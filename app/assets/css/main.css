@@ -1,0 +1,11 @@
+.navbar-SISE{
+    font-size: 50px
+}
+a.navbar-brand.texto{
+       font-size: 12px;
+}
+
+.btn-responsive {
+    white-space: normal !important;
+    word-wrap: break-word;
+}

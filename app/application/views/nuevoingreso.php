@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Inscripción Portabilidad</title>
+  <title>Inscripción Nuevo Ingreso</title>
 
   <!-- Bootstrap core CSS-->
   <link href="../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -111,8 +111,8 @@
 
       <li class="nav-item active">
         <a class="nav-link active" href="portabilidad.html">
-          <i class="fas fa-fw fa-id-card-alt"></i>
-          <span>Inscripción Portabilidad</span>
+          <i class="fas fa-fw fa-id-card"></i>
+          <span>Inscripción Nuevo Ingreso</span>
         </a>
       </li>
 
@@ -124,12 +124,12 @@
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a>Inscripcion Portabilidad</a>
+            <a>Inscripcion Nuevo Ingreso</a>
           </li>
           <li class="breadcrumb-item active">Rellene todos los campos</li>
         </ol>
 
-        <form action="http://192.168.1.115/app/c_aspirante/registrar_datos_nuevo_ingreso" method="post">
+        <form action="../c_aspirante/registrar_datos_nuevo_ingreso" method="post">
 
           <!--datos personales------------------------------------------------------>
           <p class="text-center text-white rounded" style="background-color: #579A8D; height: 40px">
@@ -262,35 +262,20 @@
                     name="aspirante_plantel">
 
                     <?php
-                                      foreach ($planteles as $plantel)
-                                      {
-                                              echo '<option value="'.$plantel->cct.'">'.$plantel->nombre_corto_plantel.'</option>';
-                                      }
-                                      ?>
+                                        foreach ($planteles as $plantel)
+                                        {
+                                                echo '<option value="'.$plantel->cct.'">'.$plantel->nombre_corto_plantel.'</option>';
+                                        }
+                                        ?>
 
                   </select>
                   <span>Plantel</span>
                 </label>
               </div>
-              <div class="col-md-2">
-                <label class="form-group has-float-label">
-                  <select class="form-control form-control-lg" required="required" id="semestre" name="semestre">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                  </select>
-                  <span>Semestre al que ingresa</span>
-                </label>
-              </div>
-
 
             </div>
 
           </div>
-
           <!--fin datos personales------------------------------------------------------>
 
           <!--direccion------------------------------------------------------>
@@ -310,11 +295,11 @@
                     id="selector_estado_aspirante">
 
                     <?php
-                                      foreach ($estados as $estado)
-                                      {
-                                              echo '<option value="'.$estado->id_estado.'">'.$estado->nombre_estado.'</option>';
-                                      }
-                                      ?>
+                              foreach ($estados as $estado)
+                              {
+                                      echo '<option value="'.$estado->id_estado.'">'.$estado->nombre_estado.'</option>';
+                              }
+                              ?>
 
 
 
@@ -331,11 +316,11 @@
                     id="selector_municipio_aspirante">
 
                     <?php
-                                      foreach ($municipios as $municipio)
-                                      {
-                                              echo '<option value="'.$municipio->id_municipio.'">'.strtoupper($municipio->nombre_municipio).'</option>';
-                                      }
-                                      ?>
+                              foreach ($municipios as $municipio)
+                              {
+                                      echo '<option value="'.$municipio->id_municipio.'">'.strtoupper($municipio->nombre_municipio).'</option>';
+                              }
+                              ?>
                   </select>
                   <span>Municipio</span>
                 </label>
@@ -347,11 +332,11 @@
                     id="selector_localidad_aspirante">
 
                     <?php
-                                      foreach ($localidades as $localidad)
-                                      {
-                                              echo '<option value="'.$localidad->id_localidad.'">'.strtoupper($localidad->nombre_localidad).'</option>';
-                                      }
-                                      ?>
+                              foreach ($localidades as $localidad)
+                              {
+                                      echo '<option value="'.$localidad->id_localidad.'">'.strtoupper($localidad->nombre_localidad).'</option>';
+                              }
+                              ?>
 
                   </select>
                   <span>Localidad</span>
@@ -477,11 +462,11 @@
                   <select class="form-control" required="required" name="aspirante_lengua_nombre">
 
                     <?php
-                                      foreach ($lenguas as $lengua)
-                                      {
-                                              echo '<option value="'.$lengua->id_lengua.'">'.strtoupper($lengua->nombre_lengua).'</option>';
-                                      }
-                                      ?>
+                              foreach ($lenguas as $lengua)
+                              {
+                                      echo '<option value="'.$lengua->id_lengua.'">'.strtoupper($lengua->nombre_lengua).'</option>';
+                              }
+                              ?>
 
                   </select>
                   <span>Lengua</span>
@@ -612,11 +597,11 @@
                     id="selector_estado_secundaria">
 
                     <?php
-                                      foreach ($estados as $estado)
-                                      {
-                                              echo '<option value="'.$estado->id_estado.'">'.$estado->nombre_estado.'</option>';
-                                      }
-                                      ?>
+                              foreach ($estados as $estado)
+                              {
+                                      echo '<option value="'.$estado->id_estado.'">'.$estado->nombre_estado.'</option>';
+                              }
+                              ?>
 
                   </select>
                   <span>Estado</span>
@@ -631,11 +616,11 @@
                     id="selector_municipio_secundaria">
 
                     <?php
-                                      foreach ($municipios as $municipio)
-                                      {
-                                              echo '<option value="'.$municipio->id_municipio.'">'.strtoupper($municipio->nombre_municipio).'</option>';
-                                      }
-                                      ?>
+                              foreach ($municipios as $municipio)
+                              {
+                                      echo '<option value="'.$municipio->id_municipio.'">'.strtoupper($municipio->nombre_municipio).'</option>';
+                              }
+                              ?>
 
                   </select>
                   <span>Municipio</span>
@@ -648,11 +633,11 @@
                     id="selector_localidad_secundaria">
 
                     <?php
-                                      foreach ($localidades as $localidad)
-                                      {
-                                              echo '<option value="'.$localidad->id_localidad.'">'.strtoupper($localidad->nombre_localidad).'</option>';
-                                      }
-                                      ?>
+                              foreach ($localidades as $localidad)
+                              {
+                                      echo '<option value="'.$localidad->id_localidad.'">'.strtoupper($localidad->nombre_localidad).'</option>';
+                              }
+                              ?>
 
                   </select>
                   <span>Localidad</span>
@@ -666,6 +651,7 @@
           <!--documentos solicitados------------------------------------------------------>
           <p class="text-center text-white rounded" style="background-color: #579A8D; height: 40px">
             Documentos recibidos
+            <hr>
           </p>
 
 

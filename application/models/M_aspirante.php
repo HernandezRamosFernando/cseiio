@@ -5,6 +5,21 @@ class M_aspirante extends CI_Model {
    }
 
 
+
+   public function asignar_num_control(){
+
+      /*SELECT IF(COUNT(*)<=0,1,COUNT(*)+1) numero FROM control_escolar.aspirante a where no_control like 'CSEIIO%' AND SUBSTRING(a.no_control,7,2)=19;*/
+     $this->db->select('IF(COUNT(*)<=0,1,COUNT(*)+1) numero');
+     $this->db->from('Aspirante a');
+     $this->db->like('a.no_control','CSEIIO','after');
+     $this->db->where('SUBSTRING(a.no_control,7,2)',date("y"));
+     $consulta = $this->db->get();
+     $resultado=$consulta->row()->numero;
+     return $resultado;
+      
+   }
+
+
 public function insertar_aspirante_nuevo_ingreso(
    $datos_aspirante,
    $datos_aspirante_direccion,
@@ -52,6 +67,11 @@ public function get_aspirantes_nombre(
 
 $this->db->where($consulta);
 return $this->db->get('Aspirante')->result();
+}
+
+function get_aspirante($no_control){
+
+   return $this->db->get_where('Aspirante', array('no_control' => $no_control))->result();
 }
 
 }

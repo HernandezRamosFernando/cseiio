@@ -13,14 +13,17 @@ class C_aspirante extends CI_Controller {
         $this->load->model('M_localidad');
         $this->load->model('M_lengua');
         $this->load->model('M_plantel');
+        $this->load->model('M_direccion_aspirante');
+        $this->load->model('M_tutor');
+        $this->load->model('M_lengua_materna');
+        $this->load->model('M_datos_secundaria');
+        $this->load->model('M_documentacion');
     }
 
-	public function index()
-	{
-		$this->load->view('formulario');
-    }
 
+//------------------------------------------vistas
     public function nuevo_ingreso(){
+
         $datos['estados'] = $this->M_estado->get_estados();
         $datos['municipios'] = $this->M_municipio->get_municipios_estado(1);
         $datos['localidades'] = $this->M_localidad->get_localidades_municipio(1);
@@ -31,21 +34,56 @@ class C_aspirante extends CI_Controller {
         $this->load->view("nuevoingreso",$datos);
     }
 
-    public function portabilidad(){
+
+    public function buscar_aspirante_editar(){
         $datos['estados'] = $this->M_estado->get_estados();
         $datos['municipios'] = $this->M_municipio->get_municipios_estado(1);
         $datos['localidades'] = $this->M_localidad->get_localidades_municipio(1);
         $datos['lenguas'] = $this->M_lengua->get_lenguas();
         $datos['planteles'] = $this->M_plantel->get_planteles();
-
- 
-        $this->load->view("portabilidad",$datos);
-    }
-
-    public function buscar_aspirante_editar(){
-        $datos['planteles'] = $this->M_plantel->get_planteles();
+       
         $this->load->view("busqueda_aspirante_editar",$datos);
     }
+
+
+    public function editar_aspirante(){
+        //$no_control = $this->input->get('no_control');
+        $no_control = $this->uri->segment(3);
+
+        //$datos['aspirante'] = $this->M_aspirante->get_aspirante($no_control);
+        //$datos['direccion_aspirante'] = $this->M_direccion_aspirante->get_direccion_aspirante($no_control);
+        //$datos['tutor_aspirante'] = $this->M_tutor->get_tutor_aspirante($no_control);
+        //$datos['lengua_materna_aspirante'] = $this->M_lengua_materna->get_lengua_materna_aspirante($no_control);
+        //$datos['datos_secundaria_aspirante'] = $this->M_datos_secundaria->get_datos_secundaria_aspirante($no_control);
+        //$datos['documentacion_aspirante'] = $this->M_documentacion->get_documentacion_aspirante($no_control);
+        $this->load->view('formulario_aspirante_editar');
+        //print_r($datos);
+        
+    }
+
+
+
+    //-------------------------------------------------
+
+    public function actualizar_datos_aspirante(){
+
+    }
+
+    public function get_datos_aspirante(){
+        $no_control = $this->uri->segment(3);
+
+        $datos['aspirante'] = $this->M_aspirante->get_aspirante($no_control);
+        $datos['direccion_aspirante'] = $this->M_direccion_aspirante->get_direccion_aspirante($no_control);
+        $datos['tutor_aspirante'] = $this->M_tutor->get_tutor_aspirante($no_control);
+        $datos['lengua_materna_aspirante'] = $this->M_lengua_materna->get_lengua_materna_aspirante($no_control);
+        $datos['datos_secundaria_aspirante'] = $this->M_datos_secundaria->get_datos_secundaria_aspirante($no_control);
+        $datos['documentacion_aspirante'] = $this->M_documentacion->get_documentacion_aspirante($no_control);
+    
+        echo json_encode($datos);
+    }
+
+
+
 
     public function buscar_aspirantes_nombre(){
         $nombre = $this->input->get('nombre');
@@ -62,17 +100,20 @@ class C_aspirante extends CI_Controller {
 
     
     public function registrar_datos_nuevo_ingreso(){
-        $no_control = 'AAAAAAA20';
+        $numero=$this->M_aspirante->asignar_num_control();
+        $num=10000+$numero;
+        //$no_control = 'CSEIIO'.date('y').str_pad($numero,4,'0',STR_PAD_LEFT);
+        $no_control = 'CSEIIO'.date('y').$num;
 
         $datos_aspirante = array(
             'no_control' => $no_control,
-            'nombre' => strtoupper($this->input->post('aspirante_nombre')),
-            'apellido_paterno' => strtoupper($this->input->post('aspirante_apellido_paterno')),
-            'apellido_materno' => strtoupper($this->input->post('aspirante_apellido_materno')),
-            'curp' => strtoupper($this->input->post('aspirante_curp')),
+            'nombre' => $this->input->post('aspirante_nombre'),
+            'apellido_paterno' => $this->input->post('aspirante_apellido_paterno'),
+            'apellido_materno' => $this->input->post('aspirante_apellido_materno'),
+            'curp' => $this->input->post('aspirante_curp'),
             'fecha_nacimiento' => $this->input->post('aspirante_fecha_nacimiento'),
             'telefono' => $this->input->post('aspirante_telefono'),
-            'correo' => strtoupper($this->input->post('aspirante_correo')),
+            'correo' => $this->input->post('aspirante_correo'),
             'nss' => $this->input->post('aspirante_nss'),
             'sexo' => $this->input->post('aspirante_sexo'),
             'programa_social' => $this->input->post('aspirante_programa_social'),
@@ -86,16 +127,16 @@ class C_aspirante extends CI_Controller {
         $datos_aspirante_direccion = array(
             'Localidad_id_localidad' => $this->input->post('aspirante_direccion_localidad'),
             'Aspirante_no_control' => $no_control,
-            'calle' => strtoupper($this->input->post('aspirante_direccion_calle').' '.$this->input->post('aspirante_direccion_numero')),
-            'colonia' => strtoupper($this->input->post('aspirante_direccion_colonia')),
+            'calle' => $this->input->post('aspirante_direccion_calle').' '.$this->input->post('aspirante_direccion_numero'),
+            'colonia' => $this->input->post('aspirante_direccion_colonia'),
             'cp' => $this->input->post('aspirante_direccion_cp')
         );
 
         $datos_aspirante_tutor = array(
-            'nombre' => strtoupper($this->input->post('aspirante_tutor_nombre')),
+            'nombre' => $this->input->post('aspirante_tutor_nombre'),
             'telefono' => $this->input->post('aspirante_tutor_telefono'),
-            'ocupacion' => strtoupper($this->input->post('aspirante_tutor_ocupacion')),
-            'parentezco' => strtoupper($this->input->post('aspirante_tutor_parentezco')),
+            'ocupacion' => $this->input->post('aspirante_tutor_ocupacion'),
+            'parentezco' => $this->input->post('aspirante_tutor_parentezco'),
             'Aspirante_no_control' => $no_control
         );
 
@@ -112,7 +153,7 @@ class C_aspirante extends CI_Controller {
 
 
         $datos_aspirante_secundaria = array(
-            'nombre_secundaria' => strtoupper($this->input->post('aspirante_secundaria_nombre')),
+            'nombre_secundaria' => $this->input->post('aspirante_secundaria_nombre'),
             'tipo_subsistema' => $this->input->post('aspirante_secundaria_tipo_subsistema'),
             'Localidad_id_localidad' => $this->input->post('aspirante_secundaria_localidad'),
             'Aspirante_no_control' => $no_control

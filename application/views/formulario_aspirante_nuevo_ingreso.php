@@ -36,21 +36,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
        <div class="row">
            <div class="col-md-4">
            <div class="form-label-group">
-           <input type="text" pattern="[A-Za-zñ]+" required="required" title="Introduzca solo letras" class="form-control" id="aspirante_nombre" name="aspirante_nombre" placeholder="Nombre(s)">
+           <input type="text" pattern="[A-Za-zñ ]+" required="required" title="Introduzca solo letras" class="form-control" id="aspirante_nombre" name="aspirante_nombre" placeholder="Nombre(s)">
            <label for="aspirante_nombre">Nombre(s)</label>
            </div>
            </div>
 
            <div class="col-md-4">
            <div class="form-label-group">
-           <input type="text" pattern="[A-Za-zñ]+" required="required" title="Introduzca solo letras" class="form-control" id="aspirante_apellido_paterno" name="aspirante_apellido_paterno" placeholder="Apellido Paterno">
+           <input type="text" pattern="[A-Za-zñ ]+" required="required" title="Introduzca solo letras" class="form-control" id="aspirante_apellido_paterno" name="aspirante_apellido_paterno" placeholder="Apellido Paterno">
            <label for="aspirante_apellido_paterno">Apellido Paterno</label>
            </div>
            </div>
 
            <div class="col-md-4">
            <div class="form-label-group">
-           <input type="text" pattern="[A-Za-zñ]+" required="required" title="Introduzca solo letras" class="form-control" id="aspirante_apellido_materno" name="aspirante_apellido_materno" placeholder="Apellido Materno">
+           <input type="text" pattern="[A-Za-zñ ]+" required="required" title="Introduzca solo letras" class="form-control" id="aspirante_apellido_materno" name="aspirante_apellido_materno" placeholder="Apellido Materno">
            <label for="aspirante_apellido_materno">Apellido Materno</label>
            </div>
            </div>
@@ -65,7 +65,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
        <div class="row">
            <div class="col-md-6">
            <div class="form-label-group">
-           <input type="text" pattern="[a-zA-zñ]{1}[aeiouAEIOU]{1}[a-zA-zñ]{1}[a-zA-zñ]{1}[0-9]{6}(H|M|h|m)(AS|BC|BS|CC|CS|CH|DF|CL|CM|DG|GT|GR|HG|JC|MC|MN|MS|NT|NL|OC|PL|QO|QR|SP|SL|SR|TC|TS|TL|VZ|YN|ZS)[BCDFGHJKLMNPQRSTVWXYZ]{3}[0-9|A-Z]{1}[0-9]{1}" required="required" title="CURP incorrecto" class="form-control" id="aspirante_curp" name="aspirante_curp" placeholder="CURP">
+           <input type="text" pattern="[A-Zñ]{1}[AEIOU]{1}[A-Zñ]{1}[A-Zñ]{1}[0-9]{6}(H|M)(AS|BC|BS|CC|CS|CH|DF|CL|CM|DG|GT|GR|HG|JC|MC|MN|MS|NT|NL|OC|PL|QO|QR|SP|SL|SR|TC|TS|TL|VZ|YN|ZS)[BCDFGHJKLMNPQRSTVWXYZ]{3}[0-9|A-Z]{1}[0-9]{1}" required="required" title="CURP incorrecto" class="form-control" id="aspirante_curp" name="aspirante_curp" placeholder="CURP">
            <label for="aspirante_curp">CURP</label>
            </div>
            </div>
@@ -101,7 +101,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
             <div class="col-md-4">
             <div class="form-label-group">
-            <input type="number" pattern="[0-9]{11}" required="required" title="Introduzca 11 digitos" class="form-control" id="aspirante_nss" name="aspirante_nss" placeholder="Numero de Seguro Social">
+            <input type="text" pattern="[0-9]{11}" title="Introduzca 11 digitos" class="form-control" id="aspirante_nss" name="aspirante_nss" placeholder="Numero de Seguro Social">
             <label for="aspirante_nss">Nss</label>
             </div>
             </div>
@@ -125,7 +125,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
             <div class="col-md-4">
             <div class="form-label-group">
-            <input type="text"class="form-control" required="required" id="aspirante_programa_social" name="aspirante_programa_social" placeholder="Folio de programa social">
+            <input type="text"class="form-control" id="aspirante_programa_social" name="aspirante_programa_social" placeholder="Folio de programa social">
             <label for="aspirante_programa_social">Folio de Programa Social</label>
             </div>
             </div>
@@ -219,7 +219,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="row">
             <div class="col-md-4">
             <div class="form-label-group">
-            <input type="text" pattern="[a-zA-Z0-9]+" required="required" title="La direccion tiene caracteres incorrectos" class="form-control" id="aspirante_direccion_calle" name="aspirante_direccion_calle" placeholder="Calle">
+            <input type="text"  required="required" title="La direccion tiene caracteres incorrectos" class="form-control" id="aspirante_direccion_calle" name="aspirante_direccion_calle" placeholder="Calle">
             <label for="aspirante_direccion_calle">Calle</label>
             </div>
             </div>
@@ -233,14 +233,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
             <div class="col-md-4">
             <div class="form-label-group">
-            <input type="text" pattern="[a-zA-Z0-9]+" required="required" title="La colonia tiene caracteres incorrectos" class="form-control" id="aspirante_direccion_colonia" name="aspirante_direccion_colonia" placeholder="Colonia">
+            <input type="text"  title="La colonia tiene caracteres incorrectos" class="form-control" id="aspirante_direccion_colonia" name="aspirante_direccion_colonia" placeholder="Colonia">
             <label for="aspirante_direccion_colonia">Colonia</label>
             </div>
             </div>
 
             <div class="col-md-2">
             <div class="form-label-group">
-            <input type="text" pattern="[0-9]{5}" required="required" title="El codigo postal solo debe contener 5 digitos" class="form-control" id="aspirante_direccion_cp" name="aspirante_direccion_cp" placeholder="Codigo Postal">
+            <input type="text" pattern="[0-9]{5}" title="El codigo postal solo debe contener 5 digitos" class="form-control" id="aspirante_direccion_cp" name="aspirante_direccion_cp" placeholder="Codigo Postal">
             <label for="aspirante_direccion_cp">Codigo Postal</label>
             </div>
             </div>
@@ -260,7 +260,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="row">
             <div class="col-md-9">
             <div class="form-label-group">
-            <input type="text" pattern="[A-Za-zñ]+" required="required" title="Introduzca solo letras" class="form-control" id="aspirante_tutor_nombre" name="aspirante_tutor_nombre" placeholder="Nombre Completo">
+            <input type="text" pattern="[A-Za-zñ ]+" required="required" title="Introduzca solo letras" class="form-control" id="aspirante_tutor_nombre" name="aspirante_tutor_nombre" placeholder="Nombre Completo">
             <label for="aspirante_tutor_nombre">Nombre Completo</label>
             </div>
             </div>
@@ -281,14 +281,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="row">
             <div class="col-md-4">
             <div class="form-label-group">
-            <input type="text" pattern="[A-Za-zñ]+"  title="Introduzca solo letras" class="form-control" id="aspirante_tutor_ocupacion" name="aspirante_tutor_ocupacion" placeholder="Ocupacion">
+            <input type="text" title="Introduzca solo letras" class="form-control" id="aspirante_tutor_ocupacion" name="aspirante_tutor_ocupacion" placeholder="Ocupacion">
             <label for="aspirante_tutor_ocupacion">Ocupacion</label>
             </div>
             </div>
 
             <div class="col-md-4">
             <div class="form-label-group">
-            <input type="text" pattern="[A-Za-zñ]+" required="required" title="Introduzca solo letras" class="form-control" id="aspirante_tutor_parentezco" name="aspirante_tutor_parentezco" placeholder="Parentezco">
+            <input type="text" pattern="[A-Za-zñ ]+" required="required" title="Introduzca solo letras" class="form-control" id="aspirante_tutor_parentezco" name="aspirante_tutor_parentezco" placeholder="Parentezco">
             <label for="aspirante_tutor_parentezco">Parentezco</label>
             </div>
             </div>
@@ -405,7 +405,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="row">
             <div class="col-md-4">
             <div class="form-label-group">
-            <input type="text" pattern="[A-Za-zñ0-9]+" required="required" title="El nombre de la secundaria contiene caracteres incorrectos" class="form-control" id="aspirante_secundaria_nombre" name="aspirante_secundaria_nombre" placeholder="Nombre de Secundaria">
+            <input type="text" pattern="[A-Za-zñ0-9 ]+" required="required" title="El nombre de la secundaria contiene caracteres incorrectos" class="form-control" id="aspirante_secundaria_nombre" name="aspirante_secundaria_nombre" placeholder="Nombre de Secundaria">
             <label for="aspirante_secundaria_nombre">Nombre de Secundaria</label>
             </div>
             </div>

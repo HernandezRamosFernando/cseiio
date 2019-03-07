@@ -12,6 +12,24 @@
   <title>Inscripción Portabilidad</title>
 
   <!-- Bootstrap core CSS-->
+<<<<<<< HEAD
+  <link href="/cseiio
+  /assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom fonts for this template-->
+  <link href="/cseiio
+  /assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+  <!-- Page level plugin CSS-->
+  <link href="/cseiio
+  /assets/datatables/DataTables-1.10.18/dataTables.bootstrap4.css" rel="stylesheet">
+  <link href="/cseiio
+  /assets/vendor/bootstrap/css/bootstrap-float-label.css" rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="/cseiio
+  /assets/css/sb-admin.css" rel="stylesheet">
+=======
   <link href="/cseiio/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom fonts for this template-->
@@ -23,6 +41,7 @@
 
   <!-- Custom styles for this template-->
   <link href="/cseiio/assets/css/sb-admin.css" rel="stylesheet">
+>>>>>>> 3aafb8ee99780f1886a8adf15b7bb0f4f48beef8
 
 
 
@@ -129,7 +148,12 @@
           <li class="breadcrumb-item active">Rellene todos los campos</li>
         </ol>
 
+<<<<<<< HEAD
+        <form action="/cseiio
+        /c_aspirante/registrar_datos_nuevo_ingreso" method="post">
+=======
         <form action="/cseiio/index.php/c_aspirante/registrar_datos_portabilidad" method="post">
+>>>>>>> 3aafb8ee99780f1886a8adf15b7bb0f4f48beef8
 
           <!--datos personales------------------------------------------------------>
           <p class="text-center text-white rounded" style="background-color: #579A8D; height: 40px">
@@ -743,6 +767,28 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
+<<<<<<< HEAD
+    <script src="/cseiio
+    /assets/vendor/jquery/jquery.min.js"></script>
+    <script src="/cseiio
+    /assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="/cseiio
+    /assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Page level plugin JavaScript-->
+    <script src="/cseiio
+    /assets/vendor/chart.js/Chart.min.js"></script>
+    <script src="/cseiio
+    /assets/vendor/datatables/jquery.dataTables.js"></script>
+    <script src="/cseiio
+    /assets/vendor/datatables/dataTables.bootstrap4.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="/cseiio
+    /assets/js/sb-admin.min.js"></script>
+=======
     <script src="/cseiio/assets/vendor/jquery/jquery.min.js"></script>
     <script src="/cseiio/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
@@ -762,6 +808,7 @@
     var selector_municipio_secundaria = document.getElementById("selector_municipio_secundaria");
     var selector_localidad_secundaria = document.getElementById("selector_localidad_secundaria");
     </script>
+>>>>>>> 3aafb8ee99780f1886a8adf15b7bb0f4f48beef8
 
 
 </body>

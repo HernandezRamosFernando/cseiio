@@ -30,13 +30,13 @@
 <body>
      <!-- Barra de arriba -->
         <nav class="navbar navbar-expand navbar-dark static-top" style="background:#545555">
-            <a class="navbar-brand mr-1" href="../views/menuadmin.html">SISE</a>
+            <a class="navbar-brand mr-1" href="/cseiio/index.php/c_menu/principal">SISE</a>
             <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
                 <i class="fas fa-bars"></i>
             </button>
             <ul class="nav justify-content-center">
                 <li class="nav-item">
-                    <a class="nav-link disabled" style="color:rgb(182, 197, 193)" href="../views/menuadmin.html">Sistema integral de servicios escolares</a>
+                    <a class="nav-link disabled" style="color:rgb(182, 197, 193)" href="/cseiio/index.php/c_menu/principal">Sistema integral de servicios escolares</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" style="color:rgb(150, 163, 159)" >Bienvenido Usuario</a>
@@ -148,48 +148,57 @@
                     <!-- Botones-->
                     <div class="row" style="height: 500px" >
                         <div class="col-md-2 col-lg-4">
-                            <a href="../views/inscripcion.html" class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-address-card btn-responsive" style="height: 80%; background: #1F934C; border-color: #1F934C; padding: 13% " >
+                            <a href="/cseiio/index.php/c_menu/inscripcion" class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-address-card btn-responsive" 
+                            style="height: 80%; background: #1F934C; border-color: #1F934C; padding: 13% " >
                               Inscripción
                             </a>
                          
                         </div>
                         <div class="col-md-2 col-lg-4">
-                            <a href="../views/reinscripcion.html" class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-id-card btn-responsive" style="height: 80%; background: #9DBF3B; border-color: #9DBF3B; padding: 13% " >
+                            <a href="../views/reinscripcion.html" class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-id-card btn-responsive" 
+                            style="height: 80%; background: #9DBF3B; border-color: #9DBF3B; padding: 13% " >
                               Reinscripción
                             </a>
                         </div>
                         <div class="col-md-4 col-lg-4">
-                            <a href=".../views/controlalumnos.html" class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-id-card btn-responsive" style="height: 80%; background: #579A8D; border-color: #579A8D; padding: 13% " >
+                            <a href="/cseiio/index.php/c_menu/control_alumnos" class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-id-card btn-responsive" 
+                            style="height: 80%; background: #579A8D; border-color: #579A8D; padding: 13% " >
                               Control de Alumnos
                             </a>
                         </div>
                         <div class="col-md-4 col-lg-4">
-                            <a href=".../views/acreditacion.html" class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-id-card btn-responsive" style="height: 80%; background: #B7156D; border-color: #B7156D; padding: 13% " >
+                            <a href=".../views/acreditacion.html" class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-id-card btn-responsive" 
+                            style="height: 80%; background: #B7156D; border-color: #B7156D; padding: 13% " >
                               Acreditación
                             </a>
                         </div>
                         <div class="col-md-4 col-lg-4">
-                            <a href="../views/reportes.html" class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-id-card btn-responsive" style="height: 80%; background: #CD581F; border-color: #CD581F; padding: 13% " >
+                            <a href="../views/reportes.html" class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-id-card btn-responsive" 
+                            style="height: 80%; background: #CD581F; border-color: #CD581F; padding: 13% " >
                               Reportes
                             </a>
                         </div>
                         <div class="col-md-4 col-lg-4">
-                            <a href="../views/formatos.html" class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-id-card btn-responsive" style="height: 80%; background: #E6AD2F; border-color: #E6AD2F; padding: 13% " >
+                            <a href="../views/formatos.html" class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-id-card btn-responsive" 
+                            style="height: 80%; background: #E6AD2F; border-color: #E6AD2F; padding: 13% " >
                              Formatos
                             </a>
                         </div>
                         <div class="col-md-4 col-lg-4">
-                            <a href="../views/certificacion.html" class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-id-card btn-responsive" style="height: 80%; background: #8D3B88; border-color: #8D3B88; padding: 13% " >
+                            <a href="../views/certificacion.html" class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-id-card btn-responsive" 
+                            style="height: 80%; background: #8D3B88; border-color: #8D3B88; padding: 13% " >
                               Certificación
                             </a>
                         </div>
                         <div class="col-md-4 col-lg-4">
-                            <a href="../views/cargadocumentos.html" class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-id-card btn-responsive" style="height: 80%; background: #553276; border-color: #553276; padding: 13% " >
+                            <a href="../views/cargadocumentos.html" class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-id-card btn-responsive" 
+                            style="height: 80%; background: #553276; border-color: #553276; padding: 13% " >
                               Carga de Documentos
                             </a>
                         </div>
                         <div class="col-md-4 col-lg-4">
-                            <a href="../views/controlusuarios.html" class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-id-card btn-responsive" style="height: 80%; background: #C4131B; border-color: #C4131B; padding: 13% " >
+                            <a href="../views/controlusuarios.html" class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-id-card btn-responsive" 
+                            style="height: 80%; background: #C4131B; border-color: #C4131B; padding: 13% " >
                               Control de Usuarios
                             </a>
                         </div>

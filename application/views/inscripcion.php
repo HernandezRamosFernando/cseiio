@@ -31,13 +31,13 @@
 <body>
   <!-- Barra de arriba -->
   <nav class="navbar navbar-expand navbar-dark static-top" style="background:#545555">
-    <a class="navbar-brand mr-1" href="menuadmin.html">SISE</a>
+    <a class="navbar-brand mr-1" href="/cseiio/index.php/c_menu/principal">SISE</a>
     <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
       <i class="fas fa-bars"></i>
     </button>
     <ul class="nav justify-content-center">
       <li class="nav-item">
-        <a class="nav-link disabled" style="color:rgb(182, 197, 193)" href="menuadmin.html">Sistema integral de
+        <a class="nav-link disabled" style="color:rgb(182, 197, 193)" href="/cseiio/index.php/c_menu/principal">Sistema integral de
           servicios escolares</a>
       </li>
       <li class="nav-item">
@@ -96,14 +96,14 @@
     <!-- Barra de lado derecho -->
     <ul class="sidebar navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="menuadmin.html">
+        <a class="nav-link" href="/cseiio/index.php/c_menu/principal">
           <i class="fas fa-fw fa-chalkboard-teacher"></i>
           <span>Menú</span>
         </a>
       </li>
 
       <li class="nav-item active">
-        <a class="nav-link" href="inscripcion.html">
+        <a class="nav-link" href="/cseiio/index.php/c_menu/inscripcion">
           <i class="fas fa-fw fa-address-card"></i>
           <span>Inscripción</span>
         </a>
@@ -125,21 +125,21 @@
         <!-- Botones-->
         <div class="row position-static" style="height: 350px">
           <div class="col col-lg-4">
-            <a href="../views/nuevoingreso.html"
+            <a href="/cseiio/index.php/c_aspirante/nuevo_ingreso"
               class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-id-card btn-responsive"
               style="height: 80%; background: #1F934C; border-color: #1F934C; padding: 13% ">
               Inscripción Nuevo Ingreso
             </a>
           </div>
           <div class="col  col-lg-4">
-            <a href="../views/portabilidad.html"
+            <a href="/cseiio/index.php/c_aspirante/portabilidad"
               class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-id-card-alt btn-responsive"
               style="height: 80%; background: #9DBF3B; border-color: #9DBF3B; padding: 13% ">
               Inscripción Portabilidad
             </a>
           </div>
           <div class="col col-lg-4">
-            <a href="../views/asignacionmatricula.html"
+            <a href="/cseiio/index.php/c_aspirante/asignar_matricula"
               class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-user-check btn-responsive"
               style="height: 80%; background: #579A8D; border-color: #579A8D; padding: 13% ">
               Asignar Matrícula

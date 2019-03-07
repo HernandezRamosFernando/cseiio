@@ -31,13 +31,13 @@
 <body>
   <!-- Barra de arriba -->
   <nav class="navbar navbar-expand navbar-dark static-top" style="background:#545555">
-    <a class="navbar-brand mr-1" href="menuadmin.html">SISE</a>
+    <a class="navbar-brand mr-1" href="/cseiio/index.php/c_menu/principal">SISE</a>
     <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
       <i class="fas fa-bars"></i>
     </button>
     <ul class="nav justify-content-center">
       <li class="nav-item">
-        <a class="nav-link disabled" style="color:rgb(182, 197, 193)" href="menuadmin.html">Sistema integral de
+        <a class="nav-link disabled" style="color:rgb(182, 197, 193)" href="/cseiio/index.php/c_menu/principal">Sistema integral de
           servicios escolares</a>
       </li>
       <li class="nav-item">
@@ -96,21 +96,21 @@
     <!-- Barra de lado derecho -->
     <ul class="sidebar navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="menuadmin.html">
+        <a class="nav-link" href="/cseiio/index.php/c_menu/principal">
           <i class="fas fa-fw fa-chalkboard-teacher"></i>
           <span>Menú</span>
         </a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="inscripcion.html">
+        <a class="nav-link" href="/cseiio/index.php/c_menu/inscripcion">
           <i class="fas fa-fw fa-address-card"></i>
           <span>Inscripción</span>
         </a>
       </li>
 
       <li class="nav-item active">
-        <a class="nav-link active" href="portabilidad.html">
+        <a class="nav-link active" href="/cseiio/index.php/c_aspirante/nuevo_ingreso">
           <i class="fas fa-fw fa-id-card"></i>
           <span>Inscripción Nuevo Ingreso</span>
         </a>
@@ -129,7 +129,11 @@
           <li class="breadcrumb-item active">Rellene todos los campos</li>
         </ol>
 
+<<<<<<< HEAD
         <form action="/cseiio/c_aspirante/registrar_datos_nuevo_ingreso" method="post">
+=======
+        <form action="/cseiio/index.php/c_aspirante/registrar_datos_nuevo_ingreso" method="post">
+>>>>>>> 3aafb8ee99780f1886a8adf15b7bb0f4f48beef8
 
           <!--datos personales------------------------------------------------------>
           <p class="text-center text-white rounded" style="background-color: #579A8D; height: 40px">
@@ -615,6 +619,7 @@
                   <select class="form-control form-control-lg" required="required" name="aspirante_secundaria_municipio"
                     onChange="cambio_municipio(selector_municipio_secundaria,selector_localidad_secundaria)"
                     id="selector_municipio_secundaria">
+                    <option></option>
 
                     <?php
                               foreach ($municipios as $municipio)
@@ -632,6 +637,7 @@
                 <label class="form-group has-float-label">
                   <select class="form-control form-control-lg" required="required" name="aspirante_secundaria_localidad"
                     id="selector_localidad_secundaria">
+                    <option></option>
 
                     <?php
                               foreach ($localidades as $localidad)
@@ -731,6 +737,7 @@
 
     <!-- Core plugin JavaScript-->
     <script src="/cseiio/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+<<<<<<< HEAD
 
     <!-- Page level plugin JavaScript-->
     <script src="/cseiio/assets/vendor/chart.js/Chart.min.js"></script>
@@ -739,6 +746,9 @@
 
     <!-- Custom scripts for all pages-->
     <script src="/cseiio/assets/js/sb-admin.min.js"></script>
+=======
+
+>>>>>>> 3aafb8ee99780f1886a8adf15b7bb0f4f48beef8
 
     <script src="/cseiio/assets/js/cambio_estado.js"></script>
     <script src="/cseiio/assets/js/cambio_municipio.js"></script>

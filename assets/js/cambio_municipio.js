@@ -4,7 +4,7 @@ function cambio_municipio(selector_municipio,selector_localidad){
     selector_localidad.innerHTML = "";
     
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'http://localhost/cseiio/index.php/c_localidad/get_localidades_municipio?id_municipio='+id_municipio, true);
+    xhr.open('GET', '/cseiio/index.php/c_localidad/get_localidades_municipio?id_municipio='+id_municipio, true);
 
     xhr.onload = function () {
         console.log(id_municipio);

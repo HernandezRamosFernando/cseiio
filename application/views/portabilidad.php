@@ -12,6 +12,7 @@
   <title>Inscripción Portabilidad</title>
 
   <!-- Bootstrap core CSS-->
+<<<<<<< HEAD
   <link href="/cseiio
   /assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -28,6 +29,19 @@
   <!-- Custom styles for this template-->
   <link href="/cseiio
   /assets/css/sb-admin.css" rel="stylesheet">
+=======
+  <link href="/cseiio/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom fonts for this template-->
+  <link href="/cseiio/assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+  <!-- Page level plugin CSS-->
+  <link href="/cseiio/assets/datatables/DataTables-1.10.18/dataTables.bootstrap4.css" rel="stylesheet">
+  <link href="/cseiio/assets/vendor/bootstrap/css/bootstrap-float-label.css" rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="/cseiio/assets/css/sb-admin.css" rel="stylesheet">
+>>>>>>> 3aafb8ee99780f1886a8adf15b7bb0f4f48beef8
 
 
 
@@ -36,13 +50,13 @@
 <body>
   <!-- Barra de arriba -->
   <nav class="navbar navbar-expand navbar-dark static-top" style="background:#545555">
-    <a class="navbar-brand mr-1" href="menuadmin.html">SISE</a>
+    <a class="navbar-brand mr-1" href="/cseiio/index.php/c_menu/principal">SISE</a>
     <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
       <i class="fas fa-bars"></i>
     </button>
     <ul class="nav justify-content-center">
       <li class="nav-item">
-        <a class="nav-link disabled" style="color:rgb(182, 197, 193)" href="menuadmin.html">Sistema integral de
+        <a class="nav-link disabled" style="color:rgb(182, 197, 193)" href="/cseiio/index.php/c_menu/principal">Sistema integral de
           servicios escolares</a>
       </li>
       <li class="nav-item">
@@ -101,21 +115,21 @@
     <!-- Barra de lado derecho -->
     <ul class="sidebar navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="menuadmin.html">
+        <a class="nav-link" href="/cseiio/index.php/c_menu/principal">
           <i class="fas fa-fw fa-chalkboard-teacher"></i>
           <span>Menú</span>
         </a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="inscripcion.html">
+        <a class="nav-link" href="/cseiio/index.php/c_menu/inscripcion">
           <i class="fas fa-fw fa-address-card"></i>
           <span>Inscripción</span>
         </a>
       </li>
 
       <li class="nav-item active">
-        <a class="nav-link active" href="portabilidad.html">
+        <a class="nav-link active" href="/cseiio/index.php/c_aspirante/portabilidad">
           <i class="fas fa-fw fa-id-card-alt"></i>
           <span>Inscripción Portabilidad</span>
         </a>
@@ -134,8 +148,12 @@
           <li class="breadcrumb-item active">Rellene todos los campos</li>
         </ol>
 
+<<<<<<< HEAD
         <form action="/cseiio
         /c_aspirante/registrar_datos_nuevo_ingreso" method="post">
+=======
+        <form action="/cseiio/index.php/c_aspirante/registrar_datos_portabilidad" method="post">
+>>>>>>> 3aafb8ee99780f1886a8adf15b7bb0f4f48beef8
 
           <!--datos personales------------------------------------------------------>
           <p class="text-center text-white rounded" style="background-color: #579A8D; height: 40px">
@@ -280,7 +298,7 @@
               </div>
               <div class="col-md-4">
                 <label class="form-group has-float-label">
-                  <select class="form-control form-control-lg" required="required" id="semestre" name="semestre">
+                  <select class="form-control form-control-lg" required="required" id="aspirante_semestre" name="aspirante_semestre">
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -749,6 +767,7 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
+<<<<<<< HEAD
     <script src="/cseiio
     /assets/vendor/jquery/jquery.min.js"></script>
     <script src="/cseiio
@@ -769,6 +788,27 @@
     <!-- Custom scripts for all pages-->
     <script src="/cseiio
     /assets/js/sb-admin.min.js"></script>
+=======
+    <script src="/cseiio/assets/vendor/jquery/jquery.min.js"></script>
+    <script src="/cseiio/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="/cseiio/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+
+    <script src="/cseiio/assets/js/cambio_estado.js"></script>
+    <script src="/cseiio/assets/js/cambio_municipio.js"></script>
+
+    <script>
+    var selector_estado_aspirante = document.getElementById("selector_estado_aspirante");
+    var selector_municipio_aspirante = document.getElementById("selector_municipio_aspirante");
+    var selector_localidad_aspirante = document.getElementById("selector_localidad_aspirante");
+    
+    var selector_estado_secundaria = document.getElementById("selector_estado_secundaria");
+    var selector_municipio_secundaria = document.getElementById("selector_municipio_secundaria");
+    var selector_localidad_secundaria = document.getElementById("selector_localidad_secundaria");
+    </script>
+>>>>>>> 3aafb8ee99780f1886a8adf15b7bb0f4f48beef8
 
 
 </body>

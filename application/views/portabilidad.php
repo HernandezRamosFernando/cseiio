@@ -31,13 +31,13 @@
 <body>
   <!-- Barra de arriba -->
   <nav class="navbar navbar-expand navbar-dark static-top" style="background:#545555">
-    <a class="navbar-brand mr-1" href="menuadmin.html">SISE</a>
+    <a class="navbar-brand mr-1" href="/cseiio/index.php/c_menu/principal">SISE</a>
     <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
       <i class="fas fa-bars"></i>
     </button>
     <ul class="nav justify-content-center">
       <li class="nav-item">
-        <a class="nav-link disabled" style="color:rgb(182, 197, 193)" href="menuadmin.html">Sistema integral de
+        <a class="nav-link disabled" style="color:rgb(182, 197, 193)" href="/cseiio/index.php/c_menu/principal">Sistema integral de
           servicios escolares</a>
       </li>
       <li class="nav-item">
@@ -96,21 +96,21 @@
     <!-- Barra de lado derecho -->
     <ul class="sidebar navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="menuadmin.html">
+        <a class="nav-link" href="/cseiio/index.php/c_menu/principal">
           <i class="fas fa-fw fa-chalkboard-teacher"></i>
           <span>Menú</span>
         </a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="inscripcion.html">
+        <a class="nav-link" href="/cseiio/index.php/c_menu/inscripcion">
           <i class="fas fa-fw fa-address-card"></i>
           <span>Inscripción</span>
         </a>
       </li>
 
       <li class="nav-item active">
-        <a class="nav-link active" href="portabilidad.html">
+        <a class="nav-link active" href="/cseiio/index.php/c_aspirante/portabilidad">
           <i class="fas fa-fw fa-id-card-alt"></i>
           <span>Inscripción Portabilidad</span>
         </a>

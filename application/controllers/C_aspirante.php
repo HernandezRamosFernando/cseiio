@@ -33,11 +33,18 @@ class C_aspirante extends CI_Controller {
  
         $this->load->view("nuevoingreso",$datos);
     }
-    public function menu(){
+    public function portabilidad(){
+
+        $datos['estados'] = $this->M_estado->get_estados();
+        $datos['municipios'] = $this->M_municipio->get_municipios_estado(1);
+        $datos['localidades'] = $this->M_localidad->get_localidades_municipio(1);
+        $datos['lenguas'] = $this->M_lengua->get_lenguas();
+        $datos['planteles'] = $this->M_plantel->get_planteles();
 
  
-        $this->load->view("inscripcion");
+        $this->load->view("portabilidad",$datos);
     }
+    
 
 
     public function buscar_aspirante_editar(){

@@ -194,7 +194,7 @@
               </div>
               <div class="col-md-2">
                 <div class="form-label-group">
-                  <input type="text" pattern="[0-9]{10}" 
+                  <input type="text" pattern="[0-9]{10}" required="required"
                     title="El numero de telefono debe de ser a 10 digitos" class="form-control" id="aspirante_telefono"
                     name="aspirante_telefono" placeholder="Telefono">
                   <label for="aspirante_telefono">Telefono</label>
@@ -213,7 +213,7 @@
 
             </div>
 
-          </div>
+          </div>required="required"
 
 
 
@@ -233,14 +233,14 @@
 
               <div class="col-md-4">
                 <div class="form-label-group">
-                  <input type="number" pattern="[0-9]{11}" title="Introduzca 11 digitos"
+                  <input type="number" pattern="[0-9]{11}" required="required" title="Introduzca 11 digitos"
                     class="form-control" id="aspirante_nss" name="aspirante_nss" placeholder="Numero de Seguro Social">
                   <label for="aspirante_nss">Nss</label>
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="form-label-group">
-                  <input type="text" class="form-control" id="aspirante_programa_social"
+                  <input type="text" class="form-control" required="required" id="aspirante_programa_social"
                     name="aspirante_programa_social" placeholder="Folio de programa social">
                   <label for="aspirante_programa_social">Folio de Programa Social</label>
                 </div>
@@ -314,7 +314,7 @@
                   <select class="form-control form-control-lg" required="required" name="aspirante_direccion_municipio"
                     onChange="cambio_municipio(selector_municipio_aspirante,selector_localidad_aspirante)"
                     id="selector_municipio_aspirante">
-                    <option></option>
+
                     <?php
                               foreach ($municipios as $municipio)
                               {
@@ -330,7 +330,6 @@
                 <label class="form-group has-float-label">
                   <select class="form-control form-control-lg" required="required" name="aspirante_direccion_localidad"
                     id="selector_localidad_aspirante">
-                    <option></option>
 
                     <?php
                               foreach ($localidades as $localidad)
@@ -369,7 +368,7 @@
                 </div>
               </div>
 
-              <div class="col-mdhttp://localhost/cseiio/index.php/C_aspirante/nuevo_ingreso-4">
+              <div class="col-md-4">
                 <div class="form-label-group">
                   <input type="text" pattern="[a-zA-Z0-9]+" required="required"
                     title="La colonia tiene caracteres incorrectos" class="form-control"

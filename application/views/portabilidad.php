@@ -160,7 +160,7 @@
 
               <div class="col-md-4">
                 <div class="form-label-group">
-                  <input type="text" pattern="[A-Za-zñ]+" required="required" title="Introduzca solo letras"
+                  <input type="text" pattern="[A-Za-zñ]+" title="Introduzca solo letras"
                     class="form-control" id="aspirante_apellido_materno" name="aspirante_apellido_materno"
                     placeholder="Apellido Materno">
                   <label for="aspirante_apellido_materno">Apellido Materno</label>
@@ -179,7 +179,7 @@
                 <div class="form-label-group">
                   <input type="text"
                     pattern="[a-zA-zñ]{1}[aeiouAEIOU]{1}[a-zA-zñ]{1}[a-zA-zñ]{1}[0-9]{6}(H|M|h|m)(AS|BC|BS|CC|CS|CH|DF|CL|CM|DG|GT|GR|HG|JC|MC|MN|MS|NT|NL|OC|PL|QO|QR|SP|SL|SR|TC|TS|TL|VZ|YN|ZS)[BCDFGHJKLMNPQRSTVWXYZ]{3}[0-9|A-Z]{1}[0-9]{1}"
-                    required="required" title="CURP incorrecto" class="form-control" id="aspirante_curp"
+                    title="CURP incorrecto" class="form-control" id="aspirante_curp"
                     name="aspirante_curp" placeholder="CURP">
                   <label for="aspirante_curp">CURP</label>
                 </div>
@@ -194,7 +194,7 @@
               </div>
               <div class="col-md-2">
                 <div class="form-label-group">
-                  <input type="text" pattern="[0-9]{10}" required="required"
+                  <input type="text" pattern="[0-9]{10}" 
                     title="El numero de telefono debe de ser a 10 digitos" class="form-control" id="aspirante_telefono"
                     name="aspirante_telefono" placeholder="Telefono">
                   <label for="aspirante_telefono">Telefono</label>
@@ -233,14 +233,14 @@
 
               <div class="col-md-4">
                 <div class="form-label-group">
-                  <input type="number" pattern="[0-9]{11}" required="required" title="Introduzca 11 digitos"
+                  <input type="number" pattern="[0-9]{11}" title="Introduzca 11 digitos"
                     class="form-control" id="aspirante_nss" name="aspirante_nss" placeholder="Numero de Seguro Social">
                   <label for="aspirante_nss">Nss</label>
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="form-label-group">
-                  <input type="text" class="form-control" required="required" id="aspirante_programa_social"
+                  <input type="text" class="form-control" id="aspirante_programa_social"
                     name="aspirante_programa_social" placeholder="Folio de programa social">
                   <label for="aspirante_programa_social">Folio de Programa Social</label>
                 </div>
@@ -264,7 +264,7 @@
                     <?php
                                       foreach ($planteles as $plantel)
                                       {
-                                              echo '<option value="'.$plantel->cct.'">'.$plantel->nombre_corto_plantel.'</option>';
+                                              echo '<option value="'.$plantel->cct.'">'.$plantel->nombre_plantel.'</option>';
                                       }
                                       ?>
 
@@ -329,6 +329,7 @@
                   <select class="form-control form-control-lg" required="required" name="aspirante_direccion_municipio"
                     onChange="cambio_municipio(selector_municipio_aspirante,selector_localidad_aspirante)"
                     id="selector_municipio_aspirante">
+                    <option></option>
 
                     <?php
                                       foreach ($municipios as $municipio)
@@ -345,6 +346,7 @@
                 <label class="form-group has-float-label">
                   <select class="form-control form-control-lg" required="required" name="aspirante_direccion_localidad"
                     id="selector_localidad_aspirante">
+                    <option></option>
 
                     <?php
                                       foreach ($localidades as $localidad)
@@ -385,7 +387,7 @@
 
               <div class="col-md-4">
                 <div class="form-label-group">
-                  <input type="text" pattern="[a-zA-Z0-9]+" required="required"
+                  <input type="text" pattern="[a-zA-Z0-9]+" 
                     title="La colonia tiene caracteres incorrectos" class="form-control"
                     id="aspirante_direccion_colonia" name="aspirante_direccion_colonia" placeholder="Colonia">
                   <label for="aspirante_direccion_colonia">Colonia</label>
@@ -394,7 +396,7 @@
 
               <div class="col-md-2">
                 <div class="form-label-group">
-                  <input type="text" pattern="[0-9]{5}" required="required"
+                  <input type="text" pattern="[0-9]{5}" 
                     title="El codigo postal solo debe contener 5 digitos" class="form-control"
                     id="aspirante_direccion_cp" name="aspirante_direccion_cp" placeholder="Codigo Postal">
                   <label for="aspirante_direccion_cp">Codigo Postal</label>
@@ -420,7 +422,7 @@
                   <input type="text" pattern="[A-Za-zñ]+" required="required" title="Introduzca solo letras"
                     class="form-control" id="aspirante_tutor_nombre" name="aspirante_tutor_nombre"
                     placeholder="Nombre Completo">
-                  <label for="aspirante_tutor_nombre">Nombre Completo</label>
+                  <label for="aspirante_tutor_nombre">Nombre Completo tutor</label>
                 </div>
               </div>
 
@@ -629,6 +631,7 @@
                   <select class="form-control form-control-lg" required="required" name="aspirante_secundaria_municipio"
                     onChange="cambio_municipio(selector_municipio_secundaria,selector_localidad_secundaria)"
                     id="selector_municipio_secundaria">
+                    <option></option>
 
                     <?php
                                       foreach ($municipios as $municipio)
@@ -646,6 +649,7 @@
                 <label class="form-group has-float-label">
                   <select class="form-control form-control-lg" required="required" name="aspirante_secundaria_localidad"
                     id="selector_localidad_secundaria">
+                    <option></option>
 
                     <?php
                                       foreach ($localidades as $localidad)

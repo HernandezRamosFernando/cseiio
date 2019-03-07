@@ -47,6 +47,9 @@ class C_aspirante extends CI_Controller {
     public function asignar_matricula(){
         $this->load->view("asignacionmatricula");
     }
+    public function carta_compromiso(){
+        $this->load->view("cartacompromiso");
+    }
     
 
 
@@ -115,6 +118,7 @@ class C_aspirante extends CI_Controller {
 
     
     public function registrar_datos_nuevo_ingreso(){
+        $this->load->view("inscripcion");
         $numero=$this->M_aspirante->asignar_num_control();
         $num=10000+$numero;
         //$no_control = 'CSEIIO'.date('y').str_pad($numero,4,'0',STR_PAD_LEFT);
@@ -210,6 +214,8 @@ class C_aspirante extends CI_Controller {
             $datos_aspirante_secundaria,
             $datos_aspirante_documentos
         );
+
+       
         //$this->M_aspirante->insertar_aspirante($datos_aspirante);
     }
 

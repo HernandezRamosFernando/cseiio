@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Control de Alumnos</title>
+  <title>Generación de Carta Compromiso</title>
 
   <!-- Bootstrap core CSS-->
   <link href="/cseiio/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -100,11 +100,16 @@
           <span>Menú</span>
         </a>
       </li>
-
-      <li class="nav-item active">
-        <a class="nav-link" href="/cseiio/index.php/c_menu/control_alumnos">
+      <li class="nav-item">
+        <a class="nav-link" href="/cseiio/index.php/c_menu/inscripcion">
           <i class="fas fa-fw fa-address-card"></i>
-          <span>Control de Alumnos</span>
+          <span>Inscripción</span>
+        </a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/cseiio/index.php/c_aspirante/carta_compromiso">
+          <i class="fas fa-fw fa-clipboard-check "></i>
+          <span>Generación de Carta Compromiso</span>
         </a>
       </li>
 
@@ -116,9 +121,9 @@
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a>Control de alumnos</a>
+            <a>Generacion de Carta Compromiso</a>
           </li>
-          <li class="breadcrumb-item active">Ingrese la busqueda que desea realizar</li>
+          <li class="breadcrumb-item active">Seleccione el Aspirante que desee:</li>
         </ol>
 
 

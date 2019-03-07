@@ -146,7 +146,7 @@
             </a>
           </div>
           <div class="col col-lg-5">
-            <a href="../views/cartacompromiso.html"
+            <a href="/cseiio/index.php/c_aspirante/carta_compromiso"
               class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-clipboard-check btn-responsive"
               style="height: 80%; background: #B7156D; border-color: #B7156D; padding: 13% ">
               Generación de Carta Compromiso

@@ -33,6 +33,11 @@ class C_aspirante extends CI_Controller {
  
         $this->load->view("nuevoingreso",$datos);
     }
+    public function menu(){
+
+ 
+        $this->load->view("inscripcion");
+    }
 
 
     public function buscar_aspirante_editar(){

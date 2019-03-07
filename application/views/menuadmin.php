@@ -161,7 +161,7 @@
                             </a>
                         </div>
                         <div class="col-md-4 col-lg-4">
-                            <a href=".../views/controlalumnos.html" class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-id-card btn-responsive" 
+                            <a href="/cseiio/index.php/c_menu/control_alumnos" class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-id-card btn-responsive" 
                             style="height: 80%; background: #579A8D; border-color: #579A8D; padding: 13% " >
                               Control de Alumnos
                             </a>

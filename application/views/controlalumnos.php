@@ -9,19 +9,19 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Inscripción</title>
+  <title>Control de Alumnos</title>
 
   <!-- Bootstrap core CSS-->
-  <link href="../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/cseiio/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom fonts for this template-->
-  <link href="../../assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="/cseiio/assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
   <!-- Custom styles for this template-->
-  <link href="../../assets/css/sb-admin.css" rel="stylesheet">
-  <link rel="icon" href="../../assets/img/favicon.ico">
+  <link href="/cseiio/assets/css/sb-admin.css" rel="stylesheet">
+  <link rel="icon" href="/cseiio/assets/img/favicon.ico">
 
-  <link rel="stylesheet" type="text/css" href="../../assets/css/main.css">
+  <link rel="stylesheet" type="text/css" href="/cseiio/assets/css/main.css">
 
 
 
@@ -103,9 +103,9 @@
       </li>
 
       <li class="nav-item active">
-        <a class="nav-link" href="/cseiio/index.php/c_menu/inscripcion">
+        <a class="nav-link" href="/cseiio/index.php/c_menu/control_alumnos">
           <i class="fas fa-fw fa-address-card"></i>
-          <span>Inscripción</span>
+          <span>Control de Alumnos</span>
         </a>
       </li>
 
@@ -117,42 +117,11 @@
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a>Inscripción</a>
+            <a>Control de alumnos</a>
           </li>
-          <li class="breadcrumb-item active">Seleccione un elemento de los mostrados</li>
+          <li class="breadcrumb-item active">Ingrese la busqueda que desea realizar</li>
         </ol>
 
-        <!-- Botones-->
-        <div class="row position-static" style="height: 350px">
-          <div class="col col-lg-4">
-            <a href="/cseiio/index.php/c_aspirante/nuevo_ingreso"
-              class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-id-card btn-responsive"
-              style="height: 80%; background: #1F934C; border-color: #1F934C; padding: 13% ">
-              Inscripción Nuevo Ingreso
-            </a>
-          </div>
-          <div class="col  col-lg-4">
-            <a href="/cseiio/index.php/c_aspirante/portabilidad"
-              class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-id-card-alt btn-responsive"
-              style="height: 80%; background: #9DBF3B; border-color: #9DBF3B; padding: 13% ">
-              Inscripción Portabilidad
-            </a>
-          </div>
-          <div class="col col-lg-4">
-            <a href="/cseiio/index.php/c_aspirante/asignar_matricula"
-              class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-user-check btn-responsive"
-              style="height: 80%; background: #579A8D; border-color: #579A8D; padding: 13% ">
-              Asignar Matrícula
-            </a>
-          </div>
-          <div class="col col-lg-5">
-            <a href="../views/cartacompromiso.html"
-              class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-clipboard-check btn-responsive"
-              style="height: 80%; background: #B7156D; border-color: #B7156D; padding: 13% ">
-              Generación de Carta Compromiso
-            </a>
-          </div>
-        </div>
 
 
       </div>
@@ -182,15 +151,15 @@
   </div>
 
   <!-- Bootstrap core JavaScript-->
-  <script src="../../assets/vendor/jquery/jquery.min.js"></script>
-  <script src="../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/cseiio/assets/vendor/jquery/jquery.min.js"></script>
+  <script src="/cseiio/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Core plugin JavaScript-->
-  <script src="../../assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="/cseiio/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
 
 
   <!-- Custom scripts for all pages-->
-  <script src="../../assets/js/sb-admin.min.js"></script>
+  <script src="/cseiio/assets/js/sb-admin.min.js"></script>
 
 
 

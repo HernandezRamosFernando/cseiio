@@ -129,7 +129,7 @@
           <li class="breadcrumb-item active">Rellene todos los campos</li>
         </ol>
 
-        <form action="/cseiio/index.php/c_aspirante/registrar_datos_nuevo_ingreso" method="post">
+        <form action="/cseiio/index.php/c_aspirante/registrar_datos_portabilidad" method="post">
 
           <!--datos personales------------------------------------------------------>
           <p class="text-center text-white rounded" style="background-color: #579A8D; height: 40px">
@@ -274,7 +274,7 @@
               </div>
               <div class="col-md-4">
                 <label class="form-group has-float-label">
-                  <select class="form-control form-control-lg" required="required" id="semestre" name="semestre">
+                  <select class="form-control form-control-lg" required="required" id="aspirante_semestre" name="aspirante_semestre">
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -749,13 +749,19 @@
     <!-- Core plugin JavaScript-->
     <script src="/cseiio/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-    <!-- Page level plugin JavaScript-->
-    <script src="/cseiio/assets/vendor/chart.js/Chart.min.js"></script>
-    <script src="/cseiio/assets/vendor/datatables/jquery.dataTables.js"></script>
-    <script src="/cseiio/assets/vendor/datatables/dataTables.bootstrap4.js"></script>
 
-    <!-- Custom scripts for all pages-->
-    <script src="/cseiio/assets/js/sb-admin.min.js"></script>
+    <script src="/cseiio/assets/js/cambio_estado.js"></script>
+    <script src="/cseiio/assets/js/cambio_municipio.js"></script>
+
+    <script>
+    var selector_estado_aspirante = document.getElementById("selector_estado_aspirante");
+    var selector_municipio_aspirante = document.getElementById("selector_municipio_aspirante");
+    var selector_localidad_aspirante = document.getElementById("selector_localidad_aspirante");
+    
+    var selector_estado_secundaria = document.getElementById("selector_estado_secundaria");
+    var selector_municipio_secundaria = document.getElementById("selector_municipio_secundaria");
+    var selector_localidad_secundaria = document.getElementById("selector_localidad_secundaria");
+    </script>
 
 
 </body>

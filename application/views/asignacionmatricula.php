@@ -11,17 +11,16 @@
             <title>Asignación matrícula</title>
         
             <!-- Bootstrap core CSS-->
-            <link href="../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+            <link href="/cseiio/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         
             <!-- Custom fonts for this template-->
-            <link href="../../assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+            <link href="/cseiio/assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
         
             <!-- Page level plugin CSS-->
-            <link href="../../assets/datatables/DataTables-1.10.18/dataTables.bootstrap4.css" rel="stylesheet">
+            <link href="/cseiio/assets/datatables/DataTables-1.10.18/dataTables.bootstrap4.css" rel="stylesheet">
         
             <!-- Custom styles for this template-->
-            <link href="../../assets/css/sb-admin.css" rel="stylesheet">
-             <link rel="icon"  href="/assets/img/favicon.ico" >
+            <link href="/cseiio/assets/css/sb-admin.css" rel="stylesheet">
         
       
         
@@ -29,13 +28,13 @@
 <body>
      <!-- Barra de arriba -->
         <nav class="navbar navbar-expand navbar-dark static-top" style="background:#545555">
-            <a class="navbar-brand mr-1" href="menuadmin.html">SISE</a>
+            <a class="navbar-brand mr-1" href="/cseiio/index.php/c_menu/principal">SISE</a>
             <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
                 <i class="fas fa-bars"></i>
             </button>
             <ul class="nav justify-content-center">
                 <li class="nav-item">
-                    <a class="nav-link disabled" style="color:rgb(182, 197, 193)" href="menuadmin.html">Sistema integral de servicios escolares</a>
+                    <a class="nav-link disabled" style="color:rgb(182, 197, 193)" href="/cseiio/index.php/c_menu/principal">Sistema integral de servicios escolares</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" style="color:rgb(150, 163, 159)" >Bienvenido Usuario</a>
@@ -90,21 +89,21 @@
     <!-- Barra de lado derecho -->
         <ul class="sidebar navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="menuadmin.html">
+                <a class="nav-link" href="/cseiio/index.php/c_menu/principal">
                       <i class="fas fa-fw fa-chalkboard-teacher"></i>
                       <span>Menú</span>
                     </a>
                   </li>
           
                   <li class="nav-item">
-                    <a class="nav-link" href="inscripcion.html" >
+                    <a class="nav-link" href="/cseiio/index.php/c_menu/inscripcion" >
                       <i class="fas fa-fw fa-address-card"></i>
                       <span>Inscripción</span>
                     </a>
                   </li> 
 
                   <li class="nav-item active">
-                        <a class="nav-link active" href="nuevoingreso.html">
+                        <a class="nav-link active" href="/cseiio/index.php/c_aspirante/asignar_matricula">
                           <i class="fas fa-fw fa-user-check"></i>
                           <span>Asignación de matrícula</span>
                         </a>
@@ -148,19 +147,19 @@
               </div>
 
                   <!-- Bootstrap core JavaScript-->
-    <script src="../../assets/vendor/jquery/jquery.min.js"></script>
-    <script src="../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/cseiio/assets/vendor/jquery/jquery.min.js"></script>
+    <script src="/cseiio/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="../../assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="/cseiio/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Page level plugin JavaScript-->
-    <script src="../../assets/vendor/chart.js/Chart.min.js"></script>
-    <script src="../../assets/vendor/datatables/jquery.dataTables.js"></script>
-    <script src="../../assets/vendor/datatables/dataTables.bootstrap4.js"></script>
+    <script src="/cseiio/assets/vendor/chart.js/Chart.min.js"></script>
+    <script src="/cseiio/assets/vendor/datatables/jquery.dataTables.js"></script>
+    <script src="/cseiio/assets/vendor/datatables/dataTables.bootstrap4.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="../../assets/js/sb-admin.min.js"></script>
+    <script src="/cseiio/assets/js/sb-admin.min.js"></script>
 
  
     </body>

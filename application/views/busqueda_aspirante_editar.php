@@ -10,15 +10,15 @@
   <link href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
 
   <!-- Bootstrap core CSS-->
-  <link href="http://192.168.1.115/app/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/cseiio/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom fonts for this template-->
-  <link href="http://192.168.1.115/app/assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="/cseiio/assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
   <!-- Custom styles for this template-->
-  <link href="http://192.168.1.115/app/assets/css/sb-admin.css" rel="stylesheet">
+  <link href="/cseiio/assets/css/sb-admin.css" rel="stylesheet">
 
-  <link href="http://192.168.1.115/app/assets/vendor/bootstrap/css/bootstrap-float-label.css" rel="stylesheet">
+  <link href="/cseiio/assets/vendor/bootstrap/css/bootstrap-float-label.css" rel="stylesheet">
 </head>
 
 <body>
@@ -132,7 +132,7 @@
         
         <div class="modal-body">
           <!-- formulario -->
-          <form action="../c_aspirante/registrar_datos_nuevo_ingreso" method="post">
+          <form action="/cseiio/c_aspirante/actualizar_datos_aspirante" method="post">
 
 <!--datos personales------------------------------------------------------>
 <p class="text-center text-white rounded" style="background-color: #579A8D; height: 40px">
@@ -249,6 +249,8 @@
       </div>
     </div>
 
+
+
   </div>
 
 
@@ -275,9 +277,25 @@
         <span>Plantel</span>
       </label>
     </div>
+    
+    
+    <div class="col-md-4">
+                <label class="form-group has-float-label">
+                  <select class="form-control form-control-lg" required="required" id="aspirante_semestre" name="aspirante_semestre">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                  </select>
+                  <span>Semestre al que ingresa</span>
+                </label>
+              </div>
+
 
   </div>
-
+ 
 </div>
 <!--fin datos personales------------------------------------------------------>
 
@@ -696,6 +714,8 @@
 
 <!-- fin documentos solicitados------------------------------------------------------>
 
+<input type="text" id="aspirante_no_control" name="aspirante_no_control" style="display:none">
+
 <br>
 <button type="submit" class="btn btn-primary btn-lg btn-block"
   style="background-color:#1F934C; border: #1F934C">Registrar</button>
@@ -718,16 +738,16 @@
 
 
   <!-- Bootstrap core JavaScript-->
-  <script src="http://192.168.1.115/app/assets/vendor/jquery/jquery.min.js"></script>
-  <script src="http://192.168.1.115/app/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/cseiio/assets/vendor/jquery/jquery.min.js"></script>
+  <script src="/cseiio/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Core plugin JavaScript-->
-  <script src="http://192.168.1.115/app/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="/cseiio/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
 
   <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 
-  <script src="http://192.168.1.115/app/assets/js/cambio_estado.js"></script>
-  <script src="http://192.168.1.115/app/assets/js/cambio_municipio.js"></script>
+  <script src="/cseiio/assets/js/cambio_estado.js"></script>
+  <script src="/cseiio/assets/js/cambio_municipio.js"></script>
 
 
 
@@ -739,13 +759,14 @@
        
 
         var xhr = new XMLHttpRequest();
-        xhr.open('GET', 'http://localhost/app/c_aspirante/get_datos_aspirante/'+e.value, true);
+        xhr.open('GET', 'http://localhost/cseiio/c_aspirante/get_datos_aspirante/'+e.value, true);
 
         xhr.onload = function () {
           console.log(JSON.parse(xhr.response));
  
           var datos = JSON.parse(xhr.response);
           //datos personales
+          document.getElementById("aspirante_no_control").value = datos.aspirante[0].no_control;
           document.getElementById("aspirante_nombre").value = datos.aspirante[0].nombre;
           document.getElementById("aspirante_apellido_paterno").value = datos.aspirante[0].apellido_paterno;
           document.getElementById("aspirante_apellido_materno").value = datos.aspirante[0].apellido_materno;
@@ -757,6 +778,7 @@
           document.getElementById("aspirante_nss").value = datos.aspirante[0].nss;
           document.getElementById("aspirante_programa_social").value = datos.aspirante[0].programa_social;
           document.getElementById("aspirante_plantel").value = datos.aspirante[0].Plantel_cct;
+          document.getElementById("aspirante_semestre").value = datos.aspirante[0].semestre;
 
 
           //direccion aspirante
@@ -869,7 +891,7 @@
       var plantel = document.getElementById("aspirante_plantel_busqueda").value;
       var query = 'nombre=' + nombre + '&apellido_paterno=' + apellido_paterno + '&apellido_materno=' + apellido_materno + '&plantel=' + plantel;
 
-      xhr.open('GET', 'http://localhost/app/c_aspirante/buscar_aspirantes_nombre?' + query, true);
+      xhr.open('GET', 'http://localhost/cseiio/c_aspirante/buscar_aspirantes_nombre?' + query, true);
 
       xhr.onload = function () {
         console.log(JSON.parse(xhr.response));

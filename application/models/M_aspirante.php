@@ -20,6 +20,67 @@ class M_aspirante extends CI_Model {
    }
 
 
+   public function actualizar_datos_aspirante(
+      $datos_aspirante,
+      $datos_aspirante_direccion,
+      $datos_aspirante_tutor,
+      $datos_aspirante_lengua,
+      $datos_aspirante_secundaria,
+      $datos_aspirante_documentos,
+      $no_control){
+
+        
+    //actualizacion apirante
+    $this->db->where('no_control', $no_control);
+    $this->db->update('Aspirante', $datos_aspirante);
+
+    //actualizacion Direccion aspira
+    $this->db->where('Aspirante_no_control', $no_control);
+    $this->db->update('Direccion_Aspirante', $datos_aspirante_direccion);
+
+    //actualizacion Tutor aspirante
+    $this->db->where('Aspirante_no_control', $no_control);
+    $this->db->update('Tutor', $datos_aspirante_tutor);
+
+    //actualizacion Tutor aspirante
+    $this->db->where('Aspirante_no_control', $no_control);
+    $this->db->update('Lengua_materna', $datos_aspirante_lengua);
+
+
+    //actualizacion Tutor aspirante
+    $this->db->where('Aspirante_no_control', $no_control);
+    $this->db->update('Datos_Secundaria', $datos_aspirante_secundaria);
+   
+      //$this->db->insert('Aspirante',$datos_aspirante);
+      //$this->db->insert('Direccion_Aspirante',$datos_aspirante_direccion);
+      //$this->db->insert('Tutor',$datos_aspirante_tutor);
+      //$this->db->insert('Lengua_materna',$datos_aspirante_lengua);
+      //$this->db->insert('Datos_Secundaria',$datos_aspirante_secundaria);
+      
+      
+      foreach($datos_aspirante_documentos as $documento){
+         $registro = array(
+            'Documento_id_documento' => $documento
+         );
+
+         //actualizacion Tutor aspirante
+         $this->db->where('Aspirante_no_control', $no_control);
+         $this->db->update('Documentacion', $registro);
+
+         //$this->db->insert('Documentacion',$registro);
+      }
+      
+
+      ?>
+   
+      <script>
+      alert("Registro actualizados correctamente");
+      </script>
+   
+      <?php
+   }
+
+
 public function insertar_aspirante_nuevo_ingreso(
    $datos_aspirante,
    $datos_aspirante_direccion,

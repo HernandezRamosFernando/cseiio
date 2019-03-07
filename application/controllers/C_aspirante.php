@@ -21,7 +21,6 @@ class C_aspirante extends CI_Controller {
     }
 
     public function nuevo_ingreso(){
-
         $datos['estados'] = $this->M_estado->get_estados();
         $datos['municipios'] = $this->M_municipio->get_municipios_estado(1);
         $datos['localidades'] = $this->M_localidad->get_localidades_municipio(1);
@@ -29,7 +28,18 @@ class C_aspirante extends CI_Controller {
         $datos['planteles'] = $this->M_plantel->get_planteles();
 
  
-        $this->load->view("formulario_aspirante_nuevo_ingreso",$datos);
+        $this->load->view("nuevoingreso",$datos);
+    }
+
+    public function portabilidad(){
+        $datos['estados'] = $this->M_estado->get_estados();
+        $datos['municipios'] = $this->M_municipio->get_municipios_estado(1);
+        $datos['localidades'] = $this->M_localidad->get_localidades_municipio(1);
+        $datos['lenguas'] = $this->M_lengua->get_lenguas();
+        $datos['planteles'] = $this->M_plantel->get_planteles();
+
+ 
+        $this->load->view("portabilidad",$datos);
     }
 
     public function buscar_aspirante_editar(){
@@ -52,7 +62,7 @@ class C_aspirante extends CI_Controller {
 
     
     public function registrar_datos_nuevo_ingreso(){
-        $no_control = 'AAAAAAA10';
+        $no_control = 'AAAAAAA20';
 
         $datos_aspirante = array(
             'no_control' => $no_control,

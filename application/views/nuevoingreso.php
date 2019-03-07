@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Inscripción Portabilidad</title>
+  <title>Inscripción Nuevo Ingreso</title>
 
   <!-- Bootstrap core CSS-->
   <link href="../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -111,8 +111,8 @@
 
       <li class="nav-item active">
         <a class="nav-link active" href="portabilidad.html">
-          <i class="fas fa-fw fa-id-card-alt"></i>
-          <span>Inscripción Portabilidad</span>
+          <i class="fas fa-fw fa-id-card"></i>
+          <span>Inscripción Nuevo Ingreso</span>
         </a>
       </li>
 
@@ -124,12 +124,12 @@
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a>Inscripcion Portabilidad</a>
+            <a>Inscripcion Nuevo Ingreso</a>
           </li>
           <li class="breadcrumb-item active">Rellene todos los campos</li>
         </ol>
 
-        <form action="http://192.168.1.115/app/c_aspirante/registrar_datos_nuevo_ingreso" method="post">
+        <form action="../c_aspirante/registrar_datos_nuevo_ingreso" method="post">
 
           <!--datos personales------------------------------------------------------>
           <p class="text-center text-white rounded" style="background-color: #579A8D; height: 40px">
@@ -175,7 +175,7 @@
           <div class="form-group">
 
             <div class="row">
-              <div class="col-md-3">
+              <div class="col-md-4">
                 <div class="form-label-group">
                   <input type="text"
                     pattern="[a-zA-zñ]{1}[aeiouAEIOU]{1}[a-zA-zñ]{1}[a-zA-zñ]{1}[0-9]{6}(H|M|h|m)(AS|BC|BS|CC|CS|CH|DF|CL|CM|DG|GT|GR|HG|JC|MC|MN|MS|NT|NL|OC|PL|QO|QR|SP|SL|SR|TC|TS|TL|VZ|YN|ZS)[BCDFGHJKLMNPQRSTVWXYZ]{3}[0-9|A-Z]{1}[0-9]{1}"
@@ -194,7 +194,7 @@
               </div>
               <div class="col-md-2">
                 <div class="form-label-group">
-                  <input type="text" pattern="[0-9]{10}" required="required"
+                  <input type="text" pattern="[0-9]{10}" 
                     title="El numero de telefono debe de ser a 10 digitos" class="form-control" id="aspirante_telefono"
                     name="aspirante_telefono" placeholder="Telefono">
                   <label for="aspirante_telefono">Telefono</label>
@@ -220,7 +220,7 @@
           <div class="form-group">
 
             <div class="row">
-              <div class="col-md-2">
+              <div class="col-md-4">
                 <label class="form-group has-float-label">
                   <select class="form-control form-control-lg" required="required" id="aspirante_sexo"
                     name="aspirante_sexo">
@@ -233,14 +233,14 @@
 
               <div class="col-md-4">
                 <div class="form-label-group">
-                  <input type="number" pattern="[0-9]{11}" required="required" title="Introduzca 11 digitos"
+                  <input type="number" pattern="[0-9]{11}" title="Introduzca 11 digitos"
                     class="form-control" id="aspirante_nss" name="aspirante_nss" placeholder="Numero de Seguro Social">
                   <label for="aspirante_nss">Nss</label>
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="form-label-group">
-                  <input type="text" class="form-control" required="required" id="aspirante_programa_social"
+                  <input type="text" class="form-control" id="aspirante_programa_social"
                     name="aspirante_programa_social" placeholder="Folio de programa social">
                   <label for="aspirante_programa_social">Folio de Programa Social</label>
                 </div>
@@ -256,41 +256,26 @@
           <div class="form-group">
 
             <div class="row">
-              <div class="col-md-4">
+              <div class="col-md-8">
                 <label class="form-group has-float-label">
                   <select class="form-control form-control-lg" required="required" id="aspirante_plantel"
                     name="aspirante_plantel">
 
                     <?php
-                                      foreach ($planteles as $plantel)
-                                      {
-                                              echo '<option value="'.$plantel->cct.'">'.$plantel->nombre_corto_plantel.'</option>';
-                                      }
-                                      ?>
+                                        foreach ($planteles as $plantel)
+                                        {
+                                                echo '<option value="'.$plantel->cct.'">'.$plantel->nombre_corto_plantel.'</option>';
+                                        }
+                                        ?>
 
                   </select>
                   <span>Plantel</span>
                 </label>
               </div>
-              <div class="col-md-2">
-                <label class="form-group has-float-label">
-                  <select class="form-control form-control-lg" required="required" id="semestre" name="semestre">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                  </select>
-                  <span>Semestre al que ingresa</span>
-                </label>
-              </div>
-
 
             </div>
 
           </div>
-
           <!--fin datos personales------------------------------------------------------>
 
           <!--direccion------------------------------------------------------>
@@ -310,11 +295,11 @@
                     id="selector_estado_aspirante">
 
                     <?php
-                                      foreach ($estados as $estado)
-                                      {
-                                              echo '<option value="'.$estado->id_estado.'">'.$estado->nombre_estado.'</option>';
-                                      }
-                                      ?>
+                              foreach ($estados as $estado)
+                              {
+                                      echo '<option value="'.$estado->id_estado.'">'.$estado->nombre_estado.'</option>';
+                              }
+                              ?>
 
 
 
@@ -329,13 +314,13 @@
                   <select class="form-control form-control-lg" required="required" name="aspirante_direccion_municipio"
                     onChange="cambio_municipio(selector_municipio_aspirante,selector_localidad_aspirante)"
                     id="selector_municipio_aspirante">
-
+                    <option></option>
                     <?php
-                                      foreach ($municipios as $municipio)
-                                      {
-                                              echo '<option value="'.$municipio->id_municipio.'">'.strtoupper($municipio->nombre_municipio).'</option>';
-                                      }
-                                      ?>
+                              foreach ($municipios as $municipio)
+                              {
+                                      echo '<option value="'.$municipio->id_municipio.'">'.strtoupper($municipio->nombre_municipio).'</option>';
+                              }
+                              ?>
                   </select>
                   <span>Municipio</span>
                 </label>
@@ -345,13 +330,14 @@
                 <label class="form-group has-float-label">
                   <select class="form-control form-control-lg" required="required" name="aspirante_direccion_localidad"
                     id="selector_localidad_aspirante">
+                    <option></option>
 
                     <?php
-                                      foreach ($localidades as $localidad)
-                                      {
-                                              echo '<option value="'.$localidad->id_localidad.'">'.strtoupper($localidad->nombre_localidad).'</option>';
-                                      }
-                                      ?>
+                              foreach ($localidades as $localidad)
+                              {
+                                      echo '<option value="'.$localidad->id_localidad.'">'.strtoupper($localidad->nombre_localidad).'</option>';
+                              }
+                              ?>
 
                   </select>
                   <span>Localidad</span>
@@ -383,7 +369,7 @@
                 </div>
               </div>
 
-              <div class="col-md-4">
+              <div class="col-mdhttp://localhost/cseiio/index.php/C_aspirante/nuevo_ingreso-4">
                 <div class="form-label-group">
                   <input type="text" pattern="[a-zA-Z0-9]+" required="required"
                     title="La colonia tiene caracteres incorrectos" class="form-control"
@@ -477,11 +463,11 @@
                   <select class="form-control" required="required" name="aspirante_lengua_nombre">
 
                     <?php
-                                      foreach ($lenguas as $lengua)
-                                      {
-                                              echo '<option value="'.$lengua->id_lengua.'">'.strtoupper($lengua->nombre_lengua).'</option>';
-                                      }
-                                      ?>
+                              foreach ($lenguas as $lengua)
+                              {
+                                      echo '<option value="'.$lengua->id_lengua.'">'.strtoupper($lengua->nombre_lengua).'</option>';
+                              }
+                              ?>
 
                   </select>
                   <span>Lengua</span>
@@ -612,11 +598,11 @@
                     id="selector_estado_secundaria">
 
                     <?php
-                                      foreach ($estados as $estado)
-                                      {
-                                              echo '<option value="'.$estado->id_estado.'">'.$estado->nombre_estado.'</option>';
-                                      }
-                                      ?>
+                              foreach ($estados as $estado)
+                              {
+                                      echo '<option value="'.$estado->id_estado.'">'.$estado->nombre_estado.'</option>';
+                              }
+                              ?>
 
                   </select>
                   <span>Estado</span>
@@ -631,11 +617,11 @@
                     id="selector_municipio_secundaria">
 
                     <?php
-                                      foreach ($municipios as $municipio)
-                                      {
-                                              echo '<option value="'.$municipio->id_municipio.'">'.strtoupper($municipio->nombre_municipio).'</option>';
-                                      }
-                                      ?>
+                              foreach ($municipios as $municipio)
+                              {
+                                      echo '<option value="'.$municipio->id_municipio.'">'.strtoupper($municipio->nombre_municipio).'</option>';
+                              }
+                              ?>
 
                   </select>
                   <span>Municipio</span>
@@ -648,11 +634,11 @@
                     id="selector_localidad_secundaria">
 
                     <?php
-                                      foreach ($localidades as $localidad)
-                                      {
-                                              echo '<option value="'.$localidad->id_localidad.'">'.strtoupper($localidad->nombre_localidad).'</option>';
-                                      }
-                                      ?>
+                              foreach ($localidades as $localidad)
+                              {
+                                      echo '<option value="'.$localidad->id_localidad.'">'.strtoupper($localidad->nombre_localidad).'</option>';
+                              }
+                              ?>
 
                   </select>
                   <span>Localidad</span>
@@ -666,6 +652,7 @@
           <!--documentos solicitados------------------------------------------------------>
           <p class="text-center text-white rounded" style="background-color: #579A8D; height: 40px">
             Documentos recibidos
+            <hr>
           </p>
 
 
@@ -752,6 +739,20 @@
 
     <!-- Custom scripts for all pages-->
     <script src="../../assets/js/sb-admin.min.js"></script>
+
+    <script src="../../assets/js/cambio_estado.js"></script>
+    <script src="../../assets/js/cambio_municipio.js"></script>
+
+    <script>
+    var selector_estado_aspirante = document.getElementById("selector_estado_aspirante");
+    var selector_municipio_aspirante = document.getElementById("selector_municipio_aspirante");
+    var selector_localidad_aspirante = document.getElementById("selector_localidad_aspirante");
+    
+    var selector_estado_secundaria = document.getElementById("selector_estado_secundaria");
+    var selector_municipio_secundaria = document.getElementById("selector_municipio_secundaria");
+    var selector_localidad_secundaria = document.getElementById("selector_localidad_secundaria");
+    </script>
+
 
 
 </body>

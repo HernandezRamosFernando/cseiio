@@ -1,16 +1,10 @@
-
-
-
-
-
-
 function cambio_municipio(selector_municipio,selector_localidad){
     //console.log(document.getElementById("selector_estado").value);
     let id_municipio = selector_municipio.value; 
     selector_localidad.innerHTML = "";
     
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'http://localhost/app/c_localidad/get_localidades_municipio?id_municipio='+id_municipio, true);
+    xhr.open('GET', 'http://localhost/cseiio/index.php/c_localidad/get_localidades_municipio?id_municipio='+id_municipio, true);
 
     xhr.onload = function () {
         console.log(id_municipio);

@@ -47,17 +47,7 @@ public function portabilidad(){
  
         $this->load->view("nuevoingreso",$datos);
     }
-    public function portabilidad(){
-
-        $datos['estados'] = $this->M_estado->get_estados();
-        $datos['municipios'] = $this->M_municipio->get_municipios_estado(1);
-        $datos['localidades'] = $this->M_localidad->get_localidades_municipio(1);
-        $datos['lenguas'] = $this->M_lengua->get_lenguas();
-        $datos['planteles'] = $this->M_plantel->get_planteles();
-
- 
-        $this->load->view("portabilidad",$datos);
-    }
+    
     public function asignar_matricula(){
         $this->load->view("asignacionmatricula");
     }
@@ -87,6 +77,10 @@ public function portabilidad(){
         //$datos['documentacion_aspirante'] = $this->M_documentacion->get_documentacion_aspirante($no_control);
         $this->load->view('formulario_aspirante_editar');
         //print_r($datos);
+        
+    }
+
+    function get_direccion_localidad(){
         
     }
 

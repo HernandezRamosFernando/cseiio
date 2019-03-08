@@ -7,7 +7,7 @@
   <title>Page Title</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+  <link href="/cseiio/assets/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
 
   <!-- Bootstrap core CSS-->
   <link href="/cseiio/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -671,46 +671,7 @@
 <!--fin datos secundaria------------------------------------------------------>
 
 <!--documentos solicitados------------------------------------------------------>
-<p class="text-center text-white rounded" style="background-color: #579A8D; height: 40px">
-  Documentos recibidos
-  <hr>
-</p>
 
-
-
-<div class="form-check">
-  <label class="form-check-label">
-    <input type="checkbox" class="form-check-input" name="aspirante_documento_acta_nacimiento"
-      id="aspirante_documento_acta_nacimiento" value="1" unchecked>
-    Acta de Nacimiento
-  </label>
-</div>
-
-<div class="form-check">
-  <label class="form-check-label">
-    <input type="checkbox" class="form-check-input" name="aspirante_documento_curp"
-      id="aspirante_documento_curp" value="2" unchecked>
-    CURP
-  </label>
-</div>
-
-
-<div class="form-check">
-  <label class="form-check-label">
-    <input type="checkbox" class="form-check-input" name="aspirante_documento_certificado_secundaria"
-      id="aspirante_documento_certificado_secundaria" value="3" unchecked>
-    Certificado de Secundaria
-  </label>
-</div>
-
-
-<div class="form-check">
-  <label class="form-check-label">
-    <input type="checkbox" class="form-check-input" name="aspirante_documento_fotos"
-      id="aspirante_documento_fotos" value="4" unchecked>
-    Fotos
-  </label>
-</div>
 
 <!-- fin documentos solicitados------------------------------------------------------>
 
@@ -744,7 +705,7 @@
   <!-- Core plugin JavaScript-->
   <script src="/cseiio/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-  <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+  <script src="/cseiio/assets/vendor/datatables/jquery.dataTables.js"></script>
 
   <script src="/cseiio/assets/js/cambio_estado.js"></script>
   <script src="/cseiio/assets/js/cambio_municipio.js"></script>

@@ -4,6 +4,34 @@ function cambio_municipio(selector_municipio,selector_localidad){
     selector_localidad.innerHTML = "";
     
     var xhr = new XMLHttpRequest();
+
+xhr.addEventListener("progress", updateProgress);
+xhr.addEventListener("load", transferComplete);
+xhr.addEventListener("error", transferFailed);
+xhr.addEventListener("abort", transferCanceled);
+
+
+    function updateProgress (oEvent) {
+        if (oEvent.lengthComputable) {
+          var percentComplete = oEvent.loaded / oEvent.total * 100;
+          // ...
+        } else {
+          // Unable to compute progress information since the total size is unknown
+        }
+      }
+      
+      function transferComplete(evt) {
+        console.log("completa.");
+      }
+      
+      function transferFailed(evt) {
+        console.log("Error en transferencia");
+      }
+      
+      function transferCanceled(evt) {
+        console.log("Transferencia cancelada por el usuario");
+      }
+      
     xhr.open('GET', '/cseiio/index.php/c_localidad/get_localidades_municipio?id_municipio='+id_municipio, true);
 
     xhr.onload = function () {

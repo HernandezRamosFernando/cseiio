@@ -12,24 +12,6 @@
   <title>Inscripción Portabilidad</title>
 
   <!-- Bootstrap core CSS-->
-<<<<<<< HEAD
-  <link href="/cseiio
-  /assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- Custom fonts for this template-->
-  <link href="/cseiio
-  /assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-
-  <!-- Page level plugin CSS-->
-  <link href="/cseiio
-  /assets/datatables/DataTables-1.10.18/dataTables.bootstrap4.css" rel="stylesheet">
-  <link href="/cseiio
-  /assets/vendor/bootstrap/css/bootstrap-float-label.css" rel="stylesheet">
-
-  <!-- Custom styles for this template-->
-  <link href="/cseiio
-  /assets/css/sb-admin.css" rel="stylesheet">
-=======
   <link href="/cseiio/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom fonts for this template-->
@@ -41,7 +23,6 @@
 
   <!-- Custom styles for this template-->
   <link href="/cseiio/assets/css/sb-admin.css" rel="stylesheet">
->>>>>>> 3aafb8ee99780f1886a8adf15b7bb0f4f48beef8
 
 
 
@@ -148,12 +129,7 @@
           <li class="breadcrumb-item active">Rellene todos los campos</li>
         </ol>
 
-<<<<<<< HEAD
-        <form action="/cseiio
-        /c_aspirante/registrar_datos_nuevo_ingreso" method="post">
-=======
         <form action="/cseiio/index.php/c_aspirante/registrar_datos_portabilidad" method="post">
->>>>>>> 3aafb8ee99780f1886a8adf15b7bb0f4f48beef8
 
           <!--datos personales------------------------------------------------------>
           <p class="text-center text-white rounded" style="background-color: #579A8D; height: 40px">
@@ -167,7 +143,7 @@
             <div class="row">
               <div class="col-md-4">
                 <div class="form-label-group">
-                  <input type="text" pattern="[A-Za-zñ]+" required="required" title="Introduzca solo letras"
+                  <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ ]+" required="required" title="Introduzca solo letras"
                     class="form-control" id="aspirante_nombre" name="aspirante_nombre" placeholder="Nombre(s)">
                   <label for="aspirante_nombre">Nombre(s)</label>
                 </div>
@@ -175,7 +151,7 @@
 
               <div class="col-md-4">
                 <div class="form-label-group">
-                  <input type="text" pattern="[A-Za-zñ]+" required="required" title="Introduzca solo letras"
+                  <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ ]+" required="required" title="Introduzca solo letras"
                     class="form-control" id="aspirante_apellido_paterno" name="aspirante_apellido_paterno"
                     placeholder="Apellido Paterno">
                   <label for="aspirante_apellido_paterno">Apellido Paterno</label>
@@ -184,7 +160,7 @@
 
               <div class="col-md-4">
                 <div class="form-label-group">
-                  <input type="text" pattern="[A-Za-zñ]+" title="Introduzca solo letras"
+                  <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ ]+" title="Introduzca solo letras"
                     class="form-control" id="aspirante_apellido_materno" name="aspirante_apellido_materno"
                     placeholder="Apellido Materno">
                   <label for="aspirante_apellido_materno">Apellido Materno</label>
@@ -394,7 +370,7 @@
             <div class="row">
               <div class="col-md-4">
                 <div class="form-label-group">
-                  <input type="text" pattern="[a-zA-Z0-9]+" required="required"
+                  <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ 0-9]+" required="required"
                     title="La direccion tiene caracteres incorrectos" class="form-control"
                     id="aspirante_direccion_calle" name="aspirante_direccion_calle" placeholder="Calle">
                   <label for="aspirante_direccion_calle">Calle</label>
@@ -411,7 +387,7 @@
 
               <div class="col-md-4">
                 <div class="form-label-group">
-                  <input type="text" pattern="[a-zA-Z0-9]+" 
+                  <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ 0-9]+" 
                     title="La colonia tiene caracteres incorrectos" class="form-control"
                     id="aspirante_direccion_colonia" name="aspirante_direccion_colonia" placeholder="Colonia">
                   <label for="aspirante_direccion_colonia">Colonia</label>
@@ -443,7 +419,7 @@
             <div class="row">
               <div class="col-md-9">
                 <div class="form-label-group">
-                  <input type="text" pattern="[A-Za-zñ]+" required="required" title="Introduzca solo letras"
+                  <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ ]+" required="required" title="Introduzca solo letras"
                     class="form-control" id="aspirante_tutor_nombre" name="aspirante_tutor_nombre"
                     placeholder="Nombre Completo">
                   <label for="aspirante_tutor_nombre">Nombre Completo tutor</label>
@@ -468,7 +444,7 @@
             <div class="row">
               <div class="col-md-4">
                 <div class="form-label-group">
-                  <input type="text" pattern="[A-Za-zñ]+" title="Introduzca solo letras" class="form-control"
+                  <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ. ]+" title="Introduzca solo letras" class="form-control"
                     id="aspirante_tutor_ocupacion" name="aspirante_tutor_ocupacion" placeholder="Ocupacion">
                   <label for="aspirante_tutor_ocupacion">Ocupacion</label>
                 </div>
@@ -476,7 +452,7 @@
 
               <div class="col-md-4">
                 <div class="form-label-group">
-                  <input type="text" pattern="[A-Za-zñ]+" required="required" title="Introduzca solo letras"
+                  <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ. ]+" required="required" title="Introduzca solo letras"
                     class="form-control" id="aspirante_tutor_parentezco" name="aspirante_tutor_parentezco"
                     placeholder="Parentezco">
                   <label for="aspirante_tutor_parentezco">Parentezco</label>
@@ -597,7 +573,7 @@
             <div class="row">
               <div class="col-md-4">
                 <div class="form-label-group">
-                  <input type="text" pattern="[A-Za-zñ0-9]+" required="required"
+                  <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ 0-9]+" required="required"
                     title="El nombre de la secundaria contiene caracteres incorrectos" class="form-control"
                     id="aspirante_secundaria_nombre" name="aspirante_secundaria_nombre"
                     placeholder="Nombre de Secundaria">
@@ -767,28 +743,6 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-<<<<<<< HEAD
-    <script src="/cseiio
-    /assets/vendor/jquery/jquery.min.js"></script>
-    <script src="/cseiio
-    /assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="/cseiio
-    /assets/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Page level plugin JavaScript-->
-    <script src="/cseiio
-    /assets/vendor/chart.js/Chart.min.js"></script>
-    <script src="/cseiio
-    /assets/vendor/datatables/jquery.dataTables.js"></script>
-    <script src="/cseiio
-    /assets/vendor/datatables/dataTables.bootstrap4.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="/cseiio
-    /assets/js/sb-admin.min.js"></script>
-=======
     <script src="/cseiio/assets/vendor/jquery/jquery.min.js"></script>
     <script src="/cseiio/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
@@ -808,7 +762,6 @@
     var selector_municipio_secundaria = document.getElementById("selector_municipio_secundaria");
     var selector_localidad_secundaria = document.getElementById("selector_localidad_secundaria");
     </script>
->>>>>>> 3aafb8ee99780f1886a8adf15b7bb0f4f48beef8
 
 
 </body>

@@ -335,13 +335,8 @@
         <select class="form-control form-control-lg" required="required" name="aspirante_direccion_municipio"
           onChange="cambio_municipio(selector_municipio_aspirante,selector_localidad_aspirante)"
           id="selector_municipio_aspirante">
-          <option></option>
-          <?php
-                    foreach ($municipios as $municipio)
-                    {
-                            echo '<option value="'.$municipio->id_municipio.'">'.strtoupper($municipio->nombre_municipio).'</option>';
-                    }
-                    ?>
+ 
+        
         </select>
         <span>Municipio</span>
       </label>
@@ -351,14 +346,7 @@
       <label class="form-group has-float-label">
         <select class="form-control form-control-lg" required="required" name="aspirante_direccion_localidad"
           id="selector_localidad_aspirante">
-          <option></option>
-
-          <?php
-                    foreach ($localidades as $localidad)
-                    {
-                            echo '<option value="'.$localidad->id_localidad.'">'.strtoupper($localidad->nombre_localidad).'</option>';
-                    }
-                    ?>
+         
 
         </select>
         <span>Localidad</span>
@@ -637,12 +625,7 @@
           onChange="cambio_municipio(selector_municipio_secundaria,selector_localidad_secundaria)"
           id="selector_municipio_secundaria">
 
-          <?php
-                    foreach ($municipios as $municipio)
-                    {
-                            echo '<option value="'.$municipio->id_municipio.'">'.strtoupper($municipio->nombre_municipio).'</option>';
-                    }
-                    ?>
+         
 
         </select>
         <span>Municipio</span>
@@ -654,12 +637,7 @@
         <select class="form-control form-control-lg" required="required" name="aspirante_secundaria_localidad"
           id="selector_localidad_secundaria">
 
-          <?php
-                    foreach ($localidades as $localidad)
-                    {
-                            echo '<option value="'.$localidad->id_localidad.'">'.strtoupper($localidad->nombre_localidad).'</option>';
-                    }
-                    ?>
+          
 
         </select>
         <span>Localidad</span>
@@ -717,13 +695,23 @@
 
     
     function cargar_datos_aspirante(e){
+      //document.getElementById("selector_estado_aspirante").innerHTML = "";
+      document.getElementById("selector_municipio_aspirante").innerHTML = "";
+      document.getElementById("selector_localidad_aspirante").innerHTML = "";
+
+      document.getElementById("selector_municipio_secundaria").innerHTML = "";
+      document.getElementById("selector_localidad_secundaria").innerHTML = "";
+
+      //document.getElementById("selector_estado_aspirante").innerHTML = "";
+      //document.getElementById("selector_estado_aspirante").innerHTML = "";
+      //document.getElementById("selector_estado_aspirante").innerHTML = "";
        
 
         var xhr = new XMLHttpRequest();
         xhr.open('GET', 'http://localhost/cseiio/c_aspirante/get_datos_aspirante/'+e.value, true);
 
         xhr.onload = function () {
-          console.log(JSON.parse(xhr.response));
+          //console.log(JSON.parse(xhr.response));
  
           var datos = JSON.parse(xhr.response);
           //datos personales
@@ -754,6 +742,52 @@
           document.getElementById("aspirante_direccion_colonia").value = datos.direccion_aspirante[0].colonia;
           document.getElementById("aspirante_direccion_cp").value = datos.direccion_aspirante[0].cp;
 
+          var direccion = new XMLHttpRequest();
+          direccion.open('GET', '/cseiio/index.php/c_localidad/get_estado_municipio_localidad?id_localidad='+datos.direccion_aspirante[0].Localidad_id_localidad, true);
+
+          direccion.onload = function () {
+           
+          document.getElementById("selector_estado_aspirante").value = JSON.parse(direccion.response)[0].id_estado;
+            //municpios
+            
+            var municipios = new XMLHttpRequest();
+            municipios.open('GET', '/cseiio/index.php/c_municipio/get_municipios_estado?id_estado='+JSON.parse(direccion.response)[0].id_estado, true);
+
+            municipios.onload = function () {
+              //console.log(JSON.parse(municipios.response));
+              JSON.parse(municipios.response).forEach(function(municipio,indice){
+                document.getElementById("selector_municipio_aspirante").innerHTML+='<option value='+municipio.id_municipio+'>'+municipio.nombre_municipio.toUpperCase()+'</option>';
+
+              });
+              document.getElementById("selector_municipio_aspirante").value = JSON.parse(direccion.response)[0].id_municipio;
+
+            };
+
+            municipios.send(null);
+
+
+            //localidades
+            var localidades = new XMLHttpRequest();
+            localidades.open('GET', '/cseiio/index.php/c_localidad/get_localidades_municipio?id_municipio='+JSON.parse(direccion.response)[0].id_municipio, true);
+
+            localidades.onload = function () {
+
+              JSON.parse(localidades.response).forEach(function(localidad,indice){
+                document.getElementById("selector_localidad_aspirante").innerHTML+='<option value='+localidad.id_localidad+'>'+localidad.nombre_localidad.toUpperCase()+'</option>';
+              });
+              
+              document.getElementById("selector_localidad_aspirante").value = JSON.parse(direccion.response)[0].id_localidad;
+            };
+
+            localidades.send(null);
+
+
+
+          };
+
+          direccion.send(null);
+          //-----fin xhr ireccion
+
 
           //tutor aspirante
           document.getElementById("aspirante_tutor_nombre").value = datos.tutor_aspirante[0].nombre;
@@ -773,37 +807,55 @@
           //datos_secunadaria
           document.getElementById("aspirante_secundaria_nombre").value = datos.datos_secundaria_aspirante[0].nombre_secundaria;
           document.getElementById("aspirante_secundaria_tipo_subsistema").value = datos.datos_secundaria_aspirante[0].tipo_subsistema;
-
-
-          //documentos
-          datos.documentacion_aspirante.forEach(function(valor,indice){
-            console.log(valor.Documento_id_documento);
-              switch(parseInt(valor.Documento_id_documento)){
-                case 1:
-                document.getElementById("aspirante_documento_acta_nacimiento").checked=true;
-                break;
-
-                case 2:
-                document.getElementById("aspirante_documento_curp").checked=true;
-                break;
-
-                case 3:
-                document.getElementById("aspirante_documento_certificado_secundaria").checked=true;
-                break;
-
-                case 4:
-                document.getElementById("aspirante_documento_fotos").checked=true;
-                break;
-                
-              }
-          });
-
-
-          //if(datos.documentacion_aspirante[0].Documento_id_documento = 1){
-            //document.getElementById("aspirante_documento_acta_nacimiento").checked=true;
-          //}
           
-          //aspirante_documento_acta_nacimiento
+          var direccion_secundaria = new XMLHttpRequest();
+          direccion_secundaria.open('GET', '/cseiio/index.php/c_localidad/get_estado_municipio_localidad?id_localidad='+datos.datos_secundaria_aspirante[0].Localidad_id_localidad, true);
+
+          direccion_secundaria.onload = function () {
+           
+          //console.log(direccion_secundaria.response);
+
+          document.getElementById("selector_estado_secundaria").value = JSON.parse(direccion_secundaria.response)[0].id_estado;
+
+          //municpios
+            
+          var municipios_secundaria = new XMLHttpRequest();
+          municipios_secundaria.open('GET', '/cseiio/index.php/c_municipio/get_municipios_estado?id_estado='+JSON.parse(direccion_secundaria.response)[0].id_estado, true);
+
+
+          municipios_secundaria.onload = function () {
+              //console.log(JSON.parse(municipios_secundaria.response));
+              JSON.parse(municipios_secundaria.response).forEach(function(municipio,indice){
+                document.getElementById("selector_municipio_secundaria").innerHTML+='<option value='+municipio.id_municipio+'>'+municipio.nombre_municipio.toUpperCase()+'</option>';
+
+              });
+              document.getElementById("selector_municipio_secundaria").value = JSON.parse(direccion_secundaria.response)[0].id_municipio;
+
+            };
+
+            municipios_secundaria.send(null);
+//---------------------------localidades
+//localidades
+            var localidades_secundaria = new XMLHttpRequest();
+            localidades_secundaria.open('GET', '/cseiio/index.php/c_localidad/get_localidades_municipio?id_municipio='+JSON.parse(direccion_secundaria.response)[0].id_municipio, true);
+
+            localidades_secundaria.onload = function () {
+
+              JSON.parse(localidades_secundaria.response).forEach(function(localidad,indice){
+                document.getElementById("selector_localidad_secundaria").innerHTML+='<option value='+localidad.id_localidad+'>'+localidad.nombre_localidad.toUpperCase()+'</option>';
+              });
+              
+              document.getElementById("selector_localidad_secundaria").value = JSON.parse(direccion_secundaria.response)[0].id_localidad;
+            };
+
+            localidades_secundaria.send(null);
+            //--------------------------
+
+          };
+
+          direccion_secundaria.send(null);
+          //-----fin xhr ireccion
+         
 
 
 
@@ -855,8 +907,8 @@
       xhr.open('GET', 'http://localhost/cseiio/c_aspirante/buscar_aspirantes_nombre?' + query, true);
 
       xhr.onload = function () {
-        console.log(JSON.parse(xhr.response));
-        //console.log(query);
+        //console.log(JSON.parse(xhr.response));
+        ////console.log(query);
 
 
         JSON.parse(xhr.response).forEach(function (valor, indice) {

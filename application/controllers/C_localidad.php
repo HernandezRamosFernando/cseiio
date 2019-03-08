@@ -14,4 +14,9 @@ class C_localidad extends CI_Controller {
         $id_municipio = $this->input->get('id_municipio');
         echo json_encode($this->M_localidad->get_localidades_municipio($id_municipio));
      }
+
+     function get_estado_municipio_localidad(){
+         
+        echo json_encode($this->M_localidad->get_estado_municipio_localidad($this->input->get('id_localidad')));
+    }
 }

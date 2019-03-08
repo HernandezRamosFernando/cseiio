@@ -47,17 +47,6 @@ public function portabilidad(){
  
         $this->load->view("nuevoingreso",$datos);
     }
-    public function portabilidad(){
-
-        $datos['estados'] = $this->M_estado->get_estados();
-        $datos['municipios'] = $this->M_municipio->get_municipios_estado(1);
-        $datos['localidades'] = $this->M_localidad->get_localidades_municipio(1);
-        $datos['lenguas'] = $this->M_lengua->get_lenguas();
-        $datos['planteles'] = $this->M_plantel->get_planteles();
-
- 
-        $this->load->view("portabilidad",$datos);
-    }
     public function asignar_matricula(){
         $this->load->view("asignacionmatricula");
     }
@@ -325,6 +314,7 @@ public function portabilidad(){
     }
 
     public function registrar_datos_portabilidad(){
+        $this->load->view("inscripcion");
         $numero=$this->M_aspirante->asignar_num_control();
         $num=10000+$numero;
         //$no_control = 'CSEIIO'.date('y').str_pad($numero,4,'0',STR_PAD_LEFT);

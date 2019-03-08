@@ -129,11 +129,7 @@
           <li class="breadcrumb-item active">Rellene todos los campos</li>
         </ol>
 
-<<<<<<< HEAD
-        <form action="/cseiio/c_aspirante/registrar_datos_nuevo_ingreso" method="post">
-=======
         <form action="/cseiio/index.php/c_aspirante/registrar_datos_nuevo_ingreso" method="post">
->>>>>>> 3aafb8ee99780f1886a8adf15b7bb0f4f48beef8
 
           <!--datos personales------------------------------------------------------>
           <p class="text-center text-white rounded" style="background-color: #579A8D; height: 40px">
@@ -737,18 +733,6 @@
 
     <!-- Core plugin JavaScript-->
     <script src="/cseiio/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
-<<<<<<< HEAD
-
-    <!-- Page level plugin JavaScript-->
-    <script src="/cseiio/assets/vendor/chart.js/Chart.min.js"></script>
-    <script src="/cseiio/assets/vendor/datatables/jquery.dataTables.js"></script>
-    <script src="/cseiio/assets/vendor/datatables/dataTables.bootstrap4.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="/cseiio/assets/js/sb-admin.min.js"></script>
-=======
-
->>>>>>> 3aafb8ee99780f1886a8adf15b7bb0f4f48beef8
 
     <script src="/cseiio/assets/js/cambio_estado.js"></script>
     <script src="/cseiio/assets/js/cambio_municipio.js"></script>

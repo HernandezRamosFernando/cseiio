@@ -11,18 +11,18 @@
             <title>Menú SISE</title>
         
             <!-- Bootstrap core CSS-->
-            <link href="../..//assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+            <link href="/cseiio/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         
             <!-- Custom fonts for this template-->
-            <link href="../../assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+            <link href="/cseiio/assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
         
             <!-- Page level plugin CSS-->
-            <link href="../../assets/datatables/DataTables-1.10.18/dataTables.bootstrap4.css" rel="stylesheet">
+            <link href="/cseiio/assets/datatables/DataTables-1.10.18/dataTables.bootstrap4.css" rel="stylesheet">
         
             <!-- Custom styles for this template-->
-            <link href="../../assets/css/sb-admin.css" rel="stylesheet">
+            <link href="/cseiio/assets/css/sb-admin.css" rel="stylesheet">
 
-             <link rel="stylesheet" type="text/css" href="../../assets/css/main.css">
+             <link rel="stylesheet" type="text/css" href="/cseiio/assets/css/main.css">
         
       
         
@@ -231,19 +231,19 @@
    
 
                   <!-- Bootstrap core JavaScript-->
-    <script src="../../assets/vendor/jquery/jquery.min.js"></script>
-    <script src="../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/cseiio/assets/vendor/jquery/jquery.min.js"></script>
+    <script src="/cseiio/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="../../assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="/cseiio/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Page level plugin JavaScript-->
-    <script src="../../assets/vendor/chart.js/Chart.min.js"></script>
-    <script src="../../assets/vendor/datatables/jquery.dataTables.js"></script>
-    <script src="../..//assets/vendor/datatables/dataTables.bootstrap4.js"></script>
+    <script src="/cseiio/assets/vendor/chart.js/Chart.min.js"></script>
+    <script src="/cseiio/assets/vendor/datatables/jquery.dataTables.js"></script>
+    <script src="/cseiio//assets/vendor/datatables/dataTables.bootstrap4.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="../../assets/js/sb-admin.min.js"></script>
+    <script src="/cseiio/assets/js/sb-admin.min.js"></script>
  
     </body>
 </html>

@@ -129,6 +129,8 @@
           <li class="breadcrumb-item active">Rellene todos los campos</li>
         </ol>
 
+        
+
         <form action="/cseiio/index.php/c_aspirante/registrar_datos_nuevo_ingreso" method="post">
 
           <!--datos personales------------------------------------------------------>
@@ -136,7 +138,6 @@
             Datos personales de Aspirante
             <hr>
           </p>
-
 
           <div class="form-group">
 
@@ -324,6 +325,7 @@
                   </select>
                   <span>Municipio</span>
                 </label>
+                
               </div>
 
               <div class="col-md-4">
@@ -746,6 +748,7 @@
     var selector_municipio_secundaria = document.getElementById("selector_municipio_secundaria");
     var selector_localidad_secundaria = document.getElementById("selector_localidad_secundaria");
     </script>
+    
 
 
 

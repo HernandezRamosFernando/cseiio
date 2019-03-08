@@ -17,14 +17,11 @@
   <!-- Custom fonts for this template-->
   <link href="/cseiio/assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
-  <!-- Page level plugin CSS-->
-  <link href="/cseiio/assets/datatables/DataTables-1.10.18/dataTables.bootstrap4.css" rel="stylesheet">
-  <link href="/cseiio/assets/vendor/bootstrap/css/bootstrap-float-label.css" rel="stylesheet">
-
   <!-- Custom styles for this template-->
   <link href="/cseiio/assets/css/sb-admin.css" rel="stylesheet">
 
-
+  <link rel="stylesheet" type="text/css" href="/cseiio/assets/css/main.css">
+  <link href="/cseiio/assets/vendor/bootstrap/css/bootstrap-float-label.css" rel="stylesheet">
 
 </head>
 
@@ -37,8 +34,8 @@
     </button>
     <ul class="nav justify-content-center">
       <li class="nav-item">
-        <a class="nav-link disabled" style="color:rgb(182, 197, 193)" href="/cseiio/index.php/c_menu/principal">
-        Sistema Integral de Servicios Escolares</a>
+        <a class="nav-link disabled" style="color:rgb(182, 197, 193)" href="/cseiio/index.php/c_menu/principal">Sistema integral de
+          servicios escolares</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" style="color:rgb(150, 163, 159)">Bienvenido Usuario</a>
@@ -90,6 +87,7 @@
     </form>
   </nav>
 
+
   <div id="wrapper">
 
 
@@ -115,8 +113,8 @@
           <span>Inscripción Nuevo Ingreso</span>
         </a>
       </li>
-
     </ul>
+
     <div id="content-wrapper">
 
       <div class="container-fluid">
@@ -729,12 +727,18 @@
       </div>
     </div>
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="/cseiio/assets/vendor/jquery/jquery.min.js"></script>
-    <script src="/cseiio/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+      <!-- Bootstrap core JavaScript-->
+  <script src="/cseiio/assets/vendor/jquery/jquery.min.js"></script>
+  <script src="/cseiio/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Core plugin JavaScript-->
-    <script src="/cseiio/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+  <!-- Core plugin JavaScript-->
+  <script src="/cseiio/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+
+  <!-- Custom scripts for all pages-->
+  <script src="/cseiio/assets/js/sb-admin.min.js"></script>
+
+    
 
     <script src="/cseiio/assets/js/cambio_estado.js"></script>
     <script src="/cseiio/assets/js/cambio_municipio.js"></script>

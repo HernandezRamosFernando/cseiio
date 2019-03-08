@@ -10,9 +10,6 @@ class C_menu extends CI_Controller{
         $this->load->view("menuadmin");
     }
 
-    public function control_alumnos(){
-        $this->load->view("controlalumnos");
-    }
 
 
 

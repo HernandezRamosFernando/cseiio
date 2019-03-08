@@ -711,8 +711,8 @@
           <!-- fin documentos solicitados------------------------------------------------------>
 
           <br>
-          <button type="submit" class="btn btn-primary btn-lg btn-block"
-            style="background-color:#1F934C; border: #1F934C">Registrar</button>
+          <button type="submit" class="btn btn-success btn-lg btn-block"
+            ">Registrar</button>
 
 
         </form>

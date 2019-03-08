@@ -57,14 +57,14 @@ public function portabilidad(){
     
 
 
-    public function buscar_aspirante_editar(){
+    public function control_alumnos(){
         $datos['estados'] = $this->M_estado->get_estados();
         $datos['municipios'] = $this->M_municipio->get_municipios_estado(1);
         $datos['localidades'] = $this->M_localidad->get_localidades_municipio(1);
         $datos['lenguas'] = $this->M_lengua->get_lenguas();
         $datos['planteles'] = $this->M_plantel->get_planteles();
        
-        $this->load->view("busqueda_aspirante_editar",$datos);
+        $this->load->view("controlalumnos",$datos);
     }
 
 

@@ -37,8 +37,8 @@
     </button>
     <ul class="nav justify-content-center">
       <li class="nav-item">
-        <a class="nav-link disabled" style="color:rgb(182, 197, 193)" href="/cseiio/index.php/c_menu/principal">Sistema integral de
-          servicios escolares</a>
+        <a class="nav-link disabled" style="color:rgb(182, 197, 193)" href="/cseiio/index.php/c_menu/principal">
+        Sistema Integral de Servicios Escolares</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" style="color:rgb(150, 163, 159)">Bienvenido Usuario</a>
@@ -129,7 +129,7 @@
           <li class="breadcrumb-item active">Rellene todos los campos</li>
         </ol>
 
-        
+
 
         <form action="/cseiio/index.php/c_aspirante/registrar_datos_nuevo_ingreso" method="post">
 
@@ -195,9 +195,8 @@
               </div>
               <div class="col-md-2">
                 <div class="form-label-group">
-                  <input type="text" pattern="[0-9]{10}" 
-                    title="El numero de telefono debe de ser a 10 digitos" class="form-control" id="aspirante_telefono"
-                    name="aspirante_telefono" placeholder="Telefono">
+                  <input type="text" pattern="[0-9]{10}" title="El numero de telefono debe de ser a 10 digitos"
+                    class="form-control" id="aspirante_telefono" name="aspirante_telefono" placeholder="Telefono">
                   <label for="aspirante_telefono">Telefono</label>
                 </div>
               </div>
@@ -234,8 +233,8 @@
 
               <div class="col-md-4">
                 <div class="form-label-group">
-                  <input type="number" pattern="[0-9]{11}" title="Introduzca 11 digitos"
-                    class="form-control" id="aspirante_nss" name="aspirante_nss" placeholder="Numero de Seguro Social">
+                  <input type="number" pattern="[0-9]{11}" title="Introduzca 11 digitos" class="form-control"
+                    id="aspirante_nss" name="aspirante_nss" placeholder="Numero de Seguro Social">
                   <label for="aspirante_nss">Nss</label>
                 </div>
               </div>
@@ -325,7 +324,7 @@
                   </select>
                   <span>Municipio</span>
                 </label>
-                
+
               </div>
 
               <div class="col-md-4">
@@ -373,18 +372,18 @@
 
               <div class="col-md-4">
                 <div class="form-label-group">
-                  <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ 0-9]+"
-                    title="La colonia tiene caracteres incorrectos" class="form-control"
-                    id="aspirante_direccion_colonia" name="aspirante_direccion_colonia" placeholder="Colonia">
+                  <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ 0-9]+" title="La colonia tiene caracteres incorrectos"
+                    class="form-control" id="aspirante_direccion_colonia" name="aspirante_direccion_colonia"
+                    placeholder="Colonia">
                   <label for="aspirante_direccion_colonia">Colonia</label>
                 </div>
               </div>
 
               <div class="col-md-2">
                 <div class="form-label-group">
-                  <input type="text" pattern="[0-9]{5}"
-                    title="El codigo postal solo debe contener 5 digitos" class="form-control"
-                    id="aspirante_direccion_cp" name="aspirante_direccion_cp" placeholder="Codigo Postal">
+                  <input type="text" pattern="[0-9]{5}" title="El codigo postal solo debe contener 5 digitos"
+                    class="form-control" id="aspirante_direccion_cp" name="aspirante_direccion_cp"
+                    placeholder="Codigo Postal">
                   <label for="aspirante_direccion_cp">Codigo Postal</label>
                 </div>
               </div>
@@ -430,17 +429,18 @@
             <div class="row">
               <div class="col-md-4">
                 <div class="form-label-group">
-                  <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ. ]+" title="Introduzca solo letras" class="form-control"
-                    id="aspirante_tutor_ocupacion" name="aspirante_tutor_ocupacion" placeholder="Ocupacion">
+                  <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ. ]+" title="Introduzca solo letras"
+                    class="form-control" id="aspirante_tutor_ocupacion" name="aspirante_tutor_ocupacion"
+                    placeholder="Ocupacion">
                   <label for="aspirante_tutor_ocupacion">Ocupacion</label>
                 </div>
               </div>
 
               <div class="col-md-4">
                 <div class="form-label-group">
-                  <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ. ]+" required="required" title="Introduzca solo letras"
-                    class="form-control" id="aspirante_tutor_parentezco" name="aspirante_tutor_parentezco"
-                    placeholder="Parentezco">
+                  <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ. ]+" required="required"
+                    title="Introduzca solo letras" class="form-control" id="aspirante_tutor_parentezco"
+                    name="aspirante_tutor_parentezco" placeholder="Parentezco">
                   <label for="aspirante_tutor_parentezco">Parentezco</label>
                 </div>
               </div>
@@ -570,7 +570,8 @@
 
               <div class="col-md-4">
                 <label class="form-group has-float-label">
-                  <select class="form-control form-control-lg" required="required" name="aspirante_secundaria_tipo_subsistema">
+                  <select class="form-control form-control-lg" required="required"
+                    name="aspirante_secundaria_tipo_subsistema">
                     <option value="TELESECUNDARIA">Telesecundaria</option>
                     <option value="GENERAL">General</option>
                     <option value="PARTICULAR">Particular</option>
@@ -698,8 +699,7 @@
           <!-- fin documentos solicitados------------------------------------------------------>
 
           <br>
-          <button type="submit" class="btn btn-primary btn-lg btn-block"
-            style="background-color:#1F934C; border: #1F934C">Registrar</button>
+          <button type="submit" class="btn btn-success btn-lg btn-block">Registrar</button>
 
 
         </form>
@@ -740,15 +740,15 @@
     <script src="/cseiio/assets/js/cambio_municipio.js"></script>
 
     <script>
-    var selector_estado_aspirante = document.getElementById("selector_estado_aspirante");
-    var selector_municipio_aspirante = document.getElementById("selector_municipio_aspirante");
-    var selector_localidad_aspirante = document.getElementById("selector_localidad_aspirante");
-    
-    var selector_estado_secundaria = document.getElementById("selector_estado_secundaria");
-    var selector_municipio_secundaria = document.getElementById("selector_municipio_secundaria");
-    var selector_localidad_secundaria = document.getElementById("selector_localidad_secundaria");
+      var selector_estado_aspirante = document.getElementById("selector_estado_aspirante");
+      var selector_municipio_aspirante = document.getElementById("selector_municipio_aspirante");
+      var selector_localidad_aspirante = document.getElementById("selector_localidad_aspirante");
+
+      var selector_estado_secundaria = document.getElementById("selector_estado_secundaria");
+      var selector_municipio_secundaria = document.getElementById("selector_municipio_secundaria");
+      var selector_localidad_secundaria = document.getElementById("selector_localidad_secundaria");
     </script>
-    
+
 
 
 

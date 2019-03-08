@@ -711,7 +711,7 @@
         xhr.open('GET', 'http://localhost/cseiio/c_aspirante/get_datos_aspirante/'+e.value, true);
 
         xhr.onload = function () {
-          //console.log(JSON.parse(xhr.response));
+          console.log(JSON.parse(xhr.response));
  
           var datos = JSON.parse(xhr.response);
           //datos personales
@@ -754,7 +754,7 @@
             municipios.open('GET', '/cseiio/index.php/c_municipio/get_municipios_estado?id_estado='+JSON.parse(direccion.response)[0].id_estado, true);
 
             municipios.onload = function () {
-              //console.log(JSON.parse(municipios.response));
+              console.log(JSON.parse(municipios.response));
               JSON.parse(municipios.response).forEach(function(municipio,indice){
                 document.getElementById("selector_municipio_aspirante").innerHTML+='<option value='+municipio.id_municipio+'>'+municipio.nombre_municipio.toUpperCase()+'</option>';
 
@@ -813,7 +813,7 @@
 
           direccion_secundaria.onload = function () {
            
-          //console.log(direccion_secundaria.response);
+          console.log(direccion_secundaria.response);
 
           document.getElementById("selector_estado_secundaria").value = JSON.parse(direccion_secundaria.response)[0].id_estado;
 
@@ -824,7 +824,7 @@
 
 
           municipios_secundaria.onload = function () {
-              //console.log(JSON.parse(municipios_secundaria.response));
+              console.log(JSON.parse(municipios_secundaria.response));
               JSON.parse(municipios_secundaria.response).forEach(function(municipio,indice){
                 document.getElementById("selector_municipio_secundaria").innerHTML+='<option value='+municipio.id_municipio+'>'+municipio.nombre_municipio.toUpperCase()+'</option>';
 
@@ -907,8 +907,8 @@
       xhr.open('GET', 'http://localhost/cseiio/c_aspirante/buscar_aspirantes_nombre?' + query, true);
 
       xhr.onload = function () {
-        //console.log(JSON.parse(xhr.response));
-        ////console.log(query);
+        console.log(JSON.parse(xhr.response));
+        //console.log(query);
 
 
         JSON.parse(xhr.response).forEach(function (valor, indice) {

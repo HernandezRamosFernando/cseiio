@@ -133,6 +133,7 @@ public function get_aspirantes_nombre_documentos(
 
    $consulta = array(
    'Aspirante_no_control =' => $no_control,
+   'tipo =' => 'base' 
 );
 
 
@@ -147,6 +148,18 @@ $this->db->where($consulta);
 //$this->db->select('COUNT(Documento_id_documento) as no_documentos');
 //
 return $this->db->get()->result();
+}
+
+
+
+public function get_aspirantes_nombre_documentos_faltantes(
+   $cct){
+
+return $this->db->query("select * from (select Aspirante_no_control as no_control, count(*) as total_documentos from  Documentacion
+group by Aspirante_no_control) as aspirantes_faltantes inner join Aspirante 
+on  aspirantes_faltantes.no_control=Aspirante.no_control
+where total_documentos<5 and Plantel_cct='".$cct."'")->result();
+
 }
 
 

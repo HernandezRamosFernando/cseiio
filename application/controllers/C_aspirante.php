@@ -105,6 +105,12 @@ public function portabilidad(){
 
     }
 
+    public function get_aspirantes_nombre_documentos_faltantes(){
+        $cct = $this->input->get('cct');
+        //echo json_encode($this->M_aspirante->get_aspirantes_nombre_documentos_faltantes($no_control));
+        echo json_encode($this->M_aspirante->get_aspirantes_nombre_documentos_faltantes($cct));
+    }
+
 
     public function actualizar_datos_aspirante(){
 
@@ -252,7 +258,8 @@ public function portabilidad(){
             'programa_social' => $this->input->post('aspirante_programa_social'),
             'Plantel_cct' => $this->input->post('aspirante_plantel'),
             'semestre' => 1,
-            'tipo_ingreso' => 'NUEVO INGRESO'
+            'tipo_ingreso' => 'NUEVO INGRESO',
+            'fecha_registro' => date("Y-m-d")
         );
 
         
@@ -298,6 +305,8 @@ public function portabilidad(){
             //'aspirante_documento_curp' => $this->input->post('aspirante_documento_curp'),
             //'aspirante_documento_certificado_secundaria' => $this->input->post('aspirante_documento_certificado_secundaria'),
             //'aspirante_documento_fotos' => $this->input->post('aspirante_documento_fotos')
+
+            $datos_aspirante_documentos['aspirante_documento_ficha_inscripcion'] = 100;
     
 
         if($this->input->post('aspirante_documento_acta_nacimiento')!=''){

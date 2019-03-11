@@ -144,7 +144,33 @@ compromiso y para ello proporciono los siguientes datos:
 
 <span>Los documentos faltantes son los que a continuación se señalan con la observación de pendientes:</span>
 
+<table style="width:100%">
+<tr>
+<th>
 
+</tr>
+<tbody>
+<tr>
+  <td>NOMBRE DEL ASPIRANTE:</td>
+  
+</tr>
+<tr>
+  <td>SEMESTRE:</td>
+</tr>
+<tr>
+  <td>NOMBRE DEL BACHILLERATO:</td>
+</tr>
+<tr>
+  <td>C.C.T:</td>
+</tr>
+<tr>
+  <td>FECHA:</td>
+</tr>
+<tr>
+  <td>CICLO ESCOLAR:</td>
+</tr>
+</tbody>
+</table>
 <p style="text-align:justify;">6.- Quedan establecidos como días de descanso obligatorios con pago de salario íntegro los días primero de enero, el primer lunes de febrero en conmemoración del cinco de febrero, el tercer lunes de febrero en conmemoración del veintiuno de marzo, primero de mayo, dieciséis de septiembre, el tercer lunes de febrero en conmemoración del veinte de noviembre, veinticinco de diciembre y primero de diciembre de cada seis años cuando corresponda a la transmisión del Poder Ejecutivo Federal, en términos del artículo 74 de "LA LEY" </p>
 
 

@@ -199,8 +199,9 @@
       <div class="container">
         <div class="card" style="overflow:scroll">
           <div class="card-body">
-            <table class="table table-striped table-bordered" id="tabla_completa">
-              <thead>
+            <table class="table table-hover" id="tabla_completa" style="width: 100%">
+              <caption>Lista de Alumnos</caption>
+              <thead class="thead-light">
                 <tr>
                   <th scope="col" class="col-md-1">Nombre</th>
                   <th scope="col" class="col-md-1">Apellido Paterno</th>
@@ -208,6 +209,7 @@
                   <th scope="col" class="col-md-1">CURP</th>
                   <th scope="col" class="col-md-1">Semestre</th>
                   <th scope="col" class="col-md-1">Editar</th>
+                  <th scope="col" class="col-md-1">Eliminar</th>
                 </tr>
               </thead>
 
@@ -225,8 +227,8 @@
 
 
       <!-- Modal -->
-      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal fade" id="modalaspirante" tabindex="-1" role="dialog" aria-labelledby="modalaspiranteTitle"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" style="max-width: 80% !important;" role="document">
           <div class="modal-content">
 
@@ -783,6 +785,39 @@
         </div>
       </div>
 
+      
+      <!-- Modal -->
+      <div class="modal fade" id="modal_eliminar_alumno" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title">Confirmación de eliminación</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            <div class="modal-body">
+              <div class="container-fluid">
+                ¿Esta seguro que desea eliminar a este alumno?
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+              <button type="button" class="btn btn-danger">Eliminar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <script>
+        $('#exampleModal').on('show.bs.modal', event => {
+          var button = $(event.relatedTarget);
+          var modal = $(this);
+          // Use above variables to manipulate the DOM
+          
+        });
+      </script>
+
 
 
 
@@ -826,9 +861,16 @@
   <!-- Custom scripts for all pages-->
   <script src="/cseiio/assets/js/sb-admin.min.js"></script>
   <script src="/cseiio/assets/vendor/datatables/jquery.dataTables.js"></script>
+  <script src="/cseiio/assets/vendor/datatables/dataTables.bootstrap4.js"></script>
 
   <script src="/cseiio/assets/js/cambio_estado.js"></script>
   <script src="/cseiio/assets/js/cambio_municipio.js"></script>
+
+  <script>
+    function eliminar_alumno(e) {
+
+    }
+  </script>
 
 
 
@@ -1016,7 +1058,7 @@
           "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
           "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
           "sInfoPostFix": "",
-          "sSearch": "Buscar:",
+          "sSearch": "Buscar específico:",
           "sUrl": "",
           "sInfoThousands": ",",
           "sLoadingRecords": "Cargando...",
@@ -1074,7 +1116,11 @@
           fila += '</td>';
 
           fila += '<td>';
-          fila += '<button class="btn btn-lg btn-success" type="button" value="' + valor.no_control + '" onclick="cargar_datos_aspirante(this)" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Editar</button>';
+          fila += '<button class="btn btn-lg btn-block btn-success" type="button" value="' + valor.no_control + '" onclick="cargar_datos_aspirante(this)" class="btn btn-primary" data-toggle="modal" data-target="#modalaspirante">Editar</button>';
+          fila += '</td>';
+
+          fila += '<td class="">';
+          fila += '<button class="btn btn-lg btn-danger" type="button" value="' + valor.no_control + '" onclick="" class="btn btn-primary" data-toggle="modal" data-target="#modal_eliminar_alumno">Eliminar</button>';
           fila += '</td>';
 
           fila += '</tr>';

@@ -52,7 +52,8 @@ public function portabilidad(){
         $this->load->view("asignacionmatricula");
     }
     public function carta_compromiso(){
-        $this->load->view("cartacompromiso");
+        $datos['planteles'] = $this->M_plantel->get_planteles();
+        $this->load->view("carta_compromiso",$datos);
     }
     
 
@@ -65,6 +66,13 @@ public function portabilidad(){
         $datos['planteles'] = $this->M_plantel->get_planteles();
        
         $this->load->view("controlalumnos",$datos);
+    }
+
+    public function get_aspirantes_nombre_documentos(){
+        $no_control = $this->input->get('no_control');
+        
+
+        echo json_encode($this->M_aspirante->get_aspirantes_nombre_documentos($no_control));
     }
 
 

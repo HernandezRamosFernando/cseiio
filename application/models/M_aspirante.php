@@ -116,9 +116,47 @@ public function get_aspirantes_nombre(
    'Plantel_cct=' => $plantel
 );
 
+
+
 $this->db->where($consulta);
 return $this->db->get('Aspirante')->result();
 }
+
+
+
+
+
+//=====================================================================
+
+public function get_aspirantes_nombre_documentos(
+   $no_control){
+
+   $consulta = array(
+   'Aspirante_no_control =' => $no_control,
+);
+
+
+$this->db->select('*');
+$this->db->from('Documentacion');
+$this->db->join('Documento', 'Documentacion.Documento_id_documento = Documento.id_documento');
+$this->db->where($consulta);
+
+//$aResult = $this->db->get();
+
+
+//$this->db->select('COUNT(Documento_id_documento) as no_documentos');
+//
+return $this->db->get()->result();
+}
+
+
+
+//=====================================================================
+
+
+
+
+
 
 function get_aspirante($no_control){
 

@@ -97,6 +97,14 @@ public function portabilidad(){
 
     //-------------------------------------------------
 
+
+    public function generar_carta_compromiso(){
+        $this->load->library('pdf');
+        $this->load->view('contratos/formatocontrato');
+
+    }
+
+
     public function actualizar_datos_aspirante(){
 
         $no_control = $this->input->post('aspirante_no_control');
@@ -422,6 +430,12 @@ public function portabilidad(){
             $datos_aspirante_documentos
         );
         //$this->M_aspirante->insertar_aspirante($datos_aspirante);
+    }
+
+
+    function delete_aspirante(){
+        $no_control = $this->input->get('no_control');
+        echo $this->M_aspirante->delete_aspirante($no_control);
     }
     
     

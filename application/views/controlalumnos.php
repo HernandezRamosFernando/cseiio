@@ -803,7 +803,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-              <button type="button" class="btn btn-danger">Eliminar</button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="confirmacion_eliminar()">Eliminar</button>
             </div>
           </div>
         </div>
@@ -850,6 +850,8 @@
     </div>
   </div>
 
+  <input type="text" style="display:none" id="no_control_borrar">
+
   <!-- Bootstrap core JavaScript-->
   <script src="/cseiio/assets/vendor/jquery/jquery.min.js"></script>
   <script src="/cseiio/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -867,9 +869,21 @@
   <script src="/cseiio/assets/js/cambio_municipio.js"></script>
 
   <script>
-    function eliminar_alumno(e) {
-
+    function eliminar_aspirante(e) {
+        document.getElementById("no_control_borrar").value=e.value;
     }
+
+    function confirmacion_eliminar(){
+      console.log("este aspirante ha sido borrado "+document.getElementById("no_control_borrar").value);
+      var xhr = new XMLHttpRequest();
+        xhr.open('GET', '/cseiio/index.php/c_aspirante/delete_aspirante?no_control='+document.getElementById("no_control_borrar").value, true);
+
+        xhr.onload = function () {
+          alert(xhr.response);
+        };
+
+        xhr.send(null);
+      }
   </script>
 
 
@@ -1120,7 +1134,7 @@
           fila += '</td>';
 
           fila += '<td class="">';
-          fila += '<button class="btn btn-lg btn-danger" type="button" value="' + valor.no_control + '" onclick="" class="btn btn-primary" data-toggle="modal" data-target="#modal_eliminar_alumno">Eliminar</button>';
+          fila += '<button class="btn btn-lg btn-danger" type="button" value="' + valor.no_control + '" onclick="eliminar_aspirante(this)" class="btn btn-primary" data-toggle="modal" data-target="#modal_eliminar_alumno">Eliminar</button>';
           fila += '</td>';
 
           fila += '</tr>';

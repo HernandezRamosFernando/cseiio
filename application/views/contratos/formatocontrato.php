@@ -37,9 +37,9 @@ class MYPDF extends TCPDF {
 		//$image_file =base_url().'plantilla/img/ladoderecho.png';
 	//	$this->Image($image_file, 190, 50, 15, '', 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
 		// Set font
-		$this->SetFont('helvetica', 'B', 17);
+		$this->SetFont('helvetica', 'B', 10);
 		// Title
-		//$this->Cell(0, 15, '<< TCPDF Example 003 >>', 0, false, 'C', 0, '', 0, false, 'M', 'M');
+		$this->Cell(0, 10, '<< Colegio Superior para la Educación Integral Intercultural de Oaxaca >>', 0, false, 'C', 0, '', 0, false, 'M', 'M');
 	}
 
 	// Page footer
@@ -60,9 +60,9 @@ $pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8',
 
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
-$pdf->SetAuthor('Recursos Humanos CSEIIO');
-$pdf->SetTitle('PDF Contrato');
-$pdf->SetSubject('Contrato CSEIIO');
+$pdf->SetAuthor('Control Escolar CSEIIO');
+$pdf->SetTitle('PDF Carta Compromiso');
+$pdf->SetSubject('Carta Compromiso CSEIIO');
 $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
 // set default header data
 $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE, PDF_HEADER_STRING);
@@ -94,20 +94,55 @@ if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
 // ---------------------------------------------------------
 
 // set font
-$pdf->SetFont('times','', 12);
+$pdf->SetFont('helvetica','', 10);
 
 // add a page
 $pdf->AddPage();
 
 // set some text to print
 $html ='
-<span style="text-align:center;"><h3>CONTRATO INDIVIDUAL DE TRABAJO</h3></span></br>
+<span style="text-align:RIGTH;">ASUNTO: CARTA COMPROMISO</span>
+<br>
+<span style="text-align:LEFT;"><STRONG>LIC. HERIBERTO RÍOS COLIN</STRONG></span>
+<br>
+<span style="text-align:LEFT;"><STRONG>JEFE DEL DEPARTAMENTO DE CONTROL ESCOLAR</STRONG></span>
+<br>
+<span style="text-align:LEFT;"><STRONG>OFICINAS CENTRALES, OAXACA, OAX.</STRONG></span>
+<br>
+<br>
 
-<span style="text-align:justify;">Que celebran <strong></strong> como patrón y ____________________ trabajador o empleado, bajo las siguientes cláusulas:</span>
-
-<span style="text-align:justify;">1.- Por sus generales, los contratantes declaran lo siguiente:
-PATRÓN: Nacionalidad _____________; edad _______ años; sexo ________; estado civil ______________; con domicilio en ____________________.	Y el trabajador 	Nacionalidad _____________; edad _______ años; sexo ________; estado civil ______________; con domicilio en ____________________.
+<span style="text-align:justify;">Solicito a usted de la manera más atenta, se me otorgue prórroga de 30 (treinta) días para la entrega completa de mi expediente
+ante esta Jefatura de Control Escolar, ya que por motivos estrictamente personales no cuento con mi documentación completa  en este momento, razón por la cual hago el siguiente 
+compromiso y para ello proporciono los siguientes datos:
 </span>
+<br>
+
+<div style="text-align: center; background-color:#58ACFA" ><span ><strong> CARTA COMPROMISO </strong></span></div>
+<table style="width:100%">
+<tbody>
+<tr>
+  <td>NOMBRE DEL ASPIRANTE:</td>
+  
+</tr>
+<tr>
+  <td>SEMESTRE:</td>
+</tr>
+<tr>
+  <td>NOMBRE DEL BACHILLERATO:</td>
+</tr>
+<tr>
+  <td>C.C.T:</td>
+</tr>
+<tr>
+  <td>FECHA:</td>
+</tr>
+<tr>
+  <td>CICLO ESCOLAR:</td>
+</tr>
+</tbody>
+</table> 
+
+<span>Los documentos faltantes son los que a continuación se señalan con la observación de pendientes:</span>
 
 
 <p style="text-align:justify;">6.- Quedan establecidos como días de descanso obligatorios con pago de salario íntegro los días primero de enero, el primer lunes de febrero en conmemoración del cinco de febrero, el tercer lunes de febrero en conmemoración del veintiuno de marzo, primero de mayo, dieciséis de septiembre, el tercer lunes de febrero en conmemoración del veinte de noviembre, veinticinco de diciembre y primero de diciembre de cada seis años cuando corresponda a la transmisión del Poder Ejecutivo Federal, en términos del artículo 74 de "LA LEY" </p>

@@ -113,6 +113,7 @@
       </li>
 
     </ul>
+
     <div id="content-wrapper">
 
       <div class="container-fluid ">
@@ -165,7 +166,7 @@
               <div class="row">
 
 
-                <div class="col-md-4">
+                <div class="col-md-6">
                   <label class="form-group has-float-label">
                     <select class="form-control form-control-lg" required="required" id="aspirante_plantel_busqueda"
                       name="aspirante_plantel">
@@ -173,7 +174,7 @@
                       <?php
             foreach ($planteles as $plantel)
             {
-                    echo '<option value="'.$plantel->cct.'">'.$plantel->nombre_corto_plantel.'</option>';
+                    echo '<option value="'.$plantel->cct.'">'.$plantel->nombre_plantel.'</option>';
             }
             ?>
 
@@ -201,6 +202,7 @@
         <div class="card" style="overflow:scroll">
           <div class="card-body">
             <table class="table table-hover" id="tabla_completa" style="width: 100%">
+            <caption>Lista de Alumnos</caption>
               <thead class="thead-light">
                 <tr>
                   <th scope="col" class="col-md-1">Nombre</th>
@@ -208,7 +210,7 @@
                   <th scope="col" class="col-md-1">Apellido Materno</th>
                   <th scope="col" class="col-md-1">CURP</th>
                   <th scope="col" class="col-md-1">Semestre</th>
-                  <th scope="col" class="col-md-1">Editar</th>
+                  <th scope="col" class="col-md-1">Carta compromiso</th>
                 </tr>
               </thead>
 
@@ -322,7 +324,7 @@ function generar_carta_compromiso(e){
           "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
           "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
           "sInfoPostFix": "",
-          "sSearch": "Buscar:",
+          "sSearch": "Buscar específico:",
           "sUrl": "",
           "sInfoThousands": ",",
           "sLoadingRecords": "Cargando...",

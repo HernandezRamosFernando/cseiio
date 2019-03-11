@@ -164,7 +164,7 @@
               <div class="row">
 
 
-                <div class="col-md-4">
+                <div class="col-md-6">
                   <label class="form-group has-float-label">
                     <select class="form-control form-control-lg" required="required" id="aspirante_plantel_busqueda"
                       name="aspirante_plantel">
@@ -172,7 +172,7 @@
                       <?php
             foreach ($planteles as $plantel)
             {
-                    echo '<option value="'.$plantel->cct.'">'.$plantel->nombre_corto_plantel.'</option>';
+                    echo '<option value="'.$plantel->cct.'">'.$plantel->nombre_plantel.'</option>';
             }
             ?>
 

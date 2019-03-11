@@ -49,7 +49,8 @@ public function portabilidad(){
     }
     
     public function asignar_matricula(){
-        $this->load->view("asignacionmatricula");
+        $datos['planteles'] = $this->M_plantel->get_planteles();
+        $this->load->view("asignacionmatricula", $datos);
     }
     public function carta_compromiso(){
         $datos['planteles'] = $this->M_plantel->get_planteles();

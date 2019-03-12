@@ -33,7 +33,7 @@ public function portabilidad(){
         $datos['planteles'] = $this->M_plantel->get_planteles();
 
  
-        $this->load->view("portabilidad",$datos);
+        $this->load->view("admin/portabilidad",$datos);
 }
 
     public function nuevo_ingreso(){
@@ -45,16 +45,16 @@ public function portabilidad(){
         $datos['planteles'] = $this->M_plantel->get_planteles();
 
  
-        $this->load->view("nuevoingreso",$datos);
+        $this->load->view("admin/nuevoingreso",$datos);
     }
     
     public function asignar_matricula(){
         $datos['planteles'] = $this->M_plantel->get_planteles();
-        $this->load->view("asignacionmatricula", $datos);
+        $this->load->view("admin/asignacionmatricula", $datos);
     }
     public function carta_compromiso(){
         $datos['planteles'] = $this->M_plantel->get_planteles();
-        $this->load->view("carta_compromiso",$datos);
+        $this->load->view("admin/carta_compromiso",$datos);
     }
     
 
@@ -66,7 +66,7 @@ public function portabilidad(){
         $datos['lenguas'] = $this->M_lengua->get_lenguas();
         $datos['planteles'] = $this->M_plantel->get_planteles();
        
-        $this->load->view("controlalumnos",$datos);
+        $this->load->view("admin/controlalumnos",$datos);
     }
 
     public function get_aspirantes_nombre_documentos(){

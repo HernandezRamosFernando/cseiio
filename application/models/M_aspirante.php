@@ -95,7 +95,7 @@ public function insertar_aspirante_nuevo_ingreso(
    $datos_aspirante_secundaria,
    $datos_aspirante_documentos){
 
-   echo $this->db->insert('Aspirante',$datos_aspirante);
+   $this->db->insert('Aspirante',$datos_aspirante);
    $this->db->insert('Direccion_Aspirante',$datos_aspirante_direccion);
    $this->db->insert('Tutor',$datos_aspirante_tutor);
    $this->db->insert('Lengua_materna',$datos_aspirante_lengua);

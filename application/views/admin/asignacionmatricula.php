@@ -318,7 +318,7 @@
       var plantel = document.getElementById("aspirante_plantel_busqueda").value;
       //var query = 'nombre=' + nombre + '&apellido_paterno=' + apellido_paterno + '&apellido_materno=' + apellido_materno + '&plantel=' + plantel;
 
-      xhr.open('GET', '/cseiio/c_estudiante/estudiantes_sin_matricula?cct=' + plantel, true);
+      xhr.open('GET', '/cseiio/index.php/c_estudiante/estudiantes_sin_matricula?cct=' + plantel, true);
 
       xhr.onload = function () {
         //console.log(JSON.parse(xhr.response));

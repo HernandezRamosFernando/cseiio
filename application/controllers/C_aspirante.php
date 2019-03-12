@@ -327,9 +327,15 @@ public function portabilidad(){
             //'aspirante_documento_certificado_secundaria' => $this->input->post('aspirante_documento_certificado_secundaria'),
             //'aspirante_documento_fotos' => $this->input->post('aspirante_documento_fotos')
 
-            $datos_aspirante_documentos['aspirante_documento_ficha_inscripcion'] = 100;
+            $datos_aspirante_documentos['aspirante_documento_acta_nacimiento'] = 1;
+            $datos_aspirante_documentos['aspirante_documento_curp'] = 2;
+            $datos_aspirante_documentos['aspirante_documento_certificado_secundaria'] = 3;
+            $datos_aspirante_documentos['aspirante_documento_fotos'] = 4;
+            $datos_aspirante_documentos['aspirante_documento_certificado_medico'] = 101;
+            $datos_aspirante_documentos['aspirante_documento_carta_buena_conducta'] = 102;
+            //$datos_aspirante_documentos['aspirante_documento_ficha_inscripcion'] = 100;
     
-
+/*
         if($this->input->post('aspirante_documento_acta_nacimiento')!=''){
             $datos_aspirante_documentos['aspirante_documento_acta_nacimiento'] = $this->input->post('aspirante_documento_acta_nacimiento');
         }
@@ -345,7 +351,7 @@ public function portabilidad(){
         if($this->input->post('aspirante_documento_fotos')!=''){
             $datos_aspirante_documentos['aspirante_documento_fotos'] = $this->input->post('aspirante_documento_fotos');
         }
-
+*/
 
 
 

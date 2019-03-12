@@ -259,7 +259,7 @@ public function portabilidad(){
 
     
     public function registrar_datos_nuevo_ingreso(){
-        $this->load->view("inscripcion");
+        $this->load->view("admin/nuevoingreso");
         $numero=$this->M_aspirante->asignar_num_control();
         $num=10000+$numero;
         //$no_control = 'CSEIIO'.date('y').str_pad($numero,4,'0',STR_PAD_LEFT);
@@ -364,7 +364,7 @@ public function portabilidad(){
     }
 
     public function registrar_datos_portabilidad(){
-        $this->load->view("inscripcion");
+        $this->load->view("admin/portabilidad");
         $numero=$this->M_aspirante->asignar_num_control();
         $num=10000+$numero;
         //$no_control = 'CSEIIO'.date('y').str_pad($numero,4,'0',STR_PAD_LEFT);

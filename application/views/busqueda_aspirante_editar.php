@@ -72,7 +72,7 @@
                   <?php
             foreach ($planteles as $plantel)
             {
-                    echo '<option value="'.$plantel->cct.'">'.$plantel->nombre_corto_plantel.'</option>';
+              echo '<option value="'.$plantel->cct.'">'.$plantel->nombre_plantel.' ----- CCT: '.$plantel->cct.'</option>';
             }
             ?>
 

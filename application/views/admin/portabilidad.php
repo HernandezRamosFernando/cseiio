@@ -185,7 +185,7 @@
                 </div>
               </div>
 
-              <div class="col-md-2 text-center">
+              <div class="col-md-3 text-center">
                 <div class="form-label-group">
                   <input type="date" required="required" class="form-control" id="aspirante_fecha_nacimiento"
                     name="aspirante_fecha_nacimiento" placeholder="Fecha de Nacimiento">
@@ -200,7 +200,7 @@
                   <label for="aspirante_telefono">Telefono</label>
                 </div>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-3">
                 <div class="form-label-group">
                   <input type="email"
                     pattern="^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$"
@@ -260,11 +260,12 @@
                 <label class="form-group has-float-label">
                   <select class="form-control form-control-lg" required="required" id="aspirante_plantel"
                     name="aspirante_plantel">
+                    <option>Seleccione el plantel de ingreso</option>
 
                     <?php
                                       foreach ($planteles as $plantel)
                                       {
-                                              echo '<option value="'.$plantel->cct.'">'.$plantel->nombre_plantel.'</option>';
+                                              echo '<option value="'.$plantel->cct.'">'.$plantel->nombre_plantel.' ----- CCT: '.$plantel->cct.'</option>';
                                       }
                                       ?>
 
@@ -308,6 +309,7 @@
                   <select class="form-control form-control-lg" required="required" name="aspirante_direccion_estado"
                     onChange="cambio_estado(selector_estado_aspirante,selector_municipio_aspirante)"
                     id="selector_estado_aspirante">
+                    <option>Seleccione el estado</option>
 
                     <?php
                                       foreach ($estados as $estado)
@@ -379,7 +381,7 @@
 
               <div class="col-md-2">
                 <div class="form-label-group">
-                  <input type="text" pattern="[0-9]+" title="Introduzca solo numeros" class="form-control"
+                  <input type="text" pattern="[0-9s/n]+" title="Introduzca solo numeros" class="form-control"
                     id="aspirante_direccion_numero" name="aspirante_direccion_numero" placeholder="Numero Exterior">
                   <label for="aspirante_direccion_numero">Numero</label>
                 </div>
@@ -428,7 +430,7 @@
 
               <div class="col-md-3">
                 <div class="form-label-group">
-                  <input type="text" pattern="[0-9]{10}" required="required"
+                  <input type="text" pattern="[0-9]{10}"
                     title="El numero de telefono debe de ser a 10 digitos" class="form-control"
                     id="aspirante_tutor_telefono" name="aspirante_tutor_telefono" placeholder="Telefono">
                   <label for="aspirante_tutor_telefono">Telefono</label>
@@ -458,7 +460,15 @@
                   <label for="aspirante_tutor_parentezco">Parentezco</label>
                 </div>
               </div>
+              <div class="col-md-4">
+                <div class="form-label-group">
+                  <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ. ]+" class="form-control" id="aspirante_tutor_prospera"
+                    name="aspirante_tutor_prospera" placeholder="Folio de Prospera">
+                  <label for="aspirante_tutor_prospera">Folio de Prospera</label>
+                </div>
+              </div>
             </div>
+            
 
           </div>
 
@@ -571,6 +581,16 @@
           <div class="form-group">
 
             <div class="row">
+            <div class="col-md-4">
+                <div class="form-label-group">
+                  <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ 0-9]+" required="required"
+                    title="El nombre de la secundaria contiene caracteres incorrectos" class="form-control"
+                    id="aspirante_secundaria_cct" name="aspirante_secundaria_cct"
+                    placeholder="CCT de Secundaria">
+                  <label for="aspirante_secundaria_cct">C C T</label>
+                </div>
+                <br>
+                </div>
               <div class="col-md-4">
                 <div class="form-label-group">
                   <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ 0-9]+" required="required"

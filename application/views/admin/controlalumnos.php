@@ -164,7 +164,7 @@
               <div class="row">
 
 
-                <div class="col-md-6">
+                <div class="col-md-8">
                   <label class="form-group has-float-label">
                     <select class="form-control form-control-lg" required="required" id="aspirante_plantel_busqueda"
                       name="aspirante_plantel">
@@ -172,7 +172,7 @@
                       <?php
             foreach ($planteles as $plantel)
             {
-                    echo '<option value="'.$plantel->cct.'">'.$plantel->nombre_plantel.'</option>';
+              echo '<option value="'.$plantel->cct.'">'.$plantel->nombre_plantel.' ----- CCT: '.$plantel->cct.'</option>';
             }
             ?>
 
@@ -207,8 +207,8 @@
                   <th scope="col" class="col-md-1">Apellido Paterno</th>
                   <th scope="col" class="col-md-1">Apellido Materno</th>
                   <th scope="col" class="col-md-1">CURP</th>
-                  <th scope="col" class="col-md-1">Semestre</th>
                   <th scope="col" class="col-md-1">Matrícula</th>
+                  <th scope="col" class="col-md-1">Imprimir</th>
                   <th scope="col" class="col-md-1">Editar</th>
                   <th scope="col" class="col-md-1">Eliminar</th>
                 </tr>
@@ -292,7 +292,7 @@
                       </div>
                     </div>
 
-                    <div class="col-md-2 text-center">
+                    <div class="col-md-3 text-center">
                       <div class="form-label-group">
                         <input type="date" required="required" class="form-control" id="aspirante_fecha_nacimiento"
                           name="aspirante_fecha_nacimiento" placeholder="Fecha de Nacimiento">
@@ -306,7 +306,7 @@
                         <label for="aspirante_telefono">Telefono</label>
                       </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                       <div class="form-label-group">
                         <input type="email"
                           pattern="^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$"
@@ -372,7 +372,7 @@
                           <?php
                               foreach ($planteles as $plantel)
                               {
-                                      echo '<option value="'.$plantel->cct.'">'.$plantel->nombre_plantel.'</option>';
+                                echo '<option value="'.$plantel->cct.'">'.$plantel->nombre_plantel.' ----- CCT: '.$plantel->cct.'</option>';
                               }
                               ?>
 
@@ -478,7 +478,7 @@
 
                     <div class="col-md-2">
                       <div class="form-label-group">
-                        <input type="text" pattern="[0-9]+" title="Introduzca solo numeros" class="form-control"
+                        <input type="text" pattern="[0-9s/n]+" title="Introduzca solo numeros" class="form-control"
                           id="aspirante_direccion_numero" name="aspirante_direccion_numero"
                           placeholder="Numero Exterior">
                         <label for="aspirante_direccion_numero">Numero</label>
@@ -528,7 +528,7 @@
 
                     <div class="col-md-3">
                       <div class="form-label-group">
-                        <input type="text" pattern="[0-9]{10}" required="required"
+                        <input type="text" pattern="[0-9]{10}" 
                           title="El numero de telefono debe de ser a 10 digitos" class="form-control"
                           id="aspirante_tutor_telefono" name="aspirante_tutor_telefono" placeholder="Telefono">
                         <label for="aspirante_tutor_telefono">Telefono</label>
@@ -559,7 +559,17 @@
                         <label for="aspirante_tutor_parentezco">Parentezco</label>
                       </div>
                     </div>
+                    <div class="col-md-4">
+                <div class="form-label-group">
+                  <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ. ]+" class="form-control" id="aspirante_tutor_prospera"
+                    name="aspirante_tutor_prospera" placeholder="Folio de Prospera">
+                  <label for="aspirante_tutor_prospera">Folio de Prospera</label>
+                </div>
+              </div>
+
+
                   </div>
+                  
 
                 </div>
 
@@ -579,6 +589,7 @@
                       <label class="form-group has-float-label">
                         <select class="form-control" required="required" id="aspirante_lengua_nombre"
                           name="aspirante_lengua_nombre">
+                         
 
                           <?php
                     foreach ($lenguas as $lengua)
@@ -596,10 +607,10 @@
                       <label class="form-group has-float-label">
                         <select class="form-control" required="required" id="aspirante_lengua_lee"
                           name="aspirante_lengua_lee">
-                          <option value="0">Nada</option>
-                          <option value="25">Poco</option>
-                          <option value="50">Regular</option>
-                          <option value="100">Mucho</option>
+                          <option value="0">Nada 0%</option>
+                          <option value="25">Poco 25%</option>
+                          <option value="50">Regular 50%</option>
+                          <option value="100">Bien 100%</option>
                         </select>
                         <span>Lee</span>
                       </label>
@@ -609,10 +620,10 @@
                       <label class="form-group has-float-label">
                         <select class="form-control" required="required" id="aspirante_lengua_habla"
                           name="aspirante_lengua_habla">
-                          <option value="0">Nada</option>
-                          <option value="25">Poco</option>
-                          <option value="50">Regular</option>
-                          <option value="100">Mucho</option>
+                          <option value="0">Nada 0%</option>
+                          <option value="25">Poco 25%</option>
+                          <option value="50">Regular 50%</option>
+                          <option value="100">Bien 100%</option>
                         </select>
                         <span>Habla</span>
                       </label>
@@ -622,10 +633,10 @@
                       <label class="form-group has-float-label">
                         <select class="form-control" required="required" id="aspirante_lengua_escribe"
                           name="aspirante_lengua_escribe">
-                          <option value="0">Nada</option>
-                          <option value="25">Poco</option>
-                          <option value="50">Regular</option>
-                          <option value="100">Mucho</option>
+                          <option value="0">Nada 0%</option>
+                          <option value="25">Poco 25%</option>
+                          <option value="50">Regular 50%</option>
+                          <option value="100">Bien 100%</option>
                         </select>
                         <span>Escribe</span>
                       </label>
@@ -635,10 +646,10 @@
                       <label class="form-group has-float-label">
                         <select class="form-control" required="required" id="aspirante_lengua_entiende"
                           name="aspirante_lengua_entiende">
-                          <option value="0">Nada</option>
-                          <option value="25">Poco</option>
-                          <option value="50">Regular</option>
-                          <option value="100">Mucho</option>
+                          <option value="0">Nada 0%</option>
+                          <option value="25">Poco 25%</option>
+                          <option value="50">Regular 50%</option>
+                          <option value="100">Bien 100%</option>
                         </select>
                         <span>Entiende</span>
                       </label>
@@ -649,10 +660,10 @@
                       <label class="form-group has-float-label">
                         <select class="form-control" required="required" id="aspirante_lengua_traduce"
                           name="aspirante_lengua_traduce">
-                          <option value="0">Nada</option>
-                          <option value="25">Poco</option>
-                          <option value="50">Regular</option>
-                          <option value="100">Mucho</option>
+                          <option value="0">Nada 0%</option>
+                          <option value="25">Poco 25%</option>
+                          <option value="50">Regular 50%</option>
+                          <option value="100">Bien 100%</option>
                         </select>
                         <span>Traduce</span>
                       </label>
@@ -678,6 +689,16 @@
                 <div class="form-group">
 
                   <div class="row">
+                  <div class="col-md-4">
+                <div class="form-label-group">
+                  <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ 0-9]+" required="required"
+                    title="El nombre de la secundaria contiene caracteres incorrectos" class="form-control"
+                    id="aspirante_secundaria_cct" name="aspirante_secundaria_cct"
+                    placeholder="CCT de Secundaria">
+                  <label for="aspirante_secundaria_cct">C C T</label>
+                </div>
+                <br>
+                </div>
                     <div class="col-md-4">
                       <div class="form-label-group">
                         <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ. 0-9]+" required="required"
@@ -1001,7 +1022,7 @@
         document.getElementById("aspirante_lengua_traduce").value = datos.lengua_materna_aspirante[0].traduce;
 
 
-        //datos_secunadaria
+        //datos_secunada 0%ria
         document.getElementById("aspirante_secundaria_nombre").value = datos.datos_secundaria_aspirante[0].nombre_secundaria;
         document.getElementById("aspirante_secundaria_tipo_subsistema").value = datos.datos_secundaria_aspirante[0].tipo_subsistema;
 
@@ -1127,11 +1148,11 @@
           fila += '</td>';
 
           fila += '<td>';
-          fila += valor.semestre;
+          fila += valor.matricula;
           fila += '</td>';
 
           fila += '<td>';
-          fila += valor.matricula;
+          fila += '<button class="btn btn-lg btn-block btn-info" type="button" value="' + valor.no_control + '" onclick="" class="btn btn-primary" >Imprimir Ficha</button>';
           fila += '</td>';
 
           fila += '<td>';

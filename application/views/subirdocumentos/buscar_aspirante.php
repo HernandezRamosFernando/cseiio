@@ -9,20 +9,20 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Inscripción Nuevo Ingreso</title>
+  <title>Subir Documentos</title>
 
   <!-- Bootstrap core CSS-->
-  <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/cseiio/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom fonts for this template-->
-  <link href="../assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-
-  <!-- Page level plugin CSS-->
-  <link href="../assets/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
-  <link href="../assets/vendor/bootstrap/css/bootstrap-float-label.css" rel="stylesheet">
+  <link href="/cseiio/assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
   <!-- Custom styles for this template-->
-  <link href="../assets/css/sb-admin.css" rel="stylesheet">
+  <link href="/cseiio/assets/css/sb-admin.css" rel="stylesheet">
+  <link rel="icon" href="/cseiio/assets/img/favicon.ico">
+
+  <link rel="stylesheet" type="text/css" href="/cseiio/assets/css/main.css">
+
 
 
 
@@ -31,13 +31,13 @@
 <body>
   <!-- Barra de arriba -->
   <nav class="navbar navbar-expand navbar-dark static-top" style="background:#545555">
-    <a class="navbar-brand mr-1" href="menuadmin.html">SISE</a>
+    <a class="navbar-brand mr-1" href="/cseiio/index.php/c_menu/principal">SISE</a>
     <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
       <i class="fas fa-bars"></i>
     </button>
     <ul class="nav justify-content-center">
       <li class="nav-item">
-        <a class="nav-link disabled" style="color:rgb(182, 197, 193)" href="menuadmin.html">Sistema integral de
+        <a class="nav-link disabled" style="color:rgb(182, 197, 193)" href="/cseiio/index.php/c_menu/principal">Sistema integral de
           servicios escolares</a>
       </li>
       <li class="nav-item">
@@ -96,39 +96,102 @@
     <!-- Barra de lado derecho -->
     <ul class="sidebar navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="menuadmin.html">
+        <a class="nav-link" href="/cseiio/index.php/c_menu/principal">
           <i class="fas fa-fw fa-chalkboard-teacher"></i>
           <span>Menú</span>
         </a>
       </li>
 
-      <li class="nav-item">
-        <a class="nav-link" href="inscripcion.html">
-          <i class="fas fa-fw fa-address-card"></i>
-          <span>Inscripción</span>
-        </a>
-      </li>
-
       <li class="nav-item active">
-        <a class="nav-link active" href="portabilidad.html">
-          <i class="fas fa-fw fa-id-card"></i>
-          <span>Inscripción Nuevo Ingreso</span>
+        <a class="nav-link" href="/cseiio/index.php/c_menu/inscripcion">
+          <i class="fas fa-fw fa-address-card"></i>
+          <span>Subir Documentos</span>
         </a>
       </li>
 
     </ul>
     <div id="content-wrapper">
 
-      <div class="container-fluid">
+      <div class="container-fluid ">
 
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a>Subir Documentos de Aspirante</a>
+            <a>Inscripción</a>
           </li>
-          <li class="breadcrumb-item active">Seleccione el tipo de busqueda según sea el caso</li>
+          <li class="breadcrumb-item active">Seleccione un elemento de los mostrados</li>
         </ol>
 
+        <div class="card">
+          <div class="card-body">
+
+
+
+            <div class="form-group">
+
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-label-group">
+                    <input type="text" pattern="[A-Za-zñ]+" title="Introduzca solo letras" class="form-control"
+                      id="aspirante_nombre_busqueda" placeholder="Nombre(s)">
+                    <label for="aspirante_nombre_busqueda">Nombre(s)</label>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-label-group">
+                    <input type="text" pattern="[A-Za-zñ]+" title="Introduzca solo letras" class="form-control"
+                      id="aspirante_apellido_paterno_busqueda" placeholder="Apellido Paterno">
+                    <label for="aspirante_apellido_paterno_busqueda">Apellido Paterno</label>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-label-group">
+                    <input type="text" pattern="[A-Za-zñ]+" title="Introduzca solo letras" class="form-control"
+                      id="aspirante_apellido_materno_busqueda" placeholder="Apellido Materno">
+                    <label for="aspirante_apellido_materno_busqueda">Apellido Materno</label>
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+
+            <div class="form-group">
+              <div class="row">
+
+
+                <div class="col-md-6">
+                  <label class="form-group has-float-label">
+                    <select class="form-control form-control-lg" required="required" id="aspirante_plantel_busqueda"
+                      name="aspirante_plantel">
+
+                      <?php
+                    foreach ($planteles as $plantel)
+                    {
+                      echo '<option value="'.$plantel->cct.'">'.$plantel->nombre_plantel.'</option>';
+                    }
+                    ?>
+
+                    </select>
+                    <span>Plantel</span>
+                  </label>
+
+                </div>
+
+                <div class="col-md-4">
+                  <button type='button' class="btn btn-success btn-lg btn-block" onclick='buscar()'>Buscar</button>
+                </div>
+
+              </div>
+            </div>
+
+
+
+          </div>
+        </div>
+      </div>
 
 
 

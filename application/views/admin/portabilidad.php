@@ -465,8 +465,8 @@
           <!--fin tutor------------------------------------------------------>
 
 
-          <!--datos lengua materna------------------------------------------------------>
-          <p class="text-center text-white rounded" style="background-color: #579A8D; height: 40px">
+           <!--datos lengua materna------------------------------------------------------>
+           <p class="text-center text-white rounded" style="background-color: #579A8D; height: 40px">
             Datos de lengua materna
             <hr>
           </p>
@@ -476,14 +476,14 @@
             <div class="row">
               <div class="col-md-2">
                 <label class="form-group has-float-label">
-                  <select class="form-control" required="required" name="aspirante_lengua_nombre">
+                  <select class="form-control" required="required" onchange="lenguas_evento(this)" id="aspirante_lengua_nombre" name="aspirante_lengua_nombre">
 
                     <?php
-                                      foreach ($lenguas as $lengua)
-                                      {
-                                              echo '<option value="'.$lengua->id_lengua.'">'.strtoupper($lengua->nombre_lengua).'</option>';
-                                      }
-                                      ?>
+                              foreach ($lenguas as $lengua)
+                              {
+                                      echo '<option value="'.$lengua->id_lengua.'">'.strtoupper($lengua->nombre_lengua).'</option>';
+                              }
+                              ?>
 
                   </select>
                   <span>Lengua</span>
@@ -492,7 +492,7 @@
 
               <div class="col-md-2">
                 <label class="form-group has-float-label">
-                  <select class="form-control" required="required" name="aspirante_lengua_lee">
+                  <select class="form-control" required="required" id="aspirante_lengua_lee" name="aspirante_lengua_lee" disabled>
                     <option value="0">Nada</option>
                     <option value="25">Poco</option>
                     <option value="50">Regular</option>
@@ -504,7 +504,7 @@
 
               <div class="col-md-2">
                 <label class="form-group has-float-label">
-                  <select class="form-control" required="required" name="aspirante_lengua_habla">
+                  <select class="form-control" required="required" id="aspirante_lengua_habla" name="aspirante_lengua_habla" disabled>
                     <option value="0">Nada</option>
                     <option value="25">Poco</option>
                     <option value="50">Regular</option>
@@ -516,7 +516,7 @@
 
               <div class="col-md-2">
                 <label class="form-group has-float-label">
-                  <select class="form-control" required="required" name="aspirante_lengua_escribe">
+                  <select class="form-control" required="required" id="aspirante_lengua_escribe" name="aspirante_lengua_escribe" disabled>
                     <option value="0">Nada</option>
                     <option value="25">Poco</option>
                     <option value="50">Regular</option>
@@ -528,7 +528,7 @@
 
               <div class="col-md-2">
                 <label class="form-group has-float-label">
-                  <select class="form-control" required="required" name="aspirante_lengua_entiende">
+                  <select class="form-control" required="required" id="aspirante_lengua_entiende" name="aspirante_lengua_entiende" disabled>
                     <option value="0">Nada</option>
                     <option value="25">Poco</option>
                     <option value="50">Regular</option>
@@ -541,7 +541,7 @@
 
               <div class="col-md-2">
                 <label class="form-group has-float-label">
-                  <select class="form-control" required="required" name="aspirante_lengua_traduce">
+                  <select class="form-control" required="required" id="aspirante_lengua_traduce" name="aspirante_lengua_traduce" disabled>
                     <option value="0">Nada</option>
                     <option value="25">Poco</option>
                     <option value="50">Regular</option>
@@ -709,7 +709,7 @@
           </div>
           <div class="form-check">
             <label class="form-check-label">
-              <input type="checkbox" class="form-check-input" name="aspirante_documento_certparcial"
+              <input type="checkbox" class="form-check-input" name="aspirante_documento_certificado_parcial"
                 id="aspirante_documento_certparcial" value="5" unchecked>
               Certificado parcial de estudios
             </label>
@@ -727,7 +727,7 @@
 
           <div class="form-check">
             <label class="form-check-label">
-              <input type="checkbox" class="form-check-input" name="aspirante_documento_acta_nacimiento"
+              <input type="checkbox" class="form-check-input" name="aspirante_documento_carta_buena_conducta"
                 id="aspirante_documento_acta_nacimiento" value="1" unchecked>
               Carta de conducta
             </label>
@@ -735,7 +735,7 @@
 
           <div class="form-check">
             <label class="form-check-label">
-              <input type="checkbox" class="form-check-input" name="aspirante_documento_curp"
+              <input type="checkbox" class="form-check-input" name="aspirante_documento_certificado_medico"
                 id="aspirante_documento_curp" value="2" unchecked>
               Certificado Médico
             </label>
@@ -743,8 +743,7 @@
 
 
           <br>
-          <button type="submit" class="btn btn-success btn-lg btn-block"
-            ">Registrar</button>
+          <button type="submit" class="btn btn-success btn-lg btn-block">Registrar</button>
 
 
         </form>
@@ -797,6 +796,25 @@
     var selector_estado_secundaria = document.getElementById("selector_estado_secundaria");
     var selector_municipio_secundaria = document.getElementById("selector_municipio_secundaria");
     var selector_localidad_secundaria = document.getElementById("selector_localidad_secundaria");
+
+    function lenguas_evento(e){
+          //console.log(e.value);
+          if(e.value>0){
+            document.getElementById("aspirante_lengua_lee").disabled = false;
+            document.getElementById("aspirante_lengua_habla").disabled = false;
+            document.getElementById("aspirante_lengua_escribe").disabled = false;
+            document.getElementById("aspirante_lengua_entiende").disabled = false;
+            document.getElementById("aspirante_lengua_traduce").disabled = false;
+          }
+
+          else{
+            document.getElementById("aspirante_lengua_lee").disabled = true;
+            document.getElementById("aspirante_lengua_habla").disabled = true;
+            document.getElementById("aspirante_lengua_escribe").disabled = true;
+            document.getElementById("aspirante_lengua_entiende").disabled = true;
+            document.getElementById("aspirante_lengua_traduce").disabled = true;
+          }
+      }
     </script>
 
 

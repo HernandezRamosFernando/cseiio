@@ -59,4 +59,16 @@ class M_documentacion extends CI_Model {
   return $resultado;
    }
 
+
+
+
+
+   function documentos_base_faltantes_aspirante($no_control){
+      return $this->db->query("SELECT id_documento,nombre_documento FROM Documentacion inner join Documento 
+      on Documentacion.Documento_id_documento = Documento.id_documento
+      where Aspirante_no_control ='".$no_control."' 
+      and tipo ='base'
+      and entregado =false")->result();
+   }
+
 }

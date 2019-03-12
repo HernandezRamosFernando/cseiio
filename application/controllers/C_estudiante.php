@@ -13,12 +13,11 @@ class C_estudiante extends CI_Controller {
     }
 
     public function generar_matricula(){
-        $no_control = "";
+       // $no_control = "";
         $numero = $this->M_estudiante->asignar_matricula();
-        $num =10000+$numero;
         //$no_control = 'CSEIIO'.date('y').str_pad($numero,4,'0',STR_PAD_LEFT);
-        $matricula = date('y').$num;
-        return $matricula;
+        //$matricula = date('y').$num;
+        return json_encode($numero);
 
     }
 

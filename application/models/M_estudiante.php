@@ -9,12 +9,10 @@ class M_estudiante extends CI_Model {
    public function asignar_matricula(){
 
     /*SELECT IF(COUNT(*)<=0,1,COUNT(*)+1) numero FROM control_escolar.aspirante a where no_control like 'CSEIIO%' AND SUBSTRING(a.no_control,7,2)=19;*/
-    $this->db->select('IF(COUNT(*)<=0,1,COUNT(*)+1) numero');
+    $this->db->select('(max(matricula)+1) as matricula');
     $this->db->from('Estudiante e');
-    $this->db->like('e.matricula','after');
-    $this->db->where('SUBSTRING(e.matricula,7,2)',date("y"));
     $consulta = $this->db->get();
-    $resultado=$consulta->row()->numero;
+    $resultado=$consulta->row()->matricula;
     return $resultado;
     
     }

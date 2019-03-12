@@ -349,7 +349,7 @@
           fila += '</td>';
 
           fila += '<td>';
-          fila += '<button class="btn btn-info" type="button" value="' + valor.no_control + '" onclick="generar_carta_compromiso(this)" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Generar Matrícula</button>';
+          fila += '<button class="btn btn-info" type="button" value="' + valor.no_control + '" onclick="asignar_matricula(this)" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Generar Matrícula</button>';
           fila += '</td>';
 
           fila += '</tr>';
@@ -366,6 +366,18 @@
     }
 
 
+
+function asignar_matricula(e){
+  var xhr = new XMLHttpRequest();
+      xhr.open('GET', '/cseiio/c_estudiante/insertar_estudiante?no_control='+e.value, true);
+
+      xhr.onload = function () {
+        alert(xhr.responseText);
+        console.log(e.value);
+      };
+
+      xhr.send(null);
+}
 
 
 

@@ -208,6 +208,7 @@
                   <th scope="col" class="col-md-1">Apellido Materno</th>
                   <th scope="col" class="col-md-1">CURP</th>
                   <th scope="col" class="col-md-1">Semestre</th>
+                  <th scope="col" class="col-md-1">Matrícula</th>
                   <th scope="col" class="col-md-1">Editar</th>
                   <th scope="col" class="col-md-1">Eliminar</th>
                 </tr>
@@ -340,14 +341,14 @@
                       <div class="form-label-group">
                         <input type="number" pattern="[0-9]{11}" title="Introduzca 11 digitos" class="form-control"
                           id="aspirante_nss" name="aspirante_nss" placeholder="Numero de Seguro Social">
-                        <label for="aspirante_nss">Nss</label>
+                        <label for="aspirante_nss">NSS (IMSS)</label>
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-label-group">
                         <input type="text" class="form-control" id="aspirante_programa_social"
                           name="aspirante_programa_social" placeholder="Folio de programa social">
-                        <label for="aspirante_programa_social">Folio de Programa Social</label>
+                        <label for="aspirante_programa_social">Folio de Prospera</label>
                       </div>
                     </div>
 
@@ -1127,6 +1128,10 @@
 
           fila += '<td>';
           fila += valor.semestre;
+          fila += '</td>';
+
+          fila += '<td>';
+          fila += valor.matricula;
           fila += '</td>';
 
           fila += '<td>';

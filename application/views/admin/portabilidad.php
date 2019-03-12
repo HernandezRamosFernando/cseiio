@@ -235,14 +235,14 @@
                 <div class="form-label-group">
                   <input type="number" pattern="[0-9]{11}" title="Introduzca 11 digitos"
                     class="form-control" id="aspirante_nss" name="aspirante_nss" placeholder="Numero de Seguro Social">
-                  <label for="aspirante_nss">Nss</label>
+                  <label for="aspirante_nss">NSS (IMSS)</label>
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="form-label-group">
                   <input type="text" class="form-control" id="aspirante_programa_social"
                     name="aspirante_programa_social" placeholder="Folio de programa social">
-                  <label for="aspirante_programa_social">Folio de Programa Social</label>
+                  <label for="aspirante_programa_social">Folio de Prospera</label>
                 </div>
               </div>
 
@@ -669,7 +669,7 @@
 
           <!--documentos solicitados------------------------------------------------------>
           <p class="text-center text-white rounded" style="background-color: #579A8D; height: 40px">
-            Documentos recibidos
+            Documentos solicitados para generar Matrícula
           </p>
 
 
@@ -707,8 +707,40 @@
               Fotos
             </label>
           </div>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input type="checkbox" class="form-check-input" name="aspirante_documento_certparcial"
+                id="aspirante_documento_certparcial" value="5" unchecked>
+              Certificado parcial de estudios
+            </label>
+          </div>
+          <br>
 
           <!-- fin documentos solicitados------------------------------------------------------>
+          <!--documentos extras------------------------------------------------------>
+           <p class="text-center text-white rounded" style="background-color: #579A8D; height: 40px">
+            Documentos Extras
+            <hr>
+          </p>
+
+
+
+          <div class="form-check">
+            <label class="form-check-label">
+              <input type="checkbox" class="form-check-input" name="aspirante_documento_acta_nacimiento"
+                id="aspirante_documento_acta_nacimiento" value="1" unchecked>
+              Carta de conducta
+            </label>
+          </div>
+
+          <div class="form-check">
+            <label class="form-check-label">
+              <input type="checkbox" class="form-check-input" name="aspirante_documento_curp"
+                id="aspirante_documento_curp" value="2" unchecked>
+              Certificado Médico
+            </label>
+          </div>
+
 
           <br>
           <button type="submit" class="btn btn-success btn-lg btn-block"

@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html>
 
@@ -11,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Control de Alumnos</title>
+  <title>Generación de Carta Compromiso</title>
 
   <!-- Bootstrap core CSS-->
   <link href="/cseiio/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -26,10 +24,7 @@
 
   <link rel="stylesheet" type="text/css" href="/cseiio/assets/css/main.css">
 
-
-
-
-</head>
+  </head>
 
 <body>
   <!-- Barra de arriba -->
@@ -40,8 +35,7 @@
     </button>
     <ul class="nav justify-content-center">
       <li class="nav-item">
-        <a class="nav-link disabled" style="color:rgb(182, 197, 193)" href="/cseiio/index.php/c_menu/principal">Sistema
-          integral de
+        <a class="nav-link disabled" style="color:rgb(182, 197, 193)" href="/cseiio/index.php/c_menu/principal">Sistema integral de
           servicios escolares</a>
       </li>
       <li class="nav-item">
@@ -105,16 +99,20 @@
           <span>Menú</span>
         </a>
       </li>
-
-      <li class="nav-item active">
-        <a class="nav-link" href="/cseiio/index.php/c_aspirante/controlalumnos">
+      <li class="nav-item">
+        <a class="nav-link" href="/cseiio/index.php/c_menu/inscripcion">
           <i class="fas fa-fw fa-address-card"></i>
-          <span>Control de Alumnos</span>
+          <span>Inscripción</span>
+        </a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/cseiio/index.php/c_aspirante/carta_compromiso">
+          <i class="fas fa-fw fa-clipboard-check "></i>
+          <span>Generación de Carta Compromiso</span>
         </a>
       </li>
 
     </ul>
-
     <div id="content-wrapper">
 
       <div class="container-fluid ">
@@ -122,9 +120,9 @@
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a>Control de alumnos</a>
+            <a>Generacion de Carta Compromiso</a>
           </li>
-          <li class="breadcrumb-item active">Ingrese la busqueda que desea realizar</li>
+          <li class="breadcrumb-item active">Ingrese el Aspirante que desee:</li>
         </ol>
 
         <div class="card">
@@ -203,7 +201,6 @@
         <div class="card" style="overflow:scroll">
           <div class="card-body">
             <table class="table table-hover" id="tabla_completa" style="width: 100%">
-            <caption>Lista de Alumnos</caption>
               <thead class="thead-light">
                 <tr>
                   <th scope="col" class="col-md-1">Nombre</th>
@@ -211,7 +208,7 @@
                   <th scope="col" class="col-md-1">Apellido Materno</th>
                   <th scope="col" class="col-md-1">CURP</th>
                   <th scope="col" class="col-md-1">Semestre</th>
-                  <th scope="col" class="col-md-1">Carta compromiso</th>
+                  <th scope="col" class="col-md-1">Editar</th>
                 </tr>
               </thead>
 
@@ -273,6 +270,7 @@
   <!-- Custom scripts for all pages-->
   <script src="/cseiio/assets/js/sb-admin.min.js"></script>
   <script src="/cseiio/assets/vendor/datatables/jquery.dataTables.js"></script>
+  <script src="/cseiio/assets/vendor/datatables/dataTables.bootstrap4.js"></script>
 
   <script src="/cseiio/assets/js/cambio_estado.js"></script>
   <script src="/cseiio/assets/js/cambio_municipio.js"></script>
@@ -282,21 +280,15 @@
 
 
   <script>
-
 function imprimir() {
-var doc = new jsPDF();
-doc.text('Hello world!', 10, 10);
-doc.save('a4.pdf');
+var doc = new jsPDF()
+doc.text('Hello world!', 10, 10)
+doc.save('a4.pdf')
 }
-
-
-
 function generar_carta_compromiso(e){
       //console.log(e.value);
-
       var xhr = new XMLHttpRequest();
-        xhr.open('GET', 'http://localhost/cseiio/c_aspirante/get_aspirantes_nombre_documentos?no_control='+e.value, true);
-
+        xhr.open('GET', '/cseiio/index.php/c_aspirante/get_aspirantes_nombre_documentos?no_control='+e.value, true);
         xhr.onload = function () {
           var documentos = JSON.parse(xhr.response);
           if(documentos.length===4){
@@ -306,12 +298,9 @@ function generar_carta_compromiso(e){
             imprimir();
           }
         };
-
         xhr.send(null);
     }
     
-
-
     function formato_tabla() {
       $('#tabla_completa').DataTable({
         //"order": [[ 0, 'desc' ]],
@@ -324,7 +313,7 @@ function generar_carta_compromiso(e){
           "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
           "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
           "sInfoPostFix": "",
-          "sSearch": "Buscar específico:",
+          "sSearch": "Buscar:",
           "sUrl": "",
           "sInfoThousands": ",",
           "sLoadingRecords": "Cargando...",
@@ -341,7 +330,6 @@ function generar_carta_compromiso(e){
         }
       });
     }
-
     function buscar() {
       document.getElementById("tabla").innerHTML = "";
       var xhr = new XMLHttpRequest();
@@ -350,54 +338,43 @@ function generar_carta_compromiso(e){
       var apellido_materno = document.getElementById("aspirante_apellido_materno_busqueda").value;
       var plantel = document.getElementById("aspirante_plantel_busqueda").value;
       //var query = 'nombre=' + nombre + '&apellido_paterno=' + apellido_paterno + '&apellido_materno=' + apellido_materno + '&plantel=' + plantel;
-
-      xhr.open('GET', '/cseiio/c_aspirante/get_aspirantes_nombre_documentos_faltantes?cct='+plantel, true);
-
+      xhr.open('GET', '/cseiio/index.php/c_aspirante/get_aspirantes_nombre_documentos_faltantes?cct=' + plantel, true);
       xhr.onload = function () {
         //console.log(JSON.parse(xhr.response));
         ////console.log(query);
-
-
         JSON.parse(xhr.response).forEach(function (valor, indice) {
           var fila = '<tr>';
-
           fila += '<td>';
           fila += valor.nombre;
           fila += '</td>';
-
           fila += '<td>';
           fila += valor.apellido_paterno;
           fila += '</td>';
-
           fila += '<td>';
           fila += valor.apellido_materno;
           fila += '</td>';
-
           fila += '<td>';
           fila += valor.curp;
           fila += '</td>';
-
           fila += '<td>';
           fila += valor.semestre;
           fila += '</td>';
-
           fila += '<td>';
-          fila += '<button class="btn btn-lg btn-success" type="button" value="' + valor.no_control + '" onclick="generar_carta_compromiso(this)" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Editar</button>';
+          fila += '<button class="btn btn-warning" type="button" value="' + valor.no_control + '" onclick="generar_carta_compromiso(this)" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Generar Carta Compromiso</button>';
           fila += '</td>';
-
           fila += '</tr>';
-
           document.getElementById("tabla").innerHTML += fila;
         });
-
         formato_tabla();
-
       };
-
       xhr.send(null);
-
     }
-
+    
   </script>
+
+
+
+
 </body>
+
 </html>

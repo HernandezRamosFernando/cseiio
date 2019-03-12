@@ -141,13 +141,16 @@ compromiso y para ello proporciono los siguientes datos:
 </tr>
 </tbody>
 </table> 
-
+<br>
+<br>
 <span>Los documentos faltantes son los que a continuación se señalan con la observación de pendientes:</span>
-
+<br>
+<br>
 <table style="width:100%">
 <tr>
-<th>
-
+<th>N.P</th>
+<th>DOCUMENTO</th>
+<th>OBSERVACIONES</th>
 </tr>
 <tbody>
 <tr>
@@ -171,26 +174,17 @@ compromiso y para ello proporciono los siguientes datos:
 </tr>
 </tbody>
 </table>
-<p style="text-align:justify;">6.- Quedan establecidos como días de descanso obligatorios con pago de salario íntegro los días primero de enero, el primer lunes de febrero en conmemoración del cinco de febrero, el tercer lunes de febrero en conmemoración del veintiuno de marzo, primero de mayo, dieciséis de septiembre, el tercer lunes de febrero en conmemoración del veinte de noviembre, veinticinco de diciembre y primero de diciembre de cada seis años cuando corresponda a la transmisión del Poder Ejecutivo Federal, en términos del artículo 74 de "LA LEY" </p>
+<br>
+<br>
+<span style="text-align:justify;" Se hace la observación que la prórroga de tiempo es aplicable solo en los casos de certificación parcial
+y cuando medie juicio civil por correcciones de nombre, apellido o algún dato del acta de nacimiento.<br>
+Estoy consiente del compromiso que suscribo, sabedor de una vez que entregue mi documentación completa, gozaré de matrícula y estaré oficialmente inscrito.
+Por lo tanto de no ser Alumno oficial del CSEIIO los semestres que haya cursado en el plantel no se reconocerán y ante de el incumplimiento y la falta 
+de estos requisitos, seré dado de baja del Bachillerato en el que obtuve mi alta. Firmo la presente a mi enterea satisfacción en a los días del mes del año.
 
+</span>
+<br>
 
-
-<p style="text-align:justify;">9.- Cuando por cualquiera circunstancia el trabajador o empleado haya que trabajar durante mayor tiempo que el que corresponde a la jornada máxima legal, el patrón retribuirá el tiempo excedente con un 100% más del salario que corresponda a las horas normales, términos del artículo 67 de la Ley Federal del Trabajo, La prolongación de tiempo extraordinario que exceda de nueve horas a la semana, obliga al patrón a pagar al trabajador el tiempo excedente, con un 200% más el salario que corresponde a las horas de jornada, en términos del artículo 68 de la Ley Federal del Trabajo, sin perjuicio de las sanciones establecidas en esta Ley. 
-</p>
-
-<p style="text-align:justify;">11.- Ambas partes convienen expresamente en someterse en caso de cualquier diferencia o controversia, al texto de éste contrato y a las disposiciones del Reglamento Interior de Trabajo aprobado por la Junta Federal de Conciliación y Arbitraje, y del cual se entrega un ejemplar al empleado o trabajador en el momento de la celebración de dicho contrato. 
-</p>
-
-<p style="text-align:justify;">
-13.- Este "CONTRATO" se celebra por tiempo indeterminado según lo establece el artículo 35  de la Ley Federal del Trabajo.
-
-Leído que fue por ambas partes este documento ante los testigos que firman, y enterados de su contenido y sabedores de las obligaciones que por virtud de él contraen, así como de las que la ley les impone, lo firman  en ______________ a los _____________ días del mes de ______________ quedando un ejemplar en poder del trabajador y _______________________ en poder del patón.
-
-</p>
-
-
-<br/>
-<br/>
 <span style="text-align:center;">
 FIRMA DEL PATRÓN
 

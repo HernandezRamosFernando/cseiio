@@ -140,21 +140,6 @@
                   </div>
                 </div>
 
-                <div class="col-md-4">
-                  <div class="form-label-group">
-                    <input type="text" pattern="[A-Za-zñ]+" title="Introduzca solo letras" class="form-control"
-                      id="aspirante_apellido_paterno_busqueda" placeholder="Apellido Paterno">
-                    <label for="aspirante_apellido_paterno_busqueda">Apellido Paterno</label>
-                  </div>
-                </div>
-
-                <div class="col-md-4">
-                  <div class="form-label-group">
-                    <input type="text" pattern="[A-Za-zñ]+" title="Introduzca solo letras" class="form-control"
-                      id="aspirante_apellido_materno_busqueda" placeholder="Apellido Materno">
-                    <label for="aspirante_apellido_materno_busqueda">Apellido Materno</label>
-                  </div>
-                </div>
               </div>
 
 

@@ -97,6 +97,27 @@ public function portabilidad(){
 
 
     //-------------------------------------------------
+   
+
+
+           public function get_docxaspirante(){
+            $no_control = $this->uri->segment(3);
+            $nombre = $this->uri->segment(4);
+            $apellido_paterno = $this->uri->segment(5);
+            $apellido_materno = $this->uri->segment(6);
+            
+            $datos['numcontrol']=$no_control;
+            $datos['nombre_completo']=$nombre.' '.$apellido_paterno.' '.$apellido_materno;
+            $datos['documentacion_aspirante'] = $this->M_documentacion->get_documentacion_aspirante($no_control);
+        
+            echo json_encode($datos);
+        }
+        
+        
+        
+
+
+    //=============================================
 
 
     public function generar_carta_compromiso(){

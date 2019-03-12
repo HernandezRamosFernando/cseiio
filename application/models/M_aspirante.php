@@ -19,6 +19,22 @@ class M_aspirante extends CI_Model {
       
    }
 
+   //===========================================
+   public function aspirantes_sin_matricula(){
+      /*
+      select * from aspirante a where a.no_control not in (select Aspirante_no_control from estudiante);
+      */
+           $this->db->select('*');
+           $this->db->from('Aspirante a');
+           $this->db->where('a.no_control not in (select Aspirante_no_control from Estudiante)');
+           $consulta = $this->db->get();
+           $resultado=$consulta->result();
+           return $resultado;
+         }
+
+
+  
+
 
    public function actualizar_datos_aspirante(
       $datos_aspirante,

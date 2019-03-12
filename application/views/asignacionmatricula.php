@@ -275,24 +275,7 @@
 
 
   <script>
-    function generar_carta_compromiso(e) {
-      //console.log(e.value);
-
-      var xhr = new XMLHttpRequest();
-      xhr.open('GET', '/cseiio/index.php/c_aspirante/get_aspirantes_nombre_documentos?no_control=' + e.value, true);
-
-      xhr.onload = function () {
-        var documentos = JSON.parse(xhr.response);
-        if (documentos.length === 4) {
-          alert("No se puede generar carta compromiso porque ya cuenta con la documentacion completa");
-        }
-        else {
-          imprimir();
-        }
-      };
-
-      xhr.send(null);
-    }
+    
 
 
 
@@ -333,9 +316,9 @@
       var apellido_paterno = document.getElementById("aspirante_apellido_paterno_busqueda").value;
       var apellido_materno = document.getElementById("aspirante_apellido_materno_busqueda").value;
       var plantel = document.getElementById("aspirante_plantel_busqueda").value;
-      var query = 'nombre=' + nombre + '&apellido_paterno=' + apellido_paterno + '&apellido_materno=' + apellido_materno + '&plantel=' + plantel;
+      //var query = 'nombre=' + nombre + '&apellido_paterno=' + apellido_paterno + '&apellido_materno=' + apellido_materno + '&plantel=' + plantel;
 
-      xhr.open('GET', '/cseiio/index.php/c_aspirante/buscar_aspirantes_nombre?' + query, true);
+      xhr.open('GET', '/cseiio/c_estudiante/estudiantes_sin_matricula?cct=' + plantel, true);
 
       xhr.onload = function () {
         //console.log(JSON.parse(xhr.response));

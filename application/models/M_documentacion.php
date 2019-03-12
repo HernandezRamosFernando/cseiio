@@ -10,4 +10,53 @@ class M_documentacion extends CI_Model {
 
    }
 
+
+
+
+
+   //==============================================
+   function ingresar_documentacion_aspirante($iddocumentacion,$ruta,$num_control){
+      $this->db->set('Aspirante_no_control',$num_control);
+      $this->db->set('Documento_id_documento',$iddocumentacion);
+      $this->db->set('ruta',$ruta);
+      $this->db->set('fecha_entrega',date('Y-m-d'));
+      return $this->db->insert('Documentacion');
+   }
+
+
+
+
+
+ function existe_documentacion_de_aspirante($iddocumentacion,$num_control){
+      $this->db->select('count(*) as resultado');
+      $this->db->from('Documentacion');
+      $this->db->where('Aspirante_no_control',$num_control);
+      $this->db->where('Documento_id_documento',$iddocumentacion);
+      $consulta = $this->db->get()->row();
+         if($consulta->resultado>0){
+            return true;
+         }
+         else{
+            return false;
+         }
+   }
+
+
+
+
+  
+
+
+   function update_aspirante_doc($iddocumentacion,$ruta,$num_control){
+     $data = array(
+    'ruta' =>$ruta,
+    'fecha_entrega' =>date('Y-m-d')
+      );
+
+   $this->db->where('Documento_id_documento', $iddocumentacion);
+   $this->db->where('Aspirante_no_control', $num_control);
+  $resultado=$this->db->update('Documentacion', $data);
+  return $resultado;
+   }
+
 }

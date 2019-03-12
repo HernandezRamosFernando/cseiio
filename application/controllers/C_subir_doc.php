@@ -7,6 +7,7 @@ class C_subir_doc extends CI_Controller {
 
     public function __construct(){
         parent::__construct();
+        $this->load->model('M_plantel');
         $this->load->model('M_aspirante');
         $this->load->model('M_documentacion');
         $this->folder = '/cseiio/ims/';
@@ -16,8 +17,9 @@ class C_subir_doc extends CI_Controller {
 
 
 
- public function buscar_aspirante_subir_doc(){ 
+ public function subir_documentos(){ 
         $datos['laspirante'] = $this->M_aspirante->aspirantes_sin_matricula();
+        $datos['planteles'] = $this->M_plantel->get_planteles();
         $this->load->view("subirdocumentos/buscar_aspirante",$datos);
 
     }

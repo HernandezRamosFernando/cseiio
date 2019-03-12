@@ -100,13 +100,17 @@ public function insertar_aspirante_nuevo_ingreso(
    $this->db->insert('Tutor',$datos_aspirante_tutor);
    $this->db->insert('Lengua_materna',$datos_aspirante_lengua);
    $this->db->insert('Datos_Secundaria',$datos_aspirante_secundaria);
+   //echo json_encode($datos_aspirante_documentos);
+   //print_r($datos_aspirante_documentos);
    
    foreach($datos_aspirante_documentos as $documento){
       $registro = array(
          'Aspirante_no_control' => $datos_aspirante['no_control'],
-         'Documento_id_documento' => $documento
+         'Documento_id_documento' => $documento['Documento_id_documento'],
+         'entregado' => $documento['entregado']
       );
-      //print_r($registro);
+      //echo print_r($registro);
+  
       $this->db->insert('Documentacion',$registro);
    }
    //print_r($datos_aspirante_documentos);
@@ -117,6 +121,7 @@ public function insertar_aspirante_nuevo_ingreso(
    </script>
 
    <?php
+   
 }
 
 
@@ -203,6 +208,10 @@ function delete_aspirante($no_control){
    return "registro eliminado";
    
 }
+
+
+
+
 
 }
 ?>

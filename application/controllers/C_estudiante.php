@@ -17,7 +17,7 @@ class C_estudiante extends CI_Controller {
         $numero = $this->M_estudiante->asignar_matricula();
         //$no_control = 'CSEIIO'.date('y').str_pad($numero,4,'0',STR_PAD_LEFT);
         //$matricula = date('y').$num;
-        return json_encode($numero);
+        return $numero;
 
     }
 

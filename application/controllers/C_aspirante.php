@@ -327,26 +327,103 @@ public function portabilidad(){
             //'aspirante_documento_certificado_secundaria' => $this->input->post('aspirante_documento_certificado_secundaria'),
             //'aspirante_documento_fotos' => $this->input->post('aspirante_documento_fotos')
 
-            $datos_aspirante_documentos['aspirante_documento_ficha_inscripcion'] = 100;
-    
+            
+            if($this->input->post('aspirante_documento_acta_nacimiento')!=''){
+                $datos_aspirante_documentos['aspirante_documento_acta_nacimiento'] = array(
+                    'Documento_id_documento' => 1,
+                    'entregado' => true
+                );
+            }
 
-        if($this->input->post('aspirante_documento_acta_nacimiento')!=''){
-            $datos_aspirante_documentos['aspirante_documento_acta_nacimiento'] = $this->input->post('aspirante_documento_acta_nacimiento');
-        }
+            else{
+                $datos_aspirante_documentos['aspirante_documento_acta_nacimiento'] = array(
+                    'Documento_id_documento' => 1,
+                    'entregado' => false
+                );
+            }
 
-        if($this->input->post('aspirante_documento_curp')!=''){
-            $datos_aspirante_documentos['aspirante_documento_curp'] = $this->input->post('aspirante_documento_curp');
-        }
-
-        if($this->input->post('aspirante_documento_certificado_secundaria')!=''){
-            $datos_aspirante_documentos['aspirante_documento_certificado_secundaria'] = $this->input->post('aspirante_documento_certificado_secundaria');
-        }
-
-        if($this->input->post('aspirante_documento_fotos')!=''){
-            $datos_aspirante_documentos['aspirante_documento_fotos'] = $this->input->post('aspirante_documento_fotos');
-        }
+            
 
 
+            if($this->input->post('aspirante_documento_curp')!=''){
+                $datos_aspirante_documentos['aspirante_documento_curp'] = array(
+                    'Documento_id_documento' => 2,
+                    'entregado' => true
+                );
+            }
+
+            else{
+                $datos_aspirante_documentos['aspirante_documento_curp'] = array(
+                    'Documento_id_documento' => 2,
+                    'entregado' => false
+                );
+            }
+
+
+
+
+
+            if($this->input->post('aspirante_documento_certificado_secundaria')!=''){
+                $datos_aspirante_documentos['aspirante_documento_certificado_secundaria'] = array(
+                    'Documento_id_documento' => 3,
+                    'entregado' => true
+                );
+            }
+
+            else{
+                $datos_aspirante_documentos['aspirante_documento_certificado_secundaria'] = array(
+                    'Documento_id_documento' => 3,
+                    'entregado' => false
+                );
+            }
+
+
+
+            if($this->input->post('aspirante_documento_fotos')!=''){
+                $datos_aspirante_documentos['aspirante_documento_fotos'] = array(
+                    'Documento_id_documento' => 4,
+                    'entregado' => true
+                );
+            }
+
+            else{
+                $datos_aspirante_documentos['aspirante_documento_documento_fotos'] = array(
+                    'Documento_id_documento' => 4,
+                    'entregado' => false
+                );
+            }
+
+
+
+            if($this->input->post('aspirante_documento_certificado_medico')!=''){
+                $datos_aspirante_documentos['aspirante_documento_certificado_medico'] = array(
+                    'Documento_id_documento' => 101,
+                    'entregado' => true
+                );
+            }
+
+            else{
+                $datos_aspirante_documentos['aspirante_documento_certificado_medico'] = array(
+                    'Documento_id_documento' => 101,
+                    'entregado' => false
+                );
+            }
+
+
+
+            if($this->input->post('aspirante_documento_carta_buena_conducta')!=''){
+                $datos_aspirante_documentos['aspirante_documento_buena_conducta'] = array(
+                    'Documento_id_documento' => 102,
+                    'entregado' => true
+                );
+            }
+
+            else{
+                $datos_aspirante_documentos['aspirante_documento_buena_conducta'] = array(
+                    'Documento_id_documento' => 102,
+                    'entregado' => false
+                );
+            }
 
 
 
@@ -360,7 +437,7 @@ public function portabilidad(){
         );
 
        
-        //$this->M_aspirante->insertar_aspirante($datos_aspirante);
+
     }
 
     public function registrar_datos_portabilidad(){
@@ -426,26 +503,124 @@ public function portabilidad(){
 
 
         $datos_aspirante_documentos = array();
-            //'aspirante_documento_acta_nacimiento' => $this->input->post('aspirante_documento_acta_nacimiento'),
-            //'aspirante_documento_curp' => $this->input->post('aspirante_documento_curp'),
-            //'aspirante_documento_certificado_secundaria' => $this->input->post('aspirante_documento_certificado_secundaria'),
-            //'aspirante_documento_fotos' => $this->input->post('aspirante_documento_fotos')
-    
+        $datos_aspirante_documentos = array();
+        //'aspirante_documento_acta_nacimiento' => $this->input->post('aspirante_documento_acta_nacimiento'),
+        //'aspirante_documento_curp' => $this->input->post('aspirante_documento_curp'),
+        //'aspirante_documento_certificado_secundaria' => $this->input->post('aspirante_documento_certificado_secundaria'),
+        //'aspirante_documento_fotos' => $this->input->post('aspirante_documento_fotos')
 
+        
         if($this->input->post('aspirante_documento_acta_nacimiento')!=''){
-            $datos_aspirante_documentos['aspirante_documento_acta_nacimiento'] = $this->input->post('aspirante_documento_acta_nacimiento');
+            $datos_aspirante_documentos['aspirante_documento_acta_nacimiento'] = array(
+                'Documento_id_documento' => 1,
+                'entregado' => true
+            );
         }
+
+        else{
+            $datos_aspirante_documentos['aspirante_documento_acta_nacimiento'] = array(
+                'Documento_id_documento' => 1,
+                'entregado' => false
+            );
+        }
+
+        
+
 
         if($this->input->post('aspirante_documento_curp')!=''){
-            $datos_aspirante_documentos['aspirante_documento_curp'] = $this->input->post('aspirante_documento_curp');
+            $datos_aspirante_documentos['aspirante_documento_curp'] = array(
+                'Documento_id_documento' => 2,
+                'entregado' => true
+            );
         }
+
+        else{
+            $datos_aspirante_documentos['aspirante_documento_curp'] = array(
+                'Documento_id_documento' => 2,
+                'entregado' => false
+            );
+        }
+
+
+
+
 
         if($this->input->post('aspirante_documento_certificado_secundaria')!=''){
-            $datos_aspirante_documentos['aspirante_documento_certificado_secundaria'] = $this->input->post('aspirante_documento_certificado_secundaria');
+            $datos_aspirante_documentos['aspirante_documento_certificado_secundaria'] = array(
+                'Documento_id_documento' => 3,
+                'entregado' => true
+            );
         }
 
+        else{
+            $datos_aspirante_documentos['aspirante_documento_certificado_secundaria'] = array(
+                'Documento_id_documento' => 3,
+                'entregado' => false
+            );
+        }
+
+
+
         if($this->input->post('aspirante_documento_fotos')!=''){
-            $datos_aspirante_documentos['aspirante_documento_fotos'] = $this->input->post('aspirante_documento_fotos');
+            $datos_aspirante_documentos['aspirante_documento_fotos'] = array(
+                'Documento_id_documento' => 4,
+                'entregado' => true
+            );
+        }
+
+        else{
+            $datos_aspirante_documentos['aspirante_documento_documento_fotos'] = array(
+                'Documento_id_documento' => 4,
+                'entregado' => false
+            );
+        }
+
+
+
+        if($this->input->post('aspirante_documento_certificado_parcial')!=''){
+            $datos_aspirante_documentos['aspirante_documento_certificado_parcial'] = array(
+                'Documento_id_documento' => 5,
+                'entregado' => true
+            );
+        }
+
+        else{
+            $datos_aspirante_documentos['aspirante_documento_certificado_parcial'] = array(
+                'Documento_id_documento' => 5,
+                'entregado' => false
+            );
+        }
+
+
+
+        if($this->input->post('aspirante_documento_certificado_medico')!=''){
+            $datos_aspirante_documentos['aspirante_documento_certificado_medico'] = array(
+                'Documento_id_documento' => 101,
+                'entregado' => true
+            );
+        }
+
+        else{
+            $datos_aspirante_documentos['aspirante_documento_certificado_medico'] = array(
+                'Documento_id_documento' => 101,
+                'entregado' => false
+            );
+        }
+
+
+
+        if($this->input->post('aspirante_documento_carta_buena_conducta')!=''){
+            $datos_aspirante_documentos['aspirante_documento_buena_conducta'] = array(
+                'Documento_id_documento' => 102,
+                'entregado' => true
+            );
+        }
+
+        else{
+            $datos_aspirante_documentos['aspirante_documento_buena_conducta'] = array(
+                'Documento_id_documento' => 102,
+                'entregado' => false
+            );
         }
 
 

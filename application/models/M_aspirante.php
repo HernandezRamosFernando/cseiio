@@ -196,12 +196,11 @@ function get_aspirante($no_control){
 
 function delete_aspirante($no_control){
 
+
+   return $this->db->delete('Aspirante', array('no_control' => $no_control));  
    
-   $this->db->delete('Aspirante', array('no_control' => $no_control));  
-   return "registro eliminado";
    
 }
-
 
 
 

@@ -199,12 +199,9 @@ function get_aspirante($no_control){
 
 
 function delete_aspirante($no_control){
+
+   
    $this->db->delete('Aspirante', array('no_control' => $no_control));  
-   $this->db->delete('Documentacion', array('Aspirante_no_control' => $no_control));  
-   $this->db->delete('Datos_Secundaria', array('Aspirante_no_control' => $no_control));  
-   $this->db->delete('Direccion_Aspirante', array('Aspirante_no_control' => $no_control));
-   $this->db->delete('Tutor', array('Aspirante_no_control' => $no_control));
-   $this->db->delete('Lengua_materna', array('Aspirante_no_control' => $no_control));
    return "registro eliminado";
    
 }

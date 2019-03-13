@@ -34,7 +34,8 @@
     </button>
     <ul class="nav justify-content-center">
       <li class="nav-item">
-        <a class="nav-link disabled" style="color:rgb(182, 197, 193)" href="/cseiio/index.php/c_menu/principal">Sistema integral de
+        <a class="nav-link disabled" style="color:rgb(182, 197, 193)" href="/cseiio/index.php/c_menu/principal">Sistema
+          integral de
           servicios escolares</a>
       </li>
       <li class="nav-item">
@@ -243,6 +244,50 @@
                   <label for="aspirante_programa_social">Folio de Prospera</label>
                 </div>
               </div>
+              <div class="col-md-4">
+                <div class="form-label-group">
+                  <input type="text" class="form-control" id="aspirante_tipo_sangre" name="aspirante_tipo_sangre"
+                    placeholder="Tipo de sangre">
+                  <label for="aspirante_tipo_sangre">Tipo de sangre</label>
+                </div>
+              </div>
+              <div class="col-md-4">
+              <label class="form-group has-float-label">
+                  <select class="form-control form-control-lg" id="aspirante_alergia_combo" name="aspirante_alergia_combo" onchange="alergia(this)">
+                  <option>Seleccione una opción</option>
+                  <option value="1">Si</option>
+                  <option value="2">No</option>
+                  </select>  
+                  <span>¿Alergico a algún medicamento?</span> 
+                </label>
+              </div>
+              <div class="col-md-4" style="display:none">
+                <div class="form-label-group">
+                  <input type="text" class="form-control" id="aspirante_alergia" name="aspirante_alergia"
+                    placeholder="Ingrese el medicamento">
+                  <label for="aspirante_aspirante_alergia">Ingrese el medicamento</label>
+                </div>
+              </div>
+
+
+              <div class="col-md-4">
+              <label class="form-group has-float-label">
+                  <select class="form-control form-control-lg" id="_sangreaspirante_discapacidad_combo" name="aspirante_discapacidad_combo" onchange="">
+                  <option>Seleccione una opción</option>
+                  <option value="1">Si</option>
+                  <option value="2">No</option>
+                  </select>  
+                  <span>¿Padece alguna discapacidad?</span> 
+                </label>
+              </div>
+              <div class="col-md-4" style="display:none">
+                <div class="form-label-group">
+                  <input type="text" class="form-control" id="aspirante_discapacidad" name="aspirante_discapacidad"
+                    placeholder="Ingrese la discapacidad">
+                  <label for="aspirante_discapacidad">Ingrese la discapacidad</label>
+                </div>
+              </div>
+
 
             </div>
 
@@ -413,9 +458,9 @@
 
               <div class="col-md-3">
                 <div class="form-label-group">
-                  <input type="text" pattern="[0-9]{10}" 
-                    title="El numero de telefono debe de ser a 10 digitos" class="form-control"
-                    id="aspirante_tutor_telefono" name="aspirante_tutor_telefono" placeholder="Telefono">
+                  <input type="text" pattern="[0-9]{10}" title="El numero de telefono debe de ser a 10 digitos"
+                    class="form-control" id="aspirante_tutor_telefono" name="aspirante_tutor_telefono"
+                    placeholder="Telefono">
                   <label for="aspirante_tutor_telefono">Telefono</label>
                 </div>
               </div>
@@ -444,10 +489,10 @@
                   <label for="aspirante_tutor_parentezco">Parentezco</label>
                 </div>
               </div>
-            <div class="col-md-4">
+              <div class="col-md-4">
                 <div class="form-label-group">
-                  <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ. ]+" class="form-control" id="aspirante_tutor_prospera"
-                    name="aspirante_tutor_prospera" placeholder="Folio de Prospera">
+                  <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ. ]+" class="form-control"
+                    id="aspirante_tutor_prospera" name="aspirante_tutor_prospera" placeholder="Folio de Prospera">
                   <label for="aspirante_tutor_prospera">Folio de Prospera</label>
                 </div>
               </div>
@@ -469,12 +514,9 @@
             <div class="row">
               <div class="col-md-2">
                 <label class="form-group has-float-label">
-<<<<<<< HEAD
-                  <select class="form-control" required="required" onchange="lenguas_evento(this)" id="aspirante_lengua_nombre" name="aspirante_lengua_nombre">
-=======
-                  <select class="form-control" required="required" name="aspirante_lengua_nombre">
-                  <option>Seleccione una lengua</option>
->>>>>>> 3b6613303ff708ac07e13c78348eebe35c822d9e
+                  <select class="form-control" required="required" onchange="lenguas_evento(this)"
+                    id="aspirante_lengua_nombre" name="aspirante_lengua_nombre">
+                    <option>Seleccione una lengua</option>
 
                     <?php
                               foreach ($lenguas as $lengua)
@@ -490,19 +532,12 @@
 
               <div class="col-md-2">
                 <label class="form-group has-float-label">
-<<<<<<< HEAD
-                  <select class="form-control" required="required" id="aspirante_lengua_lee" name="aspirante_lengua_lee" disabled>
-                    <option value="0">Nada</option>
-                    <option value="25">Poco</option>
-                    <option value="50">Regular</option>
-                    <option value="100">Mucho</option>
-=======
-                  <select class="form-control" required="required" name="aspirante_lengua_lee">
+                  <select class="form-control" required="required" id="aspirante_lengua_lee" name="aspirante_lengua_lee"
+                    disabled>
                     <option value="0">Nada 0%</option>
                     <option value="25">Poco 25%</option>
                     <option value="50">Regular 50%</option>
                     <option value="100">Bien 100%</option>
->>>>>>> 3b6613303ff708ac07e13c78348eebe35c822d9e
                   </select>
                   <span>Lee</span>
                 </label>
@@ -510,19 +545,12 @@
 
               <div class="col-md-2">
                 <label class="form-group has-float-label">
-<<<<<<< HEAD
-                  <select class="form-control" required="required" id="aspirante_lengua_habla" name="aspirante_lengua_habla" disabled>
-                    <option value="0">Nada</option>
-                    <option value="25">Poco</option>
-                    <option value="50">Regular</option>
-                    <option value="100">Mucho</option>
-=======
-                  <select class="form-control" required="required" name="aspirante_lengua_habla">
+                  <select class="form-control" required="required" id="aspirante_lengua_habla"
+                    name="aspirante_lengua_habla" disabled>
                     <option value="0">Nada 0%</option>
                     <option value="25">Poco 25%</option>
                     <option value="50">Regular 50%</option>
                     <option value="100">Bien 100%</option>
->>>>>>> 3b6613303ff708ac07e13c78348eebe35c822d9e
                   </select>
                   <span>Habla</span>
                 </label>
@@ -530,19 +558,12 @@
 
               <div class="col-md-2">
                 <label class="form-group has-float-label">
-<<<<<<< HEAD
-                  <select class="form-control" required="required" id="aspirante_lengua_escribe" name="aspirante_lengua_escribe" disabled>
-                    <option value="0">Nada</option>
-                    <option value="25">Poco</option>
-                    <option value="50">Regular</option>
-                    <option value="100">Mucho</option>
-=======
-                  <select class="form-control" required="required" name="aspirante_lengua_escribe">
+                  <select class="form-control" required="required" id="aspirante_lengua_escribe"
+                    name="aspirante_lengua_escribe" disabled>
                     <option value="0">Nada 0%</option>
                     <option value="25">Poco 25%</option>
                     <option value="50">Regular 50%</option>
                     <option value="100">Bien 100%</option>
->>>>>>> 3b6613303ff708ac07e13c78348eebe35c822d9e
                   </select>
                   <span>Escribe</span>
                 </label>
@@ -550,19 +571,12 @@
 
               <div class="col-md-2">
                 <label class="form-group has-float-label">
-<<<<<<< HEAD
-                  <select class="form-control" required="required" id="aspirante_lengua_entiende" name="aspirante_lengua_entiende" disabled>
-                    <option value="0">Nada</option>
-                    <option value="25">Poco</option>
-                    <option value="50">Regular</option>
-                    <option value="100">Mucho</option>
-=======
-                  <select class="form-control" required="required" name="aspirante_lengua_entiende">
+                  <select class="form-control" required="required" id="aspirante_lengua_entiende"
+                    name="aspirante_lengua_entiende" disabled>
                     <option value="0">Nada 0%</option>
                     <option value="25">Poco 25%</option>
                     <option value="50">Regular 50%</option>
                     <option value="100">Bien 100%</option>
->>>>>>> 3b6613303ff708ac07e13c78348eebe35c822d9e
                   </select>
                   <span>Entiende</span>
                 </label>
@@ -571,19 +585,12 @@
 
               <div class="col-md-2">
                 <label class="form-group has-float-label">
-<<<<<<< HEAD
-                  <select class="form-control" required="required" id="aspirante_lengua_traduce" name="aspirante_lengua_traduce" disabled>
-                    <option value="0">Nada</option>
-                    <option value="25">Poco</option>
-                    <option value="50">Regular</option>
-                    <option value="100">Mucho</option>
-=======
-                  <select class="form-control" required="required" name="aspirante_lengua_traduce">
+                  <select class="form-control" required="required" id="aspirante_lengua_traduce"
+                    name="aspirante_lengua_traduce" disabled>
                     <option value="0">Nada 0%</option>
                     <option value="25">Poco 25%</option>
                     <option value="50">Regular 50%</option>
                     <option value="100">Bien 100%</option>
->>>>>>> 3b6613303ff708ac07e13c78348eebe35c822d9e
                   </select>
                   <span>Traduce</span>
                 </label>
@@ -609,16 +616,15 @@
           <div class="form-group">
 
             <div class="row">
-            <div class="col-md-4">
+              <div class="col-md-4">
                 <div class="form-label-group">
                   <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ 0-9]+" required="required"
                     title="El nombre de la secundaria contiene caracteres incorrectos" class="form-control"
-                    id="aspirante_secundaria_cct" name="aspirante_secundaria_cct"
-                    placeholder="CCT de Secundaria">
+                    id="aspirante_secundaria_cct" name="aspirante_secundaria_cct" placeholder="CCT de Secundaria">
                   <label for="aspirante_secundaria_cct">C C T</label>
                 </div>
                 <br>
-                </div>
+              </div>
               <div class="col-md-4">
                 <div class="form-label-group">
                   <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ. 0-9]+" required="required"
@@ -819,18 +825,18 @@
       </div>
     </div>
 
-      <!-- Bootstrap core JavaScript-->
-  <script src="/cseiio/assets/vendor/jquery/jquery.min.js"></script>
-  <script src="/cseiio/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap core JavaScript-->
+    <script src="/cseiio/assets/vendor/jquery/jquery.min.js"></script>
+    <script src="/cseiio/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-  <!-- Core plugin JavaScript-->
-  <script src="/cseiio/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="/cseiio/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
 
 
-  <!-- Custom scripts for all pages-->
-  <script src="/cseiio/assets/js/sb-admin.min.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="/cseiio/assets/js/sb-admin.min.js"></script>
 
-    
+
 
     <script src="/cseiio/assets/js/cambio_estado.js"></script>
     <script src="/cseiio/assets/js/cambio_municipio.js"></script>
@@ -845,22 +851,29 @@
       var selector_localidad_secundaria = document.getElementById("selector_localidad_secundaria");
 
 
-      function lenguas_evento(e){
-          //console.log(e.value);
-          if(e.value>0){
-            document.getElementById("aspirante_lengua_lee").disabled = false;
-            document.getElementById("aspirante_lengua_habla").disabled = false;
-            document.getElementById("aspirante_lengua_escribe").disabled = false;
-            document.getElementById("aspirante_lengua_entiende").disabled = false;
-            document.getElementById("aspirante_lengua_traduce").disabled = false;
-          }
+      function lenguas_evento(e) {
+        //console.log(e.value);
+        if (e.value > 0) {
+          document.getElementById("aspirante_lengua_lee").disabled = false;
+          document.getElementById("aspirante_lengua_habla").disabled = false;
+          document.getElementById("aspirante_lengua_escribe").disabled = false;
+          document.getElementById("aspirante_lengua_entiende").disabled = false;
+          document.getElementById("aspirante_lengua_traduce").disabled = false;
+        }
 
-          else{
-            document.getElementById("aspirante_lengua_lee").disabled = true;
-            document.getElementById("aspirante_lengua_habla").disabled = true;
-            document.getElementById("aspirante_lengua_escribe").disabled = true;
-            document.getElementById("aspirante_lengua_entiende").disabled = true;
-            document.getElementById("aspirante_lengua_traduce").disabled = true;
+        else {
+          document.getElementById("aspirante_lengua_lee").disabled = true;
+          document.getElementById("aspirante_lengua_habla").disabled = true;
+          document.getElementById("aspirante_lengua_escribe").disabled = true;
+          document.getElementById("aspirante_lengua_entiende").disabled = true;
+          document.getElementById("aspirante_lengua_traduce").disabled = true;
+        }
+      }
+
+      function alergia(e){
+          console.log(e.value);
+          if(e.value == 1){
+            document.getElementById("aspirante_alergia").style="display:none"
           }
       }
     </script>

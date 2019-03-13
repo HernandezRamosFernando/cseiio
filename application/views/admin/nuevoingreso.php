@@ -261,7 +261,7 @@
                   <span>¿Alergico a algún medicamento?</span> 
                 </label>
               </div>
-              <div class="col-md-4" style="display:none">
+              <div class="col-md-4" style="display:none" id="a">
                 <div class="form-label-group">
                   <input type="text" class="form-control" id="aspirante_alergia" name="aspirante_alergia"
                     placeholder="Ingrese el medicamento">
@@ -272,7 +272,7 @@
 
               <div class="col-md-4">
               <label class="form-group has-float-label">
-                  <select class="form-control form-control-lg" id="_sangreaspirante_discapacidad_combo" name="aspirante_discapacidad_combo" onchange="">
+                  <select class="form-control form-control-lg" id="aspirante_discapacidad_combo" name="aspirante_discapacidad_combo" onchange="discapacidad(this)">
                   <option>Seleccione una opción</option>
                   <option value="1">Si</option>
                   <option value="2">No</option>
@@ -280,7 +280,7 @@
                   <span>¿Padece alguna discapacidad?</span> 
                 </label>
               </div>
-              <div class="col-md-4" style="display:none">
+              <div class="col-md-4" style="display:none" id="b">
                 <div class="form-label-group">
                   <input type="text" class="form-control" id="aspirante_discapacidad" name="aspirante_discapacidad"
                     placeholder="Ingrese la discapacidad">
@@ -873,7 +873,23 @@
       function alergia(e){
           console.log(e.value);
           if(e.value == 1){
-            document.getElementById("aspirante_alergia").style="display:none"
+            document.getElementById("a").style="display:"
+          }
+
+          else{
+            document.getElementById("a").style="display:none"
+          }
+      }
+
+
+      function discapacidad(e){
+          console.log(e.value);
+          if(e.value == 1){
+            document.getElementById("b").style="display:"
+          }
+
+          else{
+            document.getElementById("b").style="display:none"
           }
       }
     </script>

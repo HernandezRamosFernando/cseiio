@@ -126,14 +126,10 @@ public function insertar_aspirante_nuevo_ingreso(
 
 
 public function get_aspirantes_nombre(
-   $nombre_aspirantes,
-   $apellido_paterno_aspirantes,
-   $apellido_materno_aspirantes,
+   $curp,
    $plantel){
    $consulta = array(
-   'nombre like' => $nombre_aspirantes.'%',
-   'apellido_paterno like' => $apellido_paterno_aspirantes.'%',
-   'apellido_materno like' => $apellido_materno_aspirantes.'%',
+   'curp like' => $curp.'%',
    'Plantel_cct=' => $plantel
 );
 
@@ -173,7 +169,7 @@ return $this->db->get()->result();
 
 
 
-public function get_aspirantes_nombre_documentos_faltantes(
+public function aspirantes_carta_compromiso(
    $cct){
 
 return $this->db->query("select * from (select Aspirante_no_control as no_control, count(*) as total_documentos from  Documentacion

@@ -126,10 +126,10 @@ public function portabilidad(){
 
     }
 
-    public function get_aspirantes_nombre_documentos_faltantes(){
+    public function aspirantes_carta_compromiso(){
         $cct = $this->input->get('cct');
-        //echo json_encode($this->M_aspirante->get_aspirantes_nombre_documentos_faltantes($no_control));
-        echo json_encode($this->M_aspirante->get_aspirantes_nombre_documentos_faltantes($cct));
+        //echo json_encode($this->M_aspirante->aspirantes_carta_compromiso($no_control));
+        echo json_encode($this->M_aspirante->aspirantes_carta_compromiso($cct));
     }
 
 
@@ -245,14 +245,10 @@ public function portabilidad(){
 
 
     public function buscar_aspirantes_nombre(){
-        $nombre = $this->input->get('nombre');
-        $apellido_paterno = $this->input->get('apellido_paterno');
-        $apellido_materno = $this->input->get('apellido_materno');
+        $curp = $this->input->get('curp');
         $plantel = $this->input->get('plantel');
         echo json_encode($this->M_aspirante->get_aspirantes_nombre(
-            $nombre,
-            $apellido_paterno,
-            $apellido_materno,
+            $curp,
             $plantel
         ));
     }
@@ -441,7 +437,7 @@ public function portabilidad(){
     }
 
     public function registrar_datos_portabilidad(){
-        $this->load->view("admin/portabilidad");
+        $this->load->view("admin/inscripcion");
         $numero=$this->M_aspirante->asignar_num_control();
         $num=10000+$numero;
         //$no_control = 'CSEIIO'.date('y').str_pad($numero,4,'0',STR_PAD_LEFT);

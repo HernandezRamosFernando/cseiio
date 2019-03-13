@@ -135,8 +135,8 @@
                 <div class="col-md-4">
                   <div class="form-label-group">
                     <input type="text" pattern="[A-Za-zñ]+" title="Introduzca solo letras" class="form-control"
-                      id="aspirante_nombre_busqueda" placeholder="Nombre(s)">
-                    <label for="aspirante_nombre_busqueda">Nombre(s)</label>
+                      id="aspirante_curp_busqueda" placeholder="CURP">
+                    <label for="aspirante_curp_busqueda">CURP</label>
                   </div>
                 </div>
 
@@ -168,8 +168,8 @@
                 </div>
 
                 <div class="col-md-4">
-                  <button type='button' class="btn btn-success btn-lg btn-block" onclick='buscar()'>Buscar</button>
-                </div>
+                  <button type='button' class="btn btn-success btn-lg btn-block" id="btn_buscar" onclick='buscar()'>Buscar</button>
+                  </div>
 
               </div>
             </div>
@@ -1100,11 +1100,9 @@
     function buscar() {
       document.getElementById("tabla").innerHTML = "";
       var xhr = new XMLHttpRequest();
-      var nombre = document.getElementById("aspirante_nombre_busqueda").value;
-      var apellido_paterno = document.getElementById("aspirante_apellido_paterno_busqueda").value;
-      var apellido_materno = document.getElementById("aspirante_apellido_materno_busqueda").value;
+      var curp = document.getElementById("aspirante_curp_busqueda").value;
       var plantel = document.getElementById("aspirante_plantel_busqueda").value;
-      var query = 'nombre=' + nombre + '&apellido_paterno=' + apellido_paterno + '&apellido_materno=' + apellido_materno + '&plantel=' + plantel;
+      var query = 'curp=' + curp + '&plantel=' + plantel;
 
       xhr.open('GET', '/cseiio/index.php/c_aspirante/buscar_aspirantes_nombre?' + query, true);
 
@@ -1158,10 +1156,17 @@
       };
 
       xhr.send(null);
+      document.getElementById('btn_buscar').setAttribute("onClick", "limpiar();");
+      document.getElementById('btn_buscar').innerHTML='Limpiar Busqueda';
+    }
 
+    function limpiar() {
+      location.reload();  
+      
     }
 
   </script>
+
 
 
 

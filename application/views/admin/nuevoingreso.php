@@ -805,7 +805,7 @@
                 <div class="col-md-4">
                   <label class="form-group has-float-label">
                     <select class="form-control form-control-lg"
-                      name="aspirante_nuevasecundaria_tipo_subsistema">
+                      name="aspirante_nuevasecundaria_tipo_subsistema" id="aspirante_nuevasecundaria_tipo_subsistema">
                       <option value="TELESECUNDARIA">Telesecundaria</option>
                       <option value="GENERAL">General</option>
                       <option value="PARTICULAR">Particular</option>
@@ -884,7 +884,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-            <button type="button" class="btn btn-success">Guardar</button>
+            <button type="button" class="btn btn-success" onclick="insertar_secundaria()">Guardar</button>
           </div>
         </div>
       </div>
@@ -1013,6 +1013,37 @@
         }
       }
 
+
+      function insertar_secundaria(){
+        let secundaria = "";
+        secundaria = {
+          "cct_secundaria":document.getElementById("aspirante_nuevasecundaria_cct").value,
+          "nombre_secundaria":document.getElementById("aspirante_nuevasecundaria_nombre").value,
+          "subsistema":document.getElementById("aspirante_nuevasecundaria_tipo_subsistema").value,
+          "localidad":parseInt(document.getElementById("selector_localidad_secundaria").value)
+        };
+        console.log(secundaria);
+        //secundaria.push(document.getElementById("aspirante_nuevasecundaria_cct").value);//0
+        //secundaria.push(document.getElementById("aspirante_nuevasecundaria_nombre").value);//1
+        //secundaria.push(document.getElementById("aspirante_nuevasecundaria_tipo_subsistema").value);//2
+        //secundaria.push(document.getElementById("selector_localidad_secundaria").value);//3
+
+        //console.log(secundaria);
+        //console.log(JSON.stringify(secundaria));
+
+              var xhr = new XMLHttpRequest();
+                xhr.open("POST", '/cseiio/c_secundaria/insert_secundaria', true);
+
+          
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+                xhr.onreadystatechange = function() { 
+                    if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                        alert(xhr.responseText);
+                    }
+                }
+                xhr.send(JSON.stringify(secundaria));
+      }
 
       
     </script>

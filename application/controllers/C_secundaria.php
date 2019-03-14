@@ -21,6 +21,27 @@ class C_secundaria extends CI_Controller {
     }
 
     public function insert_secundaria(){
+        $secundaria = json_decode($this->input->raw_input_stream);
+        //print_r($secundaria);
+        //echo $secundaria->cct_secundaria;
+        $datos = array(
+            'nombre_secundaria' => $secundaria->nombre_secundaria,
+            'tipo_subsistema' => $secundaria->subsistema,
+            'Localidad_id_localidad' => $secundaria->localidad,
+            'cct_secundaria' => $secundaria->cct_secundaria
+        );
+
+       if($this->M_secundaria->insert_secundaria($datos)==1){
+           echo "Secundaria agregada exitosamente";
+       }
+
+       else{
+           echo "Algo salio mal";
+       }
+     
         
     }
 }
+
+       
+    

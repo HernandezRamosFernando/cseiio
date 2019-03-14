@@ -466,13 +466,13 @@
                 <label class="form-group has-float-label">
                   <select class="form-control form-control-lg" required="required" id="aspirante_tutor_parentesco" required="required" name="aspirante_tutor_parentesco" onchange="parentesco(this)">
                     <option value="">Seleccione</option>
-                    <option value="padre">Padre</option>
-                    <option value="madre">Madre</option>
-                    <option value="hermano/a">Hermano/a</option>
-                    <option value="tio">Tio</option>
-                    <option value="tia">Tia</option>
-                    <option value="abuelo">Abuelo</option>
-                    <option value="abuela">Abuela</option>
+                    <option value="PADRE">Padre</option>
+                    <option value="MADRE">Madre</option>
+                    <option value="HERMANO/A">Hermano/a</option>
+                    <option value="TIO">Tio</option>
+                    <option value="TIA">Tia</option>
+                    <option value="ABUELO">Abuelo</option>
+                    <option value="ABUELA">Abuela</option>
                     <option value="otro">Otro</option>
                   </select>
                   <span>Parentesco</span>

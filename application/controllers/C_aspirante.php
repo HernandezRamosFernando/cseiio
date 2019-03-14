@@ -297,7 +297,7 @@ public function portabilidad(){
             'nombre' => $this->input->post('aspirante_tutor_nombre'),
             'telefono_particular' => $this->input->post('aspirante_tutor_telefono'),
             'ocupacion' => $this->input->post('aspirante_tutor_ocupacion'),
-            'parentezco' => $this->input->post('aspirante_tutor_parentesco'),
+            'parentezco' => $this->input->post('aspirante_tutor_parentesco')==''?null:$this->input->post('aspirante_tutor_parentesco'),
             'Aspirante_no_control' => $no_control,
             'folio_prospera' => $this->input->post('aspirante_tutor_prospera'),
             'telefono_comunidad' => $this->input->post('aspirante_tutor_telefono_comunidad')
@@ -307,16 +307,16 @@ public function portabilidad(){
         $datos_aspirante_lengua = array(
             'Aspirante_no_control' => $no_control,
             'Lengua_id_lengua' => $this->input->post('aspirante_lengua_nombre'),
-            'lee' => $this->input->post('aspirante_lengua_lee'),
-            'habla' => $this->input->post('aspirante_lengua_habla'),
-            'escribe' => $this->input->post('aspirante_lengua_escribe'),
-            'entiende' => $this->input->post('aspirante_lengua_entiende'),
-            'traduce' => $this->input->post('aspirante_lengua_traduce')
+            'lee' => $this->input->post('aspirante_lengua_lee')==''?0:$this->input->post('aspirante_lengua_lee'),
+            'habla' => $this->input->post('aspirante_lengua_habla')==''?0:$this->input->post('aspirante_lengua_habla'),
+            'escribe' => $this->input->post('aspirante_lengua_escribe')==''?0:$this->input->post('aspirante_lengua_escribe'),
+            'entiende' => $this->input->post('aspirante_lengua_entiende')==''?0:$this->input->post('aspirante_lengua_entiende'),
+            'traduce' => $this->input->post('aspirante_lengua_traduce')==''?0:$this->input->post('aspirante_lengua_traduce')
         );
 
 
         $datos_aspirante_medicos = array(
-            'tipo_sangre' => $this->input->post('tipo_sangre'),
+            'tipo_sangre' => $this->input->post('tipo_sangre')==''?null:$this->input->post('tipo_sangre'),
             'alergia_medicamento' => $this->input->post('aspirante_alergia'),
             'discapacidad' => $this->input->post('aspirante_discapacidad'),
             'Aspirante_no_control' => $no_control

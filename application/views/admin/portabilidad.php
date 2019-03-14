@@ -331,6 +331,20 @@
                 </label>
               </div>
 
+              <div class="col-md-4">
+                <label class="form-group has-float-label">
+                  <select class="form-control form-control-lg" required="required" id="aspirante_semestre" name="aspirante_semestre">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                  </select>
+                  <span>Semestre al que ingresa</span>
+                </label>
+              </div>
+
             </div>
 
           </div>

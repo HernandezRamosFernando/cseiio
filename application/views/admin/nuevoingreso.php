@@ -249,6 +249,7 @@
                 <div class="form-group">
                 <label class="form-group has-float-label">
                   <select class="form-control form-control-lg" name="tipo_sangre" id="tipo_sangre">
+                   <option >Seleccione una opcion</option>
                     <option value="A+">A+</option>
                     <option value="A-">A-</option>
                     <option value="B+">B+</option>
@@ -464,7 +465,7 @@
               <div class="col-md-2">
                 <label class="form-group has-float-label">
                   <select class="form-control form-control-lg" required="required" id="aspirante_tutor_parentesco" required="required" name="aspirante_tutor_parentesco" onchange="parentesco(this)">
-                    <option>Seleccione</option>
+                    <option value="">Seleccione</option>
                     <option value="padre">Padre</option>
                     <option value="madre">Madre</option>
                     <option value="hermano/a">Hermano/a</option>
@@ -978,7 +979,9 @@
       }
       function parentesco(e) {
         if(document.getElementById("aspirante_tutor_parentesco").value === "otro"){
-		    $("#parentescootro").show()
+        $("#parentescootro").show()
+        document.getElementById("aspirante_tutor_otro").name = 'aspirante_tutor_parentesco';
+        document.getElementById("aspirante_tutor_parentesco").name = '';
 	    	}
 	    	else{
 	    	$("#parentescootro").hide()

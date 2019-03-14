@@ -621,7 +621,7 @@
               <div class="col-md-4">
                 <div class="form-label-group">
                   
-                    <input list="secundarias" required="required" class="form-control" id="aspirante_secundaria_cct" name="aspirante_secundaria_cct">
+                    <input onchange="obtener_secundaria(this)" list="secundarias" required="required" class="form-control" id="aspirante_secundaria_cct" name="aspirante_secundaria_cct">
                     <datalist id="secundarias">
              
 
@@ -652,7 +652,7 @@
             </div>
 
               <div class="row">
-              <div class="col-md-4" style="display: none">
+              <div class="col-md-4" style="display: none" id="nombre_secundaria_oculto">
                 <div class="form-label-group">
                   <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ. 0-9]+" required="required"
                     title="El nombre de la secundaria contiene caracteres incorrectos" class="form-control"
@@ -663,10 +663,10 @@
                 <br>
               </div>
 
-              <div class="col-md-4" style="display: none">
+              <div class="col-md-4" style="display: none" id="tipo_subsistema_oculto">
                 <label class="form-group has-float-label">
                   <select class="form-control form-control-lg" required="required"
-                    name="aspirante_secundaria_tipo_subsistema">
+                    name="aspirante_secundaria_tipo_subsistema" id="aspirante_secundaria_tipo_subsistema">
                     <option value="TELESECUNDARIA">Telesecundaria</option>
                     <option value="GENERAL">General</option>
                     <option value="PARTICULAR">Particular</option>
@@ -977,6 +977,39 @@
 
         else {
           document.getElementById("b").style = "display:none"
+        }
+      }
+
+      function obtener_secundaria(e){
+        console.log(e.value);
+        if(e.value.length==10){
+          var xhr = new XMLHttpRequest();
+            xhr.open('GET', '/cseiio/c_secundaria/get_secundaria?cct_secundaria='+e.value, true);
+
+            xhr.onload = function () {
+              //console.log(JSON.parse(xhr.response));
+              let secundaria = JSON.parse(xhr.response);
+              //console.log(xhr.responseText.length);
+
+
+
+              if(secundaria.length==1){
+                  document.getElementById("nombre_secundaria_oculto").style.display="";
+                  document.getElementById("aspirante_secundaria_nombre").value=secundaria[0].nombre_secundaria;
+                  document.getElementById("aspirante_secundaria_nombre").disabled = true;
+                  //tipo_subsistema_oculto
+                  document.getElementById("tipo_subsistema_oculto").style.display = "";
+                  //aspirante_secundaria_tipo_subsistema
+                  document.getElementById("aspirante_secundaria_tipo_subsistema").value = secundaria[0].tipo_subsistema;
+                  document.getElementById("aspirante_secundaria_tipo_subsistema").disabled = true;
+              }
+
+              else{
+                document.getElementById("nombre_secundaria_oculto").style.display="none";
+              }
+            };
+
+            xhr.send(null);
         }
       }
 

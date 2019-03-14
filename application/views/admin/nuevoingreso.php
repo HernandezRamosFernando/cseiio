@@ -255,7 +255,7 @@
                 <label class="form-group has-float-label">
                   <select class="form-control form-control-lg" id="aspirante_alergia_combo"
                     name="aspirante_alergia_combo" onchange="alergia(this)">
-                    <option>Seleccione una opción</option>
+                    <option value="2">Seleccione una opción</option>
                     <option value="1">Si</option>
                     <option value="2">No</option>
                   </select>
@@ -266,7 +266,7 @@
                 <div class="form-label-group">
                   <input type="text" class="form-control" id="aspirante_alergia" name="aspirante_alergia"
                     placeholder="Ingrese el medicamento">
-                  <label for="aspirante_aspirante_alergia">Ingrese el medicamento</label>
+                  <label for="aspirante_alergia">Ingrese el medicamento</label>
                 </div>
               </div>
 
@@ -275,7 +275,7 @@
                 <label class="form-group has-float-label">
                   <select class="form-control form-control-lg" id="aspirante_discapacidad_combo"
                     name="aspirante_discapacidad_combo" onchange="discapacidad(this)">
-                    <option>Seleccione una opción</option>
+                    <option value="2">Seleccione una opción</option>
                     <option value="1">Si</option>
                     <option value="2">No</option>
                   </select>
@@ -537,7 +537,7 @@
                 <label class="form-group has-float-label">
                   <select class="form-control" required="required" onchange="lenguas_evento(this)"
                     id="aspirante_lengua_nombre" name="aspirante_lengua_nombre">
-                    <option>Seleccione una lengua</option>
+                    <option value="NO CONOCE LENGUA">Seleccione una lengua</option>
 
                     <?php
                               foreach ($lenguas as $lengua)
@@ -640,7 +640,7 @@
               <div class="col-md-4">
                 <div class="form-label-group">
                   
-                    <input onchange="obtener_secundaria(this)" list="secundarias" required="required" class="form-control" id="aspirante_secundaria_cct" name="aspirante_secundaria_cct" placeholder="Buscar secundaria por CCT">
+                    <input onselect="obtener_secundaria(this)" list="secundarias" required="required" class="form-control" id="aspirante_secundaria_cct" name="aspirante_secundaria_cct" placeholder="Buscar secundaria por CCT">
                     <datalist id="secundarias">
              
 
@@ -1003,7 +1003,7 @@
         console.log(e.value);
         if(e.value.length==10){
           var xhr = new XMLHttpRequest();
-            xhr.open('GET', '/cseiio/c_secundaria/get_secundaria?cct_secundaria='+e.value, true);
+            xhr.open('GET', '/cseiio/index.php/c_secundaria/get_secundaria?cct_secundaria='+e.value, true);
 
             xhr.onload = function () {
               //console.log(JSON.parse(xhr.response));

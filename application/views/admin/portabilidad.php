@@ -128,7 +128,7 @@
           </li>
           <li class="breadcrumb-item active">Rellene todos los campos</li>
         </ol>
-        <form action="/cseiio/index.php/c_aspirante/registrar_datos_nuevo_ingreso" method="post">
+        <form action="/cseiio/index.php/c_aspirante/registrar_datos_portabilidad" method="post">
 
           <!--datos personales------------------------------------------------------>
           <p class="text-center text-white rounded" style="background-color: #579A8D; height: 40px">

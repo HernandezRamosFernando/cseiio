@@ -92,35 +92,37 @@ public function insertar_aspirante_nuevo_ingreso(
    $datos_aspirante_direccion,
    $datos_aspirante_tutor,
    $datos_aspirante_lengua,
-   $datos_aspirante_secundaria,
-   $datos_aspirante_documentos){
+   $datos_aspirante_documentos,
+   $datos_aspirante_medicos){
 
-   $this->db->insert('Aspirante',$datos_aspirante);
-   $this->db->insert('Direccion_Aspirante',$datos_aspirante_direccion);
-   $this->db->insert('Tutor',$datos_aspirante_tutor);
-   $this->db->insert('Lengua_materna',$datos_aspirante_lengua);
-   $this->db->insert('Datos_Secundaria',$datos_aspirante_secundaria);
-   //echo json_encode($datos_aspirante_documentos);
+      
+
+            $this->db->trans_start();
+            $this->db->insert('Aspirante',$datos_aspirante);
+            $this->db->insert('Direccion_Aspirante',$datos_aspirante_direccion);
+            $this->db->insert('Tutor',$datos_aspirante_tutor);
+            $this->db->insert('Lengua_materna',$datos_aspirante_lengua);
+            $this->db->insert('Datos_medicos_aspirante',$datos_aspirante_medicos);
+            foreach($datos_aspirante_documentos as $documento){
+               $registro = array(
+                  'Aspirante_no_control' => $datos_aspirante['no_control'],
+                  'Documento_id_documento' => $documento['Documento_id_documento'],
+                  'entregado' => $documento['entregado']
+               );
+               $this->db->insert('Documentacion',$registro);
+         }
+            
+            $this->db->trans_complete();
+
+               if ($this->db->trans_status() === FALSE)
+               {
+                     return "algo salio mal";
+               }
+               else{
+                  return "Registro agregado exitosamente";
+               }
    //print_r($datos_aspirante_documentos);
-   
-   foreach($datos_aspirante_documentos as $documento){
-      $registro = array(
-         'Aspirante_no_control' => $datos_aspirante['no_control'],
-         'Documento_id_documento' => $documento['Documento_id_documento'],
-         'entregado' => $documento['entregado']
-      );
-      //echo print_r($registro);
-  
-      $this->db->insert('Documentacion',$registro);
-   }
-   //print_r($datos_aspirante_documentos);
-   ?>
 
-   <script>
-   alert("Registro agregado correctamente");
-   </script>
-
-   <?php
    
 }
 

@@ -244,13 +244,26 @@
                   <label for="aspirante_programa_social">Folio de Prospera</label>
                 </div>
               </div>
+
               <div class="col-md-4">
-                <div class="form-label-group">
-                  <input type="text" class="form-control" id="aspirante_tipo_sangre" name="aspirante_tipo_sangre"
-                    placeholder="Tipo de sangre">
-                  <label for="aspirante_tipo_sangre">Tipo de sangre</label>
+                <div class="form-group">
+                <label class="form-group has-float-label">
+                  <select class="form-control form-control-lg" name="tipo_sangre" id="tipo_sangre">
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                    <option value="A+">O+</option>
+                    <option value="A-">O-</option>
+                  </select>
+                  <span>Tipo de sangre</span>
+                  </label>
                 </div>
               </div>
+
+
               <div class="col-md-4">
                 <label class="form-group has-float-label">
                   <select class="form-control form-control-lg" id="aspirante_alergia_combo"
@@ -262,7 +275,7 @@
                   <span>¿Alergico a algún medicamento?</span>
                 </label>
               </div>
-              <div class="col-md-4" style="display:none" id="a">
+              <div class="col-md-4" style="display:none" id="a" name="alergia_medicamento">
                 <div class="form-label-group">
                   <input type="text" class="form-control" id="aspirante_alergia" name="aspirante_alergia"
                     placeholder="Ingrese el medicamento">
@@ -282,7 +295,7 @@
                   <span>¿Padece alguna discapacidad?</span>
                 </label>
               </div>
-              <div class="col-md-4" style="display:none" id="b">
+              <div class="col-md-4" style="display:none" id="b" name="discapacidad">
                 <div class="form-label-group">
                   <input type="text" class="form-control" id="aspirante_discapacidad" name="aspirante_discapacidad"
                     placeholder="Ingrese la discapacidad">
@@ -651,7 +664,7 @@
 
                   <!-- Button trigger modal -->
                   <button type="button" class="btn btn-outline-success btn-lg" data-toggle="modal"
-                    data-target="#nuevasecundaria">
+                    data-target="#nuevasecundaria" onclick="cct()">
                     Agregar nueva secundaria
                   </button>
 
@@ -859,11 +872,7 @@
                       id="selector_municipio_secundaria">
                       <option></option>
 
-<<<<<<< HEAD
                      
-=======
-
->>>>>>> c53f0411de7b1d98c4f089717d13c11f6b6d5187
                     </select>
                     <span>Municipio</span>
                   </label>
@@ -875,11 +884,7 @@
                       name="aspirante_secundaria_localidad" id="selector_localidad_secundaria">
                       <option></option>
 
-<<<<<<< HEAD
                      
-=======
-                      
->>>>>>> c53f0411de7b1d98c4f089717d13c11f6b6d5187
 
                     </select>
                     <span>Localidad</span>
@@ -1045,6 +1050,10 @@
                     }
                 }
                 xhr.send(JSON.stringify(secundaria));
+      }
+
+      function cct(){
+        document.getElementById("aspirante_nuevasecundaria_cct").value=document.getElementById("aspirante_secundaria_cct").value;
       }
 
       

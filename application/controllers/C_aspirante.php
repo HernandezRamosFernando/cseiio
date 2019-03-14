@@ -268,17 +268,19 @@ public function portabilidad(){
             'nombre' => $this->input->post('aspirante_nombre'),
             'apellido_paterno' => $this->input->post('aspirante_apellido_paterno'),
             'apellido_materno' => $this->input->post('aspirante_apellido_materno'),
-            'curp' => $this->input->post('aspirante_curp'),
-            'fecha_nacimiento' => $this->input->post('aspirante_fecha_nacimiento'),
             'telefono' => $this->input->post('aspirante_telefono'),
-            'correo' => $this->input->post('aspirante_correo'),
-            'nss' => $this->input->post('aspirante_nss'),
             'sexo' => $this->input->post('aspirante_sexo'),
-            'programa_social' => $this->input->post('aspirante_programa_social'),
-            'Plantel_cct' => $this->input->post('aspirante_plantel'),
-            'semestre' => 1,
+            'nss' => $this->input->post('aspirante_nss'),
+            'correo' => $this->input->post('aspirante_correo'),
             'tipo_ingreso' => 'NUEVO INGRESO',
-            'fecha_registro' => date("Y-m-d")
+            'semestre' => 1,
+            'programa_social' => $this->input->post('aspirante_programa_social'),
+            'curp' => $this->input->post('aspirante_curp'),
+            'Plantel_cct' => $this->input->post('aspirante_plantel'),
+            'fecha_registro' => date("Y-m-d"),
+            'fecha_inscripcion' => date("Y-m-d"),
+            'Secundaria_cct_secundaria' => $this->input->post('aspirante_secundaria_cct'),
+            'fecha_nacimiento' => $this->input->post('aspirante_fecha_nacimiento')
         );
 
         
@@ -293,10 +295,12 @@ public function portabilidad(){
 
         $datos_aspirante_tutor = array(
             'nombre' => $this->input->post('aspirante_tutor_nombre'),
-            'telefono' => $this->input->post('aspirante_tutor_telefono'),
+            'telefono_particular' => $this->input->post('aspirante_tutor_telefono'),
             'ocupacion' => $this->input->post('aspirante_tutor_ocupacion'),
-            'parentezco' => $this->input->post('aspirante_tutor_parentezco'),
-            'Aspirante_no_control' => $no_control
+            'parentezco' => $this->input->post('aspirante_tutor_parentesco'),
+            'Aspirante_no_control' => $no_control,
+            'folio_prospera' => $this->input->post('aspirante_tutor_prospera'),
+            'telefono_comunidad' => $this->input->post('aspirante_tutor_telefono_comunidad')
         );
 
 
@@ -311,19 +315,15 @@ public function portabilidad(){
         );
 
 
-        $datos_aspirante_secundaria = array(
-            'nombre_secundaria' => $this->input->post('aspirante_secundaria_nombre'),
-            'tipo_subsistema' => $this->input->post('aspirante_secundaria_tipo_subsistema'),
-            'Localidad_id_localidad' => $this->input->post('aspirante_secundaria_localidad'),
+        $datos_aspirante_medicos = array(
+            'tipo_sangre' => $this->input->post('tipo_sangre'),
+            'alergia_medicamento' => $this->input->post('aspirante_alergia'),
+            'discapacidad' => $this->input->post('aspirante_discapacidad'),
             'Aspirante_no_control' => $no_control
         );
 
 
         $datos_aspirante_documentos = array();
-            //'aspirante_documento_acta_nacimiento' => $this->input->post('aspirante_documento_acta_nacimiento'),
-            //'aspirante_documento_curp' => $this->input->post('aspirante_documento_curp'),
-            //'aspirante_documento_certificado_secundaria' => $this->input->post('aspirante_documento_certificado_secundaria'),
-            //'aspirante_documento_fotos' => $this->input->post('aspirante_documento_fotos')
 
             
             if($this->input->post('aspirante_documento_acta_nacimiento')!=''){
@@ -423,15 +423,21 @@ public function portabilidad(){
                 );
             }
 
+            print_r($datos_aspirante);
+            //print_r($datos_aspirante_direccion);
+            //print_r($datos_aspirante_tutor);
+            //print_r($datos_aspirante_lengua);
+            //print_r($datos_aspirante_documentos);
+            //print_r($datos_aspirante_medicos);
 
 
-        $this->M_aspirante->insertar_aspirante_nuevo_ingreso(
+        echo $this->M_aspirante->insertar_aspirante_nuevo_ingreso(
             $datos_aspirante,
             $datos_aspirante_direccion,
             $datos_aspirante_tutor,
             $datos_aspirante_lengua,
-            $datos_aspirante_secundaria,
-            $datos_aspirante_documentos
+            $datos_aspirante_documentos,
+            $datos_aspirante_medicos
         );
 
        

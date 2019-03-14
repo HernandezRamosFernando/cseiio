@@ -18,6 +18,7 @@ class C_aspirante extends CI_Controller {
         $this->load->model('M_lengua_materna');
         $this->load->model('M_datos_secundaria');
         $this->load->model('M_documentacion');
+        $this->load->model('M_secundaria');
     }
 
 
@@ -43,6 +44,7 @@ public function portabilidad(){
         $datos['localidades'] = $this->M_localidad->get_localidades_municipio(1);
         $datos['lenguas'] = $this->M_lengua->get_lenguas();
         $datos['planteles'] = $this->M_plantel->get_planteles();
+        $datos['secundarias'] = $this->M_secundaria->get_secundarias();
 
  
         $this->load->view("admin/nuevoingreso",$datos);

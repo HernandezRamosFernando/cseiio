@@ -618,9 +618,19 @@
             <div class="row">
               <div class="col-md-4">
                 <div class="form-label-group">
-                  <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ 0-9]+" required="required"
-                    title="El nombre de la secundaria contiene caracteres incorrectos" class="form-control"
-                    id="aspirante_secundaria_cct" name="aspirante_secundaria_cct" placeholder="CCT de Secundaria">
+                  
+                    <input list="secundarias" required="required" class="form-control" id="aspirante_secundaria_cct" name="aspirante_secundaria_cct">
+                    <datalist id="secundarias">
+             
+
+                      <?php
+                              foreach ($secundarias as $secundaria)
+                              {
+                                      echo '<option value="'.$secundaria->cct_secundaria.'">';
+                              }
+                              ?>
+                    </datalist>
+
                   <label for="aspirante_secundaria_cct">C C T</label>
                 </div>
                 <br>
@@ -892,6 +902,9 @@
             document.getElementById("b").style="display:none"
           }
       }
+
+
+      
     </script>
 
 

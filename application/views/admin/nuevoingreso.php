@@ -448,10 +448,10 @@
                 </div>
               </div>
 
-              <div class="col-md-4">
+              <div class="col-md-2">
                 <label class="form-group has-float-label">
-                  <select class="form-control form-control-lg" required="required" id="aspirante_tutor_parentesco" required="required" name="aspirante_tutor_parentesco">
-                    <option>Seleccione el parentesco</option>
+                  <select class="form-control form-control-lg" required="required" id="aspirante_tutor_parentesco" required="required" name="aspirante_tutor_parentesco" onchange="parentesco(this)">
+                    <option>Seleccione</option>
                     <option value="padre">Padre</option>
                     <option value="madre">Madre</option>
                     <option value="hermano/a">Hermano/a</option>
@@ -464,6 +464,15 @@
                   <span>Parentesco</span>
                   
                </label>
+              </div>
+
+              <div class="col-md-3" id="parentescootro" style="display:none;">
+                <div class="form-label-group">
+                  <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ ]+" 
+                    class="form-control" id="aspirante_tutor_otro" name="aspirante_tutor_otro"
+                    placeholder="Escriba el parentesco">
+                  <label for="aspirante_tutor_otro">Escriba el parentesco</label>
+                </div>
               </div>
             </div>
 
@@ -859,11 +868,7 @@
                       id="selector_municipio_secundaria">
                       <option></option>
 
-<<<<<<< HEAD
                      
-=======
-
->>>>>>> c53f0411de7b1d98c4f089717d13c11f6b6d5187
                     </select>
                     <span>Municipio</span>
                   </label>
@@ -875,11 +880,7 @@
                       name="aspirante_secundaria_localidad" id="selector_localidad_secundaria">
                       <option></option>
 
-<<<<<<< HEAD
                      
-=======
-                      
->>>>>>> c53f0411de7b1d98c4f089717d13c11f6b6d5187
 
                     </select>
                     <span>Localidad</span>
@@ -889,7 +890,7 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="borrarmodal()">Cancelar</button>
             <button type="button" class="btn btn-success" onclick="insertar_secundaria()">Guardar</button>
           </div>
         </div>
@@ -961,6 +962,15 @@
           document.getElementById("aspirante_lengua_entiende").disabled = true;
           document.getElementById("aspirante_lengua_traduce").disabled = true;
         }
+      }
+      function parentesco(e) {
+        if(document.getElementById("aspirante_tutor_parentesco").value === "otro"){
+		    $("#parentescootro").show()
+	    	}
+	    	else{
+	    	$("#parentescootro").hide()
+		}
+        
       }
 
       function alergia(e) {
@@ -1045,10 +1055,23 @@
                     }
                 }
                 xhr.send(JSON.stringify(secundaria));
+
+                
+      }
+
+      function borrarmodal(){
+        $('#aspirante_nuevasecundaria_cct').val('');
+        $('#aspirante_nuevasecundaria_nombre').val('');
+        $('#aspirante_nuevasecundaria_tipo_subsistema').val('');
+        $('#selector_estado_secundaria').val('');
+        $('#selector_municipio_secundaria').val('');
+        $('#selector_localidad_secundaria').val('');
       }
 
       
     </script>
+
+
 
 
 

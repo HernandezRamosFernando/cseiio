@@ -869,13 +869,7 @@
                       id="selector_municipio_secundaria">
                       <option></option>
 
-                      <?php
-                              foreach ($municipios as $municipio)
-                              {
-                                      echo '<option value="'.$municipio->id_municipio.'">'.strtoupper($municipio->nombre_municipio).'</option>';
-                              }
-                              ?>
-
+                     
                     </select>
                     <span>Municipio</span>
                   </label>
@@ -887,12 +881,7 @@
                       name="aspirante_secundaria_localidad" id="selector_localidad_secundaria">
                       <option></option>
 
-                      <?php
-                              foreach ($localidades as $localidad)
-                              {
-                                      echo '<option value="'.$localidad->id_localidad.'">'.strtoupper($localidad->nombre_localidad).'</option>';
-                              }
-                              ?>
+                     
 
                     </select>
                     <span>Localidad</span>
@@ -1041,14 +1030,10 @@
           "subsistema":document.getElementById("aspirante_nuevasecundaria_tipo_subsistema").value,
           "localidad":parseInt(document.getElementById("selector_localidad_secundaria").value)
         };
-        console.log(secundaria);
-        //secundaria.push(document.getElementById("aspirante_nuevasecundaria_cct").value);//0
-        //secundaria.push(document.getElementById("aspirante_nuevasecundaria_nombre").value);//1
-        //secundaria.push(document.getElementById("aspirante_nuevasecundaria_tipo_subsistema").value);//2
-        //secundaria.push(document.getElementById("selector_localidad_secundaria").value);//3
 
-        //console.log(secundaria);
-        //console.log(JSON.stringify(secundaria));
+        document.getElementById("secundarias").innerHTML += '<option value="'+document.getElementById("aspirante_nuevasecundaria_cct").value+'">'
+        console.log(secundaria);
+   
 
               var xhr = new XMLHttpRequest();
                 xhr.open("POST", '/cseiio/c_secundaria/insert_secundaria', true);

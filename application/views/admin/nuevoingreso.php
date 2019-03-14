@@ -362,12 +362,7 @@
                     onChange="cambio_municipio(selector_municipio_aspirante,selector_localidad_aspirante)"
                     id="selector_municipio_aspirante">
                     <option></option>
-                    <?php
-                              foreach ($municipios as $municipio)
-                              {
-                                      echo '<option value="'.$municipio->id_municipio.'">'.strtoupper($municipio->nombre_municipio).'</option>';
-                              }
-                              ?>
+                    
                   </select>
                   <span>Municipio</span>
                 </label>
@@ -380,12 +375,7 @@
                     id="selector_localidad_aspirante">
                     <option></option>
 
-                    <?php
-                              foreach ($localidades as $localidad)
-                              {
-                                      echo '<option value="'.$localidad->id_localidad.'">'.strtoupper($localidad->nombre_localidad).'</option>';
-                              }
-                              ?>
+                    
 
                   </select>
                   <span>Localidad</span>
@@ -869,7 +859,11 @@
                       id="selector_municipio_secundaria">
                       <option></option>
 
+<<<<<<< HEAD
                      
+=======
+
+>>>>>>> c53f0411de7b1d98c4f089717d13c11f6b6d5187
                     </select>
                     <span>Municipio</span>
                   </label>
@@ -881,7 +875,11 @@
                       name="aspirante_secundaria_localidad" id="selector_localidad_secundaria">
                       <option></option>
 
+<<<<<<< HEAD
                      
+=======
+                      
+>>>>>>> c53f0411de7b1d98c4f089717d13c11f6b6d5187
 
                     </select>
                     <span>Localidad</span>
@@ -1036,7 +1034,7 @@
    
 
               var xhr = new XMLHttpRequest();
-                xhr.open("POST", '/cseiio/c_secundaria/insert_secundaria', true);
+                xhr.open("POST", '/cseiio/index.php/c_secundaria/insert_secundaria', true);
 
           
                 xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");

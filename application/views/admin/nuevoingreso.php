@@ -362,12 +362,7 @@
                     onChange="cambio_municipio(selector_municipio_aspirante,selector_localidad_aspirante)"
                     id="selector_municipio_aspirante">
                     <option></option>
-                    <?php
-                              foreach ($municipios as $municipio)
-                              {
-                                      echo '<option value="'.$municipio->id_municipio.'">'.strtoupper($municipio->nombre_municipio).'</option>';
-                              }
-                              ?>
+                    
                   </select>
                   <span>Municipio</span>
                 </label>
@@ -380,12 +375,7 @@
                     id="selector_localidad_aspirante">
                     <option></option>
 
-                    <?php
-                              foreach ($localidades as $localidad)
-                              {
-                                      echo '<option value="'.$localidad->id_localidad.'">'.strtoupper($localidad->nombre_localidad).'</option>';
-                              }
-                              ?>
+                    
 
                   </select>
                   <span>Localidad</span>
@@ -869,12 +859,6 @@
                       id="selector_municipio_secundaria">
                       <option></option>
 
-                      <?php
-                              foreach ($municipios as $municipio)
-                              {
-                                      echo '<option value="'.$municipio->id_municipio.'">'.strtoupper($municipio->nombre_municipio).'</option>';
-                              }
-                              ?>
 
                     </select>
                     <span>Municipio</span>
@@ -887,12 +871,7 @@
                       name="aspirante_secundaria_localidad" id="selector_localidad_secundaria">
                       <option></option>
 
-                      <?php
-                              foreach ($localidades as $localidad)
-                              {
-                                      echo '<option value="'.$localidad->id_localidad.'">'.strtoupper($localidad->nombre_localidad).'</option>';
-                              }
-                              ?>
+                      
 
                     </select>
                     <span>Localidad</span>
@@ -1051,7 +1030,7 @@
         //console.log(JSON.stringify(secundaria));
 
               var xhr = new XMLHttpRequest();
-                xhr.open("POST", '/cseiio/c_secundaria/insert_secundaria', true);
+                xhr.open("POST", '/cseiio/index.php/c_secundaria/insert_secundaria', true);
 
           
                 xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");

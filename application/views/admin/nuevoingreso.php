@@ -449,7 +449,7 @@
           <div class="form-group">
 
             <div class="row">
-              <div class="col-md-9">
+              <div class="col-md-7">
                 <div class="form-label-group">
                   <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ ]+" required="required" title="Introduzca solo letras"
                     class="form-control" id="aspirante_tutor_nombre" name="aspirante_tutor_nombre"
@@ -458,13 +458,22 @@
                 </div>
               </div>
 
-              <div class="col-md-3">
-                <div class="form-label-group">
-                  <input type="text" pattern="[0-9]{10}" title="El numero de telefono debe de ser a 10 digitos"
-                    class="form-control" id="aspirante_tutor_telefono" name="aspirante_tutor_telefono"
-                    placeholder="Telefono">
-                  <label for="aspirante_tutor_telefono">Telefono</label>
-                </div>
+              <div class="col-md-4">
+                <label class="form-group has-float-label">
+                  <select class="form-control form-control-lg" required="required" id="aspirante_tutor_parentesco" required="required" name="aspirante_tutor_parentesco">
+                    <option>Seleccione el parentesco</option>
+                    <option value="padre">Padre</option>
+                    <option value="madre">Madre</option>
+                    <option value="hermano/a">Hermano/a</option>
+                    <option value="tio">Tio</option>
+                    <option value="tia">Tia</option>
+                    <option value="abuelo">Abuelo</option>
+                    <option value="abuela">Abuela</option>
+                    <option value="otro">Otro</option>
+                  </select>
+                  <span>Parentesco</span>
+                  
+               </label>
               </div>
             </div>
 
@@ -474,7 +483,7 @@
           <div class="form-group">
 
             <div class="row">
-              <div class="col-md-4">
+              <div class="col-md-3">
                 <div class="form-label-group">
                   <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ. ]+" title="Introduzca solo letras"
                     class="form-control" id="aspirante_tutor_ocupacion" name="aspirante_tutor_ocupacion"
@@ -483,15 +492,25 @@
                 </div>
               </div>
 
-              <div class="col-md-4">
+              <div class="col-md-3">
                 <div class="form-label-group">
-                  <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ. ]+" required="required"
-                    title="Introduzca solo letras" class="form-control" id="aspirante_tutor_parentezco"
-                    name="aspirante_tutor_parentezco" placeholder="Parentezco">
-                  <label for="aspirante_tutor_parentezco">Parentezco</label>
+                  <input type="text" pattern="[0-9]{10}" title="El numero de telefono debe de ser a 10 digitos con lada"
+                    class="form-control" id="aspirante_tutor_telefono" name="aspirante_tutor_telefono"
+                    placeholder="Telefono particular">
+                  <label for="aspirante_tutor_telefono">Telefono particular</label>
                 </div>
               </div>
-              <div class="col-md-4">
+            <div class="col-md-3">
+                <div class="form-label-group">
+                  <input type="text" pattern="[0-9]{10}" title="El numero de telefono debe de ser a 10 digitos con lada"
+                    class="form-control" id="aspirante_tutor_telefono_comunidad" name="aspirante_tutor_telefono_comunidad"
+                    placeholder="Telefono de la comunidad">
+                  <label for="aspirante_tutor_telefono_comunidad">Telefono de la comunidad</label>
+                </div>
+              </div>
+
+              
+              <div class="col-md-3">
                 <div class="form-label-group">
                   <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ. ]+" class="form-control"
                     id="aspirante_tutor_prospera" name="aspirante_tutor_prospera" placeholder="Folio de Prospera">
@@ -621,7 +640,7 @@
               <div class="col-md-4">
                 <div class="form-label-group">
                   
-                    <input onchange="obtener_secundaria(this)" list="secundarias" required="required" class="form-control" id="aspirante_secundaria_cct" name="aspirante_secundaria_cct">
+                    <input onchange="obtener_secundaria(this)" list="secundarias" required="required" class="form-control" id="aspirante_secundaria_cct" name="aspirante_secundaria_cct" placeholder="Buscar secundaria por CCT">
                     <datalist id="secundarias">
              
 
@@ -633,7 +652,7 @@
                               ?>
                     </datalist>
 
-                  <label for="aspirante_secundaria_cct">C C T</label>
+                  <label for="aspirante_secundaria_cct">Buscar secundaria por CCT</label>
                 </div>
                 <br>
               </div>

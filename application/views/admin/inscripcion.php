@@ -94,22 +94,78 @@
 
 
     <!-- Barra de lado derecho -->
-    <ul class="sidebar navbar-nav">
-      <li class="nav-item">
+    <ul class="sidebar navbar-nav ">
+      <li class="nav-item ">
         <a class="nav-link" href="/cseiio/index.php/c_menu/principal">
-          <i class="fas fa-fw fa-chalkboard-teacher"></i>
+          <i class="fas fa-fw fa-align-justify "></i>
           <span>Menú</span>
         </a>
       </li>
 
-      <li class="nav-item active">
-        <a class="nav-link" href="/cseiio/index.php/c_menu/inscripcion">
-          <i class="fas fa-fw fa-address-card"></i>
-          <span>Inscripción</span>
+      <li class="nav-item dropdown ">
+      <a class="nav-link dropdown-toggle bg-info text-white fas fa-fw fa-address-card" data-toggle="dropdown" href="#" role="button" > 
+      <span class="font-weight-light">Inscripción<span>
+      </a>
+      <div class="dropdown-menu bg-info">
+      <a class="dropdown-item btn-responsive btn-primary fas fa-id-card " href="/cseiio/index.php/c_aspirante/nuevo_ingreso"> <span class="font-weight-light">Inscripción Nuevo Ingreso</span></a>
+      <a class="dropdown-item btn-responsive fas fa-id-card-alt" href="/cseiio/index.php/c_aspirante/portabilidad"> <span class="font-weight-light">Inscripción Portabilidad</span></a>
+      <a class="dropdown-item btn-responsive fas fa-user-check " href="/cseiio/index.php/c_aspirante/asignar_matricula"> <span class="font-weight-light">Asignar Matrícula</span></a>
+      <a class="dropdown-item btn-responsive fas fa-clipboard-check " href="/cseiio/index.php/c_aspirante/carta_compromiso"> <span class="font-weight-light">Generación de Carta Compromiso</span></a>
+      </div>
+        </a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link" href="/cseiio/index.php/c_menu/principal">
+          <i class="fas fa-fw fa-chalkboard-teacher"></i>
+          <span>Reinscripción</span>
+        </a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link" href="/cseiio/index.php/c_aspirante/control_alumnos">
+          <i class="fas fa-fw fa-list-alt"></i>
+          <span>Control de Alumnos</span>
+        </a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link" href="/cseiio/index.php/c_menu/principal">
+          <i class="fas fa-fw fa-calendar-check"></i>
+          <span>Acreditación</span>
+        </a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link" href="/cseiio/index.php/c_menu/principal">
+          <i class="fas fa-fw fa-poll"></i>
+          <span>Reportes</span>
+        </a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link" href="/cseiio/index.php/c_menu/principal">
+          <i class="fas fa-fw fa-file-alt"></i>
+          <span>Formatos</span>
+        </a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link" href="/cseiio/index.php/c_menu/principal">
+          <i class="fas fa-fw fa-file-signature "></i>
+          <span>Certificación</span>
+        </a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link" href="/cseiio/index.php/c_subir_doc/subir_documentos">
+          <i class="fas fa-fw fa-file-upload"></i>
+          <span>Carga de documentos</span>
+        </a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link" href="/cseiio/index.php/c_menu/principal">
+          <i class="fas fa-fw fa-users "></i>
+          <span>Control de usuarios</span>
         </a>
       </li>
 
     </ul>
+
+
     <div id="content-wrapper">
 
       <div class="container-fluid ">

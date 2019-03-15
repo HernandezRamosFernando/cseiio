@@ -140,7 +140,7 @@ public function get_aspirantes_nombre(
    $plantel){
    $consulta = array(
    'curp like' => $curp.'%',
-   'Plantel_cct=' => $plantel
+   'Plantel_cct like' => $plantel.'%'
 );
 
 

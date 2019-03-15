@@ -16,9 +16,9 @@ class C_aspirante extends CI_Controller {
         $this->load->model('M_direccion_aspirante');
         $this->load->model('M_tutor');
         $this->load->model('M_lengua_materna');
-        $this->load->model('M_datos_secundaria');
         $this->load->model('M_documentacion');
         $this->load->model('M_secundaria');
+        $this->load->model('M_datos_medicos');
     }
 
 
@@ -140,26 +140,28 @@ public function portabilidad(){
         $no_control = $this->input->post('aspirante_no_control');
 
         $datos_aspirante = array(
-            
             'nombre' => $this->input->post('aspirante_nombre'),
             'apellido_paterno' => $this->input->post('aspirante_apellido_paterno'),
             'apellido_materno' => $this->input->post('aspirante_apellido_materno'),
-            'curp' => $this->input->post('aspirante_curp'),
-            'fecha_nacimiento' => $this->input->post('aspirante_fecha_nacimiento'),
             'telefono' => $this->input->post('aspirante_telefono'),
-            'correo' => $this->input->post('aspirante_correo'),
-            'nss' => $this->input->post('aspirante_nss'),
             'sexo' => $this->input->post('aspirante_sexo'),
+            'nss' => $this->input->post('aspirante_nss'),
+            'correo' => $this->input->post('aspirante_correo'),
+            //'tipo_ingreso' => 'NUEVO INGRESO',
+            //'semestre' => 1,
             'programa_social' => $this->input->post('aspirante_programa_social'),
+            'curp' => $this->input->post('aspirante_curp'),
             'Plantel_cct' => $this->input->post('aspirante_plantel'),
-            'semestre' => $this->input->post('aspirante_semestre'),
-          
+            'fecha_registro' => date("Y-m-d"),
+            'fecha_inscripcion' => date("Y-m-d"),
+            'Secundaria_cct_secundaria' => $this->input->post('aspirante_secundaria_cct'),
+            'fecha_nacimiento' => $this->input->post('aspirante_fecha_nacimiento')
         );
 
         
-
         $datos_aspirante_direccion = array(
-            'Localidad_id_localidad' => $this->input->post('aspirante_direccion_localidad'),
+            //'Localidad_id_localidad' => $this->input->post('aspirante_direccion_localidad'),
+            'Aspirante_no_control' => $no_control,
             'calle' => $this->input->post('aspirante_direccion_calle').' '.$this->input->post('aspirante_direccion_numero'),
             'colonia' => $this->input->post('aspirante_direccion_colonia'),
             'cp' => $this->input->post('aspirante_direccion_cp')
@@ -167,63 +169,43 @@ public function portabilidad(){
 
         $datos_aspirante_tutor = array(
             'nombre' => $this->input->post('aspirante_tutor_nombre'),
-            'telefono' => $this->input->post('aspirante_tutor_telefono'),
+            'telefono_particular' => $this->input->post('aspirante_tutor_telefono'),
             'ocupacion' => $this->input->post('aspirante_tutor_ocupacion'),
-            'parentezco' => $this->input->post('aspirante_tutor_parentezco')
+            'parentezco' => $this->input->post('aspirante_tutor_parentesco')==''?null:$this->input->post('aspirante_tutor_parentesco'),
+            //'Aspirante_no_control' => $no_control,
+            'folio_prospera' => $this->input->post('aspirante_tutor_prospera'),
+            'telefono_comunidad' => $this->input->post('aspirante_tutor_telefono_comunidad')
         );
 
 
         $datos_aspirante_lengua = array(
+            //'Aspirante_no_control' => $no_control,
             'Lengua_id_lengua' => $this->input->post('aspirante_lengua_nombre'),
-            'lee' => $this->input->post('aspirante_lengua_lee'),
-            'habla' => $this->input->post('aspirante_lengua_habla'),
-            'escribe' => $this->input->post('aspirante_lengua_escribe'),
-            'entiende' => $this->input->post('aspirante_lengua_entiende'),
-            'traduce' => $this->input->post('aspirante_lengua_traduce')
+            'lee' => $this->input->post('aspirante_lengua_lee')==''?0:$this->input->post('aspirante_lengua_lee'),
+            'habla' => $this->input->post('aspirante_lengua_habla')==''?0:$this->input->post('aspirante_lengua_habla'),
+            'escribe' => $this->input->post('aspirante_lengua_escribe')==''?0:$this->input->post('aspirante_lengua_escribe'),
+            'entiende' => $this->input->post('aspirante_lengua_entiende')==''?0:$this->input->post('aspirante_lengua_entiende'),
+            'traduce' => $this->input->post('aspirante_lengua_traduce')==''?0:$this->input->post('aspirante_lengua_traduce')
         );
 
 
-        $datos_aspirante_secundaria = array(
-            'nombre_secundaria' => $this->input->post('aspirante_secundaria_nombre'),
-            'tipo_subsistema' => $this->input->post('aspirante_secundaria_tipo_subsistema'),
-            'Localidad_id_localidad' => $this->input->post('aspirante_secundaria_localidad')
+        $datos_aspirante_medicos = array(
+            'tipo_sangre' => $this->input->post('tipo_sangre')==''?null:$this->input->post('tipo_sangre'),
+            'alergia_medicamento' => $this->input->post('aspirante_alergia'),
+            'discapacidad' => $this->input->post('aspirante_discapacidad')
+            //'Aspirante_no_control' => $no_control
         );
 
 
-        $datos_aspirante_documentos = array();
-            //'aspirante_documento_acta_nacimiento' => $this->input->post('aspirante_documento_acta_nacimiento'),
-            //'aspirante_documento_curp' => $this->input->post('aspirante_documento_curp'),
-            //'aspirante_documento_certificado_secundaria' => $this->input->post('aspirante_documento_certificado_secundaria'),
-            //'aspirante_documento_fotos' => $this->input->post('aspirante_documento_fotos')
-    
-
-        if($this->input->post('aspirante_documento_acta_nacimiento')!=''){
-            $datos_aspirante_documentos['aspirante_documento_acta_nacimiento'] = $this->input->post('aspirante_documento_acta_nacimiento');
-        }
-
-        if($this->input->post('aspirante_documento_curp')!=''){
-            $datos_aspirante_documentos['aspirante_documento_curp'] = $this->input->post('aspirante_documento_curp');
-        }
-
-        if($this->input->post('aspirante_documento_certificado_secundaria')!=''){
-            $datos_aspirante_documentos['aspirante_documento_certificado_secundaria'] = $this->input->post('aspirante_documento_certificado_secundaria');
-        }
-
-        if($this->input->post('aspirante_documento_fotos')!=''){
-            $datos_aspirante_documentos['aspirante_documento_fotos'] = $this->input->post('aspirante_documento_fotos');
-        }
 
 
 
-
-
-        $this->M_aspirante->actualizar_datos_aspirante(
+        echo $this->M_aspirante->actualizar_datos_aspirante(
             $datos_aspirante,
             $datos_aspirante_direccion,
             $datos_aspirante_tutor,
             $datos_aspirante_lengua,
-            $datos_aspirante_secundaria,
-            $datos_aspirante_documentos,
+            $datos_aspirante_medicos,
             $no_control
         );
         //$this->M_aspirante->insertar_aspirante($datos_aspirante);
@@ -237,7 +219,8 @@ public function portabilidad(){
         $datos['direccion_aspirante'] = $this->M_direccion_aspirante->get_direccion_aspirante($no_control);
         $datos['tutor_aspirante'] = $this->M_tutor->get_tutor_aspirante($no_control);
         $datos['lengua_materna_aspirante'] = $this->M_lengua_materna->get_lengua_materna_aspirante($no_control);
-        $datos['datos_secundaria_aspirante'] = $this->M_datos_secundaria->get_datos_secundaria_aspirante($no_control);
+        $datos['secundaria_aspirante'] = $this->M_secundaria->get_secundaria($datos['aspirante'][0]->Secundaria_cct_secundaria);
+        $datos['datos_medicos_aspirante'] = $this->M_datos_medicos->get_datos_medicos_aspirante($no_control);
         $datos['documentacion_aspirante'] = $this->M_documentacion->get_documentacion_aspirante($no_control);
     
         echo json_encode($datos);
@@ -246,7 +229,7 @@ public function portabilidad(){
 
 
 
-    public function buscar_aspirantes_nombre(){
+    public function buscar_aspirantes_curp(){
         $curp = $this->input->get('curp');
         $plantel = $this->input->get('plantel');
         echo json_encode($this->M_aspirante->get_aspirantes_nombre(
@@ -256,13 +239,15 @@ public function portabilidad(){
     }
 
     
-    public function registrar_datos_nuevo_ingreso(){
+    public function registrar_datos_aspirante(){
         $this->load->view("admin/nuevoingreso");
         $numero=$this->M_aspirante->asignar_num_control();
         $num=10000+$numero;
         //$no_control = 'CSEIIO'.date('y').str_pad($numero,4,'0',STR_PAD_LEFT);
         $no_control = 'CSEIIO'.date('y').$num;
 
+        $tipo_aspirante = $this->input->post('formulario');
+
         $datos_aspirante = array(
             'no_control' => $no_control,
             'nombre' => $this->input->post('aspirante_nombre'),
@@ -272,8 +257,8 @@ public function portabilidad(){
             'sexo' => $this->input->post('aspirante_sexo'),
             'nss' => $this->input->post('aspirante_nss'),
             'correo' => $this->input->post('aspirante_correo'),
-            'tipo_ingreso' => 'NUEVO INGRESO',
-            'semestre' => 1,
+            //'tipo_ingreso' => 'NUEVO INGRESO',
+            //'semestre' => 1,
             'programa_social' => $this->input->post('aspirante_programa_social'),
             'curp' => $this->input->post('aspirante_curp'),
             'Plantel_cct' => $this->input->post('aspirante_plantel'),
@@ -283,6 +268,15 @@ public function portabilidad(){
             'fecha_nacimiento' => $this->input->post('aspirante_fecha_nacimiento')
         );
 
+        if($tipo_aspirante=='nuevo_ingreso'){
+            $datos_aspirante['tipo_ingreso'] = 'NUEVO INGRESO';
+            $datos_aspirante['semestre'] = 1;
+        }
+
+        else{
+            $datos_aspirante['tipo_ingreso'] = 'PORTABILIDAD';
+            $datos_aspirante['semestre'] = $this->input->post('aspirante_semestre');
+        }
         
 
         $datos_aspirante_direccion = array(
@@ -423,7 +417,7 @@ public function portabilidad(){
                 );
             }
 
-            print_r($datos_aspirante);
+            //print_r($datos_aspirante);
             //print_r($datos_aspirante_direccion);
             //print_r($datos_aspirante_tutor);
             //print_r($datos_aspirante_lengua);
@@ -439,198 +433,9 @@ public function portabilidad(){
             $datos_aspirante_documentos,
             $datos_aspirante_medicos
         );
-
-       
-
     }
 
-    public function registrar_datos_portabilidad(){
-        //$this->load->view("admin/nuevoingreso");
-        $numero=$this->M_aspirante->asignar_num_control();
-        $num=10000+$numero;
-        //$no_control = 'CSEIIO'.date('y').str_pad($numero,4,'0',STR_PAD_LEFT);
-        $no_control = 'CSEIIO'.date('y').$num;
-
-        $datos_aspirante = array(
-            'no_control' => $no_control,
-            'nombre' => $this->input->post('aspirante_nombre'),
-            'apellido_paterno' => $this->input->post('aspirante_apellido_paterno'),
-            'apellido_materno' => $this->input->post('aspirante_apellido_materno'),
-            'telefono' => $this->input->post('aspirante_telefono'),
-            'sexo' => $this->input->post('aspirante_sexo'),
-            'nss' => $this->input->post('aspirante_nss'),
-            'correo' => $this->input->post('aspirante_correo'),
-            'tipo_ingreso' => 'PORTABILIDAD',
-            'semestre' => $this->input->post('aspirante_semestre'),
-            'programa_social' => $this->input->post('aspirante_programa_social'),
-            'curp' => $this->input->post('aspirante_curp'),
-            'Plantel_cct' => $this->input->post('aspirante_plantel'),
-            'fecha_registro' => date("Y-m-d"),
-            'fecha_inscripcion' => date("Y-m-d"),
-            'Secundaria_cct_secundaria' => $this->input->post('aspirante_secundaria_cct'),
-            'fecha_nacimiento' => $this->input->post('aspirante_fecha_nacimiento')
-        );
-
-        
-
-        $datos_aspirante_direccion = array(
-            'Localidad_id_localidad' => $this->input->post('aspirante_direccion_localidad'),
-            'Aspirante_no_control' => $no_control,
-            'calle' => $this->input->post('aspirante_direccion_calle').' '.$this->input->post('aspirante_direccion_numero'),
-            'colonia' => $this->input->post('aspirante_direccion_colonia'),
-            'cp' => $this->input->post('aspirante_direccion_cp')
-        );
-
-        $datos_aspirante_tutor = array(
-            'nombre' => $this->input->post('aspirante_tutor_nombre'),
-            'telefono_particular' => $this->input->post('aspirante_tutor_telefono'),
-            'ocupacion' => $this->input->post('aspirante_tutor_ocupacion'),
-            'parentezco' => $this->input->post('aspirante_tutor_parentesco')==''?null:$this->input->post('aspirante_tutor_parentesco'),
-            'Aspirante_no_control' => $no_control,
-            'folio_prospera' => $this->input->post('aspirante_tutor_prospera'),
-            'telefono_comunidad' => $this->input->post('aspirante_tutor_telefono_comunidad')
-        );
-
-
-        $datos_aspirante_lengua = array(
-            'Aspirante_no_control' => $no_control,
-            'Lengua_id_lengua' => $this->input->post('aspirante_lengua_nombre'),
-            'lee' => $this->input->post('aspirante_lengua_lee')==''?0:$this->input->post('aspirante_lengua_lee'),
-            'habla' => $this->input->post('aspirante_lengua_habla')==''?0:$this->input->post('aspirante_lengua_habla'),
-            'escribe' => $this->input->post('aspirante_lengua_escribe')==''?0:$this->input->post('aspirante_lengua_escribe'),
-            'entiende' => $this->input->post('aspirante_lengua_entiende')==''?0:$this->input->post('aspirante_lengua_entiende'),
-            'traduce' => $this->input->post('aspirante_lengua_traduce')==''?0:$this->input->post('aspirante_lengua_traduce')
-        );
-
-
-        $datos_aspirante_medicos = array(
-            'tipo_sangre' => $this->input->post('tipo_sangre')==''?null:$this->input->post('tipo_sangre'),
-            'alergia_medicamento' => $this->input->post('aspirante_alergia'),
-            'discapacidad' => $this->input->post('aspirante_discapacidad'),
-            'Aspirante_no_control' => $no_control
-        );
-
-
-        $datos_aspirante_documentos = array();
-
-            
-            if($this->input->post('aspirante_documento_acta_nacimiento')!=''){
-                $datos_aspirante_documentos['aspirante_documento_acta_nacimiento'] = array(
-                    'Documento_id_documento' => 1,
-                    'entregado' => true
-                );
-            }
-
-            else{
-                $datos_aspirante_documentos['aspirante_documento_acta_nacimiento'] = array(
-                    'Documento_id_documento' => 1,
-                    'entregado' => false
-                );
-            }
-
-            
-
-
-            if($this->input->post('aspirante_documento_curp')!=''){
-                $datos_aspirante_documentos['aspirante_documento_curp'] = array(
-                    'Documento_id_documento' => 2,
-                    'entregado' => true
-                );
-            }
-
-            else{
-                $datos_aspirante_documentos['aspirante_documento_curp'] = array(
-                    'Documento_id_documento' => 2,
-                    'entregado' => false
-                );
-            }
-
-
-
-
-
-            if($this->input->post('aspirante_documento_certificado_secundaria')!=''){
-                $datos_aspirante_documentos['aspirante_documento_certificado_secundaria'] = array(
-                    'Documento_id_documento' => 3,
-                    'entregado' => true
-                );
-            }
-
-            else{
-                $datos_aspirante_documentos['aspirante_documento_certificado_secundaria'] = array(
-                    'Documento_id_documento' => 3,
-                    'entregado' => false
-                );
-            }
-
-
-
-            if($this->input->post('aspirante_documento_fotos')!=''){
-                $datos_aspirante_documentos['aspirante_documento_fotos'] = array(
-                    'Documento_id_documento' => 4,
-                    'entregado' => true
-                );
-            }
-
-            else{
-                $datos_aspirante_documentos['aspirante_documento_documento_fotos'] = array(
-                    'Documento_id_documento' => 4,
-                    'entregado' => false
-                );
-            }
-
-
-
-            if($this->input->post('aspirante_documento_certificado_medico')!=''){
-                $datos_aspirante_documentos['aspirante_documento_certificado_medico'] = array(
-                    'Documento_id_documento' => 101,
-                    'entregado' => true
-                );
-            }
-
-            else{
-                $datos_aspirante_documentos['aspirante_documento_certificado_medico'] = array(
-                    'Documento_id_documento' => 101,
-                    'entregado' => false
-                );
-            }
-
-
-
-            if($this->input->post('aspirante_documento_carta_buena_conducta')!=''){
-                $datos_aspirante_documentos['aspirante_documento_buena_conducta'] = array(
-                    'Documento_id_documento' => 102,
-                    'entregado' => true
-                );
-            }
-
-            else{
-                $datos_aspirante_documentos['aspirante_documento_buena_conducta'] = array(
-                    'Documento_id_documento' => 102,
-                    'entregado' => false
-                );
-            }
-
-            print_r($datos_aspirante);
-            //print_r($datos_aspirante_direccion);
-            //print_r($datos_aspirante_tutor);
-            //print_r($datos_aspirante_lengua);
-            //print_r($datos_aspirante_documentos);
-            //print_r($datos_aspirante_medicos);
-
-
-        echo $this->M_aspirante->insertar_aspirante_nuevo_ingreso(
-            $datos_aspirante,
-            $datos_aspirante_direccion,
-            $datos_aspirante_tutor,
-            $datos_aspirante_lengua,
-            $datos_aspirante_documentos,
-            $datos_aspirante_medicos
-        );
-
-       
-
-    }
+   
 
 
     function delete_aspirante(){

@@ -130,7 +130,9 @@
 
 
 
-        <form action="/cseiio/index.php/c_aspirante/registrar_datos_nuevo_ingreso" method="post">
+        <form action="/cseiio/index.php/c_aspirante/registrar_datos_aspirante" method="post">
+
+        <input type="text" name="formulario" value="nuevo_ingreso" style="display:none">
 
           <!--datos personales------------------------------------------------------>
           <p class="text-center text-white rounded" style="background-color: #579A8D; height: 40px">

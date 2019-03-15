@@ -125,10 +125,17 @@
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
             <a>Inscripcion Portabilidad</a>
-          </li>
+          </l
           <li class="breadcrumb-item active">Rellene todos los campos</li>
         </ol>
-        <form action="/cseiio/index.php/c_aspirante/registrar_datos_portabilidad" method="post">
+
+
+
+
+        
+        <form action="/cseiio/index.php/c_aspirante/registrar_datos_aspirante"  method="post">
+
+        <input type="text" name="formulario" value="portabilidad" style="display:none">
 
           <!--datos personales------------------------------------------------------>
           <p class="text-center text-white rounded" style="background-color: #579A8D; height: 40px">

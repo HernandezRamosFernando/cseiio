@@ -41,11 +41,11 @@ class M_aspirante extends CI_Model {
       $datos_aspirante_direccion,
       $datos_aspirante_tutor,
       $datos_aspirante_lengua,
-      $datos_aspirante_secundaria,
-      $datos_aspirante_documentos,
+      $datos_aspirante_medicos,
       $no_control){
 
-        
+
+    $this->db->trans_start();    
     //actualizacion apirante
     $this->db->where('no_control', $no_control);
     $this->db->update('Aspirante', $datos_aspirante);
@@ -58,7 +58,7 @@ class M_aspirante extends CI_Model {
     $this->db->where('Aspirante_no_control', $no_control);
     $this->db->update('Tutor', $datos_aspirante_tutor);
 
-    //actualizacion Tutor aspirante
+    //actualizacion lengua
     $this->db->where('Aspirante_no_control', $no_control);
     $this->db->update('Lengua_materna', $datos_aspirante_lengua);
 
@@ -66,13 +66,21 @@ class M_aspirante extends CI_Model {
     //actualizacion Tutor aspirante
     $this->db->where('Aspirante_no_control', $no_control);
     $this->db->update('Datos_Secundaria', $datos_aspirante_secundaria);
+
+    //actualizacion datos medicos
+    $this->db->where('Aspirante_no_control', $no_control);
+    $this->db->update('Datos_medicos_aspirante', $datos_aspirante_medicos);
+    $this->db->trans_complete();
+
+if ($this->db->trans_status() === FALSE)
+{
+        return "algo salio mal";
+}
    
-      //$this->db->insert('Aspirante',$datos_aspirante);
-      //$this->db->insert('Direccion_Aspirante',$datos_aspirante_direccion);
-      //$this->db->insert('Tutor',$datos_aspirante_tutor);
-      //$this->db->insert('Lengua_materna',$datos_aspirante_lengua);
-      //$this->db->insert('Datos_Secundaria',$datos_aspirante_secundaria);
-      
+else{
+   return "Registro actualizado correctamente";
+}
+     
       
     
       

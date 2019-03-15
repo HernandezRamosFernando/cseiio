@@ -63,10 +63,6 @@ class M_aspirante extends CI_Model {
     $this->db->update('Lengua_materna', $datos_aspirante_lengua);
 
 
-    //actualizacion Tutor aspirante
-    $this->db->where('Aspirante_no_control', $no_control);
-    $this->db->update('Datos_Secundaria', $datos_aspirante_secundaria);
-
     //actualizacion datos medicos
     $this->db->where('Aspirante_no_control', $no_control);
     $this->db->update('Datos_medicos_aspirante', $datos_aspirante_medicos);
@@ -74,24 +70,26 @@ class M_aspirante extends CI_Model {
 
 if ($this->db->trans_status() === FALSE)
 {
-        return "algo salio mal";
+   ?>
+    <script>
+      alert("algo salio mal");
+      </script>
+   <?php
+        //return "alert(algo salio mal)";
 }
    
 else{
-   return "Registro actualizado correctamente";
+   ?>
+    <script>
+      alert("Registro actualizados correctamente");
+      </script>
+   <?php
 }
      
       
     
       
 
-      ?>
-   
-      <script>
-      alert("Registro actualizados correctamente");
-      </script>
-   
-      <?php
    }
 
 

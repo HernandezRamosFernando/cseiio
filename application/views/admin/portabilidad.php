@@ -1057,6 +1057,9 @@
         
       }
 
+
+      
+
       function alergia(e) {
         console.log(e.value);
         if (e.value == 1) {

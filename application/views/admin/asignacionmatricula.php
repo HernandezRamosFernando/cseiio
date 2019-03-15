@@ -180,36 +180,17 @@
           <div class="card-body">
 
 
-
-            <div class="form-group">
-
-              <div class="row">
+          <div class="form-group">
+            <div class="row">
                 <div class="col-md-4">
                   <div class="form-label-group">
                     <input type="text" pattern="[A-Za-zñ]+" title="Introduzca solo letras" class="form-control"
-                      id="aspirante_nombre_busqueda" placeholder="Nombre(s)">
-                    <label for="aspirante_nombre_busqueda">Nombre(s)</label>
+                      id="aspirante_curp_busqueda" placeholder="CURP">
+                    <label for="aspirante_curp_busqueda">CURP</label>
                   </div>
                 </div>
 
-                <div class="col-md-4">
-                  <div class="form-label-group">
-                    <input type="text" pattern="[A-Za-zñ]+" title="Introduzca solo letras" class="form-control"
-                      id="aspirante_apellido_paterno_busqueda" placeholder="Apellido Paterno">
-                    <label for="aspirante_apellido_paterno_busqueda">Apellido Paterno</label>
-                  </div>
-                </div>
-
-                <div class="col-md-4">
-                  <div class="form-label-group">
-                    <input type="text" pattern="[A-Za-zñ]+" title="Introduzca solo letras" class="form-control"
-                      id="aspirante_apellido_materno_busqueda" placeholder="Apellido Materno">
-                    <label for="aspirante_apellido_materno_busqueda">Apellido Materno</label>
-                  </div>
-                </div>
               </div>
-
-
             </div>
 
             <div class="form-group">
@@ -220,6 +201,7 @@
                   <label class="form-group has-float-label">
                     <select class="form-control form-control-lg" required="required" id="aspirante_plantel_busqueda"
                       name="aspirante_plantel">
+                      <option value="">Buscar en todos los planteles</option>
 
                       <?php
                     foreach ($planteles as $plantel)
@@ -263,9 +245,6 @@
                   <th scope="col" class="col-md-1">Matrícula</th>
                 </tr>
               </thead>
-
-
-
               <tbody id="tabla">
 
               </tbody>
@@ -318,8 +297,6 @@
   <script src="/cseiio/assets/js/cambio_estado.js"></script>
   <script src="/cseiio/assets/js/cambio_municipio.js"></script>
 
-
-
   <script>
     
 
@@ -356,11 +333,11 @@
     }
 
     function buscar() {
+      document.getElementById("aspirante_plantel_busqueda").disabled=true;
+      document.getElementById("aspirante_curp_busqueda").disabled=true;
       document.getElementById("tabla").innerHTML = "";
       var xhr = new XMLHttpRequest();
-      var nombre = document.getElementById("aspirante_nombre_busqueda").value;
-      var apellido_paterno = document.getElementById("aspirante_apellido_paterno_busqueda").value;
-      var apellido_materno = document.getElementById("aspirante_apellido_materno_busqueda").value;
+      var curp = document.getElementById("aspirante_curp_busqueda").value;
       var plantel = document.getElementById("aspirante_plantel_busqueda").value;
       //var query = 'nombre=' + nombre + '&apellido_paterno=' + apellido_paterno + '&apellido_materno=' + apellido_materno + '&plantel=' + plantel;
 
@@ -424,13 +401,7 @@ function asignar_matricula(e){
 
       xhr.send(null);
 }
-
-
-
   </script>
-
-
-
 
 </body>
 

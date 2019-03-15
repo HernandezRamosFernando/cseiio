@@ -189,11 +189,7 @@
                     <label for="aspirante_curp_busqueda">CURP</label>
                   </div>
                 </div>
-
               </div>
-
-
-
             </div>
 
             <div class="form-group">
@@ -204,6 +200,7 @@
                   <label class="form-group has-float-label">
                     <select class="form-control form-control-lg" required="required" id="aspirante_plantel_busqueda"
                       name="aspirante_plantel">
+                      <option value="">Buscar en todos los planteles</option>
 
                       <?php
             foreach ($planteles as $plantel)
@@ -366,6 +363,8 @@ function generar_carta_compromiso(e){
       });
     }
     function buscar() {
+      document.getElementById("aspirante_plantel_busqueda").disabled=true;
+      document.getElementById("aspirante_curp_busqueda").disabled=true;
       document.getElementById("tabla").innerHTML = "";
       var xhr = new XMLHttpRequest();
       var curp = document.getElementById("aspirante_curp_busqueda").value;

@@ -189,10 +189,11 @@ return $this->db->get()->result();
 public function aspirantes_carta_compromiso(
    $cct){
 
-return $this->db->query("select * from (select Aspirante_no_control as no_control, count(*) as total_documentos from  Documentacion
-group by Aspirante_no_control) as aspirantes_faltantes inner join Aspirante 
-on  aspirantes_faltantes.no_control=Aspirante.no_control
-where total_documentos<5 and Plantel_cct='".$cct."'")->result();
+return $this->db->query("select * from (select Aspirante_no_control as no_control, count(*) as total_documentos 
+from  Documentacion inner join Documento on Documento.id_documento = Documentacion.Documento_id_documento 
+where Documento.tipo = 'base' and Documentacion.entregado = 0 group by Aspirante_no_control) as aspirantes_faltantes 
+inner join Aspirante on  aspirantes_faltantes.no_control=Aspirante.no_control
+where total_documentos<5 and Plantel_cct like'".$cct."%'")->result();
 
 }
 

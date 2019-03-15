@@ -131,9 +131,9 @@ public function portabilidad(){
     }
 
     public function aspirantes_carta_compromiso(){
-        $cct = $this->input->get('cct');
+        $plantel = $this->input->get('plantel');
         //echo json_encode($this->M_aspirante->aspirantes_carta_compromiso($no_control));
-        echo json_encode($this->M_aspirante->aspirantes_carta_compromiso($cct));
+        echo json_encode($this->M_aspirante->aspirantes_carta_compromiso($plantel));
     }
 
 
@@ -164,7 +164,7 @@ public function portabilidad(){
         $datos_aspirante_direccion = array(
             //'Localidad_id_localidad' => $this->input->post('aspirante_direccion_localidad'),
             'Aspirante_no_control' => $no_control,
-            'calle' => $this->input->post('aspirante_direccion_calle').' '.$this->input->post('aspirante_direccion_numero'),
+            'calle' => $this->input->post('aspirante_direccion_calle'),
             'colonia' => $this->input->post('aspirante_direccion_colonia'),
             'cp' => $this->input->post('aspirante_direccion_cp')
         );
@@ -284,7 +284,7 @@ public function portabilidad(){
         $datos_aspirante_direccion = array(
             'Localidad_id_localidad' => $this->input->post('aspirante_direccion_localidad'),
             'Aspirante_no_control' => $no_control,
-            'calle' => $this->input->post('aspirante_direccion_calle').' '.$this->input->post('aspirante_direccion_numero'),
+            'calle' => $this->input->post('aspirante_direccion_calle'),
             'colonia' => $this->input->post('aspirante_direccion_colonia'),
             'cp' => $this->input->post('aspirante_direccion_cp')
         );

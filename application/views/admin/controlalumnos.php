@@ -571,15 +571,7 @@
                   <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ 0-9]+" required="required"
                     title="La direccion tiene caracteres incorrectos" class="form-control"
                     id="aspirante_direccion_calle" name="aspirante_direccion_calle" placeholder="Calle">
-                  <label for="aspirante_direccion_calle">Calle</label>
-                </div>
-              </div>
-
-              <div class="col-md-2">
-                <div class="form-label-group">
-                  <input type="text" pattern="[0-9s/n]+" title="Introduzca solo numeros" class="form-control"
-                    id="aspirante_direccion_numero" name="aspirante_direccion_numero" placeholder="Numero Exterior">
-                  <label for="aspirante_direccion_numero">Numero</label>
+                  <label for="aspirante_direccion_calle">Calle y Número</label>
                 </div>
               </div>
 
@@ -831,18 +823,7 @@
                 </div>
                 <br>
               </div>
-              <div class="col-md-4">
-                <div class="form-label-group">
-
-                  <!-- Button trigger modal -->
-                  <button type="button" class="btn btn-outline-success btn-lg" data-toggle="modal"
-                    data-target="#nuevasecundaria" onclick="cct()">
-                    Agregar nueva secundaria
-                  </button>
-
-                </div>
-                <br>
-              </div>
+              
             </div>
 
               <div class="row">
@@ -964,116 +945,6 @@
 
   <input type="text" style="display:none" id="no_control_borrar">
 
-
-   <!-- Modal -->
-   <div class="modal fade" id="nuevasecundaria" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
-      aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" style="max-width: 80% !important;"role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Agregar nueva secundaria</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div class="container-fluid">
-              <div class="row">
-                <div class="col-md-4">
-                  <div class="form-label-group">
-                    <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ 0-9]+" required="required"
-                      title="El nombre de la secundaria contiene caracteres incorrectos" class="form-control"
-                      id="aspirante_nuevasecundaria_cct" name="aspirante_nuevasecundaria_cct" placeholder="CCT de Secundaria">
-                    <label for="aspirante_nuevasecundaria_cct">C C T</label>
-                  </div>
-                  <br>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-label-group">
-                    <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ. 0-9]+" class="form-control"
-                      id="aspirante_nuevasecundaria_nombre" name="aspirante_secundaria_nombre"
-                      placeholder="Nombre de Secundaria">
-                    <label for="aspirante_nuevasecundaria_nombre">Nombre de Secundaria</label>
-                  </div>
-                  <br>
-                </div>
-
-                <div class="col-md-4">
-                  <label class="form-group has-float-label">
-                    <select class="form-control form-control-lg"
-                      name="aspirante_nuevasecundaria_tipo_subsistema" id="aspirante_nuevasecundaria_tipo_subsistema">
-                      <option value="TELESECUNDARIA">Telesecundaria</option>
-                      <option value="GENERAL">General</option>
-                      <option value="PARTICULAR">Particular</option>
-                      <option value="TECNICA">Tecnica</option>
-                      <option value="COMUNITARIA">Comunitaria</option>
-                      <option value="OTRO">Otro</option>
-                    </select>
-                    <span>Tipo de Subsistema</span>
-                  </label>
-                </div>
-
-              </div>
-
-
-              <div class="row">
-
-                <div class="col-md-4">
-                  <label class="form-group has-float-label">
-                    <select class="form-control form-control-lg" required="required" name="aspirante_secundaria_estado"
-                      onChange="cambio_estado(selector_estado_secundaria,selector_municipio_secundaria)"
-                      id="selector_estado_secundaria">
-                      <option>Seleccione un estado</option>
-
-                      <?php
-                              foreach ($estados as $estado)
-                              {
-                                      echo '<option value="'.$estado->id_estado.'">'.$estado->nombre_estado.'</option>';
-                              }
-                              ?>
-
-                    </select>
-                    <span>Estado</span>
-                  </label>
-                </div>
-
-
-                <div class="col-md-4">
-                  <label class="form-group has-float-label">
-                    <select class="form-control form-control-lg" required="required"
-                      name="aspirante_secundaria_municipio"
-                      onChange="cambio_municipio(selector_municipio_secundaria,selector_localidad_secundaria)"
-                      id="selector_municipio_secundaria">
-                      <option></option>
-
-                     
-                    </select>
-                    <span>Municipio</span>
-                  </label>
-                </div>
-
-                <div class="col-md-4">
-                  <label class="form-group has-float-label">
-                    <select class="form-control form-control-lg" required="required"
-                      name="aspirante_secundaria_localidad" id="selector_localidad_secundaria">
-                      <option></option>
-
-                     
-
-                    </select>
-                    <span>Localidad</span>
-                  </label>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="borrarmodal()">Cancelar</button>
-            <button type="button" class="btn btn-success" onclick="insertar_secundaria()">Guardar</button>
-          </div>
-        </div>
-      </div>
-    </div>
 
 
 
@@ -1214,8 +1085,6 @@
           direccion.send(null);
 
         document.getElementById("aspirante_direccion_calle").value = datos.direccion_aspirante[0].calle;
-        let numero = datos.direccion_aspirante[0].calle.split(" ");
-        document.getElementById("aspirante_direccion_numero").value = numero[numero.length-1];
         document.getElementById("aspirante_direccion_colonia").value = datos.direccion_aspirante[0].colonia;
         document.getElementById("aspirante_direccion_cp").value = datos.direccion_aspirante[0].cp;
 
@@ -1315,6 +1184,8 @@
     }
 
     function buscar() {
+      document.getElementById("aspirante_plantel_busqueda").disabled=true;
+      document.getElementById("aspirante_curp_busqueda").disabled=true;
       document.getElementById("tabla").innerHTML = "";
       var xhr = new XMLHttpRequest();
       var curp = document.getElementById("aspirante_curp_busqueda").value;

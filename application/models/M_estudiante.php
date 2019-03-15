@@ -35,7 +35,7 @@ class M_estudiante extends CI_Model {
        return $this->db->query(
         "select * 
         from Aspirante
-        where Plantel_cct='".$plantel."' and no_control not in(select Aspirante_no_control from Estudiante)")->result();
+        where Plantel_cct like'".$plantel."%' and no_control not in(select Aspirante_no_control from Estudiante)")->result();
 
     }
 }

@@ -458,16 +458,8 @@
                 <div class="form-label-group">
                   <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ 0-9]+" required="required"
                     title="La direccion tiene caracteres incorrectos" class="form-control"
-                    id="aspirante_direccion_calle" name="aspirante_direccion_calle" placeholder="Calle">
-                  <label for="aspirante_direccion_calle">Calle</label>
-                </div>
-              </div>
-
-              <div class="col-md-2">
-                <div class="form-label-group">
-                  <input type="text" pattern="[0-9s/n]+" title="Introduzca solo numeros" class="form-control"
-                    id="aspirante_direccion_numero" name="aspirante_direccion_numero" placeholder="Numero Exterior">
-                  <label for="aspirante_direccion_numero">Numero</label>
+                    id="aspirante_direccion_calle" name="aspirante_direccion_calle" placeholder="Calle y número">
+                  <label for="aspirante_direccion_calle">Calle y número</label>
                 </div>
               </div>
 
@@ -1142,12 +1134,6 @@
 
       
     </script>
-
-
-
-
-
-
 </body>
 
 </html>

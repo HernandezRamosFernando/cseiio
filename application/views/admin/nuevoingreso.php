@@ -703,7 +703,9 @@
               <div class="col-md-4">
                 <div class="form-label-group">
                   
-                    <input onselect="obtener_secundaria(this)" list="secundarias" required="required" class="form-control" id="aspirante_secundaria_cct" name="aspirante_secundaria_cct" placeholder="Buscar secundaria por CCT">
+                    <input onselect="obtener_secundaria(this)" list="secundarias" 
+                    required="required" class="form-control" id="aspirante_secundaria_cct" 
+                    name="aspirante_secundaria_cct" placeholder="Buscar secundaria por CCT">
                     <datalist id="secundarias">
              
 

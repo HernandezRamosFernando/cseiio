@@ -120,13 +120,23 @@ public function insertar_aspirante_nuevo_ingreso(
             
             $this->db->trans_complete();
 
-               if ($this->db->trans_status() === FALSE)
-               {
-                     return "algo salio mal";
-               }
-               else{
-                  return "Registro agregado exitosamente";
-               }
+            if ($this->db->trans_status() === FALSE)
+            {
+               ?>
+                <script>
+                  alert("algo salio mal");
+                  </script>
+               <?php
+                    //return "alert(algo salio mal)";
+            }
+               
+            else{
+               ?>
+                <script>
+                  alert("Registro actualizados correctamente");
+                  </script>
+               <?php
+            }
    //print_r($datos_aspirante_documentos);
 
    

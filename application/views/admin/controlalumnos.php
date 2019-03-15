@@ -1329,6 +1329,7 @@
 
 
         JSON.parse(xhr.response).forEach(function (valor, indice) {
+          console.log(valor);
           var fila = '<tr>';
 
           fila += '<td>';
@@ -1348,7 +1349,7 @@
           fila += '</td>';
 
           fila += '<td>';
-          fila += valor.matricula;
+          fila += valor.matricula==="undefined"?"":valor.matricula;
           fila += '</td>';
 
           fila += '<td>';

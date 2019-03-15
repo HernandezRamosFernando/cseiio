@@ -145,15 +145,12 @@ public function insertar_aspirante_nuevo_ingreso(
 public function get_aspirantes_nombre(
    $curp,
    $plantel){
-   $consulta = array(
-   'curp like' => $curp.'%',
-   'Plantel_cct like' => $plantel.'%'
-);
+   
 
+$consulta = "select * from Aspirante as a inner join Estudiante as e on a.no_control=e.Aspirante_no_control and a.curp like '".$curp."%' and a.Plantel_cct like '".$plantel."%'";
 
-
-$this->db->where($consulta);
-return $this->db->get('Aspirante')->result();
+return $this->db->query($consulta)->result();
+//return $this->db->get('Aspirante')->result();
 }
 
 

@@ -627,6 +627,7 @@ public function portabilidad(){
             $datos_aspirante_documentos,
             $datos_aspirante_medicos
         );
+        redirect('/index.php/c_aspirante/portabilidad', 'refresh');
 
        
 

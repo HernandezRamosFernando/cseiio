@@ -4,6 +4,14 @@
 a.navbar-brand.texto{
        font-size: 12px;
 }
+btn-lista{
+    background-color: red;
+}
+btn-lista:hover{
+    color: #FFF;
+    background-color: #ca2600;
+    border-color: #bd2300;
+}
 
 .btn-responsive {
     white-space: normal !important;

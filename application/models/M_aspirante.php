@@ -62,7 +62,10 @@ class M_aspirante extends CI_Model {
     $this->db->where('Aspirante_no_control', $no_control);
     $this->db->update('Lengua_materna', $datos_aspirante_lengua);
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> c4fddd007af55a20ba0ee9ce39b7e55c684e7b37
     //actualizacion datos medicos
     $this->db->where('Aspirante_no_control', $no_control);
     $this->db->update('Datos_medicos_aspirante', $datos_aspirante_medicos);

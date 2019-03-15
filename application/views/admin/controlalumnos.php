@@ -1121,8 +1121,7 @@
 
     document.getElementById("selector_municipio_aspirante").innerHTML = "";
     document.getElementById("selector_localidad_aspirante").innerHTML = "";
-
-      document.getElementById("aspirante_no_control").value = e.value;
+    document.getElementById("aspirante_no_control").value = e.value;
 
 
 
@@ -1173,7 +1172,7 @@
 
         //direccion aspirante
         var direccion = new XMLHttpRequest();
-          direccion.open('GET', '/cseiio/c_localidad/get_estado_municipio_localidad?id_localidad='+datos.direccion_aspirante[0].Localidad_id_localidad, true);
+          direccion.open('GET', '/cseiio/index.php/c_localidad/get_estado_municipio_localidad?id_localidad='+datos.direccion_aspirante[0].Localidad_id_localidad, true);
 
 
           direccion.onload = function () {
@@ -1182,7 +1181,7 @@
 
                   //console.log(JSON.parse(direccion.response)[0].id_estado);
                   var municipios = new XMLHttpRequest();
-                  municipios.open('GET', '/cseiio/c_municipio/get_municipios_estado?id_estado='+JSON.parse(direccion.response)[0].id_estado, true);
+                  municipios.open('GET', '/cseiio/index.php/c_municipio/get_municipios_estado?id_estado='+JSON.parse(direccion.response)[0].id_estado, true);
 
                   municipios.onload = function () {
                     document.getElementById("selector_municipio_aspirante").innerHTML = "";
@@ -1199,7 +1198,7 @@
 
 
                   var localidades = new XMLHttpRequest();
-                  localidades.open('GET', '/cseiio/c_localidad/get_localidades_municipio?id_municipio='+JSON.parse(direccion.response)[0].id_municipio, true);
+                  localidades.open('GET', '/cseiio/index.php/c_localidad/get_localidades_municipio?id_municipio='+JSON.parse(direccion.response)[0].id_municipio, true);
 
                   localidades.onload = function () {
                     document.getElementById("selector_localidad_aspirante").innerHTML = "";

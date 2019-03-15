@@ -32,6 +32,7 @@ public function portabilidad(){
         $datos['localidades'] = $this->M_localidad->get_localidades_municipio(1);
         $datos['lenguas'] = $this->M_lengua->get_lenguas();
         $datos['planteles'] = $this->M_plantel->get_planteles();
+        $datos['secundarias'] = $this->M_secundaria->get_secundarias();
 
  
         $this->load->view("admin/portabilidad",$datos);
@@ -67,6 +68,7 @@ public function portabilidad(){
         $datos['localidades'] = $this->M_localidad->get_localidades_municipio(1);
         $datos['lenguas'] = $this->M_lengua->get_lenguas();
         $datos['planteles'] = $this->M_plantel->get_planteles();
+        $datos['secundarias'] = $this->M_secundaria->get_secundarias();
        
         $this->load->view("admin/controlalumnos",$datos);
     }
@@ -208,6 +210,7 @@ public function portabilidad(){
             $datos_aspirante_medicos,
             $no_control
         );
+        redirect('/index.php/c_aspirante/control_alumnos', 'refresh');
         //$this->M_aspirante->insertar_aspirante($datos_aspirante);
 
     }

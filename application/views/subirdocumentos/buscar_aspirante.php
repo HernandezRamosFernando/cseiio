@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <!DOCTYPE html>
 <html>
 
@@ -716,5 +715,3 @@ https://www.youtube.com/results?search_query=+AJAX+File+Upload+with+Progress
 </body>
 
 </html>
-=======
->>>>>>> 48aff7cb9209276afd4a78bac4353d7a74492f54

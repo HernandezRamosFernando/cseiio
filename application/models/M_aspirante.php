@@ -147,7 +147,7 @@ public function get_aspirantes_nombre(
    $plantel){
    
 
-$consulta = "select * from Aspirante as a inner join Estudiante as e on a.no_control=e.Aspirante_no_control and a.curp like '".$curp."%' and a.Plantel_cct like '".$plantel."%'";
+$consulta = "select * from Aspirante";
 
 return $this->db->query($consulta)->result();
 //return $this->db->get('Aspirante')->result();
@@ -164,7 +164,8 @@ public function get_aspirantes_nombre_documentos(
 
    $consulta = array(
    'Aspirante_no_control =' => $no_control,
-   'tipo =' => 'base' 
+   'tipo =' => 'base',
+   'entregado =' => '0'
 );
 
 

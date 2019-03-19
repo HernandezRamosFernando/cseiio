@@ -196,7 +196,7 @@
               <div class="row">
 
 
-                <div class="col-md-6">
+                <div class="col-md-8">
                   <label class="form-group has-float-label">
                     <select class="form-control form-control-lg" required="required" id="aspirante_plantel_busqueda"
                       name="aspirante_plantel">
@@ -253,17 +253,6 @@
           </div>
         </div>
       </div>
-
-
-
-
-     
-
-
-
-
-
-
 
     </div>
   </div>
@@ -393,7 +382,7 @@ function generar_carta_compromiso(e){
           fila += valor.semestre;
           fila += '</td>';
           fila += '<td>';
-          fila += '<button class="btn btn-warning" type="button" value="' + valor.no_control + '" onclick="generar_carta_compromiso(this)" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Generar Carta Compromiso</button>';
+          fila += '<button class="btn btn-warning" type="button" value="' + valor.no_control + '" onclick="generar_carta_compromiso(this)" class="btn btn-primary" data-toggle="" data-target="">Generar Carta Compromiso</button>';
           fila += '</td>';
           fila += '</tr>';
           document.getElementById("tabla").innerHTML += fila;
@@ -403,6 +392,8 @@ function generar_carta_compromiso(e){
       xhr.send(null);
       document.getElementById('btn_buscar').setAttribute("onClick", "limpiar();");
       document.getElementById('btn_buscar').innerHTML='Limpiar Busqueda';
+      document.getElementById('btn_buscar').classList.remove('btn-success');
+      document.getElementById('btn_buscar').classList.add('btn-danger');
     }
     function limpiar() {
       location.reload();  

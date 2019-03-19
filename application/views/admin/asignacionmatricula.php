@@ -197,7 +197,7 @@
               <div class="row">
 
 
-                <div class="col-md-6">
+                <div class="col-md-8">
                   <label class="form-group has-float-label">
                     <select class="form-control form-control-lg" required="required" id="aspirante_plantel_busqueda"
                       name="aspirante_plantel">
@@ -217,7 +217,7 @@
                 </div>
 
                 <div class="col-md-4">
-                  <button type='button' class="btn btn-success btn-lg btn-block" onclick='buscar()'>Buscar</button>
+                  <button type='button' class="btn btn-success btn-lg btn-block"  id="btn_buscar" onclick='buscar()'>Buscar</button>
                 </div>
 
               </div>
@@ -385,7 +385,15 @@
       };
 
       xhr.send(null);
+      document.getElementById('btn_buscar').setAttribute("onClick", "limpiar();");
+      document.getElementById('btn_buscar').innerHTML='Limpiar Busqueda';
+      document.getElementById('btn_buscar').classList.remove('btn-success');
+      document.getElementById('btn_buscar').classList.add('btn-danger');
 
+    }
+    function limpiar() {
+      location.reload();  
+      
     }
 
 

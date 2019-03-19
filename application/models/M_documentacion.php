@@ -10,7 +10,38 @@ class M_documentacion extends CI_Model {
 
    }
 
+   function get_nombre_archivo_documentacion($no_control,$iddocumento){
 
+      $this->db->select('*');
+      $this->db->from('Documentacion');
+      $this->db->where('Documento_id_documento',$iddocumento);
+      $this->db->where('Aspirante_no_control',$no_control);
+      $resultado = $this->db->get()->row();
+      return $resultado->ruta;
+  
+     }
+  
+  
+  function get_documentacion_x_tipoingreso($tipo_ingreso){
+  
+  
+      $this->db->select('*');
+      $this->db->from('Documento');
+  
+    if($tipo_ingreso=='PORTABILIDAD'){
+       $this->db->where('tipo','base');
+       $this->db->or_where('tipo','extra');
+    }
+  
+     if($tipo_ingreso=='NUEVO INGRESO'){
+        $this->db->where('tipo','base');
+     }
+      
+      $resultado = $this->db->get();
+      
+      return $resultado->result();
+  
+     }
 
 
 

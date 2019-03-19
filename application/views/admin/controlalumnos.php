@@ -1220,7 +1220,7 @@
           fila += '</td>';
 
           fila += '<td>';
-          fila += valor.matricula==="undefined"?"":valor.matricula;
+          fila += valor.matricula===null?"":valor.matricula;
           fila += '</td>';
 
           fila += '<td>';

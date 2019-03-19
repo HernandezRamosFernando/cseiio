@@ -4,6 +4,32 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-sb-admin/blob/master/LICENSE)
  */
 
+ @media (min-width: 768px) {
+  .modal-xl {
+    width: 90%;
+   max-width:1200px;
+  }
+}
+
+
+.status_upload{
+  font-weight: bold;
+  color:green;
+}
+
+.enlace1{
+
+  color: white !important;
+
+
+}
+
+.status_upload_error{
+  font-weight: bold;
+  color: red;
+}
+
+
 html {
   position: relative;
   min-height: 100%;

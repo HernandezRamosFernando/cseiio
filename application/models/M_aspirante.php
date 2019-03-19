@@ -6,9 +6,10 @@ class M_aspirante extends CI_Model {
 
 
 
+   /*
    public function asignar_num_control(){
 
-      /*SELECT IF(COUNT(*)<=0,1,COUNT(*)+1) numero FROM control_escolar.aspirante a where no_control like 'CSEIIO%' AND SUBSTRING(a.no_control,7,2)=19;*/
+      //SELECT IF(COUNT(*)<=0,1,COUNT(*)+1) numero FROM control_escolar.aspirante a where no_control like 'CSEIIO%' AND SUBSTRING(a.no_control,7,2)=19;
      $this->db->select('IF(COUNT(*)<=0,1,COUNT(*)+1) numero');
      $this->db->from('Aspirante a');
      $this->db->like('a.no_control','CSEIIO','after');
@@ -17,7 +18,21 @@ class M_aspirante extends CI_Model {
      $resultado=$consulta->row()->numero;
      return $resultado;
       
-   }
+}
+*/
+
+public function asignar_numero_consecutivo(){
+   /*SELECT  max(CONVERT(SUBSTRING(a.no_control,10,LENGTH(a.no_control)), SIGNED INTEGER)) as numero FROM control_escolar.aspirante a where no_control like 'CSEIIO20%';*/
+  $this->db->select('max(CONVERT(SUBSTRING(a.no_control,10,LENGTH(a.no_control)), SIGNED INTEGER)) as numero');
+  $this->db->from('Aspirante a');
+  $this->db->like('a.no_control','CSEIIO'.date("y"),'after');
+
+  $consulta = $this->db->get();
+  $resultado=$consulta->row()->numero;
+
+  return $resultado;
+   
+}
 
    //===========================================
    public function aspirantes_sin_matricula(){
@@ -147,7 +162,8 @@ public function get_aspirantes_nombre(
    $plantel){
    
 
-$consulta = "select * from Aspirante as a inner join Estudiante as e on a.no_control=e.Aspirante_no_control and a.curp like '".$curp."%' and a.Plantel_cct like '".$plantel."%'";
+$consulta = "SELECT * FROM Aspirante as a left outer join Estudiante as e 
+on a.no_control=e.Aspirante_no_control where Plantel_cct like '".$plantel."%' and curp like '".$curp."%'";
 
 return $this->db->query($consulta)->result();
 //return $this->db->get('Aspirante')->result();
@@ -164,8 +180,9 @@ public function get_aspirantes_nombre_documentos(
 
    $consulta = array(
    'Aspirante_no_control =' => $no_control,
-   'tipo =' => 'base' 
+   'tipo =' => 'base'
 );
+
 
 
 $this->db->select('*');
@@ -173,13 +190,35 @@ $this->db->from('Documentacion');
 $this->db->join('Documento', 'Documentacion.Documento_id_documento = Documento.id_documento');
 $this->db->where($consulta);
 
-//$aResult = $this->db->get();
 
-
-//$this->db->select('COUNT(Documento_id_documento) as no_documentos');
-//
 return $this->db->get()->result();
 }
+
+
+
+function listar_aspirantes_xplantel($idplantel){
+
+   $this->db->select('*');
+   $this->db->from('Aspirante');
+   $this->db->where('Plantel_cct',$idplantel);
+   $resultado = $this->db->get()->result();
+   return $resultado;
+
+  }
+
+
+  function listar_aspirantes_xnombreycrup($nombre,$apellido_paterno,$apellido_materno,$curp){
+
+   $this->db->select('*');
+   $this->db->from('Aspirante');
+   $this->db->like('nombre',$nombre, 'after');
+   $this->db->like('apellido_paterno',$apellido_paterno, 'after');
+   $this->db->like('apellido_materno',$apellido_materno, 'after');
+   $this->db->like('curp',$curp, 'after');
+   $resultado = $this->db->get()->result();
+   return $resultado;
+
+  }
 
 
 

@@ -101,6 +101,20 @@ public function portabilidad(){
 
 
     //-------------------------------------------------
+
+    public function buscar_aspirantesxplantel(){
+        $idplantel = $this->uri->segment(3);
+         echo json_encode($this->M_aspirante->listar_aspirantes_xplantel($idplantel));
+     }
+ 
+     public function buscar_aspirantesxnombre(){
+        $nombre = $this->input->get('nombre');
+        $apellido_paterno = $this->input->get('apellido_paterno');
+        $apellido_materno = $this->input->get('apellido_materno');
+        $curp = $this->input->get('curp');
+        
+         echo json_encode($this->M_aspirante->listar_aspirantes_xnombreycrup($nombre,$apellido_paterno,$apellido_materno,$curp));
+     }
    
 
 
@@ -243,12 +257,12 @@ public function portabilidad(){
 
     
     public function registrar_datos_aspirante(){
-        $numero=$this->M_aspirante->asignar_num_control();
-        $num=10000+$numero;
-        //$no_control = 'CSEIIO'.date('y').str_pad($numero,4,'0',STR_PAD_LEFT);
-        $no_control = 'CSEIIO'.date('y').$num;
+        $no_control=$this->generar_numcontrol(1);
+
 
         $tipo_aspirante = $this->input->post('formulario');
+
+        
 
         $datos_aspirante = array(
             'no_control' => $no_control,
@@ -448,6 +462,23 @@ public function portabilidad(){
         $no_control = $this->input->get('no_control');
         echo $this->M_aspirante->delete_aspirante($no_control);
     }
+
+
+    public function generar_numcontrol($semestre){
+
+        $numero=$this->M_aspirante->asignar_numero_consecutivo();
+        $no_control='';
+        if($numero==NULL){
+            $numero=1;
+        }
+        else{
+            $numero=$numero+1;
+        }
+        $no_control = 'CSEIIO'.date('y').$semestre.str_pad($numero,4,'0',STR_PAD_LEFT);
+        
+        return $no_control;
+    
+}
     
     
   

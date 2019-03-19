@@ -10,14 +10,15 @@ class C_subir_doc extends CI_Controller {
         $this->load->model('M_plantel');
         $this->load->model('M_aspirante');
         $this->load->model('M_documentacion');
-        $this->folder = '/cseiio/ims/';
+        $this->folder = './ims/';
         $this->load->helper('download');
         
     }
 
 
 
- public function subir_documentos(){ 
+ public function subir_documentos(){
+  
         $datos['laspirante'] = $this->M_aspirante->aspirantes_sin_matricula();
         $datos['planteles'] = $this->M_plantel->get_planteles();
         $this->load->view("subirdocumentos/buscar_aspirante",$datos);
@@ -43,13 +44,13 @@ class C_subir_doc extends CI_Controller {
 
                 if ($this->upload->do_upload('file1')) {
                 $data = array("upload_data" => $this->upload->data());
-                $nombrearchivo= $data['upload_data']['file_name'];
+                $nombrearchivo=$data['upload_data']['file_name'];
                   if($existe_registro){
                         $actualizo=$this->M_documentacion->update_aspirante_doc($iddocumento,$nombrearchivo,$no_control);
                         if($actualizo){
                             $datos['status']='Los datos se actualizaron correctamente';
                             $datos['ruta']=$nombrearchivo;
-                            $datos['acta_nacimiento']=$iddocumento;
+                            $datos['iddocumento']=$iddocumento;
                             $datos['no_control']=$no_control;
                         }
                         else{
@@ -63,7 +64,7 @@ class C_subir_doc extends CI_Controller {
                       if($ingreso){
                               $datos['status']='Los datos se actualizaron correctamente';
                               $datos['ruta']=$nombrearchivo;
-                              $datos['acta_nacimiento']=$iddocumento;
+                              $datos['iddocumento']=$iddocumento;
                               $datos['no_control']=$no_control;
                       }
                       else{
@@ -83,11 +84,65 @@ class C_subir_doc extends CI_Controller {
 
    
 
-   public function descargar($name)
+   public function descargar()
   {
-    $data = file_get_contents($this->folder.$name); 
-    force_download($name,$data); 
+    $no_control = $this->uri->segment(3);
+    $iddocumento = $this->uri->segment(4);
+
+     $nombredocumento=$this->M_documentacion->get_nombre_archivo_documentacion($no_control,$iddocumento);
+    $data = file_get_contents($this->folder.$nombredocumento); 
+    force_download($nombredocumento,$data); 
   }
+
+
+
+
+  public function visualizar()
+{
+$no_control = $this->uri->segment(3);
+    $iddocumento = $this->uri->segment(4);
+
+     $nombredocumento=$this->M_documentacion->get_nombre_archivo_documentacion($no_control,$iddocumento);
+	$file=$this->folder.$nombredocumento;
+    //get the file extension
+    $info = new SplFileInfo($nombredocumento);
+    $contenType='';
+    //var_dump($info->getExtension());
+
+    switch ($info->getExtension()) {
+        case 'pdf':
+	        $contenType='Content-Type:application/pdf';
+	        $contentDisposition = 'inline';
+        break;
+        case 'png':
+	        $contenType='Content-Type: image/png';
+	        $contentDisposition = 'inline';
+        break;
+        case 'jpeg':
+        	$contenType='Content-Type: image/jpeg';
+	        $contentDisposition = 'inline';
+        break;
+        case 'jpg':
+        	$contenType='Content-Type: image/jpg';
+	        $contentDisposition = 'inline';
+            break;
+        default:
+            $contentDisposition = 'attachment';
+    }
+
+    if (file_exists($file)) {
+        header('Content-Description: File Transfer');
+        header($contenType);
+        // change inline to attachment if you want to download it instead
+        header('Content-Disposition: '.$contentDisposition.'; filename="'.basename($file).'"');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate');
+        header('Pragma: public');
+        header('Content-Length: ' . filesize($file));
+        readfile($file);
+    }
+    else echo "El archivo no existe, vuelva a cargar el archivo o consulte con el administrador del sistema";
+}
 
 
   

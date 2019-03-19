@@ -15,4 +15,11 @@ class C_documentacion extends CI_Controller {
         $no_control = $this->input->get('no_control');
         echo json_encode($this->M_documentacion->documentos_base_faltantes_aspirante($no_control));
     }
+
+
+    function lista_documentacion(){
+        $tipoingreso = $this->input->get('tipoingreso');
+         $datos['listadoc']=$this->M_documentacion->get_documentacion_x_tipoingreso($tipoingreso);
+         echo json_encode($datos);
+     }
 }

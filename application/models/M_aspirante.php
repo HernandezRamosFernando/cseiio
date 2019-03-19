@@ -162,8 +162,12 @@ public function get_aspirantes_nombre(
    $plantel){
    
 
+<<<<<<< HEAD
 $consulta = "SELECT * FROM Aspirante as a left outer join Estudiante as e 
 on a.no_control=e.Aspirante_no_control where Plantel_cct like '".$plantel."%' and curp like '".$curp."%'";
+=======
+$consulta = "select * from Aspirante";
+>>>>>>> 9aec04a6cc493b55318d60671d1336296d40a011
 
 return $this->db->query($consulta)->result();
 //return $this->db->get('Aspirante')->result();
@@ -180,7 +184,12 @@ public function get_aspirantes_nombre_documentos(
 
    $consulta = array(
    'Aspirante_no_control =' => $no_control,
+<<<<<<< HEAD
    'tipo =' => 'base'
+=======
+   'tipo =' => 'base',
+   'entregado =' => '0'
+>>>>>>> 9aec04a6cc493b55318d60671d1336296d40a011
 );
 
 

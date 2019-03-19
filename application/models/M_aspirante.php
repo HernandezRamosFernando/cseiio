@@ -259,6 +259,11 @@ function delete_aspirante($no_control){
 }
 
 
+function aspirante_plantel($no_control){
+return $this->db->query("select * from Aspirante as a inner join Plantel as p on a.Plantel_cct=p.cct where a.no_control like '".$no_control."%'")->result();
+}
+
+
 
 
 }

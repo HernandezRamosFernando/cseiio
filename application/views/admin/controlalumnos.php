@@ -229,9 +229,6 @@
 
               </div>
             </div>
-
-
-
           </div>
         </div>
       </div>
@@ -244,10 +241,9 @@
               <caption>Lista de Alumnos</caption>
               <thead class="thead-light">
                 <tr>
-                  <th scope="col" class="col-md-1">Nombre</th>
-                  <th scope="col" class="col-md-1">Apellido Paterno</th>
-                  <th scope="col" class="col-md-1">Apellido Materno</th>
+                  <th scope="col" class="col-md-1">Nombre completo</th>
                   <th scope="col" class="col-md-1">CURP</th>
+                  <th scope="col" class="col-md-1">N° control</th>
                   <th scope="col" class="col-md-1">Matrícula</th>
                   <th scope="col" class="col-md-1">Imprimir</th>
                   <th scope="col" class="col-md-1">Editar</th>
@@ -1204,19 +1200,15 @@
           var fila = '<tr>';
 
           fila += '<td>';
-          fila += valor.nombre;
-          fila += '</td>';
-
-          fila += '<td>';
-          fila += valor.apellido_paterno;
-          fila += '</td>';
-
-          fila += '<td>';
-          fila += valor.apellido_materno;
+          fila += valor.nombre + " " + valor.apellido_paterno + " " + valor.apellido_materno;
           fila += '</td>';
 
           fila += '<td>';
           fila += valor.curp;
+          fila += '</td>';
+
+          fila += '<td>';
+          fila += valor.no_control;
           fila += '</td>';
 
           fila += '<td>';

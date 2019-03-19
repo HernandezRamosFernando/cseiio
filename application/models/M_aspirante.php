@@ -162,12 +162,8 @@ public function get_aspirantes_nombre(
    $plantel){
    
 
-<<<<<<< HEAD
 $consulta = "SELECT * FROM Aspirante as a left outer join Estudiante as e 
 on a.no_control=e.Aspirante_no_control where Plantel_cct like '".$plantel."%' and curp like '".$curp."%'";
-=======
-$consulta = "select * from Aspirante";
->>>>>>> 9aec04a6cc493b55318d60671d1336296d40a011
 
 return $this->db->query($consulta)->result();
 //return $this->db->get('Aspirante')->result();
@@ -184,12 +180,8 @@ public function get_aspirantes_nombre_documentos(
 
    $consulta = array(
    'Aspirante_no_control =' => $no_control,
-<<<<<<< HEAD
-   'tipo =' => 'base'
-=======
    'tipo =' => 'base',
    'entregado =' => '0'
->>>>>>> 9aec04a6cc493b55318d60671d1336296d40a011
 );
 
 
@@ -205,13 +197,12 @@ return $this->db->get()->result();
 
 
 
-function listar_aspirantes_xplantel($idplantel){
+function listar_aspirantes_xplantel($curp, $plantel){
+   return $this->db->query(
+      "select * 
+      from Aspirante
+      where Plantel_cct like'".$plantel."%' and curp like'".$curp."%' ")->result();
 
-   $this->db->select('*');
-   $this->db->from('Aspirante');
-   $this->db->where('Plantel_cct',$idplantel);
-   $resultado = $this->db->get()->result();
-   return $resultado;
 
   }
 
@@ -232,13 +223,15 @@ function listar_aspirantes_xplantel($idplantel){
 
 
 public function aspirantes_carta_compromiso(
-   $cct){
+   $curp,
+   $plantel
+   ){
 
 return $this->db->query("select * from (select Aspirante_no_control as no_control, count(*) as total_documentos 
 from  Documentacion inner join Documento on Documento.id_documento = Documentacion.Documento_id_documento 
 where Documento.tipo = 'base' and Documentacion.entregado = 0 group by Aspirante_no_control) as aspirantes_faltantes 
 inner join Aspirante on  aspirantes_faltantes.no_control=Aspirante.no_control
-where total_documentos<5 and Plantel_cct like'".$cct."%'")->result();
+where total_documentos<5 and Plantel_cct like'".$plantel."%' and curp like'".$curp."%'" )->result();
 
 }
 

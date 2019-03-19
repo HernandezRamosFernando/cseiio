@@ -36,8 +36,12 @@ class C_estudiante extends CI_Controller {
 
 
     public function estudiantes_sin_matricula(){
-       $cct = $this->input->get('cct');
-       echo json_encode($this->M_estudiante->estudiantes_sin_matricula($cct));
+        $curp = $this->input->get('curp');
+        $plantel = $this->input->get('plantel');
+       echo json_encode($this->M_estudiante->estudiantes_sin_matricula( 
+            $curp,
+            $plantel
+            ));
     }
 }
 

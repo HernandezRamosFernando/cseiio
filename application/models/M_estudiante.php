@@ -30,12 +30,12 @@ class M_estudiante extends CI_Model {
     }
 
 
-    public function estudiantes_sin_matricula($plantel){
+    public function estudiantes_sin_matricula($curp, $plantel){
 
        return $this->db->query(
         "select * 
         from Aspirante
-        where Plantel_cct like'".$plantel."%' and no_control not in(select Aspirante_no_control from Estudiante)")->result();
+        where Plantel_cct like'".$plantel."%' and curp like'".$curp."%' and no_control not in(select Aspirante_no_control from Estudiante)")->result();
 
     }
 }

@@ -96,15 +96,12 @@ public function portabilidad(){
         
     }
 
-    
-
-
-
-    //-------------------------------------------------
+    //-------------------------------------------------termina vistas
 
     public function buscar_aspirantesxplantel(){
-        $idplantel = $this->uri->segment(3);
-         echo json_encode($this->M_aspirante->listar_aspirantes_xplantel($idplantel));
+        $plantel = $this->input->get('plantel');
+        $curp = $this->input->get('curp');
+         echo json_encode($this->M_aspirante->listar_aspirantes_xplantel($curp, $plantel));
      }
  
      public function buscar_aspirantesxnombre(){
@@ -145,9 +142,9 @@ public function portabilidad(){
     }
 
     public function aspirantes_carta_compromiso(){
+        $curp = $this->input->get('curp');
         $plantel = $this->input->get('plantel');
-        //echo json_encode($this->M_aspirante->aspirantes_carta_compromiso($no_control));
-        echo json_encode($this->M_aspirante->aspirantes_carta_compromiso($plantel));
+        echo json_encode($this->M_aspirante->aspirantes_carta_compromiso($curp, $plantel));
     }
 
 

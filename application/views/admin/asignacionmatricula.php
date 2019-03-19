@@ -237,10 +237,9 @@
             <caption>Lista de Alumnos</caption>
               <thead class="thead-light">
                 <tr>
-                  <th scope="col" class="col-md-1">Nombre</th>
-                  <th scope="col" class="col-md-1">Apellido Paterno</th>
-                  <th scope="col" class="col-md-1">Apellido Materno</th>
+                  <th scope="col" class="col-md-1">Nombre completo</th>
                   <th scope="col" class="col-md-1">CURP</th>
+                  <th scope="col" class="col-md-1">N° control</th>
                   <th scope="col" class="col-md-1">Semestre</th>
                   <th scope="col" class="col-md-1">Matrícula</th>
                 </tr>
@@ -339,9 +338,8 @@
       var xhr = new XMLHttpRequest();
       var curp = document.getElementById("aspirante_curp_busqueda").value;
       var plantel = document.getElementById("aspirante_plantel_busqueda").value;
-      //var query = 'nombre=' + nombre + '&apellido_paterno=' + apellido_paterno + '&apellido_materno=' + apellido_materno + '&plantel=' + plantel;
-
-      xhr.open('GET', '/cseiio/index.php/c_estudiante/estudiantes_sin_matricula?cct=' + plantel, true);
+      var query = 'curp=' + curp + '&plantel=' + plantel;
+      xhr.open('GET', '/cseiio/index.php/c_estudiante/estudiantes_sin_matricula?' + query, true);
 
       xhr.onload = function () {
         //console.log(JSON.parse(xhr.response));
@@ -352,19 +350,15 @@
           var fila = '<tr>';
 
           fila += '<td>';
-          fila += valor.nombre;
-          fila += '</td>';
-
-          fila += '<td>';
-          fila += valor.apellido_paterno;
-          fila += '</td>';
-
-          fila += '<td>';
-          fila += valor.apellido_materno;
+          fila += valor.nombre + " " + valor.apellido_paterno + " " + valor.apellido_materno;
           fila += '</td>';
 
           fila += '<td>';
           fila += valor.curp;
+          fila += '</td>';
+          
+          fila += '<td>';
+          fila += valor.no_control;
           fila += '</td>';
 
           fila += '<td>';
@@ -392,6 +386,7 @@
 
     }
     function limpiar() {
+      $('#aspirante_curp_busqueda').val('');
       location.reload();  
       
     }

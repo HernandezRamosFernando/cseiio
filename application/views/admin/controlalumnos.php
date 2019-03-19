@@ -245,7 +245,6 @@
                   <th scope="col" class="col-md-1">CURP</th>
                   <th scope="col" class="col-md-1">N° control</th>
                   <th scope="col" class="col-md-1">Matrícula</th>
-                  <th scope="col" class="col-md-1">Imprimir</th>
                   <th scope="col" class="col-md-1">Editar</th>
                   <th scope="col" class="col-md-1">Eliminar</th>
                 </tr>
@@ -1213,10 +1212,6 @@
 
           fila += '<td>';
           fila += valor.matricula===null?"":valor.matricula;
-          fila += '</td>';
-
-          fila += '<td>';
-          fila += '<button class="btn btn-lg btn-block btn-info" type="button" value="' + valor.no_control + '" onclick="" class="btn btn-primary" >Imprimir Ficha</button>';
           fila += '</td>';
 
           fila += '<td>';

@@ -207,20 +207,6 @@ function listar_aspirantes_xplantel($curp, $plantel){
   }
 
 
-  function listar_aspirantes_xnombreycrup($nombre,$apellido_paterno,$apellido_materno,$curp){
-
-   $this->db->select('*');
-   $this->db->from('Aspirante');
-   $this->db->like('nombre',$nombre, 'after');
-   $this->db->like('apellido_paterno',$apellido_paterno, 'after');
-   $this->db->like('apellido_materno',$apellido_materno, 'after');
-   $this->db->like('curp',$curp, 'after');
-   $resultado = $this->db->get()->result();
-   return $resultado;
-
-  }
-
-
 
 public function aspirantes_carta_compromiso(
    $curp,

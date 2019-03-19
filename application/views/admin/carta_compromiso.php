@@ -258,6 +258,44 @@
   <!-- /.content-wrapper -->
   </div>
   <!-- /#wrapper -->
+  
+  <!-- Modal -->
+  <div class="modal fade" id="generarobservacion" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title">Agregar las observaciones</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+          <table class="table table-hover" id="tabla_documentos" style="width: 100%">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col" class="col-md-1">N° control</th>
+                  <th scope="col" class="col-md-1">Documento</th>
+                  <th scope="col" class="col-md-1">Observación</th>
+                </tr>
+              </thead>
+
+
+
+              <tbody id="tabla">
+
+              </tbody>
+          </table>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-warning" value="' + valor.no_control + '"  onclick="generar_carta_compromiso(this)">Generar carta comprimiso</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
 
   <!-- Logout Modal-->
   <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -294,17 +332,9 @@
 
   <script src="/cseiio/assets/js/cambio_estado.js"></script>
   <script src="/cseiio/assets/js/cambio_municipio.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
-
 
 
   <script>
-function imprimir() {
-var doc = new jsPDF()
-doc.text('Hello world!', 10, 10)
-doc.save('a4.pdf')
-}
 function generar_carta_compromiso(e){
       //console.log(e.value);
       var xhr = new XMLHttpRequest();
@@ -317,7 +347,7 @@ function generar_carta_compromiso(e){
           }
           else{
             var carta_compromiso = new XMLHttpRequest();
-            carta_compromiso.open('GET', '/cseiio/c_aspirante/generar_carta_compromiso?no_control='+e.value, true);
+            carta_compromiso.open('GET', '/cseiio/index.php/c_aspirante/generar_carta_compromiso?no_control='+e.value, true);
             carta_compromiso.responseType = "arraybuffer";
             carta_compromiso.onload = function () {
               //console.log(carta_compromiso.responseText);
@@ -391,7 +421,7 @@ function generar_carta_compromiso(e){
           fila += valor.semestre;
           fila += '</td>';
           fila += '<td>';
-          fila += '<button class="btn btn-warning" type="button" value="' + valor.no_control + '" onclick="generar_carta_compromiso(this)" class="btn btn-primary" data-toggle="" data-target="">Generar Carta Compromiso</button>';
+          fila += '<button class="btn btn-warning" type="button"  class="btn btn-primary" data-toggle="modal" data-target="#generarobservacion">Generar Carta Compromiso</button>';
           fila += '</td>';
           fila += '</tr>';
           document.getElementById("tabla").innerHTML += fila;

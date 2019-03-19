@@ -100,7 +100,12 @@ $pdf->SetFont('helvetica','', 10);
 $pdf->AddPage();
 
 // set some text to print
-$html ='
+$html_1 ='
+<br>
+<br>
+<br>
+<br>
+<br>
 <span style="text-align:RIGTH;">ASUNTO: CARTA COMPROMISO</span>
 <br>
 <span style="text-align:LEFT;"><STRONG>LIC. HERIBERTO RÍOS COLIN</STRONG></span>
@@ -118,98 +123,99 @@ compromiso y para ello proporciono los siguientes datos:
 <br>
 
 <div style="text-align: center; background-color:#58ACFA" ><span ><strong> CARTA COMPROMISO </strong></span></div>
-<table style="width:100%">
+
+
+<table  border="1">
+
+
 <tbody>
 <tr>
-  <td>NOMBRE DEL ASPIRANTE:</td>
-  
+<td colspan="3">Nombre del Aspirante:'.$aspirante_plantel[0]->nombre.' '.$aspirante_plantel[0]->apellido_paterno.' '.$aspirante_plantel[0]->apellido_materno.'</td>
 </tr>
+
 <tr>
-  <td>SEMESTRE:</td>
+<td>Semestre:'.$aspirante_plantel[0]->semestre.'</td>
+<td colspan="2">Grupo:</td>
 </tr>
+
+<tr><td colspan="3">Nombre del Bachillerato:'.$aspirante_plantel[0]->nombre_plantel.'</td></tr>
+
 <tr>
-  <td>NOMBRE DEL BACHILLERATO:</td>
+<td>Cct:'.$aspirante_plantel[0]->cct.'</td>
+<td>Fecha:'.date("Y-m-d").'</td>
+<td>Ciclo Escolar:</td>
 </tr>
-<tr>
-  <td>C.C.T:</td>
-</tr>
-<tr>
-  <td>FECHA:</td>
-</tr>
-<tr>
-  <td>CICLO ESCOLAR:</td>
-</tr>
+
 </tbody>
-</table> 
-<br>
-<br>
-<span>Los documentos faltantes son los que a continuación se señalan con la observación de pendientes:</span>
-<br>
-<br>
-<table style="width:100%">
-<tr>
-<th>N.P</th>
-<th>DOCUMENTO</th>
-<th>OBSERVACIONES</th>
-</tr>
-<tbody>
-<tr>
-  <td>NOMBRE DEL ASPIRANTE:</td>
-  
-</tr>
-<tr>
-  <td>SEMESTRE:</td>
-</tr>
-<tr>
-  <td>NOMBRE DEL BACHILLERATO:</td>
-</tr>
-<tr>
-  <td>C.C.T:</td>
-</tr>
-<tr>
-  <td>FECHA:</td>
-</tr>
-<tr>
-  <td>CICLO ESCOLAR:</td>
-</tr>
-</tbody>
+
 </table>
+
 <br>
 <br>
-<span style="text-align:justify;" Se hace la observación que la prórroga de tiempo es aplicable solo en los casos de certificación parcial
+
+<table  border="1">
+<thead>
+<tr>
+    <th>N.P</th>
+		<th>Documento</th>
+		<th>Observaciones</th>
+</tr>
+</thead>
+
+<tbody>';
+
+$html_2 = "";
+$contador = 1;
+foreach($documentos as $documento){
+$html_2 .= '<tr>
+<td>'.$contador.'</td>
+<td>'.$documento->nombre_documento.'</td>
+<td></td>
+</tr>';
+$contador+=1;
+};
+
+$html_3 = '</tbody>
+</table>
+
+
+
+<br>
+<br>
+<span style="text-align:justify">Se hace la observación que la prórroga de tiempo es aplicable solo en los casos de certificación parcial
 y cuando medie juicio civil por correcciones de nombre, apellido o algún dato del acta de nacimiento.<br>
 Estoy consiente del compromiso que suscribo, sabedor de una vez que entregue mi documentación completa, gozaré de matrícula y estaré oficialmente inscrito.
 Por lo tanto de no ser Alumno oficial del CSEIIO los semestres que haya cursado en el plantel no se reconocerán y ante de el incumplimiento y la falta 
 de estos requisitos, seré dado de baja del Bachillerato en el que obtuve mi alta. Firmo la presente a mi enterea satisfacción en a los días del mes del año.
-
 </span>
+
 <br>
+<br>
+<br>
+<br>
+<br>
+<p style="text-align:center">FIRMANDO DE CONFORMIDAD</p>
+<br>
+<table  border="1">
+<tbody>
+<tr>
+<td><br><br><br><br><br><br></td>
+<td></td>
+<td>Vo. Bo.</td>
+</tr>
 
-<span style="text-align:center;">
-FIRMA DEL PATRÓN
-
-<br/>
-<br/>
-<br/>
-<br/>
-
-________________________________
-
-<br/>
-<br/>
-<br/>
-<br/>
-TESTIGO
-<br/>
-<br/>
-________________________________
-
-</span>
+<tr>
+<td style="text-align:center">Nombre y firma del aspirante</td>
+<td style="text-align:center">Nombre y firma del tutor o responsable</td>
+<td style="text-align:center">El director</td>
+</tr>
+</tbody>
+</table>
 ';
 
 // print a block of text using Write()
 // output the HTML content
-$pdf->writeHTML($html, true, 0, true, true);
+$pdf->writeHTML($html_1.$html_2.$html_3, true, 0, true, true);
 
 
 //Close and output PDF document

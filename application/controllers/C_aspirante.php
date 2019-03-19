@@ -140,9 +140,16 @@ public function portabilidad(){
 
     public function generar_carta_compromiso(){
         $this->load->library('pdf');
-        $this->load->view('contratos/formatocontrato');
+        $no_control = $this->input->get('no_control');
+        $datos['documentos'] = $this->M_aspirante->get_aspirantes_nombre_documentos($no_control);
+        $datos['aspirante_plantel'] = $this->M_aspirante->aspirante_plantel($no_control);
+        //$datos['aspirante_plantel'] = $this->M_aspirante->get_aspirante($no_control);
+        $this->load->view('contratos/formatocontrato',$datos);
+
 
     }
+
+
 
     public function aspirantes_carta_compromiso(){
         $plantel = $this->input->get('plantel');

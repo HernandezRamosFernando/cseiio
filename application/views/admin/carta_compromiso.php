@@ -310,13 +310,27 @@ function generar_carta_compromiso(e){
       //console.log(e.value);
       var xhr = new XMLHttpRequest();
         xhr.open('GET', '/cseiio/index.php/c_aspirante/get_aspirantes_nombre_documentos?no_control='+e.value, true);
+        
         xhr.onload = function () {
           var documentos = JSON.parse(xhr.response);
           if(documentos.length===4){
               alert("No se puede generar carta compromiso porque ya cuenta con la documentacion completa");
           }
           else{
-            imprimir();
+            var carta_compromiso = new XMLHttpRequest();
+            carta_compromiso.open('GET', '/cseiio/c_aspirante/generar_carta_compromiso?no_control='+e.value, true);
+            carta_compromiso.responseType = "arraybuffer";
+            carta_compromiso.onload = function () {
+              //console.log(carta_compromiso.responseText);
+              if (this.status === 200) {
+                    var blob = new Blob([carta_compromiso.response], {type: "application/pdf"});
+                    var objectUrl = URL.createObjectURL(blob);
+                    window.open(objectUrl);
+                }
+              
+            };
+
+            carta_compromiso.send(null);
           }
         };
         xhr.send(null);

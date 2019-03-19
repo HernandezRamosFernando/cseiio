@@ -238,8 +238,18 @@ function get_aspirante($no_control){
 
 function delete_aspirante($no_control){
 
+   $this->db->trans_start();
+    $this->db->delete('Aspirante', array('no_control' => $no_control)); 
+   $this->db->trans_complete();
 
-   return $this->db->delete('Aspirante', array('no_control' => $no_control));  
+if ($this->db->trans_status() === FALSE)
+{
+        return "algo salio mal";
+}
+
+else{
+   return "registro borrado correctramente";
+}
    
    
 }

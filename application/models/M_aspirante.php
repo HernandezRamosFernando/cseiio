@@ -261,6 +261,33 @@ return $this->db->query("select * from Aspirante as a inner join Plantel as p on
 
 
 
+function agregar_observaciones($observaciones){
+   //$id = $observaciones[0]->id;
+//return $id;
+//return "hola";
+$this->db->trans_start();
+foreach($observaciones as $observacion){
+      //$datos.=$observacion->observacion.",".$observacion->id.",".$observacion->no_control.";;;";
+      $this->db->query("update Documentacion set observacion = '".$observacion->observacion."' where Documento_id_documento=".$observacion->id." and Aspirante_no_control='".$observacion->no_control."'");
+}
+$this->db->trans_complete();
+
+if ($this->db->trans_status() === FALSE)
+{
+        return "algo salio mal";
+}
+
+else{
+   return "bien";
+}
+
+
+
+
+
+
+}
+
 
 }
 ?>

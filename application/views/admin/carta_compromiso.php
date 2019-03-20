@@ -282,7 +282,7 @@
 
 
 
-              <tbody id="tabla">
+              <tbody id="tabla_observacion">
 
               </tbody>
           </table>
@@ -290,7 +290,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-          <button type="button" class="btn btn-warning" value="' + valor.no_control + '"  onclick="generar_carta_compromiso(this)">Generar carta comprimiso</button>
+          <button type="button" class="btn btn-warning"  onclick="generar_carta_compromiso(this)">Generar carta comprimiso</button>
         </div>
       </div>
     </div>
@@ -317,6 +317,7 @@
     </div>
   </div>
 
+  <input type="text" id="no_control" display="none">
   <!-- Bootstrap core JavaScript-->
   <script src="/cseiio/assets/vendor/jquery/jquery.min.js"></script>
   <script src="/cseiio/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -335,10 +336,62 @@
 
 
   <script>
+
+function aspirante_input(e){
+document.getElementById("no_control").value = e.value;
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', '/cseiio/index.php/c_aspirante/get_aspirantes_nombre_documentos?no_control='+e.value, true);
+
+        xhr.onload = function () {
+          console.log(JSON.parse(xhr.response));      
+          document.getElementById('tabla_observacion').innerHTML = "";
+          JSON.parse(xhr.response).forEach(function(valor, indice){
+            document.getElementById('tabla_observacion').innerHTML += "<tr><td>"+valor.Aspirante_no_control+"</td><td>"+valor.nombre_documento+'</td><td><input id="'+valor.id_documento+'" type="text" class="form-control"></td></tr>';
+          });
+
+        }
+
+        xhr.send(null);
+}
+
+
 function generar_carta_compromiso(e){
       //console.log(e.value);
+
+      var tabla = document.getElementById('tabla_observacion');
+      //console.log(tabla.childNodes);
+      var json_observaciones = Array();
+
+      //console.log(json_observaciones[0]);
+      tabla.childNodes.forEach(function(input,indice){
+ 
+            json_observaciones.push({"id":parseInt(input.childNodes[2].childNodes[0].id),
+            "observacion":input.childNodes[2].childNodes[0].value,
+            "no_control":document.getElementById("no_control").value});
+
+      });
+
+      //console.log(JSON.stringify(json_observaciones));
+
+      //insertar observaciones en la base de datos
+      var observaciones = new XMLHttpRequest();
+          observaciones.open('POST', '/cseiio/c_aspirante/agregar_observaciones', true);
+          observaciones.setRequestHeader("Content-Type", "application/json");
+
+          observaciones.onreadystatechange = function() { // Call a function when the state changes.
+            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                console.log(observaciones.response);
+            }
+        }
+        observaciones.send(JSON.stringify(json_observaciones));
+        //console.log(JSON.stringify(json_observaciones));
+
+      
+      
+
+      
       var xhr = new XMLHttpRequest();
-        xhr.open('GET', '/cseiio/index.php/c_aspirante/get_aspirantes_nombre_documentos?no_control='+e.value, true);
+        xhr.open('GET', '/cseiio/index.php/c_aspirante/get_aspirantes_nombre_documentos?no_control='+document.getElementById("no_control").value, true);
         
         xhr.onload = function () {
           var documentos = JSON.parse(xhr.response);
@@ -347,7 +400,7 @@ function generar_carta_compromiso(e){
           }
           else{
             var carta_compromiso = new XMLHttpRequest();
-            carta_compromiso.open('GET', '/cseiio/index.php/c_aspirante/generar_carta_compromiso?no_control='+e.value, true);
+            carta_compromiso.open('GET', '/cseiio/index.php/c_aspirante/generar_carta_compromiso?no_control='+document.getElementById("no_control").value, true);
             carta_compromiso.responseType = "arraybuffer";
             carta_compromiso.onload = function () {
               //console.log(carta_compromiso.responseText);
@@ -363,6 +416,7 @@ function generar_carta_compromiso(e){
           }
         };
         xhr.send(null);
+        
     }
     
     function formato_tabla() {
@@ -421,7 +475,7 @@ function generar_carta_compromiso(e){
           fila += valor.semestre;
           fila += '</td>';
           fila += '<td>';
-          fila += '<button class="btn btn-warning" type="button"  class="btn btn-primary" data-toggle="modal" data-target="#generarobservacion">Generar Carta Compromiso</button>';
+          fila += '<button class="btn btn-warning" value="'+valor.no_control+'" type="button" onclick="aspirante_input(this)"  class="btn btn-primary" data-toggle="modal" data-target="#generarobservacion">Generar Carta Compromiso</button>';
           fila += '</td>';
           fila += '</tr>';
           document.getElementById("tabla").innerHTML += fila;

@@ -170,7 +170,7 @@ foreach($documentos as $documento){
 $html_2 .= '<tr>
 <td>'.$contador.'</td>
 <td>'.$documento->nombre_documento.'</td>
-<td></td>
+<td>'.$documento->observacion.'</td>
 </tr>';
 $contador+=1;
 };

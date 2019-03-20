@@ -437,6 +437,11 @@ public function portabilidad(){
                 );
             }
 
+            
+
+
+
+
             //print_r($datos_aspirante);
             //print_r($datos_aspirante_direccion);
             //print_r($datos_aspirante_tutor);
@@ -484,6 +489,17 @@ public function portabilidad(){
     
 }
     
+
+function agregar_observaciones(){
+
+    $observaciones = json_decode($this->input->raw_input_stream);
+   //print_r($observaciones);
+    echo $this->M_aspirante->agregar_observaciones($observaciones);
+
+
+   
+
+}
     
   
 }

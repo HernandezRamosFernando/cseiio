@@ -72,7 +72,7 @@ public function portabilidad(){
        
         $this->load->view("admin/controlalumnos",$datos);
     }
-
+    //-------------------------------------------------termina vistas
     public function get_aspirantes_nombre_documentos(){
         $no_control = $this->input->get('no_control');
         
@@ -96,7 +96,7 @@ public function portabilidad(){
         
     }
 
-    //-------------------------------------------------termina vistas
+
 
     public function buscar_aspirantesxplantel(){
         $plantel = $this->input->get('plantel');
@@ -178,7 +178,6 @@ public function portabilidad(){
             'fecha_nacimiento' => $this->input->post('aspirante_fecha_nacimiento')
         );
 
-        
         $datos_aspirante_direccion = array(
             //'Localidad_id_localidad' => $this->input->post('aspirante_direccion_localidad'),
             'Aspirante_no_control' => $no_control,
@@ -197,7 +196,6 @@ public function portabilidad(){
             'telefono_comunidad' => $this->input->post('aspirante_tutor_telefono_comunidad')
         );
 
-
         $datos_aspirante_lengua = array(
             //'Aspirante_no_control' => $no_control,
             'Lengua_id_lengua' => $this->input->post('aspirante_lengua_nombre'),
@@ -208,17 +206,12 @@ public function portabilidad(){
             'traduce' => $this->input->post('aspirante_lengua_traduce')==''?0:$this->input->post('aspirante_lengua_traduce')
         );
 
-
         $datos_aspirante_medicos = array(
             'tipo_sangre' => $this->input->post('tipo_sangre')==''?null:$this->input->post('tipo_sangre'),
             'alergia_medicamento' => $this->input->post('aspirante_alergia'),
             'discapacidad' => $this->input->post('aspirante_discapacidad')
             //'Aspirante_no_control' => $no_control
         );
-
-
-
-
 
         echo $this->M_aspirante->actualizar_datos_aspirante(
             $datos_aspirante,
@@ -247,9 +240,6 @@ public function portabilidad(){
         echo json_encode($datos);
     }
 
-
-
-
     public function buscar_aspirantes_curp(){
         $curp = $this->input->get('curp');
         $plantel = $this->input->get('plantel');
@@ -262,11 +252,7 @@ public function portabilidad(){
     
     public function registrar_datos_aspirante(){
         $no_control=$this->generar_numcontrol(1);
-
-
         $tipo_aspirante = $this->input->post('formulario');
-
-        
 
         $datos_aspirante = array(
             'no_control' => $no_control,
@@ -317,7 +303,6 @@ public function portabilidad(){
             'telefono_comunidad' => $this->input->post('aspirante_tutor_telefono_comunidad')
         );
 
-
         $datos_aspirante_lengua = array(
             'Aspirante_no_control' => $no_control,
             'Lengua_id_lengua' => $this->input->post('aspirante_lengua_nombre'),
@@ -328,7 +313,6 @@ public function portabilidad(){
             'traduce' => $this->input->post('aspirante_lengua_traduce')==''?0:$this->input->post('aspirante_lengua_traduce')
         );
 
-
         $datos_aspirante_medicos = array(
             'tipo_sangre' => $this->input->post('tipo_sangre')==''?null:$this->input->post('tipo_sangre'),
             'alergia_medicamento' => $this->input->post('aspirante_alergia'),
@@ -336,26 +320,20 @@ public function portabilidad(){
             'Aspirante_no_control' => $no_control
         );
 
-
         $datos_aspirante_documentos = array();
 
-            
             if($this->input->post('aspirante_documento_acta_nacimiento')!=''){
                 $datos_aspirante_documentos['aspirante_documento_acta_nacimiento'] = array(
                     'Documento_id_documento' => 1,
                     'entregado' => true
                 );
             }
-
             else{
                 $datos_aspirante_documentos['aspirante_documento_acta_nacimiento'] = array(
                     'Documento_id_documento' => 1,
                     'entregado' => false
                 );
             }
-
-            
-
 
             if($this->input->post('aspirante_documento_curp')!=''){
                 $datos_aspirante_documentos['aspirante_documento_curp'] = array(
@@ -363,7 +341,6 @@ public function portabilidad(){
                     'entregado' => true
                 );
             }
-
             else{
                 $datos_aspirante_documentos['aspirante_documento_curp'] = array(
                     'Documento_id_documento' => 2,
@@ -371,25 +348,18 @@ public function portabilidad(){
                 );
             }
 
-
-
-
-
             if($this->input->post('aspirante_documento_certificado_secundaria')!=''){
                 $datos_aspirante_documentos['aspirante_documento_certificado_secundaria'] = array(
                     'Documento_id_documento' => 3,
                     'entregado' => true
                 );
             }
-
             else{
                 $datos_aspirante_documentos['aspirante_documento_certificado_secundaria'] = array(
                     'Documento_id_documento' => 3,
                     'entregado' => false
                 );
             }
-
-
 
             if($this->input->post('aspirante_documento_fotos')!=''){
                 $datos_aspirante_documentos['aspirante_documento_fotos'] = array(
@@ -397,7 +367,6 @@ public function portabilidad(){
                     'entregado' => true
                 );
             }
-
             else{
                 $datos_aspirante_documentos['aspirante_documento_documento_fotos'] = array(
                     'Documento_id_documento' => 4,
@@ -405,23 +374,18 @@ public function portabilidad(){
                 );
             }
 
-
-
             if($this->input->post('aspirante_documento_certificado_medico')!=''){
                 $datos_aspirante_documentos['aspirante_documento_certificado_medico'] = array(
                     'Documento_id_documento' => 101,
                     'entregado' => true
                 );
             }
-
             else{
                 $datos_aspirante_documentos['aspirante_documento_certificado_medico'] = array(
                     'Documento_id_documento' => 101,
                     'entregado' => false
                 );
             }
-
-
 
             if($this->input->post('aspirante_documento_carta_buena_conducta')!=''){
                 $datos_aspirante_documentos['aspirante_documento_buena_conducta'] = array(
@@ -429,26 +393,12 @@ public function portabilidad(){
                     'entregado' => true
                 );
             }
-
             else{
                 $datos_aspirante_documentos['aspirante_documento_buena_conducta'] = array(
                     'Documento_id_documento' => 102,
                     'entregado' => false
                 );
             }
-
-
-
-
-
-
-            //print_r($datos_aspirante);
-            //print_r($datos_aspirante_direccion);
-            //print_r($datos_aspirante_tutor);
-            //print_r($datos_aspirante_lengua);
-            //print_r($datos_aspirante_documentos);
-            //print_r($datos_aspirante_medicos);
-
 
         echo $this->M_aspirante->insertar_aspirante_nuevo_ingreso(
             $datos_aspirante,
@@ -458,7 +408,14 @@ public function portabilidad(){
             $datos_aspirante_documentos,
             $datos_aspirante_medicos
         );
-        redirect('/index.php/c_aspirante/portabilidad', 'refresh');
+        if($tipo_aspirante=='nuevo_ingreso'){
+            redirect('/index.php/c_aspirante/nuevo_ingreso', 'refresh');
+        }
+
+        else{ 
+            redirect('/index.php/c_aspirante/portabilidad', 'refresh');
+        }
+       
 
        
 

@@ -281,9 +281,6 @@
                   <th scope="col" class="col-md-1">Observación</th>
                 </tr>
               </thead>
-
-
-
               <tbody id="tabla_observacion">
 
               </tbody>
@@ -377,7 +374,7 @@ function generar_carta_compromiso(e){
 
       //insertar observaciones en la base de datos
       var observaciones = new XMLHttpRequest();
-          observaciones.open('POST', '/cseiio/c_aspirante/agregar_observaciones', true);
+          observaciones.open('POST', '/cseiio/index.php/c_aspirante/agregar_observaciones', true);
           observaciones.setRequestHeader("Content-Type", "application/json");
 
           observaciones.onreadystatechange = function() { // Call a function when the state changes.
@@ -429,7 +426,7 @@ function generar_carta_compromiso(e){
           "sLengthMenu": "Mostrar _MENU_ registros",
           "sZeroRecords": "No se encontraron resultados",
           "sEmptyTable": "Ningún dato disponible en esta tabla",
-          "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+          "sInfo": "Mostrando del _START_ al _END_ de un total de _TOTAL_ registros",
           "sInfoEmpty": "Mostrando del 0 al 0 de un total de 0 ",
           "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
           "sInfoPostFix": "",
@@ -480,7 +477,7 @@ function generar_carta_compromiso(e){
           fila += valor.Plantel_cct;
           fila += '</td>';
           fila += '<td>';
-          fila += '<button class="btn btn-warning" type="button"  class="btn btn-primary" data-toggle="modal" data-target="#generarobservacion">Generar Carta Compromiso</button>';
+          fila += '<button class="btn btn-warning" type="button" value="'+valor.no_control+'" onclick="aspirante_input(this)" class="btn btn-primary" data-toggle="modal" data-target="#generarobservacion">Generar Carta Compromiso</button>';
           fila += '</td>';
           fila += '</tr>';
           document.getElementById("tabla").innerHTML += fila;

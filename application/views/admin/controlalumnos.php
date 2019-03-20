@@ -914,22 +914,6 @@
           </div>
         </div>
       </div>
-
-      <script>
-        $('#exampleModal').on('show.bs.modal', event => {
-          var button = $(event.relatedTarget);
-          var modal = $(this);
-          // Use above variables to manipulate the DOM
-
-        });
-      </script>
-
-
-
-
-
-
-
     </div>
   </div>
   <!-- /.content-wrapper -->
@@ -994,6 +978,16 @@
       };
 
       xhr.send(null);
+      eliminartabla();
+      
+    }
+    function eliminartabla() {
+      table = $('#tabla_completa').DataTable( {
+        paging: false,
+        searching: false
+      } );
+ 
+      table.destroy();
     }
   </script>
 
@@ -1006,10 +1000,6 @@
       document.getElementById("selector_municipio_aspirante").innerHTML = "";
       document.getElementById("selector_localidad_aspirante").innerHTML = "";
       document.getElementById("aspirante_no_control").value = e.value;
-
-
-
-
       var xhr = new XMLHttpRequest();
       xhr.open('GET', '/cseiio/index.php/c_aspirante/get_datos_aspirante/' + e.value, true);
 
@@ -1158,8 +1148,6 @@
         document.getElementById("aspirante_secundaria_tipo_subsistema").disabled = true;
         document.getElementById("tipo_subsistema_oculto").style.display = "";
         //document.getElementById("tipo_subsistema_oculto").disabled = true;
-
-
       }
 
       xhr.send(null);
@@ -1208,10 +1196,6 @@
       xhr.open('GET', '/cseiio/index.php/c_aspirante/buscar_aspirantes_curp?' + query, true);
 
       xhr.onload = function () {
-        //console.log(JSON.parse(xhr.response));
-        ////console.log(query);
-
-
         JSON.parse(xhr.response).forEach(function (valor, indice) {
           console.log(valor);
           var fila = '<tr>';

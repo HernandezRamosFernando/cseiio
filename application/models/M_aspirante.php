@@ -270,6 +270,8 @@ foreach($observaciones as $observacion){
       //$datos.=$observacion->observacion.",".$observacion->id.",".$observacion->no_control.";;;";
       $this->db->query("update Documentacion set observacion = '".$observacion->observacion."' where Documento_id_documento=".$observacion->id." and Aspirante_no_control='".$observacion->no_control."'");
 }
+$this->db->query("insert into Documentacion(Documento_id_documento,Aspirante_no_control,fecha_entrega) values (5,'".$observacion->no_control."','".date("Y-m-d")."')");
+
 $this->db->trans_complete();
 
 if ($this->db->trans_status() === FALSE)

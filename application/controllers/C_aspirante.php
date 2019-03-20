@@ -437,7 +437,7 @@ public function portabilidad(){
                 );
             }
 
-            
+
 
 
 
@@ -496,10 +496,10 @@ function agregar_observaciones(){
    //print_r($observaciones);
     echo $this->M_aspirante->agregar_observaciones($observaciones);
 
-
-   
-
 }
+
+
+
     
   
 }

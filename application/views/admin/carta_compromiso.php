@@ -480,7 +480,7 @@ function generar_carta_compromiso(e){
           fila += valor.Plantel_cct;
           fila += '</td>';
           fila += '<td>';
-          fila += '<button class="btn btn-warning" type="button"  class="btn btn-primary" data-toggle="modal" data-target="#generarobservacion">Generar Carta Compromiso</button>';
+          fila += '<button class="btn btn-warning" type="button" value="'+valor.no_control+'" onclick="aspirante_input(this)" class="btn btn-primary" data-toggle="modal" data-target="#generarobservacion">Generar Carta Compromiso</button>';
           fila += '</td>';
           fila += '</tr>';
           document.getElementById("tabla").innerHTML += fila;

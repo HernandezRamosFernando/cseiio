@@ -284,11 +284,8 @@ else{
 }
 
 
-
-
-
-
 }
+//aqui terminan las funcoines
 
 
 }

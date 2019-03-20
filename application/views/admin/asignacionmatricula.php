@@ -152,7 +152,7 @@
       <li class="nav-item ">
         <a class="nav-link" href="/cseiio/index.php/c_subir_doc/subir_documentos">
           <i class="fas fa-fw fa-file-upload"></i>
-          <span>Carga de documentos</span>
+          <span>Control de documentos</span>
         </a>
       </li>
       <li class="nav-item ">
@@ -234,14 +234,16 @@
         <div class="card" style="overflow:scroll">
           <div class="card-body">
             <table class="table table-hover" id="tabla_completa" style="width: 100%">
-            <caption>Lista de Alumnos</caption>
+            <caption>Lista de Alumnos sin matrícula asignada</caption>
               <thead class="thead-light">
                 <tr>
                   <th scope="col" class="col-md-1">Nombre completo</th>
                   <th scope="col" class="col-md-1">CURP</th>
                   <th scope="col" class="col-md-1">N° control</th>
                   <th scope="col" class="col-md-1">Semestre</th>
+                  <th scope="col" class="col-md-1">Plantel CCT</th>
                   <th scope="col" class="col-md-1">Matrícula</th>
+                  
                 </tr>
               </thead>
               <tbody id="tabla">
@@ -309,8 +311,8 @@
           "sLengthMenu": "Mostrar _MENU_ registros",
           "sZeroRecords": "No se encontraron resultados",
           "sEmptyTable": "Ningún dato disponible",
-          "sInfo": "Mostrando datos del _START_ al _END_ de un total de _TOTAL_ ",
-          "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+          "sInfo": "Mostrando del _START_ al _END_ de un total de _TOTAL_ ",
+          "sInfoEmpty": "Mostrando del 0 al 0 de un total de 0",
           "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
           "sInfoPostFix": "",
           "sSearch": "Buscar específico:",
@@ -363,6 +365,10 @@
 
           fila += '<td>';
           fila += valor.semestre;
+          fila += '</td>';
+
+          fila += '<td>';
+          fila += valor.Plantel_cct;
           fila += '</td>';
 
           fila += '<td>';

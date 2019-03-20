@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Subir Documentos</title>
+  <title>Control Documentos</title>
 
   <!-- Bootstrap core CSS-->
   <link href="/cseiio/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -19,7 +19,8 @@
 
   <!-- Custom styles for this template-->
   <link href="/cseiio/assets/css/sb-admin.css" rel="stylesheet">
-  <link rel="icon" href="/cseiio/assets/img/favicon.ico">
+  <link href="/cseiio/assets/vendor/bootstrap/css/bootstrap-float-label.css" rel="stylesheet">
+  <link href="/cseiio/assets/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
 
   <link rel="stylesheet" type="text/css" href="/cseiio/assets/css/main.css">
 
@@ -160,7 +161,7 @@
       <li class="nav-item ">
         <a class="nav-link bg-info text-white" href="/cseiio/index.php/c_subir_doc/subir_documentos">
           <i class="fas fa-fw fa-file-upload"></i>
-          <span>Carga de documentos</span>
+          <span>Control de documentos</span>
         </a>
       </li>
       <li class="nav-item ">
@@ -215,14 +216,13 @@
                       <option value="">Buscar en todos los planteles</option>
 
                       <?php
-    foreach ($planteles as $plantel)
-    {
-      echo '<option value="'.$plantel->cct.'">'.$plantel->nombre_plantel.' ----- CCT: '.$plantel->cct.'</option>';
-    }
-    ?>
+              foreach ($planteles as $plantel)
+           {
+            echo '<option value="'.$plantel->cct.'">'.$plantel->nombre_plantel.' ----- CCT: '.$plantel->cct.'</option>';
+          }
+          ?>
 
                     </select>
-                    <span>Plantel</span>
                   </label>
 
                 </div>
@@ -239,26 +239,29 @@
       </div>
 
       <div class="container">
-
-        <div class="card-body">
-          <table class="table table-bordered" id="tabla_completa">
-            <thead>
+        <div class="card" style="overflow:scroll">
+          <div class="card-body">
+            <table class="table table-hover" id="tabla_completa" style="width: 100%">
+              <caption>Lista de todos los alumnos</caption>
+              <thead class="thead-light">
               <tr>
                 <th scope="col" class="col-md-1">Nombre completo</th>
                 <th scope="col" class="col-md-1">Curp</th>
                 <th scope="col" class="col-md-1">N° control</th>
                 <th scope="col" class="col-md-1">Tipo de ingreso</th>
-                <th scope="col" class="col-md-1">Subir documentación</th>
+                <th scope="col" class="col-md-1">Plantel CCT</th>
+                <th scope="col" class="col-md-1">Control de documentación</th>
               </tr>
-            </thead>
+              </thead>
 
 
 
-            <tbody id="tabla">
-            </tbody>
-          </table>
+              <tbody id="tabla">
+
+              </tbody>
+            </table>
+          </div>
         </div>
-
       </div>
 
 
@@ -367,6 +370,35 @@ https://www.youtube.com/results?search_query=+AJAX+File+Upload+with+Progress
       }
 
     }
+    function formato_tabla() {
+      $('#tabla_completa').DataTable({
+        //"order": [[ 0, 'desc' ]],
+        "language": {
+          "sProcessing": "Procesando...",
+          "sLengthMenu": "Mostrar _MENU_ registros",
+          "sZeroRecords": "No se encontraron resultados",
+          "sEmptyTable": "Ningún dato disponible en esta tabla",
+          "sInfo": "Mostrando del _START_ al _END_ de un total de _TOTAL_ ",
+          "sInfoEmpty": "Mostrando del 0 al 0 de un total de 0 ",
+          "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+          "sInfoPostFix": "",
+          "sSearch": "Buscar específico:",
+          "sUrl": "",
+          "sInfoThousands": ",",
+          "sLoadingRecords": "Cargando...",
+          "oPaginate": {
+            "sFirst": "Primero",
+            "sLast": "Último",
+            "sNext": "Siguiente",
+            "sPrevious": "Anterior"
+          },
+          "oAria": {
+            "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+            "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+          }
+        }
+      });
+    }
 
 
 
@@ -396,7 +428,7 @@ https://www.youtube.com/results?search_query=+AJAX+File+Upload+with+Progress
           fila += '</label></div></td>';
 
           fila += '<td>';
-          fila += '<input type="file" name="file' + cont + '" id="file' + cont + '" onchange="validarArchivo(this,\'status' + cont + '\',\'status_error' + cont + '\',\'boton' + cont + '\')" disabled required/><br><span class="badge badge-danger">* El archivo debe estar en formato PDF, JPG y PNG.</span><progress id="progressBar' + cont + '" value="0" max="100"></progress><span id="status' + cont + '" class="status_upload"></span><span id="status_error' + cont + '" class="status_upload_error"></span> <input  id="boton' + cont + '" class="btn btn-primary" type="button" value="Cargar archivo" onclick="uploadFile(\'file' + cont + '\',\'documento' + cont + '\',\'progressBar' + cont + '\',\'status' + cont + '\',\'status_error' + cont + '\',\'enlace' + cont + '\',\'enlaceview' + cont + '\',\'view' + cont + '\')" disabled>';
+          fila += '<input type="file" name="file' + cont + '" id="file' + cont + '" onchange="validarArchivo(this,\'status' + cont + '\',\'status_error' + cont + '\',\'boton' + cont + '\')" disabled required/><br><span class="badge badge-danger">* El archivo debe estar en formato PDF, JPG y PNG.</span><progress id="progressBar' + cont + '" value="0" max="100"></progress><span id="status' + cont + '" class="status_upload"></span><span id="status_error' + cont + '" class="status_upload_error"></span> <input  id="boton' + cont + '" class="btn btn-success" type="button" value="Cargar archivo" onclick="uploadFile(\'file' + cont + '\',\'documento' + cont + 'primary\',\'progressBar' + cont + '\',\'status' + cont + '\',\'status_error' + cont + '\',\'enlace' + cont + '\',\'enlaceview' + cont + '\',\'view' + cont + '\')" disabled>';
           fila += '</td>';
 
           fila += '<td>';
@@ -432,27 +464,26 @@ https://www.youtube.com/results?search_query=+AJAX+File+Upload+with+Progress
             cont2++;
 
             aspirante.documentacion_aspirante.forEach(function (seleccionado, indice2) {
-              if(seleccionado.Documento_id_documento==valor.id_documento)
-			                {
+              if (seleccionado.Documento_id_documento == valor.id_documento) {
 
-			                
 
-                             
-                             if(seleccionado.entregado==true){
-                             	document.getElementById("documento"+cont2).checked=true;
-                             	document.getElementById("file"+cont2).disabled=false;
-                             }
-							
+
+
+                if (seleccionado.entregado == true) {
+                  document.getElementById("documento" + cont2).checked = true;
+                  document.getElementById("file" + cont2).disabled = false;
+                }
+
                 if (seleccionado.ruta != null) {
 
 
 
                   var d = document.getElementById("enlace" + cont2);
-                  d.className = "btn btn-primary";
+                  d.className = "btn btn-info";
                   document.getElementById("enlace" + cont2).innerHTML = 'Descargar <i class="fa fa-download" aria-hidden="true"></i>';
                   document.getElementById("enlace" + cont2).href = "/cseiio/index.php/C_subir_doc/descargar/" + seleccionado.Aspirante_no_control + "/" + seleccionado.Documento_id_documento;
 
-                  document.getElementById("view" + cont2).innerHTML = '<a class="btn btn-primary enlace1" id="enlaceview' + cont2 + '" onClick="ventanaSecundaria(\'/cseiio/index.php/C_subir_doc/visualizar/' + seleccionado.Aspirante_no_control + '/' + seleccionado.Documento_id_documento + '\');">Visualizar <i class="fa fa-search" aria-hidden="true"></i></a>';
+                  document.getElementById("view" + cont2).innerHTML = '<a class="btn btn-info enlace1" id="enlaceview' + cont2 + '" onClick="ventanaSecundaria(\'/cseiio/index.php/C_subir_doc/visualizar/' + seleccionado.Aspirante_no_control + '/' + seleccionado.Documento_id_documento + '\');">Visualizar <i class="fa fa-search" aria-hidden="true"></i></a>';
 
 
 
@@ -498,39 +529,6 @@ https://www.youtube.com/results?search_query=+AJAX+File+Upload+with+Progress
       $("#tlistaaspirantes").dataTable().fnDestroy();
     }
 
-
-
-    function formato_tabla() {
-      $('#tlistaaspirantes').DataTable({
-        //"order": [[ 0, 'desc' ]],
-
-        "language": {
-          "sProcessing": "Procesando...",
-          "sLengthMenu": "Mostrar _MENU_ registros",
-          "sZeroRecords": "No se encontraron resultados",
-          "sEmptyTable": "Ningún dato disponible en esta tabla",
-          "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-          "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-          "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-          "sInfoPostFix": "",
-          "sSearch": "Buscar:",
-          "sUrl": "",
-          "sInfoThousands": ",",
-          "sLoadingRecords": "Cargando...",
-          "oPaginate": {
-            "sFirst": "Primero",
-            "sLast": "Último",
-            "sNext": "Siguiente",
-            "sPrevious": "Anterior"
-          },
-          "oAria": {
-            "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
-            "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-          }
-        }
-      });
-    }
-    formato_tabla();
 
 
     function elementoid(el) {
@@ -641,16 +639,16 @@ https://www.youtube.com/results?search_query=+AJAX+File+Upload+with+Progress
 
 
     function buscar() {
-      document.getElementById("aspirante_plantel_busqueda").disabled=true;
-      document.getElementById("aspirante_curp_busqueda").disabled=true;
+      document.getElementById("aspirante_plantel_busqueda").disabled = true;
+      document.getElementById("aspirante_curp_busqueda").disabled = true;
       document.getElementById("tabla").innerHTML = "";
       var xhr = new XMLHttpRequest();
       var curp = document.getElementById("aspirante_curp_busqueda").value;
       var plantel = document.getElementById("aspirante_plantel_busqueda").value;
       var query = 'curp=' + curp + '&plantel=' + plantel;
 
-        xhr.open('GET', '/cseiio/index.php/c_aspirante/buscar_aspirantesxplantel?' + query, true);
-      
+      xhr.open('GET', '/cseiio/index.php/c_aspirante/buscar_aspirantesxplantel?' + query, true);
+
 
 
       xhr.onload = function () {
@@ -678,6 +676,10 @@ https://www.youtube.com/results?search_query=+AJAX+File+Upload+with+Progress
           fila += valor.tipo_ingreso;
           fila += '</td>';
 
+          fila += '<td>';
+          fila += valor.Plantel_cct;
+          fila += '</td>';
+
           fila += '<td class="text-center"><button type="button" value="' + valor.no_control + '" onclick="cargar_doc_aspirante(this,\'' + valor.nombre + '\',\'' + valor.apellido_paterno + '\',\'' + valor.apellido_materno + '\',\'' + valor.tipo_ingreso + '\')" class="btn btn-success" data-toggle="modal" data-target="#modalsubirdocumentos">Subir documentos</button>';
           fila += '';
           fila += '</td>';
@@ -692,8 +694,8 @@ https://www.youtube.com/results?search_query=+AJAX+File+Upload+with+Progress
 
       };
 
-      xhr.send(null);document.getElementById('btn_buscar').setAttribute("onClick", "limpiar();");
-      document.getElementById('btn_buscar').innerHTML='Limpiar Busqueda';
+      xhr.send(null); document.getElementById('btn_buscar').setAttribute("onClick", "limpiar();");
+      document.getElementById('btn_buscar').innerHTML = 'Limpiar Busqueda';
       document.getElementById('btn_buscar').classList.remove('btn-success');
       document.getElementById('btn_buscar').classList.add('btn-danger');
     }
@@ -703,8 +705,8 @@ https://www.youtube.com/results?search_query=+AJAX+File+Upload+with+Progress
 
 
     function limpiar() {
-      location.reload();  
-      
+      location.reload();
+
     }
 
 

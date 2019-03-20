@@ -191,7 +191,7 @@
                         <div class="col-md-4 col-lg-4">
                             <a href="/cseiio/index.php/c_subir_doc/subir_documentos" class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-file-upload btn-responsive" 
                             style="height: 80%; background: #553276; border-color: #553276; padding: 13% " >
-                              Carga de Documentos
+                              Control de Documentos
                             </a>
                         </div>
                         <div class="col-md-4 col-lg-4">

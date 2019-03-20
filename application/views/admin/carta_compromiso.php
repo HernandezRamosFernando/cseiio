@@ -151,7 +151,7 @@
       <li class="nav-item ">
         <a class="nav-link" href="/cseiio/index.php/c_subir_doc/subir_documentos">
           <i class="fas fa-fw fa-file-upload"></i>
-          <span>Carga de documentos</span>
+          <span>Control de documentos</span>
         </a>
       </li>
       <li class="nav-item ">
@@ -233,12 +233,14 @@
         <div class="card" style="overflow:scroll">
           <div class="card-body">
             <table class="table table-hover" id="tabla_completa" style="width: 100%">
+            <caption>Lista de Alumnos que generan carta compromiso</caption>
               <thead class="thead-light">
                 <tr>
                   <th scope="col" class="col-md-1">Nombre completo</th>
                   <th scope="col" class="col-md-1">CURP</th>
                   <th scope="col" class="col-md-1">N° control</th>
                   <th scope="col" class="col-md-1">Semestre</th>
+                  <th scope="col" class="col-md-1">Plantel CCT</th>
                   <th scope="col" class="col-md-1">Editar</th>
                 </tr>
               </thead>
@@ -428,7 +430,7 @@ function generar_carta_compromiso(e){
           "sZeroRecords": "No se encontraron resultados",
           "sEmptyTable": "Ningún dato disponible en esta tabla",
           "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-          "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+          "sInfoEmpty": "Mostrando del 0 al 0 de un total de 0 ",
           "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
           "sInfoPostFix": "",
           "sSearch": "Buscar específico:",
@@ -475,7 +477,10 @@ function generar_carta_compromiso(e){
           fila += valor.semestre;
           fila += '</td>';
           fila += '<td>';
-          fila += '<button class="btn btn-warning" value="'+valor.no_control+'" type="button" onclick="aspirante_input(this)"  class="btn btn-primary" data-toggle="modal" data-target="#generarobservacion">Generar Carta Compromiso</button>';
+          fila += valor.Plantel_cct;
+          fila += '</td>';
+          fila += '<td>';
+          fila += '<button class="btn btn-warning" type="button"  class="btn btn-primary" data-toggle="modal" data-target="#generarobservacion">Generar Carta Compromiso</button>';
           fila += '</td>';
           fila += '</tr>';
           document.getElementById("tabla").innerHTML += fila;

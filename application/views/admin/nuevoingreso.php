@@ -194,7 +194,7 @@
               <div class="col-md-4">
                 <div class="form-label-group">
                   <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ ]+" required="required" title="Introduzca solo letras"
-                    class="form-control" id="aspirante_nombre" name="aspirante_nombre" placeholder="Nombre(s)">
+                    class="form-control"  id="aspirante_nombre" name="aspirante_nombre" placeholder="Nombre(s)">
                   <label for="aspirante_nombre">Nombre(s)</label>
                 </div>
               </div>
@@ -994,6 +994,42 @@
     <script src="/cseiio/assets/js/cambio_municipio.js"></script>
 
     <script>
+
+function fecha_curp(fecha){
+
+var fechas = fecha.split("-");
+fechas[0] = fechas[0].substring(2,4);
+return fechas.join("");
+}
+
+function generarCURP(){
+
+
+var CURP = [];
+CURP[0] = $("#aspirante_apellido_paterno").val().charAt(0).toUpperCase();
+CURP[1] = $("#aspirante_apellido_paterno").val().slice(1).replace(/\a\e\i\o\u/gi, "").charAt(0).toUpperCase();
+CURP[2] = $("#aspirante_apellido_materno").val().charAt(0).toUpperCase();
+CURP[3] = $("#aspirante_nombre").val().charAt(0).toUpperCase();
+CURP[4] = fecha_curp($("#aspirante_fecha_nacimiento").val());
+CURP[5] = $("#aspirante_sexo").val().toUpperCase();
+CURP[6] = abreviacion[estados.indexOf($("#selector_estado_aspirante option:selected").text().toLowerCase())];
+CURP[7] = $("#aspirante_apellido_paterno").val().slice(1).replace(/[aeiou]/gi, "").charAt(0).toUpperCase();
+CURP[8] = $("#aspirante_apellido_materno").val().slice(1).replace(/[aeiou]/gi, "").charAt(0).toUpperCase();
+CURP[9] = $("#aspirante_nombre").val().slice(1).replace(/[aeiou]/gi, "").charAt(0).toUpperCase();
+document.getElementById("aspirante_curp").value = CURP.join("");
+}
+
+function curp(){
+  generarCURP();
+}
+var estados = ["aguascalientes","baja california","baja california sur","campeche","chiapas","chihuahua","coahuila","colima","ciudad de mexico","distrito federal","durango","guanajuato","guerrero","hidalgo","jalisco","estado de mexico","michoacan","morelos","nayarit","nuevo leon","oaxaca","puebla","queretaro","quintana roo","san luis potosi","sinaloa","sonora","tabasco","tamaulipas","tlaxcala","veracruz","yucatan","zacatecas"];
+var abreviacion = ["AS","BC","BS","CC","CS","CH","CL","CM","CX","DF","DG","GT","GR","HG","JC","MC","MN","MS","NT","NL","OC","PL","QT","QR","SP","SL","SR","TC","TS","TL","VZ","YN","ZS"];
+
+
+  
+
+
+
       var selector_estado_aspirante = document.getElementById("selector_estado_aspirante");
       var selector_municipio_aspirante = document.getElementById("selector_municipio_aspirante");
       var selector_localidad_aspirante = document.getElementById("selector_localidad_aspirante");

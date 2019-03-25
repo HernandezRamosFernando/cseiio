@@ -136,7 +136,7 @@
         </a>
       </li>
       <li class="nav-item ">
-        <a class="nav-link" href="/cseiio/index.php/c_menu/principal">
+        <a class="nav-link" href="/cseiio/index.php/c_acreditacion/acreditacion">
           <i class="fas fa-fw fa-calendar-check"></i>
           <span>Acreditación</span>
         </a>
@@ -285,7 +285,7 @@
 
 
                 <!--datos personales------------------------------------------------------>
-                <p class="text-center text-white rounded" style="background-color: #579A8D; height: 40px">
+                <p class="text-center text-white rounded titulo-form h4">
                   Datos personales de Aspirante
                   <hr>
                 </p>
@@ -498,7 +498,7 @@
                 <!--fin datos personales------------------------------------------------------>
 
                 <!--direccion------------------------------------------------------>
-                <p class="text-center text-white rounded" style="background-color: #579A8D; height: 40px">
+                <p class="text-center text-white rounded titulo-form h4">
                   Dirección familiar del Aspirante
                   <hr>
                 </p>
@@ -598,7 +598,7 @@
                 <!--fin direccion------------------------------------------------------>
         
                 <!--curp------------------------------------------------------>
-          <p class="text-center text-white rounded" style="background-color: #579A8D; height: 40px">
+                <p class="text-center text-white rounded titulo-form h4">
             CURP
             <hr>
           </p>
@@ -625,7 +625,7 @@
                 
 
                 <!--datos tutor------------------------------------------------------>
-                <p class="text-center text-white rounded" style="background-color: #579A8D; height: 40px">
+                <p class="text-center text-white rounded titulo-form h4">
                   Datos de Tutor
                   <hr>
                 </p>
@@ -720,7 +720,7 @@
 
 
                 <!--datos lengua materna------------------------------------------------------>
-                <p class="text-center text-white rounded" style="background-color: #579A8D; height: 40px">
+                <p class="text-center text-white rounded titulo-form h4">
                   Datos de lengua materna
                   <hr>
                 </p>
@@ -824,7 +824,7 @@
 
 
                 <!--datos secundaria------------------------------------------------------>
-                <p class="text-center text-white rounded" style="background-color: #579A8D; height: 40px">
+                <p class="text-center text-white rounded titulo-form h4">
                   Datos de Secundaria de procedencia
                   <hr>
                 </p>
@@ -893,7 +893,7 @@
 
 
                 <br>
-                <button type="submit" class="btn btn-success btn-lg btn-block">Actualizar Datos</button>
+                <button type="submit" class="btn btn-success btn-lg btn-block" style="padding: 1.5rem">Actualizar Datos</button>
 
 
               </form>

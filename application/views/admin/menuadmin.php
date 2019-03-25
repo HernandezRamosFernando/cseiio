@@ -165,7 +165,7 @@
                             </a>
                         </div>
                         <div class="col-md-4 col-lg-4">
-                            <a href=".../views/acreditacion.html" class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-calendar-check btn-responsive" 
+                            <a href="/cseiio/index.php/c_acreditacion/acreditacion" class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-calendar-check btn-responsive" 
                             style="height: 80%; background: #B7156D; border-color: #B7156D; padding: 13% " >
                               Acreditación
                             </a>

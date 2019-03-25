@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Inscripción</title>
+  <title>Crear grupo</title>
 
   <!-- Bootstrap core CSS-->
   <link href="/cseiio/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -22,6 +22,7 @@
   <link rel="icon" href="/cseiio/assets/img/favicon.ico">
 
   <link rel="stylesheet" type="text/css" href="/cseiio/assets/css/main.css">
+  <link href="/cseiio/assets/vendor/bootstrap/css/bootstrap-float-label.css" rel="stylesheet">
 
 
 
@@ -37,7 +38,8 @@
     </button>
     <ul class="nav justify-content-center">
       <li class="nav-item">
-        <a class="nav-link disabled" style="color:rgb(182, 197, 193)" href="/cseiio/index.php/c_menu/principal">Sistema integral de
+        <a class="nav-link disabled" style="color:rgb(182, 197, 193)" href="/cseiio/index.php/c_menu/principal">Sistema
+          integral de
           servicios escolares</a>
       </li>
       <li class="nav-item">
@@ -103,15 +105,26 @@
       </li>
 
       <li class="nav-item dropdown ">
-      <a class="nav-link dropdown-toggle bg-info text-white fas fa-fw fa-address-card" data-toggle="dropdown" href="#" role="button" > 
-      <span class="font-weight-light">Inscripción<span>
-      </a>
-      <div class="dropdown-menu bg-info">
-      <a class="dropdown-item btn-responsive btn-primary fas fa-id-card " href="/cseiio/index.php/c_aspirante/nuevo_ingreso"> <span class="font-weight-light">Inscripción Nuevo Ingreso</span></a>
-      <a class="dropdown-item btn-responsive fas fa-id-card-alt" href="/cseiio/index.php/c_aspirante/portabilidad"> <span class="font-weight-light">Inscripción Portabilidad</span></a>
-      <a class="dropdown-item btn-responsive fas fa-user-check " href="/cseiio/index.php/c_aspirante/asignar_matricula"> <span class="font-weight-light">Asignar Matrícula</span></a>
-      <a class="dropdown-item btn-responsive fas fa-clipboard-check " href="/cseiio/index.php/c_aspirante/carta_compromiso"> <span class="font-weight-light">Generación de Carta Compromiso</span></a>
-      </div>
+        <a class="nav-link dropdown-toggle  fas fa-fw fa-address-card" data-toggle="dropdown" href="#" role="button">
+          <span class="font-weight-light">Inscripción<span>
+        </a>
+        <div class="dropdown-menu ">
+          <a class="dropdown-item btn-responsive btn-primary fas fa-id-card "
+            href="/cseiio/index.php/c_aspirante/nuevo_ingreso">
+            <span class="font-weight-light">Inscripción Nuevo Ingreso</span>
+          </a>
+          <a class="dropdown-item btn-responsive fas fa-id-card-alt" href="/cseiio/index.php/c_aspirante/portabilidad">
+            <span class="font-weight-light">Inscripción Portabilidad</span>
+          </a>
+          <a class="dropdown-item btn-responsive fas fa-user-check "
+            href="/cseiio/index.php/c_aspirante/asignar_matricula">
+            <span class="font-weight-light">Asignar Matrícula</span>
+          </a>
+          <a class="dropdown-item btn-responsive fas fa-clipboard-check "
+            href="/cseiio/index.php/c_aspirante/carta_compromiso">
+            <span class="font-weight-light">Generación de Carta Compromiso</span>
+          </a>
+        </div>
         </a>
       </li>
       <li class="nav-item ">
@@ -127,7 +140,7 @@
         </a>
       </li>
       <li class="nav-item ">
-        <a class="nav-link" href="/cseiio/index.php/c_acreditacion/acreditacion">
+        <a class="nav-link bg-info text-white" href="/cseiio/index.php/c_acreditacion/acreditacion">
           <i class="fas fa-fw fa-calendar-check"></i>
           <span>Acreditación</span>
         </a>
@@ -173,56 +186,122 @@
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a>Inscripción</a>
+            <a>Crear grupos</a>
           </li>
-          <li class="breadcrumb-item active">Seleccione un elemento de los mostrados</li>
+          <li class="breadcrumb-item active">Ingrese los datos requeridos</li>
         </ol>
 
-        <!-- Botones-->
-        <div class="row position-static" style="height: 350px">
-          <div class="col col-lg-4">
-            <a href="/cseiio/index.php/c_aspirante/nuevo_ingreso"
-              class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-id-card btn-responsive"
-              style="height: 80%; background: #1F934C; border-color: #1F934C; padding: 13% ">
-              Inscripción Nuevo Ingreso
-            </a>
+        <div class="form-group">
+
+            <div class="row">
+              <div class="col-md-8">
+                <label class="form-group has-float-label">
+                  <select class="form-control form-control-lg" required="required" id="aspirante_plantel"
+                    name="aspirante_plantel">
+                    <option>Seleccione el plantel donde creara el grupo</option>
+
+                    <?php
+                                        foreach ($planteles as $plantel)
+                                        {
+                                          echo '<option value="'.$plantel->cct.'">'.$plantel->nombre_plantel.' ----- CCT: '.$plantel->cct.'</option>';
+                                        }
+                                        ?>
+
+                  </select>
+                  <span>Plantel</span>
+                </label>
+              </div>
+
+            </div>
+
           </div>
-          <div class="col  col-lg-4">
-            <a href="/cseiio/index.php/c_aspirante/portabilidad"
-              class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-id-card-alt btn-responsive"
-              style="height: 80%; background: #9DBF3B; border-color: #9DBF3B; padding: 13% ">
-              Inscripción Portabilidad
-            </a>
+
+        <div class="form-group">
+          <div class="row">
+
+            <div class="col-md-4">
+              <label class="form-group has-float-label">
+                <select class="form-control form-control-lg" name="" id="">
+                <option value="0">Seleccione uno</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                </select>
+                <span>Seleccione el semestre del grupo a crear</span>
+              </label>
+            </div>
+          
+
+          <div class="col-md-4">
+              <label class="form-group has-float-label">
+                <select class="form-control form-control-lg" name="" id="">
+                <option value="NO">No</option>
+                </select>
+                <span>¿Es de especialidad?</span>
+              </label>
+            </div>
+
+          <div class="col-md-4">
+          <label>Cantidad de alumnos</label>
           </div>
-          <div class="col col-lg-4">
-            <a href="/cseiio/index.php/c_aspirante/asignar_matricula"
-              class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-user-check btn-responsive"
-              style="height: 80%; background: #579A8D; border-color: #579A8D; padding: 13% ">
-              Asignar Matrícula
-            </a>
-          </div>
-          <div class="col col-lg-4">
-            <a href="/cseiio/index.php/c_aspirante/carta_compromiso"
-              class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-clipboard-check btn-responsive"
-              style="height: 80%; background: #B7156D; border-color: #B7156D; padding: 13% ">
-              Generación de Carta Compromiso
-            </a>
-          </div>
-          <div class="col col-lg-4">
-            <a href="/cseiio/index.php/c_aspirante/carta_compromiso"
-              class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-clipboard-check btn-responsive"
-              style="height: 80%; background: #B7156D; border-color: #B7156D; padding: 13% ">
-              Crear ciclo escolar
-            </a>
-          </div>
-          <div class="col col-lg-4">
-            <a href="/cseiio/index.php/c_aspirante/carta_compromiso"
-              class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-clipboard-check btn-responsive"
-              style="height: 80%; background: #B7156D; border-color: #B7156D; padding: 13% ">
-              Datos de secundaria
-            </a>
+
+
           </div>
         </div>
+
+          <div class="row">
+          <div class="col-md-4">
+                <label class="form-group has-float-label">
+                  <select class="form-control form-control-lg" required="required" id="aspirante_plantel"
+                    name="aspirante_plantel">
+                    <option>Seleccione el ciclo del grupo <i class="fa fa-graduation-cap" aria-hidden="true"></i></option>
+
+                    <?php
+                                        foreach ($ciclo_escolar as $ciclo)
+                                        {
+                                          echo '<option value="'.$ciclo->id_ciclo_escolar.'">'.$ciclo->nombre_ciclo_escolar.'</option>';
+                                        }
+                                        ?>
+
+                  </select>
+                  <span>Ciclo escolar</span>
+                </label>
+              </div>
+          </div>
+
+          <div class="form-group">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-label-group">
+                <input type="text" required="required" title="Introduzca solo letras" class="form-control"
+                  id="grupo_nombre" name="grupo_nombre" placeholder="Nombre de grupo">
+                <label for="grupo_nombre">Ingrese el nombre del grupo</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-label-group">
+                <input type="text" required="required" title="Introduzca solo letras" class="form-control"
+                  id="grupo_periodo" name="grupo_periodo" placeholder="Periodo del grupo(s)">
+                <label for="grupo_periodo">Perido del grupo</label>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <button type="button" name="" id="" class="btn btn-success btn-lg btn-block" style="padding: 1.5rem">Crear grupo</button>
+            </div>
+          </div>
+        </div>
+
+
+
 
 
       </div>

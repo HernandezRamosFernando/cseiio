@@ -128,7 +128,7 @@
         </a>
       </li>
       <li class="nav-item ">
-        <a class="nav-link" href="/cseiio/index.php/c_menu/principal">
+        <a class="nav-link" href="/cseiio/index.php/c_acreditacion/acreditacion">
           <i class="fas fa-fw fa-calendar-check"></i>
           <span>Acreditación</span>
         </a>
@@ -187,7 +187,7 @@
         <input type="text" name="formulario" value="portabilidad" style="display:none">
 
           <!--datos personales------------------------------------------------------>
-          <p class="text-center text-white rounded" style="background-color: #579A8D; height: 40px">
+          <p class="text-center text-white rounded titulo-form h4">
             Datos personales de Aspirante
             <hr>
           </p>
@@ -398,7 +398,7 @@
           <!--fin datos personales------------------------------------------------------>
 
           <!--direccion------------------------------------------------------>
-          <p class="text-center text-white rounded" style="background-color: #579A8D; height: 40px">
+          <p class="text-center text-white rounded titulo-form h4">
             Dirección familiar del Aspirante
             <hr>
           </p>
@@ -495,8 +495,8 @@
 
           <!--fin direccion------------------------------------------------------>
 
-                    <!--curp------------------------------------------------------>
-                    <p class="text-center text-white rounded" style="background-color: #579A8D; height: 40px">
+    <!--curp------------------------------------------------------>
+        <p class="text-center text-white rounded titulo-form h4">
             CURP
             <hr>
           </p>
@@ -541,7 +541,7 @@
           </div>
 
           <!--datos tutor------------------------------------------------------>
-          <p class="text-center text-white rounded" style="background-color: #579A8D; height: 40px">
+          <p class="text-center text-white rounded titulo-form h4">
             Datos de Tutor
             <hr>
           </p>
@@ -634,7 +634,7 @@
 
 
           <!--datos lengua materna------------------------------------------------------>
-          <p class="text-center text-white rounded" style="background-color: #579A8D; height: 40px">
+          <p class="text-center text-white rounded titulo-form h4">
             Datos de lengua materna
             <hr>
           </p>
@@ -738,7 +738,7 @@
 
 
           <!--datos secundaria------------------------------------------------------>
-          <p class="text-center text-white rounded" style="background-color: #579A8D; height: 40px">
+          <p class="text-center text-white rounded titulo-form h4">
             Datos de Secundaria de procedencia
             <hr>
           </p>
@@ -815,7 +815,7 @@
           <!--fin datos secundaria------------------------------------------------------>
 
           <!--documentos solicitados------------------------------------------------------>
-          <p class="text-center text-white rounded" style="background-color: #579A8D; height: 40px">
+          <p class="text-center text-white rounded titulo-form h4">
             Documentos solicitados para generación de Matrícula
             <hr>
           </p>
@@ -860,7 +860,7 @@
           <!-- fin documentos solicitados------------------------------------------------------>
 
           <!--documentos extras------------------------------------------------------>
-          <p class="text-center text-white rounded" style="background-color: #579A8D; height: 40px">
+          <p class="text-center text-white rounded titulo-form h4">
             Documentos Extras
             <hr>
           </p>
@@ -887,7 +887,7 @@
           <!-- fin documentos extras------------------------------------------------------>
 
           <br>
-          <button type="submit" class="btn btn-success btn-lg btn-block">Registrar</button>
+          <button type="submit" class="btn btn-success btn-lg btn-block" style="padding: 1.5rem">Registrar</button>
 
 
         </form>
@@ -955,7 +955,7 @@
                 <div class="col-md-4">
                   <label class="form-group has-float-label">
                     <select class="form-control form-control-lg" required="required" name="aspirante_secundaria_estado"
-                      onChange="cambio_estado(selector_estado_secundaria,selector_municipio_secundaria)"
+                      onChange="cambio_estado(selector_estado_secundaria,selector_municipio_secundaria,selector_localidad_secundaria)"
                       id="selector_estado_secundaria">
                       <option>Seleccione un estado</option>
 

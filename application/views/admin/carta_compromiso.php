@@ -125,7 +125,7 @@
         </a>
       </li>
       <li class="nav-item ">
-        <a class="nav-link" href="/cseiio/index.php/c_menu/principal">
+        <a class="nav-link" href="/cseiio/index.php/c_acreditacion/acreditacion">
           <i class="fas fa-fw fa-calendar-check"></i>
           <span>Acreditación</span>
         </a>
@@ -262,8 +262,9 @@
   <!-- /#wrapper -->
   
   <!-- Modal -->
-  <div class="modal fade" id="generarobservacion" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+  <div class="modal fade" id="generarobservacion" tabindex="-1" role="dialog" aria-labelledby="generarobservacion "
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" style="max-width: 75% !important;" role="document">
       <div class="modal-content">
           <div class="modal-header">
               <h5 class="modal-title">Agregar las observaciones</h5>
@@ -276,8 +277,8 @@
           <table class="table table-hover" id="tabla_documentos" style="width: 100%">
               <thead class="thead-light">
                 <tr>
-                  <th scope="col" class="col-md-2">N° control</th>
-                  <th scope="col" class="col-md-2">Documento</th>
+                  <th scope="col" class="col-md-1">N° control</th>
+                  <th scope="col" class="col-md-1">Documento</th>
                   <th scope="col" class="col-md-3">Observación</th>
                 </tr>
               </thead>

@@ -126,7 +126,7 @@
         </a>
       </li>
       <li class="nav-item ">
-        <a class="nav-link" href="/cseiio/index.php/c_menu/principal">
+        <a class="nav-link" href="/cseiio/index.php/c_acreditacion/acreditacion">
           <i class="fas fa-fw fa-calendar-check"></i>
           <span>Acreditación</span>
         </a>
@@ -401,7 +401,7 @@
 
 function asignar_matricula(e){
   var xhr = new XMLHttpRequest();
-      xhr.open('GET', '/cseiio/c_estudiante/insertar_estudiante?no_control='+e.value, true);
+      xhr.open('GET', '/cseiio/index.php/c_estudiante/insertar_estudiante?no_control='+e.value, true);
 
       xhr.onload = function () {
         alert(xhr.responseText);

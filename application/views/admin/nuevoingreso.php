@@ -133,7 +133,7 @@
         </a>
       </li>
       <li class="nav-item ">
-        <a class="nav-link" href="/cseiio/index.php/c_menu/principal">
+        <a class="nav-link" href="/cseiio/index.php/c_acreditacion/acreditacion">
           <i class="fas fa-fw fa-calendar-check"></i>
           <span>Acreditación</span>
         </a>
@@ -190,10 +190,9 @@
           <input type="text" name="formulario" value="nuevo_ingreso" style="display:none">
 
           <!--datos personales------------------------------------------------------>
-          <p class="text-center text-white rounded" style="background-color: #579A8D; height: 40px">
-            Datos personales de Aspirante
-            <hr>
-          </p>
+            <p class="text-center text-white rounded titulo-form h4 ">Datos personales de Aspirante</p>
+            <hr>    
+          
 
           <div class="form-group">
 
@@ -387,10 +386,9 @@
           <!--fin datos personales------------------------------------------------------>
 
           <!--direccion------------------------------------------------------>
-          <p class="text-center text-white rounded" style="background-color: #579A8D; height: 40px">
-            Dirección familiar del Aspirante
+            <p class="text-center text-white rounded titulo-form h4">Dirección familiar del Aspirante</p>
             <hr>
-          </p>
+         
 
           <div class="form-group">
 
@@ -486,10 +484,9 @@
 
 
           <!--curp------------------------------------------------------>
-          <p class="text-center text-white rounded" style="background-color: #579A8D; height: 40px">
-            CURP
+          <p class="text-center text-white rounded titulo-form h4">CURP</p>
             <hr>
-          </p>
+        
           <div class="form-group">
             <div class="row">
               <div class="col-md-4">
@@ -531,10 +528,8 @@
           </div>
 
           <!--datos tutor------------------------------------------------------>
-          <p class="text-center text-white rounded" style="background-color: #579A8D; height: 40px">
-            Datos de Tutor
+          <p class="text-center text-white rounded titulo-form h4">Datos de Tutor</p>
             <hr>
-          </p>
 
           <div class="form-group">
 
@@ -624,10 +619,8 @@
 
 
           <!--datos lengua materna------------------------------------------------------>
-          <p class="text-center text-white rounded" style="background-color: #579A8D; height: 40px">
-            Datos de lengua materna
+          <p class="text-center text-white rounded titulo-form h4">Datos de lengua materna</p>
             <hr>
-          </p>
 
           <div class="form-group">
 
@@ -728,10 +721,8 @@
 
 
           <!--datos secundaria------------------------------------------------------>
-          <p class="text-center text-white rounded" style="background-color: #579A8D; height: 40px">
-            Datos de Secundaria de procedencia
+          <p class="text-center text-white rounded titulo-form h4">Datos de Secundaria de procedencia</p>
             <hr>
-          </p>
 
           <div class="form-group">
 
@@ -805,10 +796,8 @@
           <!--fin datos secundaria------------------------------------------------------>
 
           <!--documentos solicitados------------------------------------------------------>
-          <p class="text-center text-white rounded" style="background-color: #579A8D; height: 40px">
-            Documentos solicitados para generación de Matrícula
+          <p class="text-center text-white rounded titulo-form h4">Documentos solicitados para generación de Matrícula</p>
             <hr>
-          </p>
 
 
 
@@ -850,10 +839,8 @@
           <!-- fin documentos solicitados------------------------------------------------------>
 
           <!--documentos extras------------------------------------------------------>
-          <p class="text-center text-white rounded" style="background-color: #579A8D; height: 40px">
-            Documentos Extras
+          <p class="text-center text-white rounded titulo-form h4">Documentos Extras</p>
             <hr>
-          </p>
 
 
 
@@ -877,7 +864,7 @@
           <!-- fin documentos extras------------------------------------------------------>
 
           <br>
-          <button type="submit" class="btn btn-success btn-lg btn-block">Registrar</button>
+          <button type="submit" class="btn btn-success btn-lg btn-block" style="padding: 1.5rem">Registrar</button>
 
 
         </form>

@@ -95,7 +95,7 @@ if ($this->db->trans_status() === FALSE)
 else{
    ?>
     <script>
-      alert("Registro actualizados correctamente");
+      alert("Aspirante registrado correctamente");
       </script>
    <?php
 }

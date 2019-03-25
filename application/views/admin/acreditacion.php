@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Inscripción</title>
+  <title>Acreditación</title>
 
   <!-- Bootstrap core CSS-->
   <link href="/cseiio/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -103,14 +103,22 @@
       </li>
 
       <li class="nav-item dropdown ">
-      <a class="nav-link dropdown-toggle bg-info text-white fas fa-fw fa-address-card" data-toggle="dropdown" href="#" role="button" > 
+      <a class="nav-link dropdown-toggle  fas fa-fw fa-address-card" data-toggle="dropdown" href="#" role="button" > 
       <span class="font-weight-light">Inscripción<span>
       </a>
-      <div class="dropdown-menu bg-info">
-      <a class="dropdown-item btn-responsive btn-primary fas fa-id-card " href="/cseiio/index.php/c_aspirante/nuevo_ingreso"> <span class="font-weight-light">Inscripción Nuevo Ingreso</span></a>
-      <a class="dropdown-item btn-responsive fas fa-id-card-alt" href="/cseiio/index.php/c_aspirante/portabilidad"> <span class="font-weight-light">Inscripción Portabilidad</span></a>
-      <a class="dropdown-item btn-responsive fas fa-user-check " href="/cseiio/index.php/c_aspirante/asignar_matricula"> <span class="font-weight-light">Asignar Matrícula</span></a>
-      <a class="dropdown-item btn-responsive fas fa-clipboard-check " href="/cseiio/index.php/c_aspirante/carta_compromiso"> <span class="font-weight-light">Generación de Carta Compromiso</span></a>
+      <div class="dropdown-menu ">
+      <a class="dropdown-item btn-responsive btn-primary fas fa-id-card " href="/cseiio/index.php/c_aspirante/nuevo_ingreso"> 
+      <span class="font-weight-light">Inscripción Nuevo Ingreso</span>
+      </a>
+      <a class="dropdown-item btn-responsive fas fa-id-card-alt" href="/cseiio/index.php/c_aspirante/portabilidad"> 
+      <span class="font-weight-light">Inscripción Portabilidad</span>
+      </a>
+      <a class="dropdown-item btn-responsive fas fa-user-check " href="/cseiio/index.php/c_aspirante/asignar_matricula"> 
+      <span class="font-weight-light">Asignar Matrícula</span>
+      </a>
+      <a class="dropdown-item btn-responsive fas fa-clipboard-check " href="/cseiio/index.php/c_aspirante/carta_compromiso"> 
+      <span class="font-weight-light">Generación de Carta Compromiso</span>
+      </a>
       </div>
         </a>
       </li>
@@ -127,7 +135,7 @@
         </a>
       </li>
       <li class="nav-item ">
-        <a class="nav-link" href="/cseiio/index.php/c_acreditacion/acreditacion">
+        <a class="nav-link bg-info text-white" href="/cseiio/index.php/c_acreditacion/acreditacion">
           <i class="fas fa-fw fa-calendar-check"></i>
           <span>Acreditación</span>
         </a>
@@ -181,17 +189,17 @@
         <!-- Botones-->
         <div class="row position-static" style="height: 350px">
           <div class="col col-lg-4">
-            <a href="/cseiio/index.php/c_aspirante/nuevo_ingreso"
-              class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-id-card btn-responsive"
+            <a href="/cseiio/index.php/c_acreditacion/crear_grupo"
+              class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-layer-group "
               style="height: 80%; background: #1F934C; border-color: #1F934C; padding: 13% ">
-              Inscripción Nuevo Ingreso
+              Crear grupo
             </a>
           </div>
           <div class="col  col-lg-4">
             <a href="/cseiio/index.php/c_aspirante/portabilidad"
-              class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-id-card-alt btn-responsive"
+              class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-grip-vertical  btn-responsive"
               style="height: 80%; background: #9DBF3B; border-color: #9DBF3B; padding: 13% ">
-              Inscripción Portabilidad
+              Asignar alumnos a grupo
             </a>
           </div>
           <div class="col col-lg-4">

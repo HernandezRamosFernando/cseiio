@@ -511,7 +511,7 @@
                       <label class="form-group has-float-label">
                         <select class="form-control form-control-lg" required="required"
                           name="aspirante_direccion_estado"
-                          onChange="cambio_estado(selector_estado_aspirante,selector_municipio_aspirante)"
+                          onChange="cambio_estado(selector_estado_aspirante,selector_municipio_aspirante,selector_localidad_aspirante)"
                           id="selector_estado_aspirante">
                           <option>Seleccione el estado</option>
 

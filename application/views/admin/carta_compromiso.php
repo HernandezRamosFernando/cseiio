@@ -276,9 +276,9 @@
           <table class="table table-hover" id="tabla_documentos" style="width: 100%">
               <thead class="thead-light">
                 <tr>
-                  <th scope="col" class="col-md-1">N° control</th>
-                  <th scope="col" class="col-md-1">Documento</th>
-                  <th scope="col" class="col-md-1">Observación</th>
+                  <th scope="col" class="col-md-2">N° control</th>
+                  <th scope="col" class="col-md-2">Documento</th>
+                  <th scope="col" class="col-md-3">Observación</th>
                 </tr>
               </thead>
               <tbody id="tabla_observacion">

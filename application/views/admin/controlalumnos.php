@@ -38,7 +38,8 @@
     </button>
     <ul class="nav justify-content-center">
       <li class="nav-item">
-        <a class="nav-link disabled" style="color:rgb(182, 197, 193)" href="/cseiio/index.php/c_menu/principal">Sistema
+        <a class="nav-link disabled" style="color:rgb(182, 197, 193)" href="/cseiio/index.php/c_menu/principal">
+        Sistema
           integral de
           servicios escolares</a>
       </li>
@@ -327,31 +328,22 @@
                 <div class="form-group">
 
                   <div class="row">
-                    <div class="col-md-4">
-                      <div class="form-label-group">
-                        <input type="text"
-                          pattern="[A-ZÑ]{1}[AEIOU]{1}[A-ZÑ]{1}[A-ZÑ]{1}[0-9]{6}(H|M)(AS|BC|BS|CC|CS|CH|DF|CL|CM|DG|GT|GR|HG|JC|MC|MN|MS|NT|NL|OC|PL|QO|QR|SP|SL|SR|TC|TS|TL|VZ|YN|ZS)[BCDFGHJKLMNPQRSTVWXYZ]{3}[0-9|A-Z]{1}[0-9]{1}"
-                          title="CURP incorrecto" class="form-control text-uppercase" id="aspirante_curp"
-                          name="aspirante_curp" placeholder="CURP">
-                        <label for="aspirante_curp">CURP</label>
-                      </div>
-                    </div>
 
-                    <div class="col-md-3 text-center">
+                    <div class="col-md-4 text-center">
                       <div class="form-label-group">
                         <input type="date" required="required" class="form-control" id="aspirante_fecha_nacimiento"
                           name="aspirante_fecha_nacimiento" placeholder="Fecha de Nacimiento">
                         <label for="aspirante_fecha_nacimiento">Fecha Nacimiento</label>
                       </div>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-4">
                       <div class="form-label-group">
                         <input type="text" pattern="[0-9]{10}" title="El numero de telefono debe de ser a 10 digitos"
                           class="form-control" id="aspirante_telefono" name="aspirante_telefono" placeholder="Telefono">
                         <label for="aspirante_telefono">Telefono</label>
                       </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                       <div class="form-label-group">
                         <input type="email"
                           pattern="^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$"
@@ -575,7 +567,7 @@
                   <div class="row">
                     <div class="col-md-4">
                       <div class="form-label-group">
-                        <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ 0-9]+" required="required"
+                        <input type="text" required="required"
                           title="La direccion tiene caracteres incorrectos" class="form-control"
                           id="aspirante_direccion_calle" name="aspirante_direccion_calle" placeholder="Calle">
                         <label for="aspirante_direccion_calle">Calle y Número</label>
@@ -584,7 +576,7 @@
 
                     <div class="col-md-4">
                       <div class="form-label-group">
-                        <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ 0-9]+"
+                        <input type="text"
                           title="La colonia tiene caracteres incorrectos" class="form-control"
                           id="aspirante_direccion_colonia" name="aspirante_direccion_colonia" placeholder="Colonia">
                         <label for="aspirante_direccion_colonia">Colonia</label>
@@ -604,6 +596,33 @@
                 </div>
 
                 <!--fin direccion------------------------------------------------------>
+        
+                <!--curp------------------------------------------------------>
+          <p class="text-center text-white rounded" style="background-color: #579A8D; height: 40px">
+            CURP
+            <hr>
+          </p>
+          <div class="form-group">
+            <div class="row">
+
+              <div class="col-md-4">
+                <div class="form-label-group">
+                  <input type="text"
+                    pattern="[A-ZÑ]{1}[AEIOU]{1}[A-ZÑ]{1}[A-ZÑ]{1}[0-9]{6}(H|M)(AS|BC|BS|CC|CS|CH|DF|CL|CM|DG|GT|GR|HG|JC|MC|MN|MS|NT|NL|OC|PL|QO|QR|SP|SL|SR|TC|TS|TL|VZ|YN|ZS)[BCDFGHJKLMNPQRSTVWXYZ]{3}[0-9|A-Z]{1}[0-9]{1}"
+                    title="Ingrese los datos faltantes" class="form-control text-uppercase" id="aspirante_curp"
+                    name="aspirante_curp" placeholder="CURP">
+                  <label for="aspirante_curp">CURP</label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-label-group">
+              <a name="" id="" class="btn btn-outline-success btn-lg btn-block btn-responsive" href="https://www.gob.mx/curp/" target="_blank" role="button">
+              ¿No cuenta con curp? Buscar aquí</a>
+                            </div>
+                            </div>
+            </div>
+          </div>
+                
 
                 <!--datos tutor------------------------------------------------------>
                 <p class="text-center text-white rounded" style="background-color: #579A8D; height: 40px">

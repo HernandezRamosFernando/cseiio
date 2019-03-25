@@ -250,7 +250,7 @@
                 <div class="form-label-group">
                   <input type="text" pattern="[0-9]{10}" title="El numero de telefono debe de ser a 10 digitos"
                     class="form-control" id="aspirante_telefono" name="aspirante_telefono" placeholder="Telefono">
-                  <label for="aspirante_telefono">Telefono</label>
+                  <label for="aspirante_telefono">Teléfono</label>
                 </div>
               </div>
               <div class="col-md-3">
@@ -495,7 +495,7 @@
                   <input type="text" pattern="[0-9]{5}" title="El codigo postal solo debe contener 5 digitos"
                     class="form-control" id="aspirante_direccion_cp" name="aspirante_direccion_cp"
                     placeholder="Codigo Postal">
-                  <label for="aspirante_direccion_cp">Codigo Postal</label>
+                  <label for="aspirante_direccion_cp">Código Postal</label>
                 </div>
               </div>
             </div>

@@ -229,31 +229,22 @@
           <div class="form-group">
 
             <div class="row">
-              <div class="col-md-4">
-                <div class="form-label-group">
-                  <input type="text"
-                    pattern="[A-ZÑ]{1}[AEIOU]{1}[A-ZÑ]{1}[A-ZÑ]{1}[0-9]{6}(H|M)(AS|BC|BS|CC|CS|CH|DF|CL|CM|DG|GT|GR|HG|JC|MC|MN|MS|NT|NL|OC|PL|QO|QR|SP|SL|SR|TC|TS|TL|VZ|YN|ZS)[BCDFGHJKLMNPQRSTVWXYZ]{3}[0-9|A-Z]{1}[0-9]{1}"
-                    title="CURP incorrecto" class="form-control text-uppercase" id="aspirante_curp"
-                    name="aspirante_curp" placeholder="CURP">
-                  <label for="aspirante_curp">CURP</label>
-                </div>
-              </div>
 
-              <div class="col-md-3 text-center">
+              <div class="col-md-4 text-center">
                 <div class="form-label-group">
                   <input type="date" required="required" class="form-control" id="aspirante_fecha_nacimiento"
                     name="aspirante_fecha_nacimiento" placeholder="Fecha de Nacimiento">
                   <label for="aspirante_fecha_nacimiento">Fecha Nacimiento</label>
                 </div>
               </div>
-              <div class="col-md-2">
+              <div class="col-md-4">
                 <div class="form-label-group">
                   <input type="text" pattern="[0-9]{10}" title="El numero de telefono debe de ser a 10 digitos"
                     class="form-control" id="aspirante_telefono" name="aspirante_telefono" placeholder="Telefono">
                   <label for="aspirante_telefono">Teléfono</label>
                 </div>
               </div>
-              <div class="col-md-3">
+              <div class="col-md-4">
                 <div class="form-label-group">
                   <input type="email"
                     pattern="^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$"
@@ -419,7 +410,7 @@
               <div class="col-md-4">
                 <label class="form-group has-float-label">
                   <select class="form-control form-control-lg" required="required" name="aspirante_direccion_estado"
-                    onChange="cambio_estado(selector_estado_aspirante,selector_municipio_aspirante)"
+                    onChange="cambio_estado(selector_estado_aspirante,selector_municipio_aspirante,selector_localidad_aspirante)"
                     id="selector_estado_aspirante">
                     <option>Seleccione el estado</option>
 
@@ -503,6 +494,51 @@
           </div>
 
           <!--fin direccion------------------------------------------------------>
+
+                    <!--curp------------------------------------------------------>
+                    <p class="text-center text-white rounded" style="background-color: #579A8D; height: 40px">
+            CURP
+            <hr>
+          </p>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-4">
+                <label class="form-group has-float-label">
+                  <select class="form-control form-control-lg" required="required" name="aspirante_nacimiento_estado"
+                    onChange="curp();" id="selector_estado_nacimiento_aspirante">
+                    <option>Seleccione el estado</option>
+
+                    <?php
+                              foreach ($estados as $estado)
+                              {
+                                      echo '<option value="'.$estado->id_estado.'">'.$estado->nombre_estado.'</option>';
+                              }
+                              ?>
+
+
+
+                  </select>
+                  <span>Estado de nacimiento</span>
+                </label>
+              </div>
+
+              <div class="col-md-4">
+                <div class="form-label-group">
+                  <input type="text"
+                    pattern="[A-ZÑ]{1}[AEIOU]{1}[A-ZÑ]{1}[A-ZÑ]{1}[0-9]{6}(H|M)(AS|BC|BS|CC|CS|CH|DF|CL|CM|DG|GT|GR|HG|JC|MC|MN|MS|NT|NL|OC|PL|QO|QR|SP|SL|SR|TC|TS|TL|VZ|YN|ZS)[BCDFGHJKLMNPQRSTVWXYZ]{3}[0-9|A-Z]{1}[0-9]{1}"
+                    title="Ingrese los datos faltantes" class="form-control text-uppercase" id="aspirante_curp"
+                    name="aspirante_curp" placeholder="CURP">
+                  <label for="aspirante_curp">CURP</label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-label-group">
+              <a name="" id="" class="btn btn-outline-success btn-lg btn-block btn-responsive" href="https://www.gob.mx/curp/" target="_blank" role="button">
+              ¿No cuenta con curp? Buscar aquí</a>
+                            </div>
+                            </div>
+            </div>
+          </div>
 
           <!--datos tutor------------------------------------------------------>
           <p class="text-center text-white rounded" style="background-color: #579A8D; height: 40px">
@@ -1012,6 +1048,39 @@
     <script src="/cseiio/assets/js/cambio_municipio.js"></script>
 
     <script>
+
+function fecha_curp(fecha){
+
+var fechas = fecha.split("-");
+fechas[0] = fechas[0].substring(2,4);
+return fechas.join("");
+}
+
+function generarCURP(){
+
+
+var CURP = [];
+CURP[0] = $("#aspirante_apellido_paterno").val().charAt(0).toUpperCase();
+CURP[1] = $("#aspirante_apellido_paterno").val().slice(1).replace(/\a\e\i\o\u/gi, "").charAt(0).toUpperCase();
+CURP[2] = $("#aspirante_apellido_materno").val().charAt(0).toUpperCase();
+CURP[3] = $("#aspirante_nombre").val().charAt(0).toUpperCase();
+CURP[4] = fecha_curp($("#aspirante_fecha_nacimiento").val());
+CURP[5] = $("#aspirante_sexo").val().toUpperCase();
+CURP[6] = abreviacion[estados.indexOf($("#selector_estado_aspirante option:selected").text().toLowerCase())];
+CURP[7] = $("#aspirante_apellido_paterno").val().slice(1).replace(/[aeiou]/gi, "").charAt(0).toUpperCase();
+CURP[8] = $("#aspirante_apellido_materno").val().slice(1).replace(/[aeiou]/gi, "").charAt(0).toUpperCase();
+CURP[9] = $("#aspirante_nombre").val().slice(1).replace(/[aeiou]/gi, "").charAt(0).toUpperCase();
+document.getElementById("aspirante_curp").value = CURP.join("");
+}
+
+function curp(){
+  generarCURP();
+}
+var estados = ["aguascalientes","baja california","baja california sur","campeche","chiapas","chihuahua","coahuila","colima","ciudad de mexico","distrito federal","durango","guanajuato","guerrero","hidalgo","jalisco","estado de mexico","michoacan","morelos","nayarit","nuevo leon","oaxaca","puebla","queretaro","quintana roo","san luis potosi","sinaloa","sonora","tabasco","tamaulipas","tlaxcala","veracruz","yucatan","zacatecas"];
+var abreviacion = ["AS","BC","BS","CC","CS","CH","CL","CM","CX","DF","DG","GT","GR","HG","JC","MC","MN","MS","NT","NL","OC","PL","QT","QR","SP","SL","SR","TC","TS","TL","VZ","YN","ZS"];
+
+
+
       var selector_estado_aspirante = document.getElementById("selector_estado_aspirante");
       var selector_municipio_aspirante = document.getElementById("selector_municipio_aspirante");
       var selector_localidad_aspirante = document.getElementById("selector_localidad_aspirante");

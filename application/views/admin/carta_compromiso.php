@@ -334,6 +334,8 @@
   <script src="/cseiio/assets/js/cambio_estado.js"></script>
   <script src="/cseiio/assets/js/cambio_municipio.js"></script>
 
+  
+
 
   <script>
 
@@ -366,7 +368,8 @@ function aspirante_input(e){
         }
 
         else{
-          alert("Ya cuenta con una carta compromiso vigente, dias restantes: "+(30-parseInt(JSON.parse(dias.response)[0].dias)));
+          
+          //alert("Ya cuenta con una carta compromiso vigente, dias restantes: "+(30-parseInt(JSON.parse(dias.response)[0].dias)));
 
         }
       };

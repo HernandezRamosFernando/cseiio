@@ -95,7 +95,7 @@ if ($this->db->trans_status() === FALSE)
 else{
    ?>
     <script>
-      alert("Aspirante registrado correctamente");
+      alert("Aspirante actualizado correctamente");
       </script>
    <?php
 }
@@ -147,7 +147,7 @@ public function insertar_aspirante_nuevo_ingreso(
             else{
                ?>
                 <script>
-                  alert("Registro actualizados correctamente");
+                  alert("Registro agregado correctamente");
                   </script>
                <?php
             }

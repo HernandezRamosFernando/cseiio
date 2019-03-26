@@ -168,7 +168,7 @@ public function portabilidad(){
             'nss' => $this->input->post('aspirante_nss'),
             'correo' => $this->input->post('aspirante_correo'),
             //'tipo_ingreso' => 'NUEVO INGRESO',
-            //'semestre' => 1,
+            'semestre' => $this->input->post('aspirante_semestre'),
             'programa_social' => $this->input->post('aspirante_programa_social'),
             'curp' => $this->input->post('aspirante_curp'),
             'Plantel_cct' => $this->input->post('aspirante_plantel'),
@@ -277,11 +277,13 @@ public function portabilidad(){
         if($tipo_aspirante=='nuevo_ingreso'){
             $datos_aspirante['tipo_ingreso'] = 'NUEVO INGRESO';
             $datos_aspirante['semestre'] = 1;
+            $datos_aspirante['semestre_en_curso'] = 1;
         }
 
         else{
             $datos_aspirante['tipo_ingreso'] = 'PORTABILIDAD';
             $datos_aspirante['semestre'] = $this->input->post('aspirante_semestre');
+            $datos_aspirante['semestre_en_curso'] = $this->input->post('aspirante_semestre');
         }
         
 

@@ -272,6 +272,10 @@
                   <span>Ciclo escolar</span>
                 </label>
               </div>
+
+              <div class="col-md-4">
+          <label>Cantidad de alumnos</label>
+          </div>
           </div>
 
           <div class="form-group">
@@ -296,8 +300,8 @@
               </div>
             </div>
 
-            <div class="col-md-4">
-              <button type="summit" name="" id="" class="btn btn-success btn-lg btn-block" style="padding: 1.5rem">Crear grupo</button>
+            <div class="col-md-4 offset-md-3">
+              <button type="button" name="" id="" class="btn btn-success btn-lg btn-block" style="padding: 1rem">Crear grupo</button>
             </div>
           </div>
         </div>

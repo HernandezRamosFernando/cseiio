@@ -178,7 +178,7 @@
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a>Inscripcion Nuevo Ingreso</a>
+            <a>Inscripción Nuevo Ingreso</a>
           </li>
           <li class="breadcrumb-item active">Rellene todos los campos</li>
         </ol>
@@ -251,7 +251,7 @@
                   <input type="email"
                     pattern="^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$"
                     title="Introduzca un correo valido" class="form-control text-lowercase" id="aspirante_correo"
-                    name="aspirante_correo" placeholder="Correo Electronico">
+                    name="aspirante_correo" placeholder="Correo Electrónico">
                   <label for="aspirante_correo">Correo electrónico</label>
                 </div>
               </div>
@@ -268,8 +268,9 @@
             <div class="row">
               <div class="col-md-4">
                 <label class="form-group has-float-label">
-                  <select class="form-control form-control-lg" required="required" id="aspirante_sexo"
+                  <select class="form-control form-control-lg" required id="aspirante_sexo"
                     name="aspirante_sexo">
+                    <option value="">Seleccione</option>
                     <option value="H">Hombre</option>
                     <option value="M">Mujer</option>
                   </select>
@@ -295,8 +296,9 @@
               <div class="col-md-4">
                 <div class="form-group">
                   <label class="form-group has-float-label">
-                    <select class="form-control form-control-lg" name="tipo_sangre" id="tipo_sangre">
-                      <option>Seleccione una opcion</option>
+                  <select class="form-control form-control-lg" name="tipo_sangre" id="tipo_sangre" required>
+                      <option value="">Seleccione una opción</option>
+                      <option value="No conoce">No conoce su tipo de sangre</option>
                       <option value="A+">A+</option>
                       <option value="A-">A-</option>
                       <option value="B+">B+</option>
@@ -316,11 +318,10 @@
                 <label class="form-group has-float-label">
                   <select class="form-control form-control-lg" id="aspirante_alergia_combo"
                     name="aspirante_alergia_combo" onchange="alergia(this)">
-                    <option value="2">Seleccione una opción</option>
-                    <option value="1">Si</option>
                     <option value="2">No</option>
+                    <option value="1">Si</option>
                   </select>
-                  <span>¿Alergico a algún medicamento?</span>
+                  <span>¿Alérgico a algún medicamento?</span>
                 </label>
               </div>
               <div class="col-md-4" style="display:none" id="a" name="alergia_medicamento">
@@ -336,9 +337,8 @@
                 <label class="form-group has-float-label">
                   <select class="form-control form-control-lg" id="aspirante_discapacidad_combo"
                     name="aspirante_discapacidad_combo" onchange="discapacidad(this)">
-                    <option value="2">Seleccione una opción</option>
-                    <option value="1">Si</option>
                     <option value="2">No</option>
+                    <option value="1">Si</option>
                   </select>
                   <span>¿Padece alguna discapacidad?</span>
                 </label>
@@ -364,9 +364,9 @@
             <div class="row">
               <div class="col-md-8">
                 <label class="form-group has-float-label">
-                  <select class="form-control form-control-lg" required="required" id="aspirante_plantel"
+                  <select class="form-control form-control-lg" required id="aspirante_plantel"
                     name="aspirante_plantel">
-                    <option>Seleccione el plantel de ingreso</option>
+                    <option value="">Seleccione el plantel de ingreso</option>
 
                     <?php
                                         foreach ($planteles as $plantel)
@@ -396,10 +396,10 @@
 
               <div class="col-md-4">
                 <label class="form-group has-float-label">
-                  <select class="form-control form-control-lg" required="required" name="aspirante_direccion_estado"
+                  <select class="form-control form-control-lg" required name="aspirante_direccion_estado"
                     onChange="cambio_estado(selector_estado_aspirante,selector_municipio_aspirante,selector_localidad_aspirante)"
                     id="selector_estado_aspirante">
-                    <option>Seleccione el estado</option>
+                    <option value="">Seleccione el estado</option>
 
                     <?php
                               foreach ($estados as $estado)
@@ -470,9 +470,9 @@
 
               <div class="col-md-2">
                 <div class="form-label-group">
-                  <input type="text" pattern="[0-9]{5}" title="El codigo postal solo debe contener 5 digitos"
+                  <input type="text" pattern="[0-9]{5}" title="El código postal solo debe contener 5 dígitos"
                     class="form-control" id="aspirante_direccion_cp" name="aspirante_direccion_cp"
-                    placeholder="Codigo Postal">
+                    placeholder="Código Postal">
                   <label for="aspirante_direccion_cp">Código Postal</label>
                 </div>
               </div>
@@ -491,9 +491,9 @@
             <div class="row">
               <div class="col-md-4">
                 <label class="form-group has-float-label">
-                  <select class="form-control form-control-lg" required="required" name="aspirante_nacimiento_estado"
+                  <select class="form-control form-control-lg" required name="aspirante_nacimiento_estado"
                     onChange="curp();" id="selector_estado_nacimiento_aspirante">
-                    <option>Seleccione el estado</option>
+                    <option value="">Seleccione el estado de nacimiento</option>
 
                     <?php
                               foreach ($estados as $estado)
@@ -545,8 +545,8 @@
 
               <div class="col-md-2">
                 <label class="form-group has-float-label">
-                  <select class="form-control form-control-lg" required="required" id="aspirante_tutor_parentesco"
-                    required="required" name="aspirante_tutor_parentesco" onchange="parentesco(this)">
+                  <select class="form-control form-control-lg" id="aspirante_tutor_parentesco"
+                    required name="aspirante_tutor_parentesco" onchange="parentesco(this)">
                     <option value="">Seleccione</option>
                     <option value="PADRE">Padre</option>
                     <option value="MADRE">Madre</option>
@@ -581,25 +581,25 @@
                 <div class="form-label-group">
                   <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ. ]+" title="Introduzca solo letras"
                     class="form-control" id="aspirante_tutor_ocupacion" name="aspirante_tutor_ocupacion"
-                    placeholder="Ocupacion">
-                  <label for="aspirante_tutor_ocupacion">Ocupacion</label>
+                    placeholder="Ocupación">
+                  <label for="aspirante_tutor_ocupacion">Ocupación</label>
                 </div>
               </div>
 
               <div class="col-md-3">
                 <div class="form-label-group">
-                  <input type="text" pattern="[0-9]{10}" title="El numero de telefono debe de ser a 10 digitos con lada"
+                  <input type="text" pattern="[0-9]{10}" title="El numero de telefono debe de ser a 10 dígitos con lada"
                     class="form-control" id="aspirante_tutor_telefono" name="aspirante_tutor_telefono"
-                    placeholder="Telefono particular">
-                  <label for="aspirante_tutor_telefono">Telefono particular</label>
+                    placeholder="Teléfono particular">
+                  <label for="aspirante_tutor_telefono">Teléfono particular</label>
                 </div>
               </div>
               <div class="col-md-3">
                 <div class="form-label-group">
                   <input type="text" pattern="[0-9]{10}" title="El numero de telefono debe de ser a 10 digitos con lada"
                     class="form-control" id="aspirante_tutor_telefono_comunidad"
-                    name="aspirante_tutor_telefono_comunidad" placeholder="Telefono de la comunidad">
-                  <label for="aspirante_tutor_telefono_comunidad">Telefono de la comunidad</label>
+                    name="aspirante_tutor_telefono_comunidad" placeholder="Teléfono de la comunidad">
+                  <label for="aspirante_tutor_telefono_comunidad">Teléfono de la comunidad</label>
                 </div>
               </div>
 
@@ -627,9 +627,9 @@
             <div class="row">
               <div class="col-md-2">
                 <label class="form-group has-float-label">
-                  <select class="form-control" required="required" onchange="lenguas_evento(this)"
+                  <select class="form-control" required onchange="lenguas_evento(this)"
                     id="aspirante_lengua_nombre" name="aspirante_lengua_nombre">
-                    <option value="NO CONOCE LENGUA">Seleccione una lengua</option>
+                    <option value="">Seleccione una lengua</option>
 
                     <?php
                               foreach ($lenguas as $lengua)
@@ -776,12 +776,13 @@
 
               <div class="col-md-4" style="display: none" id="tipo_subsistema_oculto">
                 <label class="form-group has-float-label">
-                  <select class="form-control form-control-lg" required="required"
+                  <select class="form-control form-control-lg" required
                     name="aspirante_secundaria_tipo_subsistema" id="aspirante_secundaria_tipo_subsistema">
+                    <option value="">Seleccione un tipo</option>
                     <option value="TELESECUNDARIA">Telesecundaria</option>
                     <option value="GENERAL">General</option>
                     <option value="PARTICULAR">Particular</option>
-                    <option value="TECNICA">Tecnica</option>
+                    <option value="TÉCNICA">Técnica</option>
                     <option value="COMUNITARIA">Comunitaria</option>
                     <option value="OTRO">Otro</option>
                   </select>
@@ -912,12 +913,13 @@
 
                 <div class="col-md-4">
                   <label class="form-group has-float-label">
-                    <select class="form-control form-control-lg" name="aspirante_nuevasecundaria_tipo_subsistema"
+                    <select class="form-control form-control-lg" required name="aspirante_nuevasecundaria_tipo_subsistema"
                       id="aspirante_nuevasecundaria_tipo_subsistema">
+                    <option value="">Seleccione un tipo</option>
                       <option value="TELESECUNDARIA">Telesecundaria</option>
                       <option value="GENERAL">General</option>
                       <option value="PARTICULAR">Particular</option>
-                      <option value="TECNICA">Tecnica</option>
+                      <option value="TÉCNICA">Técnica</option>
                       <option value="COMUNITARIA">Comunitaria</option>
                       <option value="OTRO">Otro</option>
                     </select>
@@ -1037,13 +1039,21 @@
         var CURP = [];
         CURP[0] = $("#aspirante_apellido_paterno").val().charAt(0).toUpperCase();
         CURP[1] = $("#aspirante_apellido_paterno").val().slice(1).replace(/\a\e\i\o\u/gi, "").charAt(0).toUpperCase();
-        CURP[2] = $("#aspirante_apellido_materno").val().charAt(0).toUpperCase();
+        if($("#aspirante_apellido_materno").val()===""){
+          CURP[2] = "X";
+        }else{
+          CURP[2] = $("#aspirante_apellido_materno").val().charAt(0).toUpperCase();
+        }
         CURP[3] = $("#aspirante_nombre").val().charAt(0).toUpperCase();
         CURP[4] = fecha_curp($("#aspirante_fecha_nacimiento").val());
         CURP[5] = $("#aspirante_sexo").val().toUpperCase();
         CURP[6] = abreviacion[estados.indexOf($("#selector_estado_nacimiento_aspirante option:selected").text().toLowerCase())];
         CURP[7] = $("#aspirante_apellido_paterno").val().slice(1).replace(/[aeiou]/gi, "").charAt(0).toUpperCase();
-        CURP[8] = $("#aspirante_apellido_materno").val().slice(1).replace(/[aeiou]/gi, "").charAt(0).toUpperCase();
+        if($("#aspirante_apellido_materno").val()===""){
+          CURP[8] = "X";
+        }else{
+          CURP[8] = $("#aspirante_apellido_materno").val().slice(1).replace(/[aeiou]/gi, "").charAt(0).toUpperCase();
+        }
         CURP[9] = $("#aspirante_nombre").val().slice(1).replace(/[aeiou]/gi, "").charAt(0).toUpperCase();
         document.getElementById("aspirante_curp").value = CURP.join("");
       }

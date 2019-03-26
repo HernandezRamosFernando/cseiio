@@ -115,8 +115,6 @@ public function insertar_aspirante_nuevo_ingreso(
    $datos_aspirante_documentos,
    $datos_aspirante_medicos){
 
-      
-
             $this->db->trans_start();
             $this->db->insert('Aspirante',$datos_aspirante);
             $this->db->insert('Direccion_Aspirante',$datos_aspirante_direccion);
@@ -141,15 +139,16 @@ public function insertar_aspirante_nuevo_ingreso(
                   alert("algo salio mal");
                   </script>
                <?php
-                    //return "alert(algo salio mal)";
+             //return "no";
             }
                
             else{
                ?>
                 <script>
-                  alert("Registro agregado correctamente");
+                  alert("Registro Ingresado correctamente");
                   </script>
                <?php
+               //return "si";
             }
    //print_r($datos_aspirante_documentos);
 
@@ -244,11 +243,11 @@ function delete_aspirante($no_control){
 
 if ($this->db->trans_status() === FALSE)
 {
-        return "algo salio mal";
+        return "no";
 }
 
 else{
-   return "registro borrado correctramente";
+   return "si";
 }
    
    

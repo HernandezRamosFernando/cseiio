@@ -47,7 +47,8 @@ class C_estudiante extends CI_Controller {
        
         $datos = array(
             'Aspirante_no_control' => $no_control,
-            'matricula' => $matricula
+            'matricula' => $matricula,
+            'fecha_asignacion_matricula' => date("Y-m-d")
         );
         echo $this->M_estudiante->insertar_estudiante($datos);
     }

@@ -1213,7 +1213,26 @@ var abreviacion = ["AS","BC","BS","CC","CS","CH","CL","CM","CX","DF","DG","GT","
 
                 xhr.onreadystatechange = function() { 
                     if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-                        alert(xhr.responseText);
+                      if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+           if(xhr.responseText === "si")
+            {
+            Swal.fire({
+            type: 'success',
+            title: 'Secundaria agregada correctamente',
+            showConfirmButton: false,
+            timer: 2500
+           })
+           $('#nuevasecundaria').modal('toggle');
+            }else{
+            Swal.fire({
+            type: 'error',
+            title: 'Secundaria no agregada',
+            confirmButtonText: 'Cerrar'
+
+            })
+            }
+
+        }
                     }
                 }
                 xhr.send(JSON.stringify(secundaria));

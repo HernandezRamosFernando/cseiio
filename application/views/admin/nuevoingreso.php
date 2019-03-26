@@ -1023,6 +1023,9 @@
     <script src="/cseiio/assets/js/sb-admin.min.js"></script>
     <script src="/cseiio/assets/js/cambio_estado.js"></script>
     <script src="/cseiio/assets/js/cambio_municipio.js"></script>
+      <!-- scripts para alerts -->
+  <script src="/cseiio/assets/js/sweetalert2.all.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
 
     <script>
 
@@ -1183,13 +1186,29 @@
 
         xhr.onreadystatechange = function () {
           if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-            alert(xhr.responseText);
-          }
+           if(xhr.responseText === "si")
+            {
+            Swal.fire({
+            type: 'success',
+            title: 'Secundaria agregada correctamente',
+            showConfirmButton: false,
+            timer: 2500
+           })
+           $('#nuevasecundaria').modal('toggle');
+            }else{
+            Swal.fire({
+            type: 'error',
+            title: 'Secundaria no agregada',
+            confirmButtonText: 'Cerrar'
+
+            })
+            }
+
         }
-        xhr.send(JSON.stringify(secundaria));
-
-
       }
+        xhr.send(JSON.stringify(secundaria));
+      
+    }
 
       function borrarmodal() {
         $('#aspirante_nuevasecundaria_cct').val('');

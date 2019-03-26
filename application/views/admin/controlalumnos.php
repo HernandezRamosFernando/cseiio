@@ -982,6 +982,10 @@
   <script src="/cseiio/assets/js/cambio_estado.js"></script>
   <script src="/cseiio/assets/js/cambio_municipio.js"></script>
 
+  <!-- scripts para alerts -->
+  <script src="/cseiio/assets/js/sweetalert2.all.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+
   <script>
  var boton;
     function eliminar_aspirante(e) {
@@ -999,7 +1003,22 @@
       xhr.open('GET', '/cseiio/index.php/c_aspirante/delete_aspirante?no_control=' + document.getElementById("no_control_borrar").value, true);
 
       xhr.onload = function () {
-        alert(xhr.response);
+        if(xhr.responseText === "si")
+        {
+          Swal.fire({
+            type: 'success',
+            title: 'Alumno eliminado correctamente',
+            showConfirmButton: false,
+            timer: 2500 
+          })
+          
+        }else{
+          Swal.fire({
+            type: 'error',
+            title: 'Alumno no eliminado',
+            confirmButtonText: 'Cerrar'
+            })
+        }
       };
 
       xhr.send(null);
@@ -1377,13 +1396,26 @@
 
       xhr.onreadystatechange = function () {
         if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-          alert(xhr.responseText);
+          if(xhr.responseText === "si")
+          {
+            Swal.fire({
+            type: 'success',
+            title: 'Secundaria agregada correctamente',
+            showConfirmButton: false,
+            timer: 2500
+          })
+          }else{
+            Swal.fire({
+            type: 'error',
+            title: 'Secundaria no agregada',
+            confirmButtonText: 'Cerrar'
+
+            })//alert(xhr.responseText);
+          }
         }
-      }
       xhr.send(JSON.stringify(secundaria));
-
-
     }
+  }
 
     function borrarmodal() {
       $('#aspirante_nuevasecundaria_cct').val('');

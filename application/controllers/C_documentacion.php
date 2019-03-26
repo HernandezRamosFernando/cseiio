@@ -11,6 +11,15 @@ class C_documentacion extends CI_Controller {
     }
 
 
+    public function fecha_ultima_carta_compromiso_aspirante(){
+        $datos = array(
+            'Aspirante_no_control' => $this->input->get('no_control')
+        );
+
+        echo json_encode($this->M_documentacion->fecha_ultima_carta_compromiso_aspirante($datos));
+    }
+
+
     function documentos_base_faltantes_aspirante(){
         $no_control = $this->input->get('no_control');
         echo json_encode($this->M_documentacion->documentos_base_faltantes_aspirante($no_control));

@@ -338,7 +338,18 @@
   <script>
 
 function aspirante_input(e){
-document.getElementById("no_control").value = e.value;
+
+        var dias = new XMLHttpRequest();
+      dias.open('GET', '/cseiio/c_documentacion/fecha_ultima_carta_compromiso_aspirante?no_control='+e.value, true);
+
+      dias.onload = function () {
+        console.log(JSON.parse(dias.response)[0].dias);
+        if(JSON.parse(dias.response)[0].dias===null || JSON.parse(dias.response)[0].dias>30){
+
+            //abre modal
+            $("#generarobservacion").modal("show");
+
+          document.getElementById("no_control").value = e.value;
         var xhr = new XMLHttpRequest();
         xhr.open('GET', '/cseiio/index.php/c_aspirante/get_aspirantes_nombre_documentos?no_control='+e.value, true);
 
@@ -352,6 +363,21 @@ document.getElementById("no_control").value = e.value;
         }
 
         xhr.send(null);
+        }
+
+        else{
+          alert("Ya cuenta con una carta compromiso vigente, dias restantes: "+(30-parseInt(JSON.parse(dias.response)[0].dias)));
+
+        }
+      };
+
+      dias.send(null);
+  /*
+
+data-target="#generarobservacion"
+
+
+        */
 }
 
 
@@ -478,7 +504,7 @@ function generar_carta_compromiso(e){
           fila += valor.Plantel_cct;
           fila += '</td>';
           fila += '<td>';
-          fila += '<button class="btn btn-warning" type="button" value="'+valor.no_control+'" onclick="aspirante_input(this)" class="btn btn-primary" data-toggle="modal" data-target="#generarobservacion">Generar Carta Compromiso</button>';
+          fila += '<button class="btn btn-warning" type="button" value="'+valor.no_control+'" onclick="aspirante_input(this)" class="btn btn-primary" data-toggle="modal">Generar Carta Compromiso</button>';
           fila += '</td>';
           fila += '</tr>';
           document.getElementById("tabla").innerHTML += fila;

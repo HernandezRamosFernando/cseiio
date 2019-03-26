@@ -51,12 +51,15 @@ class M_documentacion extends CI_Model {
       $this->db->set('Documento_id_documento',$iddocumentacion);
       $this->db->set('ruta',$ruta);
       $this->db->set('fecha_entrega',date('Y-m-d'));
+      $this->db->set('entregado',true);
       return $this->db->insert('Documentacion');
    }
 
 
 
-
+   function fecha_ultima_carta_compromiso_aspirante($datos){
+      return $this->db->query("select curdate() - max(fecha_entrega) as dias from Documentacion where Aspirante_no_control='".$datos['Aspirante_no_control']."' and Documento_id_documento=5")->result();
+ }
 
  function existe_documentacion_de_aspirante($iddocumentacion,$num_control){
       $this->db->select('count(*) as resultado');
@@ -81,7 +84,8 @@ class M_documentacion extends CI_Model {
    function update_aspirante_doc($iddocumentacion,$ruta,$num_control){
      $data = array(
     'ruta' =>$ruta,
-    'fecha_entrega' =>date('Y-m-d')
+    'fecha_entrega' =>date('Y-m-d'),
+    'entregado' => true
       );
 
    $this->db->where('Documento_id_documento', $iddocumentacion);

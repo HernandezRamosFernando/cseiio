@@ -191,6 +191,8 @@
           <li class="breadcrumb-item active">Ingrese los datos requeridos</li>
         </ol>
 
+
+        <form action="/cseiio/c_acreditacion/agregar_grupo" method="post">
         <div class="form-group">
 
             <div class="row">
@@ -198,7 +200,7 @@
                 <label class="form-group has-float-label">
                   <select class="form-control form-control-lg" required="required" id="aspirante_plantel"
                     name="aspirante_plantel">
-                    <option>Seleccione el plantel donde creara el grupo</option>
+                    <option value="">Seleccione el plantel donde creara el grupo</option>
 
                     <?php
                                         foreach ($planteles as $plantel)
@@ -221,7 +223,7 @@
 
             <div class="col-md-4">
               <label class="form-group has-float-label">
-                <select class="form-control form-control-lg" name="" id="">
+                <select class="form-control form-control-lg" onchange="numero_alumnos(this)" name="semestre_grupo" id="semestre_grupo">
                 <option value="0">Seleccione uno</option>
                   <option value="1">1</option>
                   <option value="2">2</option>
@@ -245,7 +247,7 @@
             </div>
 
           <div class="col-md-4">
-          <label>Cantidad de alumnos</label>
+          <label id="cantidad_alumnos">Cantidad de alumnos:</label>
           </div>
 
 
@@ -255,8 +257,8 @@
           <div class="row">
           <div class="col-md-4">
                 <label class="form-group has-float-label">
-                  <select class="form-control form-control-lg" required="required" id="aspirante_plantel"
-                    name="aspirante_plantel">
+                  <select class="form-control form-control-lg" required="required" id="grupo_ciclo_escolar"
+                    name="grupo_ciclo_escolar">
                     <option>Seleccione el ciclo del grupo <i class="fa fa-graduation-cap" aria-hidden="true"></i></option>
 
                     <?php
@@ -295,10 +297,11 @@
             </div>
 
             <div class="col-md-4">
-              <button type="button" name="" id="" class="btn btn-success btn-lg btn-block" style="padding: 1.5rem">Crear grupo</button>
+              <button type="summit" name="" id="" class="btn btn-success btn-lg btn-block" style="padding: 1.5rem">Crear grupo</button>
             </div>
           </div>
         </div>
+      </form>
 
 
 
@@ -345,4 +348,27 @@
 
 </body>
 
+
+<script>
+
+function numero_alumnos(e){
+if(document.getElementById("aspirante_plantel").value===""){
+alert("debe seleecionar un plantel");
+}
+
+else{
+          var xhr = new XMLHttpRequest();
+        xhr.open('GET', '/cseiio/c_acreditacion/numero_estudiantes_semestre_plantel?semestre='+e.value+'&cct='+document.getElementById("aspirante_plantel").value, true);
+
+        xhr.onload = function () {
+         console.log(xhr.response);
+         document.getElementById("cantidad_alumnos").innerHTML = "Cantidad de Alumnos: "+JSON.parse(xhr.response)[0].total_estudiante;
+        };
+
+        xhr.send(null);
+}
+
+
+}
+</script>
 </html>

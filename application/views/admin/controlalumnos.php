@@ -183,7 +183,7 @@
           <li class="breadcrumb-item">
             <a>Control de alumnos</a>
           </li>
-          <li class="breadcrumb-item active">Ingrese la busqueda que desea realizar</li>
+          <li class="breadcrumb-item active">Ingrese la búsqueda que desea realizar</li>
         </ol>
 
         <div class="card">
@@ -339,8 +339,8 @@
                     <div class="col-md-4">
                       <div class="form-label-group">
                         <input type="text" pattern="[0-9]{10}" title="El numero de telefono debe de ser a 10 digitos"
-                          class="form-control" id="aspirante_telefono" name="aspirante_telefono" placeholder="Telefono">
-                        <label for="aspirante_telefono">Telefono</label>
+                          class="form-control" id="aspirante_telefono" name="aspirante_telefono" placeholder="Teléfono">
+                        <label for="aspirante_telefono">Teléfono</label>
                       </div>
                     </div>
                     <div class="col-md-4">
@@ -348,7 +348,7 @@
                         <input type="email"
                           pattern="^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$"
                           title="Introduzca un correo valido" class="form-control text-lowercase" id="aspirante_correo"
-                          name="aspirante_correo" placeholder="Correo Electronico">
+                          name="aspirante_correo" placeholder="Correo Electrónico">
                         <label for="aspirante_correo">Correo electrónico</label>
                       </div>
                     </div>
@@ -365,8 +365,9 @@
                   <div class="row">
                     <div class="col-md-4">
                       <label class="form-group has-float-label">
-                        <select class="form-control form-control-lg" required="required" id="aspirante_sexo"
-                          name="aspirante_sexo">
+                      <select class="form-control form-control-lg" required id="aspirante_sexo"
+                    name="aspirante_sexo">
+                    <option value="">Seleccione</option>
                           <option value="H">Hombre</option>
                           <option value="M">Mujer</option>
                         </select>
@@ -392,8 +393,9 @@
                     <div class="col-md-4">
                       <div class="form-group">
                         <label class="form-group has-float-label">
-                          <select class="form-control form-control-lg" name="tipo_sangre" id="tipo_sangre">
-                            <option>Seleccione una opcion</option>
+                          <select class="form-control form-control-lg" name="tipo_sangre" id="tipo_sangre" required>
+                            <option value="">Seleccione una opción</option>
+                            <option value="No conoce">No conoce su tipo de sangre</option>
                             <option value="A+">A+</option>
                             <option value="A-">A-</option>
                             <option value="B+">B+</option>
@@ -413,11 +415,10 @@
                       <label class="form-group has-float-label">
                         <select class="form-control form-control-lg" id="aspirante_alergia_combo"
                           name="aspirante_alergia_combo" onchange="alergia(this)">
-                          <option value="2">Seleccione una opción</option>
                           <option value="1">Si</option>
                           <option value="2">No</option>
                         </select>
-                        <span>¿Alergico a algún medicamento?</span>
+                        <span>¿Alérgico a algún medicamento?</span>
                       </label>
                     </div>
                     <div class="col-md-4" style="display:none" id="a" name="alergia_medicamento">
@@ -433,7 +434,6 @@
                       <label class="form-group has-float-label">
                         <select class="form-control form-control-lg" id="aspirante_discapacidad_combo"
                           name="aspirante_discapacidad_combo" onchange="discapacidad(this)">
-                          <option value="2">Seleccione una opción</option>
                           <option value="1">Si</option>
                           <option value="2">No</option>
                         </select>
@@ -509,11 +509,11 @@
 
                     <div class="col-md-4">
                       <label class="form-group has-float-label">
-                        <select class="form-control form-control-lg" required="required"
+                        <select class="form-control form-control-lg" required"
                           name="aspirante_direccion_estado"
                           onChange="cambio_estado(selector_estado_aspirante,selector_municipio_aspirante,selector_localidad_aspirante)"
                           id="selector_estado_aspirante">
-                          <option>Seleccione el estado</option>
+                          <option value="">Seleccione el estado</option>
 
                           <?php
                               foreach ($estados as $estado)
@@ -569,7 +569,7 @@
                       <div class="form-label-group">
                         <input type="text" required="required"
                           title="La direccion tiene caracteres incorrectos" class="form-control"
-                          id="aspirante_direccion_calle" name="aspirante_direccion_calle" placeholder="Calle">
+                          id="aspirante_direccion_calle" name="aspirante_direccion_calle" placeholder="Calle y número">
                         <label for="aspirante_direccion_calle">Calle y Número</label>
                       </div>
                     </div>
@@ -585,10 +585,10 @@
 
                     <div class="col-md-2">
                       <div class="form-label-group">
-                        <input type="text" pattern="[0-9]{5}" title="El codigo postal solo debe contener 5 digitos"
+                        <input type="text" pattern="[0-9]{5}" title="El código postal solo debe contener 5 digitos"
                           class="form-control" id="aspirante_direccion_cp" name="aspirante_direccion_cp"
-                          placeholder="Codigo Postal">
-                        <label for="aspirante_direccion_cp">Codigo Postal</label>
+                          placeholder="Código Postal">
+                        <label for="aspirante_direccion_cp">Código Postal</label>
                       </div>
                     </div>
                   </div>
@@ -644,8 +644,8 @@
 
                     <div class="col-md-2">
                       <label class="form-group has-float-label">
-                        <select class="form-control form-control-lg" required="required" id="aspirante_tutor_parentesco"
-                          required="required" name="aspirante_tutor_parentesco" onchange="parentesco(this)">
+                        <select class="form-control form-control-lg" required id="aspirante_tutor_parentesco"
+                           name="aspirante_tutor_parentesco" onchange="parentesco(this)">
                           <option value="">Seleccione</option>
                           <option value="PADRE">Padre</option>
                           <option value="MADRE">Madre</option>
@@ -680,8 +680,8 @@
                       <div class="form-label-group">
                         <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ. ]+" title="Introduzca solo letras"
                           class="form-control" id="aspirante_tutor_ocupacion" name="aspirante_tutor_ocupacion"
-                          placeholder="Ocupacion">
-                        <label for="aspirante_tutor_ocupacion">Ocupacion</label>
+                          placeholder="Ocupación">
+                        <label for="aspirante_tutor_ocupacion">Ocupación</label>
                       </div>
                     </div>
 
@@ -690,8 +690,8 @@
                         <input type="text" pattern="[0-9]{10}"
                           title="El numero de telefono debe de ser a 10 digitos con lada" class="form-control"
                           id="aspirante_tutor_telefono" name="aspirante_tutor_telefono"
-                          placeholder="Telefono particular">
-                        <label for="aspirante_tutor_telefono">Telefono particular</label>
+                          placeholder="Teléfono particular">
+                        <label for="aspirante_tutor_telefono">Teléfono particular</label>
                       </div>
                     </div>
                     <div class="col-md-3">
@@ -699,8 +699,8 @@
                         <input type="text" pattern="[0-9]{10}"
                           title="El numero de telefono debe de ser a 10 digitos con lada" class="form-control"
                           id="aspirante_tutor_telefono_comunidad" name="aspirante_tutor_telefono_comunidad"
-                          placeholder="Telefono de la comunidad">
-                        <label for="aspirante_tutor_telefono_comunidad">Telefono de la comunidad</label>
+                          placeholder="Teléfono de la comunidad">
+                        <label for="aspirante_tutor_telefono_comunidad">Teléfono de la comunidad</label>
                       </div>
                     </div>
 
@@ -875,7 +875,7 @@
                           <option value="TELESECUNDARIA">Telesecundaria</option>
                           <option value="GENERAL">General</option>
                           <option value="PARTICULAR">Particular</option>
-                          <option value="TECNICA">Tecnica</option>
+                          <option value="TÉCNICA">Técnica</option>
                           <option value="COMUNITARIA">Comunitaria</option>
                           <option value="OTRO">Otro</option>
                         </select>
@@ -927,7 +927,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-              <button type="button" class="btn btn-danger" data-dismiss="modal"
+              <button type="button" id="btn-confirmacion" class="btn btn-danger" data-dismiss="modal"
                 onclick="confirmacion_eliminar()">Eliminar</button>
             </div>
           </div>
@@ -983,8 +983,14 @@
   <script src="/cseiio/assets/js/cambio_municipio.js"></script>
 
   <script>
+ var boton;
     function eliminar_aspirante(e) {
       document.getElementById("no_control_borrar").value = e.value;
+      //document.getElementById("btn-confirmacion") = e;
+      console.log(e);
+      boton = e;
+      console.log(boton);
+
     }
 
     function confirmacion_eliminar() {
@@ -997,16 +1003,8 @@
       };
 
       xhr.send(null);
-      eliminartabla();
+      $(boton).parents('tr').detach();
       
-    }
-    function eliminartabla() {
-      table = $('#tabla_completa').DataTable( {
-        paging: false,
-        searching: false
-      } );
- 
-      table.destroy();
     }
   </script>
 
@@ -1399,7 +1397,7 @@
     function cct() {
       document.getElementById("aspirante_nuevasecundaria_cct").value = document.getElementById("aspirante_secundaria_cct").value;
     }
-
+    
 
 
 

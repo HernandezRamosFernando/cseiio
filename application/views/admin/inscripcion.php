@@ -208,6 +208,7 @@
               Generación de Carta Compromiso
             </a>
           </div>
+          <!--
           <div class="col col-lg-4">
             <a href="/cseiio/index.php/c_aspirante/carta_compromiso"
               class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-clipboard-check btn-responsive"
@@ -222,6 +223,7 @@
               Datos de secundaria
             </a>
           </div>
+          -->
         </div>
 
 

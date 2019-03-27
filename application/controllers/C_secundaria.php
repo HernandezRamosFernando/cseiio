@@ -32,11 +32,11 @@ class C_secundaria extends CI_Controller {
         );
 
        if($this->M_secundaria->insert_secundaria($datos)==1){
-           echo "Secundaria agregada exitosamente";
+           echo "si";
        }
 
        else{
-           echo "Algo salio mal";
+           echo "no";
        }
      
         

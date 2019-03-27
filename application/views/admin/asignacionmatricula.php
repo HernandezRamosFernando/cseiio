@@ -297,6 +297,9 @@
 
   <script src="/cseiio/assets/js/cambio_estado.js"></script>
   <script src="/cseiio/assets/js/cambio_municipio.js"></script>
+  <!-- scripts para alerts -->
+  <script src="/cseiio/assets/js/sweetalert2.all.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
 
   <script>
     
@@ -398,17 +401,31 @@
     }
 
 
-
 function asignar_matricula(e){
   var xhr = new XMLHttpRequest();
       xhr.open('GET', '/cseiio/index.php/c_estudiante/insertar_estudiante?no_control='+e.value, true);
 
       xhr.onload = function () {
-        alert(xhr.responseText);
-        console.log(e.value);
+        if(xhr.responseText.trim() === "si")
+        {
+          Swal.fire({
+            type: 'success',
+            title: 'Matrícula generada correctamente',
+            showConfirmButton: false,
+            timer: 2500 
+          })
+          $(e).parents('tr').detach();
+        }else{
+          Swal.fire({
+            type: 'error',
+            title: 'Matrícula no generada',
+            confirmButtonText: 'Cerrar'
+            })
+        }
       };
 
       xhr.send(null);
+     
 }
   </script>
 

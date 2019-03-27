@@ -10,13 +10,26 @@ class M_estudiante extends CI_Model {
 
 
     public function insertar_estudiante($datos){
-        if($this->db->insert('Estudiante',$datos)){
-            return "Matricula generada exitosamente";
+        $this->db->trans_start();
+        $this->db->insert('Estudiante',$datos);
+        $this->db->trans_complete();
+
+        if ($this->db->trans_status() === FALSE)
+        {
+        return "no";
         }
 
         else{
-            return "Algo salio mal";
+        return "si";
         }
+        /*
+        if($this->db->insert('Estudiante',$datos)){
+            return "si";
+        }
+
+        else{
+            return "no";
+        }*/
 
     }
 

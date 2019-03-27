@@ -334,7 +334,10 @@
   <script src="/cseiio/assets/js/cambio_estado.js"></script>
   <script src="/cseiio/assets/js/cambio_municipio.js"></script>
 
-  
+  <!-- scripts para alerts -->
+  <script src="/cseiio/assets/js/sweetalert2.all.min.js"></script>
+<!-- Optional: include a polyfill for ES6 Promises for IE11 and Android browser -->
+<script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
 
 
   <script>
@@ -342,7 +345,7 @@
 function aspirante_input(e){
 
         var dias = new XMLHttpRequest();
-      dias.open('GET', '/cseiio/c_documentacion/fecha_ultima_carta_compromiso_aspirante?no_control='+e.value, true);
+      dias.open('GET', '/cseiio/index.php/c_documentacion/fecha_ultima_carta_compromiso_aspirante?no_control='+e.value, true);
 
       dias.onload = function () {
         console.log(JSON.parse(dias.response)[0].dias);
@@ -368,8 +371,13 @@ function aspirante_input(e){
         }
 
         else{
-          
-          //alert("Ya cuenta con una carta compromiso vigente, dias restantes: "+(30-parseInt(JSON.parse(dias.response)[0].dias)));
+          Swal.fire({
+          title: 'Error!',
+          text: "Ya cuenta con una carta compromiso vigente, dias restantes: "+(30-parseInt(JSON.parse(dias.response)[0].dias)),
+          type: 'warning',
+         confirmButtonText: 'Cerrar'
+          })
+         // alert("Ya cuenta con una carta compromiso vigente, dias restantes: "+(30-parseInt(JSON.parse(dias.response)[0].dias)));
 
         }
       };
@@ -425,7 +433,6 @@ function generar_carta_compromiso(e){
         xhr.onload = function () {
           var documentos = JSON.parse(xhr.response);
           if(documentos.length===4){
-              alert("No se puede generar carta compromiso porque ya cuenta con la documentacion completa");
           }
           else{
             var carta_compromiso = new XMLHttpRequest();

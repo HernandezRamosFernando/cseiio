@@ -1,7 +1,4 @@
-
-
-
-  <title>Acreditación</title>
+<title>Acreditación</title>
 </head>
 
 <body>

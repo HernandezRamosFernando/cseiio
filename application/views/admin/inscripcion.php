@@ -229,19 +229,3 @@
     </div>
   </div>
 
-  <!-- Bootstrap core JavaScript-->
-  <script src="/cseiio/assets/vendor/jquery/jquery.min.js"></script>
-  <script src="/cseiio/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-  <!-- Core plugin JavaScript-->
-  <script src="/cseiio/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-
-  <!-- Custom scripts for all pages-->
-  <script src="/cseiio/assets/js/sb-admin.min.js"></script>
-
-
-
-</body>
-
-</html>

@@ -985,21 +985,7 @@
       </div>
     </div>
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="/cseiio/assets/vendor/jquery/jquery.min.js"></script>
-    <script src="/cseiio/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Core plugin JavaScript-->
-    <script src="/cseiio/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-
-    <!-- Custom scripts for all pages-->
-    <script src="/cseiio/assets/js/sb-admin.min.js"></script>
-    <script src="/cseiio/assets/js/cambio_estado.js"></script>
-    <script src="/cseiio/assets/js/cambio_municipio.js"></script>
-      <!-- scripts para alerts -->
-  <script src="/cseiio/assets/js/sweetalert2.all.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
 
     <script>
     const swalWithBootstrapButtons = Swal.mixin({
@@ -1019,10 +1005,10 @@
 
       function generarCURP() {
 
-
+        var consonantes = /[bcdfghjklmnpqrstvwxyz]/gi;
         var CURP = [];
         CURP[0] = $("#aspirante_apellido_paterno").val().charAt(0).toUpperCase();
-        CURP[1] = $("#aspirante_apellido_paterno").val().slice(1).replace(/\a\e\i\o\u/gi, "").charAt(0).toUpperCase();
+        CURP[1] = $("#aspirante_apellido_paterno").val().slice(1).replace(consonantes, "").charAt(0).toUpperCase();
         if($("#aspirante_apellido_materno").val()===""){
           CURP[2] = "X";
         }else{
@@ -1219,6 +1205,3 @@
 
 
     </script>
-</body>
-
-</html>

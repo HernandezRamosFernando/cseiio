@@ -1,15 +1,6 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
 
   <title>Inscripción Nuevo Ingreso</title>
+<<<<<<< HEAD
 
   <!-- Bootstrap core CSS-->
   <link href="/cseiio/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -20,6 +11,8 @@
   <link rel="stylesheet" type="text/css" href="/cseiio/assets/css/main.css">
   <link href="/cseiio/assets/vendor/bootstrap/css/bootstrap-float-label.css" rel="stylesheet">
 
+=======
+>>>>>>> ee161144281d402dd9feef7e66f5d39d1356db59
 </head>
 
 <body>

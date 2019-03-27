@@ -24,6 +24,7 @@ class C_subir_doc extends CI_Controller {
 
         $this->load->view("headers/cabecera");
         $this->load->view("subirdocumentos/buscar_aspirante",$datos);
+        $this->load->view("footers/footer");
 
     }
 

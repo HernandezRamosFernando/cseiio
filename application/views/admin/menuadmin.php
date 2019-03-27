@@ -13,7 +13,7 @@
                     <a class="nav-link" style="color:rgb(150, 163, 159)" >Bienvenido Usuario</a>
                 </li>
             </ul>
-
+            
 <!-- eventos de navbar -->
             <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
                 <ul class="navbar-nav ml-auto ml-md-0">
@@ -198,23 +198,5 @@
                   </div>
                 </div>
               </div>
-
-   
-
-                  <!-- Bootstrap core JavaScript-->
-    <script src="<?php echo base_url();?>assets/vendor/jquery/jquery.min.js"></script>
-    <script src="<?php echo base_url();?>assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="<?php echo base_url();?>assets/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Page level plugin JavaScript-->
-    <script src="<?php echo base_url();?>assets/vendor/chart.js/Chart.min.js"></script>
-    <script src="<?php echo base_url();?>assets/vendor/datatables/jquery.dataTables.js"></script>
-    <script src="<?php echo base_url();?>assets/vendor/datatables/dataTables.bootstrap4.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="<?php echo base_url();?>assets/js/sb-admin.min.js"></script>
  
-    </body>
-</html>
+

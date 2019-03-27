@@ -1,18 +1,5 @@
 
   <title>Inscripción Nuevo Ingreso</title>
-<<<<<<< HEAD
-
-  <!-- Bootstrap core CSS-->
-  <link href="/cseiio/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Custom fonts for this template-->
-  <link href="/cseiio/assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-  <!-- Custom styles for this template-->
-  <link href="/cseiio/assets/css/sb-admin.css" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="/cseiio/assets/css/main.css">
-  <link href="/cseiio/assets/vendor/bootstrap/css/bootstrap-float-label.css" rel="stylesheet">
-
-=======
->>>>>>> ee161144281d402dd9feef7e66f5d39d1356db59
 </head>
 
 <body>
@@ -720,7 +707,7 @@
               <div class="col-md-4">
                 <div class="form-label-group">
 
-                  <input onselect="obtener_secundaria(this)" list="secundarias" required="required" class="form-control"
+                  <input onchange="obtener_secundaria(this)" list="secundarias" required="required" class="form-control"
                     id="aspirante_secundaria_cct" name="aspirante_secundaria_cct"
                     placeholder="Buscar secundaria por CCT">
                   <datalist id="secundarias">
@@ -1001,21 +988,7 @@
       </div>
     </div>
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="/cseiio/assets/vendor/jquery/jquery.min.js"></script>
-    <script src="/cseiio/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Core plugin JavaScript-->
-    <script src="/cseiio/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-
-    <!-- Custom scripts for all pages-->
-    <script src="/cseiio/assets/js/sb-admin.min.js"></script>
-    <script src="/cseiio/assets/js/cambio_estado.js"></script>
-    <script src="/cseiio/assets/js/cambio_municipio.js"></script>
-      <!-- scripts para alerts -->
-  <script src="/cseiio/assets/js/sweetalert2.all.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
 
     <script>
 
@@ -1028,10 +1001,10 @@
 
       function generarCURP() {
 
-
+        var consonantes = /[bcdfghjklmnpqrstvwxyz]/gi;
         var CURP = [];
         CURP[0] = $("#aspirante_apellido_paterno").val().charAt(0).toUpperCase();
-        CURP[1] = $("#aspirante_apellido_paterno").val().slice(1).replace(/\a\e\i\o\u/gi, "").charAt(0).toUpperCase();
+        CURP[1] = $("#aspirante_apellido_paterno").val().slice(1).replace(consonantes, "").charAt(0).toUpperCase();
         if($("#aspirante_apellido_materno").val()===""){
           CURP[2] = "X";
         }else{
@@ -1215,6 +1188,3 @@
 
 
     </script>
-</body>
-
-</html>

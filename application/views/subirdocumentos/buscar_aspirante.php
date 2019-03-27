@@ -313,23 +313,7 @@ https://www.youtube.com/results?search_query=+AJAX+File+Upload+with+Progress
 
   <!-- Termina modal de carga de documentos por aspirante-->
 
-  <!-- Bootstrap core JavaScript-->
-  <script src="/cseiio/assets/vendor/jquery/jquery.min.js"></script>
-  <script src="/cseiio/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-  <!-- Core plugin JavaScript-->
-  <script src="/cseiio/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-  <!-- Page level plugin JavaScript-->
-  <script src="/cseiio/assets/vendor/chart.js/Chart.min.js"></script>
-  <script src="/cseiio/assets/vendor/datatables/jquery.dataTables.js"></script>
-  <script src="/cseiio/assets/vendor/datatables/dataTables.bootstrap4.js"></script>
-
-  <!-- Custom scripts for all pages-->
-  <script src="/cseiio/assets/js/sb-admin.min.js"></script>
-
-  <script src="/cseiio/assets/js/cambio_estado.js"></script>
-  <script src="/cseiio/assets/js/cambio_municipio.js"></script>
+ 
 
   <script>
 
@@ -688,6 +672,3 @@ https://www.youtube.com/results?search_query=+AJAX+File+Upload+with+Progress
 
 
 
-</body>
-
-</html>

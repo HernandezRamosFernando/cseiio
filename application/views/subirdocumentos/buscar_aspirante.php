@@ -215,7 +215,7 @@
       <div class="container">
         <div class="card" style="overflow:scroll">
           <div class="card-body">
-            <table class="table table-hover" id="tabla_completa" style="width: 100%">
+            <table class="table table-hover" id="tabla_completa" style="width: 100%; overflow:scroll">
               <caption>Lista de todos los alumnos</caption>
               <thead class="thead-light">
               <tr>
@@ -263,7 +263,7 @@ https://www.youtube.com/results?search_query=+AJAX+File+Upload+with+Progress
   <!-- Modal -->
 
   <div class="modal" tabindex="-1" role="dialog" id="modalsubirdocumentos">
-    <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-dialog modal-xl" style="max-width: 90% !important;" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">SUBIR DOCUMENTACIÓN</h5>
@@ -278,8 +278,9 @@ https://www.youtube.com/results?search_query=+AJAX+File+Upload+with+Progress
           </p>
           <input type="hidden" id="numcontrol" name="numcontrol" value="">
 
-          <div class="reponsive">
-            <table class="table table-bordered table-hover" id="tabla_completa" style="width: 100%">
+          <div class="card" style="overflow:scroll">
+          <div class="card-body">
+            <table class="table table-hover" id="tabla_completa" style="width: 100%">
 
               <thead class="thead-light">
                 <tr>
@@ -298,6 +299,7 @@ https://www.youtube.com/results?search_query=+AJAX+File+Upload+with+Progress
 
               </tbody>
             </table>
+            </div>
           </div>
           <p id="muestra"> </p>
         </div>

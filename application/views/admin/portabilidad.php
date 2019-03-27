@@ -157,7 +157,7 @@
 
 
         
-        <form action="/cseiio/index.php/c_aspirante/registrar_datos_aspirante"  method="post">
+        <form action="/cseiio/index.php/c_aspirante/registrar_datos_aspirante" onsubmit="return false;"  method="post">
 
         <input type="text" name="formulario" value="portabilidad" style="display:none">
 
@@ -173,7 +173,7 @@
               <div class="col-md-4">
                 <div class="form-label-group">
                   <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ ]+" required="required" title="Introduzca solo letras"
-                    class="form-control" id="aspirante_nombre" name="aspirante_nombre" placeholder="Nombre(s)">
+                    class="form-control text-uppercase" id="aspirante_nombre" name="aspirante_nombre" placeholder="Nombre(s)">
                   <label for="aspirante_nombre">Nombre(s)</label>
                 </div>
               </div>
@@ -181,7 +181,7 @@
               <div class="col-md-4">
                 <div class="form-label-group">
                   <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ ]+" required="required" title="Introduzca solo letras"
-                    class="form-control" id="aspirante_apellido_paterno" name="aspirante_apellido_paterno"
+                    class="form-control text-uppercase" id="aspirante_apellido_paterno" name="aspirante_apellido_paterno"
                     placeholder="Apellido Paterno">
                   <label for="aspirante_apellido_paterno">Apellido Paterno</label>
                 </div>
@@ -190,7 +190,7 @@
               <div class="col-md-4">
                 <div class="form-label-group">
                   <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ ]+" title="Introduzca solo letras"
-                    class="form-control" id="aspirante_apellido_materno" name="aspirante_apellido_materno"
+                    class="form-control text-uppercase" id="aspirante_apellido_materno" name="aspirante_apellido_materno"
                     placeholder="Apellido Materno">
                   <label for="aspirante_apellido_materno">Apellido Materno</label>
                 </div>
@@ -207,7 +207,7 @@
 
               <div class="col-md-4 text-center">
                 <div class="form-label-group">
-                  <input type="date" required="required" class="form-control" id="aspirante_fecha_nacimiento"
+                  <input type="date" required="required" class="form-control text-uppercase" id="aspirante_fecha_nacimiento"
                     name="aspirante_fecha_nacimiento" placeholder="Fecha de Nacimiento">
                   <label for="aspirante_fecha_nacimiento">Fecha Nacimiento</label>
                 </div>
@@ -215,7 +215,7 @@
               <div class="col-md-4">
                 <div class="form-label-group">
                   <input type="text" pattern="[0-9]{10}" title="El numero de telefono debe de ser a 10 digitos"
-                    class="form-control" id="aspirante_telefono" name="aspirante_telefono" placeholder="Teléfono">
+                    class="form-control text-uppercase" id="aspirante_telefono" name="aspirante_telefono" placeholder="Teléfono">
                   <label for="aspirante_telefono">Teléfono</label>
                 </div>
               </div>
@@ -223,7 +223,7 @@
                 <div class="form-label-group">
                   <input type="email"
                     pattern="^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$"
-                    title="Introduzca un correo valido" class="form-control text-lowercase" id="aspirante_correo"
+                    title="Introduzca un correo valido" class="form-control text-lowercase " id="aspirante_correo"
                     name="aspirante_correo" placeholder="Correo Electrónico">
                   <label for="aspirante_correo">Correo electrónico</label>
                 </div>
@@ -253,14 +253,14 @@
 
               <div class="col-md-4">
                 <div class="form-label-group">
-                  <input type="number" pattern="[0-9]{11}" title="Introduzca 11 dígitos" class="form-control"
+                  <input type="number" pattern="[0-9]{11}" title="Introduzca 11 dígitos" class="form-control text-uppercase"
                     id="aspirante_nss" name="aspirante_nss" placeholder="Numero de Seguro Social">
                   <label for="aspirante_nss">NSS (IMSS)</label>
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="form-label-group">
-                  <input type="text" class="form-control" id="aspirante_programa_social"
+                  <input type="text" class="form-control text-uppercase" id="aspirante_programa_social"
                     name="aspirante_programa_social" placeholder="Folio de programa social">
                   <label for="aspirante_programa_social">Folio de Prospera</label>
                 </div>
@@ -300,7 +300,7 @@
               </div>
               <div class="col-md-4" style="display:none" id="a" name="alergia_medicamento">
                 <div class="form-label-group">
-                  <input type="text" class="form-control" id="aspirante_alergia" name="aspirante_alergia"
+                  <input type="text" class="form-control text-uppercase" id="aspirante_alergia" name="aspirante_alergia"
                     placeholder="Ingrese el medicamento">
                   <label for="aspirante_alergia">Ingrese el medicamento</label>
                 </div>
@@ -320,7 +320,7 @@
               </div>
               <div class="col-md-4" style="display:none" id="b" name="discapacidad">
                 <div class="form-label-group">
-                  <input type="text" class="form-control" id="aspirante_discapacidad" name="aspirante_discapacidad"
+                  <input type="text" class="form-control text-uppercase" id="aspirante_discapacidad" name="aspirante_discapacidad"
                     placeholder="Ingrese la discapacidad">
                   <label for="aspirante_discapacidad">Ingrese la discapacidad</label>
                 </div>
@@ -444,7 +444,7 @@
               <div class="col-md-4">
                 <div class="form-label-group">
                   <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ 0-9]+" required="required"
-                    title="La direccion tiene caracteres incorrectos" class="form-control"
+                    title="La direccion tiene caracteres incorrectos" class="form-control text-uppercase"
                     id="aspirante_direccion_calle" name="aspirante_direccion_calle" placeholder="Calle y número">
                   <label for="aspirante_direccion_calle">Calle y número</label>
                 </div>
@@ -453,7 +453,7 @@
               <div class="col-md-4">
                 <div class="form-label-group">
                   <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ 0-9]+" title="La colonia tiene caracteres incorrectos"
-                    class="form-control" id="aspirante_direccion_colonia" name="aspirante_direccion_colonia"
+                    class="form-control text-uppercase" id="aspirante_direccion_colonia" name="aspirante_direccion_colonia"
                     placeholder="Colonia">
                   <label for="aspirante_direccion_colonia">Colonia</label>
                 </div>
@@ -462,7 +462,7 @@
               <div class="col-md-2">
                 <div class="form-label-group">
                   <input type="text" pattern="[0-9]{5}" title="El codigo postal solo debe contener 5 digitos"
-                    class="form-control" id="aspirante_direccion_cp" name="aspirante_direccion_cp"
+                    class="form-control text-uppercase" id="aspirante_direccion_cp" name="aspirante_direccion_cp"
                     placeholder="Código Postal">
                   <label for="aspirante_direccion_cp">Código Postal</label>
                 </div>
@@ -530,7 +530,7 @@
               <div class="col-md-7">
                 <div class="form-label-group">
                   <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ ]+" required="required" title="Introduzca solo letras"
-                    class="form-control" id="aspirante_tutor_nombre" name="aspirante_tutor_nombre"
+                    class="form-control text-uppercase" id="aspirante_tutor_nombre" name="aspirante_tutor_nombre"
                     placeholder="Nombre Completo">
                   <label for="aspirante_tutor_nombre">Nombre Completo</label>
                 </div>
@@ -540,14 +540,14 @@
                 <label class="form-group has-float-label">
                   <select class="form-control form-control-lg" required id="aspirante_tutor_parentesco" required="required" name="aspirante_tutor_parentesco" onchange="parentesco(this)">
                     <option value="">Seleccione</option>
-                    <option value="PADRE">Padre</option>
-                    <option value="MADRE">Madre</option>
-                    <option value="HERMANO/A">Hermano/a</option>
-                    <option value="TIO">Tio</option>
-                    <option value="TIA">Tia</option>
-                    <option value="ABUELO">Abuelo</option>
-                    <option value="ABUELA">Abuela</option>
-                    <option value="otro">Otro</option>
+                    <option value="PADRE">PADRE</option>
+                    <option value="MADRE">MADRE</option>
+                    <option value="HERMANO/A">HERMANO/A</option>
+                    <option value="TIO">TIOA</option>
+                    <option value="TIA">TIA</option>
+                    <option value="ABUELO">ABUELO</option>
+                    <option value="ABUELA">ABUELA</option>
+                    <option value="otro">OTRO</option>
                   </select>
                   <span>Parentesco</span>
                   
@@ -557,7 +557,7 @@
               <div class="col-md-3" id="parentescootro" style="display:none;">
                 <div class="form-label-group">
                   <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ ]+" 
-                    class="form-control" id="aspirante_tutor_otro" name="aspirante_tutor_otro"
+                    class="form-control text-uppercase" id="aspirante_tutor_otro" name="aspirante_tutor_otro"
                     placeholder="Escriba el parentesco">
                   <label for="aspirante_tutor_otro">Escriba el parentesco</label>
                 </div>
@@ -573,7 +573,7 @@
               <div class="col-md-3">
                 <div class="form-label-group">
                   <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ. ]+" title="Introduzca solo letras"
-                    class="form-control" id="aspirante_tutor_ocupacion" name="aspirante_tutor_ocupacion"
+                    class="form-control text-uppercase" id="aspirante_tutor_ocupacion" name="aspirante_tutor_ocupacion"
                     placeholder="Ocupación">
                   <label for="aspirante_tutor_ocupacion">Ocupación</label>
                 </div>
@@ -582,7 +582,7 @@
               <div class="col-md-3">
                 <div class="form-label-group">
                   <input type="text" pattern="[0-9]{10}" title="El numero de telefono debe de ser a 10 dígitos con lada"
-                    class="form-control" id="aspirante_tutor_telefono" name="aspirante_tutor_telefono"
+                    class="form-control text-uppercase" id="aspirante_tutor_telefono" name="aspirante_tutor_telefono"
                     placeholder="Teléfono particular">
                   <label for="aspirante_tutor_telefono">Teléfono particular</label>
                 </div>
@@ -590,7 +590,7 @@
             <div class="col-md-3">
                 <div class="form-label-group">
                   <input type="text" pattern="[0-9]{10}" title="El numero de telefono debe de ser a 10 dígitos con lada"
-                    class="form-control" id="aspirante_tutor_telefono_comunidad" name="aspirante_tutor_telefono_comunidad"
+                    class="form-control text-uppercase" id="aspirante_tutor_telefono_comunidad" name="aspirante_tutor_telefono_comunidad"
                     placeholder="Teléfono de la comunidad">
                   <label for="aspirante_tutor_telefono_comunidad">Teléfono de la comunidad</label>
                 </div>
@@ -599,7 +599,7 @@
               
               <div class="col-md-3">
                 <div class="form-label-group">
-                  <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ. ]+" class="form-control"
+                  <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ. ]+" class="form-control text-uppercase"
                     id="aspirante_tutor_prospera" name="aspirante_tutor_prospera" placeholder="Folio de Prospera">
                   <label for="aspirante_tutor_prospera">Folio de Prospera</label>
                 </div>
@@ -726,8 +726,8 @@
             <div class="col-md-4">
                 <div class="form-label-group">
                   
-                    <input onselect="obtener_secundaria(this)" list="secundarias" 
-                    required="required" class="form-control" id="aspirante_secundaria_cct" 
+                    <input list="secundarias" 
+                    required="required" class="form-control text-uppercase" id="aspirante_secundaria_cct" 
                     name="aspirante_secundaria_cct" placeholder="Buscar secundaria por CCT">
                     <datalist id="secundarias">
              
@@ -747,12 +747,16 @@
 
               <div class="col-md-4">
                 <div class="form-label-group">
+                <button type="button" class="btn btn-outline-success btn-lg" onclick="obtener_secundaria(document.getElementById('aspirante_secundaria_cct').value)">
+                   Buscar secundaria
+                  </button>
 
-                  <!-- Button trigger modal -->
+                  <!-- Button trigger modal 
                   <button type="button" class="btn btn-outline-success btn-lg" data-toggle="modal"
                     data-target="#nuevasecundaria" onclick="cct()">
                     Agregar nueva secundaria
                   </button>
+                  -->
 
                 </div>
                 <br>
@@ -763,7 +767,7 @@
               <div class="col-md-4" style="display: none" id="nombre_secundaria_oculto">
                 <div class="form-label-group">
                   <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ. 0-9]+" required="required"
-                    title="El nombre de la secundaria contiene caracteres incorrectos" class="form-control"
+                    title="El nombre de la secundaria contiene caracteres incorrectos" class="form-control text-uppercase"
                     id="aspirante_secundaria_nombre" name="aspirante_secundaria_nombre"
                     placeholder="Nombre de Secundaria">
                   <label for="aspirante_secundaria_nombre">Nombre de Secundaria</label>
@@ -865,7 +869,7 @@
           <!-- fin documentos extras------------------------------------------------------>
 
           <br>
-          <button type="submit" class="btn btn-success btn-lg btn-block" style="padding: 1.5rem">Registrar</button>
+          <button type="button" class="btn btn-success btn-lg btn-block" style="padding: 1.5rem" onclick="submit(); ">Registrar</button>
 
 
         </form>
@@ -894,7 +898,7 @@
                 <div class="col-md-4">
                   <div class="form-label-group">
                     <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ 0-9]+" required="required"
-                      title="El nombre de la secundaria contiene caracteres incorrectos" class="form-control"
+                      title="El nombre de la secundaria contiene caracteres incorrectos" class="form-control text-uppercase"
                       id="aspirante_nuevasecundaria_cct" name="aspirante_nuevasecundaria_cct" placeholder="CCT de Secundaria">
                     <label for="aspirante_nuevasecundaria_cct">C C T</label>
                   </div>
@@ -902,7 +906,7 @@
                 </div>
                 <div class="col-md-4">
                   <div class="form-label-group">
-                    <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ. 0-9]+" class="form-control"
+                    <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ. 0-9]+" class="form-control text-uppercase"
                       id="aspirante_nuevasecundaria_nombre" name="aspirante_secundaria_nombre"
                       placeholder="Nombre de Secundaria">
                     <label for="aspirante_nuevasecundaria_nombre">Nombre de Secundaria</label>
@@ -1012,6 +1016,14 @@
 
 
     <script>
+const swalWithBootstrapButtons = Swal.mixin({
+  customClass: {
+    confirmButton: 'btn btn-success btn-block',
+    cancelButton: 'btn btn-danger btn-block'
+  },
+  buttonsStyling: false,
+})
+
 
 function fecha_curp(fecha){
 
@@ -1119,15 +1131,16 @@ var abreviacion = ["AS","BC","BS","CC","CS","CH","CL","CM","CX","DF","DG","GT","
       }
 
       function obtener_secundaria(e){
-        console.log(e.value);
-        if(e.value.length==10){
+        
           var xhr = new XMLHttpRequest();
-            xhr.open('GET', '/cseiio/index.php/c_secundaria/get_secundaria?cct_secundaria='+e.value, true);
+          console.log("manda",e);
+            xhr.open('GET', '/cseiio/index.php/c_secundaria/get_secundaria?cct_secundaria='+e, true);
 
             xhr.onload = function () {
               //console.log(JSON.parse(xhr.response));
               let secundaria = JSON.parse(xhr.response);
-              //console.log(xhr.responseText.length);
+              //console.log(e);
+              console.log(xhr.responseText.length);
 
 
 
@@ -1140,15 +1153,28 @@ var abreviacion = ["AS","BC","BS","CC","CS","CH","CL","CM","CX","DF","DG","GT","
                   //aspirante_secundaria_tipo_subsistema
                   document.getElementById("aspirante_secundaria_tipo_subsistema").value = secundaria[0].tipo_subsistema;
                   document.getElementById("aspirante_secundaria_tipo_subsistema").disabled = true;
-              }
-
-              else{
+              }else{
                 document.getElementById("nombre_secundaria_oculto").style.display="none";
-              }
-            };
+                document.getElementById("tipo_subsistema_oculto").style.display="none";
+                
+                swalWithBootstrapButtons.fire({
+                  type: 'info',
+                  text: 'Esta secundaria no existe porfavor agreguela:',
+                  showCancelButton: true,
+                  confirmButtonText: 'Agregar',
+                  cancelButtonText: 'Cancelar',
+                }).then((result) => {
+                    if (result.value) {
+                      $('#nuevasecundaria').modal().show();
+                      cct();
+                    
+                    }
+                  })
+                }
+              };
 
             xhr.send(null);
-        }
+        
       }
 
 

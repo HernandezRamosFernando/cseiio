@@ -16,5 +16,8 @@
         <!-- scripts para alerts -->
   <script src="/cseiio/assets/js/sweetalert2.all.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+
+  <script src="/cseiio/assets/js/cambio_estado.js"></script>
+  <script src="/cseiio/assets/js/cambio_municipio.js"></script>
     </body>
 </html>

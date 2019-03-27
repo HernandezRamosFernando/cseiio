@@ -365,11 +365,13 @@ function asignar_matricula(e){
       xhr.open('GET', '/cseiio/index.php/c_estudiante/insertar_estudiante?no_control='+e.value, true);
 
       xhr.onload = function () {
-        if(xhr.responseText.trim() === "si")
+        console.log(xhr.responseText);
+        
+        if(xhr.responseText.trim() !== "no")
         {
           Swal.fire({
             type: 'success',
-            title: 'Matrícula generada correctamente',
+            title: 'Matrícula generada correctamente: '+xhr.responseText,
             showConfirmButton: false,
             timer: 2500 
           })

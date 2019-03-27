@@ -11,30 +11,21 @@
             <title>Menú SISE</title>
         
             <!-- Bootstrap core CSS-->
-            <link href="/cseiio/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        
-            <!-- Custom fonts for this template-->
-            <link href="/cseiio/assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-        
-            <!-- Page level plugin CSS-->
-            <link href="/cseiio/assets/datatables/DataTables-1.10.18/dataTables.bootstrap4.css" rel="stylesheet">
-        
-            <!-- Custom styles for this template-->
-            <link href="/cseiio/assets/css/sb-admin.css" rel="stylesheet">
-
-             <link rel="stylesheet" type="text/css" href="/cseiio/assets/css/main.css">
-        
-      
+            <link href="<?php echo base_url();?>assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+            <link href="<?php echo base_url();?>assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+            <link href="<?php echo base_url();?>assets/datatables/DataTables-1.10.18/dataTables.bootstrap4.css" rel="stylesheet">
+            <link href="<?php echo base_url();?>assets/css/sb-admin.css" rel="stylesheet">
+            <link href="<?php echo base_url();?>assets/css/main.css" rel="stylesheet" type="text/css" >
         
 </head>
 <body>
      <!-- Barra de arriba -->
         <nav class="navbar navbar-expand navbar-dark static-top" style="background:#545555">
-            <a class="navbar-brand mr-1" href="/cseiio/index.php/c_menu/principal">SISE</a>
+            <a class="navbar-brand mr-1" href="<?php echo base_url();?>/index.php/c_menu/principal">SISE</a>
             
             <ul class="nav justify-content-center">
                 <li class="nav-item">
-                    <a class="nav-link disabled" style="color:rgb(182, 197, 193)" href="/cseiio/index.php/c_menu/principal">Sistema integral de servicios escolares</a>
+                    <a class="nav-link disabled" style="color:rgb(182, 197, 193)" href="<?php echo base_url();?>/index.php/c_menu/principal">Sistema integral de servicios escolares</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" style="color:rgb(150, 163, 159)" >Bienvenido Usuario</a>
@@ -146,7 +137,7 @@
                     <!-- Botones-->
                     <div class="row" style="height: 500px" >
                         <div class="col-md-2 col-lg-4">
-                            <a href="/cseiio/index.php/c_menu/inscripcion" class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-address-card btn-responsive" 
+                            <a href="<?php echo base_url();?>/index.php/c_menu/inscripcion" class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-address-card btn-responsive" 
                             style="height: 80%; background: #1F934C; border-color: #1F934C; padding: 13% " >
                               Inscripción
                             </a>
@@ -159,13 +150,13 @@
                             </a>
                         </div>
                         <div class="col-md-4 col-lg-4">
-                            <a href="/cseiio/index.php/c_aspirante/control_alumnos" class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-list-alt btn-responsive" 
+                            <a href="<?php echo base_url();?>/index.php/c_aspirante/control_alumnos" class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-list-alt btn-responsive" 
                             style="height: 80%; background: #579A8D; border-color: #579A8D; padding: 13% " >
                               Control de Alumnos
                             </a>
                         </div>
                         <div class="col-md-4 col-lg-4">
-                            <a href="/cseiio/index.php/c_acreditacion/acreditacion" class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-calendar-check btn-responsive" 
+                            <a href="<?php echo base_url();?>/index.php/c_acreditacion/acreditacion" class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-calendar-check btn-responsive" 
                             style="height: 80%; background: #B7156D; border-color: #B7156D; padding: 13% " >
                               Acreditación
                             </a>
@@ -189,7 +180,7 @@
                             </a>
                         </div>
                         <div class="col-md-4 col-lg-4">
-                            <a href="/cseiio/index.php/c_subir_doc/subir_documentos" class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-file-upload btn-responsive" 
+                            <a href="<?php echo base_url();?>/index.php/c_subir_doc/subir_documentos" class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-file-upload btn-responsive" 
                             style="height: 80%; background: #553276; border-color: #553276; padding: 13% " >
                               Control de Documentos
                             </a>
@@ -229,19 +220,19 @@
    
 
                   <!-- Bootstrap core JavaScript-->
-    <script src="/cseiio/assets/vendor/jquery/jquery.min.js"></script>
-    <script src="/cseiio/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="<?php echo base_url();?>assets/vendor/jquery/jquery.min.js"></script>
+    <script src="<?php echo base_url();?>assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="/cseiio/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="<?php echo base_url();?>assets/vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Page level plugin JavaScript-->
-    <script src="/cseiio/assets/vendor/chart.js/Chart.min.js"></script>
-    <script src="/cseiio/assets/vendor/datatables/jquery.dataTables.js"></script>
-    <script src="/cseiio//assets/vendor/datatables/dataTables.bootstrap4.js"></script>
+    <script src="<?php echo base_url();?>assets/vendor/chart.js/Chart.min.js"></script>
+    <script src="<?php echo base_url();?>assets/vendor/datatables/jquery.dataTables.js"></script>
+    <script src="<?php echo base_url();?>assets/vendor/datatables/dataTables.bootstrap4.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="/cseiio/assets/js/sb-admin.min.js"></script>
+    <script src="<?php echo base_url();?>assets/js/sb-admin.min.js"></script>
  
     </body>
 </html>

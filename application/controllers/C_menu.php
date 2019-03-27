@@ -8,7 +8,7 @@ class C_menu extends CI_Controller{
     }
     
     public function principal(){
-        $this->load->view("headers/cabezera");
+        $this->load->view("headers/cabecera");
         $this->load->view("admin/menuadmin");
     }
 

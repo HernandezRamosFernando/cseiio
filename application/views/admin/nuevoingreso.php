@@ -13,13 +13,10 @@
 
   <!-- Bootstrap core CSS-->
   <link href="/cseiio/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
   <!-- Custom fonts for this template-->
   <link href="/cseiio/assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-
   <!-- Custom styles for this template-->
   <link href="/cseiio/assets/css/sb-admin.css" rel="stylesheet">
-
   <link rel="stylesheet" type="text/css" href="/cseiio/assets/css/main.css">
   <link href="/cseiio/assets/vendor/bootstrap/css/bootstrap-float-label.css" rel="stylesheet">
 

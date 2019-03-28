@@ -211,7 +211,7 @@
 
               <div class="col-md-4 text-center">
                 <div class="form-label-group">
-                  <input type="date" required="required" class="form-control text-uppercase"
+                  <input type="date" required="required" class="form-control text-uppercase" max="2006-01-01" title="La edad minima para ingresar es 14 años"
                     id="aspirante_fecha_nacimiento" name="aspirante_fecha_nacimiento" placeholder="Fecha de Nacimiento">
                   <label for="aspirante_fecha_nacimiento">Fecha Nacimiento</label>
                 </div>
@@ -439,10 +439,10 @@
 
               <div class="col-md-4">
                 <label class="form-group has-float-label" style="font-weight:bold">
-                  <select class="form-control form-control-lg" required="required" name="aspirante_direccion_municipio"
+                  <select class="form-control form-control-lg" required name="aspirante_direccion_municipio"
                     onChange="cambio_municipio(selector_municipio_aspirante,selector_localidad_aspirante)"
                     id="selector_municipio_aspirante">
-                    <option></option>
+                    <option value=""></option>
 
                   </select>
                   <span>Municipio</span>
@@ -452,9 +452,9 @@
 
               <div class="col-md-4">
                 <label class="form-group has-float-label" style="font-weight:bold">
-                  <select class="form-control form-control-lg" required="required" name="aspirante_direccion_localidad"
+                  <select class="form-control form-control-lg" required name="aspirante_direccion_localidad"
                     id="selector_localidad_aspirante">
-                    <option></option>
+                    <option value=""></option>
 
 
 
@@ -522,7 +522,7 @@
               </div>
               <div class="col-md-4">
                 <div class="form-label-group">
-                  <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ ]+" required="required" title="Introduzca solo letras"
+                  <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ ]+"  title="Introduzca solo letras"
                     class="form-control text-uppercase" id="aspirante_tutor_apellido" name="aspirante_tutor_apellido"
                     placeholder="Nombre Completo">
                   <label for="aspirante_tutor_apellido">Primer Apellido</label>
@@ -530,7 +530,7 @@
               </div>
               <div class="col-md-4">
                 <div class="form-label-group">
-                  <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ ]+" required="required" title="Introduzca solo letras"
+                  <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ ]+"  title="Introduzca solo letras"
                     class="form-control text-uppercase" id="aspirante_tutor_apellidodos" name="aspirante_tutor_apellidodos"
                     placeholder="Nombre Completo">
                   <label for="aspirante_tutor_apellidodos">Segundo Apellido</label>
@@ -1033,7 +1033,7 @@
       }
 
       function generarCURP() {
-        let estados = ["aguascalientes", "baja california", "baja california sur", "campeche", "chiapas", "chihuahua", "coahuila", "colima", "ciudad de mexico", "distrito federal", "durango", "guanajuato", "guerrero", "hidalgo", "jalisco", "estado de mexico", "michoacan", "morelos", "nayarit", "nuevo leon", "oaxaca", "puebla", "queretaro", "quintana roo", "san luis potosi", "sinaloa", "sonora", "tabasco", "tamaulipas", "tlaxcala", "veracruz", "yucatan", "zacatecas"];
+        let estados = ["aguascalientes", "baja california", "baja california sur", "campeche", "chiapas", "chihuahua", "coahuila de zaragoza", "colima", "méxico", "distrito federal", "durango", "guanajuato", "guerrero", "hidalgo", "jalisco", "estado de mexico", "michoacán", "morelos", "nayarit", "nuevo león", "oaxaca", "puebla", "querétaro", "quintana roo", "san luis potosí", "sinaloa", "sonora", "tabasco", "tamaulipas", "tlaxcala", "veracruz", "yucatán", "zacatecas"];
         let abreviacion = ["AS", "BC", "BS", "CC", "CS", "CH", "CL", "CM", "CX", "DF", "DG", "GT", "GR", "HG", "JC", "MC", "MN", "MS", "NT", "NL", "OC", "PL", "QT", "QR", "SP", "SL", "SR", "TC", "TS", "TL", "VZ", "YN", "ZS"];
 
         var consonantes = /[bcdfghjklmnpqrstvwxyz]/gi;
@@ -1256,7 +1256,9 @@ var form = document.getElementById("formulario");
             timer: 2500 
           });
 
-          form.reset();
+          document.getElementById("formulario").reset();
+          document.getElementById("selector_municipio_aspirante").value="";
+          document.getElementById("selector_localidad_aspirante").value="";
       }
 
       else{

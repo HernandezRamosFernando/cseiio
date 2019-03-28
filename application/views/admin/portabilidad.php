@@ -207,7 +207,7 @@
 
               <div class="col-md-4 text-center">
                 <div class="form-label-group">
-                  <input type="date" required="required" class="form-control text-uppercase" id="aspirante_fecha_nacimiento"
+                  <input type="date" required="required" class="form-control text-uppercase" id="aspirante_fecha_nacimiento" max="2006-01-01" title="La edad minima para ingresar es 14 años"
                     name="aspirante_fecha_nacimiento" placeholder="Fecha de Nacimiento">
                   <label for="aspirante_fecha_nacimiento">Fecha Nacimiento</label>
                 </div>
@@ -536,7 +536,7 @@
               </div>
               <div class="col-md-4">
                 <div class="form-label-group">
-                  <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ ]+" required="required" title="Introduzca solo letras"
+                  <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ ]+" title="Introduzca solo letras"
                     class="form-control text-uppercase" id="aspirante_tutor_apellido" name="aspirante_tutor_apellido"
                     placeholder="Nombre Completo">
                   <label for="aspirante_tutor_apellido">Primer Apellido</label>
@@ -544,7 +544,7 @@
               </div>
               <div class="col-md-4">
                 <div class="form-label-group">
-                  <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ ]+" required="required" title="Introduzca solo letras"
+                  <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ ]+"  title="Introduzca solo letras"
                     class="form-control text-uppercase" id="aspirante_tutor_apellidodos" name="aspirante_tutor_apellidodos"
                     placeholder="Nombre Completo">
                   <label for="aspirante_tutor_apellidodos">Segundo Apellido</label>
@@ -1282,7 +1282,9 @@ var form = document.getElementById("formulario");
             timer: 2500 
           });
 
-          form.reset();
+          document.getElementById("formulario").reset();
+          document.getElementById("selector_municipio_aspirante").value="";
+          document.getElementById("selector_localidad_aspirante").value="";
       }
 
       else{

@@ -228,6 +228,7 @@
                   <th scope="col" class="col-md-1">N° control</th>
                   <th scope="col" class="col-md-1">Matrícula</th>
                   <th scope="col" class="col-md-1">Plantel CCT</th>
+                  <th scope="col" class="col-md-1">Fecha Ingreso</th>
                   <th scope="col" class="col-md-1">Editar</th>
                   <th scope="col" class="col-md-1">Eliminar</th>
                 </tr>
@@ -1009,6 +1010,8 @@
         document.getElementById("aspirante_telefono").value = datos.aspirante[0].telefono;
         document.getElementById("aspirante_correo").value = datos.aspirante[0].correo;
 
+        document.getElementById("aspirante_sexo").value = datos.aspirante[0].sexo;
+
         document.getElementById("tipo_sangre").value = datos.datos_medicos_aspirante[0].tipo_sangre;
 
         if (datos.datos_medicos_aspirante[0].alergia_medicamento === null || datos.datos_medicos_aspirante[0].alergia_medicamento === "") {
@@ -1214,6 +1217,10 @@
           fila += '</td>';
 
           fila += '<td>';
+          fila += valor.fecha_registro;
+          fila += '</td>';
+
+          fila += '<td>';
           fila += '<button class="btn btn-lg btn-block btn-success" type="button" value="' + valor.no_control + '" onclick="cargar_datos_aspirante(this)" class="btn btn-primary" data-toggle="modal" data-target="#modalaspirante">Editar</button>';
           fila += '</td>';
 
@@ -1232,9 +1239,9 @@
 
       xhr.send(null);
       document.getElementById('btn_buscar').setAttribute("onClick", "limpiar();");
-      document.getElementById('btn_buscar').innerHTML = 'Limpiar Busqueda';
+      document.getElementById('btn_buscar').innerHTML = 'Limpiar Búsqueda';
       document.getElementById('btn_buscar').classList.remove('btn-success');
-      document.getElementById('btn_buscar').classList.add('btn-danger');
+      document.getElementById('btn_buscar').classList.add('btn-dark');
     }
 
     function limpiar() {

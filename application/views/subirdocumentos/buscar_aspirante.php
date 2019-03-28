@@ -655,9 +655,9 @@ https://www.youtube.com/results?search_query=+AJAX+File+Upload+with+Progress
       };
 
       xhr.send(null); document.getElementById('btn_buscar').setAttribute("onClick", "limpiar();");
-      document.getElementById('btn_buscar').innerHTML = 'Limpiar Busqueda';
+      document.getElementById('btn_buscar').innerHTML = 'Limpiar Búsqueda';
       document.getElementById('btn_buscar').classList.remove('btn-success');
-      document.getElementById('btn_buscar').classList.add('btn-danger');
+      document.getElementById('btn_buscar').classList.add('btn-dark');
     }
 
 

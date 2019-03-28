@@ -371,9 +371,7 @@ function asignar_matricula(e){
         {
           Swal.fire({
             type: 'success',
-            title: 'Matrícula generada correctamente: '+xhr.responseText,
-            showConfirmButton: false,
-            timer: 2500 
+            title: 'Matrícula generada correctamente: '+xhr.responseText 
           })
           $(e).parents('tr').detach();
         }else{

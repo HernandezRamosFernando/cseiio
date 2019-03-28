@@ -20,7 +20,7 @@ class M_estudiante extends CI_Model {
         }
 
         else{
-            return $this->db->insert_id();
+            return $datos['matricula'];
         }
         /*
         if($this->db->insert('Estudiante',$datos)){

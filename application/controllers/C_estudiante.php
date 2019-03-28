@@ -40,7 +40,7 @@ class C_estudiante extends CI_Controller {
     public function insertar_estudiante(){
 
 
-        $no_control = $this->input->get('no_control');
+        //$no_control = $this->input->get('no_control');
         //$matricula = $this->generar_matricula();
         $no_control = $this->input->get('no_control');
         $matricula=$this->generar_matricula($no_control);

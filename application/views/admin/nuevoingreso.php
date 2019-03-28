@@ -360,6 +360,48 @@
 
           </div>
           <!--fin datos personales------------------------------------------------------>
+          <!--curp------------------------------------------------------>
+          <p class="text-center text-white rounded titulo-form h4">CURP</p>
+            <hr>
+        
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-4">
+                <label class="form-group has-float-label">
+                  <select class="form-control form-control-lg" required name="aspirante_nacimiento_estado"
+                    onChange="curp();" id="selector_estado_nacimiento_aspirante">
+                    <option value="">Seleccione el estado de nacimiento</option>
+
+                    <?php
+                              foreach ($estados as $estado)
+                              {
+                                      echo '<option value="'.$estado->id_estado.'">'.$estado->nombre_estado.'</option>';
+                              }
+                              ?>
+
+
+
+                  </select>
+                  <span>Estado de nacimiento</span>
+                </label>
+              </div>
+
+              <div class="col-md-4">
+                <div class="form-label-group">
+                  <input type="text"
+                    title="Ingrese los datos faltantes" class="form-control text-uppercase" id="aspirante_curp"
+                    name="aspirante_curp" placeholder="CURP">
+                  <label for="aspirante_curp">CURP</label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-label-group">
+              <a name="" id="" class="btn btn-outline-success btn-lg btn-block btn-responsive" href="https://www.gob.mx/curp/" target="_blank" role="button">
+              ¿No cuenta con curp? Buscar aquí</a>
+                            </div>
+                            </div>
+            </div>
+          </div>
 
           <!--direccion------------------------------------------------------>
             <p class="text-center text-white rounded titulo-form h4">Dirección familiar del Aspirante</p>
@@ -371,7 +413,7 @@
             <div class="row">
 
               <div class="col-md-4">
-                <label class="form-group has-float-label">
+                <label class="form-group has-float-label" style="font-weight:bold">
                   <select class="form-control form-control-lg" required name="aspirante_direccion_estado"
                     onChange="cambio_estado(selector_estado_aspirante,selector_municipio_aspirante,selector_localidad_aspirante)"
                     id="selector_estado_aspirante">
@@ -393,7 +435,7 @@
 
 
               <div class="col-md-4">
-                <label class="form-group has-float-label">
+                <label class="form-group has-float-label" style="font-weight:bold">
                   <select class="form-control form-control-lg" required="required" name="aspirante_direccion_municipio"
                     onChange="cambio_municipio(selector_municipio_aspirante,selector_localidad_aspirante)"
                     id="selector_municipio_aspirante">
@@ -406,7 +448,7 @@
               </div>
 
               <div class="col-md-4">
-                <label class="form-group has-float-label">
+                <label class="form-group has-float-label" style="font-weight:bold"  >
                   <select class="form-control form-control-lg" required="required" name="aspirante_direccion_localidad"
                     id="selector_localidad_aspirante">
                     <option></option>
@@ -459,49 +501,7 @@
           <!--fin direccion------------------------------------------------------>
 
 
-          <!--curp------------------------------------------------------>
-          <p class="text-center text-white rounded titulo-form h4">CURP</p>
-            <hr>
-        
-          <div class="form-group">
-            <div class="row">
-              <div class="col-md-4">
-                <label class="form-group has-float-label">
-                  <select class="form-control form-control-lg" required name="aspirante_nacimiento_estado"
-                    onChange="curp();" id="selector_estado_nacimiento_aspirante">
-                    <option value="">Seleccione el estado de nacimiento</option>
-
-                    <?php
-                              foreach ($estados as $estado)
-                              {
-                                      echo '<option value="'.$estado->id_estado.'">'.$estado->nombre_estado.'</option>';
-                              }
-                              ?>
-
-
-
-                  </select>
-                  <span>Estado de nacimiento</span>
-                </label>
-              </div>
-
-              <div class="col-md-4">
-                <div class="form-label-group">
-                  <input type="text"
-                    pattern="[A-ZÑ]{1}[AEIOU]{1}[A-ZÑ]{1}[A-ZÑ]{1}[0-9]{6}(H|M)(AS|BC|BS|CC|CS|CH|DF|CL|CM|DG|GT|GR|HG|JC|MC|MN|MS|NT|NL|OC|PL|QO|QR|SP|SL|SR|TC|TS|TL|VZ|YN|ZS)[BCDFGHJKLMNPQRSTVWXYZ]{3}[0-9|A-Z]{1}[0-9]{1}"
-                    title="Ingrese los datos faltantes" class="form-control text-uppercase" id="aspirante_curp"
-                    name="aspirante_curp" placeholder="CURP">
-                  <label for="aspirante_curp">CURP</label>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="form-label-group">
-              <a name="" id="" class="btn btn-outline-success btn-lg btn-block btn-responsive" href="https://www.gob.mx/curp/" target="_blank" role="button">
-              ¿No cuenta con curp? Buscar aquí</a>
-                            </div>
-                            </div>
-            </div>
-          </div>
+          
 
           <!--datos tutor------------------------------------------------------>
           <p class="text-center text-white rounded titulo-form h4">Datos de Tutor</p>

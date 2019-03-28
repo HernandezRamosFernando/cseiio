@@ -296,8 +296,16 @@
   <input type="text" id="no_control" display="none">
 
 
-
+  <script src="/cseiio/assets/js/sweetalert2.all.min.js"></script>
   <script>
+  
+  const swalWithBootstrapButtons = Swal.mixin({
+  customClass: {
+    confirmButton: 'btn btn-success btn-block',
+    cancelButton: 'btn btn-secondary btn-block'
+  },
+  buttonsStyling: false,
+});
 
 function aspirante_input(e){
 
@@ -328,11 +336,13 @@ function aspirante_input(e){
         }
 
         else{
-          Swal.fire({
+          swalWithBootstrapButtons.fire({
           title: 'Error!',
           text: "Ya cuenta con una carta compromiso vigente, dias restantes: "+(30-parseInt(JSON.parse(dias.response)[0].dias)),
           type: 'warning',
-         confirmButtonText: 'Cerrar'
+          showConfirmButton: false,
+          showCancelButton: true,
+         cancelButtonText: 'Cerrar'
           })
          // alert("Ya cuenta con una carta compromiso vigente, dias restantes: "+(30-parseInt(JSON.parse(dias.response)[0].dias)));
 

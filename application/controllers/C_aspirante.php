@@ -196,7 +196,7 @@ public function portabilidad(){
         );
 
         $datos_aspirante_tutor = array(
-            'nombre' => strtoupper($this->input->post('aspirante_tutor_nombre')),
+            'nombre' => strtoupper($this->input->post('aspirante_tutor_nombre').' '.$this->input->post('aspirante_tutor_apellido').' '.$this->input->post('aspirante_tutor_apellidodos')),
             'telefono_particular' => $this->input->post('aspirante_tutor_telefono'),
             'ocupacion' => strtoupper($this->input->post('aspirante_tutor_ocupacion')),
             'parentezco' => strtoupper($this->input->post('aspirante_tutor_parentesco')==''?null:$this->input->post('aspirante_tutor_parentesco')),
@@ -305,7 +305,7 @@ public function portabilidad(){
         );
 
         $datos_aspirante_tutor = array(
-            'nombre' => strtoupper($this->input->post('aspirante_tutor_nombre')),
+            'nombre' => strtoupper($this->input->post('aspirante_tutor_nombre').' '.$this->input->post('aspirante_tutor_apellido').' '.$this->input->post('aspirante_tutor_apellidodos')),
             'telefono_particular' => $this->input->post('aspirante_tutor_telefono'),
             'ocupacion' => strtoupper($this->input->post('aspirante_tutor_ocupacion')),
             'parentezco' => strtoupper($this->input->post('aspirante_tutor_parentesco')==''?null:$this->input->post('aspirante_tutor_parentesco')),
@@ -419,14 +419,7 @@ public function portabilidad(){
             $datos_aspirante_documentos,
             $datos_aspirante_medicos
         );
-        if($tipo_aspirante=='nuevo_ingreso'){
-            redirect('/index.php/c_aspirante/nuevo_ingreso', 'refresh');
-        }
 
-        else{ 
-            redirect('/index.php/c_aspirante/portabilidad', 'refresh');
-        }
-       
 
        
 

@@ -118,14 +118,16 @@
           
                     <!-- Botones-->
                     <div class="row" style="height: 500px" >
-                        <div class="col-md-2 col-lg-4">
-                            <a href="<?php echo base_url();?>/index.php/c_menu/inscripcion" class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-address-card btn-responsive" 
-                            style="height: 80%; background: #1F934C; border-color: #1F934C; padding: 13% " >
+                        <div class="col-md-4 col-lg-4">
+                            <a href="<?php echo base_url();?>/index.php/c_menu/inscripcion" 
+                            class="btn btn-primary btn-lg btn-block  center-block  btn-responsive " 
+                            style="height: 80%; background: #1F934C;  font-size: 1.3rem;  font-weight: bold; border-color: #1F934C; padding: 13% " >
+                            <i class="material-icons">library_add</i>
                               Inscripción
                             </a>
                          
                         </div>
-                        <div class="col-md-2 col-lg-4">
+                        <div class="col-md-4 col-lg-4">
                             <a href="../views/reinscripcion.html" class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-chalkboard-teacher btn-responsive" 
                             style="height: 80%; background: #9DBF3B; border-color: #9DBF3B; padding: 13% " >
                               Reinscripción

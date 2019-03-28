@@ -186,7 +186,7 @@
                   <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ ]+" required="required" title="Introduzca solo letras"
                     class="form-control text-uppercase" id="aspirante_apellido_paterno" name="aspirante_apellido_paterno"
                     placeholder="Apellido Paterno">
-                  <label for="aspirante_apellido_paterno">Apellido Paterno</label>
+                  <label for="aspirante_apellido_paterno">Primer Apellido</label>
                 </div>
               </div>
 
@@ -195,7 +195,7 @@
                   <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ ]+" title="Introduzca solo letras"
                     class="form-control text-uppercase" id="aspirante_apellido_materno" name="aspirante_apellido_materno"
                     placeholder="Apellido Materno">
-                  <label for="aspirante_apellido_materno">Apellido Materno</label>
+                  <label for="aspirante_apellido_materno">Segundo Apellido</label>
                 </div>
               </div>
             </div>
@@ -390,7 +390,7 @@
                 <div class="form-label-group">
                   <input type="text"
                     title="Ingrese los datos faltantes" class="form-control text-uppercase" id="aspirante_curp"
-                    name="aspirante_curp" placeholder="CURP">
+                    name="aspirante_curp" placeholder="CURP" onChange="validarInput(this);">
                   <label for="aspirante_curp">CURP</label>
                 </div>
               </div>
@@ -995,6 +995,8 @@
   },
   buttonsStyling: false,
 })
+
+
 
       function fecha_curp(fecha) {
 

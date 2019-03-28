@@ -20,3 +20,11 @@ btn-lista:hover{
 .titulo-form{
     background-color: #579A8D; 
 }
+.resultado {
+    background-color: red;
+    color: white;
+    font-weight: bold;
+}
+.resultado.ok {
+    background-color: green;
+}

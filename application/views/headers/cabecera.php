@@ -21,3 +21,5 @@
             <link href="<?php echo base_url();?>/assets/css/sb-admin.css" rel="stylesheet">
             <link href="<?php echo base_url();?>/assets/css/main.css" rel="stylesheet" type="text/css" >
             <link href="<?php echo base_url();?>/assets/vendor/bootstrap/css/bootstrap-float-label.css" rel="stylesheet">
+            <script src="<?php echo base_url();?>assets/js/sweetalert2.all.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>

@@ -157,7 +157,7 @@
 
 
         
-        <form action="/cseiio/index.php/c_aspirante/registrar_datos_aspirante" onsubmit="return false;"  method="post">
+        <form id="formulario">
 
         <input type="text" name="formulario" value="portabilidad" style="display:none">
 
@@ -890,7 +890,7 @@
           <!-- fin documentos extras------------------------------------------------------>
 
           <br>
-          <button type="button" class="btn btn-success btn-lg btn-block" style="padding: 1.5rem" onclick="submit(); ">Registrar</button>
+          <button type="submit" class="btn btn-success btn-lg btn-block" style="padding: 1.5rem">Registrar</button>
 
 
         </form>
@@ -1263,7 +1263,43 @@ var abreviacion = ["AS","BC","BS","CC","CS","CH","CL","CM","CX","DF","DG","GT","
       
     </script>
 
+<script>   
 
+var form = document.getElementById("formulario");
+	form.onsubmit = function(e){
+		e.preventDefault();
+		var formdata = new FormData(form);
+		var xhr =  new XMLHttpRequest();
+		xhr.open("POST","/cseiio/index.php/c_aspirante/registrar_datos_aspirante",true);
+    xhr.onreadystatechange = function() { 
+    if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+      //console.log();
+      if(xhr.responseText==="si"){
+        Swal.fire({
+            type: 'success',
+            title: 'Registro exitoso',
+            showConfirmButton: false,
+            timer: 2500 
+          });
+
+          form.reset();
+      }
+
+      else{
+        Swal.fire({
+            type: 'error',
+            title: 'Ya existe un alumno registrado con ese curp',
+            showConfirmButton: false,
+            timer: 2500 
+          });
+      }
+    }
+}
+		xhr.send(formdata);
+		
+	}
+
+</script>
 
 
 

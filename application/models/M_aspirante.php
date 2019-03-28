@@ -2,6 +2,7 @@
 class M_aspirante extends CI_Model { 
    public function __construct() {
       parent::__construct();
+      
    }
 
 
@@ -115,6 +116,8 @@ public function insertar_aspirante_nuevo_ingreso(
    $datos_aspirante_documentos,
    $datos_aspirante_medicos){
 
+      
+
             $this->db->trans_start();
             $this->db->insert('Aspirante',$datos_aspirante);
             $this->db->insert('Direccion_Aspirante',$datos_aspirante_direccion);
@@ -134,20 +137,12 @@ public function insertar_aspirante_nuevo_ingreso(
 
             if ($this->db->trans_status() === FALSE)
             {
-               ?>
-                <script>
-                  alert("algo salio mal");
-                  </script>
-               <?php
+               return "no";
              //return "no";
             }
                
             else{
-               ?>
-                <script>
-                  alert("Registro Ingresado correctamente");
-                  </script>
-               <?php
+               return "si";
                //return "si";
             }
    //print_r($datos_aspirante_documentos);

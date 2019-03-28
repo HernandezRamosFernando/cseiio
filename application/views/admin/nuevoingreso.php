@@ -161,7 +161,7 @@
 
 
 
-        <form action="/cseiio/index.php/c_aspirante/registrar_datos_aspirante" method="post">
+        <form id="formulario">
 
           <input type="text" name="formulario" value="nuevo_ingreso" style="display:none">
 
@@ -1234,3 +1234,43 @@
 
 
     </script>
+
+
+
+<script>   
+
+var form = document.getElementById("formulario");
+	form.onsubmit = function(e){
+		e.preventDefault();
+		var formdata = new FormData(form);
+		var xhr =  new XMLHttpRequest();
+		xhr.open("POST","/cseiio/index.php/c_aspirante/registrar_datos_aspirante",true);
+    xhr.onreadystatechange = function() { 
+    if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+      //console.log();
+      if(xhr.responseText==="si"){
+        Swal.fire({
+            type: 'success',
+            title: 'Registro exitoso',
+            showConfirmButton: false,
+            timer: 2500 
+          });
+
+          form.reset();
+      }
+
+      else{
+        Swal.fire({
+            type: 'error',
+            title: 'Ya existe un alumno registrado con ese curp',
+            showConfirmButton: false,
+            timer: 2500 
+          });
+      }
+    }
+}
+		xhr.send(formdata);
+		
+	}
+
+</script>

@@ -374,6 +374,51 @@
 
           </div>
           <!--fin datos personales------------------------------------------------------>
+             <!--curp------------------------------------------------------>
+        <p class="text-center text-white rounded titulo-form h4">
+            CURP
+            <hr>
+          </p>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-4">
+                <label class="form-group has-float-label">
+                  <select class="form-control form-control-lg" required name="aspirante_nacimiento_estado"
+                    onChange="curp();" id="selector_estado_nacimiento_aspirante">
+                    <option value="">Seleccione el estado de nacimiento</option>
+
+                    <?php
+                              foreach ($estados as $estado)
+                              {
+                                      echo '<option value="'.$estado->id_estado.'">'.$estado->nombre_estado.'</option>';
+                              }
+                              ?>
+
+
+
+                  </select>
+                  <span>Estado de nacimiento</span>
+                </label>
+              </div>
+
+              <div class="col-md-4">
+                <div class="form-label-group">
+                  <input type="text"
+                    pattern="([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)"
+                    title="Ingrese los datos faltantes" class="form-control text-uppercase" id="aspirante_curp"
+                    name="aspirante_curp" placeholder="CURP">
+                  <label for="aspirante_curp">CURP</label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-label-group">
+              <a name="" id="" class="btn btn-outline-success btn-lg btn-block btn-responsive" href="https://www.gob.mx/curp/" target="_blank" role="button">
+              ¿No cuenta con curp? Buscar aquí</a>
+                            </div>
+                            </div>
+            </div>
+          </div>
+
 
           <!--direccion------------------------------------------------------>
           <p class="text-center text-white rounded titulo-form h4">
@@ -473,98 +518,74 @@
 
           <!--fin direccion------------------------------------------------------>
 
-    <!--curp------------------------------------------------------>
-        <p class="text-center text-white rounded titulo-form h4">
-            CURP
-            <hr>
-          </p>
-          <div class="form-group">
-            <div class="row">
-              <div class="col-md-4">
-                <label class="form-group has-float-label">
-                  <select class="form-control form-control-lg" required name="aspirante_nacimiento_estado"
-                    onChange="curp();" id="selector_estado_nacimiento_aspirante">
-                    <option value="">Seleccione el estado de nacimiento</option>
-
-                    <?php
-                              foreach ($estados as $estado)
-                              {
-                                      echo '<option value="'.$estado->id_estado.'">'.$estado->nombre_estado.'</option>';
-                              }
-                              ?>
-
-
-
-                  </select>
-                  <span>Estado de nacimiento</span>
-                </label>
-              </div>
-
-              <div class="col-md-4">
-                <div class="form-label-group">
-                  <input type="text"
-                    pattern="([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)"
-                    title="Ingrese los datos faltantes" class="form-control text-uppercase" id="aspirante_curp"
-                    name="aspirante_curp" placeholder="CURP">
-                  <label for="aspirante_curp">CURP</label>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="form-label-group">
-              <a name="" id="" class="btn btn-outline-success btn-lg btn-block btn-responsive" href="https://www.gob.mx/curp/" target="_blank" role="button">
-              ¿No cuenta con curp? Buscar aquí</a>
-                            </div>
-                            </div>
-            </div>
-          </div>
-
+ 
           <!--datos tutor------------------------------------------------------>
-          <p class="text-center text-white rounded titulo-form h4">
-            Datos de Tutor
-            <hr>
-          </p>
+          <p class="text-center text-white rounded titulo-form h4">Datos de Tutor</p>
+          <hr>
 
           <div class="form-group">
 
             <div class="row">
-              <div class="col-md-7">
+              <div class="col-md-4">
                 <div class="form-label-group">
                   <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ ]+" required="required" title="Introduzca solo letras"
                     class="form-control text-uppercase" id="aspirante_tutor_nombre" name="aspirante_tutor_nombre"
                     placeholder="Nombre Completo">
-                  <label for="aspirante_tutor_nombre">Nombre Completo</label>
+                  <label for="aspirante_tutor_nombre">Nombre de Tutor</label>
                 </div>
               </div>
-
-              <div class="col-md-2">
-                <label class="form-group has-float-label">
-                  <select class="form-control form-control-lg" required id="aspirante_tutor_parentesco" required="required" name="aspirante_tutor_parentesco" onchange="parentesco(this)">
-                    <option value="">Seleccione</option>
-                    <option value="PADRE">PADRE</option>
-                    <option value="MADRE">MADRE</option>
-                    <option value="HERMANO/A">HERMANO/A</option>
-                    <option value="TIO">TIOA</option>
-                    <option value="TIA">TIA</option>
-                    <option value="ABUELO">ABUELO</option>
-                    <option value="ABUELA">ABUELA</option>
-                    <option value="otro">OTRO</option>
-                  </select>
-                  <span>Parentesco</span>
-                  
-               </label>
-              </div>
-
-              <div class="col-md-3" id="parentescootro" style="display:none;">
+              <div class="col-md-4">
                 <div class="form-label-group">
-                  <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ ]+" 
-                    class="form-control text-uppercase" id="aspirante_tutor_otro" name="aspirante_tutor_otro"
-                    placeholder="Escriba el parentesco">
-                  <label for="aspirante_tutor_otro">Escriba el parentesco</label>
+                  <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ ]+" required="required" title="Introduzca solo letras"
+                    class="form-control text-uppercase" id="aspirante_tutor_apellido" name="aspirante_tutor_apellido"
+                    placeholder="Nombre Completo">
+                  <label for="aspirante_tutor_apellido">Primer Apellido</label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-label-group">
+                  <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ ]+" required="required" title="Introduzca solo letras"
+                    class="form-control text-uppercase" id="aspirante_tutor_apellidodos" name="aspirante_tutor_apellidodos"
+                    placeholder="Nombre Completo">
+                  <label for="aspirante_tutor_apellidodos">Segundo Apellido</label>
                 </div>
               </div>
             </div>
-
           </div>
+
+            <div class="form-group">
+              <div class="row">
+
+                <div class="col-md-4">
+                  <label class="form-group has-float-label">
+                    <select class="form-control form-control-lg" id="aspirante_tutor_parentesco" required
+                      name="aspirante_tutor_parentesco" onchange="parentesco(this)">
+                      <option value="">Seleccione</option>
+                      <option value="PADRE">PADRE</option>
+                      <option value="MADRE">MADRE</option>
+                      <option value="HERMANO/A">HERMANO/A</option>
+                      <option value="TIO">TIO</option>
+                      <option value="TIA">TIA</option>
+                      <option value="ABUELO">ABUELO</option>
+                      <option value="ABUELA">ABUELA</option>
+                      <option value="otro">OTRO</option>
+                    </select>
+                    <span>Parentesco</span>
+
+                  </label>
+                </div>
+
+                <div class="col-md-4" id="parentescootro" style="display:none;">
+                  <div class="form-label-group">
+                    <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ ]+" class="form-control text-uppercase"
+                      id="aspirante_tutor_otro" name="aspirante_tutor_otro" placeholder="Escriba el parentesco">
+                    <label for="aspirante_tutor_otro">Escriba el parentesco</label>
+                  </div>
+                </div>
+              </div>
+
+            
+          
 
 
           <div class="form-group">
@@ -587,16 +608,16 @@
                   <label for="aspirante_tutor_telefono">Teléfono particular</label>
                 </div>
               </div>
-            <div class="col-md-3">
+              <div class="col-md-3">
                 <div class="form-label-group">
-                  <input type="text" pattern="[0-9]{10}" title="El numero de telefono debe de ser a 10 dígitos con lada"
-                    class="form-control text-uppercase" id="aspirante_tutor_telefono_comunidad" name="aspirante_tutor_telefono_comunidad"
-                    placeholder="Teléfono de la comunidad">
+                  <input type="text" pattern="[0-9]{10}" title="El numero de telefono debe de ser a 10 digitos con lada"
+                    class="form-control text-uppercase" id="aspirante_tutor_telefono_comunidad"
+                    name="aspirante_tutor_telefono_comunidad" placeholder="Teléfono de la comunidad">
                   <label for="aspirante_tutor_telefono_comunidad">Teléfono de la comunidad</label>
                 </div>
               </div>
 
-              
+
               <div class="col-md-3">
                 <div class="form-label-group">
                   <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ. ]+" class="form-control text-uppercase"
@@ -985,7 +1006,7 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="borrarmodal()">Cancelar</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="borrarmodal()">Cancelar</button>
             <button type="button" class="btn btn-success" onclick="insertar_secundaria()">Guardar</button>
           </div>
         </div>
@@ -1019,7 +1040,7 @@
 const swalWithBootstrapButtons = Swal.mixin({
   customClass: {
     confirmButton: 'btn btn-success btn-block',
-    cancelButton: 'btn btn-danger btn-block'
+    cancelButton: 'btn btn-secondary btn-block'
   },
   buttonsStyling: false,
 })

@@ -230,7 +230,7 @@ public function portabilidad(){
             $datos_aspirante_medicos,
             $no_control
         );
-        redirect('/index.php/c_aspirante/control_alumnos', 'refresh');
+        //redirect('/index.php/c_aspirante/control_alumnos', 'refresh');
         //$this->M_aspirante->insertar_aspirante($datos_aspirante);
 
     }

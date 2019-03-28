@@ -255,7 +255,7 @@
 
             <div class="modal-body">
               <!-- formulario -->
-              <form action="/cseiio/index.php/c_aspirante/actualizar_datos_aspirante" method="post">
+              <form id="formulario">
 
 
 
@@ -1400,5 +1400,40 @@
   </script>
 
 
+<script>   
 
+var form = document.getElementById("formulario");
+	form.onsubmit = function(e){
+		e.preventDefault();
+		var formdata = new FormData(form);
+		var xhr =  new XMLHttpRequest();
+		xhr.open("POST","/cseiio/index.php/c_aspirante/actualizar_datos_aspirante",true);
+    xhr.onreadystatechange = function() { 
+    if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+      //console.log();
+      if(xhr.responseText==="si"){
+        Swal.fire({
+            type: 'success',
+            title: 'Actualizacion exitosa',
+            showConfirmButton: false,
+            timer: 2500 
+          });
 
+          $('#modalaspirante').modal('toggle');
+      }
+
+      else{
+        Swal.fire({
+            type: 'error',
+            title: 'Ocurrio un error al actualizar los datos',
+            showConfirmButton: false,
+            timer: 2500 
+          });
+      }
+    }
+}
+		xhr.send(formdata);
+		
+	}
+
+</script>

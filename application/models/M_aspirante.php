@@ -85,20 +85,11 @@ public function asignar_numero_consecutivo(){
 
 if ($this->db->trans_status() === FALSE)
 {
-   ?>
-    <script>
-      alert("algo salio mal");
-      </script>
-   <?php
-        //return "alert(algo salio mal)";
+   return "no";
 }
    
 else{
-   ?>
-    <script>
-      alert("Aspirante actualizado correctamente");
-      </script>
-   <?php
+   return "si";
 }
      
       

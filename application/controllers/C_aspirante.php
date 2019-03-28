@@ -169,37 +169,37 @@ public function portabilidad(){
         $no_control = $this->input->post('aspirante_no_control');
 
         $datos_aspirante = array(
-            'nombre' => $this->input->post('aspirante_nombre'),
-            'apellido_paterno' => $this->input->post('aspirante_apellido_paterno'),
-            'apellido_materno' => $this->input->post('aspirante_apellido_materno'),
+            'nombre' => strtoupper($this->input->post('aspirante_nombre')),
+            'apellido_paterno' => strtoupper($this->input->post('aspirante_apellido_paterno')),
+            'apellido_materno' => strtoupper($this->input->post('aspirante_apellido_materno')),
             'telefono' => $this->input->post('aspirante_telefono'),
             'sexo' => $this->input->post('aspirante_sexo'),
             'nss' => $this->input->post('aspirante_nss'),
-            'correo' => $this->input->post('aspirante_correo'),
+            'correo' => strtoupper($this->input->post('aspirante_correo')),
             //'tipo_ingreso' => 'NUEVO INGRESO',
             'semestre' => $this->input->post('aspirante_semestre'),
             'programa_social' => $this->input->post('aspirante_programa_social'),
-            'curp' => $this->input->post('aspirante_curp'),
-            'Plantel_cct' => $this->input->post('aspirante_plantel'),
+            'curp' => strtoupper($this->input->post('aspirante_curp')),
+            'Plantel_cct' => strtoupper($this->input->post('aspirante_plantel')),
             'fecha_registro' => date("Y-m-d"),
             'fecha_inscripcion' => date("Y-m-d"),
-            'Secundaria_cct_secundaria' => $this->input->post('aspirante_secundaria_cct'),
+            'Secundaria_cct_secundaria' => strtoupper($this->input->post('aspirante_secundaria_cct')),
             'fecha_nacimiento' => $this->input->post('aspirante_fecha_nacimiento')
         );
 
         $datos_aspirante_direccion = array(
             //'Localidad_id_localidad' => $this->input->post('aspirante_direccion_localidad'),
             'Aspirante_no_control' => $no_control,
-            'calle' => $this->input->post('aspirante_direccion_calle'),
-            'colonia' => $this->input->post('aspirante_direccion_colonia'),
+            'calle' => strtoupper($this->input->post('aspirante_direccion_calle')),
+            'colonia' => strtoupper($this->input->post('aspirante_direccion_colonia')),
             'cp' => $this->input->post('aspirante_direccion_cp')
         );
 
         $datos_aspirante_tutor = array(
-            'nombre' => $this->input->post('aspirante_tutor_nombre'),
+            'nombre' => strtoupper($this->input->post('aspirante_tutor_nombre')),
             'telefono_particular' => $this->input->post('aspirante_tutor_telefono'),
-            'ocupacion' => $this->input->post('aspirante_tutor_ocupacion'),
-            'parentezco' => $this->input->post('aspirante_tutor_parentesco')==''?null:$this->input->post('aspirante_tutor_parentesco'),
+            'ocupacion' => strtoupper($this->input->post('aspirante_tutor_ocupacion')),
+            'parentezco' => strtoupper($this->input->post('aspirante_tutor_parentesco')==''?null:$this->input->post('aspirante_tutor_parentesco')),
             //'Aspirante_no_control' => $no_control,
             'folio_prospera' => $this->input->post('aspirante_tutor_prospera'),
             'telefono_comunidad' => $this->input->post('aspirante_tutor_telefono_comunidad')
@@ -217,8 +217,8 @@ public function portabilidad(){
 
         $datos_aspirante_medicos = array(
             'tipo_sangre' => $this->input->post('tipo_sangre')==''?null:$this->input->post('tipo_sangre'),
-            'alergia_medicamento' => $this->input->post('aspirante_alergia'),
-            'discapacidad' => $this->input->post('aspirante_discapacidad')
+            'alergia_medicamento' => strtoupper($this->input->post('aspirante_alergia')),
+            'discapacidad' => strtoupper($this->input->post('aspirante_discapacidad'))
             //'Aspirante_no_control' => $no_control
         );
 
@@ -305,10 +305,10 @@ public function portabilidad(){
         );
 
         $datos_aspirante_tutor = array(
-            'nombre' => $this->input->post('aspirante_tutor_nombre'),
+            'nombre' => strtoupper($this->input->post('aspirante_tutor_nombre')),
             'telefono_particular' => $this->input->post('aspirante_tutor_telefono'),
-            'ocupacion' => $this->input->post('aspirante_tutor_ocupacion'),
-            'parentezco' => $this->input->post('aspirante_tutor_parentesco')==''?null:$this->input->post('aspirante_tutor_parentesco'),
+            'ocupacion' => strtoupper($this->input->post('aspirante_tutor_ocupacion')),
+            'parentezco' => strtoupper($this->input->post('aspirante_tutor_parentesco')==''?null:$this->input->post('aspirante_tutor_parentesco')),
             'Aspirante_no_control' => $no_control,
             'folio_prospera' => $this->input->post('aspirante_tutor_prospera'),
             'telefono_comunidad' => $this->input->post('aspirante_tutor_telefono_comunidad')
@@ -326,8 +326,8 @@ public function portabilidad(){
 
         $datos_aspirante_medicos = array(
             'tipo_sangre' => $this->input->post('tipo_sangre')==''?null:$this->input->post('tipo_sangre'),
-            'alergia_medicamento' => $this->input->post('aspirante_alergia'),
-            'discapacidad' => $this->input->post('aspirante_discapacidad'),
+            'alergia_medicamento' => strtoupper($this->input->post('aspirante_alergia')),
+            'discapacidad' => strtoupper($this->input->post('aspirante_discapacidad')),
             'Aspirante_no_control' => $no_control
         );
 

@@ -16,11 +16,11 @@ class M_estudiante extends CI_Model {
 
         if ($this->db->trans_status() === FALSE)
         {
-        return "no";
+            return "no";
         }
 
         else{
-        return "si";
+            return $this->db->insert_id();
         }
         /*
         if($this->db->insert('Estudiante',$datos)){

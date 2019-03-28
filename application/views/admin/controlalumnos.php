@@ -896,7 +896,8 @@
             </div>
             <div class="modal-body">
               <div class="container-fluid">
-                ¿Esta seguro que desea eliminar a este alumno?
+                ¿Esta seguro que desea eliminar a este alumno? <br>
+                Una vez eliminado, el registro se perdera definitivamente del sistema.
               </div>
             </div>
             <div class="modal-footer">

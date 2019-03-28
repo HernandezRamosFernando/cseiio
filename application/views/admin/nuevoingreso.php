@@ -389,6 +389,7 @@
               <div class="col-md-4">
                 <div class="form-label-group">
                   <input type="text"
+                  pattern="([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)"
                     title="Ingrese los datos faltantes" class="form-control text-uppercase" id="aspirante_curp"
                     name="aspirante_curp" placeholder="CURP" onChange="validarInput(this);">
                   <label for="aspirante_curp">CURP</label>

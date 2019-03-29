@@ -28,3 +28,96 @@ btn-lista:hover{
 .resultado.ok {
     background-color: green;
 }
+.menu{
+    height: 90%;
+    font-size: 1.3rem;
+    font-weight: bold; 
+    padding: 13%;
+}
+.btn {
+    border: 0 none;
+}
+.btn:focus, .btn:active:focus, .btn.active:focus {
+    outline: 0 none;
+}
+.btn-1{
+    background: #1F934C;  
+    border-color: #1F934C;
+}
+.btn-1:hover, .btn-1:focus, .btn-1:active, .btn-1.active, .open>.dropdown-toggle.btn-1 {
+    color: #fff;
+    background-color: #1b7e41;
+    border-color: #1b7e41;
+}
+.btn-2{
+    background: #9DBF3B;
+    border-color: #9DBF3B; 
+}
+.btn-2:hover, .btn-2:focus, .btn-2:active, .btn-2.active, .open>.dropdown-toggle.btn-2 {
+    color: #fff;
+    background: #84a132;
+    border-color: #84a132; 
+}
+.btn-3{
+    background: #579A8D; 
+    border-color: #579A8D;
+}
+.btn-3:hover, .btn-3:focus, .btn-3:active, .btn-3.active, .open>.dropdown-toggle.btn-3 {
+    color: #fff;
+    background: #467c72;
+    border-color: #467c72; 
+}
+.btn-4{
+    background: #B7156D;
+    border-color: #B7156D;
+}
+.btn-4:hover, .btn-4:focus, .btn-4:active, .btn-4.active, .open>.dropdown-toggle.btn-4 {
+    color: #fff;
+    background: #9D125E;
+    border-color: #9D125E; 
+}
+.btn-5{
+    background: #CD581F; 
+    border-color: #CD581F;
+}
+.btn-5:hover, .btn-5:focus, .btn-5:active, .btn-5.active, .open>.dropdown-toggle.btn-5 {
+    color: #fff;
+    background: #AD4A1A;
+    border-color: #AD4A1A; 
+}
+.btn-6{
+    background: #E6AD2F; 
+    border-color: #E6AD2F;
+}
+.btn-6:hover, .btn-6:focus, .btn-6:active, .btn-6.active, .open>.dropdown-toggle.btn-6 {
+    color: #fff;
+    background: #C6952A;
+    border-color: #C6952A; 
+}
+.btn-7{
+    background: #8D3B88; 
+    border-color: #8D3B88;
+}
+.btn-7:hover, .btn-7:focus, .btn-7:active, .btn-7.active, .open>.dropdown-toggle.btn-7 {
+    color: #fff;
+    background: #6B2D67;
+    border-color: #6B2D67; 
+}
+.btn-8{
+    background: #553276;
+    border-color: #553276;
+}
+.btn-8:hover, .btn-8:focus, .btn-8:active, .btn-8.active, .open>.dropdown-toggle.btn-8 {
+    color: #fff;
+    background: #3E2456;
+    border-color: #3E2456; 
+}
+.btn-9{
+    background: #C4131B; 
+    border-color: #C4131B;
+}
+.btn-9:hover, .btn-9:focus, .btn-9:active, .btn-9.active, .open>.dropdown-toggle.btn-9 {
+    color: #fff;
+    background: #A21017;
+    border-color: #A21017; 
+}

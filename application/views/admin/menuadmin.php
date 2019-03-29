@@ -120,58 +120,65 @@
                     <div class="row" style="height: 500px" >
                         <div class="col-md-4 col-lg-4">
                             <a href="<?php echo base_url();?>/index.php/c_menu/inscripcion" 
-                            class="btn btn-primary btn-lg btn-block  center-block  btn-responsive " 
-                            style="height: 80%; background: #1F934C;  font-size: 1.3rem;  font-weight: bold; border-color: #1F934C; padding: 13% " >
-                            <i class="material-icons">library_add</i>
+                            class="btn btn-primary btn-lg btn-block   btn-responsive menu btn-1" > 
+                            <i class="material-icons">group_add</i>
                               Inscripción
                             </a>
                          
                         </div>
                         <div class="col-md-4 col-lg-4">
-                            <a href="../views/reinscripcion.html" class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-chalkboard-teacher btn-responsive" 
-                            style="height: 80%; background: #9DBF3B; border-color: #9DBF3B; padding: 13% " >
+                            <a href="../views/reinscripcion.html" 
+                            class="btn btn-primary btn-lg btn-block   btn-responsive menu btn-2" > 
+                            <i class="material-icons">360person</i>
                               Reinscripción
                             </a>
                         </div>
                         <div class="col-md-4 col-lg-4">
-                            <a href="<?php echo base_url();?>/index.php/c_aspirante/control_alumnos" class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-list-alt btn-responsive" 
-                            style="height: 80%; background: #579A8D; border-color: #579A8D; padding: 13% " >
+                            <a href="<?php echo base_url();?>/index.php/c_aspirante/control_alumnos" 
+                            class="btn btn-primary btn-lg btn-block  btn-responsive menu btn-3" > 
+                            <i class="material-icons">person</i>
                               Control de Alumnos
                             </a>
                         </div>
                         <div class="col-md-4 col-lg-4">
-                            <a href="<?php echo base_url();?>/index.php/c_acreditacion/acreditacion" class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-calendar-check btn-responsive" 
-                            style="height: 80%; background: #B7156D; border-color: #B7156D; padding: 13% " >
+                            <a href="<?php echo base_url();?>/index.php/c_acreditacion/acreditacion" 
+                            class="btn btn-primary btn-lg btn-block btn-responsive menu btn-4" > 
+                            <i class="material-icons">beenhere</i>
                               Acreditación
                             </a>
                         </div>
                         <div class="col-md-4 col-lg-4">
-                            <a href="../views/reportes.html" class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-poll btn-responsive" 
-                            style="height: 80%; background: #CD581F; border-color: #CD581F; padding: 13% " >
+                            <a href="../views/reportes.html" 
+                            class="btn btn-primary btn-lg btn-block btn-responsive menu btn-5" >
+                            <i class="material-icons">assessment</i>
                               Reportes
                             </a>
                         </div>
                         <div class="col-md-4 col-lg-4">
-                            <a href="../views/formatos.html" class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-file-alt btn-responsive" 
-                            style="height: 80%; background: #E6AD2F; border-color: #E6AD2F; padding: 13% " >
+                            <a href="../views/formatos.html" 
+                            class="btn btn-primary btn-lg btn-block  btn-responsive menu btn-6" >
+                            <i class="material-icons">description</i>
                              Formatos
                             </a>
                         </div>
                         <div class="col-md-4 col-lg-4">
-                            <a href="../views/certificacion.html" class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-file-signature btn-responsive" 
-                            style="height: 80%; background: #8D3B88; border-color: #8D3B88; padding: 13% " >
-                              Certificación
+                            <a href="../views/certificacion.html" 
+                            class="btn btn-primary btn-lg btn-block  btn-responsive menu btn-7" >
+                            <i class="material-icons">how_to_reg</i>
+                            Certificación
                             </a>
                         </div>
                         <div class="col-md-4 col-lg-4">
-                            <a href="<?php echo base_url();?>/index.php/c_subir_doc/subir_documentos" class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-file-upload btn-responsive" 
-                            style="height: 80%; background: #553276; border-color: #553276; padding: 13% " >
+                            <a href="<?php echo base_url();?>/index.php/c_subir_doc/subir_documentos" 
+                            class="btn btn-primary btn-lg btn-block  btn-responsive menu btn-8" >
+                            <i class="material-icons">burst_mode</i>
                               Control de Documentos
                             </a>
                         </div>
                         <div class="col-md-4 col-lg-4">
-                            <a href="../views/controlusuarios.html" class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-users btn-responsive" 
-                            style="height: 80%; background: #C4131B; border-color: #C4131B; padding: 13% " >
+                            <a href="../views/controlusuarios.html" 
+                            class="btn btn-primary btn-lg btn-block  btn-responsive menu btn-9" >
+                            <i class="material-icons">supervised_user_circle</i>
                               Control de Usuarios
                             </a>
                         </div>

@@ -39,8 +39,7 @@ public function agregar_grupo(){
         'semestre' => $this->input->post('semestre_grupo'),
         'Ciclo_escolar_id_ciclo_escolar' => $this->input->post('grupo_ciclo_escolar'),
         'nombre' => $this->input->post('grupo_nombre'),
-        'periodo' => $this->input->post('grupo_periodo'),
-        'folio_grupo' => 1
+        'periodo' => $this->input->post('grupo_periodo')
     );
 
     echo $this->M_acreditacion->agregar_grupo($datos);

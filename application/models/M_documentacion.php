@@ -68,7 +68,7 @@ class M_documentacion extends CI_Model {
 
 
    function fecha_ultima_carta_compromiso_aspirante($datos){
-      return $this->db->query("select curdate() - max(fecha_entrega) as dias from Documentacion where Aspirante_no_control='".$datos['Aspirante_no_control']."' and Documento_id_documento=5")->result();
+      return $this->db->query("select datediff(curdate(),max(fecha_entrega)) as dias from Documentacion where Aspirante_no_control='".$datos['Aspirante_no_control']."' and Documento_id_documento=5")->result();
  }
 
  function existe_documentacion_de_aspirante($iddocumentacion,$num_control){

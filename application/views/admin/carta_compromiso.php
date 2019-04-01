@@ -158,7 +158,7 @@
     </div>
   </div>
 
-  <input type="text" id="no_control" display="none">
+  <input type="text" id="no_control" style="display:none">
 
 
   <script src="/cseiio/assets/js/sweetalert2.all.min.js"></script>

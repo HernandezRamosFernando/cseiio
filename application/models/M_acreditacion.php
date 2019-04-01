@@ -25,7 +25,7 @@ class M_acreditacion extends CI_Model {
         }
 
         else{
-            return "grupo creado exitosamente";
+            return "si";
         }
         
    }

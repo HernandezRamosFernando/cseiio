@@ -11,7 +11,7 @@
         </ol>
 
 
-        <form action="/cseiio/c_acreditacion/agregar_grupo" method="post">
+        <form id="formulario">
         <div class="form-group">
 
             <div class="row">
@@ -92,9 +92,6 @@
                 </label>
               </div>
 
-              <div class="col-md-4">
-          <label>Cantidad de alumnos</label>
-          </div>
           </div>
 
           <div class="form-group">
@@ -120,7 +117,7 @@
             </div>
 
             <div class="col-md-4 offset-md-3">
-              <button type="button" name="" id="" class="btn btn-success btn-lg btn-block" style="padding: 1rem">Crear grupo</button>
+              <button type="submit" class="btn btn-success btn-lg btn-block" style="padding: 1rem">Crear grupo</button>
             </div>
           </div>
         </div>
@@ -178,3 +175,44 @@ else{
 }
 </script>
 
+
+<script>   
+
+var form = document.getElementById("formulario");
+	form.onsubmit = function(e){
+		e.preventDefault();
+		var formdata = new FormData(form);
+		var xhr =  new XMLHttpRequest();
+		xhr.open("POST","/cseiio/index.php/c_acreditacion/agregar_grupo",true);
+    xhr.onreadystatechange = function() { 
+    if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+      //console.log();
+      if(xhr.responseText.trim()==="si"){
+        Swal.fire({
+            type: 'success',
+            title: 'Registro exitoso',
+            showConfirmButton: false,
+            timer: 2500 
+          });
+
+          document.getElementById("formulario").reset();
+          document.getElementById("selector_municipio_aspirante").value="";
+          document.getElementById("selector_localidad_aspirante").value="";
+      }
+
+      else{
+        Swal.fire({
+            type: 'error',
+            title: 'No se puede crear el grupo',
+            showConfirmButton: false,
+            timer: 2500 
+          });
+      }
+    }
+}
+		xhr.send(formdata);
+		
+	}
+
+</script>
+</html>

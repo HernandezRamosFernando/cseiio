@@ -33,8 +33,11 @@ public function portabilidad(){
         $datos['lenguas'] = $this->M_lengua->get_lenguas();
         $datos['planteles'] = $this->M_plantel->get_planteles();
         $datos['secundarias'] = $this->M_secundaria->get_secundarias();
-
-        $this->load->view("headers/cabecera");
+        
+        $data= array('title'=>'Inscripcion Portabilidad');
+        $this->load->view("headers/cabecera", $data);
+        $this->load->view("headers/menuarriba");
+        $this->load->view("headers/menuizquierda");
         $this->load->view("admin/portabilidad",$datos);
         $this->load->view("footers/footer");
 }
@@ -48,21 +51,32 @@ public function portabilidad(){
         $datos['planteles'] = $this->M_plantel->get_planteles();
         $datos['secundarias'] = $this->M_secundaria->get_secundarias();
 
-        $this->load->view("headers/cabecera");
+        $data= array('title'=>'Inscripcion Nuevo Ingreso');
+        $this->load->view("headers/cabecera", $data);
+        $this->load->view("headers/menuarriba");
+        $this->load->view("headers/menuizquierda");
         $this->load->view("admin/nuevoingreso",$datos);
         $this->load->view("footers/footer");
     }
     
     public function asignar_matricula(){
         $datos['planteles'] = $this->M_plantel->get_planteles();
-        $this->load->view("headers/cabecera");
+        
+        $data= array('title'=>'Asignación de Matrícula');
+        $this->load->view("headers/cabecera", $data);
+        $this->load->view("headers/menuarriba");
+        $this->load->view("headers/menuizquierda");
         $this->load->view("admin/asignacionmatricula", $datos);
         $this->load->view("footers/footer");
         
     }
     public function carta_compromiso(){
         $datos['planteles'] = $this->M_plantel->get_planteles();
-        $this->load->view("headers/cabecera");
+        
+        $data= array('title'=>'Generación de Carta Compromiso');
+        $this->load->view("headers/cabecera", $data);
+        $this->load->view("headers/menuarriba");
+        $this->load->view("headers/menuizquierda");
         $this->load->view("admin/carta_compromiso",$datos);
         $this->load->view("footers/footer");
     }
@@ -77,7 +91,10 @@ public function portabilidad(){
         $datos['planteles'] = $this->M_plantel->get_planteles();
         $datos['secundarias'] = $this->M_secundaria->get_secundarias();
        
-        $this->load->view("headers/cabecera");
+        $data= array('title'=>'Control de Alumnos');
+        $this->load->view("headers/cabecera", $data);
+        $this->load->view("headers/menuarriba");
+        $this->load->view("headers/menuizquierda");
         $this->load->view("admin/controlalumnos",$datos);
         $this->load->view("footers/footer");
     }
@@ -459,9 +476,60 @@ function agregar_observaciones(){
 
 }
 
+public function valor_Lengua($valor){
+    $resultado="";
+    switch ($valor) {
+        case 0:
+            $resultado= "Nada 0%";
+            break;
+        case 25:
+            $resultado= "Poco 25%";
+            break;
+        case 50:
+            $resultado= "Regular 50%";
+            break;
+         case 100:
+            $resultado= "Bien 100%";
+            break;
+    }
 
+    return $resultado;
+
+}
+
+
+
+public function generar_formato_inscripcion(){
+        $this->load->library('pdf');
+        $no_control = $this->input->get('no_control');
+        $datos['aspirante'] = $this->M_aspirante->get_aspirante($no_control);
+        $n_plantel= $this->M_plantel->get_nombre_plantel($datos['aspirante'][0]->Plantel_cct)->nombre_plantel;
+        $datos['nombre_plantel']=$n_plantel;
+        
+        $datos['datos_medicos'] = $this->M_datos_medicos->get_datos_medicos_aspirante($no_control);
+        $datos['direccion'] = $this->M_direccion_aspirante->get_direccion_aspirante($no_control);
+        $datos['domicilio_aspirante'] = $this->M_localidad->get_nombre_estado_municipio_localidad(($datos['direccion'][0]->Localidad_id_localidad));
+        $datos['tutor'] = $this->M_tutor->get_tutor_aspirante($no_control);
+        $datos['secundaria_aspirante'] = $this->M_secundaria->get_secundaria($datos['aspirante'][0]->Secundaria_cct_secundaria);
+
+        $datos['lengua_materna'] = $this->M_lengua_materna->get_lengua_materna_aspirante($no_control);
+        $datos['lengua_entiende'] =$this->valor_Lengua($datos['lengua_materna'][0]->entiende);
+        $datos['lengua_habla'] =$this->valor_Lengua($datos['lengua_materna'][0]->habla);
+        $datos['lengua_lee'] =$this->valor_Lengua($datos['lengua_materna'][0]->lee);
+        $datos['lengua_escribe'] =$this->valor_Lengua($datos['lengua_materna'][0]->escribe);
+        $datos['lengua_traduce'] =$this->valor_Lengua($datos['lengua_materna'][0]->traduce);
+        $datos['nombre_lengua'] = $this->M_lengua->get_nombre_lengua($datos['lengua_materna'][0]->Lengua_id_lengua)->nombre_lengua;
+        $datos['lista_documentacion'] =$this->M_documentacion->get_documentacion_xnombrede_aspirante($no_control);
+
+        $this->load->view('contratos/formatofichainscripcion',$datos);
+    }
 
     
   
 }
+
+
+
+    
+
 ?>

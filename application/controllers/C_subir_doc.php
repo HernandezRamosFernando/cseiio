@@ -22,7 +22,10 @@ class C_subir_doc extends CI_Controller {
         $datos['laspirante'] = $this->M_aspirante->aspirantes_sin_matricula();
         $datos['planteles'] = $this->M_plantel->get_planteles();
 
-        $this->load->view("headers/cabecera");
+        $data= array('title'=>'Control de Documentos');
+        $this->load->view("headers/cabecera", $data);
+        $this->load->view("headers/menuarriba");
+        $this->load->view("headers/menuizquierda");
         $this->load->view("subirdocumentos/buscar_aspirante",$datos);
         $this->load->view("footers/footer");
 

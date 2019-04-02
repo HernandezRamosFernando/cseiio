@@ -142,7 +142,7 @@ compromiso y para ello proporciono los siguientes datos:
 
 <tr>
 <td>Cct:'.$aspirante_plantel[0]->cct.'</td>
-<td>Fecha:'.date("Y-m-d").'</td>
+<td>Fecha:'.$fecha_carta[0]->fecha.'</td>
 <td>Ciclo Escolar:</td>
 </tr>
 

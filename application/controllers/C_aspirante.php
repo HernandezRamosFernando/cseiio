@@ -31,15 +31,33 @@ public function portabilidad(){
         $datos['municipios'] = $this->M_municipio->get_municipios_estado(1);
         $datos['localidades'] = $this->M_localidad->get_localidades_municipio(1);
         $datos['lenguas'] = $this->M_lengua->get_lenguas();
-        $datos['planteles'] = $this->M_plantel->get_planteles();
         $datos['secundarias'] = $this->M_secundaria->get_secundarias();
         
-        $data= array('title'=>'Inscripcion Portabilidad');
-        $this->load->view("headers/cabecera", $data);
-        $this->load->view("headers/menuarriba");
-        $this->load->view("headers/menuizquierda");
-        $this->load->view("admin/portabilidad",$datos);
-        $this->load->view("footers/footer");
+        
+
+
+        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
+            $data= array('title'=>'Inscripcion Portabilidad');
+            $datos['planteles'] = $this->M_plantel->get_planteles();
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierda");
+            $this->load->view("admin/portabilidad",$datos);
+            $this->load->view("footers/footer");
+        }
+
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
+            $datos['planteles'] = $this->M_plantel->get_plantel($this->session->userdata('user')['plantel']);
+            $data= array('title'=>'Inscripcion Portabilidad');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierdaplantel");
+            $this->load->view("plantel/portabilidad",$datos);
+            $this->load->view("footers/footer");
+        }
+        else{
+            redirect(base_url().'index.php/c_usuario');
+        }
 }
 
     public function nuevo_ingreso(){
@@ -48,37 +66,83 @@ public function portabilidad(){
         $datos['municipios'] = $this->M_municipio->get_municipios_estado(1);
         $datos['localidades'] = $this->M_localidad->get_localidades_municipio(1);
         $datos['lenguas'] = $this->M_lengua->get_lenguas();
-        $datos['planteles'] = $this->M_plantel->get_planteles();
+        
         $datos['secundarias'] = $this->M_secundaria->get_secundarias();
 
-        $data= array('title'=>'Inscripcion Nuevo Ingreso');
-        $this->load->view("headers/cabecera", $data);
-        $this->load->view("headers/menuarriba");
-        $this->load->view("headers/menuizquierda");
-        $this->load->view("admin/nuevoingreso",$datos);
-        $this->load->view("footers/footer");
+       
+
+
+
+        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
+            $data= array('title'=>'Inscripcion Nuevo Ingreso');
+            $datos['planteles'] = $this->M_plantel->get_planteles();
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierda");
+            $this->load->view("admin/nuevoingreso",$datos);
+            $this->load->view("footers/footer");
+        }
+
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
+            $datos['planteles'] = $this->M_plantel->get_plantel($this->session->userdata('user')['plantel']);
+            $data= array('title'=>'Inscripcion Nuevo Ingreso');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierdaplantel");
+            $this->load->view("plantel/nuevoingreso",$datos);
+            $this->load->view("footers/footer");
+        }
+        else{
+            redirect(base_url().'index.php/c_usuario');
+        }
     }
     
     public function asignar_matricula(){
-        $datos['planteles'] = $this->M_plantel->get_planteles();
+       
         
-        $data= array('title'=>'Asignación de Matrícula');
-        $this->load->view("headers/cabecera", $data);
-        $this->load->view("headers/menuarriba");
-        $this->load->view("headers/menuizquierda");
-        $this->load->view("admin/asignacionmatricula", $datos);
-        $this->load->view("footers/footer");
+        
+        
+
+        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
+            $data= array('title'=>'Asignación de Matrícula');
+            $datos['planteles'] = $this->M_plantel->get_planteles();
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierda");
+            $this->load->view("admin/asignacionmatricula",$datos);
+            $this->load->view("footers/footer");
+        }
+
+      
+        else{
+            redirect(base_url().'index.php/c_usuario');
+        }
         
     }
     public function carta_compromiso(){
-        $datos['planteles'] = $this->M_plantel->get_planteles();
         
-        $data= array('title'=>'Generación de Carta Compromiso');
-        $this->load->view("headers/cabecera", $data);
-        $this->load->view("headers/menuarriba");
-        $this->load->view("headers/menuizquierda");
-        $this->load->view("admin/carta_compromiso",$datos);
-        $this->load->view("footers/footer");
+        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
+            $data= array('title'=>'Generación de Carta Compromiso');
+            $datos['planteles'] = $this->M_plantel->get_planteles();
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierda");
+            $this->load->view("admin/carta_compromiso",$datos);
+            $this->load->view("footers/footer");
+        }
+
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
+            $datos['planteles'] = $this->M_plantel->get_plantel($this->session->userdata('user')['plantel']);
+            $data= array('title'=>'Generación de Carta Compromiso');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierdaplantel");
+            $this->load->view("plantel/carta_compromiso",$datos);
+            $this->load->view("footers/footer");
+        }
+        else{
+            redirect(base_url().'index.php/c_usuario');
+        }
     }
     
 
@@ -88,15 +152,32 @@ public function portabilidad(){
         $datos['municipios'] = $this->M_municipio->get_municipios_estado(1);
         $datos['localidades'] = $this->M_localidad->get_localidades_municipio(1);
         $datos['lenguas'] = $this->M_lengua->get_lenguas();
-        $datos['planteles'] = $this->M_plantel->get_planteles();
+        
         $datos['secundarias'] = $this->M_secundaria->get_secundarias();
        
-        $data= array('title'=>'Control de Alumnos');
-        $this->load->view("headers/cabecera", $data);
-        $this->load->view("headers/menuarriba");
-        $this->load->view("headers/menuizquierda");
-        $this->load->view("plantel/controlalumnos",$datos);
-        $this->load->view("footers/footer");
+        
+
+        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
+            $datos['planteles'] = $this->M_plantel->get_planteles();
+            $data= array('title'=>'Control de Alumnos');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierda");
+            $this->load->view("admin/controlalumnos",$datos);
+            $this->load->view("footers/footer");
+        } 
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
+            $datos['planteles'] = $this->M_plantel->get_plantel($this->session->userdata('user')['plantel']);
+            $data= array('title'=>'Control de Alumnos');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierdaplantel");
+            $this->load->view("plantel/controlalumnos",$datos);
+            $this->load->view("footers/footer");
+        }
+        else{
+            redirect(base_url().'index.php/c_usuario');
+        }
     }
     //-------------------------------------------------termina vistas
     public function get_aspirantes_nombre_documentos(){
@@ -213,7 +294,9 @@ public function portabilidad(){
         );
 
         $datos_aspirante_tutor = array(
-            'nombre' => strtoupper($this->input->post('aspirante_tutor_nombre').' '.$this->input->post('aspirante_tutor_apellido').' '.$this->input->post('aspirante_tutor_apellidodos')),
+            'nombre' => strtoupper($this->input->post('aspirante_tutor_nombre')),
+            'apellido_paterno' =>strtoupper($this->input->post('aspirante_tutor_apellido')),
+            'apellido_materno' =>strtoupper($this->input->post('aspirante_tutor_apellidodos')),
             'telefono_particular' => $this->input->post('aspirante_tutor_telefono'),
             'ocupacion' => strtoupper($this->input->post('aspirante_tutor_ocupacion')),
             'parentezco' => strtoupper($this->input->post('aspirante_tutor_parentesco')==''?null:$this->input->post('aspirante_tutor_parentesco')),
@@ -322,7 +405,9 @@ public function portabilidad(){
         );
 
         $datos_aspirante_tutor = array(
-            'nombre' => strtoupper($this->input->post('aspirante_tutor_nombre').' '.$this->input->post('aspirante_tutor_apellido').' '.$this->input->post('aspirante_tutor_apellidodos')),
+            'nombre' => strtoupper($this->input->post('aspirante_tutor_nombre')),
+            'apellido_paterno' =>strtoupper($this->input->post('aspirante_tutor_apellido')),
+            'apellido_materno' =>strtoupper($this->input->post('aspirante_tutor_apellidodos')),
             'telefono_particular' => $this->input->post('aspirante_tutor_telefono'),
             'ocupacion' => strtoupper($this->input->post('aspirante_tutor_ocupacion')),
             'parentezco' => strtoupper($this->input->post('aspirante_tutor_parentesco')==''?null:$this->input->post('aspirante_tutor_parentesco')),

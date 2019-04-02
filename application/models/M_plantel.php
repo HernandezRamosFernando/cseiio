@@ -9,6 +9,12 @@ class M_plantel extends CI_Model {
    function get_planteles(){
         return $this->db->get('Plantel')->result();
    }
+
+   function get_plantel($plantel){
+      return $this->db->get_where('Plantel',array('cct'=>$plantel))->result();
+   }
+
+
    function get_nombre_plantel($idplantel){
       $this->db->select('nombre_plantel');
      $this->db->from('Plantel');

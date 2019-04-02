@@ -39,7 +39,7 @@ class C_usuario extends CI_Controller {
 		$datos = $this->M_usuario->login($usuario, $password);
  
 		if($datos){
-			$this->session->set_userdata('user', $usuario);
+			$this->session->set_userdata('user',$datos);
 			redirect(base_url().'index.php/c_menu/principal');
 		}
 		else{

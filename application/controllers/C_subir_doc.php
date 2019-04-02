@@ -20,14 +20,34 @@ class C_subir_doc extends CI_Controller {
  public function subir_documentos(){
   
         $datos['laspirante'] = $this->M_aspirante->aspirantes_sin_matricula();
-        $datos['planteles'] = $this->M_plantel->get_planteles();
+  
 
-        $data= array('title'=>'Control de Documentos');
-        $this->load->view("headers/cabecera", $data);
-        $this->load->view("headers/menuarriba");
-        $this->load->view("headers/menuizquierda");
-        $this->load->view("subirdocumentos/buscar_aspirante",$datos);
-        $this->load->view("footers/footer");
+        
+      
+
+
+        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
+            $data= array('title'=>'Control de Documentos');
+            $datos['planteles'] = $this->M_plantel->get_planteles();
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierda");
+            $this->load->view("subirdocumentos/buscar_aspirante",$datos);
+            $this->load->view("footers/footer");
+        }
+
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
+            $datos['planteles'] = $this->M_plantel->get_plantel($this->session->userdata('user')['plantel']);
+            $data= array('title'=>'Control de Documentos');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierdaplantel");
+            $this->load->view("plantel/subirdocumentos",$datos);
+            $this->load->view("footers/footer");
+        }
+        else{
+            redirect(base_url().'index.php/c_usuario');
+        }
 
     }
 

@@ -12,7 +12,7 @@
         </ol>
 
         <!-- Botones-->
-        <div class="row position-static" style="height: 350px">
+        <div class="row position-static" style="">
           <div class="col-md-4 col-lg-4">
             <a href="<?php echo base_url();?>index.php/c_aspirante/nuevo_ingreso"
               class="btn btn-primary btn-lg btn-block menu btn-1 btn-responsive">

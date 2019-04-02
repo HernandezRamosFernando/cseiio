@@ -95,7 +95,7 @@ public function portabilidad(){
         $this->load->view("headers/cabecera", $data);
         $this->load->view("headers/menuarriba");
         $this->load->view("headers/menuizquierda");
-        $this->load->view("admin/controlalumnos",$datos);
+        $this->load->view("plantel/controlalumnos",$datos);
         $this->load->view("footers/footer");
     }
     //-------------------------------------------------termina vistas

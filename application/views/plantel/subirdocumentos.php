@@ -71,7 +71,6 @@
                 <th scope="col" class="col-md-1">Curp</th>
                 <th scope="col" class="col-md-1">N° control</th>
                 <th scope="col" class="col-md-1">Tipo de ingreso</th>
-                <th scope="col" class="col-md-1">Plantel CCT</th>
                 <th scope="col" class="col-md-1">Control de documentación</th>
               </tr>
               </thead>

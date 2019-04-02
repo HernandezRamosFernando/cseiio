@@ -219,7 +219,7 @@ https://www.youtube.com/results?search_query=+AJAX+File+Upload+with+Progress
 
 
       var xhr = new XMLHttpRequest();
-      xhr.open('GET', '/cseiio/index.php/c_documentacion/lista_documentacion?' + query2, true);
+      xhr.open('GET', '<?php echo base_url();?>index.php/c_documentacion/lista_documentacion?' + query2, true);
 
       xhr.onload = function () {
         console.log(JSON.parse(xhr.response));
@@ -258,7 +258,7 @@ https://www.youtube.com/results?search_query=+AJAX+File+Upload+with+Progress
 
 
         var xhr2 = new XMLHttpRequest();
-        xhr2.open('GET', '/cseiio/index.php/c_aspirante/get_docxaspirante/' + e.value, true);
+        xhr2.open('GET', '<?php echo base_url();?>index.php/c_aspirante/get_docxaspirante/' + e.value, true);
 
         xhr2.onload = function () {
           console.log(JSON.parse(xhr2.response));
@@ -290,9 +290,9 @@ https://www.youtube.com/results?search_query=+AJAX+File+Upload+with+Progress
                   var d = document.getElementById("enlace" + cont2);
                   d.className = "btn btn-info";
                   document.getElementById("enlace" + cont2).innerHTML = 'Descargar <i class="fa fa-download" aria-hidden="true"></i>';
-                  document.getElementById("enlace" + cont2).href = "/cseiio/index.php/C_subir_doc/descargar/" + seleccionado.Aspirante_no_control + "/" + seleccionado.Documento_id_documento;
+                  document.getElementById("enlace" + cont2).href = "<?php echo base_url();?>index.php/C_subir_doc/descargar/" + seleccionado.Aspirante_no_control + "/" + seleccionado.Documento_id_documento;
 
-                  document.getElementById("view" + cont2).innerHTML = '<a class="btn btn-info enlace1" id="enlaceview' + cont2 + '" onClick="ventanaSecundaria(\'/cseiio/index.php/C_subir_doc/visualizar/' + seleccionado.Aspirante_no_control + '/' + seleccionado.Documento_id_documento + '\');">Visualizar <i class="fa fa-search" aria-hidden="true"></i></a>';
+                  document.getElementById("view" + cont2).innerHTML = '<a class="btn btn-info enlace1" id="enlaceview' + cont2 + '" onClick="ventanaSecundaria(\'<?php echo base_url();?>index.php/C_subir_doc/visualizar/' + seleccionado.Aspirante_no_control + '/' + seleccionado.Documento_id_documento + '\');">Visualizar <i class="fa fa-search" aria-hidden="true"></i></a>';
 
 
 
@@ -376,7 +376,7 @@ https://www.youtube.com/results?search_query=+AJAX+File+Upload+with+Progress
       ajax.addEventListener("abort", function abortHandler(event) {
         elementoid(estado_error).innerHTML = "Carga de archivo detenida.";
       }, false);
-      ajax.open("POST", "/cseiio/index.php/C_subir_doc/subir_doc/");
+      ajax.open("POST", "<?php echo base_url();?>index.php/C_subir_doc/subir_doc/");
       ajax.send(formdata);
       ajax.onload = function () {
         console.log(JSON.parse(ajax.response));
@@ -392,9 +392,9 @@ https://www.youtube.com/results?search_query=+AJAX+File+Upload+with+Progress
           dx.className = "btn btn-primary";
           elementoid(estado).innerHTML = datos.status;
           elementoid(enlace).innerHTML = 'Descargar <i class="fa fa-download" aria-hidden="true"></i>';
-          elementoid(enlace).href = "/cseiio/index.php/C_subir_doc/descargar/" + datos.no_control + "/" + datos.iddocumento;
+          elementoid(enlace).href = "<?php echo base_url();?>index.php/C_subir_doc/descargar/" + datos.no_control + "/" + datos.iddocumento;
 
-          elementoid(view).innerHTML = '<a class="btn btn-primary enlace1" id="' + enlaceview + '" onClick="ventanaSecundaria(\'/cseiio/index.php/C_subir_doc/visualizar/'
+          elementoid(view).innerHTML = '<a class="btn btn-primary enlace1" id="' + enlaceview + '" onClick="ventanaSecundaria(\'<?php echo base_url();?>index.php/C_subir_doc/visualizar/'
             + datos.no_control + '/' + datos.iddocumento + '\');">Visualizar <i class="fa fa-search" aria-hidden="true"></i></a>';
 
         }
@@ -456,7 +456,7 @@ https://www.youtube.com/results?search_query=+AJAX+File+Upload+with+Progress
       var plantel = document.getElementById("aspirante_plantel_busqueda").value;
       var query = 'curp=' + curp + '&plantel=' + plantel;
 
-      xhr.open('GET', '/cseiio/index.php/c_aspirante/buscar_aspirantesxplantel?' + query, true);
+      xhr.open('GET', '<?php echo base_url();?>index.php/c_aspirante/buscar_aspirantesxplantel?' + query, true);
 
 
 

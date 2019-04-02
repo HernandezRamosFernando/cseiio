@@ -763,25 +763,7 @@
   </div>
   <!-- /#wrapper -->
 
-  <!-- Logout Modal-->
-  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel" ¿Seguro que deseas salir?</h5> <button class="close"
-            type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-            </button>
-        </div>
-        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="login.html">Logout</a>
-        </div>
-      </div>
-    </div>
-  </div>
+ 
 
   <input type="text" style="display:none" id="no_control_borrar">
 
@@ -806,7 +788,7 @@
     function confirmacion_eliminar() {
       console.log("este aspirante ha sido borrado " + document.getElementById("no_control_borrar").value);
       var xhr = new XMLHttpRequest();
-      xhr.open('GET', '/cseiio/index.php/c_aspirante/delete_aspirante?no_control=' + document.getElementById("no_control_borrar").value, true);
+      xhr.open('GET', '<?php echo base_url();?>index.php/c_aspirante/delete_aspirante?no_control=' + document.getElementById("no_control_borrar").value, true);
 
       xhr.onload = function () {
         if(xhr.responseText === "si")
@@ -844,7 +826,7 @@
       document.getElementById("selector_localidad_aspirante").innerHTML = "";
       document.getElementById("aspirante_no_control").value = e.value;
       var xhr = new XMLHttpRequest();
-      xhr.open('GET', '/cseiio/index.php/c_aspirante/get_datos_aspirante/' + e.value, true);
+      xhr.open('GET', '<?php echo base_url();?>index.php/c_aspirante/get_datos_aspirante/' + e.value, true);
 
       xhr.onload = function () {
         console.log(JSON.parse(xhr.response));
@@ -891,7 +873,7 @@
 
         //direccion aspirante
         var direccion = new XMLHttpRequest();
-        direccion.open('GET', '/cseiio/index.php/c_localidad/get_estado_municipio_localidad?id_localidad=' + datos.direccion_aspirante[0].Localidad_id_localidad, true);
+        direccion.open('GET', '<?php echo base_url();?>index.php/c_localidad/get_estado_municipio_localidad?id_localidad=' + datos.direccion_aspirante[0].Localidad_id_localidad, true);
 
 
         direccion.onload = function () {
@@ -900,7 +882,7 @@
 
           //console.log(JSON.parse(direccion.response)[0].id_estado);
           var municipios = new XMLHttpRequest();
-          municipios.open('GET', '/cseiio/index.php/c_municipio/get_municipios_estado?id_estado=' + JSON.parse(direccion.response)[0].id_estado, true);
+          municipios.open('GET', '<?php echo base_url();?>index.php/c_municipio/get_municipios_estado?id_estado=' + JSON.parse(direccion.response)[0].id_estado, true);
 
           municipios.onload = function () {
             document.getElementById("selector_municipio_aspirante").innerHTML = "";
@@ -917,7 +899,7 @@
 
 
           var localidades = new XMLHttpRequest();
-          localidades.open('GET', '/cseiio/index.php/c_localidad/get_localidades_municipio?id_municipio=' + JSON.parse(direccion.response)[0].id_municipio, true);
+          localidades.open('GET', '<?php echo base_url();?>index.php/c_localidad/get_localidades_municipio?id_municipio=' + JSON.parse(direccion.response)[0].id_municipio, true);
 
           localidades.onload = function () {
             document.getElementById("selector_localidad_aspirante").innerHTML = "";
@@ -1038,7 +1020,7 @@
       var plantel = document.getElementById("aspirante_plantel_busqueda").value;
       var query = 'curp=' + curp + '&plantel=' + plantel;
 
-      xhr.open('GET', '/cseiio/index.php/c_aspirante/buscar_aspirantes_curp?' + query, true);
+      xhr.open('GET', '<?php echo base_url();?>index.php/c_aspirante/buscar_aspirantes_curp?' + query, true);
 
       xhr.onload = function () {
         JSON.parse(xhr.response).forEach(function (valor, indice) {
@@ -1074,7 +1056,7 @@
           fila += '</td>';
 
           fila += '<td>';
-          fila += '<a href="/cseiio/index.php/C_aspirante/generar_formato_inscripcion?no_control='+valor.no_control+'" class="btn btn-lg btn-block btn-info btn btn-primary" target="_blank">Imprimir</a>';
+          fila += '<a href="<?php echo base_url();?>index.php/C_aspirante/generar_formato_inscripcion?no_control='+valor.no_control+'" class="btn btn-lg btn-block btn-info btn btn-primary" target="_blank">Imprimir</a>';
           fila += '</td>';
 
           fila += '<td class="">';
@@ -1162,7 +1144,7 @@
       console.log(e.value);
       if (e.value.length == 10) {
         var xhr = new XMLHttpRequest();
-        xhr.open('GET', '/cseiio/index.php/c_secundaria/get_secundaria?cct_secundaria=' + e.value, true);
+        xhr.open('GET', '<?php echo base_url();?>index.php/c_secundaria/get_secundaria?cct_secundaria=' + e.value, true);
 
         xhr.onload = function () {
           //console.log(JSON.parse(xhr.response));
@@ -1206,7 +1188,7 @@
 
 
       var xhr = new XMLHttpRequest();
-      xhr.open("POST", '/cseiio/index.php/c_secundaria/insert_secundaria', true);
+      xhr.open("POST", '<?php echo base_url();?>index.php/c_secundaria/insert_secundaria', true);
 
 
       xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -1260,7 +1242,7 @@ var form = document.getElementById("formulario");
 		e.preventDefault();
 		var formdata = new FormData(form);
 		var xhr =  new XMLHttpRequest();
-		xhr.open("POST","/cseiio/index.php/c_aspirante/actualizar_datos_aspirante",true);
+		xhr.open("POST","<?php echo base_url();?>index.php/c_aspirante/actualizar_datos_aspirante",true);
     xhr.onreadystatechange = function() { 
     if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
       //console.log();

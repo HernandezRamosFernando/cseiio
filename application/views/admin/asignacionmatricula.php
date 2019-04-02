@@ -97,25 +97,6 @@
 </div>
 <!-- /#wrapper -->
 
-<!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel" ¿Seguro que deseas salir?</h5> <button class="close"
-          type="button" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">×</span>
-          </button>
-      </div>
-      <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-      <div class="modal-footer">
-        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-        <a class="btn btn-primary" href="login.html">Logout</a>
-      </div>
-    </div>
-  </div>
-</div>
 
 
 <script>
@@ -161,7 +142,7 @@
     var curp = document.getElementById("aspirante_curp_busqueda").value;
     var plantel = document.getElementById("aspirante_plantel_busqueda").value;
     var query = 'curp=' + curp + '&plantel=' + plantel;
-    xhr.open('GET', '/cseiio/index.php/c_estudiante/estudiantes_sin_matricula?' + query, true);
+    xhr.open('GET', '<?php echo base_url();?>index.php/c_estudiante/estudiantes_sin_matricula?' + query, true);
 
     xhr.onload = function () {
       //console.log(JSON.parse(xhr.response));
@@ -220,7 +201,7 @@
 
   function asignar_matricula(e) {
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', '/cseiio/index.php/c_estudiante/insertar_estudiante?no_control=' + e.value, true);
+    xhr.open('GET', '<?php echo base_url();?>index.php/c_estudiante/insertar_estudiante?no_control=' + e.value, true);
 
     xhr.onload = function () {
       console.log(xhr.responseText);

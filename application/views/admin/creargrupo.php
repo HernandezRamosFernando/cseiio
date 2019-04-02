@@ -133,25 +133,7 @@
   </div>
   <!-- /#wrapper -->
 
-  <!-- Logout Modal-->
-  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel" ¿Seguro que deseas salir?</h5> <button class="close"
-            type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-            </button>
-        </div>
-        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="login.html">Logout</a>
-        </div>
-      </div>
-    </div>
-  </div>
+ 
   <script>
 
 function numero_alumnos(e){
@@ -161,7 +143,7 @@ alert("debe seleecionar un plantel");
 
 else{
           var xhr = new XMLHttpRequest();
-        xhr.open('GET', '/cseiio/c_acreditacion/numero_estudiantes_semestre_plantel?semestre='+e.value+'&cct='+document.getElementById("aspirante_plantel").value, true);
+        xhr.open('GET', '<?php echo base_url();?>c_acreditacion/numero_estudiantes_semestre_plantel?semestre='+e.value+'&cct='+document.getElementById("aspirante_plantel").value, true);
 
         xhr.onload = function () {
          console.log(xhr.response);
@@ -183,7 +165,7 @@ var form = document.getElementById("formulario");
 		e.preventDefault();
 		var formdata = new FormData(form);
 		var xhr =  new XMLHttpRequest();
-		xhr.open("POST","/cseiio/index.php/c_acreditacion/agregar_grupo",true);
+		xhr.open("POST","<?php echo base_url();?>index.php/c_acreditacion/agregar_grupo",true);
     xhr.onreadystatechange = function() { 
     if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
       //console.log();

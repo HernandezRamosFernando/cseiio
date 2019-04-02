@@ -11,7 +11,7 @@
       <div class="card-header"><strong>Iniciar Sesión</strong></div>
       <div class="card-body">
 
-        <form method="POST" action="/cseiio/c_usuario/login">
+        <form method="POST" action="<?php echo base_url() ?>index.php/c_usuario/login">
           <div class="form-group">
             <div class="form-label-group">
               <input type="text" id="inputUsuario" name="usuario" class="form-control" placeholder="Ingrese su usuario" required="required" autofocus="autofocus">

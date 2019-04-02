@@ -12,7 +12,7 @@
           servicios escolares</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" style="color:rgb(150, 163, 159)">Bienvenido Usuario</a>
+        <a class="nav-link" style="color:rgb(150, 163, 159)">Bienvenido <?=$this->session->userdata('user');?></a>
       </li>
     </ul>
 

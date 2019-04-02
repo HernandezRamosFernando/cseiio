@@ -18,7 +18,7 @@ class C_usuario extends CI_Controller {
  
 		//restrict users to go back to login if session has been set
 		if($this->session->userdata('user')){
-			redirect(base_url().'c_menu/principal');
+			redirect(base_url().'index.php/c_menu/principal');
 		}
 		else{
 			$data['title'] = 'Login';
@@ -41,11 +41,11 @@ class C_usuario extends CI_Controller {
 		$datos = $this->M_usuario->login($usuario, $password);
  
 		if($datos){
-			$this->session->set_userdata('user', $datos);
-			redirect(base_url().'c_menu/principal');
+			$this->session->set_userdata('user', $usuario);
+			redirect(base_url().'index.php/c_menu/principal');
 		}
 		else{
-			header('location:'.base_url().'c_usuario');
+			header('location:'.base_url().'index.php/c_usuario');
 			$this->session->set_flashdata('error','Invalid login. User not found');
         } 
     }
@@ -57,7 +57,7 @@ class C_usuario extends CI_Controller {
  
 		//restrict users to go to home if not logged in
 		if($this->session->userdata('user')){
-			$this->load->view(base_url().'c_menu/principal');
+			$this->load->view(base_url().'index.php/c_menu/principal');
 		}
 		else{
 			redirect('/');

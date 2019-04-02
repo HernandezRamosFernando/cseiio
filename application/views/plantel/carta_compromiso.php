@@ -139,20 +139,21 @@ aria-hidden="true">
 
 
 <input type="text" id="no_control" style="display:none">
-
+no_control
 
 <script src="<?php echo base_url();?>assets/js/sweetalert2.all.min.js"></script>
 <script>
 
 const swalWithBootstrapButtons = Swal.mixin({
 customClass: {
-  confirmButton: 'btn btn-success btn-block',
+  confirmButton: 'btn btn-warning btn-block',
   cancelButton: 'btn btn-secondary btn-block'
 },
 buttonsStyling: false,
 });
 
 function aspirante_input(e) {
+document.getElementById("no_control").value = e.value;
 
 var dias = new XMLHttpRequest();
 dias.open('GET', '<?php echo base_url();?>index.php/c_documentacion/fecha_ultima_carta_compromiso_aspirante?no_control=' + e.value, true);
@@ -185,10 +186,14 @@ dias.onload = function () {
       title: 'Error!',
       text: "Ya cuenta con una carta compromiso vigente, dias restantes: " + (30 - parseInt(JSON.parse(dias.response)[0].dias)),
       type: 'warning',
-      showConfirmButton: false,
+      confirmButtonText:'Reimprimir',
       showCancelButton: true,
       cancelButtonText: 'Cerrar'
-    })
+    }).then(function(result){
+        if(result.value){
+            reimprimir_carta();
+        }
+    });
     // alert("Ya cuenta con una carta compromiso vigente, dias restantes: "+(30-parseInt(JSON.parse(dias.response)[0].dias)));
 
   }
@@ -203,6 +208,34 @@ data-target="#generarobservacion"
       */
 }
 
+
+function reimprimir_carta(){
+var xhr = new XMLHttpRequest();
+xhr.open('GET', '<?php echo base_url();?>index.php/c_aspirante/get_aspirantes_nombre_documentos?no_control=' + document.getElementById("no_control").value, true);
+
+xhr.onload = function () {
+  var documentos = JSON.parse(xhr.response);
+  if (documentos.length === 4) {
+  }
+  else {
+    var carta_compromiso = new XMLHttpRequest();
+    carta_compromiso.open('GET', '<?php echo base_url();?>index.php/c_aspirante/generar_carta_compromiso?no_control=' + document.getElementById("no_control").value, true);
+    carta_compromiso.responseType = "arraybuffer";
+    carta_compromiso.onload = function () {
+      //console.log(carta_compromiso.responseText);
+      if (this.status === 200) {
+        var blob = new Blob([carta_compromiso.response], { type: "application/pdf" });
+        var objectUrl = URL.createObjectURL(blob);
+        window.open(objectUrl);
+      }
+
+    };
+
+    carta_compromiso.send(null);
+  }
+};
+xhr.send(null);
+}
 
 function generar_carta_compromiso(e) {
 //console.log(e.value);

@@ -138,30 +138,12 @@
   </div>
 
 
-  <!-- Logout Modal-->
-  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel" ¿Seguro que deseas salir?</h5> <button class="close"
-            type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-            </button>
-        </div>
-        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="login.html">Logout</a>
-        </div>
-      </div>
-    </div>
-  </div>
+ 
 
   <input type="text" id="no_control" style="display:none">
 
 
-  <script src="/cseiio/assets/js/sweetalert2.all.min.js"></script>
+  <script src="<?php echo base_url();?>assets/js/sweetalert2.all.min.js"></script>
   <script>
 
     const swalWithBootstrapButtons = Swal.mixin({
@@ -175,7 +157,7 @@
     function aspirante_input(e) {
 
       var dias = new XMLHttpRequest();
-      dias.open('GET', '/cseiio/index.php/c_documentacion/fecha_ultima_carta_compromiso_aspirante?no_control=' + e.value, true);
+      dias.open('GET', '<?php echo base_url();?>index.php/c_documentacion/fecha_ultima_carta_compromiso_aspirante?no_control=' + e.value, true);
 
       dias.onload = function () {
         console.log(JSON.parse(dias.response)[0].dias);
@@ -186,7 +168,7 @@
 
           document.getElementById("no_control").value = e.value;
           var xhr = new XMLHttpRequest();
-          xhr.open('GET', '/cseiio/index.php/c_aspirante/get_aspirantes_nombre_documentos?no_control=' + e.value, true);
+          xhr.open('GET', '<?php echo base_url();?>index.php/c_aspirante/get_aspirantes_nombre_documentos?no_control=' + e.value, true);
 
           xhr.onload = function () {
             console.log(JSON.parse(xhr.response));
@@ -248,7 +230,7 @@
 
       //insertar observaciones en la base de datos
       var observaciones = new XMLHttpRequest();
-      observaciones.open('POST', '/cseiio/index.php/c_aspirante/agregar_observaciones', true);
+      observaciones.open('POST', '<?php echo base_url();?>index.php/c_aspirante/agregar_observaciones', true);
       observaciones.setRequestHeader("Content-Type", "application/json");
 
       observaciones.onreadystatechange = function () { // Call a function when the state changes.
@@ -261,7 +243,7 @@
       //console.log(JSON.stringify(json_observaciones));
 
       var xhr = new XMLHttpRequest();
-      xhr.open('GET', '/cseiio/index.php/c_aspirante/get_aspirantes_nombre_documentos?no_control=' + document.getElementById("no_control").value, true);
+      xhr.open('GET', '<?php echo base_url();?>index.php/c_aspirante/get_aspirantes_nombre_documentos?no_control=' + document.getElementById("no_control").value, true);
 
       xhr.onload = function () {
         var documentos = JSON.parse(xhr.response);
@@ -269,7 +251,7 @@
         }
         else {
           var carta_compromiso = new XMLHttpRequest();
-          carta_compromiso.open('GET', '/cseiio/index.php/c_aspirante/generar_carta_compromiso?no_control=' + document.getElementById("no_control").value, true);
+          carta_compromiso.open('GET', '<?php echo base_url();?>index.php/c_aspirante/generar_carta_compromiso?no_control=' + document.getElementById("no_control").value, true);
           carta_compromiso.responseType = "arraybuffer";
           carta_compromiso.onload = function () {
             //console.log(carta_compromiso.responseText);
@@ -327,7 +309,7 @@
       var curp = document.getElementById("aspirante_curp_busqueda").value;
       var plantel = document.getElementById("aspirante_plantel_busqueda").value;
       var query = 'curp=' + curp + '&plantel=' + plantel;
-      xhr.open('GET', '/cseiio/index.php/c_aspirante/aspirantes_carta_compromiso?' + query, true);
+      xhr.open('GET', '<?php echo base_url();?>index.php/c_aspirante/aspirantes_carta_compromiso?' + query, true);
       xhr.onload = function () {
         //console.log(JSON.parse(xhr.response));
         ////console.log(query);

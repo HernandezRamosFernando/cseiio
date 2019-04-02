@@ -67,7 +67,7 @@ class C_usuario extends CI_Controller {
 		//load session library
 		$this->load->library('session');
 		$this->session->unset_userdata('user');
-		redirect('/c_usuario');
+		redirect('index.php/c_usuario');
 	}
  
 

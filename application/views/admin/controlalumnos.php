@@ -817,6 +817,7 @@
             showConfirmButton: false,
             timer: 2500 
           })
+          $(boton).parents('tr').detach();
           
         }else{
           Swal.fire({
@@ -828,7 +829,7 @@
       };
 
       xhr.send(null);
-      $(boton).parents('tr').detach();
+     
       
     }
   </script>

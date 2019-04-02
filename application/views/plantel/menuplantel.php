@@ -17,51 +17,51 @@
             <div class="row" style="" >
                 <div class="col-md-4 col-lg-4">
                     <a href="<?php echo base_url();?>index.php/c_menu/inscripcion" 
-                    class="btn btn-primary btn-lg btn-block d-flex justify-content-center align-content-between  btn-responsive menu btn-1" > 
-                    <i class="material-icons">group_add</i> Inscripción
+                    class="btn btn-primary btn-lg btn-block valign-center  btn-responsive menu btn-1" > 
+                    <i class="material-icons">group_add</i> &nbsp;Inscripción
                     </a>
                  
                 </div>
                 <div class="col-md-4 col-lg-4">
                     <a href="../views/reinscripcion.html" 
-                    class="btn btn-primary btn-lg btn-block d-flex justify-content-center align-content-between  btn-responsive menu btn-2" > 
-                    <i class="material-icons">360person</i> Reinscripción
+                    class="btn btn-primary btn-lg btn-block valign-center btn-responsive menu btn-2" > 
+                    <i class="material-icons">360person</i> &nbsp;Reinscripción
                     </a>
                 </div>
                 <div class="col-md-4 col-lg-4">
                     <a href="<?php echo base_url();?>index.php/c_aspirante/control_alumnos" 
-                    class="btn btn-primary btn-lg btn-block d-flex justify-content-center align-content-between btn-responsive menu btn-3" > 
-                    <i class="material-icons">person</i> Control de Alumnos
+                    class="btn btn-primary btn-lg btn-block valign-center btn-responsive menu btn-3" > 
+                    <i class="material-icons">person</i> &nbsp;Control de Alumnos
                     </a>
                 </div>
                 <div class="col-md-4 col-lg-4">
                     <a href="<?php echo base_url();?>index.php/c_acreditacion/acreditacion" 
-                    class="btn btn-primary btn-lg btn-block d-flex justify-content-center align-content-between btn-responsive menu btn-4" > 
-                    <i class="material-icons">beenhere</i> Acreditación
+                    class="btn btn-primary btn-lg btn-block valign-center btn-responsive menu btn-4" > 
+                    <i class="material-icons">beenhere</i> &nbsp;Acreditación
                     </a>
                 </div>
                 <div class="col-md-4 col-lg-4">
                     <a href="../views/reportes.html" 
-                    class="btn btn-primary btn-lg btn-block d-flex justify-content-center align-content-between btn-responsive menu btn-5" >
-                    <i class="material-icons">assessment</i> Reportes
+                    class="btn btn-primary btn-lg btn-block valign-center btn-responsive menu btn-5" >
+                    <i class="material-icons">assessment</i> &nbsp;Reportes
                     </a>
                 </div>
                 <div class="col-md-4 col-lg-4">
                     <a href="../views/formatos.html" 
-                    class="btn btn-primary btn-lg btn-block d-flex justify-content-center align-content-between btn-responsive menu btn-6" >
-                    <i class="material-icons">description</i> Formatos
+                    class="btn btn-primary btn-lg btn-block valign-center btn-responsive menu btn-6" >
+                    <i class="material-icons">description</i> &nbsp;Formatos
                     </a>
                 </div>
                 <div class="col-md-4 col-lg-4">
                     <a href="../views/certificacion.html" 
-                    class="btn btn-primary btn-lg btn-block d-flex justify-content-center align-content-between btn-responsive menu btn-7" >
-                    <i class="material-icons">how_to_reg</i> Certificación
+                    class="btn btn-primary btn-lg btn-block valign-center btn-responsive menu btn-7" >
+                    <i class="material-icons">how_to_reg</i> &nbsp;Certificación
                     </a>
                 </div>
                 <div class="col-md-4 col-lg-4">
                     <a href="<?php echo base_url();?>index.php/c_subir_doc/subir_documentos" 
-                    class="btn btn-primary btn-lg btn-block d-flex justify-content-center align-content-between btn-responsive menu btn-8" >
-                    <i class="material-icons">burst_mode</i> Control de Documentos
+                    class="btn btn-primary btn-lg btn-block valign-center btn-responsive menu btn-8" >
+                    <i class="material-icons">burst_mode</i> &nbsp;Control de Documentos
                     </a>
                 </div>
               </div>

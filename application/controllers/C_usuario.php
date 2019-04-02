@@ -13,8 +13,7 @@ class C_usuario extends CI_Controller {
 
 
     public function index(){
-		//load session library
-		$this->load->library('session');
+
  
 		//restrict users to go back to login if session has been set
 		if($this->session->userdata('user')){
@@ -31,8 +30,7 @@ class C_usuario extends CI_Controller {
 
 
     public function login(){
-		//load session library
-		$this->load->library('session');
+
  
 		$usuario = $_POST['usuario'];
         $password = $_POST['password'];
@@ -52,8 +50,8 @@ class C_usuario extends CI_Controller {
     
 
     public function home(){
-		//load session library
-		$this->load->library('session');
+
+	
  
 		//restrict users to go to home if not logged in
 		if($this->session->userdata('user')){

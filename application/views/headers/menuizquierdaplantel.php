@@ -79,11 +79,5 @@
         <span>Carga de documentos</span>
       </a>
     </li>
-    <li class="nav-item ">
-      <a class="nav-link" href="<?php echo base_url();?>index.php/c_menu/principal">
-        <i class="material-icons">supervised_user_circle</i>
-        <span>Control de usuarios</span>
-      </a>
-    </li>
 
   </ul>

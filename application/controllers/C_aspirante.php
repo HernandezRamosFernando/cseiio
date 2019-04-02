@@ -247,11 +247,15 @@ public function portabilidad(){
         $no_control = $this->input->get('no_control');
         $datos['documentos'] = $this->M_aspirante->get_aspirantes_nombre_documentos($no_control);
         $datos['aspirante_plantel'] = $this->M_aspirante->aspirante_plantel($no_control);
+        $datos['fecha_carta'] = $this->M_aspirante->fecha_carta($no_control);
         //$datos['aspirante_plantel'] = $this->M_aspirante->get_aspirante($no_control);
         $this->load->view('contratos/formatocontrato',$datos);
 
 
     }
+
+
+   
 
 
 

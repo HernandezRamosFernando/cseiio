@@ -99,6 +99,11 @@ else{
    }
 
 
+   public function fecha_carta($no_control){
+      return $this->db->query("select max(fecha_entrega) as fecha from Documentacion where Aspirante_no_control='".$no_control."' and Documento_id_documento=5")->result();
+   }
+
+
 public function insertar_aspirante_nuevo_ingreso(
    $datos_aspirante,
    $datos_aspirante_direccion,

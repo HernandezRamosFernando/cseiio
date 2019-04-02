@@ -10,22 +10,26 @@
     <div class="card card-login mx-auto mt-5">
       <div class="card-header"><strong>Iniciar Sesión</strong></div>
       <div class="card-body">
-        <form>
+
+        <form method="POST" action="<?php echo base_url() ?>index.php/c_usuario/login">
           <div class="form-group">
             <div class="form-label-group">
-              <input type="text" id="inputUsuario" class="form-control" placeholder="Ingrese su usuario" required="required" autofocus="autofocus">
+              <input type="text" id="inputUsuario" name="usuario" class="form-control" placeholder="Ingrese su usuario" required="required" autofocus="autofocus">
               <label for="inputUsuario">Ingrese su Usuario</label>
             </div>
           </div>
           <div class="form-group">
             <div class="form-label-group">
-              <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="required">
+              <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required="required">
               <label for="inputPassword">Contraseña</label>
             </div>
           </div>
   
-          <a class="btn btn-info btn-block" href="index.html">Ingresar</a>
+          <button type="submit">Ingresar</button>
         </form>
+
+
+
         <div class="text-center">
           <a class="d-block small" href="forgot-password.html">¿Olvidaste tu contraseña?</a>
         </div>

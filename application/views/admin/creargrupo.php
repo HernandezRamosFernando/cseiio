@@ -65,6 +65,15 @@
               </label>
             </div>
 
+            <div class="col-md-4" style="display: none" id="seleccione_especialidad_oculto">
+              <label class="form-group has-float-label">
+                <select class="form-control form-control-lg" required  name="seleccione_especialidad" id="seleccione_especialidad">
+                <option value="">Seleccione una especialidad</option>
+                </select>
+                <span>Especialidad</span>
+              </label>
+            </div>
+
           </div>
         </div>
 
@@ -144,14 +153,15 @@
   function especialidad(e){
     if (document.getElementById("semestre_grupo").value === "5"||document.getElementById("semestre_grupo").value === "6"){
       document.getElementById("grupo_especialidad_oculto").style.display = "";
+      document.getElementById("seleccione_especialidad_oculto").style.display = "";
 
     }else{
       document.getElementById("grupo_especialidad_oculto").style.display = "none";
+      document.getElementById("seleccione_especialidad_oculto").style.display = "none";
     }
   }
 
 function numero_alumnos(e){
-especialidad(e);
 if(document.getElementById("aspirante_plantel").value===""){
   Swal.fire({
             type: 'info',
@@ -162,6 +172,7 @@ if(document.getElementById("aspirante_plantel").value===""){
 }
 
 else{
+  especialidad(e);
           var xhr = new XMLHttpRequest();
         xhr.open('GET', '<?php echo base_url();?>index.php/c_acreditacion/numero_estudiantes_semestre_plantel?semestre='+e.value+'&cct='+document.getElementById("aspirante_plantel").value, true);
 

@@ -20,17 +20,17 @@
             </a>
           </div>
           <div class="col  col-lg-4">
-          <a href="<?php echo base_url();?>index.php/c_aspirante/carta_compromiso"
+          <a href="<?php echo base_url();?>index.php/c_acreditacion/asesor_grupo"
               class="btn btn-primary btn-lg btn-block menu valign-center btn-2 btn-responsive">
-              <i class="material-icons">assignment_ind</i>&nbsp;
-              Asignar alumnos a grupo
+              <i class="material-icons">accessibility</i>&nbsp;
+              Asignar Asesor a grupo
             </a>
           </div>
           <div class="col col-lg-4">
-            <a href="<?php echo base_url();?>index.php/c_aspirante/asignar_matricula"
-              class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-user-check btn-responsive"
-              style="height: 80%; background: #579A8D; border-color: #579A8D; padding: 13% ">
-              Asignar Matrícula
+          <a href="<?php echo base_url();?>index.php/c_aspirante/carta_compromiso"
+              class="btn btn-primary btn-lg btn-block menu valign-center btn-3 btn-responsive">
+              <i class="material-icons">assignment_ind</i>&nbsp;
+              Asignar Asesor a grupo
             </a>
           </div>
           <div class="col col-lg-4">

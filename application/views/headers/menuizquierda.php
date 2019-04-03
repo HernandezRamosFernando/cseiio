@@ -40,7 +40,7 @@
     
     <li class="nav-item ">
       <a class="nav-link" href="<?php echo base_url();?>index.php/c_menu/principal">
-        <i class="material-icons">360person</i>
+        <i class="material-icons">redoperson</i>
         <span>Reinscripción</span>
       </a>
     </li>
@@ -72,7 +72,7 @@
     </li>
     <li class="nav-item ">
       <a class="nav-link" href="<?php echo base_url();?>index.php/c_menu/principal">
-        <i class="material-icons">how_to_reg</i>
+        <i class="material-icons">check_box</i>
         <span>Certificación</span>
       </a>
     </li>
@@ -85,7 +85,7 @@
     </li>
     <li class="nav-item ">
       <a class="nav-link" href="<?php echo base_url();?>index.php/c_menu/principal">
-        <i class="material-icons">supervised_user_circle</i>
+        <i class="material-icons">people_outline</i>
         <span>Control de usuarios</span>
       </a>
     </li>

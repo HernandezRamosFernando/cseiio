@@ -25,7 +25,7 @@
                         <div class="col-md-4 col-lg-4">
                             <a href="../views/reinscripcion.html" 
                             class="btn btn-primary btn-lg btn-block valign-center btn-responsive menu btn-2" > 
-                            <i class="material-icons">360person</i> &nbsp;Reinscripción
+                            <i class="material-icons">redoperson</i>Reinscripción
                             </a>
                         </div>
                         <div class="col-md-4 col-lg-4">
@@ -55,7 +55,7 @@
                         <div class="col-md-4 col-lg-4">
                             <a href="../views/certificacion.html" 
                             class="btn btn-primary btn-lg btn-block valign-center btn-responsive menu btn-7" >
-                            <i class="material-icons">how_to_reg</i> &nbsp;Certificación
+                            <i class="material-icons">check_box</i> &nbsp;Certificación
                             </a>
                         </div>
                         <div class="col-md-4 col-lg-4">
@@ -67,7 +67,7 @@
                         <div class="col-md-4 col-lg-4 ">
                             <a href="../views/controlusuarios.html" 
                             class="btn btn-primary btn-lg btn-block valign-center btn-responsive menu btn-9" >
-                            <i class="material-icons">supervised_user_circle</i> &nbsp;Control de Usuarios
+                            <i class="material-icons">people_outline</i> &nbsp;Control de Usuarios
                             </a>
                         </div>
                       </div>

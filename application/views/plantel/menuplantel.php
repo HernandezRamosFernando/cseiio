@@ -25,7 +25,7 @@
                 <div class="col-md-4 col-lg-4">
                     <a href="../views/reinscripcion.html" 
                     class="btn btn-primary btn-lg btn-block valign-center btn-responsive menu btn-2" > 
-                    <i class="material-icons">360person</i> &nbsp;Reinscripción
+                    <i class="material-icons">redoperson</i> &nbsp;Reinscripción
                     </a>
                 </div>
                 <div class="col-md-4 col-lg-4">
@@ -55,7 +55,7 @@
                 <div class="col-md-4 col-lg-4">
                     <a href="../views/certificacion.html" 
                     class="btn btn-primary btn-lg btn-block valign-center btn-responsive menu btn-7" >
-                    <i class="material-icons">how_to_reg</i> &nbsp;Certificación
+                    <i class="material-icons">assignment_turned_in</i> &nbsp;Certificación
                     </a>
                 </div>
                 <div class="col-md-4 col-lg-4">

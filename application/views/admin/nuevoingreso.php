@@ -1038,6 +1038,7 @@
                 timer: 2500
               })
               $('#nuevasecundaria').modal('toggle');
+              obtener_secundaria(document.getElementById("aspirante_secundaria_cct").value);
             } else {
               Swal.fire({
                 type: 'error',

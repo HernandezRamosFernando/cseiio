@@ -7,7 +7,7 @@
           <li class="breadcrumb-item">
             <a>Crear grupos</a>
           </li>
-          <li class="breadcrumb-item active">Ingrese los datos requeridos</li>
+          <li class="breadcrumb-item active">Ingrese los datos requeridos para crear un grupo</li>
         </ol>
 
 
@@ -56,19 +56,23 @@
             </div>
           
 
-          <div class="col-md-4">
+          <div class="col-md-4" style="display: none" id="grupo_especialidad_oculto">
               <label class="form-group has-float-label">
-                <select class="form-control form-control-lg" name="" id="">
-                <option value="NO">No</option>
+                <select class="form-control form-control-lg"  name="grupo_especialidad" id="grupo_especialidad">
+                <option value="SI">SI</option>
                 </select>
                 <span>¿Es de especialidad?</span>
               </label>
             </div>
 
-          <div class="col-md-4">
-          <label id="cantidad_alumnos">Cantidad de alumnos:</label>
-          </div>
-
+            <div class="col-md-4" style="display: none" id="seleccione_especialidad_oculto">
+              <label class="form-group has-float-label">
+                <select class="form-control form-control-lg" required  name="seleccione_especialidad" id="seleccione_especialidad">
+                <option value="">Seleccione una especialidad</option>
+                </select>
+                <span>Especialidad</span>
+              </label>
+            </div>
 
           </div>
         </div>
@@ -92,6 +96,8 @@
                 </label>
               </div>
 
+             
+
           </div>
 
           <div class="form-group">
@@ -103,7 +109,16 @@
                 <label for="grupo_nombre">Ingrese el nombre del grupo</label>
               </div>
             </div>
+
+            <div class="col-md-3" >
           </div>
+
+              <div class="col-md-4" style="display: none" id="cantidad_alumnos_oculto">
+          <label id="cantidad_alumnos">Cantidad de alumnos:</label>
+          </div>
+          </div>
+
+          
         </div>
 
         <div class="form-group">
@@ -135,20 +150,45 @@
 
  
   <script>
+  function especialidad(e){
+    if (document.getElementById("semestre_grupo").value === "5"||document.getElementById("semestre_grupo").value === "6"){
+      document.getElementById("grupo_especialidad_oculto").style.display = "";
+      document.getElementById("seleccione_especialidad_oculto").style.display = "";
+
+    }else{
+      document.getElementById("grupo_especialidad_oculto").style.display = "none";
+      document.getElementById("seleccione_especialidad_oculto").style.display = "none";
+    }
+  }
 
 function numero_alumnos(e){
 if(document.getElementById("aspirante_plantel").value===""){
-alert("debe seleecionar un plantel");
+  Swal.fire({
+            type: 'info',
+            title: 'Debe seleccionar un plantel',
+            showConfirmButton: false,
+            timer: 2500 
+          });
 }
 
 else{
+  especialidad(e);
           var xhr = new XMLHttpRequest();
-        xhr.open('GET', '<?php echo base_url();?>c_acreditacion/numero_estudiantes_semestre_plantel?semestre='+e.value+'&cct='+document.getElementById("aspirante_plantel").value, true);
+        xhr.open('GET', '<?php echo base_url();?>index.php/c_acreditacion/numero_estudiantes_semestre_plantel?semestre='+e.value+'&cct='+document.getElementById("aspirante_plantel").value, true);
 
         xhr.onload = function () {
-         console.log(xhr.response);
-         document.getElementById("cantidad_alumnos").innerHTML = "Cantidad de Alumnos: "+JSON.parse(xhr.response)[0].total_estudiante;
-        };
+        document.getElementById("cantidad_alumnos_oculto").style.display = "";
+        console.log(xhr.response);
+        var cAlumnos = JSON.parse(xhr.response)[0].total_estudiante;
+         if( cAlumnos <= 35){
+          document.getElementById("cantidad_alumnos").innerHTML = "La cantidad de Alumnos registrados en este semestre es: "+ cAlumnos + " se recomienda crear 1 grupo";
+         }else{
+           var cGrupos = parseInt(cAlumnos / 35);
+           document.getElementById("cantidad_alumnos").innerHTML = "La cantidad de Alumnos registrados en este semestre es: "+ cAlumnos + " se recomienda crear "+ cGrupos +" grupos";
+           console.log(cGrupos);
+
+         }
+         };
 
         xhr.send(null);
 }

@@ -49,10 +49,18 @@
     </li>
     <li class="nav-item ">
       <a class="nav-link <?php ($this->uri->segment(2)=='acreditacion') ? print 'bg-info text-light ' : print 'null'; ?>"
-        href="<?php echo base_url();?>index.php/c_acreditacion/acreditacion">
+      aria-expanded="false" data-toggle="collapse" href="#submenu1" role="button">
         <i class="material-icons">beenhere</i>
         <span>Acreditación</span>
       </a>
+      <div id="submenu1" class="<?php ($this->uri->segment(2)=='crear_grupo'||$this->uri->segment(2)=='portabilidad'||$this->uri->segment(2)=='asignar_matricula'||$this->uri->segment(2)=='carta_compromiso') ? print 'null' : print 'collapse'; ?> sidebar-submenu">
+        <a class="nav-link <?php ($this->uri->segment(2)=='crear_grupo') ? print 'bg-info text-light' : print null; ?>" href="<?php echo base_url();?>index.php/c_aspirante/crear_grupo">
+        <i class="material-icons">group_add</i>
+          <span class="font-weight-light">Crear grupos
+          </span>
+        </a>
+        <hr class="bg-info" style=" border: 3px solid ;">
+      </div>
     </li>
     <li class="nav-item ">
       <a class="nav-link" href="<?php echo base_url();?>index.php/c_menu/principal">
@@ -68,7 +76,7 @@
     </li>
     <li class="nav-item ">
       <a class="nav-link" href="<?php echo base_url();?>index.php/c_menu/principal">
-        <i class="material-icons">check_box</i>
+        <i class="material-icons">assignment_turned_in</i>
         <span>Certificación</span>
       </a>
     </li>

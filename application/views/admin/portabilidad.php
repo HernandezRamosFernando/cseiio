@@ -30,7 +30,7 @@
             <div class="row">
               <div class="col-md-4">
                 <div class="form-label-group">
-                  <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ ]+" required="required" title="Introduzca solo letras"
+                  <input type="text" pattern= "[A-Za-z]+[ ]*[A-Za-z]*" onchange="validar(this)" required="required" title="Introduzca solo letras"
                     class="form-control text-uppercase" id="aspirante_nombre" name="aspirante_nombre" placeholder="Nombre(s)">
                   <label for="aspirante_nombre">Nombre(s)</label>
                 </div>
@@ -38,7 +38,7 @@
 
               <div class="col-md-4">
                 <div class="form-label-group">
-                  <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ ]+" required="required" title="Introduzca solo letras"
+                  <input type="text" pattern= "[A-Za-z]+[ ]*[A-Za-z]*" onchange="validar(this)" required="required" title="Introduzca solo letras"
                     class="form-control text-uppercase" id="aspirante_apellido_paterno" name="aspirante_apellido_paterno"
                     placeholder="Apellido Paterno">
                   <label for="aspirante_apellido_paterno">Primer Apellido</label>
@@ -47,7 +47,7 @@
 
               <div class="col-md-4">
                 <div class="form-label-group">
-                  <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ ]+" title="Introduzca solo letras"
+                  <input type="text" pattern= "[A-Za-z]+[ ]*[A-Za-z]*" onchange="validar(this)" title="Introduzca solo letras"
                     class="form-control text-uppercase" id="aspirante_apellido_materno" name="aspirante_apellido_materno"
                     placeholder="Apellido Materno">
                   <label for="aspirante_apellido_materno">Segundo Apellido</label>
@@ -72,7 +72,7 @@
               </div>
               <div class="col-md-4">
                 <div class="form-label-group">
-                  <input type="text" pattern="[0-9]{10}" title="El numero de telefono debe de ser a 10 digitos"
+                  <input type="number"  title="El numero de telefono debe de ser a 10 digitos"
                     class="form-control text-uppercase" id="aspirante_telefono" name="aspirante_telefono" placeholder="Teléfono">
                   <label for="aspirante_telefono">Teléfono</label>
                 </div>
@@ -158,7 +158,7 @@
               </div>
               <div class="col-md-4" style="display:none" id="a" name="alergia_medicamento">
                 <div class="form-label-group">
-                  <input type="text" class="form-control text-uppercase" id="aspirante_alergia" name="aspirante_alergia"
+                  <input type="text" pattern= "[A-Za-z]+[ ]*[A-Za-z]*" onchange="validar(this)" class="form-control text-uppercase" id="aspirante_alergia" name="aspirante_alergia"
                     placeholder="Ingrese el medicamento">
                   <label for="aspirante_alergia">Ingrese el medicamento</label>
                 </div>
@@ -167,7 +167,7 @@
 
               <div class="col-md-4">
                 <label class="form-group has-float-label">
-                  <select class="form-control form-control-lg" id="aspirante_discapacidad_combo"
+                  <select class="form-control form-control-lg"  id="aspirante_discapacidad_combo"
                     name="aspirante_discapacidad_combo" onchange="discapacidad(this)">
                     <option value="2">No</option>
                     <option value="1">Si</option>
@@ -178,7 +178,7 @@
               </div>
               <div class="col-md-4" style="display:none" id="b" name="discapacidad">
                 <div class="form-label-group">
-                  <input type="text" class="form-control text-uppercase" id="aspirante_discapacidad" name="aspirante_discapacidad"
+                  <input type="text" pattern= "[A-Za-z]+[ ]*[A-Za-z]*" onchange="validar(this)" class="form-control text-uppercase" id="aspirante_discapacidad" name="aspirante_discapacidad"
                     placeholder="Ingrese la discapacidad">
                   <label for="aspirante_discapacidad">Ingrese la discapacidad</label>
                 </div>
@@ -244,6 +244,7 @@
                   <select class="form-control form-control-lg" required name="aspirante_nacimiento_estado"
                     onChange="curp();" id="selector_estado_nacimiento_aspirante">
                     <option value="">Seleccione el estado de nacimiento</option>
+                    <option value="otro">Nació en otro País</option>
 
                     <?php
                               foreach ($estados as $estado)
@@ -262,8 +263,8 @@
               <div class="col-md-4">
                 <div class="form-label-group">
                   <input type="text"
-                    pattern="([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)"
-                    title="Ingrese los datos faltantes" class="form-control text-uppercase" id="aspirante_curp"
+                    pattern="[A-Za-Z0-9]{18}"
+                    title="Datos Incorrectos" class="form-control text-uppercase" id="aspirante_curp"
                     name="aspirante_curp" placeholder="CURP">
                   <label for="aspirante_curp">CURP</label>
                 </div>
@@ -275,6 +276,48 @@
                             </div>
                             </div>
             </div>
+
+            <div class="form-group">
+            <div class="row">
+            <div class="col-md-4">
+                <div class="form-label-group">
+                  <input type="text"
+                    title="Datos incorrectos" class="form-control text-uppercase" id="aspirante_lugar_nacimiento"
+                    name="aspirante_lugar_nacimiento" placeholder="Lugar de nacimiento" >
+                  <label for="aspirante_lugar_nacimiento">Lugar de Nacimiento</label>
+                </div>
+              </div>
+            <div class="col-md-3 text-center">
+                <div class="form-label-group">
+                  <input type="date" class="form-control text-uppercase" max="2006-01-01" 
+                    id="aspirante_fecha_nacimiento_registro" name="aspirante_fecha_nacimiento_registro" placeholder="Fecha de registro de NRcimiento">
+                  <label for="aspirante_fecha_nacimiento_registro">Fecha de Registro de Nacimiento</label>
+                </div>
+              </div>
+              <div class="col-md-2">
+                <label class="form-group has-float-label">
+                  <select class="form-control form-control-lg" 
+                  required name="selector_extranjero"id="selector_extranjero" onchange="nacionalidad(this);">
+                    <option value="Mexicana">No</option>
+                    <option value="otro">Si</option>
+
+
+
+                  </select>
+                  <span>¿Es extranjero?</span>
+                </label>
+              </div>
+
+              <div class="col-md-3" style="display:none" id="nacionalidad" name="nacionalidad">
+                <div class="form-label-group">
+                  <input type="text" pattern= "[A-Za-z]+[ ]*[A-Za-z]*" onchange="valida(this)" 
+                  class="form-control text-uppercase" id="aspirante_nacionalidad"
+                    name="aspirante_nacionalidad" placeholder="Ingrese la nacionalidad">
+                  <label for="aspirante_nacionalidad">Ingrese la nacionalidad</label>
+                </div>
+              </div>
+
+              </div>
           </div>
 
 
@@ -346,7 +389,7 @@
             <div class="row">
               <div class="col-md-4">
                 <div class="form-label-group">
-                  <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ 0-9]+" required="required"
+                  <input type="text" pattern= "[A-Za-z0-9]+[ ]*[A-Za-z0-9]*" onchange="validar(this)" required="required"
                     title="La direccion tiene caracteres incorrectos" class="form-control text-uppercase"
                     id="aspirante_direccion_calle" name="aspirante_direccion_calle" placeholder="Calle y número">
                   <label for="aspirante_direccion_calle">Calle y número</label>
@@ -355,7 +398,7 @@
 
               <div class="col-md-4">
                 <div class="form-label-group">
-                  <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ 0-9]+" title="La colonia tiene caracteres incorrectos"
+                  <input type="text" pattern= "[A-Za-z0-9]+[ ]*[A-Za-z0-9]*" onchange="validar(this)" title="La colonia tiene caracteres incorrectos"
                     class="form-control text-uppercase" id="aspirante_direccion_colonia" name="aspirante_direccion_colonia"
                     placeholder="Colonia">
                   <label for="aspirante_direccion_colonia">Colonia</label>
@@ -386,7 +429,7 @@
             <div class="row">
               <div class="col-md-4">
                 <div class="form-label-group">
-                  <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ ]+" required="required" title="Introduzca solo letras"
+                  <input type="text" pattern= "[A-Za-z]+[ ]*[A-Za-z]*" onchange="validar(this)" required="required" title="Introduzca solo letras"
                     class="form-control text-uppercase" id="aspirante_tutor_nombre" name="aspirante_tutor_nombre"
                     placeholder="Nombre Completo">
                   <label for="aspirante_tutor_nombre">Nombre de Tutor</label>
@@ -394,7 +437,7 @@
               </div>
               <div class="col-md-4">
                 <div class="form-label-group">
-                  <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ ]+" title="Introduzca solo letras"
+                  <input type="text" pattern= "[A-Za-z]+[ ]*[A-Za-z]*" onchange="validar(this)" title="Introduzca solo letras"
                     class="form-control text-uppercase" id="aspirante_tutor_apellido" name="aspirante_tutor_apellido"
                     placeholder="Nombre Completo">
                   <label for="aspirante_tutor_apellido">Primer Apellido</label>
@@ -402,7 +445,7 @@
               </div>
               <div class="col-md-4">
                 <div class="form-label-group">
-                  <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ ]+"  title="Introduzca solo letras"
+                  <input type="text" pattern= "[A-Za-z]+[ ]*[A-Za-z]*" onchange="validar(this)" title="Introduzca solo letras"
                     class="form-control text-uppercase" id="aspirante_tutor_apellidodos" name="aspirante_tutor_apellidodos"
                     placeholder="Nombre Completo">
                   <label for="aspirante_tutor_apellidodos">Segundo Apellido</label>
@@ -435,7 +478,7 @@
 
                 <div class="col-md-4" id="parentescootro" style="display:none;">
                   <div class="form-label-group">
-                    <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ ]+" class="form-control text-uppercase"
+                    <input type="text" pattern= "[A-Za-z]+[ ]*[A-Za-z]*" onchange="validar(this)" class="form-control text-uppercase"
                       id="aspirante_tutor_otro" name="aspirante_tutor_otro" placeholder="Escriba el parentesco">
                     <label for="aspirante_tutor_otro">Escriba el parentesco</label>
                   </div>
@@ -451,7 +494,7 @@
             <div class="row">
               <div class="col-md-3">
                 <div class="form-label-group">
-                  <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ. ]+" title="Introduzca solo letras"
+                  <input type="text" pattern= "[A-Za-z]+[ ]*[A-Za-z]*" onchange="validar(this)" title="Introduzca solo letras"
                     class="form-control text-uppercase" id="aspirante_tutor_ocupacion" name="aspirante_tutor_ocupacion"
                     placeholder="Ocupación">
                   <label for="aspirante_tutor_ocupacion">Ocupación</label>
@@ -460,7 +503,7 @@
 
               <div class="col-md-3">
                 <div class="form-label-group">
-                  <input type="text" pattern="[0-9]{10}" title="El numero de telefono debe de ser a 10 dígitos con lada"
+                  <input type="number" title="El numero de telefono debe de ser a 10 dígitos con lada"
                     class="form-control text-uppercase" id="aspirante_tutor_telefono" name="aspirante_tutor_telefono"
                     placeholder="Teléfono particular">
                   <label for="aspirante_tutor_telefono">Teléfono particular</label>
@@ -468,7 +511,7 @@
               </div>
               <div class="col-md-3">
                 <div class="form-label-group">
-                  <input type="text" pattern="[0-9]{10}" title="El numero de telefono debe de ser a 10 digitos con lada"
+                  <input type="number"  title="El numero de telefono debe de ser a 10 digitos con lada"
                     class="form-control text-uppercase" id="aspirante_tutor_telefono_comunidad"
                     name="aspirante_tutor_telefono_comunidad" placeholder="Teléfono de la comunidad">
                   <label for="aspirante_tutor_telefono_comunidad">Teléfono de la comunidad</label>
@@ -478,7 +521,7 @@
 
               <div class="col-md-3">
                 <div class="form-label-group">
-                  <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ. ]+" class="form-control text-uppercase"
+                  <input type="text" class="form-control text-uppercase"
                     id="aspirante_tutor_prospera" name="aspirante_tutor_prospera" placeholder="Folio de Prospera">
                   <label for="aspirante_tutor_prospera">Folio de Prospera</label>
                 </div>
@@ -606,7 +649,7 @@
                 <div class="form-label-group">
                   
                     <input list="secundarias" 
-                    required="required" class="form-control text-uppercase" id="aspirante_secundaria_cct" 
+                     class="form-control text-uppercase" pattern= "[A-Za-z0-9]+[ ]*[A-Za-z0-9]*" onchange="validar(this)" id="aspirante_secundaria_cct" 
                     name="aspirante_secundaria_cct" placeholder="Buscar secundaria por CCT">
                     <datalist id="secundarias">
              
@@ -630,13 +673,6 @@
                    Buscar secundaria
                   </button>
 
-                  <!-- Button trigger modal 
-                  <button type="button" class="btn btn-outline-success btn-lg" data-toggle="modal"
-                    data-target="#nuevasecundaria" onclick="cct()">
-                    Agregar nueva secundaria
-                  </button>
-                  -->
-
                 </div>
                 <br>
               </div>
@@ -645,7 +681,7 @@
               <div class="row">
               <div class="col-md-4" style="display: none" id="nombre_secundaria_oculto">
                 <div class="form-label-group">
-                  <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ. 0-9]+" required="required"
+                  <input type="text" pattern= "[A-Za-z0-9]+[ ]*[A-Za-z0-9]*" onchange="validar(this)" required="required"
                     title="El nombre de la secundaria contiene caracteres incorrectos" class="form-control text-uppercase"
                     id="aspirante_secundaria_nombre" name="aspirante_secundaria_nombre"
                     placeholder="Nombre de Secundaria">
@@ -776,7 +812,7 @@
               <div class="row">
                 <div class="col-md-4">
                   <div class="form-label-group">
-                    <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ 0-9]+" required="required"
+                    <input type="text" pattern= "[A-Za-z0-9]+[ ]*[A-Za-z0-9]*" onchange="validar(this)" required="required"
                       title="El nombre de la secundaria contiene caracteres incorrectos" class="form-control text-uppercase"
                       id="aspirante_nuevasecundaria_cct" name="aspirante_nuevasecundaria_cct" placeholder="CCT de Secundaria">
                     <label for="aspirante_nuevasecundaria_cct">C C T</label>
@@ -785,7 +821,7 @@
                 </div>
                 <div class="col-md-4">
                   <div class="form-label-group">
-                    <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ. 0-9]+" class="form-control text-uppercase"
+                    <input type="text" pattern= "[A-Za-z0-9]+[ ]*[A-Za-z0-9]*" onchange="validar(this)" class="form-control text-uppercase"
                       id="aspirante_nuevasecundaria_nombre" name="aspirante_secundaria_nombre"
                       placeholder="Nombre de Secundaria">
                     <label for="aspirante_nuevasecundaria_nombre">Nombre de Secundaria</label>
@@ -978,6 +1014,15 @@ var abreviacion = ["AS","BC","BS","CC","CS","CH","CL","CM","CX","DF","DG","GT","
           document.getElementById("a").style = "display:none"
         }
       }
+      function nacionalidad(e) {
+          valida(e);
+        if (document.getElementById("selector_extranjero").value === "otro") {
+          $("#nacionalidad").show()
+        }
+        else {
+          $("#nacionalidad").hide()
+        }
+      }
 
 
       function discapacidad(e) {
@@ -1070,6 +1115,7 @@ var abreviacion = ["AS","BC","BS","CC","CS","CH","CL","CM","CX","DF","DG","GT","
             timer: 2500
            })
            $('#nuevasecundaria').modal('toggle');
+           obtener_secundaria(document.getElementById("aspirante_secundaria_cct").value);
             }else{
             Swal.fire({
             type: 'error',
@@ -1140,7 +1186,14 @@ var form = document.getElementById("formulario");
 		xhr.send(formdata);
 		
 	}
+  function valida(e) {    
+    regexp = / +/g; /* Expresión regular para buscar todos los espacios múltiples */
+    texto = e.value;
+    texto = texto.replace(regexp, " "); /* Reemplazar todos los espacios múltiples por uno solo */
+    e.value = texto;
 
+ 
+    }
 </script>
 
 

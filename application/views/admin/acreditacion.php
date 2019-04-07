@@ -11,32 +11,32 @@
         </ol>
 
         <!-- Botones-->
-        <div class="row position-static" style="height: 350px">
-          <div class="col col-lg-4">
-            <a href="<?php echo base_url();?>index.php/c_acreditacion/crear_grupo"
-              class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-layer-group "
-              style="height: 80%; background: #1F934C; border-color: #1F934C; padding: 13% ">
+        <div class="row position-static" >
+          <div class="col-md-4 col-lg-4">
+          <a href="<?php echo base_url();?>index.php/c_acreditacion/crear_grupo"
+              class="btn btn-primary btn-lg btn-block menu valign-center btn-1 btn-responsive">
+              <i class="material-icons">group_add</i>&nbsp;
               Crear grupo
             </a>
           </div>
           <div class="col  col-lg-4">
-            <a href="<?php echo base_url();?>index.php/c_aspirante/portabilidad"
-              class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-grip-vertical  btn-responsive"
-              style="height: 80%; background: #9DBF3B; border-color: #9DBF3B; padding: 13% ">
-              Asignar alumnos a grupo
+          <a href="<?php echo base_url();?>index.php/c_acreditacion/asesor_grupo"
+              class="btn btn-primary btn-lg btn-block menu valign-center btn-2 btn-responsive">
+              <i class="material-icons">accessibility</i>&nbsp;
+              Asignar Asesor a grupo
             </a>
           </div>
           <div class="col col-lg-4">
-            <a href="<?php echo base_url();?>index.php/c_aspirante/asignar_matricula"
-              class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-user-check btn-responsive"
-              style="height: 80%; background: #579A8D; border-color: #579A8D; padding: 13% ">
-              Asignar Matrícula
+          <a href="<?php echo base_url();?>index.php/c_aspirante/carta_compromiso"
+              class="btn btn-primary btn-lg btn-block menu valign-center btn-3 btn-responsive">
+              <i class="material-icons">assignment_ind</i>&nbsp;
+              Asignar Asesor a grupo
             </a>
           </div>
           <div class="col col-lg-4">
-            <a href="<?php echo base_url();?>index.php/c_aspirante/carta_compromiso"
-              class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-clipboard-check btn-responsive"
-              style="height: 80%; background: #B7156D; border-color: #B7156D; padding: 13% ">
+          <a href="<?php echo base_url();?>index.php/c_aspirante/carta_compromiso"
+              class="btn btn-primary btn-lg btn-block menu valign-center btn-4 btn-responsive">
+              <i class="material-icons">thumbs_up_down</i>&nbsp;
               Generación de Carta Compromiso
             </a>
           </div>

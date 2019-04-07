@@ -11,6 +11,7 @@ class C_acreditacion extends CI_Controller
         $this->load->model('M_acreditacion');
     }
 
+//------------------------Vistas
 public function acreditacion(){
     $data= array('title'=>'Acreditación');
     $this->load->view("headers/cabecera", $data);
@@ -24,13 +25,26 @@ public function crear_grupo(){
     $datos['planteles'] = $this->M_plantel->get_planteles();
     $datos['ciclo_escolar'] = $this->M_ciclo_escolar->get_ciclo_escolar();
     
-    $data= array('title'=>'Creacion de grupos');
+    $data= array('title'=>'Creación de grupos');
     $this->load->view("headers/cabecera", $data);
     $this->load->view("headers/menuarriba");
     $this->load->view("headers/menuizquierda");
     $this->load->view("admin/creargrupo", $datos);
     $this->load->view("footers/footer");
 }
+
+public function asesor_grupo(){
+    $datos['planteles'] = $this->M_plantel->get_planteles();
+
+    $data= array('title'=>'Asignación de Asesor');
+    $this->load->view("headers/cabecera", $data);
+    $this->load->view("headers/menuarriba");
+    $this->load->view("headers/menuizquierda");
+    $this->load->view("admin/asesor_grupo", $datos);
+    $this->load->view("footers/footer");
+}
+
+//------------------------Fin vistas
 
 public function numero_estudiantes_semestre_plantel(){
     $datos = array(

@@ -32,6 +32,7 @@ public function portabilidad(){
         $datos['municipios'] = $this->M_municipio->get_municipios_estado(1);
         $datos['localidades'] = $this->M_localidad->get_localidades_municipio(1);
         $datos['lenguas'] = $this->M_lengua->get_lenguas();
+        $datos['ciclo_escolar'] = $this->M_ciclo_escolar->get_ciclo_escolar();
         $datos['secundarias'] = $this->M_secundaria->get_secundarias();
         
         

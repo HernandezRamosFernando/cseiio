@@ -75,22 +75,13 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-<<<<<<< HEAD
 	'hostname' => '127.0.0.1',
 	'username' => 'admin',
 	'password' => 'Aspirador1',
 	//'hostname' => '127.0.0.1',
 	//'username' => 'root',
 	//'password' => 'admin',
-=======
-	//'hostname' => '192.168.1.115',
-	//'username' => 'admin',
-	//'password' => 'Aspirador1',
-	'hostname' => '127.0.0.1',
-	'username' => 'root',
-	'password' => 'admin',
->>>>>>> da813bd5f0f9317d1e2e21f5870398c26cd52705
-	'database' => 'control_escolar',
+	'database' => 'control_escolar_ito',
 	'dbdriver' => 'mysqli',
 	'dbport' => '3306',
 	'dbprefix' => '',

@@ -45,7 +45,7 @@
                       <?php
                       foreach ($planteles as $plantel)
                       {
-                      echo '<option value="'.$plantel->cct.'">'.$plantel->nombre_plantel.' ----- CCT: '.$plantel->cct.'</option>';
+                      echo '<option value="'.$plantel->cct_plantel.'">'.$plantel->nombre_plantel.' ----- CCT: '.$plantel->cct_plantel.'</option>';
                       }
                       ?>
 
@@ -826,15 +826,15 @@
       document.getElementById("selector_localidad_aspirante").innerHTML = "";
       document.getElementById("aspirante_no_control").value = e.value;
       var xhr = new XMLHttpRequest();
-      xhr.open('GET', '<?php echo base_url();?>index.php/c_aspirante/get_datos_aspirante/' + e.value, true);
+      xhr.open('GET', '<?php echo base_url();?>index.php/c_estudiante/get_estudiante?no_control=' + e.value, true);
 
       xhr.onload = function () {
         console.log(JSON.parse(xhr.response));
         let datos = JSON.parse(xhr.response);
         //datos personales
         document.getElementById("aspirante_nombre").value = datos.aspirante[0].nombre;
-        document.getElementById("aspirante_apellido_paterno").value = datos.aspirante[0].apellido_paterno;
-        document.getElementById("aspirante_apellido_materno").value = datos.aspirante[0].apellido_materno;
+        document.getElementById("aspirante_apellido_paterno").value = datos.aspirante[0].primer_apellido;
+        document.getElementById("aspirante_apellido_materno").value = datos.aspirante[0].segundo_apellido;
 
         document.getElementById("aspirante_curp").value = datos.aspirante[0].curp;
         document.getElementById("aspirante_fecha_nacimiento").value = datos.aspirante[0].fecha_nacimiento;
@@ -1018,9 +1018,9 @@
       var xhr = new XMLHttpRequest();
       var curp = document.getElementById("aspirante_curp_busqueda").value;
       var plantel = document.getElementById("aspirante_plantel_busqueda").value;
-      var query = 'curp=' + curp + '&plantel=' + plantel;
+      var query = 'curp=' + curp + '&cct_plantel=' + plantel;
 
-      xhr.open('GET', '<?php echo base_url();?>index.php/c_aspirante/buscar_aspirantes_curp?' + query, true);
+      xhr.open('GET', '<?php echo base_url();?>index.php/c_estudiante/get_estudiantes_curp_plantel?' + query, true);
 
       xhr.onload = function () {
         JSON.parse(xhr.response).forEach(function (valor, indice) {
@@ -1028,7 +1028,7 @@
           var fila = '<tr>';
 
           fila += '<td>';
-          fila += valor.nombre + " " + valor.apellido_paterno + " " + valor.apellido_materno;
+          fila += valor.nombre + " " + valor.primer_apellido + " " + valor.segundo_apellido;
           fila += '</td>';
 
           fila += '<td>';
@@ -1044,7 +1044,7 @@
           fila += '</td>';
 
           fila += '<td>';
-          fila += valor.Plantel_cct;
+          fila += valor.Plantel_cct_plantel;
           fila += '</td>';
 
           fila += '<td>';

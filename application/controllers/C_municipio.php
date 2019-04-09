@@ -11,8 +11,13 @@ class C_municipio extends CI_Controller {
     }
 
 
-    public function get_municipios_estado(){
-       $id_estado = $this->input->get('id_estado');
-       echo json_encode($this->M_municipio->get_municipios_estado($id_estado));
+    public function get_municipios_estado_html(){
+        $id_estado = $this->input->get('id_estado');
+        $respuesta = "";
+        foreach($this->M_municipio->get_municipios_estado($id_estado) as $municipio){
+            $respuesta .= '<option value="'.$municipio->id_municipio.'">'.mb_strtoupper($municipio->nombre_municipio).'</option>';
+        }
+
+        echo $respuesta;
     }
 }

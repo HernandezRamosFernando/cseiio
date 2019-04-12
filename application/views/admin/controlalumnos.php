@@ -38,7 +38,7 @@
 
                 <div class="col-md-8">
                   <label class="form-group has-float-label">
-                    <select class="form-control form-control-lg" required="required" id="aspirante_plantel_busqueda"
+                    <select class="form-control form-control-lg" ="" id="aspirante_plantel_busqueda"
                       name="aspirante_plantel">
                       <option value="">Buscar en todos los planteles</option>
 
@@ -118,7 +118,7 @@
                   <div class="row">
                     <div class="col-md-4">
                       <div class="form-label-group">
-                        <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ ]+" required="required"
+                        <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ ]+" =""
                           title="Introduzca solo letras" class="form-control" id="aspirante_nombre"
                           name="aspirante_nombre" placeholder="Nombre(s)">
                         <label for="aspirante_nombre">Nombre(s)</label>
@@ -127,7 +127,7 @@
 
                     <div class="col-md-4">
                       <div class="form-label-group">
-                        <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ ]+" required="required"
+                        <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ ]+" =""
                           title="Introduzca solo letras" class="form-control" id="aspirante_apellido_paterno"
                           name="aspirante_apellido_paterno" placeholder="Apellido Paterno">
                         <label for="aspirante_apellido_paterno">Apellido Paterno</label>
@@ -154,7 +154,7 @@
 
                     <div class="col-md-4 text-center">
                       <div class="form-label-group">
-                        <input type="date" required="required" class="form-control" id="aspirante_fecha_nacimiento"
+                        <input type="date" ="" class="form-control" id="aspirante_fecha_nacimiento"
                           name="aspirante_fecha_nacimiento" placeholder="Fecha de Nacimiento">
                         <label for="aspirante_fecha_nacimiento">Fecha Nacimiento</label>
                       </div>
@@ -188,7 +188,7 @@
                   <div class="row">
                     <div class="col-md-4">
                       <label class="form-group has-float-label">
-                      <select class="form-control form-control-lg" required id="aspirante_sexo"
+                      <select class="form-control form-control-lg"  id="aspirante_sexo"
                     name="aspirante_sexo">
                     <option value="">Seleccione</option>
                           <option value="H">Hombre</option>
@@ -216,7 +216,7 @@
                     <div class="col-md-4">
                       <div class="form-group">
                         <label class="form-group has-float-label">
-                          <select class="form-control form-control-lg" name="tipo_sangre" id="tipo_sangre" required>
+                          <select class="form-control form-control-lg" name="tipo_sangre" id="tipo_sangre" >
                             <option value="">Seleccione una opción</option>
                             <option value="No conoce">No conoce su tipo de sangre</option>
                             <option value="A+">A+</option>
@@ -284,14 +284,14 @@
                   <div class="row">
                     <div class="col-md-8">
                       <label class="form-group has-float-label">
-                        <select class="form-control form-control-lg" required="required" id="aspirante_plantel"
+                        <select class="form-control form-control-lg" ="" id="aspirante_plantel"
                           name="aspirante_plantel">
                           <option>Seleccione el plantel de ingreso</option>
 
                           <?php
                                         foreach ($planteles as $plantel)
                                         {
-                                          echo '<option value="'.$plantel->cct.'">'.$plantel->nombre_plantel.' ----- CCT: '.$plantel->cct.'</option>';
+                                          echo '<option value="'.$plantel->cct_plantel.'">'.$plantel->nombre_plantel.' ----- CCT: '.$plantel->cct_plantel.'</option>';
                                         }
                                         ?>
 
@@ -302,7 +302,7 @@
 
                     <div class="col-md-4">
                       <label class="form-group has-float-label">
-                        <select class="form-control form-control-lg" required="required" id="aspirante_semestre"
+                        <select class="form-control form-control-lg" ="" id="aspirante_semestre"
                           name="aspirante_semestre">
                           <option value="1">1</option>
                           <option value="2">2</option>
@@ -332,7 +332,7 @@
 
                     <div class="col-md-4">
                       <label class="form-group has-float-label">
-                        <select class="form-control form-control-lg" required"
+                        <select class="form-control form-control-lg" "
                           name="aspirante_direccion_estado"
                           onChange="cambio_estado(selector_estado_aspirante,selector_municipio_aspirante,selector_localidad_aspirante)"
                           id="selector_estado_aspirante">
@@ -355,7 +355,7 @@
 
                     <div class="col-md-4">
                       <label class="form-group has-float-label">
-                        <select class="form-control form-control-lg" required="required"
+                        <select class="form-control form-control-lg" =""
                           name="aspirante_direccion_municipio"
                           onChange="cambio_municipio(selector_municipio_aspirante,selector_localidad_aspirante)"
                           id="selector_municipio_aspirante">
@@ -369,7 +369,7 @@
 
                     <div class="col-md-4">
                       <label class="form-group has-float-label">
-                        <select class="form-control form-control-lg" required="required"
+                        <select class="form-control form-control-lg" =""
                           name="aspirante_direccion_localidad" id="selector_localidad_aspirante">
                           <option></option>
 
@@ -390,7 +390,7 @@
                   <div class="row">
                     <div class="col-md-4">
                       <div class="form-label-group">
-                        <input type="text" required="required"
+                        <input type="text" =""
                           title="La direccion tiene caracteres incorrectos" class="form-control"
                           id="aspirante_direccion_calle" name="aspirante_direccion_calle" placeholder="Calle y número">
                         <label for="aspirante_direccion_calle">Calle y Número</label>
@@ -458,7 +458,7 @@
                   <div class="row">
                     <div class="col-md-7">
                       <div class="form-label-group">
-                        <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ ]+" required="required"
+                        <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ ]+" =""
                           title="Introduzca solo letras" class="form-control" id="aspirante_tutor_nombre"
                           name="aspirante_tutor_nombre" placeholder="Nombre Completo">
                         <label for="aspirante_tutor_nombre">Nombre Completo</label>
@@ -467,7 +467,7 @@
 
                     <div class="col-md-2">
                       <label class="form-group has-float-label">
-                        <select class="form-control form-control-lg" required id="aspirante_tutor_parentesco"
+                        <select class="form-control form-control-lg"  id="aspirante_tutor_parentesco"
                            name="aspirante_tutor_parentesco" onchange="parentesco(this)">
                           <option value="">Seleccione</option>
                           <option value="PADRE">Padre</option>
@@ -553,7 +553,7 @@
                   <div class="row">
                     <div class="col-md-2">
                       <label class="form-group has-float-label">
-                        <select class="form-control" required="required" onchange="lenguas_evento(this)"
+                        <select class="form-control" ="" onchange="lenguas_evento(this)"
                           id="aspirante_lengua_nombre" name="aspirante_lengua_nombre">
                           <option value="NO CONOCE LENGUA">Seleccione una lengua</option>
 
@@ -571,7 +571,7 @@
 
                     <div class="col-md-2">
                       <label class="form-group has-float-label">
-                        <select class="form-control" required="required" id="aspirante_lengua_lee"
+                        <select class="form-control" ="" id="aspirante_lengua_lee"
                           name="aspirante_lengua_lee" disabled>
                           <option value="0">Nada 0%</option>
                           <option value="25">Poco 25%</option>
@@ -584,7 +584,7 @@
 
                     <div class="col-md-2">
                       <label class="form-group has-float-label">
-                        <select class="form-control" required="required" id="aspirante_lengua_habla"
+                        <select class="form-control" ="" id="aspirante_lengua_habla"
                           name="aspirante_lengua_habla" disabled>
                           <option value="0">Nada 0%</option>
                           <option value="25">Poco 25%</option>
@@ -597,7 +597,7 @@
 
                     <div class="col-md-2">
                       <label class="form-group has-float-label">
-                        <select class="form-control" required="required" id="aspirante_lengua_escribe"
+                        <select class="form-control" ="" id="aspirante_lengua_escribe"
                           name="aspirante_lengua_escribe" disabled>
                           <option value="0">Nada 0%</option>
                           <option value="25">Poco 25%</option>
@@ -610,7 +610,7 @@
 
                     <div class="col-md-2">
                       <label class="form-group has-float-label">
-                        <select class="form-control" required="required" id="aspirante_lengua_entiende"
+                        <select class="form-control" ="" id="aspirante_lengua_entiende"
                           name="aspirante_lengua_entiende" disabled>
                           <option value="0">Nada 0%</option>
                           <option value="25">Poco 25%</option>
@@ -624,7 +624,7 @@
 
                     <div class="col-md-2">
                       <label class="form-group has-float-label">
-                        <select class="form-control" required="required" id="aspirante_lengua_traduce"
+                        <select class="form-control" ="" id="aspirante_lengua_traduce"
                           name="aspirante_lengua_traduce" disabled>
                           <option value="0">Nada 0%</option>
                           <option value="25">Poco 25%</option>
@@ -658,7 +658,7 @@
                     <div class="col-md-4">
                       <div class="form-label-group">
 
-                        <input onselect="obtener_secundaria(this)" list="secundarias" required="required"
+                        <input onselect="obtener_secundaria(this)" list="secundarias" =""
                           class="form-control" id="aspirante_secundaria_cct" name="aspirante_secundaria_cct"
                           placeholder="Buscar secundaria por CCT">
                         <datalist id="secundarias">
@@ -682,7 +682,7 @@
                   <div class="row">
                     <div class="col-md-4" style="display: none" id="nombre_secundaria_oculto">
                       <div class="form-label-group">
-                        <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ. 0-9]+" required="required"
+                        <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ. 0-9]+" =""
                           title="El nombre de la secundaria contiene caracteres incorrectos" class="form-control"
                           id="aspirante_secundaria_nombre" name="aspirante_secundaria_nombre"
                           placeholder="Nombre de Secundaria">
@@ -693,7 +693,7 @@
 
                     <div class="col-md-4" style="display: none" id="tipo_subsistema_oculto">
                       <label class="form-group has-float-label">
-                        <select class="form-control form-control-lg" required="required"
+                        <select class="form-control form-control-lg" =""
                           name="aspirante_secundaria_tipo_subsistema" id="aspirante_secundaria_tipo_subsistema">
                           <option value="TELESECUNDARIA">Telesecundaria</option>
                           <option value="GENERAL">General</option>
@@ -712,6 +712,7 @@
 
                 <!--fin datos secundaria------------------------------------------------------>
                 <input type="text" id="aspirante_no_control" name="aspirante_no_control" style="display:none">
+                <input type="text" id="id_tutor" name="id_tutor" style="display:none">
 
 
 
@@ -766,6 +767,7 @@
  
 
   <input type="text" style="display:none" id="no_control_borrar">
+ 
 
 
 
@@ -788,7 +790,7 @@
     function confirmacion_eliminar() {
       console.log("este aspirante ha sido borrado " + document.getElementById("no_control_borrar").value);
       var xhr = new XMLHttpRequest();
-      xhr.open('GET', '<?php echo base_url();?>index.php/c_aspirante/delete_aspirante?no_control=' + document.getElementById("no_control_borrar").value, true);
+      xhr.open('GET', '<?php echo base_url();?>index.php/c_estudiante/delete_estudiante?no_control=' + document.getElementById("no_control_borrar").value, true);
 
       xhr.onload = function () {
         if(xhr.responseText === "si")
@@ -825,108 +827,120 @@
       document.getElementById("selector_municipio_aspirante").innerHTML = "";
       document.getElementById("selector_localidad_aspirante").innerHTML = "";
       document.getElementById("aspirante_no_control").value = e.value;
+      document.getElementById("aspirante_alergia").value = "";
+      document.getElementById("aspirante_discapacidad").value = "";
       var xhr = new XMLHttpRequest();
       xhr.open('GET', '<?php echo base_url();?>index.php/c_estudiante/get_estudiante?no_control=' + e.value, true);
 
       xhr.onload = function () {
-        console.log(JSON.parse(xhr.response));
         let datos = JSON.parse(xhr.response);
+        console.log(datos);
+        document.getElementById("aspirante_no_control").value = datos.estudiante[0].no_control;
+        document.getElementById("id_tutor").value = datos.tutor[0].id_tutor;
         //datos personales
-        document.getElementById("aspirante_nombre").value = datos.aspirante[0].nombre;
-        document.getElementById("aspirante_apellido_paterno").value = datos.aspirante[0].primer_apellido;
-        document.getElementById("aspirante_apellido_materno").value = datos.aspirante[0].segundo_apellido;
+        document.getElementById("aspirante_nombre").value = datos.estudiante[0].nombre;
+        document.getElementById("aspirante_apellido_paterno").value = datos.estudiante[0].primer_apellido;
+        document.getElementById("aspirante_apellido_materno").value = datos.estudiante[0].segundo_apellido;
 
-        document.getElementById("aspirante_curp").value = datos.aspirante[0].curp;
-        document.getElementById("aspirante_fecha_nacimiento").value = datos.aspirante[0].fecha_nacimiento;
-        document.getElementById("aspirante_telefono").value = datos.aspirante[0].telefono;
-        document.getElementById("aspirante_correo").value = datos.aspirante[0].correo;
+        document.getElementById("aspirante_curp").value = datos.estudiante[0].curp;
+        document.getElementById("aspirante_fecha_nacimiento").value = datos.estudiante[0].fecha_nacimiento;
+        document.getElementById("aspirante_telefono").value = datos.estudiante[0].telefono;
+        document.getElementById("aspirante_correo").value = datos.estudiante[0].correo;
 
-        document.getElementById("aspirante_sexo").value = datos.aspirante[0].sexo;
+        document.getElementById("aspirante_sexo").value = datos.estudiante[0].sexo;
+        //console.log(datos.expediente_medico);
+        document.getElementById("tipo_sangre").value = datos.expediente_medico[2].valor!==""?datos.expediente_medico[2].valor:"";
 
-        document.getElementById("tipo_sangre").value = datos.datos_medicos_aspirante[0].tipo_sangre;
-
-        if (datos.datos_medicos_aspirante[0].alergia_medicamento === null || datos.datos_medicos_aspirante[0].alergia_medicamento === "") {
+        if (datos.expediente_medico[0].valor==="") {
           document.getElementById("aspirante_alergia_combo").value = "2";
+          document.getElementById("a").style.display = "none";
         }
-
+        //datos.datos_medicos_aspirante[0].alergia_medicamento === null
         else {
           document.getElementById("aspirante_alergia_combo").value = "1";
-          document.getElementById("aspirante_alergia").value = datos.datos_medicos_aspirante[0].alergia_medicamento;
+          document.getElementById("aspirante_alergia").value = datos.expediente_medico[0].valor;
           document.getElementById("a").style.display = "";
         }
 
-        if (datos.datos_medicos_aspirante[0].discapacidad === null || datos.datos_medicos_aspirante[0].discapacidad === "") {
+        if (datos.expediente_medico[1].valor==="") {
           document.getElementById("aspirante_discapacidad_combo").value = "2";
+          document.getElementById("b").style.display = "none";
         }
 
         else {
           document.getElementById("aspirante_discapacidad_combo").value = "1";
-          document.getElementById("aspirante_discapacidad").value = datos.datos_medicos_aspirante[0].discapacidad;
+          document.getElementById("aspirante_discapacidad").value = datos.expediente_medico[1].valor;
           document.getElementById("b").style.display = "";
         }
 
 
-        document.getElementById("aspirante_plantel").value = datos.aspirante[0].Plantel_cct;
-        document.getElementById("aspirante_semestre").value = datos.aspirante[0].semestre;
+        document.getElementById("aspirante_plantel").value = datos.estudiante[0].Plantel_cct_plantel;
+        document.getElementById("aspirante_semestre").value = datos.estudiante[0].semestre;
 
         //fin datos personales
 
+
+
         //direccion aspirante
-        var direccion = new XMLHttpRequest();
-        direccion.open('GET', '<?php echo base_url();?>index.php/c_localidad/get_estado_municipio_localidad?id_localidad=' + datos.direccion_aspirante[0].Localidad_id_localidad, true);
+
+        //llamada al api que regresa los ids de la direccion del estudiante
+        var respuesta;
+        let direccion = new XMLHttpRequest();
+            direccion.open('GET', '/cseiio/index.php/c_localidad/get_estado_municipio_localidad_id_localidad?id_localidad='+datos.estudiante[0].id_localidad, true);
+
+            direccion.onload = function () {
+              var respuesta = JSON.parse(direccion.response);
+              //cargar municipios
+
+              let municipios = new XMLHttpRequest();
+              municipios.open('GET', '/cseiio/index.php/c_municipio/get_municipios_estado_html?id_estado='+respuesta[0].id_estado, true);
+
+              municipios.onload = function () {
+                document.getElementById("selector_municipio_aspirante").innerHTML = municipios.responseText;
+              };
+
+              municipios.send(null);
+
+              //fin cargar municipios
 
 
-        direccion.onload = function () {
+              //cargar localidades
+              
+              let localidades = new XMLHttpRequest();
+              localidades.open('GET', '/cseiio/index.php/c_localidad/get_localidades_municipio_html?id_municipio='+respuesta[0].id_municipio, true);
 
-          document.getElementById("selector_estado_aspirante").value = JSON.parse(direccion.response)[0].id_estado;
+              localidades.onload = function () {
+                document.getElementById("selector_localidad_aspirante").innerHTML = localidades.responseText;
 
-          //console.log(JSON.parse(direccion.response)[0].id_estado);
-          var municipios = new XMLHttpRequest();
-          municipios.open('GET', '<?php echo base_url();?>index.php/c_municipio/get_municipios_estado?id_estado=' + JSON.parse(direccion.response)[0].id_estado, true);
+                //seleccionar las opciones de la direccion del estudiante que habia registrado
+                document.getElementById("selector_estado_aspirante").value = respuesta[0].id_estado;
+                document.getElementById("selector_municipio_aspirante").value = respuesta[0].id_municipio;
+                document.getElementById("selector_localidad_aspirante").value = respuesta[0].id_localidad;
+              };
 
-          municipios.onload = function () {
-            document.getElementById("selector_municipio_aspirante").innerHTML = "";
-            JSON.parse(municipios.response).forEach(function (valor, indice) {
-              document.getElementById("selector_municipio_aspirante").innerHTML += '<option value="' + valor.id_municipio + '">' + valor.nombre_municipio + '</option>';
-            });
+              localidades.send(null);
+              
+              //fin cargar localidades
+            };
 
-            document.getElementById("selector_municipio_aspirante").value = JSON.parse(direccion.response)[0].id_municipio;
+            direccion.send(null);
+        
 
-          };
-
-          municipios.send(null);
-
-
-
-          var localidades = new XMLHttpRequest();
-          localidades.open('GET', '<?php echo base_url();?>index.php/c_localidad/get_localidades_municipio?id_municipio=' + JSON.parse(direccion.response)[0].id_municipio, true);
-
-          localidades.onload = function () {
-            document.getElementById("selector_localidad_aspirante").innerHTML = "";
-            JSON.parse(localidades.response).forEach(function (valor, indice) {
-              document.getElementById("selector_localidad_aspirante").innerHTML += '<option value="' + valor.id_localidad + '">' + valor.nombre_localidad + '</option>'
-            });
-            document.getElementById("selector_localidad_aspirante").value = JSON.parse(direccion.response)[0].id_localidad;
-          };
-
-          localidades.send(null);
-        };
-
-        direccion.send(null);
-
-        document.getElementById("aspirante_direccion_calle").value = datos.direccion_aspirante[0].calle;
-        document.getElementById("aspirante_direccion_colonia").value = datos.direccion_aspirante[0].colonia;
-        document.getElementById("aspirante_direccion_cp").value = datos.direccion_aspirante[0].cp;
-
+            document.getElementById("aspirante_direccion_calle").value = datos.estudiante[0].calle;
+            document.getElementById("aspirante_direccion_colonia").value = datos.estudiante[0].colonia;
+            document.getElementById("aspirante_direccion_cp").value = datos.estudiante[0].cp;
         //fin direccion aspirante
 
+
+
+
         //datos tutor
-        document.getElementById("aspirante_tutor_nombre").value = datos.tutor_aspirante[0].nombre;
-        document.getElementById("aspirante_tutor_ocupacion").value = datos.tutor_aspirante[0].ocupacion;
-        document.getElementById("aspirante_tutor_telefono").value = datos.tutor_aspirante[0].telefono_particular;
-        document.getElementById("aspirante_tutor_telefono_comunidad").value = datos.tutor_aspirante[0].telefono_comunidad;
-        document.getElementById("aspirante_tutor_prospera").value = datos.tutor_aspirante[0].folio_prospera;
-        $parentesco = datos.tutor_aspirante[0].parentezco;
+        document.getElementById("aspirante_tutor_nombre").value = datos.tutor[0].nombre_tutor;
+        document.getElementById("aspirante_tutor_ocupacion").value = datos.tutor[0].ocupacion;
+        //document.getElementById("aspirante_tutor_telefono").value = datos.tutor[0].telefono_tutor;
+        document.getElementById("aspirante_tutor_telefono_comunidad").value = datos.tutor[0].telefono_comunidad;
+        document.getElementById("aspirante_tutor_prospera").value = datos.tutor[0].folio_programa_social_tutor;
+        $parentesco = datos.tutor[0].parentesco;
 
         if ($parentesco !== "PADRE" && $parentesco !== "MADRE" && $parentesco !== "HERMANO/A" && $parentesco !== "TIO" && $parentesco !== "TIA" && $parentesco !== "ABUELO" && $parentesco !== "ABUELA") {
           document.getElementById("aspirante_tutor_parentesco").value = "otro";
@@ -936,45 +950,56 @@
 
         else {
           document.getElementById("aspirante_tutor_parentesco").value = $parentesco;
+          document.getElementById("aspirante_tutor_otro").value = "";
+          document.getElementById("parentescootro").style.display = "none";
         }
         //fin datos tutor
+
+
+
+
         //datos lengua materna
-        if (datos.lengua_materna_aspirante[0].Lengua_id_lengua === "0") {
-          document.getElementById("aspirante_lengua_nombre").value = datos.lengua_materna_aspirante[0].Lengua_id_lengua;
+        if (datos.lengua_materna[0].id_lengua === "0") {
+          document.getElementById("aspirante_lengua_nombre").value = datos.lengua_materna[0].id_lengua;
+          document.getElementById("aspirante_lengua_lee").value = 0;
+          document.getElementById("aspirante_lengua_habla").value = 0;
+          document.getElementById("aspirante_lengua_escribe").value = 0;
+          document.getElementById("aspirante_lengua_entiende").value = 0;
+          document.getElementById("aspirante_lengua_traduce").value = 0;
         }
         else {
-          document.getElementById("aspirante_lengua_nombre").value = datos.lengua_materna_aspirante[0].Lengua_id_lengua;
+          document.getElementById("aspirante_lengua_nombre").value = datos.lengua_materna[0].id_lengua;
 
           document.getElementById("aspirante_lengua_lee").disabled = false;
-          document.getElementById("aspirante_lengua_lee").value = datos.lengua_materna_aspirante[0].lee;
+          document.getElementById("aspirante_lengua_lee").value = datos.lengua_materna[0].porcentaje;
 
           document.getElementById("aspirante_lengua_habla").disabled = false;
-          document.getElementById("aspirante_lengua_habla").value = datos.lengua_materna_aspirante[0].lee;
+          document.getElementById("aspirante_lengua_habla").value = datos.lengua_materna[1].porcentaje;
 
           document.getElementById("aspirante_lengua_escribe").disabled = false;
-          document.getElementById("aspirante_lengua_escribe").value = datos.lengua_materna_aspirante[0].lee;
+          document.getElementById("aspirante_lengua_escribe").value = datos.lengua_materna[2].porcentaje;
 
           document.getElementById("aspirante_lengua_entiende").disabled = false;
-          document.getElementById("aspirante_lengua_entiende").value = datos.lengua_materna_aspirante[0].lee;
+          document.getElementById("aspirante_lengua_entiende").value = datos.lengua_materna[3].porcentaje;
 
           document.getElementById("aspirante_lengua_traduce").disabled = false;
-          document.getElementById("aspirante_lengua_traduce").value = datos.lengua_materna_aspirante[0].lee;
+          document.getElementById("aspirante_lengua_traduce").value = datos.lengua_materna[4].porcentaje;
         }
 
         //fin datos lengua materna
 
         //secundaria
-        document.getElementById("aspirante_secundaria_cct").value = datos.secundaria_aspirante[0].cct_secundaria;
-
+        document.getElementById("aspirante_secundaria_cct").value = datos.estudiante[0].cct_escuela_procedencia;
+        /*
         document.getElementById("aspirante_secundaria_nombre").value = datos.secundaria_aspirante[0].nombre_secundaria;
         document.getElementById("aspirante_secundaria_nombre").disabled = true;
         document.getElementById("nombre_secundaria_oculto").style.display = "";
-        //document.getElementById("nombre_secundaria_oculto").disabled = true;
+ 
 
         document.getElementById("aspirante_secundaria_tipo_subsistema").value = datos.secundaria_aspirante[0].tipo_subsistema;
         document.getElementById("aspirante_secundaria_tipo_subsistema").disabled = true;
         document.getElementById("tipo_subsistema_oculto").style.display = "";
-        //document.getElementById("tipo_subsistema_oculto").disabled = true;
+        */
       }
 
       xhr.send(null);
@@ -1024,7 +1049,7 @@
 
       xhr.onload = function () {
         JSON.parse(xhr.response).forEach(function (valor, indice) {
-          console.log(valor);
+          //console.log(valor);
           var fila = '<tr>';
 
           fila += '<td>';
@@ -1242,7 +1267,7 @@ var form = document.getElementById("formulario");
 		e.preventDefault();
 		var formdata = new FormData(form);
 		var xhr =  new XMLHttpRequest();
-		xhr.open("POST","<?php echo base_url();?>index.php/c_aspirante/actualizar_datos_aspirante",true);
+		xhr.open("POST","<?php echo base_url();?>index.php/c_estudiante/update_estudiante",true);
     xhr.onreadystatechange = function() { 
     if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
       //console.log();

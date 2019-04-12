@@ -68,7 +68,7 @@ class C_estudiante extends CI_Controller {
             'Plantel_cct_plantel' => $this->input->post('aspirante_plantel'),
             //'nacinalidad' => $this->input->post('/d'),
             'lugar_nacimiento' => strtoupper($this->input->post('aspirante_lugar_nacimiento')),
-            'Escuela_procedencia_cct_escuela_procedencia' => $this->input->post('aspirante_secundaria_cct')
+            'cct_escuela_procedencia' => $this->input->post('aspirante_secundaria_cct')
         );
 
         if($tipo_estudiante=='nuevo_ingreso'){
@@ -92,11 +92,11 @@ class C_estudiante extends CI_Controller {
             'segundo_apellido_tutor' =>strtoupper($this->input->post('aspirante_tutor_apellidodos')),
             'folio_programa_social_tutor' => $this->input->post('aspirante_tutor_prospera'),
             'telefono_comunidad' => strtoupper($this->input->post('aspirante_tutor_telefono_comunidad')),
-            'telefono_tutor' => strtoupper($this->input->post('aspirante_tutor_telefono')==''?null:$this->input->post('aspirante_tutor_parentesco')),
-            'ocupacion' => $this->input->post('aspirante_tutor_ocupacion')
+            'telefono_tutor' => strtoupper($this->input->post('aspirante_tutor_telefono')==''?null:$this->input->post('aspirante_tutor_telefono')),
+            'ocupacion' => strtoupper($this->input->post('aspirante_tutor_ocupacion'))
         );
 
-        $parentesco_estudiante_tutor = $this->input->post('aspirante_tutor_parentesco'); 
+        $parentesco_estudiante_tutor = strtoupper($this->input->post('aspirante_tutor_parentesco')); 
 
         //print_r($datos_estudiante_tutor);
 
@@ -332,6 +332,135 @@ class C_estudiante extends CI_Controller {
 
     }
 
+    public function update_estudiante(){
+        //$no_control=$this->generar_numcontrol(1);
+
+
+        //inicio estudiante
+        $no_control = $this->input->post("aspirante_no_control");
+        $id_tutor = $this->input->post("id_tutor");
+        $datos_estudiante = array(
+            //'no_control' => $no_control,
+            'nombre' => strtoupper($this->input->post('aspirante_nombre')),
+            'primer_apellido' => strtoupper($this->input->post('aspirante_apellido_paterno')),
+            'segundo_apellido' => strtoupper($this->input->post('aspirante_apellido_materno')),
+            'fecha_nacimiento' => $this->input->post('aspirante_fecha_nacimiento'),
+            'sexo' => $this->input->post('aspirante_sexo'),
+            'curp' => $this->input->post('aspirante_curp'),
+            'fecha_registro' => strtoupper(date("Y-m-d")),
+            //'tipo_ingreso' => 'NUEVO INGRESO',
+            //'semestre' => 1,
+            'folio_programa_social' => $this->input->post('aspirante_programa_social'),
+            //'matricula' => strtoupper($this->input->post('aspirante_curp')),
+            'correo' => strtoupper($this->input->post('aspirante_correo')),
+            'nss' => strtoupper($this->input->post('aspirante_nss')),
+            'calle' => strtoupper($this->input->post('aspirante_direccion_calle')),
+            'colonia' => strtoupper($this->input->post('aspirante_direccion_colonia')),
+            'cp' => $this->input->post('aspirante_direccion_cp'),
+            'id_localidad' => $this->input->post('aspirante_direccion_localidad'),
+            //'semestre_en_curso' => $this->input->post('/d'),
+            'fecha_inscripcion' => date("Y-m-d"),
+            'telefono' => $this->input->post('aspirante_telefono'),
+            'Plantel_cct_plantel' => $this->input->post('aspirante_plantel'),
+            //'nacinalidad' => $this->input->post('/d'),
+            'lugar_nacimiento' => strtoupper($this->input->post('aspirante_lugar_nacimiento')),
+            'cct_escuela_procedencia' => $this->input->post('aspirante_secundaria_cct'),
+            'semestre' => $this->input->post('aspirante_semestre')
+        );
+
+       
+
+        //print_r($datos_estudiante);
+        //fin estudiante
+
+        $datos_estudiante_tutor = array(
+            'nombre_tutor' => strtoupper($this->input->post('aspirante_tutor_nombre')),
+            'primer_apellido_tutor' =>strtoupper($this->input->post('aspirante_tutor_apellido')),
+            'segundo_apellido_tutor' =>strtoupper($this->input->post('aspirante_tutor_apellidodos')),
+            'folio_programa_social_tutor' => $this->input->post('aspirante_tutor_prospera'),
+            'telefono_comunidad' => strtoupper($this->input->post('aspirante_tutor_telefono_comunidad')),
+            'telefono_tutor' => strtoupper($this->input->post('aspirante_tutor_telefono')==''?null:$this->input->post('aspirante_tutor_telefono')),
+            'ocupacion' => strtoupper($this->input->post('aspirante_tutor_ocupacion'))
+        );
+
+        $parentesco_estudiante_tutor = strtoupper($this->input->post('aspirante_tutor_parentesco')); 
+
+        //print_r($datos_estudiante_tutor);
+
+
+        //inicio lenguas maternas
+
+        $id_lengua = $this->input->post('aspirante_lengua_nombre');
+
+        $datos_estudiante_lengua_materna['lee'] = array(
+            'id_lengua' => $this->input->post('aspirante_lengua_nombre'),
+            'descripcion' => 'LEE',
+            'porcentaje' => $id_lengua==0?'null':$this->input->post('aspirante_lengua_lee')
+        );
+
+
+        $datos_estudiante_lengua_materna['habla'] = array(
+            'id_lengua' => $this->input->post('aspirante_lengua_nombre'),
+            'descripcion' => 'HABLA',
+            'porcentaje' => $id_lengua==0?'null':$this->input->post('aspirante_lengua_habla')
+        );
+
+
+        $datos_estudiante_lengua_materna['escribe'] = array(
+            'id_lengua' => $this->input->post('aspirante_lengua_nombre'),
+            'descripcion' => 'ESCRIBE',
+            'porcentaje' => $id_lengua==0?'null':$this->input->post('aspirante_lengua_escribe')
+        );
+
+
+        $datos_estudiante_lengua_materna['entiende'] = array(
+            'id_lengua' => $this->input->post('aspirante_lengua_nombre'),
+            'descripcion' => 'ENTIENDE',
+            'porcentaje' => $id_lengua==0?'null':$this->input->post('aspirante_lengua_entiende')
+        );
+
+
+        $datos_estudiante_lengua_materna['traduce'] = array(
+            'id_lengua' => $this->input->post('aspirante_lengua_nombre'),
+            'descripcion' => 'TRADUCE',
+            'porcentaje' => $id_lengua==0?'null':$this->input->post('aspirante_lengua_traduce')
+        );
+            
+        //datos medicos
+
+        $datos_estudiante_medicos['alergia'] = array(
+            'descripcion' => 'ALERGIA',
+            'valor' => strtoupper($this->input->post('aspirante_alergia'))
+        );
+
+        $datos_estudiante_medicos['discapacidad'] = array(
+            'descripcion' => 'DISCAPACIDAD',
+            'valor' => strtoupper($this->input->post('aspirante_discapacidad'))
+        );
+
+        $datos_estudiante_medicos['sangre'] = array(
+            'descripcion' => 'TIPO DE SANGRE',
+            'valor' => strtoupper($this->input->post('tipo_sangre'))
+        );
+
+        //fin datos medicos
+
+       
+        echo $this->M_estudiante->update_estudiante(
+            $datos_estudiante,
+            $datos_estudiante_tutor,
+            $parentesco_estudiante_tutor,
+            $datos_estudiante_lengua_materna,
+            $datos_estudiante_medicos,
+            $no_control,
+            $id_tutor
+        );
+        
+        
+        
+
+    }
+
 
     public function get_estudiantes_curp_plantel(){
         $curp = $this->input->get('curp');
@@ -343,6 +472,12 @@ class C_estudiante extends CI_Controller {
     public function get_estudiante(){
         $no_control = $this->input->get('no_control');
         echo json_encode($this->M_estudiante->get_estudiante($no_control));
+    }
+
+
+    public function delete_estudiante(){
+        $no_control = $this->input->get('no_control');
+        echo $this->M_estudiante->delete_estudiante($no_control);
     }
 
    

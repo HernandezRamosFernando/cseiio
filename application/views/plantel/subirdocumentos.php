@@ -71,6 +71,7 @@
                 <th scope="col" class="col-md-1">Curp</th>
                 <th scope="col" class="col-md-1">N° control</th>
                 <th scope="col" class="col-md-1">Tipo de ingreso</th>
+                <th scope="col" class="col-md-1">Estatus de documentación</th>
                 <th scope="col" class="col-md-1">Control de documentación</th>
               </tr>
               </thead>
@@ -114,7 +115,7 @@ https://www.youtube.com/results?search_query=+AJAX+File+Upload+with+Progress
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">SUBIR DOCUMENTACIÓN</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="refrescar_tabla()">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -152,7 +153,7 @@ https://www.youtube.com/results?search_query=+AJAX+File+Upload+with+Progress
         </div>
         <div class="modal-footer">
 
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar y guardar</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="refrescar_tabla()">Cerrar y guardar</button>
         </div>
       </div>
     </div>
@@ -208,51 +209,9 @@ https://www.youtube.com/results?search_query=+AJAX+File+Upload+with+Progress
     }
 
 
-
-    function cargar_doc_aspirante(e, e2, e3, e4, e5) {
+function cargar_doc_aspirante(e, e2, e3, e4, e5) {
       document.getElementById("tablaajax").innerHTML = "";
       //Asignar datos de documentación del aspirante.
-
-      var query2 = 'tipoingreso=' + e5;
-
-
-      var xhr = new XMLHttpRequest();
-      xhr.open('GET', '<?php echo base_url();?>index.php/c_documentacion/lista_documentacion?' + query2, true);
-
-      xhr.onload = function () {
-        console.log(JSON.parse(xhr.response));
-
-        var datos = JSON.parse(xhr.response);
-        var cont = 0;
-        datos.listadoc.forEach(function (valor, indice) {
-          var fila = '<tr>';
-
-          cont++;
-
-
-          fila += '<td>';
-          fila += '<div class="form-check"><label class="form-check-label"><input type="checkbox" class="form-check-input" name="documento' + cont + '" id="documento' + cont + '" value="' + valor.id_documento + '"  onclick="activarFile(this,\'file' + cont + '\')" unchecked>' + valor.nombre_documento;
-          fila += '</label></div></td>';
-
-          fila += '<td>';
-          fila += '<input type="file" name="file' + cont + '" id="file' + cont + '" onchange="validarArchivo(this,\'status' + cont + '\',\'status_error' + cont + '\',\'boton' + cont + '\')" disabled required/><br><span class="badge badge-danger">* El archivo debe estar en formato PDF, JPG y PNG.</span><progress id="progressBar' + cont + '" value="0" max="100"></progress><span id="status' + cont + '" class="status_upload"></span><span id="status_error' + cont + '" class="status_upload_error"></span> <input  id="boton' + cont + '" class="btn btn-success" type="button" value="Cargar archivo" onclick="uploadFile(\'file' + cont + '\',\'documento' + cont + '\',\'progressBar' + cont + '\',\'status' + cont + '\',\'status_error' + cont + '\',\'enlace' + cont + '\',\'enlaceview' + cont + '\',\'view' + cont + '\')" disabled>';
-          fila += '</td>';
-
-          fila += '<td>';
-          fila += '<center><a id="enlace' + cont + '" href="" ></a> </center>';
-          fila += '</td>';
-
-          fila += '<td>';
-          fila += '<center><div id="view' + cont + '"></div> </center>';
-          fila += '</td>';
-
-          fila += '</tr>';
-
-          document.getElementById("tablaajax").innerHTML += fila;
-
-
-
-        });
 
 
         var xhr2 = new XMLHttpRequest();
@@ -267,42 +226,58 @@ https://www.youtube.com/results?search_query=+AJAX+File+Upload+with+Progress
           document.getElementById("nombrecompleto").innerHTML = e2 + " " + e3 + " " + e4;
           //documentos 1.
           var cont2 = 0;
-          datos.listadoc.forEach(function (valor, indice) {
-            cont2++;
 
-            aspirante.documentacion_aspirante.forEach(function (seleccionado, indice2) {
-              if (seleccionado.Documento_id_documento == valor.id_documento) {
-
-
-
-
-                if (seleccionado.entregado == true) {
-                  document.getElementById("documento" + cont2).checked = true;
-                  document.getElementById("file" + cont2).disabled = false;
+            aspirante.documentacion_aspirante.forEach(function (valor, indice2) {
+              cont2++;
+               var fila = '<tr>';
+               estatusdoc='';
+               estatusCheck='';
+               if (valor.entregado == true) {
+                  estatusCheck='checked';
+                  
                 }
 
-                if (seleccionado.ruta != null) {
-
-
-
-                  var d = document.getElementById("enlace" + cont2);
-                  d.className = "btn btn-info";
-                  document.getElementById("enlace" + cont2).innerHTML = 'Descargar <i class="fa fa-download" aria-hidden="true"></i>';
-                  document.getElementById("enlace" + cont2).href = "<?php echo base_url();?>index.php/C_subir_doc/descargar/" + seleccionado.Aspirante_no_control + "/" + seleccionado.Documento_id_documento;
-
-                  document.getElementById("view" + cont2).innerHTML = '<a class="btn btn-info enlace1" id="enlaceview' + cont2 + '" onClick="ventanaSecundaria(\'<?php echo base_url();?>index.php/C_subir_doc/visualizar/' + seleccionado.Aspirante_no_control + '/' + seleccionado.Documento_id_documento + '\');">Visualizar <i class="fa fa-search" aria-hidden="true"></i></a>';
-
-
-
-
+                else{
+                    estatusCheck='unchecked';
+                    estatusdoc='disabled';
                 }
 
+          fila += '<td>';
+          fila += '<div class="form-check"><label class="form-check-label"><input type="checkbox" class="form-check-input" name="documento' + cont2 + '" id="documento' + cont2 + '" value="' + valor.id_documento + '"  onclick="activarFile(this,\'file' + cont2 + '\')" '+estatusCheck+'>' + valor.nombre_documento;
+          fila += '</label></div></td>';
+
+          fila += '<td>';
+          fila += '<input type="file" name="file' + cont2 + '" id="file' + cont2 + '" onchange="validarArchivo(this,\'status' + cont2 + '\',\'status_error' + cont2 + '\',\'boton' + cont2 + '\')" '+estatusdoc+' required/><br><span class="badge badge-danger">* El archivo debe estar en formato PDF, JPG y PNG.</span><progress id="progressBar' + cont2 + '" value="0" max="100"></progress><span id="status' + cont2 + '" class="status_upload"></span><span id="status_error' + cont2 + '" class="status_upload_error"></span> <input  id="boton' + cont2 + '" class="btn btn-success" type="button" value="Cargar archivo" onclick="uploadFile(\'file' + cont2 + '\',\'documento' + cont2 + '\',\'progressBar' + cont2 + '\',\'status' + cont2 + '\',\'status_error' + cont2 + '\',\'enlace' + cont2 + '\',\'enlaceview' + cont2 + '\',\'view' + cont2 + '\')" disabled>';
+          fila += '</td>';
+
+          if (valor.ruta !== null && valor.ruta.length!==0) {
+              fila += '<td>';
+              fila += '<center><a class="btn btn-info" id="enlace'+cont2 +'" href="<?php echo base_url();?>index.php/C_subir_doc/descargar/'+ valor.Aspirante_no_control +'/'+valor.Documento_id_documento+'" >Descargar <i class="fa fa-download" aria-hidden="true"></i></a> </center>';
+              fila += '</td>';
+
+              fila += '<td>';
+               fila += '<center><div id="view'+ cont2+'"><a class="btn btn-info enlace1" id="enlaceview' + cont2 + '" onClick="ventanaSecundaria(\'<?php echo base_url();?>index.php/C_subir_doc/visualizar/' + valor.Aspirante_no_control + '/' +valor.Documento_id_documento + '\');">Visualizar <i class="fa fa-search" aria-hidden="true"></i></a></div> </center>';
+              fila += '</td>';
+          }
+
+          else{
+            fila += '<td>';
+            fila += '<center><a id="enlace' + cont2 + '" href="" ></a> </center>';
+          fila += '</td>';
+
+          fila += '<td>';
+          fila += '<center><div id="view' + cont2 + '"></div> </center>';
+          fila += '</td>';
+          }
+         
 
 
-              }
+         fila += '</tr>';
+         document.getElementById("tablaajax").innerHTML += fila;
+              
             });
 
-          });
+          
 
 
 
@@ -311,25 +286,9 @@ https://www.youtube.com/results?search_query=+AJAX+File+Upload+with+Progress
         xhr2.send(null);
 
 
-      };
-
-      xhr.send(null);
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     }
-
+    
 
 
     function borrar_formato_tabla() {
@@ -443,7 +402,7 @@ https://www.youtube.com/results?search_query=+AJAX+File+Upload+with+Progress
       window.open(URL, "Visor de Documentos", "width=700,height=700,scrollbars=yes")
     }
 
-
+    
 
     function buscar() {
       document.getElementById("aspirante_plantel_busqueda").disabled = true;
@@ -483,7 +442,26 @@ https://www.youtube.com/results?search_query=+AJAX+File+Upload+with+Progress
           fila += valor.tipo_ingreso;
           fila += '</td>';
 
-          fila += '<td class="text-center"><button type="button" value="' + valor.no_control + '" onclick="cargar_doc_aspirante(this,\'' + valor.nombre + '\',\'' + valor.apellido_paterno + '\',\'' + valor.apellido_materno + '\',\'' + valor.tipo_ingreso + '\')" class="btn btn-success" data-toggle="modal" data-target="#modalsubirdocumentos">Subir documentos</button>';
+
+
+          fila += '<td>';
+          if(valor.no_entregado==0){
+            fila+='<span class="badge badge-success">Documentación por entregar completa</span><br>';
+          }
+          else{
+            fila+='<span class="badge badge-warning">Num. de Documentación por entregar: '+valor.no_entregado+'</span><br>';
+          }
+          if(valor.no_subida==0){
+            
+            fila+='<span class="badge badge-success">Documentación por subir completa</span>';
+          }
+          else{
+            fila+='<span class="badge badge-warning">Num. de Documentación por subir: '+valor.no_subida+'</span>';
+          }
+          fila += '';
+          fila += '</td>';
+
+          fila += '<td class="text-center"><button type="button" value="' + valor.no_control + '" onclick="cargar_doc_aspirante(this,\'' + valor.nombre + '\',\'' + valor.apellido_paterno + '\',\'' + valor.apellido_materno + '\',\'' + valor.tipo_ingreso + '\')" class="btn btn-success" data-toggle="modal" data-target="#modalsubirdocumentos" data-backdrop="static" data-keyboard="false">Subir documentos</button>';
           fila += '';
           fila += '</td>';
 
@@ -503,7 +481,10 @@ https://www.youtube.com/results?search_query=+AJAX+File+Upload+with+Progress
       document.getElementById('btn_buscar').classList.add('btn-dark');
     }
 
-
+function refrescar_tabla(){
+  borrar_formato_tabla();
+  buscar();
+}
 
 
 
@@ -512,6 +493,11 @@ https://www.youtube.com/results?search_query=+AJAX+File+Upload+with+Progress
 
     }
 
+
+    function borrar_formato_tabla(){
+      $("#tabla_completa").dataTable().fnDestroy();
+      
+    }
 
   </script>
 

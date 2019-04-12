@@ -12,7 +12,8 @@ class C_estado extends CI_Controller {
 
 
 
-    function obtener_estados(){
+    function get_estados(){
         echo json_encode($this->M_estado->get_estados());
     }
+
 }

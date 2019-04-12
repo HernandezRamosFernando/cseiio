@@ -29,7 +29,7 @@
                             </a>
                         </div>
                         <div class="col-md-4 col-lg-4">
-                            <a href="<?php echo base_url();?>index.php/c_aspirante/control_alumnos" 
+                            <a href="<?php echo base_url();?>index.php/c_vistas/control_alumnos" 
                             class="btn btn-primary btn-lg btn-block valign-center btn-responsive menu btn-3" > 
                             <i class="material-icons">person</i> &nbsp;Control de Alumnos
                             </a>

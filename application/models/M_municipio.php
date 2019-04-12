@@ -9,4 +9,6 @@ class M_municipio extends CI_Model {
         return $this->db->get_where('Municipio', array('Estado_id_estado' => $id_estado))->result();
    }
 
+   
+
 }

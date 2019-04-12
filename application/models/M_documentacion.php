@@ -16,7 +16,8 @@ class M_documentacion extends CI_Model {
 
 
    function get_documentacion_aspirante($no_control){
-    return $this->db->get_where('Documentacion', array('Aspirante_no_control' => $no_control))->result();
+      print_r ($no_control);
+    return $this->db->get_where('Documentacion', array('numcontrol' => $no_control))->result();
 
    }
 
@@ -103,10 +104,6 @@ class M_documentacion extends CI_Model {
   $resultado=$this->db->update('Documentacion', $data);
   return $resultado;
    }
-
-
-
-
 
    function documentos_base_faltantes_aspirante($no_control){
       return $this->db->query("SELECT id_documento,nombre_documento FROM Documentacion inner join Documento 

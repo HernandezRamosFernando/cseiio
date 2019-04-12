@@ -8,7 +8,7 @@ class C_subir_doc extends CI_Controller {
     public function __construct(){
         parent::__construct();
         $this->load->model('M_plantel');
-        $this->load->model('M_aspirante');
+        $this->load->model('M_estudiante');
         $this->load->model('M_documentacion');
         $this->folder = './ims/';
         $this->load->helper('download');
@@ -19,7 +19,7 @@ class C_subir_doc extends CI_Controller {
 
  public function subir_documentos(){
   
-        $datos['laspirante'] = $this->M_aspirante->aspirantes_sin_matricula();
+        //$datos['laspirante'] = $this->M_estudiante->aspirantes_lista();
   
 
         
@@ -37,7 +37,8 @@ class C_subir_doc extends CI_Controller {
         }
 
         else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
-            $datos['planteles'] = $this->M_plantel->get_plantel($this->session->userdata('user')['plantel']);
+           $datos['planteles'] = $this->M_plantel->get_plantel('20EBD0002B');
+           $datos['planteles'] = $this->M_plantel->get_plantel($this->session->userdata('user')['plantel']);
             $data= array('title'=>'Control de Documentos');
             $this->load->view("headers/cabecera", $data);
             $this->load->view("headers/menuarriba");

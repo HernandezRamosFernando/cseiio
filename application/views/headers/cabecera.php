@@ -29,6 +29,7 @@
             <!--<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
             
             <script src="<?php echo base_url();?>assets/vendor/jquery/jquery.min.js"></script>
+
             <title><?=$title?></title>
 
 

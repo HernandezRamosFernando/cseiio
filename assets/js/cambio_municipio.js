@@ -6,18 +6,17 @@ function cambio_municipio(selector_municipio,selector_localidad){
     var xhr = new XMLHttpRequest();
 
     
-    selector_localidad.innerHTML =  "<img src=\"/cseiio/assets/img/cargando.gif\"\" />";  //imagen de carga
+    //selector_localidad.innerHTML =  "<img src=\"/cseiio/assets/img/cargando.gif\"\" />";  //imagen de carga
 
-    xhr.open('GET', '/cseiio/index.php/c_localidad/get_localidades_municipio?id_municipio='+id_municipio, true);
+    xhr.open('GET', '/cseiio/index.php/c_localidad/get_localidades_municipio_html?id_municipio='+id_municipio, true);
 
     xhr.onreadystatechange = function() {
         console.log(id_municipio);
-        if(xhr.readyState == 4)
-       {
-        JSON.parse(xhr.response).forEach(function(valor,indice){
-            selector_localidad.innerHTML += '<option value="'+valor.id_localidad+'">'+valor.nombre_localidad.toUpperCase()+'</option>';
-        });
-    }
+        if(xhr.readyState == 4){
+            selector_localidad.innerHTML = xhr.responseText;
+        }
+
+
     };
 
     xhr.send(null);

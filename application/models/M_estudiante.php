@@ -199,5 +199,13 @@ function delete_estudiante($no_control){
             }
 }
 
+
+
+public function get_plantel_estudiante($no_control){
+   return $this->db->query("SELECT * 
+   FROM Estudiante as e inner join Plantel as p on e.Plantel_cct_plantel=p.cct_plantel 
+   where no_control='".$no_control."'")->result();
+}
+
 }
 ?>

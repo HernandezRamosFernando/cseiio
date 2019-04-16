@@ -130,18 +130,18 @@ compromiso y para ello proporciono los siguientes datos:
 
 <tbody>
 <tr>
-<td colspan="3">Nombre del Aspirante:'.$aspirante_plantel[0]->nombre.' '.$aspirante_plantel[0]->apellido_paterno.' '.$aspirante_plantel[0]->apellido_materno.'</td>
+<td colspan="3">Nombre del Aspirante:'.$estudiante_plantel[0]->nombre.' '.$estudiante_plantel[0]->primer_apellido.' '.$estudiante_plantel[0]->segundo_apellido.'</td>
 </tr>
 
 <tr>
-<td>Semestre:'.$aspirante_plantel[0]->semestre.'</td>
+<td>Semestre:'.$estudiante_plantel[0]->semestre_en_curso.'</td>
 <td colspan="2">Grupo:</td>
 </tr>
 
-<tr><td colspan="3">Nombre del Bachillerato:'.$aspirante_plantel[0]->nombre_plantel.'</td></tr>
+<tr><td colspan="3">Nombre del Bachillerato:'.$estudiante_plantel[0]->nombre_plantel.'</td></tr>
 
 <tr>
-<td>Cct:'.$aspirante_plantel[0]->cct.'</td>
+<td>Cct:'.$estudiante_plantel[0]->cct_plantel.'</td>
 <td>Fecha:'.$fecha_carta[0]->fecha.'</td>
 <td>Ciclo Escolar:</td>
 </tr>
@@ -166,6 +166,7 @@ compromiso y para ello proporciono los siguientes datos:
 
 $html_2 = "";
 $contador = 1;
+
 foreach($documentos as $documento){
 $html_2 .= '<tr>
 <td>'.$contador.'</td>

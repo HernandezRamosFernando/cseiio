@@ -468,6 +468,12 @@ class C_estudiante extends CI_Controller {
         echo $this->M_estudiante->delete_estudiante($no_control);
     }
 
+
+    public function get_plantel_estudiante(){
+        $no_control = $this->input->get('no_control');
+        echo json_encode($this->M_estudiante->get_plantel_estudiante($no_control));
+    }
+
    
 
 

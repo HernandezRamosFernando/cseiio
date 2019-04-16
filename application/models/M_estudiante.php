@@ -104,7 +104,8 @@ public function get_estudiante($no_control){
 
    $datos['tutor'] =$this->db->query("SELECT * from Estudiante_Tutor as et inner join Tutor as t on et.Tutor_id_tutor=t.id_tutor  where Estudiante_no_control='".$no_control."'")->result();
 
-   $datos['expediente_medico'] = $this->db->query("SELECT * from Expediente_medico where Estudiante_no_control='".$no_control."'");
+   $datos['expediente_medico'] = $this->db->query("SELECT * from Expediente_medico where Estudiante_no_control='".$no_control."'")->result();
+   $datos['lengua_materna'] = $this->db->query("SELECT * from Datos_lengua_materna where Estudiante_no_control='".$no_control."'")->result();
    return $datos;
 }
 function listar_aspirantes_xplantel($curp, $plantel){
@@ -117,8 +118,92 @@ function listar_aspirantes_xplantel($curp, $plantel){
 
 
 
+public function update_estudiante(
+   $datos_estudiante,
+   $datos_estudiante_tutor,
+   $parentesco_estudiante_tutor,
+   $datos_estudiante_lengua_materna,
+   $datos_estudiante_medicos,
+   $no_control,
+   $id_tutor){
+
+      
+
+            $this->db->trans_start();
+
+            //tabla estudiante
+            $this->db->where('no_control', $no_control);
+            $this->db->update('Estudiante',$datos_estudiante);
+
+            //tabla tutor
+            $this->db->where('id_tutor', $id_tutor);
+            $this->db->update('Tutor',$datos_estudiante_tutor);
+
+            //tabla estudiante-tutor
+            $this->db->where("Estudiante_no_control",$no_control);
+            $this->db->update("Estudiante_Tutor",array(
+               'parentesco' => $parentesco_estudiante_tutor
+            ));
 
 
+            
+            foreach($datos_estudiante_medicos as $dato_medico){
+               
+               $this->db->where(array(
+                  'Estudiante_no_control' =>$no_control,
+                  'descripcion' => $dato_medico['descripcion']
+               ));
+               $this->db->update('Expediente_medico',$dato_medico);
+            }
+            
+            
+            
+            foreach($datos_estudiante_lengua_materna as $dato_lengua){
+               $this->db->where(array(
+                  'Estudiante_no_control' => $no_control,
+                  'descripcion' => $dato_lengua['descripcion']
+               ));
+               $this->db->update('Datos_lengua_materna',$dato_lengua);
+            }
+
+            
+         
+            
+
+            $this->db->trans_complete();
+
+            if ($this->db->trans_status() === FALSE)
+            {
+               return "no";
+             //return "no";
+            }
+               
+            else{
+               return "si";
+               //return "si";
+            }
+
+   
+}
+
+
+function delete_estudiante($no_control){
+   $this->db->trans_start();
+   $this->db->where('no_control',$no_control);
+   $this->db->delete('Estudiante');
+   $this->db->trans_complete();
+
+            if ($this->db->trans_status() === FALSE)
+            {
+               return "no";
+             //return "no";
+            }
+               
+            else{
+               return "si";
+               //return "si";
+            }
+}
 
 }
 ?>

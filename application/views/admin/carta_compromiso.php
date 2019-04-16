@@ -41,7 +41,7 @@
                       <?php
             foreach ($planteles as $plantel)
             {
-                    echo '<option value="'.$plantel->cct.'">'.$plantel->nombre_plantel.'</option>';
+                    echo '<option value="'.$plantel->cct_plantel.'">'.$plantel->nombre_plantel.'</option>';
             }
             ?>
 
@@ -338,18 +338,19 @@
       document.getElementById("aspirante_plantel_busqueda").disabled = true;
       document.getElementById("aspirante_curp_busqueda").disabled = true;
       document.getElementById("tabla").innerHTML = "";
+
       var xhr = new XMLHttpRequest();
       var curp = document.getElementById("aspirante_curp_busqueda").value;
       var plantel = document.getElementById("aspirante_plantel_busqueda").value;
-      var query = 'curp=' + curp + '&plantel=' + plantel;
-      xhr.open('GET', '<?php echo base_url();?>index.php/c_aspirante/aspirantes_carta_compromiso?' + query, true);
+      var query = 'curp=' + curp + '&cct_plantel=' + plantel;
+      xhr.open('GET', '<?php echo base_url();?>index.php/c_documentacion/get_estudiantes_falta_documentacion_base?' + query, true);
       xhr.onload = function () {
         //console.log(JSON.parse(xhr.response));
         ////console.log(query);
         JSON.parse(xhr.response).forEach(function (valor, indice) {
           var fila = '<tr>';
           fila += '<td>';
-          fila += valor.nombre + " " + valor.apellido_paterno + " " + valor.apellido_materno;
+          fila += valor.nombre + " " + valor.primer_apellido + " " + valor.segundo_apellido;
           fila += '</td>';
           fila += '<td>';
           fila += valor.curp;
@@ -361,7 +362,7 @@
           fila += valor.semestre;
           fila += '</td>';
           fila += '<td>';
-          fila += valor.Plantel_cct;
+          fila += valor.Plantel_cct_plantel;
           fila += '</td>';
           fila += '<td>';
           fila += '<button class="btn btn-warning" type="button" value="' + valor.no_control + '" onclick="aspirante_input(this)" class="btn btn-primary" data-toggle="modal">Generar Carta Compromiso</button>';

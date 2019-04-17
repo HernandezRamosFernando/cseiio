@@ -6,7 +6,12 @@ class M_localidad extends CI_Model {
 
 
    function get_localidades_municipio($id_municipio){
-        return $this->db->get_where('Localidad', array('Municipio_id_municipio' => $id_municipio))->result();
+        //return $this->db->get_where('Localidad', array('Municipio_id_municipio' => $id_municipio))->result();
+        
+        return $this->db->query("SELECT * 
+        FROM Localidad 
+        where Municipio_id_municipio = '".$id_municipio."'
+        order by nombre_localidad ASC")->result();
    }
 
    function get_estado_municipio_localidad($id_localidad){

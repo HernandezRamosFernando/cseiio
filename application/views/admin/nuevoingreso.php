@@ -282,15 +282,11 @@
               <label for="aspirante_lugar_nacimiento">Lugar de Nacimiento</label>
             </div>
           </div>
-          <div class="col-md-3 text-center">
+          <div class="col-md-5 ">
             <div class="form-label-group">
-             <!-- <input type="date" class="form-control text-uppercase" max="2006-01-01"
-                id="aspirante_fecha_nacimiento_registro" name="aspirante_fecha_nacimiento_registro"
-                placeholder="Fecha de registro de Nacimiento">-->
-
                 <input class="form-control" placeholder="Fecha de Registro de Nacimiento: dd/mm/aaaa" type="text" name="fecha" onchange="validafecha(this);"
                 onkeyup="mascara(this,'/',patron,true)" maxlength="10" id="aspirante_fecha_nacimiento_registro" name="aspirante_fecha_nacimiento_registro">
-              <label for="aspirante_fecha_nacimiento_registro">Fecha de Registro de Nacimiento</label>
+              <label for="aspirante_fecha_nacimiento_registro">Fecha de Registro de Nacimiento dd/mm/aaaa</label>
             </div>
           </div>
 
@@ -998,6 +994,14 @@
   }
 
   function insertar_secundaria() {
+    if(document.getElementById("aspirante_nuevasecundaria_cct").value === ''||document.getElementById("aspirante_nuevasecundaria_nombre").value === ''||document.getElementById("aspirante_nuevasecundaria_tipo_subsistema").value===''){
+    Swal.fire({
+          type: 'error',
+          title: 'Bachillerato no agregado',
+          confirmButtonText: 'Cerrar'
+
+        })
+  }else{
     let secundaria = "";
     secundaria = {
       "cct_escuela_procedencia": document.getElementById("aspirante_nuevasecundaria_cct").value,
@@ -1025,6 +1029,9 @@
           })
           $('#nuevasecundaria').modal('toggle');
           obtener_secundaria(document.getElementById("aspirante_secundaria_cct").value);
+          document.getElementById("selector_estado_aspirante").value = "";
+          document.getElementById("selector_municipio_aspirante").value = "";
+          document.getElementById("selector_localidad_aspirante").value = "";
         } else {
           Swal.fire({
             type: 'error',
@@ -1038,7 +1045,7 @@
     }
     xhr.send(JSON.stringify(secundaria));
 
-
+  }
 }
 
 

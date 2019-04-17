@@ -11,21 +11,24 @@
       <div class="card-header"><strong>Iniciar Sesión</strong></div>
       <div class="card-body">
 
-        <form method="POST" action="<?php echo base_url() ?>index.php/c_usuario/login">
+      <form id="formulario">
+
           <div class="form-group">
             <div class="form-label-group">
-              <input type="text" id="inputUsuario" name="usuario" class="form-control" placeholder="Ingrese su usuario" required="required" autofocus="autofocus">
+              <input type="text" id="inputUsuario" pattern="[A-Za-z0-9]+[ ]*[A-Za-z0-9 ]*" onchange="valida(this);" 
+              name="usuario" class="form-control" placeholder="Ingrese su usuario" required="required" autofocus="autofocus">
               <label for="inputUsuario">Ingrese su Usuario</label>
             </div>
           </div>
           <div class="form-group">
             <div class="form-label-group">
-              <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required="required">
+              <input type="password" name="password" pattern="[A-Za-z0-9]+[ ]*[A-Za-z0-9 ]*" onchange="valida(this);"
+              id="inputPassword" class="form-control" placeholder="Password" required="required">
               <label for="inputPassword">Contraseña</label>
             </div>
           </div>
   
-          <button class="btn btn-success btn-block btn-lg" type="submit">Ingresar</button>
+          <button class="btn btn-success btn-block btn-lg" type="submit" id="ingresar" >Ingresar</button>
         </form>
         <hr>
 
@@ -56,4 +59,42 @@
           </div>
       </div>
   </div>
-  
+
+  <script>
+  var form = document.getElementById("formulario");
+  form.onsubmit =  function (e) {
+    e.preventDefault();
+    var formdata = new FormData(form);
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "<?php echo base_url();?>index.php/c_usuario/login", true);
+    xhr.onreadystatechange = async function () {
+      if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+        //console.log(xhr.responseText);
+        if (xhr.responseText === "") {
+          Swal.fire({
+            type: 'success',
+            title: 'Ingreso exitoso',
+            showConfirmButton: false,
+            timer: 3500
+          });
+          await sleep(600);
+          window.location.replace("<?php echo base_url();?>index.php/c_menu/principal");
+          
+        }
+
+        else {
+          Swal.fire({
+            type: 'error',
+            title: 'Usuario o Contraseña incorrecto',
+            showConfirmButton: false,
+            timer: 2500
+          });
+        }
+      }
+    }
+    xhr.send(formdata);
+    
+
+  }
+
+    </script>

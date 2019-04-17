@@ -186,7 +186,9 @@ public function update_estudiante(
    
 }
 
-
+/**$this->db->query("DELETE 
+   FROM Estudiante 
+   WHERE (no_control = '".$no_control."'") */
 function delete_estudiante($no_control){
    $this->db->trans_start();
    $this->db->where('no_control',$no_control);

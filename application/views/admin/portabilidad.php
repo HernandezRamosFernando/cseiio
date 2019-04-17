@@ -20,7 +20,7 @@
 
   <form id="formulario">
 
-    <input type="text" name="formulario" value="nuevo_ingreso" style="display:none">
+    <input type="text" name="formulario" value="portabilidad" style="display:none">
 
     <!--datos personales------------------------------------------------------>
     <p class="text-center text-white rounded titulo-form h4 ">Datos personales de Aspirante</p>
@@ -282,12 +282,12 @@
 
     <div class="form-group">
       <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-5">
           <div class="form-label-group">
             <input type="text" title="Datos incorrectos" class="form-control text-uppercase"
               id="aspirante_lugar_nacimiento" name="aspirante_lugar_nacimiento" required
                placeholder="Lugar de nacimiento">
-            <label for="aspirante_lugar_nacimiento">Lugar de Nacimiento</label>
+            <label for="aspirante_lugar_nacimiento">Lugar de Nacimiento dd/mm/aaaa</label>
           </div>
         </div>
         <div class="col-md-3 text-center">
@@ -619,7 +619,7 @@
 
 
       <!--datos secundaria------------------------------------------------------>
-      <p class="text-center text-white rounded titulo-form h4">Datos de Secundaria de procedencia</p>
+      <p class="text-center text-white rounded titulo-form h4">Datos de Bachillerato de procedencia</p>
       <hr>
 
       <div class="form-group">
@@ -629,7 +629,7 @@
             <div class="form-label-group">
 
               <input list="secundarias" class="form-control text-uppercase" id="aspirante_secundaria_cct"
-                name="aspirante_secundaria_cct" placeholder="Buscar secundaria por CCT">
+                name="aspirante_secundaria_cct" placeholder="Buscar Bachillerato por CCT">
               <datalist id="secundarias">
 
                 <?php
@@ -640,7 +640,7 @@
                             ?>
               </datalist>
 
-              <label for="aspirante_secundaria_cct">Buscar secundaria por CCT</label>
+              <label for="aspirante_secundaria_cct">Buscar Bachillerato por CCT</label>
             </div>
             <br>
           </div>
@@ -648,7 +648,7 @@
             <div class="form-label-group">
               <button type="button" class="btn btn-outline-success btn-lg"
                 onclick="obtener_secundaria(document.getElementById('aspirante_secundaria_cct').value)">
-                Buscar secundaria
+                Buscar Bachillerato
               </button>
 
 
@@ -663,8 +663,8 @@
               <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ. 0-9]+"
                 title="El nombre de la secundaria contiene caracteres incorrectos" class="form-control text-uppercase"
                 id="aspirante_secundaria_nombre" name="aspirante_secundaria_nombre"
-                placeholder="Nombre de Secundaria">
-              <label for="aspirante_secundaria_nombre">Nombre de Secundaria</label>
+                placeholder="Nombre de Bachillerato">
+              <label for="aspirante_secundaria_nombre">Nombre de Bachillerato</label>
             </div>
             <br>
           </div>
@@ -780,7 +780,7 @@ aria-hidden="true">
 <div class="modal-dialog modal-dialog-centered" style="max-width: 80% !important;" role="document">
   <div class="modal-content">
     <div class="modal-header">
-      <h5 class="modal-title">Agregar nueva secundaria</h5>
+      <h5 class="modal-title">Agregar nuevo Bachillerato</h5>
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -793,7 +793,7 @@ aria-hidden="true">
               <input type="text" pattern="[A-ZÁÉÍÓÚáéíóúa-z0-9]+[ ]*[A-ZÁÉÍÓÚáéíóúa-z0-9]*" 
                 title="El nombre de la secundaria contiene caracteres incorrectos" class="form-control text-uppercase"
                 id="aspirante_nuevasecundaria_cct" name="aspirante_nuevasecundaria_cct"
-                placeholder="CCT de Secundaria">
+                placeholder="CCT de Bachillerato">
               <label for="aspirante_nuevasecundaria_cct">C C T</label>
             </div>
             <br>
@@ -802,8 +802,8 @@ aria-hidden="true">
             <div class="form-label-group">
               <input type="text" ppattern="[A-ZÁÉÍÓÚáéíóúa-z0-9]+[ ]*[A-ZÁÉÍÓÚáéíóúa-z0-9]*" 
                 class="form-control text-uppercase" id="aspirante_nuevasecundaria_nombre"
-                name="aspirante_secundaria_nombre" placeholder="Nombre de Secundaria">
-              <label for="aspirante_nuevasecundaria_nombre">Nombre de Secundaria</label>
+                name="aspirante_secundaria_nombre" placeholder="Nombre de Bachillerato">
+              <label for="aspirante_nuevasecundaria_nombre">Nombre de Bachillerato</label>
             </div>
             <br>
           </div>
@@ -879,7 +879,7 @@ aria-hidden="true">
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="borrarmodal()">Cancelar</button>
-      <button type="button" class="btn btn-success" onclick="insertar_secundaria()">Guardar</button>
+      <button type="button" class="btn btn-success" id="insertarsecundaria" onclick="insertar_secundaria()">Guardar</button>
     </div>
   </div>
 </div>
@@ -925,7 +925,7 @@ function obtener_secundaria(e) {
 
       swalWithBootstrapButtons.fire({
         type: 'info',
-        text: 'Esta secundaria no existe porfavor agreguela:',
+        text: 'Este Bachillerato no existe porfavor agreguelo:',
         showCancelButton: true,
         confirmButtonText: 'Agregar',
         cancelButtonText: 'Cancelar',
@@ -1006,13 +1006,22 @@ function envioform(form) {
 }
 
 function insertar_secundaria() {
+  if(document.getElementById("aspirante_nuevasecundaria_cct").value === ''||document.getElementById("aspirante_nuevasecundaria_nombre").value === ''||document.getElementById("aspirante_nuevasecundaria_tipo_subsistema").value===''){
+    Swal.fire({
+          type: 'error',
+          title: 'Bachillerato no agregado',
+          confirmButtonText: 'Cerrar'
+
+        })
+  }else{
+
   let secundaria = "";
   secundaria = {
     "cct_escuela_procedencia": document.getElementById("aspirante_nuevasecundaria_cct").value,
     "nombre_escuela_procedencia": document.getElementById("aspirante_nuevasecundaria_nombre").value,
     "tipo_subsistema": document.getElementById("aspirante_nuevasecundaria_tipo_subsistema").value,
     "id_localidad_escuela_procedencia": parseInt(document.getElementById("selector_localidad_secundaria").value),
-    "tipo_escuela_procedencia": "SECUNDARIA"
+    "tipo_escuela_procedencia": "BACHILLERATO"
   };
 
   document.getElementById("secundarias").innerHTML += '<option value="' + document.getElementById("aspirante_nuevasecundaria_cct").value + '">'
@@ -1027,16 +1036,19 @@ function insertar_secundaria() {
       if (xhr.responseText === "si") {
         Swal.fire({
           type: 'success',
-          title: 'Secundaria agregada correctamente',
+          title: 'Bachillerato agregado correctamente',
           showConfirmButton: false,
           timer: 2500
         })
         $('#nuevasecundaria').modal('toggle');
         obtener_secundaria(document.getElementById("aspirante_secundaria_cct").value);
+        document.getElementById("selector_estado_aspirante").value = "";
+        document.getElementById("selector_municipio_aspirante").value = "";
+        document.getElementById("selector_localidad_aspirante").value = "";
       } else {
         Swal.fire({
           type: 'error',
-          title: 'Secundaria no agregada',
+          title: 'Bachillerato no agregado',
           confirmButtonText: 'Cerrar'
 
         })
@@ -1046,7 +1058,7 @@ function insertar_secundaria() {
   }
   xhr.send(JSON.stringify(secundaria));
 
-
+  }
 }
 
 

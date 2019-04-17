@@ -13,8 +13,6 @@
     <div class="card">
       <div class="card-body">
 
-
-
         <div class="form-group">
 
           <div class="row">
@@ -91,680 +89,12 @@
     </div>
   </div>
 
-  <!-- Modal -->
-  <div class="modal fade" id="modalaspirante" tabindex="-1" role="dialog" aria-labelledby="modalaspiranteTitle"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" style="max-width: 80% !important;" role="document">
-      <div class="modal-content">
 
-        <div class="modal-body">
-          <!-- formulario -->
-          <form id="formulario">
-
-
-
-            <!--datos personales------------------------------------------------------>
-            <p class="text-center text-white rounded titulo-form h4">
-              Datos personales de Aspirante
-              <hr>
-            </p>
-
-            <div class="form-group">
-
-              <div class="row">
-                <div class="col-md-4">
-                  <div class="form-label-group">
-                    <input type="text" pattern="[A-Za-z]+[ ]*[A-Za-z ]*" required title="Introduzca solo letras validas"
-                      class="form-control text-uppercase" id="aspirante_nombre" name="aspirante_nombre"
-                      onchange="valida(this)" placeholder="Nombre(s)">
-                    <label for="aspirante_nombre">Nombre(s)</label>
-                  </div>
-                </div>
-
-                <div class="col-md-4">
-                  <div class="form-label-group">
-                    <input type="text" pattern="[A-Za-z]+[ ]*[A-Za-z ]*" required title="Introduzca solo letras"
-                      class="form-control text-uppercase" id="aspirante_apellido_paterno"
-                      onchange="valida(this)" name="aspirante_apellido_paterno" placeholder="Apellido Paterno">
-                    <label for="aspirante_apellido_paterno">Primer Apellido</label>
-                  </div>
-                </div>
-
-                <div class="col-md-4">
-                  <div class="form-label-group">
-                    <input type="text" pattern="[A-Za-z]+[ ]*[A-Za-z ]*" title="Introduzca solo letras"
-                      class="form-control text-uppercase" id="aspirante_apellido_materno"
-                      onchange="valida(this)" name="aspirante_apellido_materno" placeholder="Apellido Materno">
-                    <label for="aspirante_apellido_materno">Segundo Apellido</label>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-
-
-
-            <div class="form-group">
-
-              <div class="row">
-
-                <div class="col-md-4 ">
-                  <div class="form-label-group ">
-                    <input class="form-control" placeholder="" type="text" required onchange="validafecha(this);"
-                      onkeyup="mascara(this,'/',patron,true)" maxlength="10" id="aspirante_fecha_nacimiento"
-                      name="aspirante_fecha_nacimiento">
-                    <label for="aspirante_fecha_nacimiento">Fecha Nacimiento: dd/mm/aaaa</label>
-
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-label-group">
-                    <input type="number" title="El numero de telefono debe de ser a 10 digitos"
-                      class="form-control text-uppercase" id="aspirante_telefono" name="aspirante_telefono"
-                      placeholder="Telefono">
-                    <label for="aspirante_telefono">Teléfono</label>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-label-group">
-                    <input type="email"
-                      pattern="^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$"
-                      title="Introduzca un correo valido" class="form-control text-lowercase" id="aspirante_correo"
-                      name="aspirante_correo" placeholder="Correo Electrónico">
-                    <label for="aspirante_correo">Correo electrónico</label>
-                  </div>
-                </div>
-
-
-              </div>
-
-            </div>
-
-
-
-            <div class="form-group">
-
-              <div class="row">
-                <div class="col-md-4">
-                  <label class="form-group has-float-label">
-                    <select class="form-control form-control-lg" id="aspirante_sexo" required name="aspirante_sexo">
-                      <option value="">Seleccione</option>
-                      <option value="H">Hombre</option>
-                      <option value="M">Mujer</option>
-                    </select>
-                    <span>Sexo</span>
-                  </label>
-                </div>
-
-                <div class="col-md-4">
-                  <div class="form-label-group">
-                    <input type="number" pattern="[0-9]{11}" title="Introduzca 11 digitos"
-                      class="form-control text-uppercase" id="aspirante_nss" name="aspirante_nss"
-                      placeholder="Numero de Seguro Social">
-                    <label for="aspirante_nss">NSS (IMSS)</label>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-label-group">
-                    <input type="text" class="form-control text-uppercase" id="aspirante_programa_social"
-                      name="aspirante_programa_social" placeholder="Folio de programa social">
-                    <label for="aspirante_programa_social">Folio de Prospera</label>
-                  </div>
-                </div>
-
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <label class="form-group has-float-label">
-                      <select class="form-control form-control-lg" name="tipo_sangre" required id="tipo_sangre">
-                        <option value="">Seleccione una opción</option>
-                        <option value="No conoce">No conoce su tipo de sangre</option>
-                        <option value="A+">A+</option>
-                        <option value="A-">A-</option>
-                        <option value="B+">B+</option>
-                        <option value="B-">B-</option>
-                        <option value="AB+">AB+</option>
-                        <option value="AB-">AB-</option>
-                        <option value="A+">O+</option>
-                        <option value="A-">O-</option>
-                      </select>
-                      <span>Tipo de sangre</span>
-                    </label>
-                  </div>
-                </div>
-
-
-                <div class="col-md-4">
-                  <label class="form-group has-float-label">
-                    <select class="form-control form-control-lg" id="aspirante_alergia_combo"
-                      name="aspirante_alergia_combo" onchange="alergia(this)">
-                      <option value="2">No</option>
-                      <option value="1">Si</option>
-                    </select>
-                    <span>¿Alérgico a algún medicamento?</span>
-                  </label>
-                </div>
-                <div class="col-md-4" style="display:none" id="a" name="alergia_medicamento">
-                  <div class="form-label-group">
-                    <input type="text" pattern="[A-Za-z]+[ ]*[A-Za-z ]*" onchange="valida(this)"
-                      class="form-control text-uppercase" id="aspirante_alergia" name="aspirante_alergia"
-                      onchange="valida(this)" placeholder="Ingrese el medicamento">
-                    <label for="aspirante_alergia">Ingrese el medicamento</label>
-                  </div>
-                </div>
-
-
-                <div class="col-md-4">
-                  <label class="form-group has-float-label">
-                    <select class="form-control form-control-lg " id="aspirante_discapacidad_combo"
-                      name="aspirante_discapacidad_combo" onchange="discapacidad(this)">
-                      <option value="2">No</option>
-                      <option value="1">Si</option>
-                    </select>
-                    <span>¿Padece alguna discapacidad?</span>
-                  </label>
-                </div>
-                <div class="col-md-4" style="display:none" id="b" name="discapacidad">
-                  <div class="form-label-group">
-                    <input type="text" pattern="[A-Za-z]+[ ]*[A-Za-z ]*" onchange="valida(this)"
-                      class="form-control text-uppercase" id="aspirante_discapacidad" name="aspirante_discapacidad"
-                      onchange="valida(this)" placeholder="Ingrese la discapacidad">
-                    <label for="aspirante_discapacidad">Ingrese la discapacidad</label>
-                  </div>
-                </div>
-
-              </div>
-
-            </div>
-
-
-            <div class="form-group">
-
-              <div class="row">
-                <div class="col-md-8">
-                  <label class="form-group has-float-label">
-                    <select class="form-control form-control-lg"="" id="aspirante_plantel" name="aspirante_plantel">
-                      <option>Seleccione el plantel de ingreso</option>
-
-                      <?php
-                                        foreach ($planteles as $plantel)
-                                        {
-                                          echo '<option value="'.$plantel->cct_plantel.'">'.$plantel->nombre_plantel.' ----- CCT: '.$plantel->cct_plantel.'</option>';
-                                        }
-                                        ?>
-
-                    </select>
-                    <span>Plantel</span>
-                  </label>
-                </div>
-
-                <div class="col-md-4">
-                  <label class="form-group has-float-label">
-                    <select class="form-control form-control-lg" required="required" id="aspirante_semestre"
-                      name="aspirante_semestre">
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="4">4</option>
-                      <option value="5">5</option>
-                      <option value="6">6</option>
-                    </select>
-                    <span>Semestre al que ingresa</span>
-                  </label>
-                </div>
-
-              </div>
-
-            </div>
-            <!--fin datos personales------------------------------------------------------>
-            <!--curp------------------------------------------------------>
-            <p class="text-center text-white rounded titulo-form h4">CURP</p>
-            <hr>
-
-            <div class="form-group">
-              <div class="row">
-
-
-                <div class="col-md-4">
-                  <div class="form-label-group">
-                    <input type="text" pattern="[A-Za-z0-9]{18}" title="Faltan datos"
-                      class="form-control text-uppercase" id="aspirante_curp" name="aspirante_curp" placeholder="CURP">
-                    <label for="aspirante_curp">CURP</label>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-label-group">
-                    <a name="" id="" class="btn btn-outline-success btn-lg btn-block btn-responsive"
-                      href="https://www.gob.mx/curp/" target="_blank" role="button">
-                      ¿No cuenta con curp? Buscar aquí</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <div class="row">
-                <div class="col-md-4">
-                  <div class="form-label-group">
-                    <input type="text" title="Datos incorrectos" class="form-control text-uppercase"
-                      id="aspirante_lugar_nacimiento" name="aspirante_lugar_nacimiento" required
-                      onchange="valida(this)" placeholder="Lugar de nacimiento">
-                    <label for="aspirante_lugar_nacimiento">Lugar de Nacimiento</label>
-                  </div>
-                </div>
-
-
-              </div>
-
-            </div>
-            <!--direccion------------------------------------------------------>
-            <p class="text-center text-white rounded titulo-form h4">
-              Dirección familiar del Aspirante
-              <hr>
-            </p>
-
-            <div class="form-group">
-
-              <div class="row">
-
-                <div class="col-md-4">
-                  <label class="form-group has-float-label">
-                    <select class="form-control form-control-lg" required" name="aspirante_direccion_estado"
-                      onChange="cambio_estado(selector_estado_aspirante,selector_municipio_aspirante,selector_localidad_aspirante)"
-                      id="selector_estado_aspirante">
-                      <option value="">Seleccione el estado</option>
-
-                      <?php
-                              foreach ($estados as $estado)
-                              {
-                                      echo '<option value="'.$estado->id_estado.'">'.$estado->nombre_estado.'</option>';
-                              }
-                              ?>
-
-
-
-                    </select>
-                    <span>Estado</span>
-                  </label>
-                </div>
-
-
-                <div class="col-md-4">
-                  <label class="form-group has-float-label">
-                    <select class="form-control form-control-lg"="" name="aspirante_direccion_municipio"
-                      onChange="cambio_municipio(selector_municipio_aspirante,selector_localidad_aspirante)"
-                      id="selector_municipio_aspirante">
-                      <option></option>
-                    </select>
-                    <span>Municipio</span>
-                  </label>
-                </div>
-                <div class="col-md-4">
-                  <label class="form-group has-float-label">
-                    <select class="form-control form-control-lg"="" name="aspirante_direccion_localidad"
-                      id="selector_localidad_aspirante">
-                      <option></option>
-                    </select>
-                    <span>Localidad</span>
-                  </label>
-                </div>
-              </div>
-            </div>
-
-
-            <div class="form-group">
-
-              <div class="row">
-                <div class="col-md-4">
-                  <div class="form-label-group">
-                    <input type="text" required="required" title="La direccion tiene caracteres incorrectos"
-                      class="form-control" id="aspirante_direccion_calle" name="aspirante_direccion_calle"
-                      placeholder="Calle y número">
-                    <label for="aspirante_direccion_calle">Calle y Número</label>
-                  </div>
-                </div>
-
-                <div class="col-md-4">
-                  <div class="form-label-group">
-                    <input type="text" title="La colonia tiene caracteres incorrectos" class="form-control"
-                      id="aspirante_direccion_colonia" name="aspirante_direccion_colonia" placeholder="Colonia">
-                    <label for="aspirante_direccion_colonia">Colonia</label>
-                  </div>
-                </div>
-
-                <div class="col-md-2">
-                  <div class="form-label-group">
-                    <input type="text" pattern="[0-9]{5}" title="El código postal solo debe contener 5 digitos"
-                      class="form-control" id="aspirante_direccion_cp" name="aspirante_direccion_cp"
-                      placeholder="Código Postal">
-                    <label for="aspirante_direccion_cp">Código Postal</label>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-
-            <!--fin direccion------------------------------------------------------>
-
-
-
-            <!--datos tutor------------------------------------------------------>
-            <p class="text-center text-white rounded titulo-form h4">
-              Datos de Tutor
-              <hr>
-            </p>
-
-            <div class="form-group">
-
-              <div class="row">
-                <div class="col-md-4">
-                  <div class="form-label-group">
-                    <input type="text" pattern="[A-Za-z]+[ ]*[A-Za-z ]*" onchange="valida(this)" required
-                      title="Introduzca solo letras" class="form-control text-uppercase" id="aspirante_tutor_nombre"
-                      onchange="valida(this)" name="aspirante_tutor_nombre" placeholder="Nombre Completo">
-                    <label for="aspirante_tutor_nombre">Nombre de Tutor</label>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-label-group">
-                    <input type="text" pattern="[A-Za-z]+[ ]*[A-Za-z ]*" onchange="valida(this)" required
-                      title="Introduzca solo letras" class="form-control text-uppercase" id="aspirante_tutor_apellido"
-                      onchange="valida(this)" name="aspirante_tutor_apellido" placeholder="Primer Apellido">
-                    <label for="aspirante_tutor_apellido">Primer Apellido</label>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-label-group">
-                    <input type="text" pattern="[A-Za-z]+[ ]?[A-Za-z]*" onchange="valida(this)"
-                      title="Introduzca solo letras" class="form-control text-uppercase"
-                      onchange="valida(this)" id="aspirante_tutor_apellidodos" name="aspirante_tutor_apellidodos" placeholder="Segundo Apellido">
-                    <label for="aspirante_tutor_apellidodos">Segundo Apellido</label>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <div class="row">
-
-                <div class="col-md-4">
-                  <label class="form-group has-float-label">
-                    <select class="form-control form-control-lg" id="aspirante_tutor_parentesco" required
-                      name="aspirante_tutor_parentesco" onchange="parentesco(this)">
-                      <option value="">Seleccione</option>
-                      <option value="PADRE">PADRE</option>
-                      <option value="MADRE">MADRE</option>
-                      <option value="HERMANO/A">HERMANO/A</option>
-                      <option value="TIO">TIO</option>
-                      <option value="TIA">TIA</option>
-                      <option value="ABUELO">ABUELO</option>
-                      <option value="ABUELA">ABUELA</option>
-                      <option value="otro">OTRO</option>
-                    </select>
-                    <span>Parentesco</span>
-
-                  </label>
-                </div>
-
-                <div class="col-md-4" id="parentescootro" style="display:none;">
-                  <div class="form-label-group">
-                    <input type="text" pattern="[A-Za-z]+[ ]*[A-Za-z ]*" onchange="valida(this)"
-                      class="form-control text-uppercase" id="aspirante_tutor_otro" name="aspirante_tutor_otro"
-                      onchange="valida(this)" placeholder="Escriba el parentesco">
-                    <label for="aspirante_tutor_otro">Escriba el parentesco</label>
-                  </div>
-                </div>
-              </div>
-
-
-              <div class="form-group">
-
-                <div class="row">
-                  <div class="col-md-3">
-                    <div class="form-label-group">
-                      <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ. ]+" title="Introduzca solo letras"
-                        class="form-control" id="aspirante_tutor_ocupacion" name="aspirante_tutor_ocupacion"
-                        onchange="valida(this)" placeholder="Ocupación">
-                      <label for="aspirante_tutor_ocupacion">Ocupación</label>
-                    </div>
-                  </div>
-
-                  <div class="col-md-3">
-                    <div class="form-label-group">
-                      <input type="text" pattern="[0-9]{10}"
-                        title="El numero de telefono debe de ser a 10 digitos con lada" class="form-control"
-                        id="aspirante_tutor_telefono" name="aspirante_tutor_telefono" placeholder="Teléfono particular">
-                      <label for="aspirante_tutor_telefono">Teléfono particular</label>
-                    </div>
-                  </div>
-                  <div class="col-md-3">
-                    <div class="form-label-group">
-                      <input type="text" pattern="[0-9]{10}"
-                        title="El numero de telefono debe de ser a 10 digitos con lada" class="form-control"
-                        id="aspirante_tutor_telefono_comunidad" name="aspirante_tutor_telefono_comunidad"
-                        placeholder="Teléfono de la comunidad">
-                      <label for="aspirante_tutor_telefono_comunidad">Teléfono de la comunidad</label>
-                    </div>
-                  </div>
-
-
-                  <div class="col-md-3">
-                    <div class="form-label-group">
-                      <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ. ]+" class="form-control"
-                        id="aspirante_tutor_prospera" name="aspirante_tutor_prospera" placeholder="Folio de Prospera">
-                      <label for="aspirante_tutor_prospera">Folio de Prospera</label>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-
-              <!--fin tutor------------------------------------------------------>
-
-
-              <!--datos lengua materna------------------------------------------------------>
-              <p class="text-center text-white rounded titulo-form h4">
-                Datos de lengua materna
-                <hr>
-              </p>
-
-              <div class="form-group">
-
-                <div class="row">
-                  <div class="col-md-2">
-                    <label class="form-group has-float-label">
-                      <select class="form-control" required="required" onchange="lenguas_evento(this)"
-                        id="aspirante_lengua_nombre" name="aspirante_lengua_nombre">
-                        <option value="NO CONOCE LENGUA">Seleccione una lengua</option>
-
-                        <?php
-                              foreach ($lenguas as $lengua)
-                              {
-                                      echo '<option value="'.$lengua->id_lengua.'">'.strtoupper($lengua->nombre_lengua).'</option>';
-                              }
-                              ?>
-
-                      </select>
-                      <span>Lengua</span>
-                    </label>
-                  </div>
-
-                  <div class="col-md-2">
-                    <label class="form-group has-float-label">
-                      <select class="form-control" required="required" id="aspirante_lengua_lee"
-                        name="aspirante_lengua_lee" disabled>
-                        <option value="0">Nada 0%</option>
-                        <option value="25">Poco 25%</option>
-                        <option value="50">Regular 50%</option>
-                        <option value="100">Bien 100%</option>
-                      </select>
-                      <span>Lee</span>
-                    </label>
-                  </div>
-
-                  <div class="col-md-2">
-                    <label class="form-group has-float-label">
-                      <select class="form-control" required="required" id="aspirante_lengua_habla"
-                        name="aspirante_lengua_habla" disabled>
-                        <option value="0">Nada 0%</option>
-                        <option value="25">Poco 25%</option>
-                        <option value="50">Regular 50%</option>
-                        <option value="100">Bien 100%</option>
-                      </select>
-                      <span>Habla</span>
-                    </label>
-                  </div>
-
-                  <div class="col-md-2">
-                    <label class="form-group has-float-label">
-                      <select class="form-control" required="required" id="aspirante_lengua_escribe"
-                        name="aspirante_lengua_escribe" disabled>
-                        <option value="0">Nada 0%</option>
-                        <option value="25">Poco 25%</option>
-                        <option value="50">Regular 50%</option>
-                        <option value="100">Bien 100%</option>
-                      </select>
-                      <span>Escribe</span>
-                    </label>
-                  </div>
-
-                  <div class="col-md-2">
-                    <label class="form-group has-float-label">
-                      <select class="form-control" required="required" id="aspirante_lengua_entiende"
-                        name="aspirante_lengua_entiende" disabled>
-                        <option value="0">Nada 0%</option>
-                        <option value="25">Poco 25%</option>
-                        <option value="50">Regular 50%</option>
-                        <option value="100">Bien 100%</option>
-                      </select>
-                      <span>Entiende</span>
-                    </label>
-                  </div>
-
-
-                  <div class="col-md-2">
-                    <label class="form-group has-float-label">
-                      <select class="form-control" required="required" id="aspirante_lengua_traduce"
-                        name="aspirante_lengua_traduce" disabled>
-                        <option value="0">Nada 0%</option>
-                        <option value="25">Poco 25%</option>
-                        <option value="50">Regular 50%</option>
-                        <option value="100">Bien 100%</option>
-                      </select>
-                      <span>Traduce</span>
-                    </label>
-                  </div>
-
-
-
-
-                </div>
-
-              </div>
-
-              <!--fin legua materna------------------------------------------------------>
-
-
-
-              <!--datos secundaria------------------------------------------------------>
-              <p class="text-center text-white rounded titulo-form h4">
-                Datos de Secundaria de procedencia
-                <hr>
-              </p>
-
-              <div class="form-group">
-
-                <div class="row">
-                  <div class="col-md-4">
-                    <div class="form-label-group">
-
-                      <input list="secundarias" class="form-control text-uppercase" id="aspirante_secundaria_cct"
-                        name="aspirante_secundaria_cct" placeholder="Buscar secundaria por CCT">
-                      <datalist id="secundarias">
-
-                        <?php
-                              foreach ($escuela_procedencia as $escuela)
-                              {
-                                      echo '<option value="'.$escuela->cct_escuela_procedencia.'">';
-                              }
-                              ?>
-                      </datalist>
-
-                      <label for="aspirante_secundaria_cct">Buscar secundaria por CCT</label>
-                    </div>
-                    <br>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="form-label-group">
-                      <button type="button" class="btn btn-outline-success btn-lg"
-                        onclick="obtener_secundaria(document.getElementById('aspirante_secundaria_cct').value)">
-                        Buscar secundaria
-                      </button>
-
-
-                    </div>
-                    <br>
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="col-md-4" style="display: none" id="nombre_secundaria_oculto">
-                    <div class="form-label-group">
-                      <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ. 0-9]+"
-                        title="El nombre de la secundaria contiene caracteres incorrectos"
-                        class="form-control text-uppercase" id="aspirante_secundaria_nombre"
-                        name="aspirante_secundaria_nombre" placeholder="Nombre de Secundaria">
-                      <label for="aspirante_secundaria_nombre">Nombre de Secundaria</label>
-                    </div>
-                    <br>
-                  </div>
-
-                  <div class="col-md-4" style="display: none" id="tipo_subsistema_oculto">
-                    <label class="form-group has-float-label">
-                      <select class="form-control form-control-lg" name="aspirante_secundaria_tipo_subsistema"
-                        id="aspirante_secundaria_tipo_subsistema">
-                        <option value="">Seleccione un tipo</option>
-                        <option value="TELESECUNDARIA">Telesecundaria</option>
-                        <option value="GENERAL">General</option>
-                        <option value="PARTICULAR">Particular</option>
-                        <option value="TÉCNICA">Técnica</option>
-                        <option value="COMUNITARIA">Comunitaria</option>
-                        <option value="OTRO">Otro</option>
-                      </select>
-                      <span>Tipo de Subsistema</span>
-                    </label>
-                  </div>
-
-                </div>
-
-              </div>
-
-              <!--fin datos secundaria------------------------------------------------------>
-              <input type="text" id="aspirante_no_control" name="aspirante_no_control" style="display:none">
-              <input type="text" id="id_tutor" name="id_tutor" style="display:none">
-
-
-
-              <br>
-              <button type="submit" class="btn btn-success btn-lg btn-block" style="padding: 1.5rem">Actualizar
-                Datos</button>
-
-
-          </form>
-
-          <!-- fin cuerpo modal -->
-
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
+</div>
+<!-- /.content-wrapper -->
 
   <!-- Modal -->
-  <div class="modal fade" id="modal_eliminar_alumno" tabindex="-1" role="dialog" aria-labelledby="modaleliminarTitle"
-    aria-hidden="true">
+  <div class="modal fade" id="modal_eliminar_alumno" tabindex="-1" role="dialog" aria-labelledby="modaleliminarTitle">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -786,36 +116,691 @@
         </div>
       </div>
     </div>
-  </div>
-
 </div>
-<!-- /.content-wrapper -->
+        
+<!-- Modal -->
+<div class="modal fade" id="modalaspirante" tabindex="-1" role="dialog" aria-labelledby="modalaspiranteTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" style="max-width: 80% !important;" role="document">
+    <div class="modal-content">
 
+      <div class="modal-body">
+        <!-- formulario -->
+        <form id="formulario">
+
+
+
+          <!--datos personales------------------------------------------------------>
+          <p class="text-center text-white rounded titulo-form h4">
+            Datos personales de Aspirante
+            <hr>
+          </p>
+
+          <div class="form-group">
+
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-label-group">
+                  <input type="text" pattern="[A-Za-z]+[ ]*[A-Za-z ]*" required title="Introduzca solo letras validas"
+                    class="form-control text-uppercase" id="aspirante_nombre" name="aspirante_nombre"
+                    onchange="valida(this)" placeholder="Nombre(s)">
+                  <label for="aspirante_nombre">Nombre(s)</label>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="form-label-group">
+                  <input type="text" pattern="[A-Za-z]+[ ]*[A-Za-z ]*" required title="Introduzca solo letras"
+                    class="form-control text-uppercase" id="aspirante_apellido_paterno" onchange="valida(this)"
+                    name="aspirante_apellido_paterno" placeholder="Apellido Paterno">
+                  <label for="aspirante_apellido_paterno">Primer Apellido</label>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="form-label-group">
+                  <input type="text" pattern="[A-Za-z]+[ ]*[A-Za-z ]*" title="Introduzca solo letras"
+                    class="form-control text-uppercase" id="aspirante_apellido_materno" onchange="valida(this)"
+                    name="aspirante_apellido_materno" placeholder="Apellido Materno">
+                  <label for="aspirante_apellido_materno">Segundo Apellido</label>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+
+
+          <div class="form-group">
+
+            <div class="row">
+
+              <div class="col-md-4 ">
+                <div class="form-label-group ">
+                  <input class="form-control" placeholder="" type="text" required onchange="validafecha(this);"
+                    onkeyup="mascara(this,'/',patron,true)" maxlength="10" id="aspirante_fecha_nacimiento"
+                    name="aspirante_fecha_nacimiento">
+                  <label for="aspirante_fecha_nacimiento">Fecha Nacimiento: dd/mm/aaaa</label>
+
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-label-group">
+                  <input type="number" title="El numero de telefono debe de ser a 10 digitos"
+                    class="form-control text-uppercase" id="aspirante_telefono" name="aspirante_telefono"
+                    placeholder="Telefono">
+                  <label for="aspirante_telefono">Teléfono</label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-label-group">
+                  <input type="email"
+                    pattern="^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$"
+                    title="Introduzca un correo valido" class="form-control text-lowercase" id="aspirante_correo"
+                    name="aspirante_correo" placeholder="Correo Electrónico">
+                  <label for="aspirante_correo">Correo electrónico</label>
+                </div>
+              </div>
+
+
+            </div>
+
+          </div>
+
+
+
+          <div class="form-group">
+
+            <div class="row">
+              <div class="col-md-4">
+                <label class="form-group has-float-label">
+                  <select class="form-control form-control-lg" id="aspirante_sexo" required name="aspirante_sexo">
+                    <option value="">Seleccione</option>
+                    <option value="H">Hombre</option>
+                    <option value="M">Mujer</option>
+                  </select>
+                  <span>Sexo</span>
+                </label>
+              </div>
+
+              <div class="col-md-4">
+                <div class="form-label-group">
+                  <input type="number" pattern="[0-9]{11}" title="Introduzca 11 digitos"
+                    class="form-control text-uppercase" id="aspirante_nss" name="aspirante_nss"
+                    placeholder="Numero de Seguro Social">
+                  <label for="aspirante_nss">NSS (IMSS)</label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-label-group">
+                  <input type="text" class="form-control text-uppercase" id="aspirante_programa_social"
+                    name="aspirante_programa_social" placeholder="Folio de programa social">
+                  <label for="aspirante_programa_social">Folio de Prospera</label>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="form-group has-float-label">
+                    <select class="form-control form-control-lg" name="tipo_sangre" required id="tipo_sangre">
+                      <option value="">Seleccione una opción</option>
+                      <option value="No conoce">No conoce su tipo de sangre</option>
+                      <option value="A+">A+</option>
+                      <option value="A-">A-</option>
+                      <option value="B+">B+</option>
+                      <option value="B-">B-</option>
+                      <option value="AB+">AB+</option>
+                      <option value="AB-">AB-</option>
+                      <option value="A+">O+</option>
+                      <option value="A-">O-</option>
+                    </select>
+                    <span>Tipo de sangre</span>
+                  </label>
+                </div>
+              </div>
+
+
+              <div class="col-md-4">
+                <label class="form-group has-float-label">
+                  <select class="form-control form-control-lg" id="aspirante_alergia_combo"
+                    name="aspirante_alergia_combo" onchange="alergia(this)">
+                    <option value="2">No</option>
+                    <option value="1">Si</option>
+                  </select>
+                  <span>¿Alérgico a algún medicamento?</span>
+                </label>
+              </div>
+              <div class="col-md-4" style="display:none" id="a" name="alergia_medicamento">
+                <div class="form-label-group">
+                  <input type="text" pattern="[A-Za-z]+[ ]*[A-Za-z ]*" onchange="valida(this)"
+                    class="form-control text-uppercase" id="aspirante_alergia" name="aspirante_alergia"
+                    onchange="valida(this)" placeholder="Ingrese el medicamento">
+                  <label for="aspirante_alergia">Ingrese el medicamento</label>
+                </div>
+              </div>
+
+
+              <div class="col-md-4">
+                <label class="form-group has-float-label">
+                  <select class="form-control form-control-lg " id="aspirante_discapacidad_combo"
+                    name="aspirante_discapacidad_combo" onchange="discapacidad(this)">
+                    <option value="2">No</option>
+                    <option value="1">Si</option>
+                  </select>
+                  <span>¿Padece alguna discapacidad?</span>
+                </label>
+              </div>
+              <div class="col-md-4" style="display:none" id="b" name="discapacidad">
+                <div class="form-label-group">
+                  <input type="text" pattern="[A-Za-z]+[ ]*[A-Za-z ]*" onchange="valida(this)"
+                    class="form-control text-uppercase" id="aspirante_discapacidad" name="aspirante_discapacidad"
+                    onchange="valida(this)" placeholder="Ingrese la discapacidad">
+                  <label for="aspirante_discapacidad">Ingrese la discapacidad</label>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="form-group">
+
+            <div class="row">
+              <div class="col-md-8">
+                <label class="form-group has-float-label">
+                  <select class="form-control form-control-lg"="" id="aspirante_plantel" name="aspirante_plantel">
+                    <option>Seleccione el plantel de ingreso</option>
+
+                    <?php
+                                        foreach ($planteles as $plantel)
+                                        {
+                                          echo '<option value="'.$plantel->cct_plantel.'">'.$plantel->nombre_plantel.' ----- CCT: '.$plantel->cct_plantel.'</option>';
+                                        }
+                                        ?>
+
+                  </select>
+                  <span>Plantel</span>
+                </label>
+              </div>
+
+              <div class="col-md-4">
+                <label class="form-group has-float-label">
+                  <select class="form-control form-control-lg" required="required" id="aspirante_semestre"
+                    name="aspirante_semestre">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                  </select>
+                  <span>Semestre al que ingresa</span>
+                </label>
+              </div>
+
+            </div>
+
+          </div>
+          <!--fin datos personales------------------------------------------------------>
+          <!--curp------------------------------------------------------>
+          <p class="text-center text-white rounded titulo-form h4">CURP</p>
+          <hr>
+
+          <div class="form-group">
+            <div class="row">
+
+
+              <div class="col-md-4">
+                <div class="form-label-group">
+                  <input type="text" pattern="[A-Za-z0-9]{18}" title="Faltan datos" class="form-control text-uppercase"
+                    id="aspirante_curp" name="aspirante_curp" placeholder="CURP">
+                  <label for="aspirante_curp">CURP</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-label-group">
+                  <a name="" id="" class="btn btn-outline-success btn-lg btn-block btn-responsive"
+                    href="https://www.gob.mx/curp/" target="_blank" role="button">
+                    ¿No cuenta con curp? Buscar aquí</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-label-group">
+                  <input type="text" title="Datos incorrectos" class="form-control text-uppercase"
+                    id="aspirante_lugar_nacimiento" name="aspirante_lugar_nacimiento" required onchange="valida(this)"
+                    placeholder="Lugar de nacimiento">
+                  <label for="aspirante_lugar_nacimiento">Lugar de Nacimiento</label>
+                </div>
+              </div>
+
+
+            </div>
+
+          </div>
+          <!--direccion------------------------------------------------------>
+          <p class="text-center text-white rounded titulo-form h4">
+            Dirección familiar del Aspirante
+            <hr>
+          </p>
+
+          <div class="form-group">
+
+            <div class="row">
+
+              <div class="col-md-4">
+                <label class="form-group has-float-label">
+                  <select class="form-control form-control-lg" required" name="aspirante_direccion_estado"
+                    onChange="cambio_estado(selector_estado_aspirante,selector_municipio_aspirante,selector_localidad_aspirante)"
+                    id="selector_estado_aspirante">
+                    <option value="">Seleccione el estado</option>
+
+                    <?php
+                              foreach ($estados as $estado)
+                              {
+                                      echo '<option value="'.$estado->id_estado.'">'.$estado->nombre_estado.'</option>';
+                              }
+                              ?>
+
+
+
+                  </select>
+                  <span>Estado</span>
+                </label>
+              </div>
+
+
+              <div class="col-md-4">
+                <label class="form-group has-float-label">
+                  <select class="form-control form-control-lg"="" name="aspirante_direccion_municipio"
+                    onChange="cambio_municipio(selector_municipio_aspirante,selector_localidad_aspirante)"
+                    id="selector_municipio_aspirante">
+                    <option></option>
+                  </select>
+                  <span>Municipio</span>
+                </label>
+              </div>
+              <div class="col-md-4">
+                <label class="form-group has-float-label">
+                  <select class="form-control form-control-lg"="" name="aspirante_direccion_localidad"
+                    id="selector_localidad_aspirante">
+                    <option></option>
+                  </select>
+                  <span>Localidad</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="form-group">
+
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-label-group">
+                  <input type="text" required="required" title="La direccion tiene caracteres incorrectos"
+                    class="form-control" id="aspirante_direccion_calle" name="aspirante_direccion_calle"
+                    placeholder="Calle y número">
+                  <label for="aspirante_direccion_calle">Calle y Número</label>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="form-label-group">
+                  <input type="text" title="La colonia tiene caracteres incorrectos" class="form-control"
+                    id="aspirante_direccion_colonia" name="aspirante_direccion_colonia" placeholder="Colonia">
+                  <label for="aspirante_direccion_colonia">Colonia</label>
+                </div>
+              </div>
+
+              <div class="col-md-2">
+                <div class="form-label-group">
+                  <input type="text" pattern="[0-9]{5}" title="El código postal solo debe contener 5 digitos"
+                    class="form-control" id="aspirante_direccion_cp" name="aspirante_direccion_cp"
+                    placeholder="Código Postal">
+                  <label for="aspirante_direccion_cp">Código Postal</label>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!--fin direccion------------------------------------------------------>
+
+
+
+          <!--datos tutor------------------------------------------------------>
+          <p class="text-center text-white rounded titulo-form h4">
+            Datos de Tutor
+            <hr>
+          </p>
+
+          <div class="form-group">
+
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-label-group">
+                  <input type="text" pattern="[A-Za-z]+[ ]*[A-Za-z ]*" onchange="valida(this)" required
+                    title="Introduzca solo letras" class="form-control text-uppercase" id="aspirante_tutor_nombre"
+                    onchange="valida(this)" name="aspirante_tutor_nombre" placeholder="Nombre Completo">
+                  <label for="aspirante_tutor_nombre">Nombre de Tutor</label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-label-group">
+                  <input type="text" pattern="[A-Za-z]+[ ]*[A-Za-z ]*" onchange="valida(this)" required
+                    title="Introduzca solo letras" class="form-control text-uppercase" id="aspirante_tutor_apellido"
+                    onchange="valida(this)" name="aspirante_tutor_apellido" placeholder="Primer Apellido">
+                  <label for="aspirante_tutor_apellido">Primer Apellido</label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-label-group">
+                  <input type="text" pattern="[A-Za-z]+[ ]?[A-Za-z]*" onchange="valida(this)"
+                    title="Introduzca solo letras" class="form-control text-uppercase" onchange="valida(this)"
+                    id="aspirante_tutor_apellidodos" name="aspirante_tutor_apellidodos" placeholder="Segundo Apellido">
+                  <label for="aspirante_tutor_apellidodos">Segundo Apellido</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+
+              <div class="col-md-4">
+                <label class="form-group has-float-label">
+                  <select class="form-control form-control-lg" id="aspirante_tutor_parentesco" required
+                    name="aspirante_tutor_parentesco" onchange="parentesco(this)">
+                    <option value="">Seleccione</option>
+                    <option value="PADRE">PADRE</option>
+                    <option value="MADRE">MADRE</option>
+                    <option value="HERMANO/A">HERMANO/A</option>
+                    <option value="TIO">TIO</option>
+                    <option value="TIA">TIA</option>
+                    <option value="ABUELO">ABUELO</option>
+                    <option value="ABUELA">ABUELA</option>
+                    <option value="otro">OTRO</option>
+                  </select>
+                  <span>Parentesco</span>
+
+                </label>
+              </div>
+
+              <div class="col-md-4" id="parentescootro" style="display:none;">
+                <div class="form-label-group">
+                  <input type="text" pattern="[A-Za-z]+[ ]*[A-Za-z ]*" onchange="valida(this)"
+                    class="form-control text-uppercase" id="aspirante_tutor_otro" name="aspirante_tutor_otro"
+                    onchange="valida(this)" placeholder="Escriba el parentesco">
+                  <label for="aspirante_tutor_otro">Escriba el parentesco</label>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="form-group">
+
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="form-label-group">
+                    <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ. ]+" title="Introduzca solo letras"
+                      class="form-control" id="aspirante_tutor_ocupacion" name="aspirante_tutor_ocupacion"
+                      onchange="valida(this)" placeholder="Ocupación">
+                    <label for="aspirante_tutor_ocupacion">Ocupación</label>
+                  </div>
+                </div>
+
+                <div class="col-md-3">
+                  <div class="form-label-group">
+                    <input type="text" pattern="[0-9]{10}"
+                      title="El numero de telefono debe de ser a 10 digitos con lada" class="form-control"
+                      id="aspirante_tutor_telefono" name="aspirante_tutor_telefono" placeholder="Teléfono particular">
+                    <label for="aspirante_tutor_telefono">Teléfono particular</label>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-label-group">
+                    <input type="text" pattern="[0-9]{10}"
+                      title="El numero de telefono debe de ser a 10 digitos con lada" class="form-control"
+                      id="aspirante_tutor_telefono_comunidad" name="aspirante_tutor_telefono_comunidad"
+                      placeholder="Teléfono de la comunidad">
+                    <label for="aspirante_tutor_telefono_comunidad">Teléfono de la comunidad</label>
+                  </div>
+                </div>
+
+
+                <div class="col-md-3">
+                  <div class="form-label-group">
+                    <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ. ]+" class="form-control"
+                      id="aspirante_tutor_prospera" name="aspirante_tutor_prospera" placeholder="Folio de Prospera">
+                    <label for="aspirante_tutor_prospera">Folio de Prospera</label>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!--fin tutor------------------------------------------------------>
+
+
+            <!--datos lengua materna------------------------------------------------------>
+            <p class="text-center text-white rounded titulo-form h4">
+              Datos de lengua materna
+              <hr>
+            </p>
+
+            <div class="form-group">
+
+              <div class="row">
+                <div class="col-md-2">
+                  <label class="form-group has-float-label">
+                    <select class="form-control" required="required" onchange="lenguas_evento(this)"
+                      id="aspirante_lengua_nombre" name="aspirante_lengua_nombre">
+                      <option value="NO CONOCE LENGUA">Seleccione una lengua</option>
+
+                      <?php
+                              foreach ($lenguas as $lengua)
+                              {
+                                      echo '<option value="'.$lengua->id_lengua.'">'.strtoupper($lengua->nombre_lengua).'</option>';
+                              }
+                              ?>
+
+                    </select>
+                    <span>Lengua</span>
+                  </label>
+                </div>
+
+                <div class="col-md-2">
+                  <label class="form-group has-float-label">
+                    <select class="form-control" required="required" id="aspirante_lengua_lee"
+                      name="aspirante_lengua_lee" disabled>
+                      <option value="0">Nada 0%</option>
+                      <option value="25">Poco 25%</option>
+                      <option value="50">Regular 50%</option>
+                      <option value="100">Bien 100%</option>
+                    </select>
+                    <span>Lee</span>
+                  </label>
+                </div>
+
+                <div class="col-md-2">
+                  <label class="form-group has-float-label">
+                    <select class="form-control" required="required" id="aspirante_lengua_habla"
+                      name="aspirante_lengua_habla" disabled>
+                      <option value="0">Nada 0%</option>
+                      <option value="25">Poco 25%</option>
+                      <option value="50">Regular 50%</option>
+                      <option value="100">Bien 100%</option>
+                    </select>
+                    <span>Habla</span>
+                  </label>
+                </div>
+
+                <div class="col-md-2">
+                  <label class="form-group has-float-label">
+                    <select class="form-control" required="required" id="aspirante_lengua_escribe"
+                      name="aspirante_lengua_escribe" disabled>
+                      <option value="0">Nada 0%</option>
+                      <option value="25">Poco 25%</option>
+                      <option value="50">Regular 50%</option>
+                      <option value="100">Bien 100%</option>
+                    </select>
+                    <span>Escribe</span>
+                  </label>
+                </div>
+
+                <div class="col-md-2">
+                  <label class="form-group has-float-label">
+                    <select class="form-control" required="required" id="aspirante_lengua_entiende"
+                      name="aspirante_lengua_entiende" disabled>
+                      <option value="0">Nada 0%</option>
+                      <option value="25">Poco 25%</option>
+                      <option value="50">Regular 50%</option>
+                      <option value="100">Bien 100%</option>
+                    </select>
+                    <span>Entiende</span>
+                  </label>
+                </div>
+
+
+                <div class="col-md-2">
+                  <label class="form-group has-float-label">
+                    <select class="form-control" required="required" id="aspirante_lengua_traduce"
+                      name="aspirante_lengua_traduce" disabled>
+                      <option value="0">Nada 0%</option>
+                      <option value="25">Poco 25%</option>
+                      <option value="50">Regular 50%</option>
+                      <option value="100">Bien 100%</option>
+                    </select>
+                    <span>Traduce</span>
+                  </label>
+                </div>
+
+
+
+
+              </div>
+
+            </div>
+
+            <!--fin legua materna------------------------------------------------------>
+
+
+
+            <!--datos secundaria------------------------------------------------------>
+            <p class="text-center text-white rounded titulo-form h4">
+              Datos de Escuela de procedencia
+              <hr>
+            </p>
+
+            <div class="form-group">
+
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-label-group">
+
+                    <input list="secundarias" class="form-control text-uppercase" id="aspirante_secundaria_cct"
+                      name="aspirante_secundaria_cct" placeholder="Buscar escuela por CCT">
+                    <datalist id="secundarias">
+
+                      <?php
+                              foreach ($escuela_procedencia as $escuela)
+                              {
+                                      echo '<option value="'.$escuela->cct_escuela_procedencia.'">';
+                              }
+                              ?>
+                    </datalist>
+
+                    <label for="aspirante_secundaria_cct">Buscar escuela por CCT</label>
+                  </div>
+                  <br>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-label-group">
+                    <button type="button" class="btn btn-outline-success btn-lg"
+                      onclick="obtener_secundaria(document.getElementById('aspirante_secundaria_cct').value)">
+                      Buscar escuela
+                    </button>
+
+
+                  </div>
+                  <br>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-4" style="display: none" id="nombre_secundaria_oculto">
+                  <div class="form-label-group">
+                    <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ. 0-9]+"
+                      title="El nombre de la secundaria contiene caracteres incorrectos"
+                      class="form-control text-uppercase" id="aspirante_secundaria_nombre"
+                      name="aspirante_secundaria_nombre" placeholder="Nombre de Secundaria">
+                    <label for="aspirante_secundaria_nombre">Nombre de Secundaria</label>
+                  </div>
+                  <br>
+                </div>
+
+                <div class="col-md-4" style="display: none" id="tipo_subsistema_oculto">
+                  <label class="form-group has-float-label">
+                    <select class="form-control form-control-lg" name="aspirante_secundaria_tipo_subsistema"
+                      id="aspirante_secundaria_tipo_subsistema">
+                      <option value="">Seleccione un tipo</option>
+                      <option value="TELESECUNDARIA">Telesecundaria</option>
+                      <option value="GENERAL">General</option>
+                      <option value="PARTICULAR">Particular</option>
+                      <option value="TÉCNICA">Técnica</option>
+                      <option value="COMUNITARIA">Comunitaria</option>
+                      <option value="OTRO">Otro</option>
+                    </select>
+                    <span>Tipo de Subsistema</span>
+                  </label>
+                </div>
+
+              </div>
+
+            </div>
+
+            <!--fin datos secundaria------------------------------------------------------>
+            <input type="text" id="aspirante_no_control" name="aspirante_no_control" style="display:none">
+            <input type="text" id="id_tutor" name="id_tutor" style="display:none">
+
+
+
+            <br>
+            <button type="submit" class="btn btn-success btn-lg btn-block" style="padding: 1.5rem">Actualizar
+              Datos</button>
+
+
+        </form>
+
+        <!-- fin cuerpo modal -->
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+                    
 <input type="text" style="display:none" id="no_control_borrar">
-
-
-
-
-
 
 
 <script>
 
-  var boton;
-  function eliminar_aspirante(e) {
-    document.getElementById("no_control_borrar").value = e.value;
-    //document.getElementById("btn-confirmacion") = e;
-    console.log(e);
-    boton = e;
-    console.log(boton);
-  }
-
 
   function confirmacion_eliminar() {
-    console.log("este aspirante ha sido borrado " + document.getElementById("no_control_borrar").value);
     var xhr = new XMLHttpRequest();
     xhr.open('GET', '<?php echo base_url();?>index.php/c_estudiante/delete_estudiante?no_control=' + document.getElementById("no_control_borrar").value, true);
+    console.log("este aspirante ha sido borrado " + document.getElementById("no_control_borrar").value);
     xhr.onload = function () {
+      console.log(xhr.responseText);
       if (xhr.responseText === "si") {
         Swal.fire({
           type: 'success',
@@ -838,35 +823,7 @@
 
   }
 
-  function formato_tabla() {
-    $('#tabla_completa').DataTable({
-      //"order": [[ 0, 'desc' ]],
-      "language": {
-        "sProcessing": "Procesando...",
-        "sLengthMenu": "Mostrar _MENU_ registros",
-        "sZeroRecords": "No se encontraron resultados",
-        "sEmptyTable": "Ningún dato disponible en esta tabla",
-        "sInfo": "Mostrando del _START_ al _END_ de un total de _TOTAL_ ",
-        "sInfoEmpty": "Mostrando del 0 al 0 de un total de 0 ",
-        "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-        "sInfoPostFix": "",
-        "sSearch": "Buscar específico:",
-        "sUrl": "",
-        "sInfoThousands": ",",
-        "sLoadingRecords": "Cargando...",
-        "oPaginate": {
-          "sFirst": "Primero",
-          "sLast": "Último",
-          "sNext": "Siguiente",
-          "sPrevious": "Anterior"
-        },
-        "oAria": {
-          "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
-          "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-        }
-      }
-    });
-  }
+  
   function cargar_datos_aspirante(e) {
     document.getElementById("selector_municipio_aspirante").innerHTML = "";
     document.getElementById("selector_localidad_aspirante").innerHTML = "";
@@ -1040,13 +997,13 @@
         fila += valor.fecha_registro;
         fila += '</td>';
         fila += '<td>';
-        fila += '<button class="btn btn-lg btn-block btn-success" type="button" value="' + valor.no_control + '" onclick="cargar_datos_aspirante(this)" class="btn btn-primary" data-toggle="modal" data-target="#modalaspirante">Editar</button>';
+        fila += '<button class="btn btn-lg btn-block btn-success" type="button" value="' + valor.no_control + '" onclick="cargar_datos_aspirante(this)" data-toggle="modal" data-target="#modalaspirante">Editar</button>';
         fila += '</td>';
         fila += '<td>';
         fila += '<a href="<?php echo base_url();?>index.php/C_aspirante/generar_formato_inscripcion?no_control=' + valor.no_control + '" class="btn btn-lg btn-block btn-info btn btn-primary" target="_blank">Imprimir</a>';
         fila += '</td>';
         fila += '<td class="">';
-        fila += '<button class="btn btn-lg btn-danger" type="button" value="' + valor.no_control + '" onclick="eliminar_aspirante(this)" class="btn btn-primary" data-toggle="modal" data-target="#modal_eliminar_alumno">Eliminar</button>';
+        fila += '<button class="btn btn-lg btn-block btn-danger" type="button" value="' + valor.no_control + '" onclick="eliminar_aspirante(this)" data-toggle="modal" data-target="#modal_eliminar_alumno">Eliminar</button>';
         fila += '</td>';
         fila += '</tr>';
         document.getElementById("tabla").innerHTML += fila;

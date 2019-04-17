@@ -33,14 +33,14 @@ class C_usuario extends CI_Controller {
 
  
 		$usuario = $_POST['usuario'];
-        $password = $_POST['password'];
+    $password = $_POST['password'];
  
         
 		$datos = $this->M_usuario->login($usuario, $password);
  
 		if($datos){
 			$this->session->set_userdata('user',$datos);
-			redirect(base_url().'index.php/c_menu/principal');
+			//redirect(base_url().'index.php/c_menu/principal');
 		}
 		else{
 			header('location:'.base_url().'index.php/c_usuario');

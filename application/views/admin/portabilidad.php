@@ -731,7 +731,25 @@
           Fotos
         </label>
       </div>
-      <br>
+
+      <div class="form-check">
+          <label class="form-check-label">
+            <input type="checkbox" class="form-check-input" name="aspirante_documento_certificado_parcial"
+              id="aspirante_documento_certificado_parcial" value="5" unchecked>
+            Certificado Parcial de Estudios
+          </label>
+        </div>
+
+
+        <div class="form-check">
+          <label class="form-check-label">
+            <input type="checkbox" class="form-check-input" name="aspirante_documento_resolucion"
+              id="aspirante_documento_resolucion" value="6" unchecked>
+            Resolucion de Equivalencia
+          </label>
+        </div>
+        <br>
+
 
       <!-- fin documentos solicitados------------------------------------------------------>
 
@@ -756,6 +774,8 @@
           Certificado Médico
         </label>
       </div>
+
+      
 
 
       <!-- fin documentos extras------------------------------------------------------>

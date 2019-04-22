@@ -138,6 +138,8 @@
 
     </form>
 
+
+    <input type="text" style="display:none" id="id_grupo">
     <a name="" id="" class="btn btn-primary"  onclick="buscar();" role="button">Cargar datos</a>
 
 <div class="row">
@@ -295,7 +297,7 @@
     xhr.onreadystatechange = function () {
       if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
         console.log(xhr.responseText);
-        if (xhr.responseText.trim() === "si") {
+        if (xhr.responseText.trim() !== "no") {
           Swal.fire({
             type: 'success',
             title: 'Grupo creado Exitosamente',
@@ -303,9 +305,10 @@
             timer: 2500
           });
 
-          document.getElementById("formulario").reset();
-          document.getElementById("selector_municipio_aspirante").value = "";
-          document.getElementById("selector_localidad_aspirante").value = "";
+          //document.getElementById("formulario").reset();
+          //document.getElementById("selector_municipio_aspirante").value = "";
+          //document.getElementById("selector_localidad_aspirante").value = "";
+          document.getElementById("id_grupo").value = xhr.responseText;
         }
 
         else {

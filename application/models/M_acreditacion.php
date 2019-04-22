@@ -17,15 +17,16 @@ class M_acreditacion extends CI_Model {
     
     $this->db->trans_start();
     $this->db->insert('Grupo',$datos);
+    $id = $this->db->insert_id();
     $this->db->trans_complete();
 
         if ($this->db->trans_status() === FALSE)
         {
-                return "algo salio mal";
+                return "no";
         }
 
         else{
-            return "si";
+            return $id;
         }
         
    }
@@ -34,6 +35,6 @@ class M_acreditacion extends CI_Model {
 
 
    public function get_estudiantes_plantel_semestre($plantel,$semestre){
-       return $this->db->query("select * from Estudiante where Plantel_cct_plantel='".$plantel."' and semestre=".$semestre)->result(); 
+       return $this->db->query("select * from Estudiante where semestre=".$semestre." and Plantel_cct_plantel='".$plantel."' and no_control not in (select distinct Estudiante_no_control from Grupo_Estudiante)")->result(); 
    }
 }

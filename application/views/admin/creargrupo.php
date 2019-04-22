@@ -11,14 +11,13 @@
     </ol>
 
 
-    <form id="formulario">
+    <form class="card" id="formulario">
       <div class="form-group">
 
         <div class="row">
           <div class="col-md-8">
             <label class="form-group has-float-label">
-              <select class="form-control form-control-lg" required="required" id="aspirante_plantel"
-                name="aspirante_plantel">
+              <select class="form-control form-control-lg"="" id="plantel" name="plantel">
                 <option value="">Seleccione el plantel donde creara el grupo</option>
 
                 <?php
@@ -68,8 +67,7 @@
 
           <div class="col-md-4" style="display: none" id="seleccione_especialidad_oculto">
             <label class="form-group has-float-label">
-              <select class="form-control form-control-lg" required name="seleccione_especialidad"
-                id="seleccione_especialidad">
+              <select class="form-control form-control-lg" name="seleccione_especialidad" id="seleccione_especialidad">
                 <option value="">Seleccione una especialidad</option>
               </select>
               <span>Especialidad</span>
@@ -82,9 +80,8 @@
       <div class="row">
         <div class="col-md-4">
           <label class="form-group has-float-label">
-            <select class="form-control form-control-lg" required="required" id="grupo_ciclo_escolar"
-              name="grupo_ciclo_escolar">
-              <option>Seleccione el ciclo del grupo <i class="fa fa-graduation-cap" aria-hidden="true"></i></option>
+            <select class="form-control form-control-lg"="" id="grupo_ciclo_escolar" name="grupo_ciclo_escolar">
+              <option>Seleccione el ciclo del grupo </option>
 
               <?php
                                         foreach ($ciclo_escolar as $ciclo)
@@ -97,56 +94,56 @@
             <span>Ciclo escolar</span>
           </label>
         </div>
+       </div>
 
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-label-group">
+                <input type="text" required="required" pattern="[A-Za-z]+[ ]*[A-Za-z ]*" title="Introduzca solo letras"
+                  class="form-control text-uppercase" id="grupo_nombre" onchange="valida(this);" name="grupo_nombre"
+                  placeholder="Nombre de grupo">
+                <label for="grupo_nombre">Ingrese el nombre del grupo</label>
+              </div>
+            </div>
 
+            <div class="col-md-3">
+            </div>
 
-      </div>
+            <div class="col-md-4" style="display: none" id="cantidad_alumnos_oculto">
+              <label id="cantidad_alumnos">Cantidad de alumnos:</label>
 
-      <div class="form-group">
-        <div class="row">
-          <div class="col-md-4">
-            <div class="form-label-group">
-              <input type="text" required="required" pattern="[A-Za-z]+[ ]*[A-Za-z ]*" title="Introduzca solo letras"
-                class="form-control text-uppercase" id="grupo_nombre" onchange="valida(this);" name="grupo_nombre"
-                placeholder="Nombre de grupo">
-              <label for="grupo_nombre">Ingrese el nombre del grupo</label>
             </div>
           </div>
+        </div>
 
-          <div class="col-md-3">
-          </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-label-group">
+                <input type="text"="" pattern="[A-Za-z]+[-]*[A-Za-z ]*" title="Introduzca solo letras"
+                  class="form-control text-uppercase" id="grupo_periodo" name="grupo_periodo"
+                  placeholder="Periodo del grupo(s)">
+                <label for="grupo_periodo">Perido del grupo</label>
+              </div>
+            </div>
 
-          <div class="col-md-4" style="display: none" id="cantidad_alumnos_oculto">
-            <label id="cantidad_alumnos">Cantidad de alumnos:</label>
+            <div class="col-md-4 offset-md-3">
+              <button type="submit" class="btn btn-success btn-lg btn-block" style="padding: 1rem">Crear
+                grupo</button>
+            </div>
           </div>
         </div>
 
 
-      </div>
-
-      <div class="form-group">
-        <div class="row">
-          <div class="col-md-4">
-            <div class="form-label-group">
-              <input type="text" required="required" pattern="[A-Za-z]+[-]*[A-Za-z ]*" title="Introduzca solo letras"
-                class="form-control text-uppercase" id="grupo_periodo" name="grupo_periodo"
-                placeholder="Periodo del grupo(s)">
-              <label for="grupo_periodo">Perido del grupo</label>
-            </div>
-          </div>
-
-          <div class="col-md-4 offset-md-3">
-            <button type="submit" class="btn btn-success btn-lg btn-block" style="padding: 1rem">Crear grupo</button>
-          </div>
-        </div>
-      </div>
     </form>
 
-    <div class="row">
-    <!--<div style="width: 350px; height: 70px; padding: 10px; border: 1px solid #aaaaaa;" id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-<br>-->
-<div class="col-6">
-<table class="table table-hover" id="tabla_completa" style="width: 100%">
+    <a name="" id="" class="btn btn-primary"  onclick="buscar();" role="button">Cargar datos</a>
+
+<div class="row">
+    <div class="card col-6" >
+      <div class="card-body">
+        <table class="table table-hover" id="tabla_completa" style="width: 95%">
           <caption>Lista de todos los alumnos de este semestre sin grupo</caption>
           <thead class="thead-light">
             <tr>
@@ -161,9 +158,11 @@
           </tbody>
         </table>
 
-                                      </div>
-                                      <div class="col-6">
-                                      <table class="table table-hover" id="tabla_completa_grupo" style="width: 100%">
+      </div>
+     </div>
+      <div class="card col-6">
+      <div class="card-body">
+        <table class="table table-hover" id="tabla_completa_grupo" style="width: 95%">
           <caption>Lista del Grupo creado</caption>
           <thead class="thead-light">
             <tr>
@@ -177,23 +176,45 @@
 
           </tbody>
         </table>
+      </div>
+    </div>
                                       </div>
-                                      </div>
-                                      
- 
   </div>
-</div>
-<!-- /.content-wrapper -->
+  <!-- /.content-wrapper -->
 </div>
 <!-- /#wrapper -->
 
 
+
 <script>
 
-function buscar() {
+  function cambiardetabla(e) {
+    var tr=$(e).parents("tr").appendTo("#tabla_completa_grupo tbody");
+    e.className = "";
+    e.className = "btn btn-lg btn-block btn-danger";
+    e.innerText="";
+    e.innerText="Eliminar";
+    e.setAttribute("onClick", "regresartabla(this);");
+  }
+
+  function regresartabla(e){
+    var tr=$(e).parents("tr").appendTo("#tabla_completa tbody");
+    e.className = "";
+    e.className = "btn btn-lg btn-block btn-success";
+    e.innerText="";
+    e.innerText="Agregar";
+    e.setAttribute("onClick", "cambiardetabla(this);");
+  }
+
+
+
+  function buscar() {
     document.getElementById("tabla").innerHTML = "";
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', '<?php echo base_url();?>index.php/c_estudiante/get_estudiantes_curp_plantel?' + query, true);
+    var semestre = document.getElementById("semestre_grupo").value;
+    var plantel = document.getElementById("plantel").value;
+    var query = 'semestre=' + semestre + '&plantel=' + plantel;
+    xhr.open('GET', '<?php echo base_url();?>index.php/c_acreditacion/get_estudiantes_plantel_semestre?' + query, true);
     xhr.onload = function () {
       JSON.parse(xhr.response).forEach(function (valor, indice) {
         //console.log(valor);
@@ -205,16 +226,16 @@ function buscar() {
         fila += valor.no_control;
         fila += '</td>';
         fila += '<td class="">';
-        fila += '<button class="btn btn-lg btn-block btn-succes" type="button" value="' + valor.no_control + '" onclick="">Agregar</button>';
+        fila += '<button class="btn btn-lg btn-block btn-success" type="button" value="' + valor.no_control + '" id="botoncambio" onclick="cambiardetabla(this);">Agregar</button>';
         fila += '</td>';
         fila += '</tr>';
         document.getElementById("tabla").innerHTML += fila;
       });
-      formato_tabla();
+      //formato_tabla();
     };
     xhr.send(null);
   }
-  
+
   function especialidad(e) {
     if (document.getElementById("semestre_grupo").value === "5" || document.getElementById("semestre_grupo").value === "6") {
       document.getElementById("grupo_especialidad_oculto").style.display = "";
@@ -227,7 +248,7 @@ function buscar() {
   }
 
   function numero_alumnos(e) {
-    if (document.getElementById("aspirante_plantel").value === "") {
+    if (document.getElementById("plantel").value === "") {
       Swal.fire({
         type: 'info',
         title: 'Debe seleccionar un plantel',
@@ -239,7 +260,7 @@ function buscar() {
     else {
       especialidad(e);
       var xhr = new XMLHttpRequest();
-      xhr.open('GET', '<?php echo base_url();?>index.php/c_acreditacion/numero_estudiantes_semestre_plantel?semestre=' + e.value + '&cct=' + document.getElementById("aspirante_plantel").value, true);
+      xhr.open('GET', '<?php echo base_url();?>index.php/c_acreditacion/numero_estudiantes_semestre_plantel?semestre=' + e.value + '&cct=' + document.getElementById("plantel").value, true);
 
       xhr.onload = function () {
         document.getElementById("cantidad_alumnos_oculto").style.display = "";
@@ -273,11 +294,11 @@ function buscar() {
     xhr.open("POST", "<?php echo base_url();?>index.php/c_acreditacion/agregar_grupo", true);
     xhr.onreadystatechange = function () {
       if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-        //console.log();
+        console.log(xhr.responseText);
         if (xhr.responseText.trim() === "si") {
           Swal.fire({
             type: 'success',
-            title: 'Registro exitoso',
+            title: 'Grupo creado Exitosamente',
             showConfirmButton: false,
             timer: 2500
           });
@@ -296,11 +317,18 @@ function buscar() {
           });
         }
       }
-    }
-    xhr.send(formdata);
 
   }
+  xhr.send(formdata);
+
+		
+	}
 
 </script>
+
+
+
+
+
 
 </html>

@@ -181,6 +181,7 @@
         </table>
       </div>
     </div>
+    <button type="button" name="" id="" class="btn btn-primary btn-lg btn-block"> Guardar Alumnos</button>
                                       </div>
   </div>
   <!-- /.content-wrapper -->
@@ -307,8 +308,12 @@
           });
 
           //document.getElementById("formulario").reset();
-          //document.getElementById("selector_municipio_aspirante").value = "";
-          //document.getElementById("selector_localidad_aspirante").value = "";
+          
+          document.getElementById("grupo_nombre").disabled = true;
+          document.getElementById("grupo_periodo").disabled = true;
+          document.getElementById("semestre_grupo").disabled = true;
+          document.getElementById("plantel").disabled = true;
+          document.getElementById("grupo_ciclo_escolar").disabled = true;
           document.getElementById("id_grupo").value = xhr.responseText;
         }
 

@@ -140,6 +140,7 @@
 
     <a name="" id="" class="btn btn-primary"  onclick="buscar();" role="button">Cargar datos</a>
 
+
 <div class="row">
     <div class="card col-6" >
       <div class="card-body">

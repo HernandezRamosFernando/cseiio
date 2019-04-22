@@ -268,6 +268,7 @@ function validafecha(e){
     })
     e.value='';
   }
+}
 
   function borrarmodal() {
     $('#aspirante_nuevasecundaria_cct').val('');
@@ -287,9 +288,7 @@ function validafecha(e){
 
   }
 
- 
 
-}
 
 function limpiar() {
   $('#aspirante_curp_busqueda').val('');

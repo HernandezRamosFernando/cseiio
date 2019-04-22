@@ -60,7 +60,6 @@ public function portabilidad(){
         //$datos['localidades'] = $this->M_localidad->get_localidades_municipio(1);
         $datos['lenguas'] = $this->M_lengua->get_lenguas();
         $datos['ciclo_escolar'] = $this->M_ciclo_escolar->get_ciclo_escolar();
-        
         $datos['escuela_procedencia'] = $this->M_escuela_procedencia->get_escuelas();
 
        
@@ -93,9 +92,6 @@ public function portabilidad(){
     
     public function asignar_matricula(){
        
-        
-        
-        
 
         if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
             $data= array('title'=>'Asignación de Matrícula');
@@ -139,8 +135,6 @@ public function portabilidad(){
         }
     }
     
-
-
     public function control_alumnos(){
         $datos['estados'] = $this->M_estado->get_estados();
         //$datos['municipios'] = $this->M_municipio->get_municipios_estado(1);
@@ -173,5 +167,36 @@ public function portabilidad(){
             redirect(base_url().'index.php/c_usuario');
         }
     }
+
+    public function acreditacion(){
+        $data= array('title'=>'Acreditación');
+        $this->load->view("headers/cabecera", $data);
+        $this->load->view("headers/menuarriba");
+        $this->load->view("headers/menuizquierda");
+        $this->load->view("admin/acreditacion");
+        $this->load->view("footers/footer");
+    }
+
+    public function crear_grupo(){
+        $datos['planteles'] = $this->M_plantel->get_planteles();
+        $datos['ciclo_escolar'] = $this->M_ciclo_escolar->get_ciclo_escolar();
+        
+        $data= array('title'=>'Creación de grupos');
+        $this->load->view("headers/cabecera", $data);
+        $this->load->view("headers/menuarriba");
+        $this->load->view("headers/menuizquierda");
+        $this->load->view("admin/creargrupo", $datos);
+        $this->load->view("footers/footer");
+    }
+    public function asesor_grupo(){
+        $datos['planteles'] = $this->M_plantel->get_planteles();
+    
+        $data= array('title'=>'Asignación de Asesor');
+        $this->load->view("headers/cabecera", $data);
+        $this->load->view("headers/menuarriba");
+        $this->load->view("headers/menuizquierda");
+        $this->load->view("admin/asesor_grupo", $datos);
+        $this->load->view("footers/footer");
+    }    
     //-------------------------------------------------termina vistas
 }

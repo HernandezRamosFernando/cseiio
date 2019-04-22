@@ -6,7 +6,7 @@ class M_acreditacion extends CI_Model {
 
 
    function numero_estudiantes_semestre_plantel($datos){
-       return $this->db->query("select count(*) as total_estudiante from Aspirante where semestre_en_curso=".$datos['semestre']." and Plantel_cct='".$datos['cct']."'")->result();
+       return $this->db->query("select count(*) as total_estudiante from Estudiante where semestre_en_curso=".$datos['semestre']." and Plantel_cct_plantel='".$datos['cct']."'")->result();
    }
 
    

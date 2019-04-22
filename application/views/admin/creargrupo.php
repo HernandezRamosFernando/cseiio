@@ -24,7 +24,7 @@
                     <?php
                                         foreach ($planteles as $plantel)
                                         {
-                                          echo '<option value="'.$plantel->cct.'">'.$plantel->nombre_plantel.' ----- CCT: '.$plantel->cct.'</option>';
+                                          echo '<option value="'.$plantel->cct_plantel.'">'.$plantel->nombre_plantel.' ----- CCT: '.$plantel->cct_plantel.'</option>';
                                         }
                                         ?>
 
@@ -104,8 +104,9 @@
           <div class="row">
             <div class="col-md-4">
               <div class="form-label-group">
-                <input type="text" required="required" title="Introduzca solo letras" class="form-control"
-                  id="grupo_nombre" name="grupo_nombre" placeholder="Nombre de grupo">
+                <input type="text" required="required" pattern="[A-Za-z]+[ ]*[A-Za-z ]*" title="Introduzca solo letras" 
+                  class="form-control text-uppercase"
+                  id="grupo_nombre" onchange="valida(this);" name="grupo_nombre" placeholder="Nombre de grupo">
                 <label for="grupo_nombre">Ingrese el nombre del grupo</label>
               </div>
             </div>
@@ -125,8 +126,9 @@
           <div class="row">
             <div class="col-md-4">
               <div class="form-label-group">
-                <input type="text" required="required" title="Introduzca solo letras" class="form-control"
-                  id="grupo_periodo" name="grupo_periodo" placeholder="Periodo del grupo(s)">
+                <input type="text" required="required" pattern="[A-Za-z]+[-]*[A-Za-z ]*" title="Introduzca solo letras" 
+                  class="form-control text-uppercase"
+                  id="grupo_periodo"  name="grupo_periodo" placeholder="Periodo del grupo(s)">
                 <label for="grupo_periodo">Perido del grupo</label>
               </div>
             </div>

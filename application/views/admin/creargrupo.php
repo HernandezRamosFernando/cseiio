@@ -94,95 +94,96 @@
             <span>Ciclo escolar</span>
           </label>
         </div>
-       </div>
+      </div>
 
-        <div class="form-group">
-          <div class="row">
-            <div class="col-md-4">
-              <div class="form-label-group">
-                <input type="text" required="required" pattern="[A-Za-z]+[ ]*[A-Za-z ]*" title="Introduzca solo letras"
-                  class="form-control text-uppercase" id="grupo_nombre" onchange="valida(this);" name="grupo_nombre"
-                  placeholder="Nombre de grupo">
-                <label for="grupo_nombre">Ingrese el nombre del grupo</label>
-              </div>
-            </div>
-
-            <div class="col-md-3">
-            </div>
-
-            <div class="col-md-4" style="display: none" id="cantidad_alumnos_oculto">
-              <label id="cantidad_alumnos">Cantidad de alumnos:</label>
-
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-label-group">
+              <input type="text" required="required" pattern="[A-Za-z]+[ ]*[A-Za-z ]*" title="Introduzca solo letras"
+                class="form-control text-uppercase" id="grupo_nombre" onchange="valida(this);" name="grupo_nombre"
+                placeholder="Nombre de grupo">
+              <label for="grupo_nombre">Ingrese el nombre del grupo</label>
             </div>
           </div>
-        </div>
 
-        <div class="form-group">
-          <div class="row">
-            <div class="col-md-4">
-              <div class="form-label-group">
-                <input type="text"="" pattern="[A-Za-z]+[-]*[A-Za-z ]*" title="Introduzca solo letras"
-                  class="form-control text-uppercase" id="grupo_periodo" name="grupo_periodo"
-                  placeholder="Periodo del grupo(s)">
-                <label for="grupo_periodo">Perido del grupo</label>
-              </div>
-            </div>
+          <div class="col-md-3">
+          </div>
 
-            <div class="col-md-4 offset-md-3">
-              <button type="submit" class="btn btn-success btn-lg btn-block" style="padding: 1rem">Crear
-                grupo</button>
-            </div>
+          <div class="col-md-4" style="display: none" id="cantidad_alumnos_oculto">
+            <label id="cantidad_alumnos">Cantidad de alumnos:</label>
+
           </div>
         </div>
+      </div>
+
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-label-group">
+              <input type="text"="" pattern="[A-Za-z]+[-]*[A-Za-z ]*" title="Introduzca solo letras"
+                class="form-control text-uppercase" id="grupo_periodo" name="grupo_periodo"
+                placeholder="Periodo del grupo(s)">
+              <label for="grupo_periodo">Perido del grupo</label>
+            </div>
+          </div>
+
+          <div class="col-md-4 offset-md-3">
+            <button type="submit" class="btn btn-success btn-lg btn-block" style="padding: 1rem">Crear
+              grupo</button>
+          </div>
+        </div>
+      </div>
 
 
-    </form>
+    
 
 
     <input type="text" style="display:none" id="id_grupo">
-    <a name="" id="" class="btn btn-primary"  onclick="buscar();" role="button">Cargar datos</a>
+    <a name="" id="" class="btn btn-primary" onclick="buscar();" role="button">Cargar datos</a>
 
 
-<div class="row">
-    <div class="card col-6" >
-      <div class="card-body">
-        <table class="table table-hover" id="tabla_completa" style="width: 95%">
-          <caption>Lista de todos los alumnos de este semestre sin grupo</caption>
-          <thead class="thead-light">
-            <tr>
-              <th scope="col" class="col-md-1">Nombre completo</th>
-              <th scope="col" class="col-md-1">N° control</th>
-              <th scope="col" class="col-md-1">Agregar</th>
-            </tr>
-          </thead>
+    <div class="row">
+      <div class=" col-md-6">
+        <div class="card card-body">
+          <table class="table table-hover" id="tabla_completa" style="width: 100%">
+            <caption>Lista de todos los alumnos de este semestre sin grupo</caption>
+            <thead class="thead-light">
+              <tr>
+                <th scope="col" class="col-md-1">Nombre completo</th>
+                <th scope="col" class="col-md-1">N° control</th>
+                <th scope="col" class="col-md-1">Agregar</th>
+              </tr>
+            </thead>
+            <tbody id="tabla">
+            </tbody>
+          </table>
 
-          <tbody id="tabla">
-
-          </tbody>
-        </table>
-
+        </div>
       </div>
-     </div>
-      <div class="card col-6">
-      <div class="card-body">
-        <table class="table table-hover" id="tabla_completa_grupo" style="width: 95%">
-          <caption>Lista del Grupo creado</caption>
-          <thead class="thead-light">
-            <tr>
-              <th scope="col" class="col-md-1">Nombre completo</th>
-              <th scope="col" class="col-md-1">N° control</th>
-              <th scope="col" class="col-md-1">Eliminar</th>
-            </tr>
-          </thead>
 
-          <tbody id="tablagrupo">
+      <div class="col-md-6">
+        <div class="card card-body">
+          <table class="table table-hover" id="tabla_completa_grupo" style="width: 100%">
+            <caption>Lista del Grupo creado</caption>
+            <thead class="thead-light">
+              <tr>
+                <th scope="col" class="col-md-1">Nombre completo</th>
+                <th scope="col" class="col-md-1">N° control</th>
+                <th scope="col" class="col-md-1">Eliminar</th>
+              </tr>
+            </thead>
 
-          </tbody>
-        </table>
+            <tbody id="tablagrupo">
+
+            </tbody>
+          </table>
+        </div>
       </div>
+      <button type="button" name="" id="" class="btn btn-primary btn-lg btn-block"> Guardar Alumnos</button>
+
+      </form>
     </div>
-    <button type="button" name="" id="" class="btn btn-primary btn-lg btn-block"> Guardar Alumnos</button>
-                                      </div>
   </div>
   <!-- /.content-wrapper -->
 </div>
@@ -193,20 +194,20 @@
 <script>
 
   function cambiardetabla(e) {
-    var tr=$(e).parents("tr").appendTo("#tabla_completa_grupo tbody");
+    var tr = $(e).parents("tr").appendTo("#tabla_completa_grupo tbody");
     e.className = "";
     e.className = "btn btn-lg btn-block btn-danger";
-    e.innerText="";
-    e.innerText="Eliminar";
+    e.innerText = "";
+    e.innerText = "Eliminar";
     e.setAttribute("onClick", "regresartabla(this);");
   }
 
-  function regresartabla(e){
-    var tr=$(e).parents("tr").appendTo("#tabla_completa tbody");
+  function regresartabla(e) {
+    var tr = $(e).parents("tr").appendTo("#tabla_completa tbody");
     e.className = "";
     e.className = "btn btn-lg btn-block btn-success";
-    e.innerText="";
-    e.innerText="Agregar";
+    e.innerText = "";
+    e.innerText = "Agregar";
     e.setAttribute("onClick", "cambiardetabla(this);");
   }
 
@@ -308,7 +309,7 @@
           });
 
           //document.getElementById("formulario").reset();
-          
+
           document.getElementById("grupo_nombre").disabled = true;
           document.getElementById("grupo_periodo").disabled = true;
           document.getElementById("semestre_grupo").disabled = true;
@@ -327,11 +328,11 @@
         }
       }
 
-  }
-  xhr.send(formdata);
+    }
+    xhr.send(formdata);
 
-		
-	}
+
+  }
 
 </script>
 

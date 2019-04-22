@@ -29,4 +29,11 @@ class M_acreditacion extends CI_Model {
         }
         
    }
+
+
+
+
+   public function get_estudiantes_plantel_semestre($plantel,$semestre){
+       return $this->db->query("select * from Estudiante where Plantel_cct_plantel='".$plantel."' and semestre=".$semestre)->result(); 
+   }
 }

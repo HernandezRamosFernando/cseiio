@@ -1,3 +1,36 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+<style>
+.tables_ui {
+  display:inline-block;
+  margin:2px 2%;
+  border:2px solid #3333fe;
+  border-spacing:0;
+}
+.tables_ui ul li {
+  min-width: 200px;
+}
+.dragging li.ui-state-hover {
+  min-width: 240px;
+}
+.dragging .ui-state-hover a {
+  color:green !important;
+  font-weight: bold;
+}
+.tables_ui th,td {
+  text-align: right;
+  padding: 2px 4px;
+  border: 1px solid;
+}
+.t_sortable tr, .ui-sortable-helper {
+  cursor: move;
+}
+.t_sortable tr:first-child {
+  cursor: default;
+}
+.ui-sortable-placeholder {
+  background: yellow;
+}
+</style>
   <div id="content-wrapper">
 
       <div class="container-fluid ">
@@ -17,8 +50,8 @@
             <div class="row">
               <div class="col-md-8">
                 <label class="form-group has-float-label">
-                  <select class="form-control form-control-lg" required="required" id="aspirante_plantel"
-                    name="aspirante_plantel">
+                  <select class="form-control form-control-lg" ="" id="plantel"
+                    name="plantel">
                     <option value="">Seleccione el plantel donde creara el grupo</option>
 
                     <?php
@@ -67,7 +100,7 @@
 
             <div class="col-md-4" style="display: none" id="seleccione_especialidad_oculto">
               <label class="form-group has-float-label">
-                <select class="form-control form-control-lg" required  name="seleccione_especialidad" id="seleccione_especialidad">
+                <select class="form-control form-control-lg"   name="seleccione_especialidad" id="seleccione_especialidad">
                 <option value="">Seleccione una especialidad</option>
                 </select>
                 <span>Especialidad</span>
@@ -80,7 +113,7 @@
           <div class="row">
           <div class="col-md-4">
                 <label class="form-group has-float-label">
-                  <select class="form-control form-control-lg" required="required" id="grupo_ciclo_escolar"
+                  <select class="form-control form-control-lg" ="" id="grupo_ciclo_escolar"
                     name="grupo_ciclo_escolar">
                     <option>Seleccione el ciclo del grupo <i class="fa fa-graduation-cap" aria-hidden="true"></i></option>
 
@@ -104,7 +137,7 @@
           <div class="row">
             <div class="col-md-4">
               <div class="form-label-group">
-                <input type="text" required="required" pattern="[A-Za-z]+[ ]*[A-Za-z ]*" title="Introduzca solo letras" 
+                <input type="text" ="" pattern="[A-Za-z]+[ ]*[A-Za-z ]*" title="Introduzca solo letras" 
                   class="form-control text-uppercase"
                   id="grupo_nombre" onchange="valida(this);" name="grupo_nombre" placeholder="Nombre de grupo">
                 <label for="grupo_nombre">Ingrese el nombre del grupo</label>
@@ -126,7 +159,7 @@
           <div class="row">
             <div class="col-md-4">
               <div class="form-label-group">
-                <input type="text" required="required" pattern="[A-Za-z]+[-]*[A-Za-z ]*" title="Introduzca solo letras" 
+                <input type="text" ="" pattern="[A-Za-z]+[-]*[A-Za-z ]*" title="Introduzca solo letras" 
                   class="form-control text-uppercase"
                   id="grupo_periodo"  name="grupo_periodo" placeholder="Periodo del grupo(s)">
                 <label for="grupo_periodo">Perido del grupo</label>
@@ -141,6 +174,10 @@
       </form>
 
 
+<!-- tabla  -->
+
+
+<!-- tabla  -->
 
 
 
@@ -149,6 +186,8 @@
     <!-- /.content-wrapper -->
   </div>
   <!-- /#wrapper -->
+
+
 
  
   <script>
@@ -164,7 +203,7 @@
   }
 
 function numero_alumnos(e){
-if(document.getElementById("aspirante_plantel").value===""){
+if(document.getElementById("plantel").value===""){
   Swal.fire({
             type: 'info',
             title: 'Debe seleccionar un plantel',
@@ -176,7 +215,7 @@ if(document.getElementById("aspirante_plantel").value===""){
 else{
   especialidad(e);
           var xhr = new XMLHttpRequest();
-        xhr.open('GET', '<?php echo base_url();?>index.php/c_acreditacion/numero_estudiantes_semestre_plantel?semestre='+e.value+'&cct='+document.getElementById("aspirante_plantel").value, true);
+        xhr.open('GET', '<?php echo base_url();?>index.php/c_acreditacion/numero_estudiantes_semestre_plantel?semestre='+e.value+'&cct='+document.getElementById("plantel").value, true);
 
         xhr.onload = function () {
         document.getElementById("cantidad_alumnos_oculto").style.display = "";
@@ -210,11 +249,11 @@ var form = document.getElementById("formulario");
 		xhr.open("POST","<?php echo base_url();?>index.php/c_acreditacion/agregar_grupo",true);
     xhr.onreadystatechange = function() { 
     if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-      //console.log();
+      console.log(xhr.responseText);
       if(xhr.responseText.trim()==="si"){
         Swal.fire({
             type: 'success',
-            title: 'Registro exitoso',
+            title: 'Grupo creado Exitosamente',
             showConfirmButton: false,
             timer: 2500 
           });
@@ -235,8 +274,15 @@ var form = document.getElementById("formulario");
     }
 }
 		xhr.send(formdata);
+
 		
 	}
 
 </script>
+
+
+
+
+
+
 </html>

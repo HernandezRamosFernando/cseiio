@@ -58,14 +58,21 @@ public function numero_estudiantes_semestre_plantel(){
 
 public function agregar_grupo(){
     $datos = array(
-        'Plantel_cct' => $this->input->post('aspirante_plantel'),
+        'plantel' => $this->input->post('plantel'),
         'semestre' => $this->input->post('semestre_grupo'),
-        'Ciclo_escolar_id_ciclo_escolar' => $this->input->post('grupo_ciclo_escolar'),
-        'nombre' => $this->input->post('grupo_nombre'),
-        'periodo' => $this->input->post('grupo_periodo')
+        'nombre_grupo' => $this->input->post('grupo_nombre')
     );
 
     echo $this->M_acreditacion->agregar_grupo($datos);
+}
+
+
+
+public function get_estudiantes_plantel_semestre(){
+    $plantel = $this->input->get('plantel');
+    $semestre = $this->input->get('semestre');
+
+    echo json_encode($this->M_acreditacion->get_estudiantes_plantel_semestre($plantel,$semestre));
 }
 
 }

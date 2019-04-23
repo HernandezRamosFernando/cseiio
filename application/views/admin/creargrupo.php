@@ -128,9 +128,16 @@
             </div>
           </div>
 
+<<<<<<< HEAD
+            <div class="col-md-4 offset-md-3">
+              <button type="button" class="btn btn-success btn-lg btn-block" onclick="alerta_grupo()" style="padding: 1rem">Crear
+                grupo</button>
+            </div>
+=======
           <div class="col-md-4 offset-md-3">
             <button type="submit" class="btn btn-success btn-lg btn-block" style="padding: 1rem">Crear
               grupo</button>
+>>>>>>> e4abc789730ee655b8df278581d6e578234d181b
           </div>
         </div>
       </div>
@@ -140,6 +147,27 @@
 
 
     <input type="text" style="display:none" id="id_grupo">
+<<<<<<< HEAD
+
+
+<div class="row">
+    <div class="card col-6" >
+      <div class="card-body">
+        <table class="table table-hover" id="tabla_completa" style="width: 95%">
+          <caption>Lista de todos los alumnos de este semestre sin grupo</caption>
+          <thead class="thead-light">
+            <tr>
+              <th scope="col" class="col-md-1">Nombre completo</th>
+              <th scope="col" class="col-md-1">N° control</th>
+              <th scope="col" class="col-md-1">Agregar</th>
+            </tr>
+          </thead>
+
+          <tbody id="tabla">
+
+          </tbody>
+        </table>
+=======
     <a name="" id="" class="btn btn-primary" onclick="buscar();" role="button">Cargar datos</a>
 
 
@@ -158,6 +186,7 @@
             <tbody id="tabla">
             </tbody>
           </table>
+>>>>>>> e4abc789730ee655b8df278581d6e578234d181b
 
         </div>
       </div>
@@ -184,6 +213,11 @@
 
       </form>
     </div>
+<<<<<<< HEAD
+    <button type="button" onclick="enviar_formulario()" class="btn btn-primary btn-lg btn-block"> Guardar Alumnos</button>
+                                      </div>
+=======
+>>>>>>> e4abc789730ee655b8df278581d6e578234d181b
   </div>
   <!-- /.content-wrapper -->
 </div>
@@ -286,11 +320,66 @@
 
 
   }
+
+
+  function alerta_grupo(){
+    Swal.fire({
+            type: 'success',
+            title: 'Agregue alumnos al grupo',
+            showConfirmButton: false,
+            timer: 500
+          });
+
+          buscar();
+
+  }
 </script>
 
 
 <script>
 
+  function enviar_formulario(){
+    var datos_grupo = {
+      plantel:document.getElementById("plantel").value,
+      semestre:parseInt(document.getElementById("semestre_grupo").value),
+      nombre_grupo:document.getElementById("grupo_nombre").value,
+      ciclo_escolar:document.getElementById("grupo_ciclo_escolar").value
+    };
+
+    var alumnos = document.getElementById("tabla_completa_grupo").children[2].children;
+    var alumnos_json = new Array();
+    for(let i=0;i<alumnos.length;i++){
+      alumnos_json.push(alumnos[i].children[1].innerText);
+    }
+
+    var datos = {
+      grupo:datos_grupo,
+      alumnos:alumnos_json
+    }
+
+    //console.log(datos);
+
+
+
+    var xhr = new XMLHttpRequest();
+      xhr.open("POST", '/cseiio/c_acreditacion/agregar_grupo', true);
+
+      //Send the proper header information along with the request
+      xhr.setRequestHeader("Content-Type", "application/json");
+
+      xhr.onreadystatechange = function() { // Call a function when the state changes.
+          if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+
+            //aqui esta la respuesta de crear el grupo
+              console.log(xhr.response);
+          }
+      }
+      xhr.send(JSON.stringify(datos));
+
+
+
+  }
+/*
   var form = document.getElementById("formulario");
   form.onsubmit = function (e) {
     e.preventDefault();
@@ -332,8 +421,14 @@
     xhr.send(formdata);
 
 
+<<<<<<< HEAD
+		
+	}
+*/
+=======
   }
 
+>>>>>>> e4abc789730ee655b8df278581d6e578234d181b
 </script>
 
 

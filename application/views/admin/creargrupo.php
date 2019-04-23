@@ -129,7 +129,7 @@
           </div>
 
             <div class="col-md-4 offset-md-3">
-              <button type="button" class="btn btn-success btn-lg btn-block" onclick="alerta_grupo()" style="padding: 1rem">Crear
+              <button type="button" class="btn btn-success btn-lg btn-block" onclick="alerta_grupo()" style="padding: 1rem" id="crear_grupo">Crear
                 grupo</button>
             </div>
           </div>
@@ -216,6 +216,12 @@
 
   function buscar() {
     document.getElementById("tabla").innerHTML = "";
+    document.getElementById("grupo_nombre").disabled = true;
+    document.getElementById("grupo_periodo").disabled = true;
+    document.getElementById("semestre_grupo").disabled = true;
+    document.getElementById("plantel").disabled = true;
+    document.getElementById("grupo_ciclo_escolar").disabled = true;
+    
     var xhr = new XMLHttpRequest();
     var semestre = document.getElementById("semestre_grupo").value;
     var plantel = document.getElementById("plantel").value;
@@ -240,6 +246,9 @@
       //formato_tabla();
     };
     xhr.send(null);
+    document.getElementById('crear_grupo').classList.remove('btn-success');
+    document.getElementById('crear_grupo').classList.add('btn-dark');
+    document.getElementById('crear_grupo').disabled = true;
   }
 
   function especialidad(e) {
@@ -329,7 +338,7 @@
 
 
     var xhr = new XMLHttpRequest();
-      xhr.open("POST", '/cseiio/c_acreditacion/agregar_grupo', true);
+      xhr.open("POST", '<?php echo base_url();?>index.php/c_acreditacion/agregar_grupo', true);
 
       //Send the proper header information along with the request
       xhr.setRequestHeader("Content-Type", "application/json");

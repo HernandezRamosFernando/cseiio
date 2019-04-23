@@ -9,7 +9,7 @@
       <a>Inscripción Portabilidad</a>
     </li>
     <li class="breadcrumb-item active">Rellene todos los campos</li>
-    <div class=" col-md-4 text-right"> Ciclo escolar:
+    <div class=" col-md-4 text-right " style="font-weight:bold"> Ciclo escolar:
       <?php
          echo ($ciclo_escolar[0]->nombre_ciclo_escolar);
         ?>
@@ -282,23 +282,19 @@
 
     <div class="form-group">
       <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-4">
           <div class="form-label-group">
             <input type="text" title="Datos incorrectos" class="form-control text-uppercase"
               id="aspirante_lugar_nacimiento" name="aspirante_lugar_nacimiento" required
                placeholder="Lugar de nacimiento">
-            <label for="aspirante_lugar_nacimiento">Lugar de Nacimiento dd/mm/aaaa</label>
+            <label for="aspirante_lugar_nacimiento">Lugar de Nacimiento </label>
           </div>
         </div>
-        <div class="col-md-3 text-center">
+        <div class="col-md-5">
           <div class="form-label-group">
-           <!-- <input type="date" class="form-control text-uppercase" max="2006-01-01"
-              id="aspirante_fecha_nacimiento_registro" name="aspirante_fecha_nacimiento_registro"
-              placeholder="Fecha de registro de Nacimiento">-->
-
-              <input class="form-control" placeholder="Fecha de Registro de Nacimiento: dd/mm/aaaa" type="text" name="fecha" onchange="validafecha(this);"
+              <input class="form-control" placeholder="Fecha de Registro de Nacimiento: dd/mm/aaaa" type="text" name="fecha" onchange="validafecharegistro(this);"
               onkeyup="mascara(this,'/',patron,true)" maxlength="10" id="aspirante_fecha_nacimiento_registro" name="aspirante_fecha_nacimiento_registro">
-            <label for="aspirante_fecha_nacimiento_registro">Fecha de Registro de Nacimiento</label>
+            <label for="aspirante_fecha_nacimiento_registro">Fecha de Registro de Nacimiento dd/mm/aaaa</label>
           </div>
         </div>
 
@@ -706,6 +702,14 @@
         </label>
       </div>
 
+      <div class="form-check" id="aspirante_documento_carta_extemporaneo_oculto" style="display:none">
+          <label class="form-check-label">
+            <input type="checkbox" class="form-check-input" name="aspirante_documento_carta_extemporaneo"
+              id="aspirante_documento_carta_extemporaneo" value="7" unchecked>
+            Carta de registro extemporaneo
+          </label>
+      </div>
+
       <div class="form-check">
         <label class="form-check-label">
           <input type="checkbox" class="form-check-input" name="aspirante_documento_curp"
@@ -1080,8 +1084,6 @@ function insertar_secundaria() {
 
   }
 }
-
-
 
 
 </script>

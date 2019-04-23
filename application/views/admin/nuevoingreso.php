@@ -8,7 +8,7 @@
         <a>Inscripción Nuevo Ingreso</a>
       </li>
       <li class="breadcrumb-item active">Rellene todos los campos</li>
-      <div class=" col-md-4 text-right"> Ciclo escolar:
+      <div class=" col-md-4 text-right" style="font-weight:bold"> Ciclo escolar:
         <?php
            echo ($ciclo_escolar[0]->nombre_ciclo_escolar);
           ?>
@@ -284,7 +284,7 @@
           </div>
           <div class="col-md-5 ">
             <div class="form-label-group">
-                <input class="form-control" placeholder="Fecha de Registro de Nacimiento: dd/mm/aaaa" type="text" name="fecha" onchange="validafecha(this);validaracta();"
+                <input class="form-control" placeholder="Fecha de Registro de Nacimiento: dd/mm/aaaa" type="text" name="fecha" onchange="validafecharegistro(this);validaracta();"
                 onkeyup="mascara(this,'/',patron,true)" maxlength="10" id="aspirante_fecha_nacimiento_registro" name="aspirante_fecha_nacimiento_registro">
               <label for="aspirante_fecha_nacimiento_registro">Fecha de Registro de Nacimiento dd/mm/aaaa</label>
             </div>
@@ -694,6 +694,14 @@
           </label>
         </div>
 
+        <div class="form-check" id="aspirante_documento_carta_extemporaneo_oculto" style="display:none">
+          <label class="form-check-label">
+            <input type="checkbox" class="form-check-input" name="aspirante_documento_carta_extemporaneo"
+              id="aspirante_documento_carta_extemporaneo" value="7" unchecked>
+            Carta de registro extemporaneo
+          </label>
+        </div>
+
         <div class="form-check">
           <label class="form-check-label">
             <input type="checkbox" class="form-check-input" name="aspirante_documento_curp"
@@ -1048,25 +1056,7 @@
   }
 }
 
-function validaracta(){
-  var fechaInicio = reverseFecha(document.getElementById("aspirante_fecha_nacimiento").value);
-  fechaInicio=new Date(fechaInicio).getTime();
-var fechaFin = reverseFecha(document.getElementById("aspirante_fecha_nacimiento_registro").value);
-fechaFin = new Date(fechaFin).getTime();
 
-console.log(fechaInicio);
-console.log(fechaFin);
-
-var diff = fechaFin - fechaInicio;
-var resultado = diff/(1000*60*60*24);
-if(resultado >= 2192){
-console.log("Necesita acta de registro extemporaneo");
-}else{
-  console.log("No Necesita acta de registro extemporaneo");
-}
-
-console.log(diff/(1000*60*60*24) );
-}
 
 
 

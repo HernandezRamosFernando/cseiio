@@ -270,6 +270,21 @@ function validafecha(e){
   }
 }
 
+function validafecharegistro(e){
+  fecha= e.value.split('/');
+  if(fecha[0] <= "31" && fecha[1] <= "12" && fecha[2] <= "2019"){
+  }else{
+    Swal.fire({
+      type: 'error',
+      title: 'La fecha ingresada es incorrecta',
+      confirmButtonText: 'Cerrar'
+
+    })
+    e.value='';
+  }
+}
+
+
   function borrarmodal() {
     $('#aspirante_nuevasecundaria_cct').val('');
     $('#aspirante_nuevasecundaria_nombre').val('');
@@ -351,4 +366,24 @@ function reverseFecha(str) {
   //Step 4. Return the reversed string
   return joinArray; // "olleh"
 }
+function validaracta(){
+  var fechaInicio = reverseFecha(document.getElementById("aspirante_fecha_nacimiento").value);
+  fechaInicio=new Date(fechaInicio).getTime();
+var fechaFin = reverseFecha(document.getElementById("aspirante_fecha_nacimiento_registro").value);
+fechaFin = new Date(fechaFin).getTime();
 
+console.log(fechaInicio);
+console.log(fechaFin);
+
+var diff = fechaFin - fechaInicio;
+var resultado = diff/(1000*60*60*24);
+if(resultado > 2193){
+console.log("Necesita acta de registro extemporaneo");
+document.getElementById("aspirante_documento_carta_extemporaneo_oculto").style = "display:";
+}else{
+  console.log("No Necesita acta de registro extemporaneo");
+  document.getElementById("aspirante_documento_carta_extemporaneo_oculto").style = "display: none";
+}
+
+console.log(diff/(1000*60*60*24) );
+}

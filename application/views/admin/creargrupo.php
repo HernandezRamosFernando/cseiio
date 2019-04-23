@@ -80,7 +80,7 @@
       <div class="row">
         <div class="col-md-4">
           <label class="form-group has-float-label">
-            <select class="form-control form-control-lg"="" id="grupo_ciclo_escolar" name="grupo_ciclo_escolar">
+            <select class="form-control form-control-lg" id="grupo_ciclo_escolar" name="grupo_ciclo_escolar">
               <option>Seleccione el ciclo del grupo </option>
 
               <?php
@@ -129,18 +129,12 @@
           </div>
 
             <div class="col-md-4 offset-md-3">
-              <button type="button" class="btn btn-success btn-lg btn-block" onclick="alerta_grupo()" style="padding: 1rem" id="crear_grupo">Crear
-                grupo</button>
+              <button type="button" class="btn btn-success btn-lg btn-block" onclick="alerta_grupo()" style="padding: 1rem" id="crear_grupo">Crear grupo</button>
             </div>
           </div>
         </div>
       </div>
 
-
-    
-
-
-    <input type="text" style="display:none" id="id_grupo">
     <a name="" id="" class="btn btn-primary" onclick="buscar();" role="button">Cargar datos</a>
 
 
@@ -185,7 +179,7 @@
     </div>
     <br>
     <button type="button" onclick="enviar_formulario()" class="btn btn-primary btn-lg btn-block"> Guardar Alumnos</button>
-                                      </div>
+    </div>
   </div>
   <!-- /.content-wrapper -->
 </div>
@@ -251,6 +245,34 @@
     document.getElementById('crear_grupo').classList.add('btn-dark');
     document.getElementById('crear_grupo').disabled = true;
   }
+  function buscar_estudiantes_grupo(idgrupo) {
+    document.getElementById("tablagrupo").innerHTML = "";
+    
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '<?php echo base_url();?>index.php/c_grupo/get_estudiantes_grupo?id_grupo=' + idgrupo, true);
+    xhr.onload = function () {
+      JSON.parse(xhr.response).forEach(function (valor, indice) {
+        //console.log(valor);
+        var fila = '<tr>';
+        fila += '<td>';
+        fila += valor.nombre + " " + valor.primer_apellido + " " + valor.segundo_apellido;
+        fila += '</td>';
+        fila += '<td>';
+        fila += valor.no_control;
+        fila += '</td>';
+        fila += '<td class="">';
+        fila += '<button class="btn btn-lg btn-block btn-danger" type="button" value="' + valor.no_control + '" id="botoncambio" disabled="true">Eliminar</button>';
+        fila += '</td>';
+        fila += '</tr>';
+        document.getElementById("tablagrupo").innerHTML += fila;
+      });
+      //formato_tabla();
+    };
+    xhr.send(null);
+    document.getElementById('crear_grupo').classList.remove('btn-success');
+    document.getElementById('crear_grupo').classList.add('btn-dark');
+    document.getElementById('crear_grupo').disabled = true;
+  }
 
   function especialidad(e) {
     if (document.getElementById("semestre_grupo").value === "5" || document.getElementById("semestre_grupo").value === "6") {
@@ -300,14 +322,50 @@
 
 
   function alerta_grupo(){
-    Swal.fire({
+
+if(document.getElementById("plantel").value != '' && document.getElementById("semestre_grupo").value != '' && document.getElementById("grupo_ciclo_escolar").value != '' && document.getElementById("grupo_nombre").value != ""){
+    var id_grupo = document.getElementById("plantel").value+document.getElementById("semestre_grupo").value+document.getElementById("grupo_ciclo_escolar").value+document.getElementById("grupo_nombre").value.toUpperCase();
+    var xhr = new XMLHttpRequest();
+      xhr.open('GET', '<?php echo base_url();?>index.php/c_grupo/get_existe_grupo?id_grupo='+id_grupo, true);
+      xhr.onload = function () {
+        console.log(JSON.parse(xhr.response)[0]);
+        if(JSON.parse(xhr.response).length===0){
+          swalWithBootstrapButtons.fire({
             type: 'info',
             title: 'Agregue estudiantes al grupo creado'
           });
-
           buscar();
-
+         
+        }
+        else if(35-JSON.parse(xhr.response)[0].total_alumnos>0){
+          swalWithBootstrapButtons.fire({
+            type: 'warning',
+            title: 'El grupo ya existe y tiene '+(35-JSON.parse(xhr.response)[0].total_alumnos)+" lugares libres",
+            confirmButtonText:'Agregar estudiantes al grupo',
+            showCancelButton: true,
+            cancelButtonText: 'Cerrar'
+          }).then(function(result){
+              if(result.value){
+                  buscar();
+                  buscar_estudiantes_grupo(id_grupo);
+              }
+          });
+        }
+        else{
+          Swal.fire({
+            type: 'warning',
+            title: 'El grupo ya existe y se encuentra lleno'
+          });
+        }
+      };
+      xhr.send(null);
+  }else{
+    Swal.fire({
+            type: 'warning',
+            title: 'Agregue los datos faltantes'
+          });
   }
+}
 
   function enviar_formulario(){
     var datos_grupo = {

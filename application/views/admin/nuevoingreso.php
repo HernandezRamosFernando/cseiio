@@ -284,7 +284,7 @@
           </div>
           <div class="col-md-5 ">
             <div class="form-label-group">
-                <input class="form-control" placeholder="Fecha de Registro de Nacimiento: dd/mm/aaaa" type="text" name="fecha" onchange="validafecha(this);"
+                <input class="form-control" placeholder="Fecha de Registro de Nacimiento: dd/mm/aaaa" type="text" name="fecha" onchange="validafecha(this);validaracta();"
                 onkeyup="mascara(this,'/',patron,true)" maxlength="10" id="aspirante_fecha_nacimiento_registro" name="aspirante_fecha_nacimiento_registro">
               <label for="aspirante_fecha_nacimiento_registro">Fecha de Registro de Nacimiento dd/mm/aaaa</label>
             </div>
@@ -1047,6 +1047,28 @@
 
   }
 }
+
+function validaracta(){
+  var fechaInicio = reverseFecha(document.getElementById("aspirante_fecha_nacimiento").value);
+  fechaInicio=new Date(fechaInicio).getTime();
+var fechaFin = reverseFecha(document.getElementById("aspirante_fecha_nacimiento_registro").value);
+fechaFin = new Date(fechaFin).getTime();
+
+console.log(fechaInicio);
+console.log(fechaFin);
+
+var diff = fechaFin - fechaInicio;
+var resultado = diff/(1000*60*60*24);
+if(resultado >= 2192){
+console.log("Necesita acta de registro extemporaneo");
+}else{
+  console.log("No Necesita acta de registro extemporaneo");
+}
+
+console.log(diff/(1000*60*60*24) );
+}
+
+
 
 
 

@@ -16,15 +16,16 @@ class M_acreditacion extends CI_Model {
 
    function agregar_grupo($datos){
        //return $datos->grupo->plantel;
+    $id = $datos->grupo->plantel.$datos->grupo->semestre.$datos->grupo->ciclo_escolar.mb_strtoupper($datos->grupo->nombre_grupo);
     
     $this->db->trans_start();
     $this->db->insert('Grupo',array(
+        'id_grupo'=>$id,
         'semestre'=>$datos->grupo->semestre,
         'nombre_grupo'=>mb_strtoupper($datos->grupo->nombre_grupo),
         'plantel'=>$datos->grupo->plantel
     ));
     
-    $id = $this->db->insert_id();
     $materias = $this->M_materia->get_materias_semestre($datos->grupo->semestre);
 
     

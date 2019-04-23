@@ -514,13 +514,8 @@ public function buscar_aspirantesxplantel(){
     $plantel = $this->input->get('plantel');
     $curp = $this->input->get('curp');
      echo json_encode($this->M_estudiante->listar_aspirantes_xplantel($curp, $plantel));
- }
- 
-
-    
-  
 }
-
+ 
 
 public function estudiantes_sin_matricula(){
     $curp = $this->input->get('curp');
@@ -530,7 +525,6 @@ public function estudiantes_sin_matricula(){
         $plantel
         ));
 }
-
 public function generar_matricula($no_control){
     $matricula='';
     
@@ -564,4 +558,12 @@ public function insertar_estudiante(){
     );
     echo $this->M_estudiante->insertar_estudiante($datos);
 }
+
+}
+
+
+
+
+
+
 ?>

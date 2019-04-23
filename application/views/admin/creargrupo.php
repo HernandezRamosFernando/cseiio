@@ -128,16 +128,10 @@
             </div>
           </div>
 
-<<<<<<< HEAD
             <div class="col-md-4 offset-md-3">
               <button type="button" class="btn btn-success btn-lg btn-block" onclick="alerta_grupo()" style="padding: 1rem">Crear
                 grupo</button>
             </div>
-=======
-          <div class="col-md-4 offset-md-3">
-            <button type="submit" class="btn btn-success btn-lg btn-block" style="padding: 1rem">Crear
-              grupo</button>
->>>>>>> e4abc789730ee655b8df278581d6e578234d181b
           </div>
         </div>
       </div>
@@ -147,27 +141,6 @@
 
 
     <input type="text" style="display:none" id="id_grupo">
-<<<<<<< HEAD
-
-
-<div class="row">
-    <div class="card col-6" >
-      <div class="card-body">
-        <table class="table table-hover" id="tabla_completa" style="width: 95%">
-          <caption>Lista de todos los alumnos de este semestre sin grupo</caption>
-          <thead class="thead-light">
-            <tr>
-              <th scope="col" class="col-md-1">Nombre completo</th>
-              <th scope="col" class="col-md-1">N° control</th>
-              <th scope="col" class="col-md-1">Agregar</th>
-            </tr>
-          </thead>
-
-          <tbody id="tabla">
-
-          </tbody>
-        </table>
-=======
     <a name="" id="" class="btn btn-primary" onclick="buscar();" role="button">Cargar datos</a>
 
 
@@ -186,7 +159,6 @@
             <tbody id="tabla">
             </tbody>
           </table>
->>>>>>> e4abc789730ee655b8df278581d6e578234d181b
 
         </div>
       </div>
@@ -209,15 +181,10 @@
           </table>
         </div>
       </div>
-      <button type="button" name="" id="" class="btn btn-primary btn-lg btn-block"> Guardar Alumnos</button>
-
       </form>
     </div>
-<<<<<<< HEAD
     <button type="button" onclick="enviar_formulario()" class="btn btn-primary btn-lg btn-block"> Guardar Alumnos</button>
                                       </div>
-=======
->>>>>>> e4abc789730ee655b8df278581d6e578234d181b
   </div>
   <!-- /.content-wrapper -->
 </div>
@@ -421,14 +388,9 @@
     xhr.send(formdata);
 
 
-<<<<<<< HEAD
 		
 	}
 */
-=======
-  }
-
->>>>>>> e4abc789730ee655b8df278581d6e578234d181b
 </script>
 
 

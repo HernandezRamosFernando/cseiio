@@ -2,6 +2,7 @@
 class M_acreditacion extends CI_Model { 
    public function __construct() {
       parent::__construct();
+      $this->load->model('M_materia');
    }
 
 
@@ -14,10 +15,35 @@ class M_acreditacion extends CI_Model {
 
 
    function agregar_grupo($datos){
+       //return $datos->grupo->plantel;
     
     $this->db->trans_start();
-    $this->db->insert('Grupo',$datos);
+    $this->db->insert('Grupo',array(
+        'semestre'=>$datos->grupo->semestre,
+        'nombre_grupo'=>mb_strtoupper($datos->grupo->nombre_grupo),
+        'plantel'=>$datos->grupo->plantel
+    ));
+    
     $id = $this->db->insert_id();
+    $materias = $this->M_materia->get_materias_semestre($datos->grupo->semestre);
+
+    
+    foreach(($datos->alumnos) as $alumno){
+
+        foreach($materias as $materia){
+
+            $this->db->insert('Grupo_Estudiante',array(
+                'Grupo_id_grupo'=>$id,
+                'Estudiante_no_control'=>$alumno,
+                'Ciclo_escolar_id_ciclo_escolar'=>$datos->grupo->ciclo_escolar,
+                'id_materia'=>$materia->clave,
+
+            ));
+
+        }
+       
+    }
+    
     $this->db->trans_complete();
 
         if ($this->db->trans_status() === FALSE)
@@ -26,8 +52,9 @@ class M_acreditacion extends CI_Model {
         }
 
         else{
-            return $id;
+            return "si";
         }
+        
         
    }
 

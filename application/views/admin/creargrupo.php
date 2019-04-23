@@ -140,7 +140,7 @@
     
 
 
-    <input type="text" style="display:none" id="id_grupo">
+\
     <a name="" id="" class="btn btn-primary" onclick="buscar();" role="button">Cargar datos</a>
 
 
@@ -299,7 +299,27 @@
 
 
   function alerta_grupo(){
-    Swal.fire({
+
+    //$datos->grupo->plantel.$datos->grupo->semestre.$datos->grupo->ciclo_escolar.mb_strtoupper($datos->grupo->nombre_grupo)
+    var datos_grupo = {
+      plantel:document.getElementById("plantel").value,
+      semestre:parseInt(document.getElementById("semestre_grupo").value),
+      nombre_grupo:document.getElementById("grupo_nombre").value,
+      ciclo_escolar:document.getElementById("grupo_ciclo_escolar").value
+    };
+
+    var id_grupo = document.getElementById("plantel").value+document.getElementById("semestre_grupo").value+document.getElementById("grupo_ciclo_escolar").value+document.getElementById("grupo_nombre").value.toUpperCase();
+
+//se pregunta si existe el grupo
+    var xhr = new XMLHttpRequest();
+      xhr.open('GET', '/cseiio/c_grupo/get_existe_grupo?id_grupo='+id_grupo, true);
+
+      xhr.onload = function () {
+        console.log(JSON.parse(xhr.response)[0]);
+        
+        if(JSON.parse(xhr.response).length===0){
+
+          Swal.fire({
             type: 'success',
             title: 'Agregue alumnos al grupo',
             showConfirmButton: false,
@@ -307,6 +327,31 @@
           });
 
           buscar();
+
+        }
+
+        else if(35-JSON.parse(xhr.response)[0].total_alumnos>0){
+          Swal.fire({
+            type: 'warning',
+            title: 'El grupo ya existe y tiene '+(35-JSON.parse(xhr.response)[0].total_alumnos)+" lugares libres"
+          });
+
+ 
+        }
+
+        else{
+          Swal.fire({
+            type: 'warning',
+            title: 'El grupo ya existe y se encunetra lleno'
+          });
+        }
+
+      };
+
+      xhr.send(null);
+
+
+    
 
   }
 </script>

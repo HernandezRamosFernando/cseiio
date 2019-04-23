@@ -183,6 +183,7 @@
       </div>
       </form>
     </div>
+    <br>
     <button type="button" onclick="enviar_formulario()" class="btn btn-primary btn-lg btn-block"> Guardar Alumnos</button>
                                       </div>
   </div>
@@ -300,19 +301,13 @@
 
   function alerta_grupo(){
     Swal.fire({
-            type: 'success',
-            title: 'Agregue alumnos al grupo',
-            showConfirmButton: false,
-            timer: 500
+            type: 'info',
+            title: 'Agregue estudiantes al grupo creado'
           });
 
           buscar();
 
   }
-</script>
-
-
-<script>
 
   function enviar_formulario(){
     var datos_grupo = {

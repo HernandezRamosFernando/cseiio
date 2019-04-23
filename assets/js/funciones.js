@@ -387,3 +387,32 @@ document.getElementById("aspirante_documento_carta_extemporaneo_oculto").style =
 
 console.log(diff/(1000*60*60*24) );
 }
+
+function cambiardetabla(e) {
+  var tr = $(e).parents("tr").appendTo("#tabla_completa_grupo tbody");
+  e.className = "";
+  e.className = "btn btn-lg btn-block btn-danger";
+  e.innerText = "";
+  e.innerText = "Eliminar";
+  e.setAttribute("onClick", "regresartabla(this);");
+}
+
+function regresartabla(e) {
+  var tr = $(e).parents("tr").appendTo("#tabla_completa tbody");
+  e.className = "";
+  e.className = "btn btn-lg btn-block btn-success";
+  e.innerText = "";
+  e.innerText = "Agregar";
+  e.setAttribute("onClick", "cambiardetabla(this);");
+}
+
+function especialidad_grupo(e) {
+  if (document.getElementById("semestre_grupo").value === "5" || document.getElementById("semestre_grupo").value === "6") {
+    document.getElementById("grupo_especialidad_oculto").style.display = "";
+    document.getElementById("seleccione_especialidad_oculto").style.display = "";
+
+  } else {
+    document.getElementById("grupo_especialidad_oculto").style.display = "none";
+    document.getElementById("seleccione_especialidad_oculto").style.display = "none";
+  }
+}

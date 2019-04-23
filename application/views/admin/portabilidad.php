@@ -336,9 +336,9 @@
         <div class="col-md-4">
           <label class="form-group has-float-label" style="font-weight:bold">
             <select class="form-control form-control-lg"  name="aspirante_direccion_municipio" required
-              onChange="cambio_municipio(selector_municipio_aspirante,selector_localidad_aspirante)"
+              onclick="cambio_municipio(selector_municipio_aspirante,selector_localidad_aspirante)"
               id="selector_municipio_aspirante">
-              <option value=""></option>
+              <option value="">Seleccione un municipio</option>
 
             </select>
             <span>Municipio</span>
@@ -350,7 +350,7 @@
           <label class="form-group has-float-label" style="font-weight:bold">
             <select class="form-control form-control-lg"  name="aspirante_direccion_localidad" required
               id="selector_localidad_aspirante">
-              <option value=""></option>
+              <option value="">Seleccione una localidad</option>
 
 
             </select>

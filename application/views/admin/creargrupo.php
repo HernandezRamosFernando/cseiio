@@ -178,7 +178,7 @@
       </form>
     </div>
     <br>
-    <button type="button" onclick="enviar_formulario()" class="btn btn-primary btn-lg btn-block"> Guardar Alumnos</button>
+    <button type="button" value="nuevo" onclick="enviar_formulario()" id="boton_agregar" class="btn btn-primary btn-lg btn-block"> Guardar Alumnos</button>
     </div>
   </div>
   <!-- /.content-wrapper -->
@@ -348,6 +348,7 @@ if(document.getElementById("plantel").value != '' && document.getElementById("se
               if(result.value){
                   buscar();
                   buscar_estudiantes_grupo(id_grupo);
+                  document.getElementById("boton_agregar").value="existente";
               }
           });
         }
@@ -368,6 +369,8 @@ if(document.getElementById("plantel").value != '' && document.getElementById("se
 }
 
   function enviar_formulario(){
+    if(document.getElementById("boton_agregar").value==="nuevo"){
+    
     var datos_grupo = {
       plantel:document.getElementById("plantel").value,
       semestre:parseInt(document.getElementById("semestre_grupo").value),
@@ -405,7 +408,41 @@ if(document.getElementById("plantel").value != '' && document.getElementById("se
       }
       xhr.send(JSON.stringify(datos));
 
+    }
 
+    else{
+      var tabla = document.getElementById("tabla_completa_grupo");
+      var filas = tabla.children[2].children;
+      var estudiantes = new Array();
+      
+      for(let i=0;i<filas.length;i++){
+          //console.log(filas[i].children[2].children.botoncambio.disabled);
+          if(filas[i].children[2].children.botoncambio.disabled===false){
+            estudiantes.push(filas[i].children[2].children.botoncambio.value);
+          }
+      }
+
+      var datos = {
+        id_grupo:document.getElementById("plantel").value+document.getElementById("semestre_grupo").value+document.getElementById("grupo_ciclo_escolar").value+document.getElementById("grupo_nombre").value.toUpperCase(),
+        estudiantes:estudiantes,
+        semestre:document.getElementById("semestre_grupo").value,
+        ciclo_escolar:document.getElementById("grupo_ciclo_escolar").value
+      };
+
+      var xhr = new XMLHttpRequest();
+        xhr.open("POST", '/cseiio/c_acreditacion/agregar_estudiantes_grupo', true);
+
+        //Send the proper header information along with the request
+        xhr.setRequestHeader("Content-Type", "application/json");
+
+        xhr.onreadystatechange = function() { // Call a function when the state changes.
+            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                console.log(xhr.response);
+            }
+        }
+        xhr.send(JSON.stringify(datos));
+
+    }
 
   }
 /*

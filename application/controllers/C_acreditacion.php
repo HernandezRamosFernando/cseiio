@@ -59,18 +59,16 @@ public function numero_estudiantes_semestre_plantel(){
 public function agregar_grupo(){
 
     $datos = json_decode($this->input->raw_input_stream);
-    //print_r($datos);
     echo $this->M_acreditacion->agregar_grupo($datos);
-    /*
-    $datos = array(
-        'plantel' => $this->input->post('plantel'),
-        'semestre' => $this->input->post('semestre_grupo'),
-        'nombre_grupo' => $this->input->post('grupo_nombre')
-    );
 
-    
-    */
 
+}
+
+
+public function agregar_estudiantes_grupo(){
+    $datos = json_decode($this->input->raw_input_stream);
+    echo $this->M_acreditacion->agregar_estudiantes_grupo($datos);
+   
 }
 
 

@@ -60,6 +60,40 @@ class M_acreditacion extends CI_Model {
    }
 
 
+   public function agregar_estudiantes_grupo($datos){
+    $this->db->trans_start();
+    $materias = $this->M_materia->get_materias_semestre($datos->semestre);
+
+    foreach(($datos->estudiantes) as $estudiante){
+
+        foreach($materias as $materia){
+
+            $this->db->insert('Grupo_Estudiante',array(
+                'Grupo_id_grupo'=>$datos->id_grupo,
+                'Estudiante_no_control'=>$estudiante,
+                'Ciclo_escolar_id_ciclo_escolar'=>$datos->ciclo_escolar,
+                'id_materia'=>$materia->clave,
+
+            ));
+
+        }
+       
+    }
+
+    $this->db->trans_complete();
+
+        if ($this->db->trans_status() === FALSE)
+        {
+                return "no";
+        }
+
+        else{
+            return "si";
+        }
+    
+   }
+
+
 
 
    public function get_estudiantes_plantel_semestre($plantel,$semestre){

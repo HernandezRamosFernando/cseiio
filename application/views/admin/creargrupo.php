@@ -147,7 +147,7 @@
       <a name="" id="" class="btn btn-primary" onclick="buscar();" role="button">Cargar datos</a>
 
 
-      <div class="row">
+      <div class="row" id="alumnos_oculto" style="display:none">
       <div class=" col-md-6">
         <div class="card card-body">
           <table class="table table-hover" id="tabla_completa" style="width: 100%">
@@ -186,7 +186,7 @@
      </div>
    </form>
     <br>
-    <button type="button" value="nuevo" onclick="enviar_formulario()" id="boton_agregar" class="btn btn-primary btn-lg btn-block"> Guardar Alumnos</button>
+    <button type="button" value="nuevo" onclick="enviar_formulario()" id="boton_agregar" class="btn btn-success btn-lg btn-block" style="display: none"> Guardar Alumnos</button>
     </div>
   </div>
   <!-- /.content-wrapper -->
@@ -206,6 +206,7 @@ function llenar_especialidad(){
   xhr.onload = function(){
     console.log(xhr.response);
     seleccione_componente.innerHTML = xhr.responseText;
+    
   };
   xhr.send(null);
 }
@@ -276,6 +277,8 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
     document.getElementById('crear_grupo').classList.remove('btn-success');
     document.getElementById('crear_grupo').classList.add('btn-dark');
     document.getElementById('crear_grupo').disabled = true;
+    document.getElementById('boton_agregar').style.display = "";
+    document.getElementById('alumnos_oculto').style.display = "";
   }
 
   function buscar_estudiantes_grupo(idgrupo) {
@@ -420,9 +423,9 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
                   type: 'success',
                   title: 'Datos agregados correctamente'
                  });
-                 document.getElementById("formulario").reset();
+                 setTimeout(location.reload.bind(location), 2500); 
                  document.getElementById("tabla").innerHTML = "";
-                 document.getElementById("tabla_grupo").innerHTML = "";
+                 document.getElementById("tablagrupo").innerHTML = "";
                }else{
                 Swal.fire({
                   type: 'error',

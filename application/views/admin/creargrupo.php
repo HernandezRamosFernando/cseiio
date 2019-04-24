@@ -17,7 +17,7 @@
         <div class="row">
           <div class="col-md-8">
             <label class="form-group has-float-label">
-              <select class="form-control form-control-lg"="" id="plantel" name="plantel">
+              <select class="form-control form-control-lg"="" id="plantel"   name="plantel">
                 <option value="">Seleccione el plantel donde creara el grupo</option>
 
                 <?php
@@ -197,14 +197,18 @@
 
 <script>
 
-/*function llenar_especialidad(){
+function llenar_especialidad(){
+  seleccione_componente.innerHTML = "Cargando datos";
+  document.getElementById("plantel").setAttribute("onchange", "llenar_especialidad();");
   var xhr = new XMLHttpRequest();
-  var.open();
+  var plantel = document.getElementById("plantel").value;
+  xhr.open('GET', '<?php echo base_url();?>index.php/c_plantel/get_plantel_especialidad_html?plantel=' + plantel , true);
   xhr.onload = function(){
     console.log(xhr.response);
+    seleccione_componente.innerHTML = xhr.responseText;
   };
   xhr.send(null);
-}*/
+}
 
 function validarcomponente(){
 if (document.getElementById("semestre_grupo").value === "5" || document.getElementById("semestre_grupo").value === "6") {
@@ -317,12 +321,13 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
 
     else {
       componente_grupo(e);
+     
       var xhr = new XMLHttpRequest();
       xhr.open('GET', '<?php echo base_url();?>index.php/c_acreditacion/numero_estudiantes_semestre_plantel?semestre=' + e.value + '&cct=' + document.getElementById("plantel").value, true);
 
       xhr.onload = function () {
         document.getElementById("cantidad_alumnos_oculto").style.display = "";
-        console.log(xhr.response);
+        //console.log(xhr.response);
         var cAlumnos = JSON.parse(xhr.response)[0].total_estudiante;
         if (cAlumnos <= 35) {
           document.getElementById("cantidad_alumnos").innerHTML = "La cantidad de Alumnos registrados en este semestre es: " + cAlumnos + " se recomienda crear 1 grupo";

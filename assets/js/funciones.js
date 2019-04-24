@@ -408,6 +408,7 @@ function regresartabla(e) {
 
 function componente_grupo(e) {
   if (document.getElementById("semestre_grupo").value === "5" || document.getElementById("semestre_grupo").value === "6") {
+    llenar_especialidad();
     document.getElementById("grupo_componente_oculto").style.display = "";
     document.getElementById("seleccione_componente_oculto").style.display = "";
 

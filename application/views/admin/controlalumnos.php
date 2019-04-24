@@ -875,12 +875,12 @@
       //llamada al api que regresa los ids de la direccion del estudiante
       var respuesta;
       let direccion = new XMLHttpRequest();
-      direccion.open('GET', '/cseiio/index.php/c_localidad/get_estado_municipio_localidad_id_localidad?id_localidad=' + datos.estudiante[0].id_localidad, true);
+      direccion.open('GET', '<?php echo base_url();?>index.php/c_localidad/get_estado_municipio_localidad_id_localidad?id_localidad=' + datos.estudiante[0].id_localidad, true);
       direccion.onload = function () {
         var respuesta = JSON.parse(direccion.response);
         //cargar municipios
         let municipios = new XMLHttpRequest();
-        municipios.open('GET', '/cseiio/index.php/c_municipio/get_municipios_estado_html?id_estado=' + respuesta[0].id_estado, true);
+        municipios.open('GET', '<?php echo base_url();?>index.php/c_municipio/get_municipios_estado_html?id_estado=' + respuesta[0].id_estado, true);
         municipios.onload = function () {
           document.getElementById("selector_municipio_aspirante").innerHTML = municipios.responseText;
         };
@@ -889,7 +889,7 @@
         //cargar localidades
 
         let localidades = new XMLHttpRequest();
-        localidades.open('GET', '/cseiio/index.php/c_localidad/get_localidades_municipio_html?id_municipio=' + respuesta[0].id_municipio, true);
+        localidades.open('GET', '<?php echo base_url();?>index.php/c_localidad/get_localidades_municipio_html?id_municipio=' + respuesta[0].id_municipio, true);
         localidades.onload = function () {
           document.getElementById("selector_localidad_aspirante").innerHTML = localidades.responseText;
           //seleccionar las opciones de la direccion del estudiante que habia registrado

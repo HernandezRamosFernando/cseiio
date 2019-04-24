@@ -61,22 +61,23 @@
               <select class="form-control form-control-lg" name="grupo_especialidad" id="grupo_especialidad">
                 <option value="SI">SI</option>
               </select>
-              <span>¿Es de especialidad?</span>
+              <span>¿Es de componente?</span>
             </label>
           </div>
 
           <div class="col-md-4" style="display: none" id="seleccione_especialidad_oculto">
             <label class="form-group has-float-label">
               <select class="form-control form-control-lg" name="seleccione_especialidad" id="seleccione_especialidad">
-                <option value="">Seleccione una especialidad</option>
+                <option value="">Seleccione un componente</option>
               </select>
-              <span>Especialidad</span>
+              <span>Componente</span>
             </label>
           </div>
 
         </div>
       </div>
 
+      <div class="form-group">
       <div class="row">
         <div class="col-md-4">
           <label class="form-group has-float-label">
@@ -95,16 +96,25 @@
           </label>
         </div>
       </div>
+      </div>
 
       <div class="form-group">
         <div class="row">
+
           <div class="col-md-4">
-            <div class="form-label-group">
-              <input type="text" required="required" pattern="[A-Za-z]+[ ]*[A-Za-z ]*" title="Introduzca solo letras"
-                class="form-control text-uppercase" id="grupo_nombre" onchange="valida(this);" name="grupo_nombre"
-                placeholder="Nombre de grupo">
-              <label for="grupo_nombre">Ingrese el nombre del grupo</label>
-            </div>
+            <label class="form-group has-float-label">
+              <select class="form-control form-control-lg"  name="grupo_nombre"
+                id="grupo_nombre">
+                <option value="">Seleccione uno</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+                <option value="E">E</option>
+                <option value="F">F</option>
+              </select>
+              <span>Seleccione nombre del grupo</span>
+            </label>
           </div>
 
           <div class="col-md-3">
@@ -133,12 +143,11 @@
             </div>
           </div>
         </div>
-      </div>
 
-    <a name="" id="" class="btn btn-primary" onclick="buscar();" role="button">Cargar datos</a>
+      <a name="" id="" class="btn btn-primary" onclick="buscar();" role="button">Cargar datos</a>
 
 
-    <div class="row">
+      <div class="row">
       <div class=" col-md-6">
         <div class="card card-body">
           <table class="table table-hover" id="tabla_completa" style="width: 100%">
@@ -153,7 +162,6 @@
             <tbody id="tabla">
             </tbody>
           </table>
-
         </div>
       </div>
 
@@ -175,8 +183,8 @@
           </table>
         </div>
       </div>
-      </form>
-    </div>
+     </div>
+   </form>
     <br>
     <button type="button" value="nuevo" onclick="enviar_formulario()" id="boton_agregar" class="btn btn-primary btn-lg btn-block"> Guardar Alumnos</button>
     </div>
@@ -189,23 +197,7 @@
 
 <script>
 
-  function cambiardetabla(e) {
-    var tr = $(e).parents("tr").appendTo("#tabla_completa_grupo tbody");
-    e.className = "";
-    e.className = "btn btn-lg btn-block btn-danger";
-    e.innerText = "";
-    e.innerText = "Eliminar";
-    e.setAttribute("onClick", "regresartabla(this);");
-  }
 
-  function regresartabla(e) {
-    var tr = $(e).parents("tr").appendTo("#tabla_completa tbody");
-    e.className = "";
-    e.className = "btn btn-lg btn-block btn-success";
-    e.innerText = "";
-    e.innerText = "Agregar";
-    e.setAttribute("onClick", "cambiardetabla(this);");
-  }
 
 
 
@@ -245,6 +237,7 @@
     document.getElementById('crear_grupo').classList.add('btn-dark');
     document.getElementById('crear_grupo').disabled = true;
   }
+
   function buscar_estudiantes_grupo(idgrupo) {
     document.getElementById("tablagrupo").innerHTML = "";
     
@@ -274,16 +267,7 @@
     document.getElementById('crear_grupo').disabled = true;
   }
 
-  function especialidad(e) {
-    if (document.getElementById("semestre_grupo").value === "5" || document.getElementById("semestre_grupo").value === "6") {
-      document.getElementById("grupo_especialidad_oculto").style.display = "";
-      document.getElementById("seleccione_especialidad_oculto").style.display = "";
 
-    } else {
-      document.getElementById("grupo_especialidad_oculto").style.display = "none";
-      document.getElementById("seleccione_especialidad_oculto").style.display = "none";
-    }
-  }
 
   function numero_alumnos(e) {
     if (document.getElementById("plantel").value === "") {
@@ -296,7 +280,7 @@
     }
 
     else {
-      especialidad(e);
+      especialidad_grupo(e);
       var xhr = new XMLHttpRequest();
       xhr.open('GET', '<?php echo base_url();?>index.php/c_acreditacion/numero_estudiantes_semestre_plantel?semestre=' + e.value + '&cct=' + document.getElementById("plantel").value, true);
 
@@ -323,7 +307,7 @@
 
   function alerta_grupo(){
 
-if(document.getElementById("plantel").value != '' && document.getElementById("semestre_grupo").value != '' && document.getElementById("grupo_ciclo_escolar").value != '' && document.getElementById("grupo_nombre").value != ""){
+    if(document.getElementById("plantel").value != '' && document.getElementById("semestre_grupo").value != '' && document.getElementById("grupo_ciclo_escolar").value != '' && document.getElementById("grupo_nombre").value != ""){
     var id_grupo = document.getElementById("plantel").value+document.getElementById("semestre_grupo").value+document.getElementById("grupo_ciclo_escolar").value+document.getElementById("grupo_nombre").value.toUpperCase();
     var xhr = new XMLHttpRequest();
       xhr.open('GET', '<?php echo base_url();?>index.php/c_grupo/get_existe_grupo?id_grupo='+id_grupo, true);
@@ -332,7 +316,8 @@ if(document.getElementById("plantel").value != '' && document.getElementById("se
         if(JSON.parse(xhr.response).length===0){
           swalWithBootstrapButtons.fire({
             type: 'info',
-            title: 'Agregue estudiantes al grupo creado'
+            title: 'Agregue estudiantes al grupo creado',
+            confirmButtonText:'Agregar'
           });
           buscar();
          
@@ -360,12 +345,12 @@ if(document.getElementById("plantel").value != '' && document.getElementById("se
         }
       };
       xhr.send(null);
-  }else{
+    }else{
     Swal.fire({
             type: 'warning',
             title: 'Agregue los datos faltantes'
           });
-  }
+    }
 }
 
   function enviar_formulario(){
@@ -388,28 +373,32 @@ if(document.getElementById("plantel").value != '' && document.getElementById("se
       grupo:datos_grupo,
       alumnos:alumnos_json
     }
-
-    //console.log(datos);
-
-
-
     var xhr = new XMLHttpRequest();
       xhr.open("POST", '<?php echo base_url();?>index.php/c_acreditacion/agregar_grupo', true);
-
       //Send the proper header information along with the request
       xhr.setRequestHeader("Content-Type", "application/json");
 
       xhr.onreadystatechange = function() { // Call a function when the state changes.
           if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-
-            //aqui esta la respuesta de crear el grupo
-              console.log(xhr.response);
+            console.log(xhr.response);
+            if (xhr.responseText.trim() === "si") {      
+                Swal.fire({
+                  type: 'success',
+                  title: 'Datos agregados correctamente'
+                 });
+                 document.getElementById("formulario").reset();
+                 document.getElementById("tabla").innerHTML = "";
+                 document.getElementById("tabla_grupo").innerHTML = "";
+               }else{
+                Swal.fire({
+                  type: 'error',
+                  title: 'Datos no agregados'
+                 });
+               }
           }
       }
       xhr.send(JSON.stringify(datos));
-
     }
-
     else{
       var tabla = document.getElementById("tabla_completa_grupo");
       var filas = tabla.children[2].children;
@@ -421,23 +410,35 @@ if(document.getElementById("plantel").value != '' && document.getElementById("se
             estudiantes.push(filas[i].children[2].children.botoncambio.value);
           }
       }
-
       var datos = {
         id_grupo:document.getElementById("plantel").value+document.getElementById("semestre_grupo").value+document.getElementById("grupo_ciclo_escolar").value+document.getElementById("grupo_nombre").value.toUpperCase(),
         estudiantes:estudiantes,
         semestre:document.getElementById("semestre_grupo").value,
         ciclo_escolar:document.getElementById("grupo_ciclo_escolar").value
       };
-
       var xhr = new XMLHttpRequest();
-        xhr.open("POST", '/cseiio/c_acreditacion/agregar_estudiantes_grupo', true);
-
+        xhr.open("POST", '<?php echo base_url();?>index.php/c_acreditacion/agregar_estudiantes_grupo', true);
         //Send the proper header information along with the request
         xhr.setRequestHeader("Content-Type", "application/json");
-
         xhr.onreadystatechange = function() { // Call a function when the state changes.
             if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+              if (xhr.responseText.trim() === "si") {
                 console.log(xhr.response);
+                Swal.fire({
+                  type: 'success',
+                  title: 'Datos agregados correctamente',
+                  showConfirmButton: false,
+                 });
+
+                 setTimeout(location.reload.bind(location), 2500); 
+                 
+
+               }else{
+                Swal.fire({
+                  type: 'error',
+                  title: 'Datos no agregados'
+                 });
+               }
             }
         }
         xhr.send(JSON.stringify(datos));

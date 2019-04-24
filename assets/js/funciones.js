@@ -406,13 +406,13 @@ function regresartabla(e) {
   e.setAttribute("onClick", "cambiardetabla(this);");
 }
 
-function especialidad_grupo(e) {
+function componente_grupo(e) {
   if (document.getElementById("semestre_grupo").value === "5" || document.getElementById("semestre_grupo").value === "6") {
-    document.getElementById("grupo_especialidad_oculto").style.display = "";
-    document.getElementById("seleccione_especialidad_oculto").style.display = "";
+    document.getElementById("grupo_componente_oculto").style.display = "";
+    document.getElementById("seleccione_componente_oculto").style.display = "";
 
   } else {
-    document.getElementById("grupo_especialidad_oculto").style.display = "none";
-    document.getElementById("seleccione_especialidad_oculto").style.display = "none";
+    document.getElementById("grupo_componente_oculto").style.display = "none";
+    document.getElementById("seleccione_componente_oculto").style.display = "none";
   }
 }

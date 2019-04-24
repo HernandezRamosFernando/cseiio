@@ -56,18 +56,18 @@
           </div>
 
 
-          <div class="col-md-4" style="display: none" id="grupo_especialidad_oculto">
+          <div class="col-md-4" style="display: none" id="grupo_componente_oculto">
             <label class="form-group has-float-label">
-              <select class="form-control form-control-lg" name="grupo_especialidad" id="grupo_especialidad">
+              <select class="form-control form-control-lg" name="grupo_componente" id="grupo_componente">
                 <option value="SI">SI</option>
               </select>
               <span>¿Es de componente?</span>
             </label>
           </div>
 
-          <div class="col-md-4" style="display: none" id="seleccione_especialidad_oculto">
+          <div class="col-md-4" style="display: none" id="seleccione_componente_oculto">
             <label class="form-group has-float-label">
-              <select class="form-control form-control-lg" name="seleccione_especialidad" id="seleccione_especialidad">
+              <select class="form-control form-control-lg" name="seleccione_componente" id="seleccione_componente">
                 <option value="">Seleccione un componente</option>
               </select>
               <span>Componente</span>
@@ -139,7 +139,7 @@
           </div>
 
             <div class="col-md-4 offset-md-3">
-              <button type="button" class="btn btn-success btn-lg btn-block" onclick="alerta_grupo()" style="padding: 1rem" id="crear_grupo">Crear grupo</button>
+              <button type="button" class="btn btn-success btn-lg btn-block" onclick="validarcomponente()" style="padding: 1rem" id="crear_grupo">Crear grupo</button>
             </div>
           </div>
         </div>
@@ -197,18 +197,54 @@
 
 <script>
 
+/*function llenar_especialidad(){
+  var xhr = new XMLHttpRequest();
+  var.open();
+  xhr.onload = function(){
+    console.log(xhr.response);
+  };
+  xhr.send(null);
+}*/
 
-
-
-
-  function buscar() {
+function validarcomponente(){
+if (document.getElementById("semestre_grupo").value === "5" || document.getElementById("semestre_grupo").value === "6") {
+  if(document.getElementById("plantel").value != '' && document.getElementById("semestre_grupo").value != '' && document.getElementById("grupo_ciclo_escolar").value != '' && document.getElementById("grupo_nombre").value != "" && document.getElementById("seleccione_componente").value != "" && document.getElementById("grupo_componente").value != ""){
     document.getElementById("tabla").innerHTML = "";
     document.getElementById("grupo_nombre").disabled = true;
     document.getElementById("grupo_periodo").disabled = true;
     document.getElementById("semestre_grupo").disabled = true;
     document.getElementById("plantel").disabled = true;
     document.getElementById("grupo_ciclo_escolar").disabled = true;
-    
+    document.getElementById("seleccione_componente").disabled = true;
+    document.getElementById("grupo_componente").disabled = true;
+    alerta_grupo();
+
+  }else{
+    Swal.fire({
+            type: 'warning',
+            title: 'Agregue los datos faltantes'
+          });
+    }
+
+  }else{
+    if(document.getElementById("plantel").value != '' && document.getElementById("semestre_grupo").value != '' && document.getElementById("grupo_ciclo_escolar").value != '' && document.getElementById("grupo_nombre").value != ""){
+    document.getElementById("tabla").innerHTML = "";
+    document.getElementById("grupo_nombre").disabled = true;
+    document.getElementById("grupo_periodo").disabled = true;
+    document.getElementById("semestre_grupo").disabled = true;
+    document.getElementById("plantel").disabled = true;
+    document.getElementById("grupo_ciclo_escolar").disabled = true;
+    alerta_grupo();
+    }else{
+    Swal.fire({
+            type: 'warning',
+            title: 'Agregue los datos faltantes'
+          });
+      }
+  }
+}
+
+  function buscar() { 
     var xhr = new XMLHttpRequest();
     var semestre = document.getElementById("semestre_grupo").value;
     var plantel = document.getElementById("plantel").value;
@@ -280,7 +316,7 @@
     }
 
     else {
-      especialidad_grupo(e);
+      componente_grupo(e);
       var xhr = new XMLHttpRequest();
       xhr.open('GET', '<?php echo base_url();?>index.php/c_acreditacion/numero_estudiantes_semestre_plantel?semestre=' + e.value + '&cct=' + document.getElementById("plantel").value, true);
 
@@ -306,8 +342,7 @@
 
 
   function alerta_grupo(){
-
-    if(document.getElementById("plantel").value != '' && document.getElementById("semestre_grupo").value != '' && document.getElementById("grupo_ciclo_escolar").value != '' && document.getElementById("grupo_nombre").value != ""){
+    
     var id_grupo = document.getElementById("plantel").value+document.getElementById("semestre_grupo").value+document.getElementById("grupo_ciclo_escolar").value+document.getElementById("grupo_nombre").value.toUpperCase();
     var xhr = new XMLHttpRequest();
       xhr.open('GET', '<?php echo base_url();?>index.php/c_grupo/get_existe_grupo?id_grupo='+id_grupo, true);
@@ -345,12 +380,6 @@
         }
       };
       xhr.send(null);
-    }else{
-    Swal.fire({
-            type: 'warning',
-            title: 'Agregue los datos faltantes'
-          });
-    }
 }
 
   function enviar_formulario(){

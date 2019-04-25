@@ -41,6 +41,28 @@
 
           <div class="col-md-4">
             <label class="form-group has-float-label">
+              <select class="form-control form-control-lg" onchange="numero_alumnos(this)" name="semestre_grupo"
+                id="semestre_grupo">
+                <option value="">Seleccione uno</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+              </select>
+              <span>Seleccione el semestre del grupo a crear</span>
+            </label>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="row">
+
+          <div class="col-md-4">
+            <label class="form-group has-float-label">
               <select class="form-control form-control-lg" onchange="numero_alumnos(this)" name="grupos"
                 id="grupos">
                 <option value="">Seleccione uno</option>
@@ -57,22 +79,7 @@
 
 
       <div class="row" id="alumnos_oculto" style="display:none">
-      <div class=" col-md-6">
-        <div class="card card-body">
-          <table class="table table-hover" id="tabla_completa" style="width: 100%">
-            <caption>Lista de todos los alumnos de este semestre sin grupo</caption>
-            <thead class="thead-light">
-              <tr>
-                <th scope="col" class="col-md-1">Nombre completo</th>
-                <th scope="col" class="col-md-1">N° control</th>
-                <th scope="col" class="col-md-1">Agregar</th>
-              </tr>
-            </thead>
-            <tbody id="tabla">
-            </tbody>
-          </table>
-        </div>
-      </div>
+      
 
       <div class="col-md-6">
         <div class="card card-body">
@@ -92,6 +99,24 @@
           </table>
         </div>
       </div>
+
+      <div class=" col-md-6">
+        <div class="card card-body">
+          <table class="table table-hover" id="tabla_completa" style="width: 100%">
+            <caption>Lista de todos los alumnos de este semestre sin grupo</caption>
+            <thead class="thead-light">
+              <tr>
+                <th scope="col" class="col-md-1">Nombre completo</th>
+                <th scope="col" class="col-md-1">N° control</th>
+                <th scope="col" class="col-md-1">Agregar</th>
+              </tr>
+            </thead>
+            <tbody id="tabla">
+            </tbody>
+          </table>
+        </div>
+      </div>
+
      </div>
    </form>
     <br>

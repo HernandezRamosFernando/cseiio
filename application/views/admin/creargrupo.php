@@ -354,13 +354,13 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
   function alerta_grupo(){
 
     if(parseInt(document.getElementById("semestre_grupo"))<5){
-      var id_grupo = document.getElementById("plantel").value+document.getElementById("semestre_grupo").value+document.getElementById("grupo_ciclo_escolar").value+document.getElementById("grupo_nombre").value.toUpperCase();
+      var id_grupo = document.getElementById("plantel").value+document.getElementById("semestre_grupo").value+document.getElementById("grupo_ciclo_escolar").value+document.getElementById("grupo_periodo").value+document.getElementById("grupo_nombre").value.toUpperCase();
     }
 
     else{
       var valor_componente = document.getElementById("seleccione_componente").value;
       var nombre_corto_componente = valor_componente.split("-")[1];
-      var id_grupo = document.getElementById("plantel").value+document.getElementById("semestre_grupo").value+document.getElementById("grupo_ciclo_escolar").value+document.getElementById("grupo_nombre").value.toUpperCase()+"-"+nombre_corto_componente;
+      var id_grupo = document.getElementById("plantel").value+document.getElementById("semestre_grupo").value+document.getElementById("grupo_ciclo_escolar").value+document.getElementById("grupo_periodo").value+document.getElementById("grupo_nombre").value.toUpperCase()+"-"+nombre_corto_componente;
     }
     
     var xhr = new XMLHttpRequest();
@@ -409,7 +409,8 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
       semestre:parseInt(document.getElementById("semestre_grupo").value),
       nombre_grupo:document.getElementById("grupo_nombre").value,
       ciclo_escolar:document.getElementById("grupo_ciclo_escolar").value,
-      componente:document.getElementById("seleccione_componente").value
+      componente:document.getElementById("seleccione_componente").value,
+      periodo:document.getElementById("seleccione_componente").value
     };
 
     var alumnos = document.getElementById("tabla_completa_grupo").children[2].children;
@@ -461,7 +462,7 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
           }
       }
       var datos = {
-        id_grupo:document.getElementById("plantel").value+document.getElementById("semestre_grupo").value+document.getElementById("grupo_ciclo_escolar").value+document.getElementById("grupo_nombre").value.toUpperCase(),
+        id_grupo:document.getElementById("plantel").value+document.getElementById("semestre_grupo").value+document.getElementById("grupo_ciclo_escolar").value+document.getElementById("grupo_periodo").value+document.getElementById("grupo_nombre").value.toUpperCase(),
         estudiantes:estudiantes,
         semestre:document.getElementById("semestre_grupo").value,
         ciclo_escolar:document.getElementById("grupo_ciclo_escolar").value,

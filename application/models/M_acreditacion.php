@@ -17,7 +17,7 @@ class M_acreditacion extends CI_Model {
    function agregar_grupo($datos){
     //grupos de semestres normales sin especialidad
     if($datos->grupo->semestre<5){
-        $id = $datos->grupo->plantel.$datos->grupo->semestre.$datos->grupo->ciclo_escolar.mb_strtoupper($datos->grupo->nombre_grupo);
+        $id = $datos->grupo->plantel.$datos->grupo->semestre.$datos->grupo->ciclo_escolar.$datos->grupo->periodo.mb_strtoupper($datos->grupo->nombre_grupo);
         $materias = $this->M_materia->get_materias_semestre($datos->grupo->semestre);
         $nombre_grupo=mb_strtoupper($datos->grupo->nombre_grupo);
     }
@@ -26,7 +26,7 @@ class M_acreditacion extends CI_Model {
         $valor_option = $datos->grupo->componente;
         $id_componente = explode("-",$valor_option)[0];
         $nombre_corto_componente = explode("-",$valor_option)[1];
-        $id = $datos->grupo->plantel.$datos->grupo->semestre.$datos->grupo->ciclo_escolar.mb_strtoupper($datos->grupo->nombre_grupo).'-'.$nombre_corto_componente;
+        $id = $datos->grupo->plantel.$datos->grupo->semestre.$datos->grupo->ciclo_escolar.$datos->grupo->periodo.mb_strtoupper($datos->grupo->nombre_grupo).'-'.$nombre_corto_componente;
         $materias = $this->M_materia->get_materias_semestre_componente($datos->grupo->semestre,$id_componente);
         $nombre_grupo=mb_strtoupper($datos->grupo->nombre_grupo).'-'.$nombre_corto_componente;
     }

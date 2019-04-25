@@ -29,8 +29,8 @@ class M_plantel extends CI_Model {
    }
 
 
-   function get_grupos_plantel($plantel){
-         $grupos = $this->db->query("select * from Grupo where plantel='".$plantel."'")->result();
+   function get_grupos_plantel_html($plantel,$semestre){
+         $grupos = $this->db->query("select * from Grupo where semestre=".$semestre." and plantel='".$plantel."'")->result();
          $respuesta="";
 
          foreach($grupos as $grupo){

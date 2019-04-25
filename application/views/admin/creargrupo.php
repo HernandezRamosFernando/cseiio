@@ -462,7 +462,7 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
           }
       }
       var datos = {
-        id_grupo:document.getElementById("plantel").value+document.getElementById("semestre_grupo").value+document.getElementById("grupo_ciclo_escolar").value+document.getElementById("grupo_nombre").value.toUpperCase(),
+        id_grupo:document.getElementById("plantel").value+document.getElementById("semestre_grupo").value+document.getElementById("grupo_ciclo_escolar").value+document.getElementById("grupo_periodo").value+document.getElementById("grupo_nombre").value.toUpperCase(),
         estudiantes:estudiantes,
         semestre:document.getElementById("semestre_grupo").value,
         ciclo_escolar:document.getElementById("grupo_ciclo_escolar").value,

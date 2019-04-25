@@ -350,8 +350,17 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
 
 
   function alerta_grupo(){
+
+    if(parseInt(document.getElementById("semestre_grupo"))<5){
+      var id_grupo = document.getElementById("plantel").value+document.getElementById("semestre_grupo").value+document.getElementById("grupo_ciclo_escolar").value+document.getElementById("grupo_nombre").value.toUpperCase();
+    }
+
+    else{
+      var valor_componente = document.getElementById("seleccione_componente").value;
+      var nombre_corto_componente = valor_componente.split("-")[1];
+      var id_grupo = document.getElementById("plantel").value+document.getElementById("semestre_grupo").value+document.getElementById("grupo_ciclo_escolar").value+document.getElementById("grupo_nombre").value.toUpperCase()+"-"+nombre_corto_componente;
+    }
     
-    var id_grupo = document.getElementById("plantel").value+document.getElementById("semestre_grupo").value+document.getElementById("grupo_ciclo_escolar").value+document.getElementById("grupo_nombre").value.toUpperCase();
     var xhr = new XMLHttpRequest();
       xhr.open('GET', '<?php echo base_url();?>index.php/c_grupo/get_existe_grupo?id_grupo='+id_grupo, true);
       xhr.onload = function () {

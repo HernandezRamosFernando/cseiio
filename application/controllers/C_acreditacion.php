@@ -60,6 +60,7 @@ public function agregar_grupo(){
 
     $datos = json_decode($this->input->raw_input_stream);
     echo $this->M_acreditacion->agregar_grupo($datos);
+    //print_r($datos);
 
 
 }

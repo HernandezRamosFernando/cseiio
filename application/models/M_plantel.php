@@ -19,13 +19,25 @@ class M_plantel extends CI_Model {
    }
 
    function get_plantel_especialidad_html($plantel){
-      $registros = $this->db->query("SELECT c.id_componente,c.nombre FROM Plantel_Componente as pc inner join Componente as c on pc.Componente_id_componente=c.id_componente  where pc.Componente_id_componente>1  and pc.Plantel_cct='".$plantel."'")->result();
+      $registros = $this->db->query("SELECT c.id_componente,c.nombre,c.nombre_corto FROM Plantel_Componente as pc inner join Componente as c on pc.Componente_id_componente=c.id_componente  where pc.Componente_id_componente>1  and pc.Plantel_cct='".$plantel."'")->result();
       $respuesta = "";
       $respuesta.='<option value="'."".'">'."Seleccione una especialidad".'</option>';
       foreach($registros as $registro){
-         $respuesta.='<option value="'.$registro->id_componente.'">'.$registro->nombre.'</option>';
+         $respuesta.='<option value="'.$registro->id_componente.'-'.$registro->nombre_corto.'">'.$registro->nombre.'</option>';
       }
       return $respuesta;
+   }
+
+
+   function get_grupos_plantel($plantel){
+         $grupos = $this->db->query("select * from Grupo where plantel='".$plantel."'")->result();
+         $respuesta="";
+
+         foreach($grupos as $grupo){
+            $respuesta.='<option value="'.$grupo->id_grupo.'">'.$grupo->semestre.' '.$grupo->nombre_grupo.'</option>';
+         }
+
+         return $respuesta;
    }
 
 }

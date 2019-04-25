@@ -15,18 +15,33 @@ class M_acreditacion extends CI_Model {
 
 
    function agregar_grupo($datos){
-       //return $datos->grupo->plantel;
-    $id = $datos->grupo->plantel.$datos->grupo->semestre.$datos->grupo->ciclo_escolar.mb_strtoupper($datos->grupo->nombre_grupo);
+    //grupos de semestres normales sin especialidad
+    if($datos->grupo->semestre<5){
+        $id = $datos->grupo->plantel.$datos->grupo->semestre.$datos->grupo->ciclo_escolar.mb_strtoupper($datos->grupo->nombre_grupo);
+        $materias = $this->M_materia->get_materias_semestre($datos->grupo->semestre);
+        $nombre_grupo=mb_strtoupper($datos->grupo->nombre_grupo);
+    }
+
+    else{
+        $valor_option = $datos->grupo->componente;
+        $id_componente = explode("-",$valor_option)[0];
+        $nombre_corto_componente = explode("-",$valor_option)[1];
+        $id = $datos->grupo->plantel.$datos->grupo->semestre.$datos->grupo->ciclo_escolar.mb_strtoupper($datos->grupo->nombre_grupo).'-'.$nombre_corto_componente;
+        $materias = $this->M_materia->get_materias_semestre_componente($datos->grupo->semestre,$id_componente);
+        $nombre_grupo=mb_strtoupper($datos->grupo->nombre_grupo).'-'.$nombre_corto_componente;
+    }
+    //$id = $datos->grupo->plantel.$datos->grupo->semestre.$datos->grupo->ciclo_escolar.mb_strtoupper($datos->grupo->nombre_grupo);
     
+
     $this->db->trans_start();
     $this->db->insert('Grupo',array(
         'id_grupo'=>$id,
         'semestre'=>$datos->grupo->semestre,
-        'nombre_grupo'=>mb_strtoupper($datos->grupo->nombre_grupo),
+        'nombre_grupo'=>$nombre_grupo,
         'plantel'=>$datos->grupo->plantel
     ));
     
-    $materias = $this->M_materia->get_materias_semestre($datos->grupo->semestre);
+    
 
     
     foreach(($datos->alumnos) as $alumno){
@@ -44,6 +59,8 @@ class M_acreditacion extends CI_Model {
         }
        
     }
+
+    //fin materias normales
     
     $this->db->trans_complete();
 

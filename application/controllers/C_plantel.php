@@ -19,4 +19,10 @@ class C_plantel extends CI_Controller
         echo $this->M_plantel->get_plantel_especialidad_html($plantel);
         //print_r($this->M_plantel->get_plantel_especialidad($plantel));
     }
+
+
+    public function get_grupos_plantel(){
+        $plantel = $this->input->get("plantel");
+        echo $this->M_plantel->get_grupos_plantel($plantel);
+    }
 }

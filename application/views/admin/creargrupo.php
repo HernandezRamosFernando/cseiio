@@ -397,7 +397,8 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
       plantel:document.getElementById("plantel").value,
       semestre:parseInt(document.getElementById("semestre_grupo").value),
       nombre_grupo:document.getElementById("grupo_nombre").value,
-      ciclo_escolar:document.getElementById("grupo_ciclo_escolar").value
+      ciclo_escolar:document.getElementById("grupo_ciclo_escolar").value,
+      componente:document.getElementById("seleccione_componente").value
     };
 
     var alumnos = document.getElementById("tabla_completa_grupo").children[2].children;
@@ -410,6 +411,7 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
       grupo:datos_grupo,
       alumnos:alumnos_json
     }
+
     var xhr = new XMLHttpRequest();
       xhr.open("POST", '<?php echo base_url();?>index.php/c_acreditacion/agregar_grupo', true);
       //Send the proper header information along with the request

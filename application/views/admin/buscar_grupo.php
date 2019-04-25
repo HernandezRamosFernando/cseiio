@@ -5,7 +5,7 @@
     <!-- Breadcrumbs-->
     <ol class="breadcrumb">
       <li class="breadcrumb-item">
-        <a>Crear grupos</a>
+        <a>Buscar grupos</a>
       </li>
       <li class="breadcrumb-item active">Ingrese los datos requeridos para crear un grupo</li>
     </ol>
@@ -18,7 +18,7 @@
           <div class="col-md-8">
             <label class="form-group has-float-label">
               <select class="form-control form-control-lg"="" id="plantel"   name="plantel">
-                <option value="">Seleccione el plantel donde creara el grupo</option>
+                <option value="">Seleccione el plantel donde buscar el grupo</option>
 
                 <?php
                                         foreach ($planteles as $plantel)
@@ -41,109 +41,16 @@
 
           <div class="col-md-4">
             <label class="form-group has-float-label">
-              <select class="form-control form-control-lg" onchange="numero_alumnos(this)" name="semestre_grupo"
-                id="semestre_grupo">
+              <select class="form-control form-control-lg" onchange="numero_alumnos(this)" name="grupos"
+                id="grupos">
                 <option value="">Seleccione uno</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
               </select>
-              <span>Seleccione el semestre del grupo a crear</span>
-            </label>
-          </div>
-
-
-          <div class="col-md-4" style="display: none" id="grupo_componente_oculto">
-            <label class="form-group has-float-label">
-              <select class="form-control form-control-lg" name="grupo_componente" id="grupo_componente">
-                <option value="SI">SI</option>
-              </select>
-              <span>¿Es de componente?</span>
-            </label>
-          </div>
-
-          <div class="col-md-4" style="display: none" id="seleccione_componente_oculto">
-            <label class="form-group has-float-label">
-              <select class="form-control form-control-lg" name="seleccione_componente" id="seleccione_componente">
-                <option value="">Seleccione un componente</option>
-              </select>
-              <span>Componente</span>
-            </label>
-          </div>
-
-        </div>
-      </div>
-
-      <div class="form-group">
-      <div class="row">
-        <div class="col-md-4">
-          <label class="form-group has-float-label">
-            <select class="form-control form-control-lg" id="grupo_ciclo_escolar" name="grupo_ciclo_escolar">
-              <option>Seleccione el ciclo del grupo </option>
-
-              <?php
-                                        foreach ($ciclo_escolar as $ciclo)
-                                        {
-                                          echo '<option value="'.$ciclo->id_ciclo_escolar.'">'.$ciclo->nombre_ciclo_escolar.'</option>';
-                                        }
-                                        ?>
-
-            </select>
-            <span>Ciclo escolar</span>
-          </label>
-        </div>
-      </div>
-      </div>
-
-      <div class="form-group">
-        <div class="row">
-
-          <div class="col-md-4">
-            <label class="form-group has-float-label">
-              <select class="form-control form-control-lg"  name="grupo_nombre"
-                id="grupo_nombre">
-                <option value="">Seleccione uno</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
-                <option value="E">E</option>
-                <option value="F">F</option>
-              </select>
-              <span>Seleccione nombre del grupo</span>
-            </label>
-          </div>
-
-          <div class="col-md-3">
-          </div>
-
-          <div class="col-md-4" style="display: none" id="cantidad_alumnos_oculto">
-            <label id="cantidad_alumnos">Cantidad de alumnos:</label>
-
-          </div>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <div class="row">
-        
-          <div class="col-md-4">
-          <label class="form-group has-float-label">
-              <select class="form-control form-control-lg"  name="grupo_periodo"
-                id="grupo_periodo">
-                <option value="">Seleccione uno</option>
-                <option value="A">Agosto-Diciembre</option>
-                <option value="B">Enero-Julio</option>
-              </select>
-              <span>Periodo del grupo</span>
+              <span>Seleccione un grupo</span>
             </label>
           </div>
 
             <div class="col-md-4 offset-md-3">
-              <button type="button" class="btn btn-success btn-lg btn-block" onclick="validarcomponente()" style="padding: 1rem" id="crear_grupo">Crear grupo</button>
+              <button type="button" class="btn btn-success btn-lg btn-block" onclick="validarcomponente()" style="padding: 1rem" id="crear_grupo">Mostrar grupo</button>
             </div>
           </div>
         </div>
@@ -214,12 +121,12 @@ function llenar_especialidad(){
 }
 
 function validarcomponente(){
-if (document.getElementById("semestre_grupo").value === "5" || document.getElementById("semestre_grupo").value === "6") {
-  if(document.getElementById("plantel").value != '' && document.getElementById("semestre_grupo").value != '' && document.getElementById("grupo_ciclo_escolar").value != '' && document.getElementById("grupo_nombre").value != "" && document.getElementById("seleccione_componente").value != "" && document.getElementById("grupo_componente").value != ""){
+if (document.getElementById("grupos").value === "5" || document.getElementById("grupos").value === "6") {
+  if(document.getElementById("plantel").value != '' && document.getElementById("grupos").value != '' && document.getElementById("grupo_ciclo_escolar").value != '' && document.getElementById("grupo_nombre").value != "" && document.getElementById("seleccione_componente").value != "" && document.getElementById("grupo_componente").value != ""){
     document.getElementById("tabla").innerHTML = "";
     document.getElementById("grupo_nombre").disabled = true;
     document.getElementById("grupo_periodo").disabled = true;
-    document.getElementById("semestre_grupo").disabled = true;
+    document.getElementById("grupos").disabled = true;
     document.getElementById("plantel").disabled = true;
     document.getElementById("grupo_ciclo_escolar").disabled = true;
     document.getElementById("seleccione_componente").disabled = true;
@@ -234,11 +141,11 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
     }
 
   }else{
-    if(document.getElementById("plantel").value != '' && document.getElementById("semestre_grupo").value != '' && document.getElementById("grupo_ciclo_escolar").value != '' && document.getElementById("grupo_nombre").value != ""){
+    if(document.getElementById("plantel").value != '' && document.getElementById("grupos").value != '' && document.getElementById("grupo_ciclo_escolar").value != '' && document.getElementById("grupo_nombre").value != ""){
     document.getElementById("tabla").innerHTML = "";
     document.getElementById("grupo_nombre").disabled = true;
     document.getElementById("grupo_periodo").disabled = true;
-    document.getElementById("semestre_grupo").disabled = true;
+    document.getElementById("grupos").disabled = true;
     document.getElementById("plantel").disabled = true;
     document.getElementById("grupo_ciclo_escolar").disabled = true;
     alerta_grupo();
@@ -253,7 +160,7 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
 
   function buscar() { 
     var xhr = new XMLHttpRequest();
-    var semestre = document.getElementById("semestre_grupo").value;
+    var semestre = document.getElementById("grupos").value;
     var plantel = document.getElementById("plantel").value;
     var query = 'semestre=' + semestre + '&plantel=' + plantel;
     xhr.open('GET', '<?php echo base_url();?>index.php/c_acreditacion/get_estudiantes_plantel_semestre?' + query, true);
@@ -352,17 +259,8 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
 
 
   function alerta_grupo(){
-
-    if(parseInt(document.getElementById("semestre_grupo"))<5){
-      var id_grupo = document.getElementById("plantel").value+document.getElementById("semestre_grupo").value+document.getElementById("grupo_ciclo_escolar").value+document.getElementById("grupo_nombre").value.toUpperCase();
-    }
-
-    else{
-      var valor_componente = document.getElementById("seleccione_componente").value;
-      var nombre_corto_componente = valor_componente.split("-")[1];
-      var id_grupo = document.getElementById("plantel").value+document.getElementById("semestre_grupo").value+document.getElementById("grupo_ciclo_escolar").value+document.getElementById("grupo_nombre").value.toUpperCase()+"-"+nombre_corto_componente;
-    }
     
+    var id_grupo = document.getElementById("plantel").value+document.getElementById("grupos").value+document.getElementById("grupo_ciclo_escolar").value+document.getElementById("grupo_nombre").value.toUpperCase();
     var xhr = new XMLHttpRequest();
       xhr.open('GET', '<?php echo base_url();?>index.php/c_grupo/get_existe_grupo?id_grupo='+id_grupo, true);
       xhr.onload = function () {
@@ -406,10 +304,9 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
     
     var datos_grupo = {
       plantel:document.getElementById("plantel").value,
-      semestre:parseInt(document.getElementById("semestre_grupo").value),
+      semestre:parseInt(document.getElementById("grupos").value),
       nombre_grupo:document.getElementById("grupo_nombre").value,
-      ciclo_escolar:document.getElementById("grupo_ciclo_escolar").value,
-      componente:document.getElementById("seleccione_componente").value
+      ciclo_escolar:document.getElementById("grupo_ciclo_escolar").value
     };
 
     var alumnos = document.getElementById("tabla_completa_grupo").children[2].children;
@@ -422,7 +319,6 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
       grupo:datos_grupo,
       alumnos:alumnos_json
     }
-
     var xhr = new XMLHttpRequest();
       xhr.open("POST", '<?php echo base_url();?>index.php/c_acreditacion/agregar_grupo', true);
       //Send the proper header information along with the request
@@ -461,18 +357,11 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
           }
       }
       var datos = {
-        id_grupo:document.getElementById("plantel").value+document.getElementById("semestre_grupo").value+document.getElementById("grupo_ciclo_escolar").value+document.getElementById("grupo_nombre").value.toUpperCase(),
+        id_grupo:document.getElementById("plantel").value+document.getElementById("grupos").value+document.getElementById("grupo_ciclo_escolar").value+document.getElementById("grupo_nombre").value.toUpperCase(),
         estudiantes:estudiantes,
-        semestre:document.getElementById("semestre_grupo").value,
-        ciclo_escolar:document.getElementById("grupo_ciclo_escolar").value,
-        componente:document.getElementById("seleccione_componente").value.split("-")[1],
-        id_componente:document.getElementById("seleccione_componente").value.split("-")[0]
+        semestre:document.getElementById("grupos").value,
+        ciclo_escolar:document.getElementById("grupo_ciclo_escolar").value
       };
-
-
-
-
-
       var xhr = new XMLHttpRequest();
         xhr.open("POST", '<?php echo base_url();?>index.php/c_acreditacion/agregar_estudiantes_grupo', true);
         //Send the proper header information along with the request
@@ -525,7 +414,7 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
 
           document.getElementById("grupo_nombre").disabled = true;
           document.getElementById("grupo_periodo").disabled = true;
-          document.getElementById("semestre_grupo").disabled = true;
+          document.getElementById("grupos").disabled = true;
           document.getElementById("plantel").disabled = true;
           document.getElementById("grupo_ciclo_escolar").disabled = true;
           document.getElementById("id_grupo").value = xhr.responseText;

@@ -462,8 +462,15 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
         id_grupo:document.getElementById("plantel").value+document.getElementById("semestre_grupo").value+document.getElementById("grupo_ciclo_escolar").value+document.getElementById("grupo_nombre").value.toUpperCase(),
         estudiantes:estudiantes,
         semestre:document.getElementById("semestre_grupo").value,
-        ciclo_escolar:document.getElementById("grupo_ciclo_escolar").value
+        ciclo_escolar:document.getElementById("grupo_ciclo_escolar").value,
+        componente:document.getElementById("seleccione_componente").value.split("-")[1],
+        id_componente:document.getElementById("seleccione_componente").value.split("-")[0]
       };
+
+
+
+
+
       var xhr = new XMLHttpRequest();
         xhr.open("POST", '<?php echo base_url();?>index.php/c_acreditacion/agregar_estudiantes_grupo', true);
         //Send the proper header information along with the request

@@ -79,14 +79,25 @@ class M_acreditacion extends CI_Model {
 
    public function agregar_estudiantes_grupo($datos){
     $this->db->trans_start();
-    $materias = $this->M_materia->get_materias_semestre($datos->semestre);
+
+    if($datos->semestre<5){
+        $materias = $this->M_materia->get_materias_semestre($datos->semestre);
+        $id_grupo=$datos->id_grupo;
+    }
+
+    else{
+        $materias = $this->M_materia->get_materias_semestre_componente($datos->semestre,$datos->id_componente);
+        $id_grupo=$datos->id_grupo.'-'.$datos->componente;
+    }
+
+    
 
     foreach(($datos->estudiantes) as $estudiante){
 
         foreach($materias as $materia){
 
             $this->db->insert('Grupo_Estudiante',array(
-                'Grupo_id_grupo'=>$datos->id_grupo,
+                'Grupo_id_grupo'=>$id_grupo,
                 'Estudiante_no_control'=>$estudiante,
                 'Ciclo_escolar_id_ciclo_escolar'=>$datos->ciclo_escolar,
                 'id_materia'=>$materia->clave,

@@ -188,6 +188,18 @@ public function portabilidad(){
         $this->load->view("admin/creargrupo", $datos);
         $this->load->view("footers/footer");
     }
+
+    public function buscar_grupo(){
+        $datos['planteles'] = $this->M_plantel->get_planteles();
+        $datos['ciclo_escolar'] = $this->M_ciclo_escolar->get_ciclo_escolar();
+        
+        $data= array('title'=>'Buscador de grupos');
+        $this->load->view("headers/cabecera", $data);
+        $this->load->view("headers/menuarriba");
+        $this->load->view("headers/menuizquierda");
+        $this->load->view("admin/buscar_grupo", $datos);
+        $this->load->view("footers/footer");
+    }
     public function asesor_grupo(){
         $datos['planteles'] = $this->M_plantel->get_planteles();
     

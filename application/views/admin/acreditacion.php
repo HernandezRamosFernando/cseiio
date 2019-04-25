@@ -20,7 +20,7 @@
             </a>
           </div>
           <div class="col  col-lg-4">
-          <a href="<?php echo base_url();?>index.php/c_vistas/"
+          <a href="<?php echo base_url();?>index.php/c_vistas/buscar_grupo"
               class="btn btn-primary btn-lg btn-block menu valign-center btn-2 btn-responsive">
               <i class="material-icons"></i>&nbsp;
               Buscar Grupo

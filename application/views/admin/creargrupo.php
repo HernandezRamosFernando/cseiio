@@ -129,13 +129,17 @@
 
       <div class="form-group">
         <div class="row">
+        
           <div class="col-md-4">
-            <div class="form-label-group">
-              <input type="text"="" pattern="[A-Za-z]+[-]*[A-Za-z ]*" title="Introduzca solo letras"
-                class="form-control text-uppercase" id="grupo_periodo" name="grupo_periodo"
-                placeholder="Periodo del grupo(s)">
-              <label for="grupo_periodo">Perido del grupo</label>
-            </div>
+          <label class="form-group has-float-label">
+              <select class="form-control form-control-lg"  name="grupo_periodo"
+                id="grupo_periodo">
+                <option value="">Seleccione uno</option>
+                <option value="A">Agosto-Diciembre</option>
+                <option value="B">Enero-Julio</option>
+              </select>
+              <span>Periodo del grupo</span>
+            </label>
           </div>
 
             <div class="col-md-4 offset-md-3">
@@ -348,7 +352,17 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
 
 
   function alerta_grupo(){
-    var id_grupo = document.getElementById("plantel").value+document.getElementById("semestre_grupo").value+document.getElementById("grupo_ciclo_escolar").value+document.getElementById("grupo_nombre").value.toUpperCase();
+
+    if(parseInt(document.getElementById("semestre_grupo"))<5){
+      var id_grupo = document.getElementById("plantel").value+document.getElementById("semestre_grupo").value+document.getElementById("grupo_ciclo_escolar").value+document.getElementById("grupo_nombre").value.toUpperCase();
+    }
+
+    else{
+      var valor_componente = document.getElementById("seleccione_componente").value;
+      var nombre_corto_componente = valor_componente.split("-")[1];
+      var id_grupo = document.getElementById("plantel").value+document.getElementById("semestre_grupo").value+document.getElementById("grupo_ciclo_escolar").value+document.getElementById("grupo_nombre").value.toUpperCase()+"-"+nombre_corto_componente;
+    }
+    
     var xhr = new XMLHttpRequest();
       xhr.open('GET', '<?php echo base_url();?>index.php/c_grupo/get_existe_grupo?id_grupo='+id_grupo, true);
       xhr.onload = function () {

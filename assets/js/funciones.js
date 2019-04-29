@@ -320,13 +320,6 @@ function eliminar_aspirante(e) {
   //console.log(boton);
 }
 
-function eliminar_grupo(e) {
-  
-  boton = "";
-  boton = e;
-  
-}
-
 function formato_tabla() {
   $('#tabla_completa').DataTable({
     //"order": [[ 0, 'desc' ]],

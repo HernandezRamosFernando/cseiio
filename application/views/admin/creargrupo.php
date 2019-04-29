@@ -380,13 +380,10 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
       var nombre_corto_componente = valor_componente.split("-")[1];
       var id_grupo = document.getElementById("plantel").value+document.getElementById("semestre_grupo").value+document.getElementById("grupo_ciclo_escolar").value+document.getElementById("grupo_periodo").value+document.getElementById("grupo_nombre").value.toUpperCase()+"-"+nombre_corto_componente;
     }
-<<<<<<< HEAD
-=======
 
     console.log(id_grupo);
     console.log(document.getElementById("semestre_grupo"));
     
->>>>>>> 95c77a28c5f7c792dc22b60d4e2e7367c7cd3457
     var xhr = new XMLHttpRequest();
       xhr.open('GET', '<?php echo base_url();?>index.php/c_grupo/get_existe_grupo?id_grupo='+id_grupo, false);
       xhr.onload = function () {

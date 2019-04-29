@@ -408,13 +408,13 @@ function cambiardetabla(e) {
     }
 
     else{
-      alert("grupo lleno");
+      Swal.fire({
+        type: 'error',
+        title: 'Cupo de grupo lleno'
+      });
     }
+  }
 
-
-
-  
-}
 
 function regresartabla(e) {
   var tr = $(e).parents("tr").appendTo("#tabla_completa tbody");

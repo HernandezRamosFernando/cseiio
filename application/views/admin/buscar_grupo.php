@@ -291,7 +291,6 @@ if (document.getElementById("grupos").value === "5" || document.getElementById("
     document.getElementById('tabla_alumnos').classList.add('col-md-12');
   }
 
-
   function enviar_formulario(){
     if(document.getElementById("boton_agregar").value==="nuevo"){
     

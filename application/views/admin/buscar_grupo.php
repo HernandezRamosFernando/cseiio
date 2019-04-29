@@ -41,40 +41,56 @@
 
           <div class="col-md-4">
             <label class="form-group has-float-label">
-              <select class="form-control form-control-lg" onchange="numero_alumnos(this)" name="grupos"
+              <select class="form-control form-control-lg" onchange="cargargrupos()" name="semestre_grupo"
+                id="semestre_grupo">
+                <option value="">Seleccione uno</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+              </select>
+              <span>Seleccione el semestre del grupo a  buscar</span>
+            </label>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="row">
+
+          <div class="col-md-4">
+            <label class="form-group has-float-label">
+              <select class="form-control form-control-lg"  name="grupos"
                 id="grupos">
                 <option value="">Seleccione uno</option>
               </select>
-              <span>Seleccione un grupo</span>
+              <span>Lista de grupos</span>
             </label>
           </div>
 
             <div class="col-md-4 offset-md-3">
-              <button type="button" class="btn btn-success btn-lg btn-block" onclick="validarcomponente()" style="padding: 1rem" id="crear_grupo">Mostrar grupo</button>
+              <button type="button" class="btn btn-success btn-lg btn-block" onclick="buscar_estudiantes_grupo()" style="padding: 1rem" id="crear_grupo">Mostrar grupo</button>
             </div>
+          </div>
+        </div>
+
+        <div class="row" id="botones" style="display:none">
+          <div class="col-md-6">
+            <button type="button" class="btn btn-success btn-lg btn-block" onclick="btnagregar_alumnos();" style="padding: 1rem" id="agregar_alumnos">Agregar alumnos al grupo</button>
+          </div>
+          <div class="col-md-6">
+            <button type="button" class="btn btn-warning btn-lg btn-block" onclick="" style="padding: 1rem" id="quitar_alumnos">Quitar alumnos al grupo</button>
           </div>
         </div>
 
 
       <div class="row" id="alumnos_oculto" style="display:none">
-      <div class=" col-md-6">
-        <div class="card card-body">
-          <table class="table table-hover" id="tabla_completa" style="width: 100%">
-            <caption>Lista de todos los alumnos de este semestre sin grupo</caption>
-            <thead class="thead-light">
-              <tr>
-                <th scope="col" class="col-md-1">Nombre completo</th>
-                <th scope="col" class="col-md-1">N° control</th>
-                <th scope="col" class="col-md-1">Agregar</th>
-              </tr>
-            </thead>
-            <tbody id="tabla">
-            </tbody>
-          </table>
-        </div>
-      </div>
+      
 
-      <div class="col-md-6">
+      <div class="col-md-6" id="tabla_alumnos">
         <div class="card card-body">
           <table class="table table-hover" id="tabla_completa_grupo" style="width: 100%">
             <caption>Lista del Grupo creado</caption>
@@ -92,6 +108,24 @@
           </table>
         </div>
       </div>
+
+      <div class="col-md-6" style="display:none" id="tabla_completa_alumnos">
+        <div class="card card-body" >
+          <table class="table table-hover" id="tabla_completa" style="width: 100%">
+            <caption>Lista de todos los alumnos de este semestre sin grupo</caption>
+            <thead class="thead-light">
+              <tr>
+                <th scope="col" class="col-md-1">Nombre completo</th>
+                <th scope="col" class="col-md-1">N° control</th>
+                <th scope="col" class="col-md-1">Agregar</th>
+              </tr>
+            </thead>
+            <tbody id="tabla">
+            </tbody>
+          </table>
+        </div>
+      </div>
+
      </div>
    </form>
     <br>
@@ -105,20 +139,52 @@
 
 
 <script>
-
-function llenar_especialidad(){
-  seleccione_componente.innerHTML = "Cargando datos";
-  document.getElementById("plantel").setAttribute("onchange", "llenar_especialidad();");
-  var xhr = new XMLHttpRequest();
-  var plantel = document.getElementById("plantel").value;
-  xhr.open('GET', '<?php echo base_url();?>index.php/c_plantel/get_plantel_especialidad_html?plantel=' + plantel , true);
-  xhr.onload = function(){
-    console.log(xhr.response);
-    seleccione_componente.innerHTML = xhr.responseText;
-    
-  };
-  xhr.send(null);
+function cargargrupos() 
+{
+  if (document.getElementById("plantel").value === "") {
+      Swal.fire({
+        type: 'info',
+        title: 'Debe seleccionar un plantel',
+        showConfirmButton: false,
+        timer: 2500
+      });
+    }else{
+      var xhr = new XMLHttpRequest();
+      var plantel = document.getElementById("plantel").value;
+      console.log(plantel);
+  
+      var semestre = document.getElementById("semestre_grupo").value;
+      console.log(semestre);
+      grupos.innerHTML="";
+      xhr.open('GET', '<?php echo base_url();?>index.php/c_plantel/get_grupos_plantel_html?plantel=' + plantel + '&semestre='+ semestre , true);
+      xhr.onload = function(){
+       if(xhr.response === ""){
+       var option = document.createElement("option");
+       option.text = "Ningun grupo creado";
+       option.value = "";
+       grupos.add(option); 
+       }else{
+        console.log(xhr.response);
+         grupos.innerHTML = xhr.responseText;
+        }
+        };  
+       xhr.send(null);
+    }
 }
+
+function btnagregar_alumnos() {
+  document.getElementById('agregar_alumnos').classList.remove('btn-success');
+  document.getElementById('agregar_alumnos').classList.add('btn-dark');
+  document.getElementById('agregar_alumnos').disabled = true;
+  document.getElementById('quitar_alumnos').style.display = "none";
+  document.getElementById('tabla_completa_alumnos').style.display = "";
+  document.getElementById('tabla_alumnos').classList.remove('col-md-12');
+  document.getElementById('tabla_alumnos').classList.add('col-md-6');
+  buscar();
+  
+}
+
+
 
 function validarcomponente(){
 if (document.getElementById("grupos").value === "5" || document.getElementById("grupos").value === "6") {
@@ -160,7 +226,7 @@ if (document.getElementById("grupos").value === "5" || document.getElementById("
 
   function buscar() { 
     var xhr = new XMLHttpRequest();
-    var semestre = document.getElementById("grupos").value;
+    var semestre = document.getElementById("semestre_grupo").value;
     var plantel = document.getElementById("plantel").value;
     var query = 'semestre=' + semestre + '&plantel=' + plantel;
     xhr.open('GET', '<?php echo base_url();?>index.php/c_acreditacion/get_estudiantes_plantel_semestre?' + query, true);
@@ -190,7 +256,9 @@ if (document.getElementById("grupos").value === "5" || document.getElementById("
     document.getElementById('alumnos_oculto').style.display = "";
   }
 
-  function buscar_estudiantes_grupo(idgrupo) {
+  function buscar_estudiantes_grupo() {
+    idgrupo=document.getElementById("grupos").value;
+    console.log(idgrupo);
     document.getElementById("tablagrupo").innerHTML = "";
     
     var xhr = new XMLHttpRequest();
@@ -217,87 +285,12 @@ if (document.getElementById("grupos").value === "5" || document.getElementById("
     document.getElementById('crear_grupo').classList.remove('btn-success');
     document.getElementById('crear_grupo').classList.add('btn-dark');
     document.getElementById('crear_grupo').disabled = true;
+    document.getElementById('alumnos_oculto').style.display = "";
+    document.getElementById('botones').style.display = "";
+    document.getElementById('tabla_alumnos').classList.remove('col-md-6');
+    document.getElementById('tabla_alumnos').classList.add('col-md-12');
   }
 
-
-
-  function numero_alumnos(e) {
-    if (document.getElementById("plantel").value === "") {
-      Swal.fire({
-        type: 'info',
-        title: 'Debe seleccionar un plantel',
-        showConfirmButton: false,
-        timer: 2500
-      });
-    }
-
-    else {
-      componente_grupo(e);
-     
-      var xhr = new XMLHttpRequest();
-      xhr.open('GET', '<?php echo base_url();?>index.php/c_acreditacion/numero_estudiantes_semestre_plantel?semestre=' + e.value + '&cct=' + document.getElementById("plantel").value, true);
-
-      xhr.onload = function () {
-        document.getElementById("cantidad_alumnos_oculto").style.display = "";
-        //console.log(xhr.response);
-        var cAlumnos = JSON.parse(xhr.response)[0].total_estudiante;
-        if (cAlumnos <= 35) {
-          document.getElementById("cantidad_alumnos").innerHTML = "La cantidad de Alumnos registrados en este semestre es: " + cAlumnos + " se recomienda crear 1 grupo";
-        } else {
-          var cGrupos = parseInt(cAlumnos / 35);
-          document.getElementById("cantidad_alumnos").innerHTML = "La cantidad de Alumnos registrados en este semestre es: " + cAlumnos + " se recomienda crear " + cGrupos + " grupos";
-          console.log(cGrupos);
-
-        }
-      };
-
-      xhr.send(null);
-    }
-
-
-  }
-
-
-  function alerta_grupo(){
-    
-    var id_grupo = document.getElementById("plantel").value+document.getElementById("grupos").value+document.getElementById("grupo_ciclo_escolar").value+document.getElementById("grupo_nombre").value.toUpperCase();
-    var xhr = new XMLHttpRequest();
-      xhr.open('GET', '<?php echo base_url();?>index.php/c_grupo/get_existe_grupo?id_grupo='+id_grupo, true);
-      xhr.onload = function () {
-        console.log(JSON.parse(xhr.response)[0]);
-        if(JSON.parse(xhr.response).length===0){
-          swalWithBootstrapButtons.fire({
-            type: 'info',
-            title: 'Agregue estudiantes al grupo creado',
-            confirmButtonText:'Agregar'
-          });
-          buscar();
-         
-        }
-        else if(35-JSON.parse(xhr.response)[0].total_alumnos>0){
-          swalWithBootstrapButtons.fire({
-            type: 'warning',
-            title: 'El grupo ya existe y tiene '+(35-JSON.parse(xhr.response)[0].total_alumnos)+" lugares libres",
-            confirmButtonText:'Agregar estudiantes al grupo',
-            showCancelButton: true,
-            cancelButtonText: 'Cerrar'
-          }).then(function(result){
-              if(result.value){
-                  buscar();
-                  buscar_estudiantes_grupo(id_grupo);
-                  document.getElementById("boton_agregar").value="existente";
-              }
-          });
-        }
-        else{
-          Swal.fire({
-            type: 'warning',
-            title: 'El grupo ya existe y se encuentra lleno'
-          });
-        }
-      };
-      xhr.send(null);
-}
 
   function enviar_formulario(){
     if(document.getElementById("boton_agregar").value==="nuevo"){
@@ -392,56 +385,6 @@ if (document.getElementById("grupos").value === "5" || document.getElementById("
     }
 
   }
-/*
-  var form = document.getElementById("formulario");
-  form.onsubmit = function (e) {
-    e.preventDefault();
-    var formdata = new FormData(form);
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "<?php echo base_url();?>index.php/c_acreditacion/agregar_grupo", true);
-    xhr.onreadystatechange = function () {
-      if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-        console.log(xhr.responseText);
-        if (xhr.responseText.trim() !== "no") {
-          Swal.fire({
-            type: 'success',
-            title: 'Grupo creado Exitosamente',
-            showConfirmButton: false,
-            timer: 2500
-          });
 
-          //document.getElementById("formulario").reset();
-
-          document.getElementById("grupo_nombre").disabled = true;
-          document.getElementById("grupo_periodo").disabled = true;
-          document.getElementById("grupos").disabled = true;
-          document.getElementById("plantel").disabled = true;
-          document.getElementById("grupo_ciclo_escolar").disabled = true;
-          document.getElementById("id_grupo").value = xhr.responseText;
-        }
-
-        else {
-          Swal.fire({
-            type: 'error',
-            title: 'No se puede crear el grupo',
-            showConfirmButton: false,
-            timer: 2500
-          });
-        }
-      }
-
-    }
-    xhr.send(formdata);
-
-
-		
-	}
-*/
 </script>
-
-
-
-
-
-
 </html>

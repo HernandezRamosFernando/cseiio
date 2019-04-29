@@ -215,7 +215,7 @@ function llenar_especialidad(){
 
 function validarcomponente(){
 if (document.getElementById("semestre_grupo").value === "5" || document.getElementById("semestre_grupo").value === "6") {
-  if(document.getElementById("plantel").value != '' && document.getElementById("semestre_grupo").value != '' && document.getElementById("grupo_ciclo_escolar").value != '' && document.getElementById("grupo_nombre").value != "" && document.getElementById("seleccione_componente").value != "" && document.getElementById("grupo_componente").value != ""){
+  if(document.getElementById("plantel").value != '' && document.getElementById("grupo_periodo").value != '' && document.getElementById("semestre_grupo").value != '' && document.getElementById("grupo_ciclo_escolar").value != '' && document.getElementById("grupo_nombre").value != "" && document.getElementById("seleccione_componente").value != "" && document.getElementById("grupo_componente").value != ""){
     document.getElementById("tabla").innerHTML = "";
     document.getElementById("grupo_nombre").disabled = true;
     document.getElementById("grupo_periodo").disabled = true;
@@ -234,7 +234,7 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
     }
 
   }else{
-    if(document.getElementById("plantel").value != '' && document.getElementById("semestre_grupo").value != '' && document.getElementById("grupo_ciclo_escolar").value != '' && document.getElementById("grupo_nombre").value != ""){
+    if(document.getElementById("plantel").value != '' && document.getElementById("grupo_periodo").value != '' && document.getElementById("semestre_grupo").value != '' && document.getElementById("grupo_ciclo_escolar").value != '' && document.getElementById("grupo_nombre").value != ""){
     document.getElementById("tabla").innerHTML = "";
     document.getElementById("grupo_nombre").disabled = true;
     document.getElementById("grupo_periodo").disabled = true;

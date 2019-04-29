@@ -389,12 +389,31 @@ console.log(diff/(1000*60*60*24) );
 }
 
 function cambiardetabla(e) {
-  var tr = $(e).parents("tr").appendTo("#tabla_completa_grupo tbody");
-  e.className = "";
-  e.className = "btn btn-lg btn-block btn-danger";
-  e.innerText = "";
-  e.innerText = "Eliminar";
-  e.setAttribute("onClick", "regresartabla(this);");
+
+  var alumnos = document.getElementById("tabla_completa_grupo").children[2].children;
+    var alumnos_json = new Array();
+    for(let i=0;i<alumnos.length;i++){
+      alumnos_json.push(alumnos[i].children[1].innerText);
+    }
+
+    console.log(alumnos_json);
+
+    if(alumnos_json.length<35){
+      var tr = $(e).parents("tr").appendTo("#tabla_completa_grupo tbody");
+      e.className = "";
+      e.className = "btn btn-lg btn-block btn-danger";
+      e.innerText = "";
+      e.innerText = "Eliminar";
+      e.setAttribute("onClick", "regresartabla(this);");
+    }
+
+    else{
+      alert("grupo lleno");
+    }
+
+
+
+  
 }
 
 function regresartabla(e) {

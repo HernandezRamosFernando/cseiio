@@ -358,7 +358,6 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
           var cGrupos = parseInt(cAlumnos / 35);
           cGrupos = cGrupos + 1;
           document.getElementById("cantidad_alumnos").innerHTML = "La cantidad de Alumnos registrados en este semestre es: " + cAlumnos + " se recomienda crear " + cGrupos  + " grupos";
-          console.log(cGrupos);
 
         }
       };
@@ -372,7 +371,7 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
 
   function alerta_grupo(){
 
-    if(parseInt(document.getElementById("semestre_grupo"))<5){
+    if(parseInt(document.getElementById("semestre_grupo").value)<5){
       var id_grupo = document.getElementById("plantel").value+document.getElementById("semestre_grupo").value+document.getElementById("grupo_ciclo_escolar").value+document.getElementById("grupo_periodo").value+document.getElementById("grupo_nombre").value.toUpperCase();
     }
     else{
@@ -383,7 +382,7 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
     var xhr = new XMLHttpRequest();
       xhr.open('GET', '<?php echo base_url();?>index.php/c_grupo/get_existe_grupo?id_grupo='+id_grupo, true);
       xhr.onload = function () {
-        console.log(JSON.parse(xhr.response)[0]);
+        console.log(xhr.response);
         if(JSON.parse(xhr.response).length===0){
           swalWithBootstrapButtons.fire({
             type: 'info',

@@ -319,7 +319,7 @@ if (document.getElementById("grupos").value === "5" || document.getElementById("
         fila += valor.no_control;
         fila += '</td>';
         fila += '<td class="">';
-        fila += '<button class="btn btn-lg btn-block btn-danger" type="button" value="' + valor.no_control + '" id="botoncambio" >Eliminar</button>';
+        fila += '<button class="btn btn-lg btn-block btn-danger" type="button" value="' + valor.no_control + '" id="botoncambio" onclick="eliminar()" >Eliminar</button>';
         fila += '</td>';
         fila += '</tr>';
         document.getElementById("tablagrupo").innerHTML += fila;
@@ -336,6 +336,17 @@ if (document.getElementById("grupos").value === "5" || document.getElementById("
     document.getElementById('tabla_alumnos').classList.add('col-md-12');
   }
   function enviar_formulario(){
+  }
+
+
+  function eliminar(){
+    var alumnos = document.getElementById("tabla_completa_grupo").children[2].children;
+    var alumnos_json = new Array();
+    for(let i=0;i<alumnos.length;i++){
+      alumnos_json.push(alumnos[i].children[1].innerText);
+    }
+
+    console.log(alumnos_json);
   }
 
 </script>

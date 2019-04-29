@@ -372,7 +372,7 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
 
   function alerta_grupo(){
 
-    if(parseInt(document.getElementById("semestre_grupo"))<5){
+    if(parseInt(document.getElementById("semestre_grupo").value)<5){
       var id_grupo = document.getElementById("plantel").value+document.getElementById("semestre_grupo").value+document.getElementById("grupo_ciclo_escolar").value+document.getElementById("grupo_periodo").value+document.getElementById("grupo_nombre").value.toUpperCase();
     }
     else{
@@ -383,7 +383,12 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
     var xhr = new XMLHttpRequest();
       xhr.open('GET', '<?php echo base_url();?>index.php/c_grupo/get_existe_grupo?id_grupo='+id_grupo, true);
       xhr.onload = function () {
-        console.log(JSON.parse(xhr.response)[0]);
+///////////////////////////////////////////////////////////////
+        console.log(JSON.parse(xhr.response));
+        console.log(JSON.parse(xhr.response).length);
+        console.log(id_grupo);
+
+
         if(JSON.parse(xhr.response).length===0){
           swalWithBootstrapButtons.fire({
             type: 'info',
@@ -418,7 +423,19 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
 }
 
   function enviar_formulario(){
-    if(document.getElementById("boton_agregar").value==="nuevo"){
+    var alumnos = document.getElementById("tabla_completa_grupo").children[2].children;
+    var alumnos_json = new Array();
+    for(let i=0;i<alumnos.length;i++){
+      alumnos_json.push(alumnos[i].children[1].innerText);
+    }
+
+    console.log(alumnos_json);
+    if(alumnos_json.length===0){
+      alert("no puede crear grupos vacios");
+    }
+
+    else{
+      if(document.getElementById("boton_agregar").value==="nuevo"){
     
     var datos_grupo = {
       plantel:document.getElementById("plantel").value,
@@ -518,6 +535,9 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
         xhr.send(JSON.stringify(datos));
 
     }
+    }
+
+    
 
   }
 /*

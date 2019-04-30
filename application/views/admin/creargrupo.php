@@ -508,13 +508,19 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
             console.log(xhr.response);
             $('#div_carga').hide();
             if (xhr.responseText.trim() === "si") {      
-                Swal.fire({
-                  type: 'success',
-                  title: 'Datos agregados correctamente'
-                 });
-                 setTimeout(location.reload.bind(location), 2500); 
-                 document.getElementById("tabla").innerHTML = "";
-                 document.getElementById("tablagrupo").innerHTML = "";
+              console.log(xhr.response);
+                swalWithBootstrapButtons.fire({
+                type: 'success',
+                text: 'Datos agregados correctamente',
+                confirmButtonText: 'Aceptar'
+                }).then((result) => {
+                if (result.value) {
+                 //aqui va el aceptar
+                 setTimeout(location.reload.bind(location), 500); 
+
+                 }
+                    //aqui va si cancela
+                });
                }else{
                 Swal.fire({
                   type: 'error',
@@ -564,14 +570,18 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
               $('#div_carga').hide();
               if (xhr.responseText.trim() === "si") {
                 console.log(xhr.response);
-                Swal.fire({
-                  type: 'success',
-                  title: 'Datos agregados correctamente',
-                  showConfirmButton: false,
-                 });
+                swalWithBootstrapButtons.fire({
+                type: 'success',
+                text: 'Datos agregados correctamente',
+                confirmButtonText: 'Aceptar'
+                }).then((result) => {
+                if (result.value) {
+                 //aqui va el aceptar
+                 setTimeout(location.reload.bind(location), 500); 
 
-                 setTimeout(location.reload.bind(location), 2500); 
-                 
+                 }
+                    //aqui va si cancela
+                });
 
                }else{
                 Swal.fire({

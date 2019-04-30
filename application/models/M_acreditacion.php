@@ -80,9 +80,10 @@ class M_acreditacion extends CI_Model {
 
    public function agregar_estudiantes_grupo_editado($datos){
 
-    $id_componente = $this->M_componente->get_id_componente(explode("-",$datos->id_grupo)[1])[0]->id_componente;
+    
     $id_ciclo = $this->M_grupo->get_id_ciclo_grupo($datos->id_grupo)[0]->Ciclo_escolar_id_ciclo_escolar;
     $this->db->trans_start();
+
     if($datos->semestre<5){
         $materias = $this->M_materia->get_materias_semestre($datos->semestre);
         
@@ -90,6 +91,7 @@ class M_acreditacion extends CI_Model {
 
     else{
         $materias = $this->M_materia->get_materias_semestre_componente($datos->semestre,$id_componente);
+        $id_componente = $this->M_componente->get_id_componente(explode("-",$datos->id_grupo)[1])[0]->id_componente;
     }
 
 

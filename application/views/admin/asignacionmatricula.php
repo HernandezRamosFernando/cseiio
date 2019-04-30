@@ -112,8 +112,14 @@
     var plantel = document.getElementById("aspirante_plantel_busqueda").value;
     var query = 'curp=' + curp + '&plantel=' + plantel;
     xhr.open('GET', '<?php echo base_url();?>index.php/c_estudiante/estudiantes_sin_matricula?' + query, true);
-
-    xhr.onload = function () {
+    xhr.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      xhr.error = function (){
+        console.log("error de conexion");
+      }
+      xhr.onload = function(){
+        $('#div_carga').hide();
       //console.log(JSON.parse(xhr.response));
       ////console.log(query);
 
@@ -167,8 +173,14 @@
   function asignar_matricula(e) {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', '<?php echo base_url();?>index.php/c_estudiante/insertar_estudiante?no_control=' + e.value, true);
-
-    xhr.onload = function () {
+    xhr.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      xhr.error = function (){
+        console.log("error de conexion");
+      }
+      xhr.onload = function(){
+        $('#div_carga').hide();
       console.log(xhr.responseText);
 
       if (xhr.responseText.trim() !== "no") {

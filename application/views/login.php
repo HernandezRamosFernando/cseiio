@@ -67,9 +67,16 @@
     var formdata = new FormData(form);
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "<?php echo base_url();?>index.php/c_usuario/login", true);
+    xhr.onloadstart = function(){
+        $('#div_carga').show();
+      }
+    xhr.error = function (){
+        console.log("error de conexion");
+      }
     xhr.onreadystatechange = async function () {
       if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
         //console.log(xhr.responseText);
+        $('#div_carga').hide();
         if (xhr.responseText === "") {
           Swal.fire({
             type: 'success',

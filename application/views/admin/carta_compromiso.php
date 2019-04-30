@@ -153,8 +153,14 @@
 
       var dias = new XMLHttpRequest();
       dias.open('GET', '<?php echo base_url();?>index.php/c_documentacion/get_dias_ultima_carta_compromiso_estudiante?no_control=' + e.value, true);
-
-      dias.onload = function () {
+      dias.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      dias.error = function (){
+        console.log("error de conexion");
+      }
+      dias.onload = function(){
+        $('#div_carga').hide();
         //console.log(JSON.parse(dias.response)[0].dias);
         console.log(dias.response);
         if (JSON.parse(dias.response)[0].dias === null || JSON.parse(dias.response)[0].dias > 30) {
@@ -210,7 +216,14 @@
       var carta_compromiso = new XMLHttpRequest();
           carta_compromiso.open('GET', '<?php echo base_url();?>index.php/c_documentacion/generar_carta_compromiso?no_control=' + document.getElementById("no_control").value, true);
           carta_compromiso.responseType = "arraybuffer";
-          carta_compromiso.onload = function () {
+          carta_compromiso.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      carta_compromiso.error = function (){
+        console.log("error de conexion");
+      }
+      carta_compromiso.onload = function(){
+        $('#div_carga').hide();
             //console.log(carta_compromiso.responseText);
             if (this.status === 200) {
               var blob = new Blob([carta_compromiso.response], { type: "application/pdf" });
@@ -251,10 +264,17 @@
       var observaciones = new XMLHttpRequest();
       observaciones.open('POST', '<?php echo base_url();?>index.php/c_documentacion/add_observaciones_documentacion_faltante_estudiante', true);
       observaciones.setRequestHeader("Content-Type", "application/json");
-
+      observaciones.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      observaciones.error = function (){
+        console.log("error de conexion");
+      }
+        
       observaciones.onreadystatechange = function () { 
 //-------------------------------------- generacion de carta compromiso
         if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+          $('#div_carga').hide();
           //si se agregan las observaciones correctamente entonces se genera la carta compromiso
           if(observaciones.responseText==="si"){
           var carta_compromiso = new XMLHttpRequest();
@@ -289,26 +309,6 @@
         }
       }
       observaciones.send(JSON.stringify(json_observaciones));
-
-   /*
-        
-          var carta_compromiso = new XMLHttpRequest();
-          carta_compromiso.open('GET', '<?php echo base_url();?>index.php/c_aspirante/generar_carta_compromiso?no_control=' + document.getElementById("no_control").value, true);
-          carta_compromiso.responseType = "arraybuffer";
-          carta_compromiso.onload = function () {
-            //console.log(carta_compromiso.responseText);
-            if (this.status === 200) {
-              var blob = new Blob([carta_compromiso.response], { type: "application/pdf" });
-              var objectUrl = URL.createObjectURL(blob);
-              window.open(objectUrl);
-            }
-
-          };
-
-          carta_compromiso.send(null);
-        
-  */
-
     }
 
 
@@ -322,9 +322,14 @@
       var plantel = document.getElementById("aspirante_plantel_busqueda").value;
       var query = 'curp=' + curp + '&cct_plantel=' + plantel;
       xhr.open('GET', '<?php echo base_url();?>index.php/c_documentacion/get_estudiantes_falta_documentacion_base?' + query, true);
-      xhr.onload = function () {
-        //console.log(JSON.parse(xhr.response));
-        ////console.log(query);
+      xhr.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      xhr.error = function (){
+        console.log("error de conexion");
+      }
+      xhr.onload = function(){
+        $('#div_carga').hide();
         JSON.parse(xhr.response).forEach(function (valor, indice) {
           var fila = '<tr>';
           fila += '<td>';

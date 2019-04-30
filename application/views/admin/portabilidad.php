@@ -924,8 +924,14 @@ function obtener_secundaria(e) {
   console.log(e);
   var xhr = new XMLHttpRequest();
   xhr.open('GET', '<?php echo base_url();?>index.php/c_escuela_procedencia/get_escuela?cct=' + e, true);
-
-  xhr.onload = function () {
+  xhr.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      xhr.error = function (){
+        console.log("error de conexion");
+      }
+      xhr.onload = function(){
+        $('#div_carga').hide();
     //console.log(JSON.parse(xhr.response));
     let secundaria = JSON.parse(xhr.response);
     //console.log(xhr.responseText.length);
@@ -999,9 +1005,16 @@ function envioform(form) {
 
   var xhr = new XMLHttpRequest();
   xhr.open("POST", "<?php echo base_url();?>index.php/c_estudiante/registrar_datos_estudiante", true);
+  xhr.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      xhr.error = function (){
+        console.log("error de conexion");
+      }
   xhr.onreadystatechange = function () {
     if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
       console.log(xhr.responseText);
+      $('#div_carga').hide();
       if (xhr.responseText === "si") {
         Swal.fire({
           type: 'success',
@@ -1054,9 +1067,15 @@ function insertar_secundaria() {
   
   xhr.open("POST", '<?php echo base_url();?>index.php/c_escuela_procedencia/insert_escuela', true);
   xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
+  xhr.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      xhr.error = function (){
+        console.log("error de conexion");
+      }
   xhr.onreadystatechange = function () {
     if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+      $('#div_carga').hide();
       if (xhr.responseText === "si") {
         Swal.fire({
           type: 'success',

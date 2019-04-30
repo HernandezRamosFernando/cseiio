@@ -799,7 +799,14 @@
     var xhr = new XMLHttpRequest();
     xhr.open('GET', '<?php echo base_url();?>index.php/c_estudiante/delete_estudiante?no_control=' + document.getElementById("no_control_borrar").value, true);
     console.log("este aspirante ha sido borrado " + document.getElementById("no_control_borrar").value);
-    xhr.onload = function () {
+    xhr.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      xhr.error = function (){
+        console.log("error de conexion");
+      }
+      xhr.onload = function(){
+        $('#div_carga').hide();
       console.log(xhr.responseText);
       if (xhr.responseText === "si") {
         Swal.fire({
@@ -832,7 +839,14 @@
     document.getElementById("aspirante_discapacidad").value = "";
     var xhr = new XMLHttpRequest();
     xhr.open('GET', '<?php echo base_url();?>index.php/c_estudiante/get_estudiante?no_control=' + e.value, true);
-    xhr.onload = function () {
+    xhr.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      xhr.error = function (){
+        console.log("error de conexion");
+      }
+      xhr.onload = function(){
+        $('#div_carga').hide();
       let datos = JSON.parse(xhr.response);
       console.log(datos);
       document.getElementById("aspirante_no_control").value = datos.estudiante[0].no_control;
@@ -876,7 +890,15 @@
       var respuesta;
       let direccion = new XMLHttpRequest();
       direccion.open('GET', '<?php echo base_url();?>index.php/c_localidad/get_estado_municipio_localidad_id_localidad?id_localidad=' + datos.estudiante[0].id_localidad, true);
-      direccion.onload = function () {
+      
+      direccion.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      direccion.error = function (){
+        console.log("error de conexion");
+      }
+      direccion.onload = function(){
+        $('#div_carga').hide();
         var respuesta = JSON.parse(direccion.response);
         //cargar municipios
         let municipios = new XMLHttpRequest();
@@ -974,7 +996,14 @@
     var plantel = document.getElementById("aspirante_plantel_busqueda").value;
     var query = 'curp=' + curp + '&cct_plantel=' + plantel;
     xhr.open('GET', '<?php echo base_url();?>index.php/c_estudiante/get_estudiantes_curp_plantel?' + query, true);
-    xhr.onload = function () {
+    xhr.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      xhr.error = function (){
+        console.log("error de conexion");
+      }
+      xhr.onload = function(){
+        $('#div_carga').hide();
       JSON.parse(xhr.response).forEach(function (valor, indice) {
         //console.log(valor);
         var fila = '<tr>';
@@ -1023,8 +1052,14 @@
     console.log(e);
     var xhr = new XMLHttpRequest();
     xhr.open('GET', '<?php echo base_url();?>index.php/c_escuela_procedencia/get_escuela?cct=' + e, true);
-
-    xhr.onload = function () {
+    xhr.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      xhr.error = function (){
+        console.log("error de conexion");
+      }
+      xhr.onload = function(){
+        $('#div_carga').hide();
       //console.log(JSON.parse(xhr.response));
       let secundaria = JSON.parse(xhr.response);
       //console.log(xhr.responseText.length);
@@ -1085,9 +1120,16 @@
 
 
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      xhr.error = function (){
+        console.log("error de conexion");
+      }
 
     xhr.onreadystatechange = function () {
       if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+        $('#div_carga').hide();
         if (xhr.responseText === "si") {
           Swal.fire({
             type: 'success',
@@ -1141,9 +1183,15 @@
     var formdata = new FormData(form);
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "<?php echo base_url();?>index.php/c_estudiante/update_estudiante", true);
+    xhr.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      xhr.error = function (){
+        console.log("error de conexion");
+      }
     xhr.onreadystatechange = function () {
       if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-        //console.log();
+        $('#div_carga').hide();
         if (xhr.responseText === "si") {
           Swal.fire({
             type: 'success',

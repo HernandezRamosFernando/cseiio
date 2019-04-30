@@ -97,7 +97,7 @@
               <tr>
                 <th scope="col" class="col-md-1">Nombre completo</th>
                 <th scope="col" class="col-md-1">N° control</th>
-                <th scope="col" class="col-md-1">Eliminar</th>
+                <th scope="col" class="col-md-1">Opción</th>
               </tr>
             </thead>
 
@@ -116,7 +116,7 @@
               <tr>
                 <th scope="col" class="col-md-1">Nombre completo</th>
                 <th scope="col" class="col-md-1">N° control</th>
-                <th scope="col" class="col-md-1">Agregar</th>
+                <th scope="col" class="col-md-1">Opción</th>
               </tr>
             </thead>
             <tbody id="tabla">
@@ -156,7 +156,14 @@ function cargargrupos()
       console.log(semestre);
       grupos.innerHTML="";
       xhr.open('GET', '<?php echo base_url();?>index.php/c_plantel/get_grupos_plantel_html?plantel=' + plantel + '&semestre='+ semestre , true);
+      xhr.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      xhr.error = function (){
+        console.log("error de conexion");
+      }
       xhr.onload = function(){
+        $('#div_carga').hide();
        if(xhr.response === ""){
        var option = document.createElement("option");
        option.text = "Ningun grupo creado";
@@ -240,7 +247,14 @@ if (document.getElementById("grupos").value === "5" || document.getElementById("
     var plantel = document.getElementById("plantel").value;
     var query = 'semestre=' + semestre + '&plantel=' + plantel;
     xhr.open('GET', '<?php echo base_url();?>index.php/c_acreditacion/get_estudiantes_plantel_semestre?' + query, true);
-    xhr.onload = function () {
+    xhr.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      xhr.error = function (){
+        console.log("error de conexion");
+      }
+      xhr.onload = function(){
+        $('#div_carga').hide();
       JSON.parse(xhr.response).forEach(function (valor, indice) {
         //console.log(valor);
         var fila = '<tr>';
@@ -259,11 +273,9 @@ if (document.getElementById("grupos").value === "5" || document.getElementById("
       //formato_tabla();
     };
     xhr.send(null);
-    document.getElementById('crear_grupo').classList.remove('btn-success');
-    document.getElementById('crear_grupo').classList.add('btn-dark');
-    document.getElementById('crear_grupo').disabled = true;
     document.getElementById('boton_agregar').style.display = "";
     document.getElementById('alumnos_oculto').style.display = "";
+    limpiarbusqueda();
   }
 
   function buscar_estudiantes_grupo() {
@@ -273,7 +285,14 @@ if (document.getElementById("grupos").value === "5" || document.getElementById("
     
     var xhr = new XMLHttpRequest();
     xhr.open('GET', '<?php echo base_url();?>index.php/c_grupo/get_estudiantes_grupo?id_grupo=' + idgrupo, true);
-    xhr.onload = function () {
+    xhr.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      xhr.error = function (){
+        console.log("error de conexion");
+      }
+      xhr.onload = function(){
+        $('#div_carga').hide();
       JSON.parse(xhr.response).forEach(function (valor, indice) {
         //console.log(valor);
         var fila = '<tr>';
@@ -284,7 +303,7 @@ if (document.getElementById("grupos").value === "5" || document.getElementById("
         fila += valor.no_control;
         fila += '</td>';
         fila += '<td class="">';
-        fila += '<button class="btn btn-lg btn-block btn-danger" type="button" value="' + valor.no_control + '" id="botoncambio" disabled="true">Eliminar</button>';
+        fila += '<button class="btn btn-lg btn-block btn-dark" type="button" value="' + valor.no_control + '" id="botoncambio" disabled="true">Deshabilitado</button>';
         fila += '</td>';
         fila += '</tr>';
         document.getElementById("tablagrupo").innerHTML += fila;
@@ -292,13 +311,24 @@ if (document.getElementById("grupos").value === "5" || document.getElementById("
       //formato_tabla();
     };
     xhr.send(null);
-    document.getElementById('crear_grupo').classList.remove('btn-success');
-    document.getElementById('crear_grupo').classList.add('btn-dark');
-    document.getElementById('crear_grupo').disabled = true;
     document.getElementById('alumnos_oculto').style.display = "";
     document.getElementById('botones').style.display = "";
     document.getElementById('tabla_alumnos').classList.remove('col-md-6');
     document.getElementById('tabla_alumnos').classList.add('col-md-12');
+    limpiarbusqueda();
+
+  }
+
+  function limpiarbusqueda(){
+    document.getElementById("grupos").disabled = true;
+    document.getElementById("plantel").disabled = true;
+    document.getElementById("semestre_grupo").disabled = true;
+    document.getElementById('crear_grupo').classList.remove('btn-success');
+    document.getElementById('crear_grupo').classList.add('btn-dark');
+    document.getElementById('crear_grupo').setAttribute("onClick", "limpiar();");
+    document.getElementById('crear_grupo').innerHTML = 'Limpiar Búsqueda';
+    document.getElementById('crear_grupo').classList.remove('btn-success');
+    document.getElementById('crear_grupo').classList.add('btn-dark');
   }
 
   function buscar_quitar_estudiantes() {
@@ -308,7 +338,14 @@ if (document.getElementById("grupos").value === "5" || document.getElementById("
     
     var xhr = new XMLHttpRequest();
     xhr.open('GET', '<?php echo base_url();?>index.php/c_grupo/get_estudiantes_grupo?id_grupo=' + idgrupo, true);
-    xhr.onload = function () {
+    xhr.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      xhr.error = function (){
+        console.log("error de conexion");
+      }
+      xhr.onload = function(){
+        $('#div_carga').hide();
       JSON.parse(xhr.response).forEach(function (valor, indice) {
         //console.log(valor);
         var fila = '<tr>';
@@ -327,13 +364,11 @@ if (document.getElementById("grupos").value === "5" || document.getElementById("
       //formato_tabla();
     };
     xhr.send(null);
-    document.getElementById('crear_grupo').classList.remove('btn-success');
-    document.getElementById('crear_grupo').classList.add('btn-dark');
-    document.getElementById('crear_grupo').disabled = true;
     document.getElementById('alumnos_oculto').style.display = "";
     document.getElementById('botones').style.display = "";
     document.getElementById('tabla_alumnos').classList.remove('col-md-6');
     document.getElementById('tabla_alumnos').classList.add('col-md-12');
+    limpiarbusqueda();
   }
   function enviar_formulario(){
   }
@@ -349,6 +384,7 @@ if (document.getElementById("grupos").value === "5" || document.getElementById("
 
     console.log(alumnos_json);
   }
+
 
 </script>
 </html>

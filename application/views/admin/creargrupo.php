@@ -195,8 +195,6 @@
 </div>
 <!-- /#wrapper -->
 
-
-
 <script>
 
 function llenar_especialidad(){
@@ -205,7 +203,14 @@ function llenar_especialidad(){
   var xhr = new XMLHttpRequest();
   var plantel = document.getElementById("plantel").value;
   xhr.open('GET', '<?php echo base_url();?>index.php/c_plantel/get_plantel_especialidad_html?plantel=' + plantel , true);
-  xhr.onload = function(){
+  xhr.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      xhr.error = function (){
+        console.log("error de conexion");
+      }
+      xhr.onload = function(){
+        $('#div_carga').hide();
     console.log(xhr.response);
     seleccione_componente.innerHTML = xhr.responseText;
     
@@ -275,7 +280,14 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
     var plantel = document.getElementById("plantel").value;
     var query = 'semestre=' + semestre + '&plantel=' + plantel;
     xhr.open('GET', '<?php echo base_url();?>index.php/c_acreditacion/get_estudiantes_plantel_semestre?' + query, true);
-    xhr.onload = function () {
+    xhr.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      xhr.error = function (){
+        console.log("error de conexion");
+      }
+      xhr.onload = function(){
+        $('#div_carga').hide();
       JSON.parse(xhr.response).forEach(function (valor, indice) {
         //console.log(valor);
         var fila = '<tr>';
@@ -306,7 +318,14 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
     
     var xhr = new XMLHttpRequest();
     xhr.open('GET', '<?php echo base_url();?>index.php/c_grupo/get_estudiantes_grupo?id_grupo=' + idgrupo, true);
-    xhr.onload = function () {
+    xhr.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      xhr.error = function (){
+        console.log("error de conexion");
+      }
+      xhr.onload = function(){
+        $('#div_carga').hide();
       JSON.parse(xhr.response).forEach(function (valor, indice) {
         //console.log(valor);
         var fila = '<tr>';
@@ -347,8 +366,14 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
      
       var xhr = new XMLHttpRequest();
       xhr.open('GET', '<?php echo base_url();?>index.php/c_acreditacion/numero_estudiantes_semestre_plantel?semestre=' + e.value + '&cct=' + document.getElementById("plantel").value, true);
-
-      xhr.onload = function () {
+      xhr.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      xhr.error = function (){
+        console.log("error de conexion");
+      }
+      xhr.onload = function(){
+        $('#div_carga').hide();
         document.getElementById("cantidad_alumnos_oculto").style.display = "";
         //console.log(xhr.response);
         var cAlumnos = JSON.parse(xhr.response)[0].total_estudiante;
@@ -381,7 +406,14 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
     }
     var xhr = new XMLHttpRequest();
       xhr.open('GET', '<?php echo base_url();?>index.php/c_grupo/get_existe_grupo?id_grupo='+id_grupo, true);
-      xhr.onload = function () {
+      xhr.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      xhr.error = function (){
+        console.log("error de conexion");
+      }
+      xhr.onload = function(){
+        $('#div_carga').hide();
 ///////////////////////////////////////////////////////////////
         console.log(JSON.parse(xhr.response));
         console.log(JSON.parse(xhr.response).length);
@@ -430,7 +462,10 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
 
     console.log(alumnos_json);
     if(alumnos_json.length===0){
-      alert("no puede crear grupos vacios");
+      Swal.fire({
+            type: 'error',
+            title: 'No se pueden guardar grupos vacios'
+          });
     }
 
     else{
@@ -460,6 +495,12 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
       xhr.open("POST", '<?php echo base_url();?>index.php/c_acreditacion/agregar_grupo', true);
       //Send the proper header information along with the request
       xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      xhr.error = function (){
+        console.log("error de conexion");
+      }
 
       xhr.onreadystatechange = function() { // Call a function when the state changes.
           if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
@@ -510,6 +551,12 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
         xhr.open("POST", '<?php echo base_url();?>index.php/c_acreditacion/agregar_estudiantes_grupo', true);
         //Send the proper header information along with the request
         xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      xhr.error = function (){
+        console.log("error de conexion");
+      }
         xhr.onreadystatechange = function() { // Call a function when the state changes.
             if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
               if (xhr.responseText.trim() === "si") {
@@ -535,60 +582,6 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
 
     }
     }
-
-    
-
   }
-/*
-  var form = document.getElementById("formulario");
-  form.onsubmit = function (e) {
-    e.preventDefault();
-    var formdata = new FormData(form);
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "<?php echo base_url();?>index.php/c_acreditacion/agregar_grupo", true);
-    xhr.onreadystatechange = function () {
-      if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-        console.log(xhr.responseText);
-        if (xhr.responseText.trim() !== "no") {
-          Swal.fire({
-            type: 'success',
-            title: 'Grupo creado Exitosamente',
-            showConfirmButton: false,
-            timer: 2500
-          });
-
-          //document.getElementById("formulario").reset();
-
-          document.getElementById("grupo_nombre").disabled = true;
-          document.getElementById("grupo_periodo").disabled = true;
-          document.getElementById("semestre_grupo").disabled = true;
-          document.getElementById("plantel").disabled = true;
-          document.getElementById("grupo_ciclo_escolar").disabled = true;
-          document.getElementById("id_grupo").value = xhr.responseText;
-        }
-
-        else {
-          Swal.fire({
-            type: 'error',
-            title: 'No se puede crear el grupo',
-            showConfirmButton: false,
-            timer: 2500
-          });
-        }
-      }
-
-    }
-    xhr.send(formdata);
-
-
-		
-	}
-*/
 </script>
-
-
-
-
-
-
 </html>

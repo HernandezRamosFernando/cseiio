@@ -407,7 +407,18 @@ function validarcomponente(){
           cancelButtonText: 'Cancelar',
         }).then((result) => {
           if (result.value) {
-            //aqui va el aceptar
+            var xhr = new XMLHttpRequest();
+              xhr.open("POST", '/cseiio/c_grupo/delete_grupo', true);
+
+              //Send the proper header information along with the request
+              xhr.setRequestHeader("Content-Type", "application/json");
+
+              xhr.onreadystatechange = function() { // Call a function when the state changes.
+                  if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                      console.log(xhr.response);
+                  }
+              }
+              xhr.send(JSON.stringify({id_grupo:document.getElementById("grupos").value}));
 
           }
           //aqui va si cancela

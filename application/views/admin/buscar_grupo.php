@@ -138,6 +138,8 @@
 
 
 <script>
+
+var lista_alumnos=new Array();
 function cargargrupos() 
 {
   if (document.getElementById("plantel").value === "") {
@@ -179,6 +181,7 @@ function cargargrupos()
 }
 
 function btnagregar_alumnos() {
+  //document.getElementById('agregar_alumnos').value = 
   document.getElementById('agregar_alumnos').classList.remove('btn-success');
   document.getElementById('agregar_alumnos').classList.add('btn-dark');
   document.getElementById('agregar_alumnos').disabled = true;
@@ -191,6 +194,7 @@ function btnagregar_alumnos() {
   
 }
 function btnquitar_alumnos() {
+  document.getElementById('boton_agregar').value = "eliminar";
   document.getElementById('quitar_alumnos').classList.remove('btn-success');
   document.getElementById('quitar_alumnos').classList.add('btn-dark');
   document.getElementById('quitar_alumnos').disabled = true;
@@ -362,6 +366,15 @@ if (document.getElementById("grupos").value === "5" || document.getElementById("
         document.getElementById("tablagrupo").innerHTML += fila;
       });
       //formato_tabla();
+
+
+      var alumnos = document.getElementById("tabla_completa_grupo").children[2].children;
+      lista_alumnos = new Array();
+    for(let i=0;i<alumnos.length;i++){
+      lista_alumnos.push(alumnos[i].children[1].innerText);
+    }
+
+    console.log(lista_alumnos);
     };
     xhr.send(null);
     document.getElementById('alumnos_oculto').style.display = "";
@@ -371,6 +384,88 @@ if (document.getElementById("grupos").value === "5" || document.getElementById("
     limpiarbusqueda();
   }
   function enviar_formulario(){
+
+    if(document.getElementById("boton_agregar").value==="eliminar"){
+
+      var alumnos = document.getElementById("tabla_completa_grupo").children[2].children;
+    var alumnos_json = new Array();
+    for(let i=0;i<alumnos.length;i++){
+      alumnos_json.push(alumnos[i].children[1].innerText);
+    }
+    
+    if(alumnos_json.length===0){
+    alert("si el grupo esta vacio, este se eliminara");
+    }
+
+    else{
+      //lista_alumnos
+    var faltantes = new Array();
+    lista_alumnos.forEach(function(valor,indice){
+      if(alumnos_json.indexOf(valor)<0){
+            faltantes.push(valor);
+        }
+    });
+
+    var datos={
+      id_grupo:document.getElementById("grupos").value,
+      eliminados:faltantes
+    }
+
+    var xhr = new XMLHttpRequest();
+      xhr.open("POST", '/cseiio/c_grupo/delete_estudiantes_grupo', true);
+
+      //Send the proper header information along with the request
+      xhr.setRequestHeader("Content-Type", "application/json");
+
+      xhr.onreadystatechange = function() { // Call a function when the state changes.
+          if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+              console.log(xhr.response);
+          }
+      }
+      xhr.send(JSON.stringify(datos));
+    }
+
+    }
+
+    else{
+
+      var tabla = document.getElementById("tabla_completa_grupo");
+      var filas = tabla.children[2].children;
+      var estudiantes = new Array();
+      
+      for(let i=0;i<filas.length;i++){
+          //console.log(filas[i].children[2].children.botoncambio.disabled);
+          if(filas[i].children[2].children.botoncambio.disabled===false){
+            estudiantes.push(filas[i].children[2].children.botoncambio.value);
+          }
+      }
+
+      var datos = {
+        estudiantes:estudiantes,
+        id_grupo:document.getElementById("grupos").value,
+        semestre:document.getElementById("semestre_grupo").value
+      }
+
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", '/cseiio/c_acreditacion/agregar_estudiantes_grupo_editado', true);
+
+      //Send the proper header information along with the request
+      xhr.setRequestHeader("Content-Type", "application/json");
+
+      xhr.onreadystatechange = function() { // Call a function when the state changes.
+          if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+             console.log(xhr.response);
+          }
+      }
+      xhr.send(JSON.stringify(datos));
+
+      //console.log(estudiantes);
+
+    }
+
+    
+
+    //console.log(faltantes);
   }
 
 

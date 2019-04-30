@@ -81,6 +81,12 @@ public function get_estudiantes_plantel_semestre(){
     echo json_encode($this->M_acreditacion->get_estudiantes_plantel_semestre($plantel,$semestre));
 }
 
+
+public function agregar_estudiantes_grupo_editado(){
+    $datos = json_decode($this->input->raw_input_stream);
+    echo $this->M_acreditacion->agregar_estudiantes_grupo_editado($datos);
+}
+
 }
 
 

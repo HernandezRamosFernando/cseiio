@@ -3,6 +3,7 @@ class M_acreditacion extends CI_Model {
    public function __construct() {
       parent::__construct();
       $this->load->model('M_materia');
+      $this->load->model('M_componente');
    }
 
 
@@ -74,6 +75,12 @@ class M_acreditacion extends CI_Model {
         }
         
         
+   }
+
+   public function agregar_estudiantes_grupo_editado($datos){
+
+    return explode("-",$datos->id_grupo);
+
    }
 
 

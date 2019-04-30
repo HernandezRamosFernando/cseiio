@@ -23,4 +23,23 @@ class M_grupo extends CI_Model {
             Grupo_id_grupo = '".$id_grupo."'
         GROUP BY Estudiante_no_control) AS e ON Estudiante.no_control = e.Estudiante_no_control")->result();
    }
+
+
+
+   public function delete_estudiantes_grupo($datos){
+       
+    $this->db->trans_start();
+    foreach($datos->eliminados as $alumno){
+        $this->db->query("delete from Grupo_Estudiante where Grupo_id_grupo='".$datos->id_grupo."' and Estudiante_no_control='".$alumno."'");
+    }
+    $this->db->trans_complete();
+
+        if ($this->db->trans_status() === FALSE)
+        {
+                return "no";
+        }
+        else{
+            return "si";
+        }
+   }
 }

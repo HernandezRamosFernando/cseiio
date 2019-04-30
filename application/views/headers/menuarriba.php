@@ -1,5 +1,9 @@
 
 <body>
+
+<div class="div_carga"id="div_carga">
+<img class="cargador" id="cargador" src="../../assets/img/loading-63.gif"/>
+</div>
   <!-- Barra de arriba -->
   <nav class="navbar navbar-expand navbar-dark static-top" style="background:#545555">
     <a class="navbar-brand mr-1" href="<?php echo base_url();?>index.php/c_menu/principal">SISE</a>

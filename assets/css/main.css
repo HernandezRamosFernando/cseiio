@@ -156,3 +156,19 @@ btn-lista:hover{
     background: #A21017;
     border-color: #A21017; 
 }
+.div_carga{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+	/*background: url(../img/GRIS.png) repeat;*/
+	display:none;
+	z-index:1;
+}
+
+.cargador{
+    display:block;
+    margin:auto;
+    margin-top: 20%;
+}

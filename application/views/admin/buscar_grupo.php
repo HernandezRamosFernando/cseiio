@@ -140,8 +140,7 @@
 <script>
 
 var lista_alumnos=new Array();
-function cargargrupos() 
-{
+function cargargrupos() {
   if (document.getElementById("plantel").value === "") {
       Swal.fire({
         type: 'info',
@@ -208,7 +207,7 @@ function btnquitar_alumnos() {
 
 
 function validarcomponente(){
-if (document.getElementById("grupos").value === "5" || document.getElementById("grupos").value === "6") {
+  if (document.getElementById("grupos").value === "5" || document.getElementById("grupos").value === "6") {
   if(document.getElementById("plantel").value != '' && document.getElementById("grupos").value != '' && document.getElementById("grupo_ciclo_escolar").value != '' && document.getElementById("grupo_nombre").value != "" && document.getElementById("seleccione_componente").value != "" && document.getElementById("grupo_componente").value != ""){
     document.getElementById("tabla").innerHTML = "";
     document.getElementById("grupo_nombre").disabled = true;
@@ -384,17 +383,35 @@ if (document.getElementById("grupos").value === "5" || document.getElementById("
     limpiarbusqueda();
   }
   function enviar_formulario(){
-
     if(document.getElementById("boton_agregar").value==="eliminar"){
-
-      var alumnos = document.getElementById("tabla_completa_grupo").children[2].children;
+      swalWithBootstrapButtons.fire({
+          type: 'warning',
+          text: '¿Esta seguro de desea eliminar estos alumnos?',
+          showCancelButton: true,
+          confirmButtonText: 'Aceptar',
+          cancelButtonText: 'Cancelar',
+        }).then((result) => {
+          if (result.value) {
+            var alumnos = document.getElementById("tabla_completa_grupo").children[2].children;
     var alumnos_json = new Array();
     for(let i=0;i<alumnos.length;i++){
       alumnos_json.push(alumnos[i].children[1].innerText);
     }
     
     if(alumnos_json.length===0){
-    alert("si el grupo esta vacio, este se eliminara");
+      swalWithBootstrapButtons.fire({
+          type: 'warning',
+          text: 'Al eliminar todos los alumnos se eliminará el grupo ¿Está seguro?',
+          showCancelButton: true,
+          confirmButtonText: 'Aceptar',
+          cancelButtonText: 'Cancelar',
+        }).then((result) => {
+          if (result.value) {
+            //aqui va el aceptar
+
+          }
+          //aqui va si cancela
+        });
     }
 
     else{
@@ -412,22 +429,37 @@ if (document.getElementById("grupos").value === "5" || document.getElementById("
     }
 
     var xhr = new XMLHttpRequest();
-      xhr.open("POST", '/cseiio/c_grupo/delete_estudiantes_grupo', true);
-
-      //Send the proper header information along with the request
-      xhr.setRequestHeader("Content-Type", "application/json");
-
-      xhr.onreadystatechange = function() { // Call a function when the state changes.
-          if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-              console.log(xhr.response);
-          }
+      xhr.open("POST", '<?php echo base_url();?>index.php/c_grupo/delete_estudiantes_grupo', true);
+      xhr.onloadstart = function(){
+        $('#div_carga').show();
       }
+      xhr.error = function (){
+        console.log("error de conexion");
+      }
+        xhr.onreadystatechange = function() { // Call a function when the state changes.
+            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+              $('#div_carga').hide();
+              if (xhr.responseText.trim() === "si") {
+                console.log(xhr.response);
+                Swal.fire({
+                  type: 'success',
+                  title: 'Datos guardados correctamente',
+                  showConfirmButton: false,
+                 });
+                 setTimeout(location.reload.bind(location), 2500); 
+               }else{
+                Swal.fire({
+                  type: 'error',
+                  title: 'Datos no guardados'
+                 });
+               }
+            }
+        }
       xhr.send(JSON.stringify(datos));
     }
-
-    }
-
-    else{
+          }
+        });
+    }else{
 
       var tabla = document.getElementById("tabla_completa_grupo");
       var filas = tabla.children[2].children;
@@ -447,25 +479,36 @@ if (document.getElementById("grupos").value === "5" || document.getElementById("
       }
 
       var xhr = new XMLHttpRequest();
-      xhr.open("POST", '/cseiio/c_acreditacion/agregar_estudiantes_grupo_editado', true);
-
+      xhr.open("POST", '<?php echo base_url();?>index.php/c_acreditacion/agregar_estudiantes_grupo_editado', true);
       //Send the proper header information along with the request
       xhr.setRequestHeader("Content-Type", "application/json");
-
-      xhr.onreadystatechange = function() { // Call a function when the state changes.
-          if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-             console.log(xhr.response);
-          }
+      xhr.onloadstart = function(){
+        $('#div_carga').show();
       }
+      xhr.error = function (){
+        console.log("error de conexion");
+      }
+        xhr.onreadystatechange = function() { // Call a function when the state changes.
+            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+              $('#div_carga').hide();
+              if (xhr.responseText.trim() === "si") {
+                console.log(xhr.response);
+                Swal.fire({
+                  type: 'success',
+                  title: 'Alumnos agregados correctamente',
+                  showConfirmButton: false,
+                 });
+                 setTimeout(location.reload.bind(location), 2500); 
+               }else{
+                Swal.fire({
+                  type: 'error',
+                  title: 'Alumnos no agregados'
+                 });
+               }
+            }
+        }
       xhr.send(JSON.stringify(datos));
-
-      //console.log(estudiantes);
-
     }
-
-    
-
-    //console.log(faltantes);
   }
 
 

@@ -23,6 +23,11 @@ class C_grupo extends CI_Controller
         $datos = json_decode($this->input->raw_input_stream);
         echo $this->M_grupo->delete_estudiantes_grupo($datos);
     }
+
+    public function delete_grupo(){
+        $grupo = json_decode($this->input->raw_input_stream);
+        echo $this->M_grupo->delete_grupo($grupo->id_grupo);
+    }
 }
 
 

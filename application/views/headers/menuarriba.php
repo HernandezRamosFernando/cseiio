@@ -2,7 +2,7 @@
 <body>
 
 <div class="div_carga"id="div_carga">
-<img class="cargador" id="cargador" src="../../assets/img/loading-63.gif"/>
+<img class="cargador" id="cargador" src="<?php echo base_url();?>assets/img/loading-63.gif"/>
 </div>
   <!-- Barra de arriba -->
   <nav class="navbar navbar-expand navbar-dark static-top" style="background:#545555">

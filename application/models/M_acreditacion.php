@@ -4,6 +4,7 @@ class M_acreditacion extends CI_Model {
       parent::__construct();
       $this->load->model('M_materia');
       $this->load->model('M_componente');
+      $this->load->model('M_grupo');
    }
 
 
@@ -79,7 +80,45 @@ class M_acreditacion extends CI_Model {
 
    public function agregar_estudiantes_grupo_editado($datos){
 
-    return explode("-",$datos->id_grupo);
+    $id_componente = $this->M_componente->get_id_componente(explode("-",$datos->id_grupo)[1])[0]->id_componente;
+    $id_ciclo = $this->M_grupo->get_id_ciclo_grupo($datos->id_grupo)[0]->Ciclo_escolar_id_ciclo_escolar;
+    $this->db->trans_start();
+    if($datos->semestre<5){
+        $materias = $this->M_materia->get_materias_semestre($datos->semestre);
+        
+    }
+
+    else{
+        $materias = $this->M_materia->get_materias_semestre_componente($datos->semestre,$id_componente);
+    }
+
+
+    foreach(($datos->estudiantes) as $estudiante){
+
+        foreach($materias as $materia){
+
+            $this->db->insert('Grupo_Estudiante',array(
+                'Grupo_id_grupo'=>$datos->id_grupo,
+                'Estudiante_no_control'=>$estudiante,
+                'Ciclo_escolar_id_ciclo_escolar'=>$id_ciclo,
+                'id_materia'=>$materia->clave,
+
+            ));
+
+        }
+       
+    }
+
+    $this->db->trans_complete();
+
+        if ($this->db->trans_status() === FALSE)
+        {
+                return "no";
+        }
+
+        else{
+            return "si";
+        }
 
    }
 

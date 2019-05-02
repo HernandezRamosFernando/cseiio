@@ -68,7 +68,7 @@
           </div>
 
             <div class="col-md-4 offset-md-3">
-              <button type="button" class="btn btn-success btn-lg btn-block" onclick="buscar_estudiantes_grupo()" style="padding: 1rem" id="crear_grupo">Mostrar grupo</button>
+              <button type="button" class="btn btn-success btn-lg btn-block" onclick="cargar_materias()" style="padding: 1rem" id="crear_grupo">Mostrar grupo</button>
             </div>
           </div>
       </div>
@@ -152,6 +152,26 @@ function cargargrupos() {
         };  
        xhr.send(null);
     }
+}
+
+
+
+function cargar_materias(){
+  var xhr = new XMLHttpRequest();
+    xhr.open('GET', '/cseiio/c_grupo/get_materias_grupo?grupo='+document.getElementById("grupos").value, true);
+
+    xhr.onload = function () {
+      console.log(JSON.parse(xhr.response));
+      JSON.parse(xhr.response).forEach(function(valor,indice){
+        var fila ="<tr>";
+        fila+="<td>"+valor.unidad_contenido+"</td>";
+        fila+="<td>"+valor.clave+"</td>";
+        fila+="</tr>";
+        document.getElementById("tabla").innerHTML+=fila;
+      });
+    };
+
+    xhr.send(null);
 }
 </script>
 

@@ -2,6 +2,8 @@
 class M_grupo extends CI_Model { 
    public function __construct() {
       parent::__construct();
+      $this->load->model("M_materia");
+      $this->load->model("M_componente");
    }
 
 
@@ -64,5 +66,21 @@ class M_grupo extends CI_Model {
         else{
             return "si";
         }
+   }
+
+
+
+   public function get_materias_grupo($id_grupo){
+    $semestre = $this->db->query("select semestre from Grupo where id_grupo='".$id_grupo."'")->result()[0]->semestre;
+    if($semestre<5){
+        $materias = $this->M_materia->get_materias_semestre_completo($semestre);
+    }
+
+    else{
+
+        $id_componente = $this->M_componente->get_id_componente(explode('-',$id_grupo)[1]);
+        $materias = $this->M_materia->get_materias_semestre_componente($semestre,$id_componente[0]->id_componente);
+    }
+    return $materias;
    }
 }

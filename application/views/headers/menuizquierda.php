@@ -68,7 +68,7 @@
           <span class="font-weight-light">Buscar grupos
           </span>
         </a>
-        <a class="nav-link <?php ($this->uri->segment(2)=='asesor_grupo') ? print 'bg-info text-light' : print null; ?>" href="<?php echo base_url();?>index.php/c_acreditacion/asesor_grupo">
+        <a class="nav-link <?php ($this->uri->segment(2)=='asesor_grupo') ? print 'bg-info text-light' : print null; ?>" href="<?php echo base_url();?>index.php/c_vistas/asesor_grupo">
         <i class="material-icons">group_add</i>
           <span class="font-weight-light">Asignar Asesor
           </span>

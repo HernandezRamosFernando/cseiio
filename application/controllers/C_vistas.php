@@ -209,6 +209,7 @@ public function portabilidad(){
         $this->load->view("headers/menuizquierda");
         $this->load->view("admin/asesor_grupo", $datos);
         $this->load->view("footers/footer");
-    }    
+    }
+        
     //-------------------------------------------------termina vistas
 }

@@ -157,15 +157,23 @@ function cargargrupos() {
 
 
 function cargar_materias(){
+  document.getElementById("tabla").innerHTML= "";
   var xhr = new XMLHttpRequest();
-    xhr.open('GET', '/cseiio/c_grupo/get_materias_grupo?grupo='+document.getElementById("grupos").value, true);
-
-    xhr.onload = function () {
+    xhr.open('GET', '<?php echo base_url();?>index.php/c_grupo/get_materias_grupo?grupo='+document.getElementById("grupos").value, true);
+    xhr.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      xhr.error = function (){
+        console.log("error de conexion");
+      }
+      xhr.onload = function(){
+        $('#div_carga').hide();
       console.log(JSON.parse(xhr.response));
       JSON.parse(xhr.response).forEach(function(valor,indice){
         var fila ="<tr>";
         fila+="<td>"+valor.unidad_contenido+"</td>";
         fila+="<td>"+valor.clave+"</td>";
+        fila+='<td><input type="text" class="form-control" name="input_asesor" id="input_asesor" placeholder="Nombre de asesor"></td>';
         fila+="</tr>";
         document.getElementById("tabla").innerHTML+=fila;
       });

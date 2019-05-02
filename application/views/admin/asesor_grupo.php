@@ -159,7 +159,7 @@ function cargargrupos() {
 function cargar_materias(){
   document.getElementById("tabla").innerHTML= "";
   var xhr = new XMLHttpRequest();
-    xhr.open('GET', '<?php echo base_url();?>index.php/c_grupo/get_materias_grupo?grupo='+document.getElementById("grupos").value, true);
+    xhr.open('GET', '<?php echo base_url();?>index.php/c_grupo/get_materias_grupo_asesor?grupo='+document.getElementById("grupos").value, true);
     xhr.onloadstart = function(){
         $('#div_carga').show();
       }
@@ -173,7 +173,8 @@ function cargar_materias(){
         var fila ="<tr>";
         fila+="<td>"+valor.unidad_contenido+"</td>";
         fila+="<td>"+valor.clave+"</td>";
-        fila+='<td><input type="text" class="form-control" name="input_asesor" id="input_asesor" placeholder="Nombre de asesor"></td>';
+        var asesor = valor.asesor==="null"?"":valor.asesor;
+        fila+='<td><input type="text" class="form-control" name="input_asesor" id="input_asesor" value="'+asesor+'" placeholder="Nombre de asesor"></td>';
         fila+="</tr>";
         document.getElementById("tabla").innerHTML+=fila;
       });

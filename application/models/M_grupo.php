@@ -85,6 +85,12 @@ class M_grupo extends CI_Model {
    }
 
 
+   public function get_materias_grupo_asesor($id_grupo){
+   
+    return $this->db->query("select distinct id_materia,asesor,clave,unidad_contenido from Grupo_Estudiante as ge inner join Materia as m on ge.id_materia=m.clave where ge.Grupo_id_grupo='".$id_grupo."'")->result();
+   }
+
+
    public function agregar_asesor_materias($datos){
     $this->db->trans_start();
 

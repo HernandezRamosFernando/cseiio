@@ -188,7 +188,9 @@
      </div>
    </form>
     <br>
-    <button type="button" value="nuevo" onclick="enviar_formulario()" id="boton_agregar" class="btn btn-success btn-lg btn-block" style="display: none"> Guardar Alumnos</button>
+        <div class="col-md-12" id="agregar_oculto" style="display: none">
+        <button type="button" value="nuevo" onclick="enviar_formulario()" id="boton_agregar" class="btn btn-success btn-lg btn-block" style="padding: 1rem"> Guardar Alumnos</button>
+        </div>
     </div>
   </div>
   <!-- /.content-wrapper -->
@@ -309,7 +311,7 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
     document.getElementById('crear_grupo').classList.remove('btn-success');
     document.getElementById('crear_grupo').classList.add('btn-dark');
     document.getElementById('crear_grupo').disabled = true;
-    document.getElementById('boton_agregar').style.display = "";
+    document.getElementById('agregar_oculto').style.display = "";
     document.getElementById('alumnos_oculto').style.display = "";
   }
 

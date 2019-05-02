@@ -128,7 +128,10 @@
      </div>
    </form>
     <br>
-    <button type="button" value="nuevo" onclick="enviar_formulario()" id="boton_agregar" class="btn btn-success btn-lg btn-block" style="display: none"> Guardar cambios</button>
+        <div class="col-md-12" id="agregar_oculto" style="display: none">
+        <button type="button" value="nuevo" onclick="enviar_formulario()" id="boton_agregar" class="btn btn-success btn-lg btn-block"  style="padding: 1rem"> Guardar cambios</button> 
+        </div>
+
     </div>
   </div>
   <!-- /.content-wrapper -->
@@ -188,7 +191,7 @@ function btnagregar_alumnos() {
   document.getElementById('tabla_completa_alumnos').style.display = "";
   document.getElementById('tabla_alumnos').classList.remove('col-md-12');
   document.getElementById('tabla_alumnos').classList.add('col-md-6');
-  document.getElementById('boton_agregar').style.display = "";
+  document.getElementById('agregar_oculto').style.display = "";
   buscar();
   
 }
@@ -198,7 +201,7 @@ function btnquitar_alumnos() {
   document.getElementById('quitar_alumnos').classList.add('btn-dark');
   document.getElementById('quitar_alumnos').disabled = true;
   document.getElementById('agregar_alumnos').style.display = "none";
-  document.getElementById('boton_agregar').style.display = "";
+  document.getElementById('agregar_oculto').style.display = "";
   buscar_quitar_estudiantes();
 
   

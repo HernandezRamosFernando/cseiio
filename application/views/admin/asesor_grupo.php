@@ -81,9 +81,9 @@
           <caption>Lista de las materias del grupo</caption>
           <thead class="thead-light">
             <tr>
-              <th scope="col" class="col-md-1">Materia</th>
-              <th scope="col" class="col-md-1">Clave</th>
-              <th scope="col" class="col-md-1">Nombre de Asesor</th>
+              <th scope="col">Materia</th>
+              <th scope="col" >Clave</th>
+              <th scope="col" style="width:35%">Nombre de Asesor</th>
             </tr>
           </thead>
 
@@ -173,12 +173,11 @@ function cargar_materias(){
         var fila ="<tr>";
         fila+="<td>"+valor.unidad_contenido+"</td>";
         fila+="<td>"+valor.clave+"</td>";
-        fila+='<td><input type="text" class="form-control" name="input_asesor" id="input_asesor" placeholder="Nombre de asesor"></td>';
+        fila+='<td><input type="text" class="form-control" name="input_asesor" id="input_asesor" placeholder="Nombre de asesor" style="width:100%"></td>';
         fila+="</tr>";
         document.getElementById("tabla").innerHTML+=fila;
       });
     };
-
     xhr.send(null);
 }
 </script>

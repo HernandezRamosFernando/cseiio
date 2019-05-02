@@ -95,10 +95,10 @@
         </table>
       </div>
     </div>
-
+<br>
     <div class="form-group">
       <div class="row">
-        <div class="col-md-4 offset-md-3">
+        <div class="col-md-12">
           <button class="btn btn-success btn-lg btn-block" style="padding: 1rem" onclick="guardar()">Guardar</button>
         </div>
       </div>
@@ -200,14 +200,39 @@ function guardar(){
 
 
   var xhr = new XMLHttpRequest();
-      xhr.open("POST", '/cseiio/c_grupo/agregar_asesor_materias', true);
+      xhr.open("POST", '<?php echo base_url();?>index.php/c_grupo/agregar_asesor_materias', true);
 
       //Send the proper header information along with the request
       xhr.setRequestHeader("Content-Type", "application/json");
-
+      xhr.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      xhr.error = function (){
+        console.log("error de conexion");
+      }
       xhr.onreadystatechange = function() { // Call a function when the state changes.
           if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-              console.log(xhr.response);
+            $('#div_carga').hide();
+              if (xhr.responseText.trim() === "si") {
+                console.log(xhr.response);
+                    swalWithBootstrapButtons.fire({
+                    type: 'success',
+                    text: 'Datos guardados correctamente',
+                    confirmButtonText: 'Aceptar'
+                    }).then((result) => {
+                    if (result.value) {
+                    //aqui va el aceptar
+                    $(document).scrollTop(0);
+                    location.reload(); 
+                      }
+                    //aqui va si cancela
+                    });
+               }else{
+                Swal.fire({
+                  type: 'error',
+                  text: 'Datos no guardados'
+                 });
+               }
           }
       }
       xhr.send(JSON.stringify(datos));

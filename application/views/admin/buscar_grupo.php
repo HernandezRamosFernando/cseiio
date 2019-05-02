@@ -74,7 +74,7 @@
               <button type="button" class="btn btn-success btn-lg btn-block" onclick="buscar_estudiantes_grupo()" style="padding: 1rem" id="crear_grupo">Mostrar grupo</button>
             </div>
           </div>
-        </div>
+      </div>
 
         <div class="row" id="botones" style="display:none">
           <div class="col-md-6">
@@ -128,7 +128,7 @@
      </div>
    </form>
     <br>
-    <button type="button" value="nuevo" onclick="enviar_formulario()" id="boton_agregar" class="btn btn-success btn-lg btn-block" style="display: none"> Guardar Alumnos</button>
+    <button type="button" value="nuevo" onclick="enviar_formulario()" id="boton_agregar" class="btn btn-success btn-lg btn-block" style="display: none"> Guardar cambios</button>
     </div>
   </div>
   <!-- /.content-wrapper -->
@@ -144,7 +144,7 @@ function cargargrupos() {
   if (document.getElementById("plantel").value === "") {
       Swal.fire({
         type: 'info',
-        title: 'Debe seleccionar un plantel',
+        text: 'Debe seleccionar un plantel',
         showConfirmButton: false,
         timer: 2500
       });
@@ -222,7 +222,7 @@ function validarcomponente(){
   }else{
     Swal.fire({
             type: 'warning',
-            title: 'Agregue los datos faltantes'
+            text: 'Agregue los datos faltantes'
           });
     }
 
@@ -238,7 +238,7 @@ function validarcomponente(){
     }else{
     Swal.fire({
             type: 'warning',
-            title: 'Agregue los datos faltantes'
+            text: 'Agregue los datos faltantes'
           });
       }
   }
@@ -297,7 +297,7 @@ function validarcomponente(){
       xhr.onload = function(){
         $('#div_carga').hide();
       JSON.parse(xhr.response).forEach(function (valor, indice) {
-        //console.log(valor);
+        //console.log(xhr.response);
         var fila = '<tr>';
         fila += '<td>';
         fila += valor.nombre + " " + valor.primer_apellido + " " + valor.segundo_apellido;
@@ -408,14 +408,26 @@ function validarcomponente(){
         }).then((result) => {
           if (result.value) {
             var xhr = new XMLHttpRequest();
-              xhr.open("POST", '/cseiio/c_grupo/delete_grupo', true);
+              xhr.open("POST", '<?php echo base_url();?>index.php/c_grupo/delete_grupo', true);
 
               //Send the proper header information along with the request
               xhr.setRequestHeader("Content-Type", "application/json");
 
               xhr.onreadystatechange = function() { // Call a function when the state changes.
                   if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-                      console.log(xhr.response);
+                    console.log(xhr.response);
+                    swalWithBootstrapButtons.fire({
+                    type: 'success',
+                    text: 'Datos guardados correctamente',
+                    confirmButtonText: 'Aceptar'
+                    }).then((result) => {
+                    if (result.value) {
+                    //aqui va el aceptar
+                    $(document).scrollTop(0);
+                    location.reload(); 
+                      }
+                    //aqui va si cancela
+                    });
                   }
               }
               xhr.send(JSON.stringify({id_grupo:document.getElementById("grupos").value}));
@@ -452,16 +464,22 @@ function validarcomponente(){
               $('#div_carga').hide();
               if (xhr.responseText.trim() === "si") {
                 console.log(xhr.response);
-                Swal.fire({
-                  type: 'success',
-                  title: 'Datos guardados correctamente',
-                  showConfirmButton: false,
-                 });
-                 setTimeout(location.reload.bind(location), 2500); 
+                    swalWithBootstrapButtons.fire({
+                    type: 'success',
+                    text: 'Datos guardados correctamente',
+                    confirmButtonText: 'Aceptar'
+                    }).then((result) => {
+                    if (result.value) {
+                    //aqui va el aceptar
+                    $(document).scrollTop(0);
+                    location.reload(); 
+                      }
+                    //aqui va si cancela
+                    });
                }else{
                 Swal.fire({
                   type: 'error',
-                  title: 'Datos no guardados'
+                  text: 'Datos no guardados'
                  });
                }
             }
@@ -504,16 +522,22 @@ function validarcomponente(){
               $('#div_carga').hide();
               if (xhr.responseText.trim() === "si") {
                 console.log(xhr.response);
-                Swal.fire({
-                  type: 'success',
-                  title: 'Alumnos agregados correctamente',
-                  showConfirmButton: false,
-                 });
-                 setTimeout(location.reload.bind(location), 2500); 
+                    swalWithBootstrapButtons.fire({
+                    type: 'success',
+                    text: 'Datos guardados correctamente',
+                    confirmButtonText: 'Aceptar'
+                    }).then((result) => {
+                    if (result.value) {
+                    //aqui va el aceptar
+                    $(document).scrollTop(0);
+                    location.reload(); 
+                      }
+                    //aqui va si cancela
+                    });
                }else{
                 Swal.fire({
                   type: 'error',
-                  title: 'Alumnos no agregados'
+                  text: 'Alumnos no no guardados'
                  });
                }
             }

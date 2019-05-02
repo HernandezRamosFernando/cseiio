@@ -257,7 +257,7 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
   }else{
     Swal.fire({
             type: 'warning',
-            title: 'Agregue los datos faltantes'
+            text: 'Agregue los datos faltantes'
           });
     }
 
@@ -266,9 +266,9 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
       bloquearnormal();
     alerta_grupo();
     }else{
-    Swal.fire({
+      Swal.fire({
             type: 'warning',
-            title: 'Agregue los datos faltantes'
+            text: 'Agregue los datos faltantes'
           });
       }
   }
@@ -355,9 +355,7 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
     if (document.getElementById("plantel").value === "") {
       Swal.fire({
         type: 'info',
-        title: 'Debe seleccionar un plantel',
-        showConfirmButton: false,
-        timer: 2500
+        text: 'Debe seleccionar un plantel'
       });
     }
 
@@ -375,7 +373,7 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
       xhr.onload = function(){
         $('#div_carga').hide();
         document.getElementById("cantidad_alumnos_oculto").style.display = "";
-        //console.log(xhr.response);
+        console.log(xhr.response);
         var cAlumnos = JSON.parse(xhr.response)[0].total_estudiante;
         if (cAlumnos <= 35) {
           document.getElementById("cantidad_alumnos").innerHTML = "La cantidad de Alumnos registrados en este semestre es: " + cAlumnos + " se recomienda crear 1 grupo";
@@ -423,7 +421,7 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
         if(JSON.parse(xhr.response).length===0){
           swalWithBootstrapButtons.fire({
             type: 'info',
-            title: 'Agregue estudiantes al grupo creado',
+            text: 'Agregue estudiantes al grupo creado',
             confirmButtonText:'Agregar'
           });
           buscar();
@@ -431,7 +429,7 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
         else if(35-JSON.parse(xhr.response)[0].total_alumnos>0){
           swalWithBootstrapButtons.fire({
             type: 'warning',
-            title: 'El grupo ya existe y tiene '+(35-JSON.parse(xhr.response)[0].total_alumnos)+" lugares libres",
+            text: 'El grupo ya existe y tiene '+(35-JSON.parse(xhr.response)[0].total_alumnos)+" lugares libres",
             confirmButtonText:'Agregar estudiantes al grupo',
             showCancelButton: true,
             cancelButtonText: 'Cerrar'
@@ -446,7 +444,7 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
         else{
           Swal.fire({
             type: 'warning',
-            title: 'El grupo ya existe y se encuentra lleno'
+            text: 'El grupo ya existe y se encuentra lleno'
           });
         }
       };
@@ -464,7 +462,7 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
     if(alumnos_json.length===0){
       Swal.fire({
             type: 'error',
-            title: 'No se pueden guardar grupos vacios'
+            text: 'No se pueden guardar grupos vacios'
           });
     }
 
@@ -516,15 +514,15 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
                 }).then((result) => {
                 if (result.value) {
                  //aqui va el aceptar
-                 setTimeout(location.reload.bind(location), 500); 
-
+                 $(document).scrollTop(0);
+                    location.reload(); 
                  }
                     //aqui va si cancela
                 });
                }else{
                 Swal.fire({
                   type: 'error',
-                  title: 'Datos no agregados'
+                  text: 'Datos no agregados'
                  });
                }
           }
@@ -577,8 +575,8 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
                 }).then((result) => {
                 if (result.value) {
                  //aqui va el aceptar
-                 setTimeout(location.reload.bind(location), 500); 
-
+                 $(document).scrollTop(0);
+                    location.reload(); 
                  }
                     //aqui va si cancela
                 });
@@ -586,7 +584,7 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
                }else{
                 Swal.fire({
                   type: 'error',
-                  title: 'Datos no agregados'
+                  text: 'Datos no agregados'
                  });
                }
             }

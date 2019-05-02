@@ -83,4 +83,24 @@ class M_grupo extends CI_Model {
     }
     return $materias;
    }
+
+
+   public function agregar_asesor_materias($datos){
+    $this->db->trans_start();
+
+    foreach($datos as $dato){
+        $this->db->query("update Grupo_Estudiante set asesor='".$dato->asesor."' where Grupo_id_grupo='".$dato->id_grupo."' and id_materia='".$dato->id_materia."'");
+    }
+
+    $this->db->trans_complete();
+    
+    if ($this->db->trans_status() === FALSE)
+    {
+           return "no";
+    }
+
+    else{
+        return "si";
+    }
+   }
 }

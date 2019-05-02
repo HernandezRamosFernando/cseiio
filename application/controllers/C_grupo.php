@@ -33,6 +33,11 @@ class C_grupo extends CI_Controller
         $id_grupo = $this->input->get("grupo");
         echo json_encode($this->M_grupo->get_materias_grupo($id_grupo));
     }
+
+    public function agregar_asesor_materias(){
+        $datos = json_decode($this->input->raw_input_stream);
+        echo $this->M_grupo->agregar_asesor_materias($datos);
+    }
 }
 
 

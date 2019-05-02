@@ -99,7 +99,7 @@
     <div class="form-group">
       <div class="row">
         <div class="col-md-4 offset-md-3">
-          <button class="btn btn-success btn-lg btn-block" style="padding: 1rem">Guardar</button>
+          <button class="btn btn-success btn-lg btn-block" style="padding: 1rem" onclick="guardar()">Guardar</button>
         </div>
       </div>
     </div>
@@ -179,6 +179,40 @@ function cargar_materias(){
       });
     };
     xhr.send(null);
+}
+
+
+function guardar(){
+  var tabla = document.getElementById("tabla").children;
+  var datos = new Array();
+  
+  for(let i=0;i<tabla.length;i++){
+    //var a = tabla[i].children[2].children
+    //console.log(a[0].value);
+    var dato={
+      id_grupo:document.getElementById("grupos").value,
+      id_materia:tabla[i].children[1].innerText,
+      asesor:tabla[i].children[2].children[0].value
+    }
+
+    datos.push(dato);
+  }
+
+
+  var xhr = new XMLHttpRequest();
+      xhr.open("POST", '/cseiio/c_grupo/agregar_asesor_materias', true);
+
+      //Send the proper header information along with the request
+      xhr.setRequestHeader("Content-Type", "application/json");
+
+      xhr.onreadystatechange = function() { // Call a function when the state changes.
+          if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+              console.log(xhr.response);
+          }
+      }
+      xhr.send(JSON.stringify(datos));
+
+ // console.log(datos);
 }
 </script>
 

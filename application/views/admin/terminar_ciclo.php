@@ -17,7 +17,7 @@
           <div class="row">
             <div class="col-md-4">
               <div class="form-label-group">
-                <input type="text" pattern="[A-Za-zñ]+" title="" class="form-control" id="nombre_ciclo"
+                <input type="text"  disabled class="form-control" id="nombre_ciclo"
                   placeholder="Nombre ciclo escolar ">
                 <label for="nombre_ciclo">Nombre de ciclo escolar</label>
               </div>
@@ -25,7 +25,7 @@
 
             <div class="col-md-4">
               <div class="form-label-group">
-                <input type="text" pattern="[A-Za-zñ]+" title="" class="form-control" id="fecha_matricula"
+                <input type="text" disabled class="form-control" id="fecha_matricula"
                   placeholder="Fecha de la matrícula">
                 <label for="fecha_matricula">Fecha de la matrícula</label>
               </div>
@@ -33,7 +33,7 @@
 
             <div class="col-md-4">
               <div class="form-label-group">
-                <input type="text" pattern="[A-Za-zñ]+" title="" class="form-control" id="periodo"
+                <input type="text" disabled  class="form-control" id="periodo"
                   placeholder="Periodo">
                 <label for="periodo">Periodo</label>
               </div>
@@ -47,17 +47,17 @@
           <div class="row">
             <div class="col-md-4">
               <div class="form-label-group">
-                <input type="text" pattern="[A-Za-zñ]+" title="" class="form-control" id="fecha_inicio_periodo"
+                <input type="text"  class="form-control" id="fecha_inicio_periodo" onkeyup="mascara(this,'/',patron,true)" onchange="validafecha(this);"
                   placeholder="Fecha de inicio del periodo">
-                <label for="fecha_inicio_periodo">Fecha de inicio del periodo</label>
+                <label for="fecha_inicio_periodo">Fecha de inicio del periodo (dd/mm/aaaa)</label>
               </div>
             </div>
 
             <div class="col-md-4">
               <div class="form-label-group">
-                <input type="text" pattern="[A-Za-zñ]+" title="" class="form-control" id="fecha_fin_periodo"
+                <input type="text"  class="form-control" id="fecha_fin_periodo" onkeyup="mascara(this,'/',patron,true)" onchange="validafecha(this);"
                   placeholder="Fecha de finalización del periodo">
-                <label for="fecha_fin_periodo">Fecha de finalización del periodo</label>
+                <label for="fecha_fin_periodo">Fecha de finalización del periodo (dd/mm/aaaa)</label>
               </div>
             </div>
 
@@ -105,7 +105,7 @@
         }).then((result) => {
           if (result.value) {
             var xhr = new XMLHttpRequest();
-            xhr.open('GET', '/cseiio/c_ciclo_escolar/get_datos_siguiente_ciclo', true);
+            xhr.open('GET', '<?php echo base_url();?>index.php/c_ciclo_escolar/get_datos_siguiente_ciclo', true);
 
             xhr.onload = function () {
               //console.log(JSON.parse(xhr.response));
@@ -139,7 +139,7 @@
           }
         });
       } else {
-        window.history.back();
+        window.location.replace("<?php echo base_url();?>index.php/c_vistas/acreditacion"); 
       }     //aqui va si cancela
 
 
@@ -160,14 +160,41 @@
 
 
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", '/cseiio/c_ciclo_escolar/agregar_ciclo_escolar', true);
+    xhr.open("POST", '<?php echo base_url();?>index.php/c_ciclo_escolar/agregar_ciclo_escolar', true);
 
     //Send the proper header information along with the request
     xhr.setRequestHeader("Content-Type", "application/json");
-
-    xhr.onreadystatechange = function() { // Call a function when the state changes.
-        if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+    xhr.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      xhr.error = function (){
+        console.log("error de conexion");
+      }
+        xhr.onreadystatechange = function() { // Call a function when the state changes.
+            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+              $('#div_carga').hide();
             console.log(xhr.response);
+            if (xhr.responseText.trim() === "si") {
+                console.log(xhr.response);
+                swalWithBootstrapButtons.fire({
+                type: 'success',
+                text: 'Datos agregados correctamente',
+                confirmButtonText: 'Aceptar'
+                }).then((result) => {
+                if (result.value) {
+                 //aqui va el aceptar
+                 $(document).scrollTop(0);
+                    window.location.replace("<?php echo base_url();?>index.php/c_vistas/acreditacion"); 
+                 }
+                    //aqui va si cancela
+                });
+
+               }else{
+                Swal.fire({
+                  type: 'error',
+                  text: 'Datos no agregados'
+                 });
+               }
         }
     }
     xhr.send(JSON.stringify(datos));

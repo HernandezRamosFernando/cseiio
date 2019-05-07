@@ -128,19 +128,6 @@ function alergia(e) {
   }
 }
 
-/*function alergia(e) {
-  document.getElementById("aspirante_alergia").value = "";
-  console.log(e.value);
-  if (e.value == 1) {
-    document.getElementById("a").style = "display:"
-  }
-
-  else {
-    document.getElementById("a").style = "display:none"
-  }
-}*/
-
-
 function discapacidad(e) {
   console.log(e.value);
   if (e.value == 1) {
@@ -154,20 +141,6 @@ function discapacidad(e) {
     document.getElementById("aspirante_discapacidad").value = '';
   }
 }
-
-/*function discapacidad(e) {
-  //aspirante_discapacidad
-  document.getElementById("aspirante_discapacidad").value = ""
-  console.log(e.value);
-  if (e.value == 1) {
-    document.getElementById("b").style = "display:"
-  }
-
-  else {
-    document.getElementById("b").style = "display:none"
-  }
-}*/
-
 
 
 function borrarmodal() {
@@ -257,6 +230,7 @@ function mascara(d, sep, pat, nums) {
 }
 
 function validafecha(e){
+  console.log(e.value);
   fecha= e.value.split('/');
   if(fecha[0] <= "31" && fecha[1] <= "12" && fecha[2] <= "2004"){
   }else{

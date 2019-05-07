@@ -78,7 +78,7 @@
 
   <br>
   <div class="col-md-12" id="boton_oculto" style="display: none">
-    <button type="button" onclick="" id="boton_agregar" class="btn btn-success btn-lg btn-block" style="padding: 1rem">
+    <button type="button" onclick="agregar_ciclo()" id="boton_agregar" class="btn btn-success btn-lg btn-block" style="padding: 1rem">
       Guardar Nuevo periodo de ciclo escolar</button>
   </div>
 </div>
@@ -113,7 +113,6 @@
               if (JSON.parse(xhr.response)[0].respuesta === undefined) {
                 document.getElementById("nombre_ciclo").value = JSON.parse(xhr.response)[0].nombre_ciclo_escolar;
                 document.getElementById("fecha_matricula").value = JSON.parse(xhr.response)[0].fecha_matricula;
-                document.getElementById("fecha_matricula").value = JSON.parse(xhr.response)[0].fecha_matricula;
                 document.getElementById("periodo").value = "ENERO-JULIO";
 
               }
@@ -134,6 +133,33 @@
 
 
     });
+  }
+
+
+  function agregar_ciclo(){
+    let datos = {
+      nombre_ciclo:document.getElementById("nombre_ciclo").value,
+      fecha_matricula:document.getElementById("fecha_matricula").value,
+      periodo:document.getElementById("periodo").value,
+      fecha_inicio:document.getElementById("fecha_inicio_periodo").value,
+      fecha_terminacion:document.getElementById("fecha_fin_periodo").value
+    }
+
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", '/cseiio/c_ciclo_escolar/agregar_ciclo_escolar', true);
+
+    //Send the proper header information along with the request
+    xhr.setRequestHeader("Content-Type", "application/json");
+
+    xhr.onreadystatechange = function() { // Call a function when the state changes.
+        if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+            console.log(xhr.response);
+        }
+    }
+    xhr.send(JSON.stringify(datos));
+
+    //console.log(datos);
   }
 
 

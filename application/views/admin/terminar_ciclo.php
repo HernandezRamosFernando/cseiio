@@ -5,7 +5,7 @@
     <!-- Breadcrumbs-->
     <ol class="breadcrumb">
       <li class="breadcrumb-item">
-        <a>Nuevo periodo de ciclo escolar</a>
+        <a>Finalización de periodo de ciclo escolar</a>
       </li>
       <li class="breadcrumb-item active">Agregue los datos solicitados</li>
     </ol>
@@ -17,7 +17,7 @@
           <div class="row">
             <div class="col-md-4">
               <div class="form-label-group">
-                <input type="text"  class="form-control" id="nombre_ciclo"
+                <input type="text" pattern="[A-Za-zñ]+" title="" class="form-control" id="nombre_ciclo"
                   placeholder="Nombre ciclo escolar ">
                 <label for="nombre_ciclo">Nombre de ciclo escolar</label>
               </div>
@@ -25,7 +25,7 @@
 
             <div class="col-md-4">
               <div class="form-label-group">
-                <input type="text"  class="form-control" id="fecha_matricula"
+                <input type="text" pattern="[A-Za-zñ]+" title="" class="form-control" id="fecha_matricula"
                   placeholder="Fecha de la matrícula">
                 <label for="fecha_matricula">Fecha de la matrícula</label>
               </div>
@@ -33,7 +33,7 @@
 
             <div class="col-md-4">
               <div class="form-label-group">
-                <input type="text"  class="form-control" id="periodo"
+                <input type="text" pattern="[A-Za-zñ]+" title="" class="form-control" id="periodo"
                   placeholder="Periodo">
                 <label for="periodo">Periodo</label>
               </div>
@@ -47,7 +47,7 @@
           <div class="row">
             <div class="col-md-4">
               <div class="form-label-group">
-                <input type="text" class="form-control" id="fecha_inicio_periodo"
+                <input type="text" pattern="[A-Za-zñ]+" title="" class="form-control" id="fecha_inicio_periodo"
                   placeholder="Fecha de inicio del periodo">
                 <label for="fecha_inicio_periodo">Fecha de inicio del periodo</label>
               </div>
@@ -55,7 +55,7 @@
 
             <div class="col-md-4">
               <div class="form-label-group">
-                <input type="text" class="form-control" id="fecha_fin_periodo"
+                <input type="text" pattern="[A-Za-zñ]+" title="" class="form-control" id="fecha_fin_periodo"
                   placeholder="Fecha de finalización del periodo">
                 <label for="fecha_fin_periodo">Fecha de finalización del periodo</label>
               </div>
@@ -105,11 +105,13 @@
         }).then((result) => {
           if (result.value) {
             var xhr = new XMLHttpRequest();
-            xhr.open('GET', '<?php echo base_url();?>index.php/c_ciclo_escolar/get_datos_siguiente_ciclo', true);
+            xhr.open('GET', '/cseiio/c_ciclo_escolar/get_datos_siguiente_ciclo', true);
 
             xhr.onload = function () {
-              //console.log(JSON.parse(xhr.response)[0].respuesta);
+              //console.log(JSON.parse(xhr.response));
               //console.log(JSON.parse(xhr.response)[0].id_ciclo_escolar);
+              
+
               if (JSON.parse(xhr.response)[0].respuesta === undefined) {
                 document.getElementById("nombre_ciclo").value = JSON.parse(xhr.response)[0].nombre_ciclo_escolar;
                 document.getElementById("fecha_matricula").value = JSON.parse(xhr.response)[0].fecha_matricula;
@@ -117,7 +119,18 @@
 
               }
 
+              else{
+                let separador_nombre = JSON.parse(xhr.response)[1].nombre_ciclo_escolar.split("-");
+                var a = parseInt(separador_nombre[0])+1;
+                var b = parseInt(separador_nombre[1])+1;
+                var nombre_ciclo = a+"-"+b;
+                var fecha_matricula = parseInt(JSON.parse(xhr.response)[1].fecha_matricula)+1;
+                document.getElementById("nombre_ciclo").value = nombre_ciclo;
+                document.getElementById("fecha_matricula").value = fecha_matricula;
+                document.getElementById("periodo").value = "AGOSTO-DICIEMBRE";
+              }
 
+              
             };
 
             xhr.send(null);
@@ -126,7 +139,7 @@
           }
         });
       } else {
-        window.location.replace("<?php echo base_url();?>index.php/c_vistas/acreditacion");
+        window.history.back();
       }     //aqui va si cancela
 
 
@@ -137,7 +150,6 @@
 
 
   function agregar_ciclo(){
-    console.log("click");
     let datos = {
       nombre_ciclo:document.getElementById("nombre_ciclo").value,
       fecha_matricula:document.getElementById("fecha_matricula").value,
@@ -148,42 +160,14 @@
 
 
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", '<?php echo base_url();?>index.php/c_ciclo_escolar/agregar_ciclo_escolar', true);
+    xhr.open("POST", '/cseiio/c_ciclo_escolar/agregar_ciclo_escolar', true);
 
     //Send the proper header information along with the request
     xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.onloadstart = function(){
-        $('#div_carga').show();
-      }
-      xhr.error = function (){
-        console.log("error de conexion");
-      }
-    
-      xhr.onreadystatechange = function() { // Call a function when the state changes.
-          if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-            console.log(xhr.response);
-            $('#div_carga').hide();
 
-            if (xhr.responseText.trim() === "si") {      
-              console.log(xhr.response);
-                swalWithBootstrapButtons.fire({
-                type: 'success',
-                text: 'Datos agregados correctamente',
-                confirmButtonText: 'Aceptar'
-                }).then((result) => {
-                if (result.value) {
-                 //aqui va el aceptar
-                 $(document).scrollTop(0);
-                 window.location.replace("<?php echo base_url();?>index.php/c_vistas/acreditacion");
-                 }
-                    //aqui va si cancela
-                });
-               }else{
-                Swal.fire({
-                  type: 'error',
-                  text: 'Datos no agregados'
-                 });
-               }
+    xhr.onreadystatechange = function() { // Call a function when the state changes.
+        if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+            console.log(xhr.response);
         }
     }
     xhr.send(JSON.stringify(datos));

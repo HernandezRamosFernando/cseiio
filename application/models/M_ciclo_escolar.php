@@ -16,7 +16,8 @@ class M_ciclo_escolar extends CI_Model {
       }
       
       else{
-         return array('respuesta'=>true);
+         return array(array('respuesta'=>true),
+         $this->get_ciclo_escolar()[0]);
       }
    }
 

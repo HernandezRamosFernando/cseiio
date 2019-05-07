@@ -10,6 +10,10 @@ class C_ciclo_escolar extends CI_Controller {
         $this->load->model("M_ciclo_escolar");
     }
 
+    public function get_ciclo_escolar_en_curso(){
+        echo json_encode($this->M_ciclo_escolar->get_ciclo_escolar());
+    }
+
 
     public function get_datos_siguiente_ciclo(){
         echo json_encode($this->M_ciclo_escolar->get_datos_siguiente_ciclo());

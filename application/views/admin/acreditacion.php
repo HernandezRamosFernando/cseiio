@@ -41,10 +41,10 @@
             </a>
           </div>
           <div class="col-md-4 col-lg-4">
-            <a href="<?php echo base_url();?>index.php/c_aspirante/carta_compromiso"
-              class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-clipboard-check btn-responsive"
-              style="height: 80%; background: #B7156D; border-color: #B7156D; padding: 13% ">
-              Crear ciclo escolar
+          <a href="<?php echo base_url();?>index.php/c_vistas/calificacion"
+              class="btn btn-primary btn-lg btn-block menu valign-center btn-5 btn-responsive">
+              <i class="material-icons">thumbs_up_down</i>&nbsp;
+              Calificaciones
             </a>
           </div>
           <div class="col-md-4 col-lg-4">

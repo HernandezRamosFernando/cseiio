@@ -244,6 +244,21 @@ function validafecha(e){
   }
 }
 
+function validafechanormal(e){
+  console.log(e.value);
+  fecha= e.value.split('/');
+  if(fecha[0] <= "31" && fecha[1] <= "12" ){
+  }else{
+    Swal.fire({
+      type: 'error',
+      title: 'La fecha ingresada es incorrecta',
+      confirmButtonText: 'Cerrar'
+
+    })
+    e.value='';
+  }
+}
+
 function validafecharegistro(e){
   fecha= e.value.split('/');
   if(fecha[0] <= "31" && fecha[1] <= "12" && fecha[2] <= "2019"){

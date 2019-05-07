@@ -220,6 +220,17 @@ public function portabilidad(){
         $this->load->view("admin/terminar_ciclo");
         $this->load->view("footers/footer");
     }
+
+    public function calificacion(){
+        $datos['planteles'] = $this->M_plantel->get_planteles();
+    
+        $data= array('title'=>'Calificaciones');
+        $this->load->view("headers/cabecera", $data);
+        $this->load->view("headers/menuarriba");
+        $this->load->view("headers/menuizquierda");
+        $this->load->view("admin/calificacion", $datos);
+        $this->load->view("footers/footer");
+    }
         
     //-------------------------------------------------termina vistas
 }

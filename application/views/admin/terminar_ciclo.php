@@ -47,7 +47,7 @@
           <div class="row">
             <div class="col-md-4">
               <div class="form-label-group">
-                <input type="text"  class="form-control" id="fecha_inicio_periodo" onkeyup="mascara(this,'/',patron,true)" 
+                <input type="text"  class="form-control" id="fecha_inicio_periodo" onkeyup="mascara(this,'/',patron,true)" onchange="validafechanormal(this)"
                   placeholder="Fecha de inicio del periodo">
                 <label for="fecha_inicio_periodo">Fecha de inicio del periodo (dd/mm/aaaa)</label>
               </div>
@@ -55,7 +55,7 @@
 
             <div class="col-md-4">
               <div class="form-label-group">
-                <input type="text"  class="form-control" id="fecha_fin_periodo" onkeyup="mascara(this,'/',patron,true)"
+                <input type="text"  class="form-control" id="fecha_fin_periodo" onkeyup="mascara(this,'/',patron,true)" onchange="validafechanormal(this)"
                   placeholder="Fecha de finalización del periodo">
                 <label for="fecha_fin_periodo">Fecha de finalización del periodo (dd/mm/aaaa)</label>
               </div>
@@ -78,7 +78,7 @@
 
   <br>
   <div class="col-md-12" id="boton_oculto" style="display: none">
-    <button type="button" onclick="agregar_ciclo()" id="boton_agregar" class="btn btn-success btn-lg btn-block" style="padding: 1rem">
+    <button type="button" onclick="validarcomponente()" id="boton_agregar" class="btn btn-success btn-lg btn-block" style="padding: 1rem">
       Guardar Nuevo periodo de ciclo escolar</button>
   </div>
 </div>
@@ -154,8 +154,21 @@
     return fecha_separada.join("-");
   }
 
+  function validarcomponente(){
+
+if(document.getElementById("fecha_fin_periodo").value != '' && document.getElementById("fecha_inicio_periodo").value != '' ){
+  agregar_ciclo()
+}else{
+  Swal.fire({
+        type: 'warning',
+        text: 'Agregue los datos faltantes'
+      });
+  }
+}
+
 
   function agregar_ciclo(){
+
     let datos = {
       nombre_ciclo:document.getElementById("nombre_ciclo").value,
       fecha_matricula:document.getElementById("fecha_matricula").value,

@@ -63,7 +63,7 @@
 
           <div class="col-md-4">
             <label class="form-group has-float-label">
-              <select class="form-control form-control-lg"  name="grupos" id="grupos">
+              <select class="form-control form-control-lg" onchange="cargar_materias()" name="grupos" id="grupos">
                 <option value="">Seleccione uno</option>
               </select>
               <span>Lista de grupos</span>
@@ -86,7 +86,7 @@
           </div>
 
             <div class="col-md-4 offset-md-3">
-              <button type="button" class="btn btn-success btn-lg btn-block" onclick="" style="padding: 1rem" id="crear_grupo">Mostrar materia</button>
+              <button type="button" class="btn btn-success btn-lg btn-block" onclick="cargar_materia()" style="padding: 1rem" id="crear_grupo">Mostrar materia</button>
             </div>
           </div>
       </div>
@@ -104,6 +104,10 @@
               <tr>
                 <th scope="col" class="col-md-1">Nombre completo</th>
                 <th scope="col" class="col-md-1">N° control</th>
+                <th scope="col" class="col-md-1">Parcial 1</th>
+                <th scope="col" class="col-md-1">Parcial 2</th>
+                <th scope="col" class="col-md-1">Parcial 3</th>
+                <th scope="col" class="col-md-1">Examen Final</th>
                 <th scope="col" class="col-md-1">Opción</th>
               </tr>
             </thead>
@@ -178,5 +182,43 @@ if (document.getElementById("plantel").value === "") {
     };  
    xhr.send(null);
 }
+}
+
+
+
+function cargar_materia(){
+  document.getElementById("tablagrupo").innerHTML="";
+  var xhr = new XMLHttpRequest();
+    xhr.open('GET', '/cseiio/c_grupo/get_estudiantes_grupo_materia?grupo='+document.getElementById("grupos").value+'&materia='+document.getElementById("materias").value, true);
+
+    xhr.onload = function () {
+      console.log(xhr.response);
+      JSON.parse(xhr.response).forEach(function(valor,indice){
+        var registro = "<tr>";
+        registro+="<td>"+valor.nombre+" "+valor.primer_apellido+" "+valor.segundo_apellido+"</td>";
+        registro+="<td>"+valor.no_control+"</td>"
+        registro+="</tr>";
+        document.getElementById("tablagrupo").innerHTML+=registro;
+      });
+    };
+
+    xhr.send(null);
+}
+
+
+function cargar_materias(){
+  var xhr = new XMLHttpRequest();
+    xhr.open('GET', '/cseiio/c_grupo/get_materias_grupo?grupo='+document.getElementById("grupos").value, true);
+
+    xhr.onload = function () {
+      let opciones = "";
+      JSON.parse(xhr.response).forEach(function(valor,indice){
+        opciones+= '<option value="'+valor.clave+'">'+valor.unidad_contenido+'</option>';
+      });
+
+      document.getElementById("materias").innerHTML=opciones;
+    };
+
+    xhr.send(null);
 }
     </script>

@@ -75,6 +75,11 @@
 
 
 </div>
+
+    <br>
+    <div class="col-md-12" id="boton_oculto" style="display: none">
+        <button type="button" onclick="" id="boton_agregar" class="btn btn-success btn-lg btn-block" style="padding: 1rem"> Guardar Nuevo periodo de ciclo escolar</button>
+    </div>
 </div>
 <!-- /.content-wrapper -->
 </div>
@@ -99,12 +104,14 @@ window.onload = function() {
                 confirmButtonText: 'Aceptar'
                 }).then((result) => {
                     if (result.value){
-                        alert("funciona");
-                        document.getElementById("periodo_oculto").display="";
+                        document.getElementById("periodo_oculto").style.display="";
+                        document.getElementById("boton_oculto").style.display="";
                     }
                 });
-
-                }     //aqui va si cancela
+            }else{
+                window.history.back();
+            }     //aqui va si cancela
+            
         });
 };
  

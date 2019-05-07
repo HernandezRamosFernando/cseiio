@@ -69,7 +69,7 @@
             <div class="form-label-group ">
                 <input class="form-control" placeholder="" type="text" required onchange="validafecha(this);"
                 onkeyup="mascara(this,'/',patron,true)" maxlength="10" id="aspirante_fecha_nacimiento" name="aspirante_fecha_nacimiento">
-              <label for="aspirante_fecha_nacimiento">Fecha Nacimiento: dd/mm/aaaa</label>
+              <label for="aspirante_fecha_nacimiento">Fecha Nacimiento (dd/mm/aaaa)</label>
               
             </div>
           </div>
@@ -286,7 +286,7 @@
             <div class="form-label-group">
                 <input class="form-control" placeholder="Fecha de Registro de Nacimiento: dd/mm/aaaa" type="text" name="fecha" onchange="validafecharegistro(this);validaracta();"
                 onkeyup="mascara(this,'/',patron,true)" maxlength="10" id="aspirante_fecha_nacimiento_registro" name="aspirante_fecha_nacimiento_registro">
-              <label for="aspirante_fecha_nacimiento_registro">Fecha de Registro de Nacimiento dd/mm/aaaa</label>
+              <label for="aspirante_fecha_nacimiento_registro">Fecha de Registro de Nacimiento (dd/mm/aaaa)</label>
             </div>
           </div>
 

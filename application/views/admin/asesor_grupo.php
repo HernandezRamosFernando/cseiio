@@ -75,7 +75,7 @@
 
 
 
-    <div class="card" style="overflow:scroll">
+    <div class="card" style="overflow:scroll; display: none" id="tabla_oculto" >
       <div class="card-body">
         <table class="table table-hover" id="tabla_completa" style="width: 100%">
           <caption>Lista de las materias del grupo</caption>
@@ -94,9 +94,9 @@
           </tbody>
         </table>
       </div>
-    </div>
-<br>
-    <div class="form-group">
+      </div>
+        <br>
+    <div class="form-group" id="boton_oculto" style="display: none">
       <div class="row">
         <div class="col-md-12">
           <button class="btn btn-success btn-lg btn-block" style="padding: 1rem" onclick="guardar()">Guardar</button>
@@ -191,6 +191,9 @@ function cargar_materias(){
     };
     xhr.send(null);
     limpiarbusqueda();
+    document.getElementById("tabla_oculto").style.display="";
+    document.getElementById("boton_oculto").style.display="";
+    
 }
 
 function limpiarbusqueda(){

@@ -47,7 +47,7 @@
           <div class="row">
             <div class="col-md-4">
               <div class="form-label-group">
-                <input type="text"  class="form-control" id="fecha_inicio_periodo" onkeyup="mascara(this,'/',patron,true)" onchange="validafecha(this);"
+                <input type="text"  class="form-control" id="fecha_inicio_periodo" onkeyup="mascara(this,'/',patron,true)" 
                   placeholder="Fecha de inicio del periodo">
                 <label for="fecha_inicio_periodo">Fecha de inicio del periodo (dd/mm/aaaa)</label>
               </div>
@@ -55,7 +55,7 @@
 
             <div class="col-md-4">
               <div class="form-label-group">
-                <input type="text"  class="form-control" id="fecha_fin_periodo" onkeyup="mascara(this,'/',patron,true)" onchange="validafecha(this);"
+                <input type="text"  class="form-control" id="fecha_fin_periodo" onkeyup="mascara(this,'/',patron,true)"
                   placeholder="Fecha de finalización del periodo">
                 <label for="fecha_fin_periodo">Fecha de finalización del periodo (dd/mm/aaaa)</label>
               </div>
@@ -149,14 +149,21 @@
   }
 
 
+  function fecha_sql(fecha){
+    let fecha_separada = fecha.split("/").reverse();
+    return fecha_separada.join("-");
+  }
+
+
   function agregar_ciclo(){
     let datos = {
       nombre_ciclo:document.getElementById("nombre_ciclo").value,
       fecha_matricula:document.getElementById("fecha_matricula").value,
       periodo:document.getElementById("periodo").value,
-      fecha_inicio:document.getElementById("fecha_inicio_periodo").value,
-      fecha_terminacion:document.getElementById("fecha_fin_periodo").value
-    }
+      fecha_inicio:fecha_sql(document.getElementById("fecha_inicio_periodo").value),
+      fecha_terminacion:fecha_sql(document.getElementById("fecha_fin_periodo").value)
+    };
+ 
 
 
     var xhr = new XMLHttpRequest();
@@ -198,6 +205,8 @@
         }
     }
     xhr.send(JSON.stringify(datos));
+
+    
 
     //console.log(datos);
   }

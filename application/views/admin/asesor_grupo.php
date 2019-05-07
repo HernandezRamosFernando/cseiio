@@ -14,7 +14,7 @@
         <div class="row">
           <div class="col-md-8">
             <label class="form-group has-float-label">
-              <select class="form-control form-control-lg"="" id="plantel"   name="plantel">
+              <select class="form-control form-control-lg" id="plantel" name="plantel">
                 <option value="">Seleccione el plantel donde buscar el grupo</option>
 
                 <?php
@@ -68,7 +68,7 @@
           </div>
 
             <div class="col-md-4 offset-md-3">
-              <button type="button" class="btn btn-success btn-lg btn-block" onclick="cargar_materias()" style="padding: 1rem" id="crear_grupo">Mostrar grupo</button>
+              <button type="button" class="btn btn-success btn-lg btn-block" onclick="validarcomponente()" style="padding: 1rem" id="crear_grupo">Mostrar grupo</button>
             </div>
           </div>
       </div>
@@ -115,6 +115,18 @@
 <!-- /#wrapper -->
 
 <script>
+function validarcomponente(){
+
+if(document.getElementById("plantel").value != '' && document.getElementById("grupos").value != '' && document.getElementById("semestre_grupo").value != '' ){
+  cargar_materias();
+}else{
+  Swal.fire({
+        type: 'warning',
+        text: 'Agregue los datos faltantes'
+      });
+  }
+}
+
 function cargargrupos() {
   if (document.getElementById("plantel").value === "") {
       Swal.fire({
@@ -123,13 +135,11 @@ function cargargrupos() {
         showConfirmButton: false,
         timer: 2500
       });
+      $("#semestre_grupo").val('');
     }else{
       var xhr = new XMLHttpRequest();
       var plantel = document.getElementById("plantel").value;
-      console.log(plantel);
-  
       var semestre = document.getElementById("semestre_grupo").value;
-      console.log(semestre);
       grupos.innerHTML="";
       xhr.open('GET', '<?php echo base_url();?>index.php/c_plantel/get_grupos_plantel_html?plantel=' + plantel + '&semestre='+ semestre , true);
       xhr.onloadstart = function(){
@@ -180,7 +190,19 @@ function cargar_materias(){
       });
     };
     xhr.send(null);
+    limpiarbusqueda();
 }
+
+function limpiarbusqueda(){
+    document.getElementById("grupos").disabled = true;
+    document.getElementById("plantel").disabled = true;
+    document.getElementById("semestre_grupo").disabled = true;
+    document.getElementById('crear_grupo').classList.remove('btn-success');
+    document.getElementById('crear_grupo').classList.add('btn-info');
+    document.getElementById('crear_grupo').setAttribute("onClick", "limpiar();");
+    document.getElementById('crear_grupo').innerHTML = 'Limpiar Búsqueda';
+  }
+
 
 
 function guardar(){

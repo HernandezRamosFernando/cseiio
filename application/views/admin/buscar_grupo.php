@@ -304,11 +304,9 @@ function btnquitar_alumnos() {
     document.getElementById("plantel").disabled = true;
     document.getElementById("semestre_grupo").disabled = true;
     document.getElementById('crear_grupo').classList.remove('btn-success');
-    document.getElementById('crear_grupo').classList.add('btn-dark');
+    document.getElementById('crear_grupo').classList.add('btn-info');
     document.getElementById('crear_grupo').setAttribute("onClick", "limpiar();");
     document.getElementById('crear_grupo').innerHTML = 'Limpiar Búsqueda';
-    document.getElementById('crear_grupo').classList.remove('btn-success');
-    document.getElementById('crear_grupo').classList.add('btn-dark');
   }
 
   function buscar_quitar_estudiantes() {

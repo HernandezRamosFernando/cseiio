@@ -11,7 +11,7 @@ class M_plantel extends CI_Model {
    }
 
    function get_plantel($plantel){
-      return $this->db->get_where('Plantel',array('cct'=>$plantel))->result();
+      return $this->db->get_where('Plantel',array('cct_plantel'=>$plantel))->result();
    }
 
    function get_plantel_especialidad($plantel){

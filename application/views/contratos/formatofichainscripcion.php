@@ -109,19 +109,12 @@ $pdf->AddPage();
 
 // set some text to print
 
-$sexo=$aspirante[0]->sexo;
-	if ($sexo=='H'){
-		$sexo= "HOMBRE";
-	}
 
-	if ($sexo=='M'){
-		$sexo= "MUJER";
-	}
 
 //operacion para calcular años de nacimiento;
 
 
-/*$empezar_fecha = strtotime($aspirante[0]->fecha_nacimiento); 
+/*$empezar_fecha = strtotime($estudiante[0]->fecha_nacimiento); 
 
 $terminar_fecha = strtotime(date("Y-m-d")); 
 
@@ -134,27 +127,52 @@ $edad= 'Difference: '.$difference->y.' years, '
 
 */
 
-$datetime1 = new DateTime($aspirante[0]->fecha_nacimiento);
+$datetime1 = new DateTime($estudiante['estudiante'][0]->fecha_nacimiento);
 
 $datetime2 = new DateTime(date("Y-m-d"));
 
 $difference = $datetime1->diff($datetime2);
 
-$edad=$difference->y.' años';
+$edad=$difference->y.' AÑOS';
 
-$esAlergico='NO';
-$tieneDiscapacidad="NO";
 
-if($datos_medicos[0]->alergia_medicamento!=""){
-	$esAlergico='SI';
-	
+$sexo=$estudiante['estudiante'][0]->sexo;
+	if ($sexo=='H'){
+		$sexo= "HOMBRE";
+	}
 
+	if ($sexo=='M'){
+		$sexo= "MUJER";
+	}
+
+$tipo_sangre='';
+$alergia='';
+$discapacidad='';
+$tieneAlergia='NO';
+$tieneDiscapacidad='NO';
+foreach ($estudiante['expediente_medico'] as $expediente) {
+
+	if($expediente->descripcion=='TIPO DE SANGRE'){
+		$tipo_sangre=$expediente->valor;
+	}
+
+	if($expediente->descripcion=='ALERGIA'){
+		$alergia=$expediente->valor;
+	}
+
+	if($expediente->descripcion=='DISCAPACIDAD'){
+		$discapacidad=$expediente->valor;
+	}
 }
 
+if($alergia!=''){
+	$tieneAlergia='SI';
+}
 
-if($datos_medicos[0]->discapacidad!=""){
+if($discapacidad!=''){
 	$tieneDiscapacidad='SI';
 }
+
 
 
 
@@ -175,13 +193,13 @@ $html_1 ='
 </tr>
 
 <tr>
-<td colspan="2"> <strong>C.C.T.: </strong>'.$aspirante[0]->Plantel_cct.'</td>
+<td colspan="2"> <strong>C.C.T.: </strong>'.$estudiante['estudiante'][0]->Plantel_cct_plantel.'</td>
 </tr>
 
 
 <tr>
-<td> <strong>SEMESTRE AL QUE INGRESA: </strong>'.$aspirante[0]->semestre.'</td>
-<td> <strong>SITUACIÓN DE INGRESO: </strong>'.$aspirante[0]->tipo_ingreso.'</td>
+<td> <strong>SEMESTRE AL QUE INGRESA: </strong>'.$estudiante['estudiante'][0]->semestre.'</td>
+<td> <strong>SITUACIÓN DE INGRESO: </strong>'.$estudiante['estudiante'][0]->tipo_ingreso.'</td>
 </tr>
 
 </tbody>
@@ -197,9 +215,9 @@ $html_1 ='
 </tr>
 
 <tr>
-<td style="text-align: center;"><strong>APELLIDO PATERNO:</strong><BR>'.strtoupper($aspirante[0]->apellido_paterno).'</td>
-<td style="text-align: center;"><strong>APELLIDO MATERNO:</strong><BR>'.strtoupper($aspirante[0]->apellido_materno).'</td>
-<td style="text-align: center;"><strong>NOMBRE(S):</strong><BR>'.strtoupper($aspirante[0]->nombre).'</td>
+<td style="text-align: center;"><strong>APELLIDO PATERNO:</strong><BR>'.strtoupper($estudiante['estudiante'][0]->primer_apellido).'</td>
+<td style="text-align: center;"><strong>APELLIDO MATERNO:</strong><BR>'.strtoupper($estudiante['estudiante'][0]->segundo_apellido).'</td>
+<td style="text-align: center;"><strong>NOMBRE(S):</strong><BR>'.strtoupper($estudiante['estudiante'][0]->nombre).'</td>
 </tr>
 
 </tbody>
@@ -207,9 +225,10 @@ $html_1 ='
 
 <table  border="1">
 <tbody>
+<tr ><td colspan="2"><strong>LUGAR DE NACIMIENTO: </strong>'.strtoupper($estudiante['estudiante'][0]->lugar_nacimiento).'</td></tr>
 <tr>
-<td><strong>CURP: </strong>'.strtoupper($aspirante[0]->curp).'</td>
-<td><strong>FECHA DE NACIMIENTO: </strong>'.strtoupper($aspirante[0]->fecha_nacimiento).'</td>
+<td><strong>CURP: </strong>'.strtoupper($estudiante['estudiante'][0]->curp).'</td>
+<td><strong>FECHA DE NACIMIENTO: </strong>'.strtoupper($estudiante['estudiante'][0]->fecha_nacimiento).'</td>
 </tr>
 
 <tr>
@@ -218,31 +237,34 @@ $html_1 ='
 </tr>
 
 <tr>
-<td><strong>TELÉFONO: </strong>'.$aspirante[0]->telefono.'</td>
-<td><strong>MAIL: </strong>'.$aspirante[0]->correo.'</td>
+<td><strong>TELÉFONO: </strong>'.$estudiante['estudiante'][0]->telefono.'</td>
+<td><strong>MAIL: </strong>'.$estudiante['estudiante'][0]->correo.'</td>
 </tr>
 
 
 <tr>
-<td><strong>NSS: </strong>'.$aspirante[0]->nss.'</td>
-<td><strong>TIPO DE SANGRE: </strong>'.$datos_medicos[0]->tipo_sangre.'</td>
+<td><strong>NSS: </strong>'.$estudiante['estudiante'][0]->nss.'</td>
+
+
+
+<td><strong>TIPO DE SANGRE: </strong> '.$tipo_sangre.'</td>
 </tr>
 
 
 
 <tr>
-<td><strong>¿ALÉRGICO A ALGÚN MEDICAMENTO?: </strong>'.$esAlergico.'</td>
-<td><strong>MEDICAMENTOS AL QUE ES ALÉRGICO: </strong><BR>'.$datos_medicos[0]->alergia_medicamento.'</td>
+<td><strong>¿ALÉRGICO A ALGÚN MEDICAMENTO?: </strong>'.$tieneAlergia.'</td>
+<td><strong>MEDICAMENTOS AL QUE ES ALÉRGICO: </strong> '.$alergia.'<BR></td>
 </tr>
 
 <tr>
 <td><strong>¿PADECE ALGUNA DISCAPACIDAD?: </strong>'.$tieneDiscapacidad.'</td>
-<td><strong>DISCAPACIDAD: </strong>'.$datos_medicos[0]->discapacidad.'</td>
+<td><strong>DISCAPACIDAD: </strong>'.$discapacidad.'</td>
 </tr>
 
 
 <tr>
-<td colspan="2"><strong>FOLIO PROSPERA :</strong>'.$aspirante[0]->programa_social.'</td>
+<td colspan="2"><strong>FOLIO PROSPERA :</strong>'.$estudiante['estudiante'][0]->folio_programa_social.'</td>
 <td></td>
 </tr>
 
@@ -256,15 +278,15 @@ $html_1 ='
 </tr>
 
 <tr>
-<td style="text-align: center;"><strong>ESTADO:</strong><BR>'.$domicilio_aspirante[0]->nombre_estado.'</td>
-<td style="text-align: center;"><strong>MUNICIPIO:</strong><BR>'.$domicilio_aspirante[0]->nombre_municipio.'</td>
-<td style="text-align: center;"><strong>LOCALIDAD:</strong><BR>'.$domicilio_aspirante[0]->nombre_localidad.'</td>
+<td style="text-align: center;"><strong>ESTADO:</strong><BR>'.strtoupper($domicilio_estudiante[0]->nombre_estado).'</td>
+<td style="text-align: center;"><strong>MUNICIPIO:</strong><BR>'.strtoupper($domicilio_estudiante[0]->nombre_municipio).'</td>
+<td style="text-align: center;"><strong>LOCALIDAD:</strong><BR>'.strtoupper($domicilio_estudiante[0]->nombre_localidad).'</td>
 </tr>
 
 <tr>
-<td ><strong>CALLE Y NÚMERO:</strong> '.$direccion[0]->calle.'</td>
-<td ><strong>COLONIA:</strong> '.$direccion[0]->colonia.'</td>
-<td ><strong>CÓDIGO POSTAL:</strong> '.$direccion[0]->cp.'</td>
+<td ><strong>CALLE Y NÚMERO:</strong> '.strtoupper($estudiante['estudiante'][0]->calle).'</td>
+<td ><strong>COLONIA:</strong> '.strtoupper($estudiante['estudiante'][0]->colonia).'</td>
+<td ><strong>CÓDIGO POSTAL:</strong> '.$estudiante['estudiante'][0]->cp.'</td>
 </tr>
 
 </tbody>
@@ -272,7 +294,6 @@ $html_1 ='
 
 <br>
 <br>
-
 <table  border="1">
 <tbody>
 <tr>
@@ -280,21 +301,21 @@ $html_1 ='
 </tr>
 
 <tr>
-<td style="text-align: center;"><strong>APELLIDO PATERNO:</strong><BR></td>
-<td style="text-align: center;"><strong>APELLIDO MATERNO:</strong><BR></td>
-<td style="text-align: center;"><strong>NOMBRE(S):</strong><BR>'.$tutor[0]->nombre.'</td>
+<td style="text-align: center;"><strong>APELLIDO PATERNO:</strong><BR> '.$estudiante['tutor'][0]->primer_apellido_tutor.'</td>
+<td style="text-align: center;"><strong>APELLIDO MATERNO:</strong><BR> '.strtoupper($estudiante['tutor'][0]->segundo_apellido_tutor).'</td>
+<td style="text-align: center;"><strong>NOMBRE(S):</strong><BR> '.strtoupper($estudiante['tutor'][0]->nombre_tutor).'</td>
 </tr>
 
 
 <tr>
-<td ><strong>PARENTESCO:</strong><BR>'.$tutor[0]->parentezco.'</td>
-<td ><strong>OCUPACIÓN:</strong><BR>'.$tutor[0]->ocupacion.'</td>
-<td ><strong>TELÉFONO PARTICULAR:</strong><BR>'.$tutor[0]->telefono_particular.'</td>
+<td ><strong>PARENTESCO:</strong><BR>'.$estudiante['tutor'][0]->parentesco.'</td>
+<td ><strong>OCUPACIÓN:</strong><BR>'.$estudiante['tutor'][0]->ocupacion.'</td>
+<td ><strong>TELÉFONO PARTICULAR:</strong><BR>'.$estudiante['tutor'][0]->telefono_tutor.'</td>
 </tr>
 
 <tr>
-<td ><strong>TELÉFONO DE LA COMUNIDAD:</strong><BR>'.$tutor[0]->telefono_comunidad.'</td>
-<td colspan="2"><strong>FOLIO PROSPERA:</strong>'.$tutor[0]->folio_prospera.'</td>
+<td ><strong>TELÉFONO DE LA COMUNIDAD:</strong><BR>'.$estudiante['tutor'][0]->telefono_comunidad.'</td>
+<td colspan="2"><strong>FOLIO PROSPERA:</strong>'.$estudiante['tutor'][0]->folio_programa_social_tutor.'</td>
 </tr>
 
 </tbody>
@@ -302,7 +323,6 @@ $html_1 ='
 
 <br>
 <br>
-
 
 <table  border="1">
 <tbody>
@@ -311,21 +331,20 @@ $html_1 ='
 </tr>
 
 <tr>
-<td colspan="2"><strong>ESCUELA DE PROCEDENCIA: </strong>'.$secundaria_aspirante[0]->nombre_secundaria.'</td>
+<td colspan="2"><strong>ESCUELA DE PROCEDENCIA: </strong> '.((isset($escuela_procedencia[0]->nombre_escuela_procedencia)) ? strtoupper($escuela_procedencia[0]->nombre_escuela_procedencia) : "").'</td>
 </tr>
 
 <tr>
-<td colspan="2"><strong>C.C.T.: </strong> '.$secundaria_aspirante[0]->cct_secundaria.'</td>
+<td colspan="2"><strong>C.C.T.: </strong> '.((isset($estudiante['estudiante'][0]->cct_escuela_procedencia)) ? strtoupper($estudiante['estudiante'][0]->cct_escuela_procedencia) : "").'</td>
 </tr>
 
 <tr>
-<td colspan="2"><strong>TIPO DE SUBSISTEMA: </strong> '.$secundaria_aspirante[0]->tipo_subsistema.'</td>
+<td colspan="2"><strong>TIPO DE SUBSISTEMA: </strong> '.((isset($escuela_procedencia[0]->tipo_subsistema)) ? strtoupper($escuela_procedencia[0]->tipo_subsistema) : "").'</td>
 </tr>
 
 
 </tbody>
 </table>
-
 
 <table  border="1">
 <tbody>
@@ -335,7 +354,7 @@ $html_1 ='
 </tr>
 
 <tr>
-<td colspan="5"><strong>LENGUA MATERNA: </strong> '.$nombre_lengua.'</td>
+<td colspan="5"><strong>LENGUA MATERNA: </strong> '.strtoupper($nombre_lengua).'</td>
 </tr>
 
 <tr>
@@ -347,11 +366,11 @@ $html_1 ='
 </tr>
 
 <tr>
-<td style="text-align: center;">'.$lengua_entiende.'</td>
-<td style="text-align: center;">'.$lengua_habla.'</td>
-<td style="text-align: center;">'.$lengua_lee.'</td>
-<td style="text-align: center;">'.$lengua_escribe.'</td>
-<td style="text-align: center;">'.$lengua_traduce.'</td>
+<td style="text-align: center;">'.strtoupper($lengua_entiende).'</td>
+<td style="text-align: center;">'.strtoupper($lengua_habla).'</td>
+<td style="text-align: center;">'.strtoupper($lengua_lee).'</td>
+<td style="text-align: center;">'.strtoupper($lengua_escribe).'</td>
+<td style="text-align: center;">'.strtoupper($lengua_traduce).'</td>
 </tr>
 
 </tbody>
@@ -390,7 +409,7 @@ foreach ($lista_documentacion as $documento) {
  	if($documento->entregado){
  		$entregado="checked=\"checked\"";
  	}
- 	$html_2.='<td><input type="checkbox" name="documento'.$cont.'" value="'.$documento->Documento_id_documento.'" '.$entregado.'>'.$documento->nombre_documento.' </td>';
+ 	$html_2.='<td><input type="checkbox" name="documento'.$cont.'" value="'.$documento->id_documento.'" '.$entregado.'>'.strtoupper($documento->nombre_documento).' </td>';
  	
  }
 

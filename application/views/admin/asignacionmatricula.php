@@ -101,9 +101,7 @@
 
 <script>
 
-
-
-  function buscar() {
+function buscar() {
     document.getElementById("aspirante_plantel_busqueda").disabled = true;
     document.getElementById("aspirante_curp_busqueda").disabled = true;
     document.getElementById("tabla").innerHTML = "";
@@ -112,14 +110,8 @@
     var plantel = document.getElementById("aspirante_plantel_busqueda").value;
     var query = 'curp=' + curp + '&plantel=' + plantel;
     xhr.open('GET', '<?php echo base_url();?>index.php/c_estudiante/estudiantes_sin_matricula?' + query, true);
-    xhr.onloadstart = function(){
-        $('#div_carga').show();
-      }
-      xhr.error = function (){
-        console.log("error de conexion");
-      }
-      xhr.onload = function(){
-        $('#div_carga').hide();
+
+    xhr.onload = function () {
       //console.log(JSON.parse(xhr.response));
       ////console.log(query);
 
@@ -128,7 +120,8 @@
         var fila = '<tr>';
 
         fila += '<td>';
-        fila += valor.nombre + " " + valor.apellido_paterno + " " + valor.apellido_materno;
+        var nombre_completo=valor.nombre + " " + valor.primer_apellido + " " + valor.segundo_apellido;
+        fila += nombre_completo;
         fila += '</td>';
 
         fila += '<td>';
@@ -144,11 +137,11 @@
         fila += '</td>';
 
         fila += '<td>';
-        fila += valor.Plantel_cct;
+        fila += valor.Plantel_cct_plantel;
         fila += '</td>';
 
         fila += '<td>';
-        fila += '<button class="btn btn-info" type="button" value="' + valor.no_control + '" onclick="asignar_matricula(this)" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Generar Matrícula</button>';
+        fila += '<button class="btn btn-info" type="button" value="' + valor.no_control + '" onclick="asignar_matricula(this,\''+nombre_completo+'\')" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Generar Matrícula</button>';
         fila += '</td>';
 
         fila += '</tr>';
@@ -167,26 +160,19 @@
     document.getElementById('btn_buscar').classList.add('btn-dark');
 
   }
- 
 
 
-  function asignar_matricula(e) {
+  function asignar_matricula(e,e2) {
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', '<?php echo base_url();?>index.php/c_estudiante/insertar_estudiante?no_control=' + e.value, true);
-    xhr.onloadstart = function(){
-        $('#div_carga').show();
-      }
-      xhr.error = function (){
-        console.log("error de conexion");
-      }
-      xhr.onload = function(){
-        $('#div_carga').hide();
+    xhr.open('GET', '<?php echo base_url();?>index.php/c_estudiante/generar_matricula?no_control=' + e.value, true);
+
+    xhr.onload = function () {
       console.log(xhr.responseText);
 
       if (xhr.responseText.trim() !== "no") {
         Swal.fire({
           type: 'success',
-          title: 'Matrícula generada correctamente: ' + xhr.responseText
+          title: 'Matrícula generada correctamente<br>' + xhr.responseText+'<br> asignada a:<br>'+e2
         })
         $(e).parents('tr').detach();
       } else {

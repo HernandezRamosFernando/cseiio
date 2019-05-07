@@ -210,6 +210,16 @@ public function portabilidad(){
         $this->load->view("admin/asesor_grupo", $datos);
         $this->load->view("footers/footer");
     }
+
+    public function terminar_ciclo(){
+    
+        $data= array('title'=>'Terminacion de ciclo escolar');
+        $this->load->view("headers/cabecera", $data);
+        $this->load->view("headers/menuarriba");
+        $this->load->view("headers/menuizquierda");
+        $this->load->view("admin/terminar_ciclo");
+        $this->load->view("footers/footer");
+    }
         
     //-------------------------------------------------termina vistas
 }

@@ -208,7 +208,6 @@ function btnquitar_alumnos() {
 }
 
 
-
 function validarcomponente(){
   if (document.getElementById("grupos").value === "5" || document.getElementById("grupos").value === "6") {
   if(document.getElementById("plantel").value != '' && document.getElementById("grupos").value != '' && document.getElementById("grupo_ciclo_escolar").value != '' && document.getElementById("grupo_nombre").value != "" && document.getElementById("seleccione_componente").value != "" && document.getElementById("grupo_componente").value != ""){

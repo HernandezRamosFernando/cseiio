@@ -34,10 +34,10 @@
             </a>
           </div>
           <div class="col col-lg-4">
-          <a href="<?php echo base_url();?>index.php/c_aspirante/carta_compromiso"
+          <a href="<?php echo base_url();?>index.php/c_vistas/terminar_ciclo"
               class="btn btn-primary btn-lg btn-block menu valign-center btn-4 btn-responsive">
               <i class="material-icons">thumbs_up_down</i>&nbsp;
-              Generación de Carta Compromiso
+              Terminar periodo de ciclo escolar
             </a>
           </div>
           <div class="col col-lg-4">

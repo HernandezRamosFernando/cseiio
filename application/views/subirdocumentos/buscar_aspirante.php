@@ -255,11 +255,11 @@ https://www.youtube.com/results?search_query=+AJAX+File+Upload+with+Progress
 
           if (valor.ruta !== null && valor.ruta.length!==0) {
               fila += '<td>';
-              fila += '<center><a class="btn btn-info" id="enlace'+cont2 +'" href="<?php echo base_url();?>index.php/C_subir_doc/descargar/'+ valor.Estudiante_no_control +'/'+valor.Documento_id_documento+'" >Descargar <i class="fa fa-download" aria-hidden="true"></i></a> </center>';
+              fila += '<center><a class="btn btn-info" id="enlace'+cont2 +'" href="<?php echo base_url();?>index.php/C_subir_doc/descargar/'+ valor.Estudiante_no_control +'/'+valor.id_documento+'" >Descargar <i class="fa fa-download" aria-hidden="true"></i></a> </center>';
               fila += '</td>';
 
               fila += '<td>';
-               fila += '<center><div id="view'+ cont2+'"><a class="btn btn-info enlace1" id="enlaceview' + cont2 + '" onClick="ventanaSecundaria(\'<?php echo base_url();?>index.php/C_subir_doc/visualizar/' + valor.Estudiante_no_control + '/' +valor.Documento_id_documento + '\');">Visualizar <i class="fa fa-search" aria-hidden="true"></i></a></div> </center>';
+               fila += '<center><div id="view'+ cont2+'"><a class="btn btn-info enlace1" id="enlaceview' + cont2 + '" onClick="ventanaSecundaria(\'<?php echo base_url();?>index.php/C_subir_doc/visualizar/' + valor.Estudiante_no_control + '/' +valor.id_documento + '\');">Visualizar <i class="fa fa-search" aria-hidden="true"></i></a></div> </center>';
               fila += '</td>';
           }
 
@@ -489,16 +489,6 @@ https://www.youtube.com/results?search_query=+AJAX+File+Upload+with+Progress
       document.getElementById('btn_buscar').classList.remove('btn-success');
       document.getElementById('btn_buscar').classList.add('btn-dark');
     }
-
-
-
-
-
-    function limpiar() {
-      location.reload();
-
-    }
-
 
 function refrescar_tabla(){
   borrar_formato_tabla();

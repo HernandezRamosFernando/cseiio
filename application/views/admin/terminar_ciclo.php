@@ -92,7 +92,24 @@ window.onload = function() {
                     cancelButtonText: 'Cancelar'
                     }).then((result) => {
                     if (result.value) {
-                    //aqui va el aceptar
+                      var xhr = new XMLHttpRequest();
+                      xhr.open('GET', '/cseiio/c_ciclo_escolar/get_datos_siguiente_ciclo', true);
+
+                      xhr.onload = function () {
+                        //console.log(JSON.parse(xhr.response)[0].respuesta);
+                        //console.log(JSON.parse(xhr.response)[0].id_ciclo_escolar);
+                        if(JSON.parse(xhr.response)[0].respuesta===undefined){
+                            document.getElementById("nombre_ciclo").value = JSON.parse(xhr.response)[0].nombre_ciclo_escolar;
+                            document.getElementById("fecha_matricula").value = JSON.parse(xhr.response)[0].fecha_matricula;
+                            document.getElementById("fecha_matricula").value = JSON.parse(xhr.response)[0].fecha_matricula;
+                            document.getElementById("periodo").value = "ENERO-JULIO";
+
+                        }
+
+                        
+                      };
+
+                      xhr.send(null);
                       }
                     //aqui va si cancela
                     });

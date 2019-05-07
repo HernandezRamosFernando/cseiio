@@ -503,8 +503,7 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
       xhr.error = function (){
         console.log("error de conexion");
       }
-      
-
+    
       xhr.onreadystatechange = function() { // Call a function when the state changes.
           if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
             console.log(xhr.response);

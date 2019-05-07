@@ -73,6 +73,11 @@
           <span class="font-weight-light">Asignar Asesor
           </span>
         </a>
+        <a class="nav-link <?php ($this->uri->segment(2)=='terminar_ciclo') ? print 'bg-info text-light' : print null; ?>" href="<?php echo base_url();?>index.php/c_vistas/terminar_ciclo">
+        <i class="material-icons">group_add</i>
+          <span class="font-weight-light">Finalizar periodo
+          </span>
+        </a>
         <hr class="bg-info" style=" border: 3px solid ;">
       </div>
     </li>

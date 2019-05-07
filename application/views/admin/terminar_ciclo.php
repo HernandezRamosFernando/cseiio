@@ -10,7 +10,7 @@
     <li class="breadcrumb-item active">Agregue los datos solicitados</li>
   </ol>
 
-  <div class="card">
+  <div class="card" id="periodo_oculto" style="display: none">
       <div class="card-body">
 
       <div class="form-group">
@@ -67,7 +67,7 @@
 
 
       </div>
-|   </div>
+   </div>
 
 
 
@@ -85,17 +85,27 @@
 window.onload = function() {
   //funciones a ejecutar
   swalWithBootstrapButtons.fire({
-                    type: 'warning',
-                    text: 'Esta seguro que desea finalizar el periodo escolar',
-                    confirmButtonText: 'Aceptar',
-                    showCancelButton: 'true',
-                    cancelButtonText: 'Cancelar'
-                    }).then((result) => {
-                    if (result.value) {
-                    //aqui va el aceptar
-                      }
-                    //aqui va si cancela
-                    });
+    type: 'warning',
+    text: 'Esta seguro que desea finalizar el periodo escolar',
+    confirmButtonText: 'Aceptar',
+    showCancelButton: 'true',
+    cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.value) {
+            //aqui va el aceptar
+            swalWithBootstrapButtons.fire({
+                type: 'info',
+                text: 'Agregue los datos del nuevo periodo escolar',
+                confirmButtonText: 'Aceptar'
+                }).then((result) => {
+                    if (result.value){
+                        alert("funciona");
+                        document.getElementById("periodo_oculto").display="";
+                    }
+                });
+
+                }     //aqui va si cancela
+        });
 };
  
 

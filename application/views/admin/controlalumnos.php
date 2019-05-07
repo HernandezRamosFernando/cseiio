@@ -1029,7 +1029,7 @@
         fila += '<button class="btn btn-lg btn-block btn-success" type="button" value="' + valor.no_control + '" onclick="cargar_datos_aspirante(this)" data-toggle="modal" data-target="#modalaspirante">Editar</button>';
         fila += '</td>';
         fila += '<td>';
-        fila += '<a href="<?php echo base_url();?>index.php/C_aspirante/generar_formato_inscripcion?no_control=' + valor.no_control + '" class="btn btn-lg btn-block btn-info btn btn-primary" target="_blank">Imprimir</a>';
+        fila += '<a href="<?php echo base_url();?>index.php/C_estudiante/generar_formato_inscripcion?no_control=' + valor.no_control + '" class="btn btn-lg btn-block btn-info btn btn-primary" target="_blank">Imprimir</a>';
         fila += '</td>';
         fila += '<td class="">';
         fila += '<button class="btn btn-lg btn-block btn-danger" type="button" value="' + valor.no_control + '" onclick="eliminar_aspirante(this)" data-toggle="modal" data-target="#modal_eliminar_alumno">Eliminar</button>';

@@ -21,11 +21,6 @@ class C_subir_doc extends CI_Controller {
   
         //$datos['laspirante'] = $this->M_estudiante->aspirantes_lista();
   
-
-        
-      
-
-
         if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
             $data= array('title'=>'Control de Documentos');
             $datos['planteles'] = $this->M_plantel->get_planteles();

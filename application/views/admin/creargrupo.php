@@ -51,7 +51,7 @@
                 <option value="5">5</option>
                 <option value="6">6</option>
               </select>
-              <span>Seleccione el semestre del grupo a crear</span>
+              <span>Semestre del grupo a crear</span>
             </label>
           </div>
 
@@ -102,10 +102,10 @@
         <div class="row">
 
           <div class="col-md-4">
-            <label class="form-group has-float-label">
-              <select class="form-control form-control-lg"  name="grupo_nombre"
+            <label class="form-group has-float-label" style="font-size: 16pt; font-weight: bold">
+              <select class="form-control form-control-lg"  name="grupo_nombre" style="color: blue"
                 id="grupo_nombre">
-                <option value="">Seleccione uno</option>
+                <option value="" >Elegir</option>
                 <option value="A">A</option>
                 <option value="B">B</option>
                 <option value="C">C</option>
@@ -113,7 +113,7 @@
                 <option value="E">E</option>
                 <option value="F">F</option>
               </select>
-              <span>Seleccione nombre del grupo</span>
+              <span>Nombre del grupo</span>
             </label>
           </div>
 

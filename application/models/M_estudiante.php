@@ -108,15 +108,6 @@ public function get_estudiante($no_control){
    $datos['lengua_materna'] = $this->db->query("SELECT * from Datos_lengua_materna where Estudiante_no_control='".$no_control."'")->result();
    return $datos;
 }
-function listar_aspirantes_xplantel($curp, $plantel){
-   return $this->db->query(
-      "select *,(SELECT count(*) noentregada FROM Documentacion d1 where d1.Estudiante_no_control=Estudiante.no_control and d1.entregado=0) as no_entregado,(SELECT count(*) nosubida FROM Documentacion d1 where d1.Estudiante_no_control=Estudiante.no_control and ruta is null or ruta='') as no_subida from Estudiante where Plantel_cct_plantel like'".$plantel."%' and curp like'".$curp."%' ")->result();
-
-
-  }
-
-
-
 
 public function update_estudiante(
    $datos_estudiante,
@@ -214,6 +205,87 @@ public function get_plantel_estudiante($no_control){
    FROM Estudiante as e inner join Plantel as p on e.Plantel_cct_plantel=p.cct_plantel 
    where no_control='".$no_control."'")->result();
 }
+
+function listar_aspirantes_xplantel($curp, $plantel){
+   return $this->db->query(
+      "select *,(SELECT count(*) noentregada FROM Documentacion d1 where d1.Estudiante_no_control=Estudiante.no_control and d1.entregado=0) as no_entregado,(SELECT count(*) nosubida FROM Documentacion d1 where d1.Estudiante_no_control=Estudiante.no_control and ruta is null or length(ruta)=0) as no_subida from Estudiante where Plantel_cct_plantel like'".$plantel."%' and curp like'".$curp."%' ")->result();
+
+
+  }
+
+  public function estudiantes_sin_matricula($curp, $plantel){
+
+   return $this->db->query(
+    "select * 
+    from Estudiante
+    where Plantel_cct_plantel like'".$plantel."%' and curp like'".$curp."%' and matricula is null")->result();
+
+}
+
+public function obtener_fecha_inscripcion_semestre($no_control){
+   //select fecha_inscripcion FROM Aspirante where no_control='CSEIIO1910002' 
+   $this->db->select('semestre,fecha_inscripcion');
+   $this->db->from('Estudiante e');
+   $this->db->where('e.no_control',$no_control);
+   $consulta = $this->db->get();
+   $resultado=$consulta->row();
+   return $resultado;
+   
+   }
+
+   public function obtener_ciclo_escolar($fecha){
+      //SELECT fecha_matricula FROM ciclo_escolar where fecha_inicio<='2018-08-13' and fecha_termino>='2018-08-13'; 
+      $this->db->select('fecha_matricula');
+      $this->db->from('Ciclo_escolar c');
+      $this->db->where('fecha_inicio<=\''.$fecha.'\' and fecha_terminacion>=\''.$fecha.'\'');
+      $consulta = $this->db->get()->row();
+      $resultado=0;
+      if($consulta!=null)
+      {
+          $resultado=$consulta->fecha_matricula;
+        
+      }
+  
+      else{
+         $resultado=null;
+      }
+      
+      return $resultado;
+      
+      }
+      public function numero_consecutivo_matricula($anio){
+         //SELECT max(CONVERT(SUBSTRING(matricula,4,LENGTH(matricula)),SIGNED INTEGER)) as total FROM estudiante where matricula like '18%';
+        $this->db->select('max(CONVERT(SUBSTRING(matricula,4,LENGTH(matricula)),SIGNED INTEGER)) as total');
+        $this->db->from('Estudiante');
+        $this->db->like('matricula',$anio,'after');
+      
+        $consulta = $this->db->get();
+        $resultado=$consulta->row()->total;
+        if($resultado==null){
+          $resultado=1;
+        }
+        else{
+          $resultado=$resultado+1;
+        }
+      
+        return $resultado;
+      }
+      public function insertar_matricula($datos){
+         $this->db->trans_start();
+         $this->db->query("update Estudiante set matricula = '".$datos["matricula"]."' where no_control = '".$datos["no_control"]."' " );
+         $this->db->trans_complete();
+   
+               if ($this->db->trans_status() === FALSE)
+               {
+                  return "no";
+                }
+                  
+               else{
+                  return $datos['matricula'];
+                 
+               }
+   
+     } 
 
 }
 ?>

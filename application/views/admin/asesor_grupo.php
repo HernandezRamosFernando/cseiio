@@ -173,12 +173,8 @@ function cargar_materias(){
         var fila ="<tr>";
         fila+="<td>"+valor.unidad_contenido+"</td>";
         fila+="<td>"+valor.clave+"</td>";
-<<<<<<< HEAD
         var asesor = valor.asesor==="null"?"":valor.asesor;
         fila+='<td><input type="text" class="form-control" name="input_asesor" id="input_asesor" value="'+asesor+'" placeholder="Nombre de asesor"></td>';
-=======
-        fila+='<td><input type="text" class="form-control" name="input_asesor" id="input_asesor" placeholder="Nombre de asesor" style="width:100%"></td>';
->>>>>>> 22e989a731de4a7774a2005433cf645f9d048bb1
         fila+="</tr>";
         document.getElementById("tabla").innerHTML+=fila;
       });

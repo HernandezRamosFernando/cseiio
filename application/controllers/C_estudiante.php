@@ -8,6 +8,12 @@ class C_estudiante extends CI_Controller {
     public function __construct(){
         parent::__construct();
         $this->load->model('M_estudiante');
+        $this->load->model('M_documentacion');
+        $this->load->model('M_plantel');
+        $this->load->model('M_localidad');
+        $this->load->model('M_escuela_procedencia');
+        $this->load->model('M_lengua');
+
     }
 
 
@@ -498,25 +504,8 @@ public function valor_Lengua($valor){
 
 }
 
-public function get_docxaspirante(){
-    $no_control = $this->uri->segment(3);
-    $nombre = $this->uri->segment(4);
-    $primer_apellido = $this->uri->segment(5);
-    $segundo_apellido = $this->uri->segment(6);
-    
-    $datos['numcontrol']=$no_control;
-    $datos['nombre_completo']=$nombre.' '.$primer_apellido.' '.$segundo_apellido;
-    $datos['documentacion_aspirante'] = $this->M_documentacion->get_documentacion_aspirante($no_control);
 
-    echo json_encode($datos);
-}
-public function buscar_aspirantesxplantel(){
-    $plantel = $this->input->get('plantel');
-    $curp = $this->input->get('curp');
-     echo json_encode($this->M_estudiante->listar_aspirantes_xplantel($curp, $plantel));
-}
  
-
 public function estudiantes_sin_matricula(){
     $curp = $this->input->get('curp');
     $plantel = $this->input->get('plantel');
@@ -525,9 +514,76 @@ public function estudiantes_sin_matricula(){
         $plantel
         ));
 }
-public function generar_matricula($no_control){
-    $matricula='';
+
+
+public function get_docxaspirante(){
+    $no_control = $this->uri->segment(3);
+    $nombre = $this->uri->segment(4);
+    $primer_apellido = $this->uri->segment(5);
+    $segundo_apellido = $this->uri->segment(6);
     
+    $datos['numcontrol']=$no_control;
+    $datos['nombre_completo']=$nombre.' '.$primer_apellido.' '.$segundo_apellido;
+    $datos['documentacion_aspirante'] = $this->M_documentacion->get_documentacion_xnombrede_aspirante($no_control);
+
+    echo json_encode($datos);
+}
+public function buscar_aspirantesxplantel(){
+    $plantel = $this->input->get('plantel');
+    $curp = $this->input->get('curp');
+     echo json_encode($this->M_estudiante->listar_aspirantes_xplantel($curp, $plantel));
+ }
+ 
+ public function generar_formato_inscripcion(){
+    $this->load->library('pdf');
+    $no_control = $this->input->get('no_control');
+    $datos['estudiante'] = $this->M_estudiante->get_estudiante($no_control);
+    $datos['nombre_plantel']= $this->M_plantel->get_plantel($datos['estudiante']['estudiante'][0]->Plantel_cct_plantel)[0]->nombre_plantel;
+
+    $datos['domicilio_estudiante'] = $this->M_localidad->get_nombre_estado_municipio_localidad($datos['estudiante']['estudiante'][0]->id_localidad);
+
+    $datos['escuela_procedencia'] =$this->M_escuela_procedencia->get_escuela($datos['estudiante']['estudiante'][0]->cct_escuela_procedencia);
+
+    if(!empty($datos['estudiante']['lengua_materna'][0]->id_lengua)){
+        $datos['nombre_lengua'] = $this->M_lengua->get_nombre_lengua($datos['estudiante']['lengua_materna'][0]->id_lengua)->nombre_lengua;
+    $datos['lengua_lee'] =$this->valor_Lengua($datos['estudiante']['lengua_materna'][0]->porcentaje);
+    $datos['lengua_habla'] =$this->valor_Lengua($datos['estudiante']['lengua_materna'][1]->porcentaje);
+    $datos['lengua_escribe'] =$this->valor_Lengua($datos['estudiante']['lengua_materna'][2]->porcentaje);
+    $datos['lengua_entiende'] =$this->valor_Lengua($datos['estudiante']['lengua_materna'][3]->porcentaje);
+    $datos['lengua_traduce'] =$this->valor_Lengua($datos['estudiante']['lengua_materna'][4]->porcentaje);
+
+    }
+    else{
+
+    $datos['nombre_lengua'] = "";
+    $datos['lengua_lee'] ="";
+    $datos['lengua_habla'] ="";
+    $datos['lengua_escribe'] ="";
+    $datos['lengua_entiende'] ="";
+    $datos['lengua_traduce'] ="";
+
+    }
+    
+    
+    $datos['lista_documentacion'] =$this->M_documentacion->get_documentacion_xnombrede_aspirante($no_control);
+    $this->load->view('contratos/formatofichainscripcion',$datos);
+}
+
+
+public function generar_formato_observaciones_expedientes(){
+    $plantel = $this->input->post('plantel_busqueda');
+    $datos['ciclo_escolar'] = $this->M_ciclo_escolar->get_ciclo_escolar();
+     $datos['dato_plantel']=$this->M_plantel->get_plantel($plantel);
+    $datos['lista_doc']=$this->M_documentacion->lista_observaciones_en_documentacion($plantel);
+    $this->load->library('pdf');
+    $this->load->view('contratos/formatoobservacionesexpedientes',$datos);
+}
+
+public function generar_matricula(){
+    $no_control = $this->input->get('no_control');
+    //$nombre_completo = $this->input->get('nombre_completo');
+    $matricula='';
+    $mensaje='';
     $datos= $this->M_estudiante->obtener_fecha_inscripcion_semestre($no_control);
         $fecha_inscripcion=$datos->fecha_inscripcion;
         $semestre=$datos->semestre;
@@ -535,35 +591,26 @@ public function generar_matricula($no_control){
         if($anio_ciclo!=null){
             $numconsecutivo=$this->M_estudiante->numero_consecutivo_matricula($anio_ciclo);
             $matricula=$anio_ciclo.$semestre.str_pad($numconsecutivo,4,'0',STR_PAD_LEFT);
+
+
+            $datos = array(
+            'no_control' => $no_control,
+            'matricula' => $matricula,
+            'fecha_asignacion_matricula' => date("Y-m-d")
+            );
+
+            echo $this->M_estudiante->insertar_matricula($datos);
             
+
 
         }
         else{
             $matricula=null;
+            echo "no";
         }
 
-        return $matricula;
-   
-}
-public function insertar_estudiante(){
-    //$no_control = $this->input->get('no_control');
-    //$matricula = $this->generar_matricula();
-    $no_control = $this->input->get('no_control');
-    $matricula=$this->generar_matricula($no_control);
-   
-    $datos = array(
-        'Estudiante_no_control' => $no_control,
-        'matricula' => $matricula,
-        'fecha_asignacion_matricula' => date("Y-m-d")
-    );
-    echo $this->M_estudiante->insertar_estudiante($datos);
+        echo $semestre;  
 }
 
 }
-
-
-
-
-
-
 ?>

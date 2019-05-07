@@ -82,8 +82,6 @@
         <div class="col-md-4">
           <label class="form-group has-float-label">
             <select class="form-control form-control-lg" id="grupo_ciclo_escolar" name="grupo_ciclo_escolar">
-              <option>Seleccione el ciclo del grupo </option>
-
               <?php
                                         foreach ($ciclo_escolar as $ciclo)
                                         {
@@ -134,9 +132,12 @@
           <label class="form-group has-float-label">
               <select class="form-control form-control-lg"  name="grupo_periodo"
                 id="grupo_periodo">
-                <option value="">Seleccione uno</option>
-                <option value="A">Agosto-Diciembre</option>
-                <option value="B">Enero-Julio</option>
+                <?php
+                                        foreach ($ciclo_escolar as $ciclo)
+                                        {
+                                          echo '<option value="'.$ciclo->id_ciclo_escolar.'">'.$ciclo->periodo.'</option>';
+                                        }
+                                        ?>
               </select>
               <span>Periodo del grupo</span>
             </label>

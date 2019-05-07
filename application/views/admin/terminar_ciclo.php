@@ -10,7 +10,7 @@
     <li class="breadcrumb-item active">Agregue los datos solicitados</li>
   </ol>
 
-  <div class="card">
+  <div class="card" id="periodo_oculto" style="display: none">
       <div class="card-body">
 
       <div class="form-group">
@@ -67,7 +67,7 @@
 
 
       </div>
-|   </div>
+   </div>
 
 
 
@@ -75,6 +75,11 @@
 
 
 </div>
+
+    <br>
+    <div class="col-md-12" id="boton_oculto" style="display: none">
+        <button type="button" onclick="" id="boton_agregar" class="btn btn-success btn-lg btn-block" style="padding: 1rem"> Guardar Nuevo periodo de ciclo escolar</button>
+    </div>
 </div>
 <!-- /.content-wrapper -->
 </div>
@@ -92,7 +97,13 @@ window.onload = function() {
                     cancelButtonText: 'Cancelar'
                     }).then((result) => {
                     if (result.value) {
-                      var xhr = new XMLHttpRequest();
+                      swalWithBootstrapButtons.fire({
+                          type: 'info',
+                          text: 'Agregue los datos del nuevo periodo escolar',
+                          confirmButtonText: 'Aceptar'
+                          }).then((result) => {
+                          if (result.value){
+                            var xhr = new XMLHttpRequest();
                       xhr.open('GET', '/cseiio/c_ciclo_escolar/get_datos_siguiente_ciclo', true);
 
                       xhr.onload = function () {
@@ -110,10 +121,19 @@ window.onload = function() {
                       };
 
                       xhr.send(null);
-                      }
-                    //aqui va si cancela
-                    });
+                            document.getElementById("periodo_oculto").style.display="";
+                            document.getElementById("boton_oculto").style.display="";
+                             }
+                           });
+                            }else{
+                            window.history.back();
+                             }     //aqui va si cancela
+                      
+                      
+
+
 };
+}
  
 
 </script>

@@ -57,7 +57,7 @@
         <i class="material-icons">beenhere</i>
         <span>Acreditación</span>
       </a>
-      <div id="submenu1" class="<?php ($this->uri->segment(2)=='crear_grupo'||$this->uri->segment(2)=='buscar_grupo'||$this->uri->segment(2)=='asesor_grupo') ? print 'null' : print 'collapse'; ?> sidebar-submenu">
+      <div id="submenu1" class="<?php ($this->uri->segment(2)=='crear_grupo'||$this->uri->segment(2)=='terminar_ciclo'||$this->uri->segment(2)=='buscar_grupo'||$this->uri->segment(2)=='asesor_grupo') ? print 'null' : print 'collapse'; ?> sidebar-submenu">
         <a class="nav-link <?php ($this->uri->segment(2)=='crear_grupo') ? print 'bg-info text-light' : print null; ?>" href="<?php echo base_url();?>index.php/c_vistas/crear_grupo">
         <i class="material-icons">group_add</i>
           <span class="font-weight-light">Crear grupos
@@ -71,6 +71,11 @@
         <a class="nav-link <?php ($this->uri->segment(2)=='asesor_grupo') ? print 'bg-info text-light' : print null; ?>" href="<?php echo base_url();?>index.php/c_vistas/asesor_grupo">
         <i class="material-icons">group_add</i>
           <span class="font-weight-light">Asignar Asesor
+          </span>
+        </a>
+        <a class="nav-link <?php ($this->uri->segment(2)=='terminar_ciclo') ? print 'bg-info text-light' : print null; ?>" href="<?php echo base_url();?>index.php/c_vistas/terminar_ciclo">
+        <i class="material-icons">group_add</i>
+          <span class="font-weight-light">Finalizar periodo
           </span>
         </a>
         <hr class="bg-info" style=" border: 3px solid ;">

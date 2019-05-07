@@ -360,6 +360,7 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
         type: 'info',
         text: 'Debe seleccionar un plantel'
       });
+      $("#semestre_grupo").val('');
     }
 
     else {

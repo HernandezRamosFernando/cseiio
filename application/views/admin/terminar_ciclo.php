@@ -5,7 +5,7 @@
     <!-- Breadcrumbs-->
     <ol class="breadcrumb">
       <li class="breadcrumb-item">
-        <a>Finalización de periodo de ciclo escolar</a>
+        <a>Nuevo periodo de ciclo escolar</a>
       </li>
       <li class="breadcrumb-item active">Agregue los datos solicitados</li>
     </ol>
@@ -17,7 +17,7 @@
           <div class="row">
             <div class="col-md-4">
               <div class="form-label-group">
-                <input type="text" pattern="[A-Za-zñ]+" title="" class="form-control" id="nombre_ciclo"
+                <input type="text"  class="form-control" id="nombre_ciclo"
                   placeholder="Nombre ciclo escolar ">
                 <label for="nombre_ciclo">Nombre de ciclo escolar</label>
               </div>
@@ -25,7 +25,7 @@
 
             <div class="col-md-4">
               <div class="form-label-group">
-                <input type="text" pattern="[A-Za-zñ]+" title="" class="form-control" id="fecha_matricula"
+                <input type="text"  class="form-control" id="fecha_matricula"
                   placeholder="Fecha de la matrícula">
                 <label for="fecha_matricula">Fecha de la matrícula</label>
               </div>
@@ -33,7 +33,7 @@
 
             <div class="col-md-4">
               <div class="form-label-group">
-                <input type="text" pattern="[A-Za-zñ]+" title="" class="form-control" id="periodo"
+                <input type="text"  class="form-control" id="periodo"
                   placeholder="Periodo">
                 <label for="periodo">Periodo</label>
               </div>
@@ -105,7 +105,7 @@
         }).then((result) => {
           if (result.value) {
             var xhr = new XMLHttpRequest();
-            xhr.open('GET', '/cseiio/c_ciclo_escolar/get_datos_siguiente_ciclo', true);
+            xhr.open('GET', '<?php echo base_url();?>index.php/c_ciclo_escolar/get_datos_siguiente_ciclo', true);
 
             xhr.onload = function () {
               //console.log(JSON.parse(xhr.response)[0].respuesta);

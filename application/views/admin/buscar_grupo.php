@@ -71,7 +71,7 @@
           </div>
 
             <div class="col-md-4 offset-md-3">
-              <button type="button" class="btn btn-success btn-lg btn-block" onclick="buscar_estudiantes_grupo()" style="padding: 1rem" id="crear_grupo">Mostrar grupo</button>
+              <button type="button" class="btn btn-success btn-lg btn-block" onclick="validarcomponente()" style="padding: 1rem" id="crear_grupo">Mostrar grupo</button>
             </div>
           </div>
       </div>
@@ -142,15 +142,26 @@
 
 <script>
 
+function validarcomponente(){
+
+    if(document.getElementById("plantel").value != '' && document.getElementById("grupos").value != '' && document.getElementById("semestre_grupo").value != '' ){
+      buscar_estudiantes_grupo();
+    }else{
+      Swal.fire({
+            type: 'warning',
+            text: 'Agregue los datos faltantes'
+          });
+      }
+}
+
 var lista_alumnos=new Array();
 function cargargrupos() {
   if (document.getElementById("plantel").value === "") {
       Swal.fire({
         type: 'info',
-        text: 'Debe seleccionar un plantel',
-        showConfirmButton: false,
-        timer: 2500
+        text: 'Debe seleccionar un plantel'
       });
+      $("#semestre_grupo").val('');
     }else{
       var xhr = new XMLHttpRequest();
       var plantel = document.getElementById("plantel").value;
@@ -208,43 +219,7 @@ function btnquitar_alumnos() {
 }
 
 
-function validarcomponente(){
-  if (document.getElementById("grupos").value === "5" || document.getElementById("grupos").value === "6") {
-  if(document.getElementById("plantel").value != '' && document.getElementById("grupos").value != '' && document.getElementById("grupo_ciclo_escolar").value != '' && document.getElementById("grupo_nombre").value != "" && document.getElementById("seleccione_componente").value != "" && document.getElementById("grupo_componente").value != ""){
-    document.getElementById("tabla").innerHTML = "";
-    document.getElementById("grupo_nombre").disabled = true;
-    document.getElementById("grupo_periodo").disabled = true;
-    document.getElementById("grupos").disabled = true;
-    document.getElementById("plantel").disabled = true;
-    document.getElementById("grupo_ciclo_escolar").disabled = true;
-    document.getElementById("seleccione_componente").disabled = true;
-    document.getElementById("grupo_componente").disabled = true;
-    alerta_grupo();
 
-  }else{
-    Swal.fire({
-            type: 'warning',
-            text: 'Agregue los datos faltantes'
-          });
-    }
-
-  }else{
-    if(document.getElementById("plantel").value != '' && document.getElementById("grupos").value != '' && document.getElementById("grupo_ciclo_escolar").value != '' && document.getElementById("grupo_nombre").value != ""){
-    document.getElementById("tabla").innerHTML = "";
-    document.getElementById("grupo_nombre").disabled = true;
-    document.getElementById("grupo_periodo").disabled = true;
-    document.getElementById("grupos").disabled = true;
-    document.getElementById("plantel").disabled = true;
-    document.getElementById("grupo_ciclo_escolar").disabled = true;
-    alerta_grupo();
-    }else{
-    Swal.fire({
-            type: 'warning',
-            text: 'Agregue los datos faltantes'
-          });
-      }
-  }
-}
 
   function buscar() { 
     var xhr = new XMLHttpRequest();

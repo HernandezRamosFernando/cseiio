@@ -173,3 +173,10 @@ btn-lista:hover{
     margin-top: 20%;
     position: relative;
 }
+.seltitulo{
+    font-size: 16pt; 
+    font-weight: bold;
+}
+.selcolor{
+    color:  #237087;
+}

@@ -16,8 +16,8 @@
 
         <div class="row">
           <div class="col-md-8">
-            <label class="form-group has-float-label">
-              <select class="form-control form-control-lg" id="plantel"   name="plantel">
+            <label class="form-group has-float-label seltitulo">
+              <select class="form-control form-control-lg selcolor" id="plantel"   name="plantel">
                 <option value="">Seleccione el plantel donde buscar el grupo</option>
 
                 <?php
@@ -40,8 +40,8 @@
         <div class="row">
 
           <div class="col-md-4">
-            <label class="form-group has-float-label">
-              <select class="form-control form-control-lg" onchange="cargargrupos()" name="semestre_grupo"
+            <label class="form-group has-float-label seltitulo">
+              <select class="form-control form-control-lg selcolor" onchange="cargargrupos()" name="semestre_grupo"
                 id="semestre_grupo">
                 <option value="">Seleccione uno</option>
                 <option value="1">1</option>
@@ -62,8 +62,8 @@
         <div class="row">
 
           <div class="col-md-4">
-            <label class="form-group has-float-label">
-              <select class="form-control form-control-lg" onchange="cargar_materias()" name="grupos" id="grupos">
+            <label class="form-group has-float-label seltitulo">
+              <select class="form-control form-control-lg selcolor" onchange="cargar_materias()" name="grupos" id="grupos">
                 <option value="">Seleccione uno</option>
               </select>
               <span>Lista de grupos</span>
@@ -77,8 +77,8 @@
 
 
           <div class="col-md-4">
-            <label class="form-group has-float-label">
-              <select class="form-control form-control-lg"  name="materias" id="materias">
+            <label class="form-group has-float-label seltitulo">
+              <select class="form-control form-control-lg selcolor"  name="materias" id="materias">
                 <option value="">Seleccione uno</option>
               </select>
               <span>Lista de materias del grupo</span>
@@ -99,7 +99,7 @@
       <div class="col-md-12" id="tabla_alumnos">
         <div class="card card-body">
           <table class="table table-hover" id="tabla_completa_grupo" style="width: 100%">
-            <caption>Lista del Grupo creado</caption>
+            <caption>Lista de los alumnos del grupo</caption>
             <thead class="thead-light">
               <tr>
                 <th scope="col" class="col-md-1">Nombre completo</th>
@@ -185,7 +185,6 @@ if (document.getElementById("plantel").value === "") {
 
 
 function cargar_materia(){
-  var PrimerParcial, SegundoParcial, TercerParcial, ExamenFinal;
   document.getElementById("tablagrupo").innerHTML="";
   var xhr = new XMLHttpRequest();
     xhr.open('GET', '<?php echo base_url();?>index.php/c_grupo/get_estudiantes_grupo_materia?grupo='+document.getElementById("grupos").value+'&materia='+document.getElementById("materias").value, true);
@@ -202,10 +201,10 @@ function cargar_materia(){
         var registro = "<tr>";
         registro+='<td>'+valor.nombre+' '+valor.primer_apellido+' '+valor.segundo_apellido+'</td>';
         registro+='<td>'+valor.no_control+'</td>';
-        registro+='<td><input type="text" class="form-control" name="primer_parcial" id="primer_parcial" value="'+PrimerParcial+'" placeholder="Primer Parcial"></td>';
-        registro+='<td><input type="text" class="form-control" name="segundo_parcial" id="segundo_parcial" value="'+SegundoParcial+'" placeholder="Segundo Parcial"></td>';
-        registro+='<td><input type="text" class="form-control" name="tercer_parcial" id="tercer_parcial" value="'+TercerParcial+'" placeholder="Tercer Parcial"></td>';
-        registro+='<td><input type="text" class="form-control" name="examen_final" id="examen_final" value="'+ExamenFinal+'" placeholder="Examen Final"></td>';
+        registro+='<td><input type="text" class="form-control" name="primer_parcial" id="primer_parcial" placeholder="Primer Parcial"></td>';
+        registro+='<td><input type="text" class="form-control" name="segundo_parcial" id="segundo_parcial" placeholder="Segundo Parcial"></td>';
+        registro+='<td><input type="text" class="form-control" name="tercer_parcial" id="tercer_parcial" placeholder="Tercer Parcial"></td>';
+        registro+='<td><input type="text" class="form-control" name="examen_final" id="examen_final" placeholder="Examen Final"></td>';
         registro+='</tr>';
         document.getElementById("tablagrupo").innerHTML+=registro;
       });

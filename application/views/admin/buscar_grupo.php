@@ -16,8 +16,8 @@
 
         <div class="row">
           <div class="col-md-8">
-            <label class="form-group has-float-label">
-              <select class="form-control form-control-lg"="" id="plantel"   name="plantel">
+            <label class="form-group has-float-label seltitulo">
+              <select class="form-control form-control-lg selcolor" id="plantel"   name="plantel">
                 <option value="">Seleccione el plantel donde buscar el grupo</option>
 
                 <?php
@@ -40,8 +40,8 @@
         <div class="row">
 
           <div class="col-md-4">
-            <label class="form-group has-float-label">
-              <select class="form-control form-control-lg" onchange="cargargrupos()" name="semestre_grupo"
+            <label class="form-group has-float-label seltitulo">
+              <select class="form-control form-control-lg selcolor" onchange="cargargrupos()" name="semestre_grupo"
                 id="semestre_grupo">
                 <option value="">Seleccione uno</option>
                 <option value="1">1</option>
@@ -62,8 +62,8 @@
         <div class="row">
 
           <div class="col-md-4">
-            <label class="form-group has-float-label">
-              <select class="form-control form-control-lg"  name="grupos" id="grupos">
+            <label class="form-group has-float-label seltitulo">
+              <select class="form-control form-control-lg selcolor"  name="grupos" id="grupos">
                 <option value="">Seleccione uno</option>
               </select>
               <span>Lista de grupos</span>

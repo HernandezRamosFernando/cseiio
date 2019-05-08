@@ -16,8 +16,8 @@
 
         <div class="row">
           <div class="col-md-8">
-            <label class="form-group has-float-label">
-              <select class="form-control form-control-lg"="" id="plantel"   name="plantel">
+            <label class="form-group has-float-label seltitulo">
+              <select class="form-control form-control-lg selcolor" id="plantel"   name="plantel">
                 <option value="">Seleccione el plantel donde creara el grupo</option>
 
                 <?php
@@ -40,8 +40,8 @@
         <div class="row">
 
           <div class="col-md-4">
-            <label class="form-group has-float-label">
-              <select class="form-control form-control-lg" onchange="numero_alumnos(this)" name="semestre_grupo"
+            <label class="form-group has-float-label seltitulo">
+              <select class="form-control form-control-lg selcolor" onchange="numero_alumnos(this)" name="semestre_grupo"
                 id="semestre_grupo">
                 <option value="">Seleccione uno</option>
                 <option value="1">1</option>
@@ -57,8 +57,8 @@
 
 
           <div class="col-md-4" style="display: none" id="grupo_componente_oculto">
-            <label class="form-group has-float-label">
-              <select class="form-control form-control-lg" name="grupo_componente" id="grupo_componente">
+            <label class="form-group has-float-label seltitulo">
+              <select class="form-control form-control-lg selcolor" name="grupo_componente" id="grupo_componente">
                 <option value="SI">SI</option>
               </select>
               <span>¿Es de componente?</span>
@@ -66,8 +66,8 @@
           </div>
 
           <div class="col-md-4" style="display: none" id="seleccione_componente_oculto">
-            <label class="form-group has-float-label">
-              <select class="form-control form-control-lg" name="seleccione_componente" id="seleccione_componente">
+            <label class="form-group has-float-label seltitulo">
+              <select class="form-control form-control-lg selcolor" name="seleccione_componente" id="seleccione_componente">
                 <option value="">Seleccione un componente</option>
               </select>
               <span>Componente</span>
@@ -80,8 +80,8 @@
       <div class="form-group">
       <div class="row">
         <div class="col-md-4">
-          <label class="form-group has-float-label">
-            <select class="form-control form-control-lg" id="grupo_ciclo_escolar" name="grupo_ciclo_escolar">
+          <label class="form-group has-float-label seltitulo">
+            <select class="form-control form-control-lg selcolor" id="grupo_ciclo_escolar" name="grupo_ciclo_escolar">
               <?php
                                         foreach ($ciclo_escolar as $ciclo)
                                         {
@@ -100,8 +100,8 @@
         <div class="row">
 
           <div class="col-md-4">
-            <label class="form-group has-float-label" style="font-size: 16pt; font-weight: bold">
-              <select class="form-control form-control-lg"  name="grupo_nombre" style="color: blue"
+            <label class="form-group has-float-label seltitulo" >
+              <select class="form-control form-control-lg selcolor"  name="grupo_nombre" 
                 id="grupo_nombre">
                 <option value="" >Elegir</option>
                 <option value="A">A</option>
@@ -129,8 +129,8 @@
         <div class="row">
         
           <div class="col-md-4">
-          <label class="form-group has-float-label">
-              <select class="form-control form-control-lg"  name="grupo_periodo"
+          <label class="form-group has-float-label seltitulo">
+              <select class="form-control form-control-lg selcolor"  name="grupo_periodo"
                 id="grupo_periodo">
                 <?php
                                         foreach ($ciclo_escolar as $ciclo)

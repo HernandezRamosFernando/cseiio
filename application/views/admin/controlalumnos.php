@@ -17,9 +17,9 @@
 
           <div class="row">
             <div class="col-md-4">
-              <div class="form-label-group">
+              <div class="form-label-group ">
                 <input type="text" pattern="[A-Za-zñ]+" title="Introduzca solo letras" class="form-control"
-                  id="aspirante_curp_busqueda" placeholder="CURP">
+                  id="aspirante_curp_busqueda" placeholder="CURP" style="color: #237087">
                 <label for="aspirante_curp_busqueda">CURP</label>
               </div>
             </div>
@@ -34,8 +34,8 @@
 
 
             <div class="col-md-8">
-              <label class="form-group has-float-label">
-                <select class="form-control form-control-lg" required="required" id="aspirante_plantel_busqueda"
+              <label class="form-group has-float-label seltitulo">
+                <select class="form-control form-control-lg selcolor" required="required" id="aspirante_plantel_busqueda"
                   name="aspirante_plantel">
                   <option value="">Buscar en todos los planteles</option>
 
@@ -143,7 +143,7 @@
                 <div class="form-label-group">
                   <input type="text" pattern="[A-Za-z]+[ ]*[A-Za-z ]*" required title="Introduzca solo letras validas"
                     class="form-control text-uppercase" id="aspirante_nombre" name="aspirante_nombre"
-                    onchange="valida(this)" placeholder="Nombre(s)">
+                    onchange="valida(this)" placeholder="Nombre(s)" style="color: #237087">
                   <label for="aspirante_nombre">Nombre(s)</label>
                 </div>
               </div>
@@ -152,7 +152,7 @@
                 <div class="form-label-group">
                   <input type="text" pattern="[A-Za-z]+[ ]*[A-Za-z ]*" required title="Introduzca solo letras"
                     class="form-control text-uppercase" id="aspirante_apellido_paterno" onchange="valida(this)"
-                    name="aspirante_apellido_paterno" placeholder="Apellido Paterno">
+                    name="aspirante_apellido_paterno" placeholder="Apellido Paterno" style="color: #237087">
                   <label for="aspirante_apellido_paterno">Primer Apellido</label>
                 </div>
               </div>
@@ -161,7 +161,7 @@
                 <div class="form-label-group">
                   <input type="text" pattern="[A-Za-z]+[ ]*[A-Za-z ]*" title="Introduzca solo letras"
                     class="form-control text-uppercase" id="aspirante_apellido_materno" onchange="valida(this)"
-                    name="aspirante_apellido_materno" placeholder="Apellido Materno">
+                    name="aspirante_apellido_materno" placeholder="Apellido Materno" style="color: #237087">
                   <label for="aspirante_apellido_materno">Segundo Apellido</label>
                 </div>
               </div>
@@ -178,7 +178,7 @@
               <div class="col-md-4 ">
                 <div class="form-label-group ">
                   <input class="form-control" placeholder="" type="text" required onchange="validafecha(this);"
-                    onkeyup="mascara(this,'/',patron,true)" maxlength="10" id="aspirante_fecha_nacimiento"
+                    onkeyup="mascara(this,'/',patron,true)" maxlength="10" id="aspirante_fecha_nacimiento" style="color: #237087"
                     name="aspirante_fecha_nacimiento">
                   <label for="aspirante_fecha_nacimiento">Fecha Nacimiento: dd/mm/aaaa</label>
 
@@ -188,7 +188,7 @@
                 <div class="form-label-group">
                   <input type="number" title="El numero de telefono debe de ser a 10 digitos"
                     class="form-control text-uppercase" id="aspirante_telefono" name="aspirante_telefono"
-                    placeholder="Telefono">
+                    placeholder="Telefono" style="color: #237087">
                   <label for="aspirante_telefono">Teléfono</label>
                 </div>
               </div>
@@ -197,7 +197,7 @@
                   <input type="email"
                     pattern="^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$"
                     title="Introduzca un correo valido" class="form-control text-lowercase" id="aspirante_correo"
-                    name="aspirante_correo" placeholder="Correo Electrónico">
+                    name="aspirante_correo" placeholder="Correo Electrónico" style="color: #237087">
                   <label for="aspirante_correo">Correo electrónico</label>
                 </div>
               </div>
@@ -213,8 +213,8 @@
 
             <div class="row">
               <div class="col-md-4">
-                <label class="form-group has-float-label">
-                  <select class="form-control form-control-lg" id="aspirante_sexo" required name="aspirante_sexo">
+                <label class="form-group has-float-label seltitulo">
+                  <select class="form-control form-control-lg selcolor" id="aspirante_sexo" required name="aspirante_sexo">
                     <option value="">Seleccione</option>
                     <option value="H">Hombre</option>
                     <option value="M">Mujer</option>
@@ -227,22 +227,22 @@
                 <div class="form-label-group">
                   <input type="number" pattern="[0-9]{11}" title="Introduzca 11 digitos"
                     class="form-control text-uppercase" id="aspirante_nss" name="aspirante_nss"
-                    placeholder="Numero de Seguro Social">
+                    placeholder="Numero de Seguro Social" style="color: #237087">
                   <label for="aspirante_nss">NSS (IMSS)</label>
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="form-label-group">
                   <input type="text" class="form-control text-uppercase" id="aspirante_programa_social"
-                    name="aspirante_programa_social" placeholder="Folio de programa social">
+                    name="aspirante_programa_social" placeholder="Folio de programa social" style="color: #237087">
                   <label for="aspirante_programa_social">Folio de Prospera</label>
                 </div>
               </div>
 
               <div class="col-md-4">
                 <div class="form-group">
-                  <label class="form-group has-float-label">
-                    <select class="form-control form-control-lg" name="tipo_sangre" required id="tipo_sangre">
+                  <label class="form-group has-float-label seltitulo">
+                    <select class="form-control form-control-lg selcolor" name="tipo_sangre" required id="tipo_sangre">
                       <option value="">Seleccione una opción</option>
                       <option value="No conoce">No conoce su tipo de sangre</option>
                       <option value="A+">A+</option>
@@ -261,8 +261,8 @@
 
 
               <div class="col-md-4">
-                <label class="form-group has-float-label">
-                  <select class="form-control form-control-lg" id="aspirante_alergia_combo"
+                <label class="form-group has-float-label seltitulo">
+                  <select class="form-control form-control-lg selcolor" id="aspirante_alergia_combo"
                     name="aspirante_alergia_combo" onchange="alergia(this)">
                     <option value="2">No</option>
                     <option value="1">Si</option>
@@ -274,15 +274,15 @@
                 <div class="form-label-group">
                   <input type="text" pattern="[A-Za-z]+[ ]*[A-Za-z ]*" onchange="valida(this)"
                     class="form-control text-uppercase" id="aspirante_alergia" name="aspirante_alergia"
-                    onchange="valida(this)" placeholder="Ingrese el medicamento">
+                    onchange="valida(this)" placeholder="Ingrese el medicamento" style="color: #237087">
                   <label for="aspirante_alergia">Ingrese el medicamento</label>
                 </div>
               </div>
 
 
               <div class="col-md-4">
-                <label class="form-group has-float-label">
-                  <select class="form-control form-control-lg " id="aspirante_discapacidad_combo"
+                <label class="form-group has-float-label seltitulo">
+                  <select class="form-control form-control-lg selcolor" id="aspirante_discapacidad_combo"
                     name="aspirante_discapacidad_combo" onchange="discapacidad(this)">
                     <option value="2">No</option>
                     <option value="1">Si</option>
@@ -294,7 +294,7 @@
                 <div class="form-label-group">
                   <input type="text" pattern="[A-Za-z]+[ ]*[A-Za-z ]*" onchange="valida(this)"
                     class="form-control text-uppercase" id="aspirante_discapacidad" name="aspirante_discapacidad"
-                    onchange="valida(this)" placeholder="Ingrese la discapacidad">
+                    onchange="valida(this)" placeholder="Ingrese la discapacidad" style="color: #237087">
                   <label for="aspirante_discapacidad">Ingrese la discapacidad</label>
                 </div>
               </div>
@@ -308,8 +308,8 @@
 
             <div class="row">
               <div class="col-md-8">
-                <label class="form-group has-float-label">
-                  <select class="form-control form-control-lg"="" id="aspirante_plantel" name="aspirante_plantel">
+                <label class="form-group has-float-label seltitulo">
+                  <select class="form-control form-control-lg selcolor" id="aspirante_plantel" name="aspirante_plantel">
                     <option>Seleccione el plantel de ingreso</option>
 
                     <?php
@@ -325,8 +325,8 @@
               </div>
 
               <div class="col-md-4">
-                <label class="form-group has-float-label">
-                  <select class="form-control form-control-lg" required="required" id="aspirante_semestre"
+                <label class="form-group has-float-label seltitulo">
+                  <select class="form-control form-control-lg selcolor" required="required" id="aspirante_semestre"
                     name="aspirante_semestre">
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -354,14 +354,14 @@
               <div class="col-md-4">
                 <div class="form-label-group">
                   <input type="text" pattern="[A-Za-z0-9]{18}" title="Faltan datos" class="form-control text-uppercase"
-                    id="aspirante_curp" name="aspirante_curp" placeholder="CURP">
+                    id="aspirante_curp" name="aspirante_curp" placeholder="CURP" style="color: #237087">
                   <label for="aspirante_curp">CURP</label>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-label-group">
                   <a name="" id="" class="btn btn-outline-success btn-lg btn-block btn-responsive"
-                    href="https://www.gob.mx/curp/" target="_blank" role="button">
+                    href="https://www.gob.mx/curp/" target="_blank" role="button" >
                     ¿No cuenta con curp? Buscar aquí</a>
                 </div>
               </div>
@@ -374,7 +374,7 @@
                 <div class="form-label-group">
                   <input type="text" title="Datos incorrectos" class="form-control text-uppercase"
                     id="aspirante_lugar_nacimiento" name="aspirante_lugar_nacimiento" required onchange="valida(this)"
-                    placeholder="Lugar de nacimiento">
+                    placeholder="Lugar de nacimiento" style="color: #237087">
                   <label for="aspirante_lugar_nacimiento">Lugar de Nacimiento</label>
                 </div>
               </div>
@@ -394,8 +394,8 @@
             <div class="row">
 
               <div class="col-md-4">
-                <label class="form-group has-float-label">
-                  <select class="form-control form-control-lg" required" name="aspirante_direccion_estado"
+                <label class="form-group has-float-label seltitulo">
+                  <select class="form-control form-control-lg selcolor" required" name="aspirante_direccion_estado"
                     onChange="cambio_estado(selector_estado_aspirante,selector_municipio_aspirante,selector_localidad_aspirante)"
                     id="selector_estado_aspirante">
                     <option value="">Seleccione el estado</option>
@@ -416,8 +416,8 @@
 
 
               <div class="col-md-4">
-                <label class="form-group has-float-label">
-                  <select class="form-control form-control-lg"="" name="aspirante_direccion_municipio"
+                <label class="form-group has-float-label seltitulo">
+                  <select class="form-control form-control-lg selcolor" name="aspirante_direccion_municipio"
                     onChange="cambio_municipio(selector_municipio_aspirante,selector_localidad_aspirante)"
                     id="selector_municipio_aspirante">
                     <option></option>
@@ -426,8 +426,8 @@
                 </label>
               </div>
               <div class="col-md-4">
-                <label class="form-group has-float-label">
-                  <select class="form-control form-control-lg"="" name="aspirante_direccion_localidad"
+                <label class="form-group has-float-label seltitulo">
+                  <select class="form-control form-control-lg selcolor" name="aspirante_direccion_localidad"
                     id="selector_localidad_aspirante">
                     <option></option>
                   </select>
@@ -445,7 +445,7 @@
                 <div class="form-label-group">
                   <input type="text" required="required" title="La direccion tiene caracteres incorrectos"
                     class="form-control" id="aspirante_direccion_calle" name="aspirante_direccion_calle"
-                    placeholder="Calle y número">
+                    placeholder="Calle y número" style="color: #237087">
                   <label for="aspirante_direccion_calle">Calle y Número</label>
                 </div>
               </div>
@@ -453,7 +453,7 @@
               <div class="col-md-4">
                 <div class="form-label-group">
                   <input type="text" title="La colonia tiene caracteres incorrectos" class="form-control"
-                    id="aspirante_direccion_colonia" name="aspirante_direccion_colonia" placeholder="Colonia">
+                    id="aspirante_direccion_colonia" name="aspirante_direccion_colonia" placeholder="Colonia" style="color: #237087">
                   <label for="aspirante_direccion_colonia">Colonia</label>
                 </div>
               </div>
@@ -462,7 +462,7 @@
                 <div class="form-label-group">
                   <input type="text" pattern="[0-9]{5}" title="El código postal solo debe contener 5 digitos"
                     class="form-control" id="aspirante_direccion_cp" name="aspirante_direccion_cp"
-                    placeholder="Código Postal">
+                    placeholder="Código Postal" style="color: #237087">
                   <label for="aspirante_direccion_cp">Código Postal</label>
                 </div>
               </div>

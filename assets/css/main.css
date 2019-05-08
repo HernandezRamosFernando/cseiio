@@ -176,7 +176,11 @@ btn-lista:hover{
 .seltitulo{
     font-size: 16pt; 
     font-weight: bold;
+    color:#777;
 }
 .selcolor{
     color:  #237087;
+}
+.btn-guardar{
+    font-weight: bold;
 }

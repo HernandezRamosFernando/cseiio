@@ -316,7 +316,7 @@ function formato_tabla() {
       "sProcessing": "Procesando...",
       "sLengthMenu": "Mostrar _MENU_ ",
       "sZeroRecords": "No se encontraron resultados",
-      "sEmptyTable": "Ningún dato disponible en esta tabla",
+      "sEmptyTable": "Ningún dato encontrado",
       "sInfo": "Mostrando del _START_ al _END_ de un total de _TOTAL_ ",
       "sInfoEmpty": "Mostrando del 0 al 0 de un total de 0 ",
       "sInfoFiltered": "(filtrado de un total de _MAX_ )",

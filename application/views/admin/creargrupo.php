@@ -18,7 +18,7 @@
           <div class="col-md-8">
             <label class="form-group has-float-label seltitulo">
               <select class="form-control form-control-lg selcolor" id="plantel"   name="plantel">
-                <option value="">Seleccione el plantel donde creara el grupo</option>
+                <option value="">Seleccione el plantel donde creará el grupo</option>
 
                 <?php
                                         foreach ($planteles as $plantel)
@@ -190,7 +190,7 @@
    </form>
     <br>
         <div class="col-md-12" id="agregar_oculto" style="display: none">
-        <button type="button" value="nuevo" onclick="enviar_formulario()" id="boton_agregar" class="btn btn-success btn-lg btn-block" style="padding: 1rem"> Guardar Alumnos</button>
+        <button type="button" value="nuevo" onclick="enviar_formulario()" id="boton_agregar" class="btn btn-success btn-lg btn-block btn-guardar" style="padding: 1rem"> Guardar Alumnos</button>
         </div>
     </div>
   </div>
@@ -433,7 +433,7 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
         else if(35-JSON.parse(xhr.response)[0].total_alumnos>0){
           swalWithBootstrapButtons.fire({
             type: 'warning',
-            text: 'El grupo ya existe y tiene '+(35-JSON.parse(xhr.response)[0].total_alumnos)+" lugares libres",
+            text: 'El grupo ya existe y tiene '+(35-JSON.parse(xhr.response)[0].total_alumnos)+" lugares disponibles",
             confirmButtonText:'Agregar estudiantes al grupo',
             showCancelButton: true,
             cancelButtonText: 'Cerrar'

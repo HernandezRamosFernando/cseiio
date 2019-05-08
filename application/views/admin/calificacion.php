@@ -51,7 +51,7 @@
                 <option value="5">5</option>
                 <option value="6">6</option>
               </select>
-              <span>Seleccione el semestre del grupo a  buscar</span>
+              <span>Semestre del grupo a  buscar</span>
             </label>
           </div>
 
@@ -122,7 +122,7 @@
    </form>
     <br>
         <div class="col-md-12" id="agregar_oculto" style="display: none">
-        <button type="button" value="nuevo" onclick="enviar_formulario()" id="boton_agregar" class="btn btn-success btn-lg btn-block"  style="padding: 1rem"> Guardar cambios</button> 
+        <button type="button" value="nuevo" onclick="enviar_formulario()" id="boton_agregar" class="btn btn-success btn-lg btn-block btn-guardar"  style="padding: 1rem"> Guardar cambios</button> 
         </div>
 
     </div>

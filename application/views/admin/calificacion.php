@@ -159,7 +159,7 @@ if (document.getElementById("plantel").value === "") {
   var semestre = document.getElementById("semestre_grupo").value;
   console.log(semestre);
   grupos.innerHTML="";
-  xhr.open('GET', '<?php echo base_url();?>index.php/c_plantel/get_grupos_plantel_html?plantel=' + plantel + '&semestre='+ semestre , true);
+  xhr.open('GET', '<?php echo base_url();?>index.php/c_plantel/get_grupos_plantel_htmloption?plantel=' + plantel + '&semestre='+ semestre , true);
   xhr.onloadstart = function(){
     $('#div_carga').show();
   }

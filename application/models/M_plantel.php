@@ -40,4 +40,16 @@ class M_plantel extends CI_Model {
          return $respuesta;
    }
 
+   function get_grupos_plantel_htmloption($plantel,$semestre){
+      $grupos = $this->db->query("select * from Grupo where semestre=".$semestre." and plantel='".$plantel."'")->result();
+      $respuesta="";
+      $respuesta.='<option value="'."".'">'."Seleccione un grupo".'</option>';
+
+      foreach($grupos as $grupo){
+         $respuesta.='<option value="'.$grupo->id_grupo.'">'.$grupo->semestre.' '.$grupo->nombre_grupo.'</option>';
+      }
+
+      return $respuesta;
+}
+
 }

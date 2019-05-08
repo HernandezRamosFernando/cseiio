@@ -108,7 +108,6 @@
                 <th scope="col" class="col-md-1">Parcial 2</th>
                 <th scope="col" class="col-md-1">Parcial 3</th>
                 <th scope="col" class="col-md-1">Examen Final</th>
-                <th scope="col" class="col-md-1">Opción</th>
               </tr>
             </thead>
 
@@ -145,7 +144,6 @@ if(document.getElementById("plantel").value != '' && document.getElementById("gr
   }
 }
 
-var lista_alumnos=new Array();
 function cargargrupos() {
 if (document.getElementById("plantel").value === "") {
   Swal.fire({
@@ -161,7 +159,7 @@ if (document.getElementById("plantel").value === "") {
   var semestre = document.getElementById("semestre_grupo").value;
   console.log(semestre);
   grupos.innerHTML="";
-  xhr.open('GET', '<?php echo base_url();?>index.php/c_plantel/get_grupos_plantel_html?plantel=' + plantel + '&semestre='+ semestre , true);
+  xhr.open('GET', '<?php echo base_url();?>index.php/c_plantel/get_grupos_plantel_htmloption?plantel=' + plantel + '&semestre='+ semestre , true);
   xhr.onloadstart = function(){
     $('#div_carga').show();
   }
@@ -187,30 +185,49 @@ if (document.getElementById("plantel").value === "") {
 
 
 function cargar_materia(){
+  var PrimerParcial, SegundoParcial, TercerParcial, ExamenFinal;
   document.getElementById("tablagrupo").innerHTML="";
   var xhr = new XMLHttpRequest();
-    xhr.open('GET', '/cseiio/c_grupo/get_estudiantes_grupo_materia?grupo='+document.getElementById("grupos").value+'&materia='+document.getElementById("materias").value, true);
-
-    xhr.onload = function () {
+    xhr.open('GET', '<?php echo base_url();?>index.php/c_grupo/get_estudiantes_grupo_materia?grupo='+document.getElementById("grupos").value+'&materia='+document.getElementById("materias").value, true);
+    xhr.onloadstart = function(){
+    $('#div_carga').show();
+  }
+  xhr.error = function (){
+    console.log("error de conexion");
+  }
+  xhr.onload = function(){
+    $('#div_carga').hide();
       console.log(xhr.response);
       JSON.parse(xhr.response).forEach(function(valor,indice){
         var registro = "<tr>";
-        registro+="<td>"+valor.nombre+" "+valor.primer_apellido+" "+valor.segundo_apellido+"</td>";
-        registro+="<td>"+valor.no_control+"</td>"
-        registro+="</tr>";
+        registro+='<td>'+valor.nombre+' '+valor.primer_apellido+' '+valor.segundo_apellido+'</td>';
+        registro+='<td>'+valor.no_control+'</td>';
+        registro+='<td><input type="text" class="form-control" name="primer_parcial" id="primer_parcial" value="'+PrimerParcial+'" placeholder="Primer Parcial"></td>';
+        registro+='<td><input type="text" class="form-control" name="segundo_parcial" id="segundo_parcial" value="'+SegundoParcial+'" placeholder="Segundo Parcial"></td>';
+        registro+='<td><input type="text" class="form-control" name="tercer_parcial" id="tercer_parcial" value="'+TercerParcial+'" placeholder="Tercer Parcial"></td>';
+        registro+='<td><input type="text" class="form-control" name="examen_final" id="examen_final" value="'+ExamenFinal+'" placeholder="Examen Final"></td>';
+        registro+='</tr>';
         document.getElementById("tablagrupo").innerHTML+=registro;
       });
-    };
+    }
 
     xhr.send(null);
+  
 }
 
 
 function cargar_materias(){
+  if(document.getElementById("grupos").value != ""){
   var xhr = new XMLHttpRequest();
-    xhr.open('GET', '/cseiio/c_grupo/get_materias_grupo?grupo='+document.getElementById("grupos").value, true);
-
-    xhr.onload = function () {
+    xhr.open('GET', '<?php echo base_url();?>index.php/c_grupo/get_materias_grupo?grupo='+document.getElementById("grupos").value, true);
+    xhr.onloadstart = function(){
+    $('#div_carga').show();
+  }
+  xhr.error = function (){
+    console.log("error de conexion");
+  }
+  xhr.onload = function(){
+    $('#div_carga').hide();
       let opciones = "";
       JSON.parse(xhr.response).forEach(function(valor,indice){
         opciones+= '<option value="'+valor.clave+'">'+valor.unidad_contenido+'</option>';
@@ -220,5 +237,8 @@ function cargar_materias(){
     };
 
     xhr.send(null);
+    }else{
+      document.getElementById("materias").innerHTML = '';
+  }
 }
     </script>

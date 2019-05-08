@@ -837,11 +837,9 @@ aria-hidden="true">
               <select class="form-control form-control-lg" name="aspirante_nuevasecundaria_tipo_subsistema" 
                 id="aspirante_nuevasecundaria_tipo_subsistema">
                 <option value="">Seleccione un tipo</option>
-                <option value="TELESECUNDARIA">Telesecundaria</option>
-                <option value="GENERAL">General</option>
-                <option value="PARTICULAR">Particular</option>
-                <option value="TÉCNICA">Técnica</option>
-                <option value="COMUNITARIA">Comunitaria</option>
+                <option value="TELESECUNDARIA">Educación Profesional Técnica</option>
+                <option value="GENERAL">Bachillerato General</option>
+                <option value="PARTICULAR">Bachillerato Tecnológico</option>
                 <option value="OTRO">Otro</option>
               </select>
               <span>Tipo de Subsistema</span>

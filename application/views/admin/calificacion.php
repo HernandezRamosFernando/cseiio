@@ -122,7 +122,7 @@
    </form>
     <br>
         <div class="col-md-12" id="agregar_oculto" style="display: ">
-        <button type="button" value="nuevo" onclick="enviar_formulario()" id="boton_agregar" class="btn btn-success btn-lg btn-block btn-guardar"  style="padding: 1rem"> Guardar cambios</button> 
+        <button type="button" value="nuevo" onclick="guardar()" id="boton_agregar" class="btn btn-success btn-lg btn-block btn-guardar"  style="padding: 1rem"> Guardar cambios</button> 
         </div>
 
     </div>
@@ -152,14 +152,39 @@ function guardar(){
   }
 
   var xhr = new XMLHttpRequest();
-      xhr.open("POST", '/cseiio/c_grupo_estudiante/agregar_calificaciones_materia_grupo', true);
+      xhr.open("POST", '<?php echo base_url();?>index.php/c_grupo_estudiante/agregar_calificaciones_materia_grupo', true);
 
       //Send the proper header information along with the request
       xhr.setRequestHeader("Content-Type", "application/json");
-
+      xhr.onloadstart = function(){
+    $('#div_carga').show();
+  }
+  xhr.error = function (){
+    console.log("error de conexion");
+  }
       xhr.onreadystatechange = function() { // Call a function when the state changes.
           if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-              console.log(xhr.response);
+            $('#div_carga').hide();
+              if (xhr.responseText.trim() === "si") {
+                console.log(xhr.response);
+                    swalWithBootstrapButtons.fire({
+                    type: 'success',
+                    text: 'Datos guardados correctamente',
+                    confirmButtonText: 'Aceptar'
+                    }).then((result) => {
+                    if (result.value) {
+                    //aqui va el aceptar
+                    $(document).scrollTop(0);
+                    location.reload(); 
+                      }
+                    //aqui va si cancela
+                    });
+               }else{
+                Swal.fire({
+                  type: 'error',
+                  text: 'Alumnos no no guardados'
+                 });
+               }
           }
       }
       xhr.send(JSON.stringify(datos));
@@ -168,7 +193,7 @@ function guardar(){
 }
 
 
-    function validarcomponente(){
+function validarcomponente(){
 
 if(document.getElementById("plantel").value != '' && document.getElementById("grupos").value != '' && document.getElementById("semestre_grupo").value != '' ){
   //

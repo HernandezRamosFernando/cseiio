@@ -12,6 +12,7 @@ class C_vistas extends CI_Controller {
         $this->load->model('M_plantel');
         $this->load->model('M_escuela_procedencia');
         $this->load->model('M_ciclo_escolar');
+        $this->load->model('M_componente');
     }
     
     //------------------------------------------vistas
@@ -230,6 +231,31 @@ public function portabilidad(){
         $this->load->view("headers/menuizquierda");
         $this->load->view("admin/calificacion", $datos);
         $this->load->view("footers/footer");
+    }
+
+    public function materias(){
+        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
+        $datos['planteles'] = $this->M_plantel->get_planteles();
+        $dato= array('title'=>'Materias');
+            $datos['componente']=$this->M_componente->get_lista();
+            //$datos['academia']=$this->M_academia->get_lista();
+            $this->load->view("headers/cabecera",$dato);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierda");
+            $this->load->view("admin/materias",$datos);
+            $this->load->view("footers/footer");
+        }
+    }
+
+    public function componentes(){
+        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
+            $dato= array('title'=>'Componentes');
+            $this->load->view("headers/cabecera",$dato);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierda");
+            $this->load->view("admin/componente");
+            $this->load->view("footers/footer");
+        }
     }
         
     //-------------------------------------------------termina vistas

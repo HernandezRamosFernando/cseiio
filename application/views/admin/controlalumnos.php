@@ -487,7 +487,7 @@
                 <div class="form-label-group">
                   <input type="text" pattern="[A-Za-z]+[ ]*[A-Za-z ]*" onchange="valida(this)" required
                     title="Introduzca solo letras" class="form-control text-uppercase" id="aspirante_tutor_nombre"
-                    onchange="valida(this)" name="aspirante_tutor_nombre" placeholder="Nombre Completo">
+                    onchange="valida(this)" name="aspirante_tutor_nombre" placeholder="Nombre Completo" style="color: #237087">
                   <label for="aspirante_tutor_nombre">Nombre de Tutor</label>
                 </div>
               </div>

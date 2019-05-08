@@ -65,8 +65,7 @@ class C_usuario extends CI_Controller {
  
 	public function logout(){
 		//load session library
-		$this->load->library('session');
-		$this->session->unset_userdata('user');
+		$this->session->sess_destroy();
 		redirect('index.php/c_usuario');
 	}
  

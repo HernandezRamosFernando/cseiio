@@ -87,7 +87,7 @@ class M_grupo extends CI_Model {
 
    public function get_materias_grupo_asesor($id_grupo){
    
-    return $this->db->query("select distinct id_materia,asesor,clave,unidad_contenido from Grupo_Estudiante as ge inner join Materia as m on ge.id_materia=m.clave where ge.Grupo_id_grupo='".$id_grupo."'")->result();
+    return $this->db->query("select * from Materia inner join (select distinct id_materia,id_asesor from Grupo_Estudiante where Grupo_id_grupo='".$id_grupo."') as asesores on id_materia=clave")->result();
    }
 
 
@@ -95,7 +95,7 @@ class M_grupo extends CI_Model {
     $this->db->trans_start();
 
     foreach($datos as $dato){
-        $this->db->query("update Grupo_Estudiante set asesor='".$dato->asesor."' where Grupo_id_grupo='".$dato->id_grupo."' and id_materia='".$dato->id_materia."'");
+        $this->db->query("update Grupo_Estudiante set id_asesor=".$dato->asesor." where Grupo_id_grupo='".$dato->id_grupo."' and id_materia='".$dato->id_materia."'");
     }
 
     $this->db->trans_complete();

@@ -118,7 +118,7 @@
 function validarcomponente(){
 
 if(document.getElementById("plantel").value != '' && document.getElementById("grupos").value != '' && document.getElementById("semestre_grupo").value != '' ){
-  cargar_materias();
+  cargar_select_asesores();
 }else{
   Swal.fire({
         type: 'warning',
@@ -166,7 +166,14 @@ function cargargrupos() {
 
 
 
-function cargar_materias(){
+
+function cargar_select_asesores(){
+    //cargar select de asesores de ese plantel
+    var asesores = new XMLHttpRequest();
+    asesores.open('GET', '/cseiio/c_asesor/get_asesores_plantel?plantel='+document.getElementById("plantel").value, true);
+
+    asesores.onload = function () {
+      //cargar materia y asesores ya guardados
   document.getElementById("tabla").innerHTML= "";
   var xhr = new XMLHttpRequest();
     xhr.open('GET', '<?php echo base_url();?>index.php/c_grupo/get_materias_grupo_asesor?grupo='+document.getElementById("grupos").value, true);
@@ -177,24 +184,40 @@ function cargar_materias(){
         console.log("error de conexion");
       }
       xhr.onload = function(){
+        //console.log(xhr.response);
         $('#div_carga').hide();
+        
       console.log(JSON.parse(xhr.response));
-      JSON.parse(xhr.response).forEach(function(valor,indice){
+      
+      JSON.parse(xhr.response).forEach(async function(valor,indice){
         var fila ="<tr>";
         fila+="<td>"+valor.unidad_contenido+"</td>";
         fila+="<td>"+valor.clave+"</td>";
-        var asesor = valor.asesor==="null"?"":valor.asesor;
-        fila+='<td><input type="text" class="form-control" name="input_asesor" id="input_asesor" value="'+asesor+'" placeholder="Nombre de asesor"></td>';
+        fila+='<td><select id="s'+indice+'" class="form-control form-control-lg">'+asesores.response+'</select><td>';
+        //var asesor = valor.asesor==="null"?"":valor.asesor;
+        //fila+='<td><input type="text" class="form-control" name="input_asesor" id="input_asesor" value="'+asesor+'" placeholder="Nombre de asesor"></td>';
         fila+="</tr>";
         document.getElementById("tabla").innerHTML+=fila;
+        $("#s"+indice+" option[value="+valor.id_asesor+"]").attr('selected', 'selected');
+  
       });
+
+
+      
     };
+
     xhr.send(null);
     limpiarbusqueda();
     document.getElementById("tabla_oculto").style.display="";
     document.getElementById("boton_oculto").style.display="";
-    
+    };
+
+    asesores.send(null);
 }
+
+
+
+
 
 function limpiarbusqueda(){
     document.getElementById("grupos").disabled = true;
@@ -209,6 +232,8 @@ function limpiarbusqueda(){
 
 
 function guardar(){
+  
+  
   var tabla = document.getElementById("tabla").children;
   var datos = new Array();
   
@@ -223,6 +248,8 @@ function guardar(){
 
     datos.push(dato);
   }
+
+  console.log(datos);
 
 
   var xhr = new XMLHttpRequest();
@@ -264,6 +291,7 @@ function guardar(){
       xhr.send(JSON.stringify(datos));
 
  // console.log(datos);
+ 
 }
 </script>
 

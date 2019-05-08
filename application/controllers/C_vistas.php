@@ -257,6 +257,19 @@ public function portabilidad(){
             $this->load->view("footers/footer");
         }
     }
+
+    public function permisos_cal(){
+        $datos['planteles'] = $this->M_plantel->get_planteles();
+
+        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
+            $dato= array('title'=>'Permisos de calificaciones');
+            $this->load->view("headers/cabecera",$dato);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierda");
+            $this->load->view("admin/permisos_calificacion", $datos);
+            $this->load->view("footers/footer");
+        }
+    }
         
     //-------------------------------------------------termina vistas
 }

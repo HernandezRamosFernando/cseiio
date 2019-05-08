@@ -170,7 +170,7 @@ function cargargrupos() {
 function cargar_select_asesores(){
     //cargar select de asesores de ese plantel
     var asesores = new XMLHttpRequest();
-    asesores.open('GET', '/cseiio/c_asesor/get_asesores_plantel?plantel='+document.getElementById("plantel").value, true);
+    asesores.open('GET', '<?php echo base_url();?>index.php/c_asesor/get_asesores_plantel?plantel='+document.getElementById("plantel").value, true);
 
     asesores.onload = function () {
       //cargar materia y asesores ya guardados

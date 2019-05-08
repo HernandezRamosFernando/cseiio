@@ -32,4 +32,8 @@ class C_plantel extends CI_Controller
         $semestre = $this->input->get("semestre");
         echo $this->M_plantel->get_grupos_plantel_htmloption($plantel,$semestre);
     }
+
+    public function get_planteles(){
+        echo json_encode($this->M_plantel->get_planteles());
+    }
 }

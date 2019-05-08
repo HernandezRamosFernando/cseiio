@@ -121,8 +121,8 @@
      </div>
    </form>
     <br>
-        <div class="col-md-12" id="agregar_oculto" style="display: none">
-        <button type="button" value="nuevo" onclick="enviar_formulario()" id="boton_agregar" class="btn btn-success btn-lg btn-block"  style="padding: 1rem"> Guardar cambios</button> 
+        <div class="col-md-12" id="agregar_oculto">
+        <button type="button" value="nuevo" onclick="guardar()" id="boton_agregar" class="btn btn-success btn-lg btn-block"  style="padding: 1rem"> Guardar cambios</button> 
         </div>
 
     </div>
@@ -132,6 +132,42 @@
 <!-- /#wrapper -->
 
 <script>
+
+function guardar(){
+  var tabla = document.getElementById("tablagrupo");
+  var datos = new Array();
+
+  for(let i=0;i<tabla.childNodes.length;i++){
+      var dato = {
+        id_grupo:document.getElementById("grupos").value,
+        materia:document.getElementById("materias").value,
+        no_control:tabla.childNodes[i].childNodes[1].innerText,
+        primer_parcial:tabla.childNodes[i].childNodes[2].childNodes[0].value===""?null:tabla.childNodes[i].childNodes[2].childNodes[0].value,
+        segundo_parcial:tabla.childNodes[i].childNodes[3].childNodes[0].value===""?null:tabla.childNodes[i].childNodes[3].childNodes[0].value,
+        tercer_parcial:tabla.childNodes[i].childNodes[4].childNodes[0].value===""?null:tabla.childNodes[i].childNodes[4].childNodes[0].value,
+        examen_final:tabla.childNodes[i].childNodes[5].childNodes[0].value===""?null:tabla.childNodes[i].childNodes[5].childNodes[0].value
+      }
+
+      datos.push(dato);
+  }
+
+  var xhr = new XMLHttpRequest();
+      xhr.open("POST", '/cseiio/c_grupo_estudiante/agregar_calificaciones_materia_grupo', true);
+
+      //Send the proper header information along with the request
+      xhr.setRequestHeader("Content-Type", "application/json");
+
+      xhr.onreadystatechange = function() { // Call a function when the state changes.
+          if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+              console.log(xhr.response);
+          }
+      }
+      xhr.send(JSON.stringify(datos));
+
+  console.log(datos);
+}
+
+
     function validarcomponente(){
 
 if(document.getElementById("plantel").value != '' && document.getElementById("grupos").value != '' && document.getElementById("semestre_grupo").value != '' ){
@@ -196,15 +232,19 @@ function cargar_materia(){
   }
   xhr.onload = function(){
     $('#div_carga').hide();
-      console.log(xhr.response);
+      console.log(JSON.parse(xhr.response));
       JSON.parse(xhr.response).forEach(function(valor,indice){
         var registro = "<tr>";
         registro+='<td>'+valor.nombre+' '+valor.primer_apellido+' '+valor.segundo_apellido+'</td>';
         registro+='<td>'+valor.no_control+'</td>';
-        registro+='<td><input type="text" class="form-control" name="primer_parcial" id="primer_parcial" placeholder="Primer Parcial"></td>';
-        registro+='<td><input type="text" class="form-control" name="segundo_parcial" id="segundo_parcial" placeholder="Segundo Parcial"></td>';
-        registro+='<td><input type="text" class="form-control" name="tercer_parcial" id="tercer_parcial" placeholder="Tercer Parcial"></td>';
-        registro+='<td><input type="text" class="form-control" name="examen_final" id="examen_final" placeholder="Examen Final"></td>';
+        var primer_parcial = valor.primer_parcial!==null?valor.primer_parcial:"";
+        registro+='<td><input type="text" class="form-control" name="primer_parcial" value="'+primer_parcial+'" id="primer_parcial" placeholder="Primer Parcial"></td>';
+        var segundo_parcial = valor.segundo_parcial!==null?valor.segundo_parcial:"";
+        registro+='<td><input type="text" class="form-control" name="segundo_parcial" value="'+segundo_parcial+'" id="segundo_parcial" placeholder="Segundo Parcial"></td>';
+        var tercer_parcial = valor.tercer_parcial!==null?valor.tercer_parcial:"";
+        registro+='<td><input type="text" class="form-control" name="tercer_parcial" value="'+tercer_parcial+'" id="tercer_parcial" placeholder="Tercer Parcial"></td>';
+        var examen_final = valor.examen_final!==null?valor.examen_final:"";
+        registro+='<td><input type="text" class="form-control" name="examen_final" value="'+examen_final+'" id="examen_final" placeholder="Examen Final"></td>';
         registro+='</tr>';
         document.getElementById("tablagrupo").innerHTML+=registro;
       });

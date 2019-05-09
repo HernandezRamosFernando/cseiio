@@ -107,7 +107,7 @@
    </form>
     <br>
         <div class="col-md-12" id="agregar_oculto" style="display: ">
-        <button type="button" value="nuevo" data-toggle="modal" data-target="#fechapermiso" id="boton_agregar" class="btn btn-success btn-lg btn-block btn-guardar"  style="padding: 1rem"> Guardar cambios</button> 
+        <button type="button" data-toggle="modal" data-target="#fechapermiso" id="boton_agregar" class="btn btn-success btn-lg btn-block btn-guardar"  style="padding: 1rem"> Guardar cambios</button> 
         </div>
 
     </div>
@@ -150,7 +150,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button type="button" onclick="" class="btn btn-success">Guardar fecha</button>
+        <button type="button" onclick="guardar()" class="btn btn-success">Guardar fecha</button>
       </div>
     </div>
   </div>
@@ -159,7 +159,68 @@
 
 <script>
 
+function fecha_sql(fecha){
+let fecha_separada = fecha.split("/").reverse();
+return fecha_separada.join("-");
+}
+
+function guardar(){
+  var datos = new Array();
+  if(document.getElementById("boton_agregar").value==="todos"){
+    var tabla = document.getElementById("tablaplantel");
+    for(let i=2;i<tabla.childNodes.length;i++){
+      var dato = {
+        cct_plantel:tabla.childNodes[i].childNodes[1].innerText,
+        primer_parcial:tabla.childNodes[i].childNodes[3].childNodes[0].checked,
+        segundo_parcial:tabla.childNodes[i].childNodes[4].childNodes[0].checked,
+        tercer_parcial:tabla.childNodes[i].childNodes[5].childNodes[0].checked,
+        examen_final:tabla.childNodes[i].childNodes[6].childNodes[0].checked,
+        fecha_inicio:fecha_sql(document.getElementById("fecha_inicio").value),
+        fecha_fin:fecha_sql(document.getElementById("fecha_fin").value),
+        usuario:"<?= $this->session->userdata('user')['usuario'] ?>"
+      };
+
+      datos.push(dato);
+    }
+
+    console.log(datos);
+  }
+
+  else{
+    var tabla = document.getElementById("tablaunplantel");
+    var dato = {
+      cct_plantel:tabla.childNodes[1].childNodes[0].childNodes[1].childNodes[1].value,
+      primer_parcial:tabla.childNodes[1].childNodes[2].childNodes[1].checked,
+      segundo_parcial:tabla.childNodes[1].childNodes[4].childNodes[1].checked,
+      tercer_parcial:tabla.childNodes[1].childNodes[6].childNodes[1].checked,
+      examen_final:tabla.childNodes[1].childNodes[8].childNodes[1].checked,
+      fecha_inicio:fecha_sql(document.getElementById("fecha_inicio").value),
+      fecha_fin:fecha_sql(document.getElementById("fecha_fin").value),
+      usuario:"<?= $this->session->userdata('user')['usuario'] ?>"
+    };
+    datos.push(dato);
+  }
+
+
+
+  //mandar json a controlador permisos
+  var xhr = new XMLHttpRequest();
+      xhr.open("POST", '/cseiio/c_permisos/agregar_permisos', true);
+
+      //Send the proper header information along with the request
+      xhr.setRequestHeader("Content-Type", "application/json");
+
+      xhr.onreadystatechange = function() { // Call a function when the state changes.
+          if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+              console.log(xhr.response);
+          }
+      }
+      xhr.send(JSON.stringify(datos));
+//fin peticion
+}
+
   function unplantel(){
+    document.getElementById("boton_agregar").value = "uno";
     document.getElementById("todos_planteles").style.display = "none";
    document.getElementById("formulariounplantel").style.display = "";
    document.getElementById("un_plantel").disabled=true;
@@ -203,6 +264,8 @@
   }
 
  function todoslosplanteles() {
+  document.getElementById("boton_agregar").value = "todos";
+
    document.getElementById("un_plantel").style.display = "none";
    document.getElementById("formulario").style.display = "";
    document.getElementById("todos_planteles").disabled=true;

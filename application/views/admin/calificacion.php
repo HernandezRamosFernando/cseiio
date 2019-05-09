@@ -246,7 +246,17 @@ if (document.getElementById("plantel").value === "") {
 
 
 function cargar_materia(){
-  document.getElementById("tablagrupo").innerHTML="";
+  var permisos = new XMLHttpRequest();
+      permisos.open('GET', '/cseiio/c_permisos/get_permiso_plantel?plantel='+document.getElementById("plantel").value, true);
+
+      permisos.onload = function () {
+        //console.log(JSON.parse(xhr.response)[0];
+        var permisos_plantel = JSON.parse(permisos.response)[0];
+        console.log(permisos_plantel);
+
+
+        //cargar inputs
+        document.getElementById("tablagrupo").innerHTML="";
   var xhr = new XMLHttpRequest();
     xhr.open('GET', '<?php echo base_url();?>index.php/c_grupo/get_estudiantes_grupo_materia?grupo='+document.getElementById("grupos").value+'&materia='+document.getElementById("materias").value, true);
     xhr.onloadstart = function(){
@@ -263,19 +273,45 @@ function cargar_materia(){
         registro+='<td>'+valor.nombre+' '+valor.primer_apellido+' '+valor.segundo_apellido+'</td>';
         registro+='<td>'+valor.no_control+'</td>';
         var primer_parcial = valor.primer_parcial!==null?valor.primer_parcial:"";
-        registro+='<td><input type="text" class="form-control" name="primer_parcial" value="'+primer_parcial+'" id="primer_parcial" placeholder="Primer Parcial"></td>';
+
+        if(permisos_plantel.primer_parcial==="1"){
+          registro+='<td><input type="text" class="form-control" name="primer_parcial" value="'+primer_parcial+'" id="primer_parcial" placeholder="Primer Parcial"></td>';
+        }
+        else{
+          registro+='<td><input type="text" class="form-control" name="primer_parcial" value="'+primer_parcial+'" id="primer_parcial" placeholder="Primer Parcial" disabled></td>';
+        }
         var segundo_parcial = valor.segundo_parcial!==null?valor.segundo_parcial:"";
-        registro+='<td><input type="text" class="form-control" name="segundo_parcial" value="'+segundo_parcial+'" id="segundo_parcial" placeholder="Segundo Parcial"></td>';
+        if(permisos_plantel.segundo_parcial==="1"){
+          registro+='<td><input type="text" class="form-control" name="segundo_parcial" value="'+segundo_parcial+'" id="segundo_parcial" placeholder="Segundo Parcial"></td>';
+        }
+
+        else{
+          registro+='<td><input type="text" class="form-control" name="segundo_parcial" value="'+segundo_parcial+'" id="segundo_parcial" placeholder="Segundo Parcial" disabled></td>';
+
+        }
         var tercer_parcial = valor.tercer_parcial!==null?valor.tercer_parcial:"";
-        registro+='<td><input type="text" class="form-control" name="tercer_parcial" value="'+tercer_parcial+'" id="tercer_parcial" placeholder="Tercer Parcial"></td>';
+        if(permisos_plantel.tercer_parcial==="1"){
+          registro+='<td><input type="text" class="form-control" name="tercer_parcial" value="'+tercer_parcial+'" id="tercer_parcial" placeholder="Tercer Parcial"></td>';
+        }
+        else{
+          registro+='<td><input type="text" class="form-control" name="tercer_parcial" value="'+tercer_parcial+'" id="tercer_parcial" placeholder="Tercer Parcial" disabled></td>';
+        }
         var examen_final = valor.examen_final!==null?valor.examen_final:"";
-        registro+='<td><input type="text" class="form-control" name="examen_final" value="'+examen_final+'" id="examen_final" placeholder="Examen Final"></td>';
+        if(permisos_plantel.examen_final==="1"){
+          registro+='<td><input type="text" class="form-control" name="examen_final" value="'+examen_final+'" id="examen_final" placeholder="Examen Final" disabled></td>';
+        }
         registro+='</tr>';
         document.getElementById("tablagrupo").innerHTML+=registro;
       });
     }
 
     xhr.send(null);
+        //fin cargar inputs
+      };
+
+      permisos.send(null);
+/*
+    */
   
 }
 

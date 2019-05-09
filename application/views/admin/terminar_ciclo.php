@@ -78,7 +78,7 @@
 
   <br>
   <div class="col-md-12" id="boton_oculto" style="display: none">
-    <button type="button" onclick="validarcomponente()" id="boton_agregar" class="btn btn-success btn-lg btn-block" style="padding: 1rem">
+    <button type="button" onclick="validarcomponente()" id="boton_agregar" class="btn btn-success btn-lg btn-block btn-guardar" style="padding: 1rem">
       Guardar Nuevo periodo de ciclo escolar</button>
   </div>
 </div>
@@ -106,8 +106,14 @@
           if (result.value) {
             var xhr = new XMLHttpRequest();
             xhr.open('GET', '<?php echo base_url();?>index.php/c_ciclo_escolar/get_datos_siguiente_ciclo', true);
-
-            xhr.onload = function () {
+            xhr.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      xhr.error = function (){
+        console.log("error de conexion");
+      }
+      xhr.onload = function(){
+        $('#div_carga').hide();
               //console.log(JSON.parse(xhr.response));
               //console.log(JSON.parse(xhr.response)[0].id_ciclo_escolar);
               

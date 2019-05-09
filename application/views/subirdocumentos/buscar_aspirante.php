@@ -21,7 +21,7 @@
                 <div class="col-md-4">
                   <div class="form-label-group">
                     <input type="text" pattern="[A-Za-zñ]+" title="Introduzca solo letras" class="form-control"
-                      id="aspirante_curp_busqueda" placeholder="CURP">
+                      id="aspirante_curp_busqueda" placeholder="CURP" style="color: #237087">
                     <label for="aspirante_curp_busqueda">CURP</label>
                   </div>
                 </div>
@@ -36,8 +36,8 @@
 
 
                 <div class="col-md-8">
-                  <label class="form-group has-float-label">
-                    <select class="form-control form-control-lg" required="required" id="aspirante_plantel_busqueda"
+                  <label class="form-group has-float-label seltitulo">
+                    <select class="form-control form-control-lg selcolor" required="required" id="aspirante_plantel_busqueda"
                       name="aspirante_plantel">
                       <option value="">Buscar en todos los planteles</option>
 
@@ -49,6 +49,7 @@
           ?>
 
                     </select>
+                    <span>Plantel</span>
                   </label>
 
                 </div>
@@ -155,7 +156,7 @@ https://www.youtube.com/results?search_query=+AJAX+File+Upload+with+Progress
         </div>
         <div class="modal-footer">
 
-          <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="refrescar_tabla()">Cerrar y guardar</button>
+          <button type="button" class="btn btn-success" data-dismiss="modal" onclick="refrescar_tabla()">Cerrar y guardar</button>
         </div>
       </div>
     </div>
@@ -180,37 +181,6 @@ https://www.youtube.com/results?search_query=+AJAX+File+Upload+with+Progress
       }
 
     }
-    function formato_tabla() {
-      $('#tabla_completa').DataTable({
-        //"order": [[ 0, 'desc' ]],
-        "language": {
-          "sProcessing": "Procesando...",
-          "sLengthMenu": "Mostrar _MENU_ registros",
-          "sZeroRecords": "No se encontraron resultados",
-          "sEmptyTable": "Ningún dato disponible en esta tabla",
-          "sInfo": "Mostrando del _START_ al _END_ de un total de _TOTAL_ ",
-          "sInfoEmpty": "Mostrando del 0 al 0 de un total de 0 ",
-          "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-          "sInfoPostFix": "",
-          "sSearch": "Buscar específico:",
-          "sUrl": "",
-          "sInfoThousands": ",",
-          "sLoadingRecords": "Cargando...",
-          "oPaginate": {
-            "sFirst": "Primero",
-            "sLast": "Último",
-            "sNext": "Siguiente",
-            "sPrevious": "Anterior"
-          },
-          "oAria": {
-            "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
-            "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-          }
-        }
-      });
-    }
-
-
 
     function cargar_doc_aspirante(e, e2, e3, e4, e5) {
       document.getElementById("tablaajax").innerHTML = "";
@@ -219,8 +189,14 @@ https://www.youtube.com/results?search_query=+AJAX+File+Upload+with+Progress
 
         var xhr2 = new XMLHttpRequest();
         xhr2.open('GET', '<?php echo base_url();?>index.php/c_estudiante/get_docxaspirante/' + e.value, true);
-
-        xhr2.onload = function () {
+        xhr2.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      xhr2.error = function (){
+        console.log("error de conexion");
+      }
+      xhr2.onload = function(){
+        $('#div_carga').hide();
           console.log(JSON.parse(xhr2.response));
 
           var estudiante = JSON.parse(xhr2.response);
@@ -340,7 +316,14 @@ https://www.youtube.com/results?search_query=+AJAX+File+Upload+with+Progress
       }, false);
       ajax.open("POST", "<?php echo base_url();?>index.php/C_subir_doc/subir_doc/");
       ajax.send(formdata);
-      ajax.onload = function () {
+      ajax.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      ajax.error = function (){
+        console.log("error de conexion");
+      }
+      ajax.onload = function(){
+        $('#div_carga').hide();
         console.log(JSON.parse(ajax.response));
 
         var datos = JSON.parse(ajax.response);
@@ -420,10 +403,14 @@ https://www.youtube.com/results?search_query=+AJAX+File+Upload+with+Progress
       var query = 'curp=' + curp + '&plantel=' + plantel;
 
       xhr.open('GET', '<?php echo base_url();?>index.php/c_estudiante/buscar_aspirantesxplantel?' + query, true);
-
-
-
-      xhr.onload = function () {
+      xhr.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      xhr.error = function (){
+        console.log("error de conexion");
+      }
+      xhr.onload = function(){
+        $('#div_carga').hide();
         //console.log(JSON.parse(xhr.response));
         ////console.log(query);
 

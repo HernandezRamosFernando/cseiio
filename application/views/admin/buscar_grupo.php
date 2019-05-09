@@ -51,7 +51,7 @@
                 <option value="5">5</option>
                 <option value="6">6</option>
               </select>
-              <span>Seleccione el semestre del grupo a  buscar</span>
+              <span>Semestre del grupo a buscar</span>
             </label>
           </div>
 
@@ -87,7 +87,22 @@
 
 
       <div class="row" id="alumnos_oculto" style="display:none">
-      
+      <div class="col-md-6" style="display:none" id="tabla_completa_alumnos">
+        <div class="card card-body" >
+          <table class="table table-hover" id="tabla_completa" style="width: 100%">
+            <caption>Lista de todos los alumnos de este semestre sin grupo</caption>
+            <thead class="thead-light">
+              <tr>
+                <th scope="col" class="col-md-1">Nombre completo</th>
+                <th scope="col" class="col-md-1">N° control</th>
+                <th scope="col" class="col-md-1">Opción</th>
+              </tr>
+            </thead>
+            <tbody id="tabla">
+            </tbody>
+          </table>
+        </div>
+      </div>
 
       <div class="col-md-6" id="tabla_alumnos">
         <div class="card card-body">
@@ -108,28 +123,13 @@
         </div>
       </div>
 
-      <div class="col-md-6" style="display:none" id="tabla_completa_alumnos">
-        <div class="card card-body" >
-          <table class="table table-hover" id="tabla_completa" style="width: 100%">
-            <caption>Lista de todos los alumnos de este semestre sin grupo</caption>
-            <thead class="thead-light">
-              <tr>
-                <th scope="col" class="col-md-1">Nombre completo</th>
-                <th scope="col" class="col-md-1">N° control</th>
-                <th scope="col" class="col-md-1">Opción</th>
-              </tr>
-            </thead>
-            <tbody id="tabla">
-            </tbody>
-          </table>
-        </div>
-      </div>
+      
 
      </div>
    </form>
     <br>
         <div class="col-md-12" id="agregar_oculto" style="display: none">
-        <button type="button" value="nuevo" onclick="enviar_formulario()" id="boton_agregar" class="btn btn-success btn-lg btn-block"  style="padding: 1rem"> Guardar cambios</button> 
+        <button type="button" value="nuevo" onclick="enviar_formulario()" id="boton_agregar" class="btn btn-success btn-lg btn-block btn-guardar"  style="padding: 1rem"> Guardar cambios</button> 
         </div>
 
     </div>
@@ -376,7 +376,7 @@ function btnquitar_alumnos() {
     if(alumnos_json.length===0){
       swalWithBootstrapButtons.fire({
           type: 'warning',
-          text: 'Al eliminar todos los alumnos se eliminará el grupo ¿Está seguro?',
+          text: 'Al quitar todos los alumnos se borrara el grupo ¿Está seguro?',
           showCancelButton: true,
           confirmButtonText: 'Aceptar',
           cancelButtonText: 'Cancelar',

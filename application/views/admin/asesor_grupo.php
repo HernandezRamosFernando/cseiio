@@ -48,7 +48,7 @@
                 <option value="5">5</option>
                 <option value="6">6</option>
               </select>
-              <span>Seleccione el semestre del grupo a  buscar</span>
+              <span>Semestre del grupo a buscar</span>
             </label>
           </div>
 
@@ -99,7 +99,7 @@
     <div class="form-group" id="boton_oculto" style="display: none">
       <div class="row">
         <div class="col-md-12">
-          <button class="btn btn-success btn-lg btn-block" style="padding: 1rem" onclick="guardar()">Guardar</button>
+          <button class="btn btn-success btn-lg btn-block btn-guardar" style="padding: 1rem" onclick="guardar()">Guardar</button>
         </div>
       </div>
     </div>
@@ -170,7 +170,7 @@ function cargargrupos() {
 function cargar_select_asesores(){
     //cargar select de asesores de ese plantel
     var asesores = new XMLHttpRequest();
-    asesores.open('GET', '/cseiio/c_asesor/get_asesores_plantel?plantel='+document.getElementById("plantel").value, true);
+    asesores.open('GET', '<?php echo base_url();?>index.php/c_asesor/get_asesores_plantel?plantel='+document.getElementById("plantel").value, true);
 
     asesores.onload = function () {
       //cargar materia y asesores ya guardados

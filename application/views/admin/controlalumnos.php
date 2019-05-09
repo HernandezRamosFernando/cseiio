@@ -495,7 +495,7 @@
                 <div class="form-label-group">
                   <input type="text" pattern="[A-Za-z]+[ ]*[A-Za-z ]*" onchange="valida(this)" required
                     title="Introduzca solo letras" class="form-control text-uppercase" id="aspirante_tutor_apellido"
-                    onchange="valida(this)" name="aspirante_tutor_apellido" placeholder="Primer Apellido">
+                    onchange="valida(this)" name="aspirante_tutor_apellido" placeholder="Primer Apellido" style="color: #237087">
                   <label for="aspirante_tutor_apellido">Primer Apellido</label>
                 </div>
               </div>
@@ -503,7 +503,7 @@
                 <div class="form-label-group">
                   <input type="text" pattern="[A-Za-z]+[ ]?[A-Za-z]*" onchange="valida(this)"
                     title="Introduzca solo letras" class="form-control text-uppercase" onchange="valida(this)"
-                    id="aspirante_tutor_apellidodos" name="aspirante_tutor_apellidodos" placeholder="Segundo Apellido">
+                    id="aspirante_tutor_apellidodos" name="aspirante_tutor_apellidodos" placeholder="Segundo Apellido" style="color: #237087">
                   <label for="aspirante_tutor_apellidodos">Segundo Apellido</label>
                 </div>
               </div>
@@ -514,8 +514,8 @@
             <div class="row">
 
               <div class="col-md-4">
-                <label class="form-group has-float-label">
-                  <select class="form-control form-control-lg" id="aspirante_tutor_parentesco" required
+                <label class="form-group has-float-label seltitulo">
+                  <select class="form-control form-control-lg selcolor" id="aspirante_tutor_parentesco" required
                     name="aspirante_tutor_parentesco" onchange="parentesco(this)">
                     <option value="">Seleccione</option>
                     <option value="PADRE">PADRE</option>
@@ -536,7 +536,7 @@
                 <div class="form-label-group">
                   <input type="text" pattern="[A-Za-z]+[ ]*[A-Za-z ]*" onchange="valida(this)"
                     class="form-control text-uppercase" id="aspirante_tutor_otro" name="aspirante_tutor_otro"
-                    onchange="valida(this)" placeholder="Escriba el parentesco">
+                    onchange="valida(this)" placeholder="Escriba el parentesco" style="color: #237087">
                   <label for="aspirante_tutor_otro">Escriba el parentesco</label>
                 </div>
               </div>
@@ -550,7 +550,7 @@
                   <div class="form-label-group">
                     <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ. ]+" title="Introduzca solo letras"
                       class="form-control" id="aspirante_tutor_ocupacion" name="aspirante_tutor_ocupacion"
-                      onchange="valida(this)" placeholder="Ocupación">
+                      onchange="valida(this)" placeholder="Ocupación" style="color: #237087">
                     <label for="aspirante_tutor_ocupacion">Ocupación</label>
                   </div>
                 </div>
@@ -559,7 +559,7 @@
                   <div class="form-label-group">
                     <input type="text" pattern="[0-9]{10}"
                       title="El numero de telefono debe de ser a 10 digitos con lada" class="form-control"
-                      id="aspirante_tutor_telefono" name="aspirante_tutor_telefono" placeholder="Teléfono particular">
+                      id="aspirante_tutor_telefono" name="aspirante_tutor_telefono" placeholder="Teléfono particular" style="color: #237087">
                     <label for="aspirante_tutor_telefono">Teléfono particular</label>
                   </div>
                 </div>
@@ -568,7 +568,7 @@
                     <input type="text" pattern="[0-9]{10}"
                       title="El numero de telefono debe de ser a 10 digitos con lada" class="form-control"
                       id="aspirante_tutor_telefono_comunidad" name="aspirante_tutor_telefono_comunidad"
-                      placeholder="Teléfono de la comunidad">
+                      placeholder="Teléfono de la comunidad" style="color: #237087">
                     <label for="aspirante_tutor_telefono_comunidad">Teléfono de la comunidad</label>
                   </div>
                 </div>
@@ -576,7 +576,7 @@
 
                 <div class="col-md-3">
                   <div class="form-label-group">
-                    <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ. ]+" class="form-control"
+                    <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ. ]+" class="form-control" style="color: #237087"
                       id="aspirante_tutor_prospera" name="aspirante_tutor_prospera" placeholder="Folio de Prospera">
                     <label for="aspirante_tutor_prospera">Folio de Prospera</label>
                   </div>
@@ -598,8 +598,8 @@
 
               <div class="row">
                 <div class="col-md-2">
-                  <label class="form-group has-float-label">
-                    <select class="form-control" required="required" onchange="lenguas_evento(this)"
+                  <label class="form-group has-float-label seltitulo">
+                    <select class="form-control selcolor" required="required" onchange="lenguas_evento(this)"
                       id="aspirante_lengua_nombre" name="aspirante_lengua_nombre">
                       <option value="NO CONOCE LENGUA">Seleccione una lengua</option>
 
@@ -616,8 +616,8 @@
                 </div>
 
                 <div class="col-md-2">
-                  <label class="form-group has-float-label">
-                    <select class="form-control" required="required" id="aspirante_lengua_lee"
+                  <label class="form-group has-float-label seltitulo">
+                    <select class="form-control selcolor" required="required" id="aspirante_lengua_lee"
                       name="aspirante_lengua_lee" disabled>
                       <option value="0">Nada 0%</option>
                       <option value="25">Poco 25%</option>
@@ -629,8 +629,8 @@
                 </div>
 
                 <div class="col-md-2">
-                  <label class="form-group has-float-label">
-                    <select class="form-control" required="required" id="aspirante_lengua_habla"
+                  <label class="form-group has-float-label seltitulo">
+                    <select class="form-control selcolor" required="required" id="aspirante_lengua_habla"
                       name="aspirante_lengua_habla" disabled>
                       <option value="0">Nada 0%</option>
                       <option value="25">Poco 25%</option>
@@ -642,8 +642,8 @@
                 </div>
 
                 <div class="col-md-2">
-                  <label class="form-group has-float-label">
-                    <select class="form-control" required="required" id="aspirante_lengua_escribe"
+                  <label class="form-group has-float-label seltitulo">
+                    <select class="form-control selcolor" required="required" id="aspirante_lengua_escribe"
                       name="aspirante_lengua_escribe" disabled>
                       <option value="0">Nada 0%</option>
                       <option value="25">Poco 25%</option>
@@ -655,8 +655,8 @@
                 </div>
 
                 <div class="col-md-2">
-                  <label class="form-group has-float-label">
-                    <select class="form-control" required="required" id="aspirante_lengua_entiende"
+                  <label class="form-group has-float-label seltitulo">
+                    <select class="form-control selcolor" required="required" id="aspirante_lengua_entiende"
                       name="aspirante_lengua_entiende" disabled>
                       <option value="0">Nada 0%</option>
                       <option value="25">Poco 25%</option>
@@ -669,8 +669,8 @@
 
 
                 <div class="col-md-2">
-                  <label class="form-group has-float-label">
-                    <select class="form-control" required="required" id="aspirante_lengua_traduce"
+                  <label class="form-group has-float-label seltitulo">
+                    <select class="form-control selcolor" required="required" id="aspirante_lengua_traduce"
                       name="aspirante_lengua_traduce" disabled>
                       <option value="0">Nada 0%</option>
                       <option value="25">Poco 25%</option>
@@ -705,7 +705,7 @@
                   <div class="form-label-group">
 
                     <input list="secundarias" class="form-control text-uppercase" id="aspirante_secundaria_cct"
-                      name="aspirante_secundaria_cct" placeholder="Buscar escuela por CCT">
+                      name="aspirante_secundaria_cct" placeholder="Buscar escuela por CCT" style="color: #237087">
                     <datalist id="secundarias">
 
                       <?php
@@ -738,7 +738,7 @@
                   <div class="form-label-group">
                     <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ. 0-9]+"
                       title="El nombre de la secundaria contiene caracteres incorrectos"
-                      class="form-control text-uppercase" id="aspirante_secundaria_nombre"
+                      class="form-control text-uppercase" id="aspirante_secundaria_nombre" style="color: #237087"
                       name="aspirante_secundaria_nombre" placeholder="Nombre de Secundaria">
                     <label for="aspirante_secundaria_nombre">Nombre de Secundaria</label>
                   </div>
@@ -746,8 +746,8 @@
                 </div>
 
                 <div class="col-md-4" style="display: none" id="tipo_subsistema_oculto">
-                  <label class="form-group has-float-label">
-                    <select class="form-control form-control-lg" name="aspirante_secundaria_tipo_subsistema"
+                  <label class="form-group has-float-label seltitulo">
+                    <select class="form-control form-control-lg selcolor" name="aspirante_secundaria_tipo_subsistema"
                       id="aspirante_secundaria_tipo_subsistema">
                       <option value="">Seleccione un tipo</option>
                       <option value="TELESECUNDARIA">Telesecundaria</option>

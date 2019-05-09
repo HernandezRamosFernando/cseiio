@@ -21,7 +21,7 @@
                 <div class="col-md-4">
                   <div class="form-label-group">
                     <input type="text" pattern="[A-Za-zñ]+" title="Introduzca solo letras" class="form-control"
-                      id="aspirante_curp_busqueda" placeholder="CURP">
+                      id="aspirante_curp_busqueda" placeholder="CURP" style="color: #237087">
                     <label for="aspirante_curp_busqueda">CURP</label>
                   </div>
                 </div>
@@ -33,8 +33,8 @@
 
 
                 <div class="col-md-8">
-                  <label class="form-group has-float-label">
-                    <select class="form-control form-control-lg" required="required" id="aspirante_plantel_busqueda"
+                  <label class="form-group has-float-label seltitulo">
+                    <select class="form-control form-control-lg selcolor" required="required" id="aspirante_plantel_busqueda"
                       name="aspirante_plantel">
                       <option value="">Buscar en todos los planteles</option>
 

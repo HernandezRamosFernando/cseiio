@@ -14,7 +14,7 @@
         <i class="material-icons">group_add</i>
         <span class="font-weight-light">Inscripción<span>
       </a>
-      <div id="submenu" class="<?php ($this->uri->segment(2)=='nuevo_ingreso'||$this->uri->segment(2)=='portabilidad'||$this->uri->segment(2)=='asignar_matricula'||$this->uri->segment(2)=='carta_compromiso') ? print 'null' : print 'collapse'; ?> sidebar-submenu">
+      <div id="submenu" class="<?php ($this->uri->segment(2)=='nuevo_ingreso'||$this->uri->segment(2)=='portabilidad'||$this->uri->segment(2)=='asignar_matricula'||$this->uri->segment(2)=='carta_compromiso' ||$this->uri->segment(2)=='resolucion_equivalencia') ? print 'null' : print 'collapse'; ?> sidebar-submenu">
         <a class="nav-link <?php ($this->uri->segment(2)=='nuevo_ingreso') ? print 'bg-info text-light' : print null; ?>" href="<?php echo base_url();?>index.php/c_vistas/nuevo_ingreso">
         <i class="material-icons">person_add</i>
           <span class="font-weight-light">Inscripción Nuevo Ingreso
@@ -23,6 +23,11 @@
         <a class="nav-link  <?php ($this->uri->segment(2)=='portabilidad') ? print 'bg-info text-light' : print null; ?>" href="<?php echo base_url();?>index.php/c_vistas/portabilidad">
         <i class="material-icons">person_outline</i>
           <span class="font-weight-light">Inscripción Portabilidad
+          </span>
+        </a>
+        <a class="nav-link  <?php ($this->uri->segment(2)=='resolucion_equivalencia') ? print 'bg-info text-light' : print null; ?>" href="<?php echo base_url();?>index.php/c_vistas/resolucion_equivalencia">
+        <i class="material-icons">person_outline</i>
+          <span class="font-weight-light">Resolución equivalencia
           </span>
         </a>
         <a class="nav-link  <?php ($this->uri->segment(2)=='asignar_matricula') ? print 'bg-info text-light' : print null; ?>" href="<?php echo base_url();?>index.php/c_vistas/asignar_matricula">
@@ -111,11 +116,22 @@
         <span>Carga de documentos</span>
       </a>
     </li>
-    <li class="nav-item ">
-      <a class="nav-link" href="<?php echo base_url();?>index.php/c_menu/principal">
+    <li class="nav-item dropdown ">
+      <a class="nav-link nav-dropdown-toggle  <?php ($this->uri->segment(2)=='inscripcion') ? print 'bg-info text-light' : print null; ?>"
+      aria-expanded="false" data-toggle="collapse" href="#submenu2" role="button">
         <i class="material-icons">people_outline</i>
-        <span>Control de usuarios</span>
+        <span>Control Y Permisos</span>
       </a>
+      <div id="submenu2" class="<?php ($this->uri->segment(2)=='permisos_cal'||$this->uri->segment(2)==''||$this->uri->segment(2)==''||$this->uri->segment(2)=='' ||$this->uri->segment(2)=='') ? print 'null' : print 'collapse'; ?> sidebar-submenu">
+        <a class="nav-link <?php ($this->uri->segment(2)=='permisos_cal') ? print 'bg-info text-light' : print null; ?>" href="<?php echo base_url();?>index.php/c_vistas/permisos_cal">
+        <i class="material-icons">person_add</i>
+          <span class="font-weight-light">Permisos calificaciones
+          </span>
+        </a>
+        <hr class="bg-info" style=" border: 3px solid ;">
+      </div>
+      
     </li>
+
 
   </ul>

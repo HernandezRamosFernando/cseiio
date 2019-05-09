@@ -178,6 +178,15 @@ public function portabilidad(){
         $this->load->view("footers/footer");
     }
 
+    public function control_permisos(){
+        $data= array('title'=>'Control y Permisos');
+        $this->load->view("headers/cabecera", $data);
+        $this->load->view("headers/menuarriba");
+        $this->load->view("headers/menuizquierda");
+        $this->load->view("admin/controlypermisos");
+        $this->load->view("footers/footer");
+    }
+
     public function crear_grupo(){
         $datos['planteles'] = $this->M_plantel->get_planteles();
         $datos['ciclo_escolar'] = $this->M_ciclo_escolar->get_ciclo_escolar();
@@ -223,6 +232,7 @@ public function portabilidad(){
     }
 
     public function calificacion(){
+        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
         $datos['planteles'] = $this->M_plantel->get_planteles();
     
         $data= array('title'=>'Calificaciones');
@@ -231,6 +241,7 @@ public function portabilidad(){
         $this->load->view("headers/menuizquierda");
         $this->load->view("admin/calificacion", $datos);
         $this->load->view("footers/footer");
+        }
     }
 
     public function materias(){
@@ -270,6 +281,17 @@ public function portabilidad(){
             $this->load->view("footers/footer");
         }
     }
+
+    public function resolucion_equivalencia(){
+        $datos['planteles'] = $this->M_plantel->get_planteles();
+        $datos['ciclo_escolar'] = $this->M_ciclo_escolar->lista_ciclo_escolar();
+        $data= array('title'=>'Resolución de Equivalencia');
+        $this->load->view("headers/cabecera", $data);
+        $this->load->view("headers/menuarriba");
+        $this->load->view("headers/menuizquierda");
+        $this->load->view("admin/resolucion_equivalencia", $datos);
+        $this->load->view("footers/footer");
+    } 
         
     //-------------------------------------------------termina vistas
 }

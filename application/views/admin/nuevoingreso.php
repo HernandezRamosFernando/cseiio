@@ -75,7 +75,7 @@
           </div>
           <div class="col-md-4">
             <div class="form-label-group">
-              <input type="number" title="El numero de telefono debe de ser a 10 digitos" style="color: #237087"
+              <input type="number" title="El numero de telefono debe de ser a 13 digitos" style="color: #237087"
                 class="form-control text-uppercase" id="aspirante_telefono" name="aspirante_telefono"
                 placeholder="Telefono">
               <label for="aspirante_telefono">Teléfono</label>
@@ -478,7 +478,7 @@
 
             <div class="col-md-3">
               <div class="form-label-group">
-                <input type="number" title="El numero de telefono debe de ser a 10 dígitos con lada"
+                <input type="number" title="El numero de telefono debe de ser a 13 dígitos con lada"
                   class="form-control text-uppercase" id="aspirante_tutor_telefono" name="aspirante_tutor_telefono"
                   placeholder="Teléfono particular"style="color: #237087">
                 <label for="aspirante_tutor_telefono">Teléfono particular</label>
@@ -486,7 +486,7 @@
             </div>
             <div class="col-md-3">
               <div class="form-label-group">
-                <input type="number" title="El numero de telefono debe de ser a 10 digitos con lada"
+                <input type="number" title="El numero de telefono debe de ser a 13 digitos con lada"
                   class="form-control text-uppercase" id="aspirante_tutor_telefono_comunidad" style="color: #237087"
                   name="aspirante_tutor_telefono_comunidad" placeholder="Teléfono de la comunidad">
                 <label for="aspirante_tutor_telefono_comunidad">Teléfono de la comunidad</label>
@@ -714,7 +714,7 @@
         <div class="form-check">
           <label class="form-check-label">
             <input type="checkbox" class="form-check-input" name="aspirante_documento_certificado_secundaria"
-              id="aspirante_documento_certificado_secundaria" value="3" unchecked>
+              id="aspirante_documento_certificado_secundaria" value="3" unchecked onclick="checksecundaria();">
             Certificado de Secundaria
           </label>
         </div>
@@ -1074,5 +1074,6 @@
     xhr.send(JSON.stringify(secundaria));
 
   }
+
 }
 </script>

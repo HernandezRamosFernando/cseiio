@@ -13,6 +13,8 @@ class C_estudiante extends CI_Controller {
         $this->load->model('M_localidad');
         $this->load->model('M_escuela_procedencia');
         $this->load->model('M_lengua');
+        $this->load->model('M_ciclo_escolar');
+        $this->load->model('M_resolucion_equivalencia');
 
     }
 
@@ -610,6 +612,149 @@ public function generar_matricula(){
         }
 
         echo $semestre;  
+}
+
+public function estudiantes_portabilidad(){
+    $curp = $this->input->get('curp');
+    $plantel = $this->input->get('plantel');
+   echo json_encode($this->M_estudiante->estudiantes_portabilidad( 
+        $curp,
+        $plantel
+        ));
+}
+
+
+public function nombre_del_semestre($idsemestre){
+    $nombre='';
+        switch ($idsemestre) {
+        case 1:
+            $nombre='primer';
+            break;
+        case 2:
+            $nombre="segundo";
+            break;
+        case 3:
+             $nombre="tercer";
+            break;
+        case 4:
+             $nombre="cuarto";
+            break;
+        case 5:
+             $nombre="quinto";
+            break;
+        case 6:
+             $nombre="sexto";
+            break;
+            }
+    return $nombre;
+    
+}
+
+
+public function ciclos_escolares_acreditados($ciclo_escolar,$semestre_acreditado){
+    $ciclos_escolares='';
+    $ciclo = explode("-",$ciclo_escolar);
+    $num_ciclos=round($semestre_acreditado/2);
+    $anio_inicial=$ciclo[1]-$num_ciclos; 
+    $anio_final=$anio_inicial+1;
+    
+    if($num_ciclos>1){
+        for($x=1;$x<=$num_ciclos;$x++){
+        if($x>1){
+            $ciclos_escolares.=', ';
+        }
+        $ciclos_escolares.=$anio_inicial.'-'.$anio_final;
+        $anio_inicial=$anio_inicial+1;
+        $anio_final=$anio_final+1;
+        }
+    }
+    else{
+        $ciclos_escolares=$ciclo_escolar;
+    }
+
+    return $ciclos_escolares;
+
+}
+
+
+
+
+public function generar_resolucion_equivalencia(){
+    $no_control = $this->input->post('num_control_estudiante');
+    $num_folio = strtoupper($this->input->post('num_folio'));
+    $plantel_inscrito = $this->input->post('plantel_inscrito');
+    $fecha_expedicion = $this->input->post('fecha_expedicion');
+    $ciclo_escolar= $this->input->post('ciclo_escolar');
+    $promedio_acreditado = $this->input->post('promedio_acreditado');
+    $semestre_acreditado = $this->input->post('semestre_acreditado');
+       
+     echo $this->M_resolucion_equivalencia->generar_resolucion($no_control,$num_folio,$plantel_inscrito,$fecha_expedicion,$ciclo_escolar,$promedio_acreditado,$semestre_acreditado);
+
+    
+}
+
+
+public function descargar_resolucion_equivalencia(){
+    $no_control=$this->input->get('no_control');
+    $datos_resolucion=$this->M_resolucion_equivalencia->get_resolucion_equivalencia($no_control);
+    $datos_estudiante=$this->M_estudiante->get_plantel_estudiante($no_control);
+    $datos_escuela_procedencia=$this->M_escuela_procedencia->get_escuela($datos_estudiante[0]->cct_escuela_procedencia);
+    $datos['escuela_procedencia'] = $datos_escuela_procedencia[0]->nombre_escuela_procedencia;
+    $datos['cct_procedencia'] = $datos_estudiante[0]->cct_escuela_procedencia;
+    $datos['nombre_completo']=$datos_estudiante[0]->nombre." ".$datos_estudiante[0]->primer_apellido." ".$datos_estudiante[0]->segundo_apellido;
+    $datos['plantel_inscrito']=$datos_estudiante[0]->Plantel_cct_plantel;
+    $datos['semestre_acreditado']=" a ".$this->nombre_del_semestre($datos_resolucion[0]->ultimo_semestre_acreditado);
+    $datos['promedio_acreditado']=$datos_resolucion[0]->promedio_acreditado;
+   
+    $datos['nombre_plantel_inscrito']=$this->M_plantel->get_nombre_localidad($datos_estudiante[0]->Plantel_cct_plantel)[0]->nombre_localidad;
+    
+
+     date_default_timezone_set('UTC');
+    date_default_timezone_set("America/Mexico_City");
+    //$hora = strftime("%I:%M:%S %p", strtotime($timestamp));Descomentar en caso de requerir hora
+    setlocale(LC_TIME, 'spanish');
+   
+    $datos['fecha_expedicion'] =utf8_encode(strftime("%d de %B del %Y", strtotime($datos_resolucion[0]->fecha_expedicion)));
+    $datos['num_folio'] = $datos_resolucion[0]->folio;
+    $nombre_ciclo_escolar=$this->M_ciclo_escolar->obtener_nombre_ciclo_escolar($datos_resolucion[0]->id_ciclo_escolar)[0]->nombre_ciclo_escolar;
+    $semestre_acreditado=$datos_resolucion[0]->ultimo_semestre_acreditado;
+    $datos['ciclos_escolares']=$this->ciclos_escolares_acreditados($nombre_ciclo_escolar,$semestre_acreditado);
+    
+
+    $this->load->library('pdf');
+    $this->load->view('reportes/resolucion_equivalencia',$datos);
+
+}
+
+
+
+
+public function get_resolucion_equivalencia(){
+    $no_control = $this->input->get('no_control');
+   echo json_encode($this->M_resolucion_equivalencia->get_resolucion_equivalencia($no_control));
+}
+
+
+public function editar_resolucion_equivalencia(){
+    $no_control=$this->input->post('mnum_control_estudiante');
+    $plantel_inscrito=$this->input->post('mplantel_inscrito');
+    $num_folio=$this->input->post('mnum_folio');
+    $semestre_acreditado=$this->input->post('msemestre_acreditado');
+    $fecha_expedicion=$this->input->post('mfecha_expedicion');
+    $ciclo_escolar=$this->input->post('mciclo_escolar');
+    $promedio=$this->input->post('mpromedio_acreditado');
+    $datos = array(
+        'folio' => $num_folio,
+        'fecha_expedicion' => $fecha_expedicion,
+        'usuario_elaboro' =>10,
+        'ultimo_semestre_acreditado' =>$semestre_acreditado,
+        'promedio_acreditado' =>$promedio,
+        'id_ciclo_escolar' =>$ciclo_escolar,
+        'id_plantel_inscrito' =>$plantel_inscrito,
+    );
+
+
+    echo $this->M_resolucion_equivalencia->editar_resolucion($datos,$no_control);
 }
 
 }

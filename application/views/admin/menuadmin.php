@@ -65,9 +65,9 @@
                             </a>
                         </div>
                         <div class="col-md-4 col-lg-4 ">
-                            <a href="../views/controlusuarios.html" 
+                            <a href="<?php echo base_url();?>index.php/c_vistas/control_permisos" 
                             class="btn btn-primary btn-lg btn-block valign-center btn-responsive menu btn-9" >
-                            <i class="material-icons">people_outline</i> &nbsp;Control de Usuarios
+                            <i class="material-icons">people_outline</i> &nbsp;Control y Permisos
                             </a>
                         </div>
                       </div>

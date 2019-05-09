@@ -186,7 +186,7 @@
               </div>
               <div class="col-md-4">
                 <div class="form-label-group">
-                  <input type="number" title="El numero de telefono debe de ser a 10 digitos"
+                  <input type="number" title="El numero de telefono debe de ser a 13 digitos"
                     class="form-control text-uppercase" id="aspirante_telefono" name="aspirante_telefono"
                     placeholder="Telefono" style="color: #237087">
                   <label for="aspirante_telefono">Teléfono</label>
@@ -558,7 +558,7 @@
                 <div class="col-md-3">
                   <div class="form-label-group">
                     <input type="text" pattern="[0-9]{10}"
-                      title="El numero de telefono debe de ser a 10 digitos con lada" class="form-control"
+                      title="El numero de telefono debe de ser a 13 digitos con lada" class="form-control"
                       id="aspirante_tutor_telefono" name="aspirante_tutor_telefono" placeholder="Teléfono particular" style="color: #237087">
                     <label for="aspirante_tutor_telefono">Teléfono particular</label>
                   </div>
@@ -566,7 +566,7 @@
                 <div class="col-md-3">
                   <div class="form-label-group">
                     <input type="text" pattern="[0-9]{10}"
-                      title="El numero de telefono debe de ser a 10 digitos con lada" class="form-control"
+                      title="El numero de telefono debe de ser a 13 digitos con lada" class="form-control"
                       id="aspirante_tutor_telefono_comunidad" name="aspirante_tutor_telefono_comunidad"
                       placeholder="Teléfono de la comunidad" style="color: #237087">
                     <label for="aspirante_tutor_telefono_comunidad">Teléfono de la comunidad</label>

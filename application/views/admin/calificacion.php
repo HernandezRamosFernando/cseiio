@@ -252,7 +252,14 @@ function cargar_materia(){
       permisos.onload = function () {
         //console.log(JSON.parse(xhr.response)[0];
         var permisos_plantel = JSON.parse(permisos.response)[0];
-        console.log(permisos_plantel);
+        if(permisos_plantel===undefined){
+          var permisos_plantel = {
+            primer_parcial:"0",
+            segundo_parcial:"0",
+            tercer_parcial:"0",
+            examen_final:"0"
+          }
+        }
 
 
         //cargar inputs

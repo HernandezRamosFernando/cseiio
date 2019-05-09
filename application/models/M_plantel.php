@@ -51,5 +51,9 @@ class M_plantel extends CI_Model {
 
       return $respuesta;
 }
+function get_nombre_localidad($plantel){
+        
+   return $this->db->query("SELECT nombre_localidad FROM Plantel p inner join Localidad l on p.id_localidad_plantel=l.id_localidad where p.cct_plantel='".$plantel."'")->result();
+}
 
 }

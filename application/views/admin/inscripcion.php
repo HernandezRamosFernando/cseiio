@@ -41,6 +41,13 @@
               Generación de Carta Compromiso
             </a>
           </div>
+          <div class="col-md-4 col-lg-4">
+            <a href="<?php echo base_url();?>index.php/c_vistas/resolucion_equivalencia"
+              class="btn btn-primary btn-lg btn-block menu valign-center btn-5 btn-responsive">
+              <i class="material-icons">transfer_within_a_station</i>&nbsp;
+              Generación de Resolución de Equivalencia
+            </a>
+          </div>
           <!--
           <div class="col col-lg-4">
             <a href="<?php echo base_url();?>index.php/c_vistas/carta_compromiso"

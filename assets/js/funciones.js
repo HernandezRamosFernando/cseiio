@@ -35,8 +35,8 @@ console.log(fechas);
 }
 
 function generarCURP() {
-  let estados = ["aguascalientes", "baja california", "baja california sur", "campeche", "chiapas", "chihuahua", "coahuila de zaragoza", "colima", "méxico", "distrito federal", "durango", "guanajuato", "guerrero", "hidalgo", "jalisco", "estado de mexico", "michoacán", "morelos", "nayarit", "nuevo león", "oaxaca", "puebla", "querétaro", "quintana roo", "san luis potosí", "sinaloa", "sonora", "tabasco", "tamaulipas", "tlaxcala", "veracruz", "yucatán", "zacatecas"];
-  let abreviacion = ["AS", "BC", "BS", "CC", "CS", "CH", "CL", "CM", "CX", "DF", "DG", "GT", "GR", "HG", "JC", "MC", "MN", "MS", "NT", "NL", "OC", "PL", "QT", "QR", "SP", "SL", "SR", "TC", "TS", "TL", "VZ", "YN", "ZS"];
+  let estados = ["nació en otro país", "aguascalientes", "baja california", "baja california sur", "campeche", "chiapas", "chihuahua", "coahuila de zaragoza", "colima", "méxico", "distrito federal", "durango", "guanajuato", "guerrero", "hidalgo", "jalisco", "estado de mexico", "michoacán", "morelos", "nayarit", "nuevo león", "oaxaca", "puebla", "querétaro", "quintana roo", "san luis potosí", "sinaloa", "sonora", "tabasco", "tamaulipas", "tlaxcala", "veracruz", "yucatán", "zacatecas"];
+  let abreviacion = ["EX", "AS", "BC", "BS", "CC", "CS", "CH", "CL", "CM", "CX", "DF", "DG", "GT", "GR", "HG", "JC", "MC", "MN", "MS", "NT", "NL", "OC", "PL", "QT", "QR", "SP", "SL", "SR", "TC", "TS", "TL", "VZ", "YN", "ZS"];
 
   var consonantes = /[bcdfghjklmnpqrstvwxyz]/gi;
   var CURP = [];
@@ -188,6 +188,26 @@ function checkacta() {
     document.getElementById("aspirante_fecha_nacimiento_registro").required = false;
   }
 }
+
+function checksecundaria() {
+  if (document.getElementById("aspirante_documento_certificado_secundaria").checked) {
+    document.getElementById("aspirante_secundaria_cct").required = true;
+
+  } else {
+    document.getElementById("aspirante_secundaria_cct").required = false;
+  }
+}
+
+function checkbachillerato() {
+  if (document.getElementById("aspirante_documento_certificado_parcial").checked) {
+    document.getElementById("aspirante_secundaria_cct").required = true;
+
+  } else {
+    document.getElementById("aspirante_secundaria_cct").required = false;
+  }
+}
+
+
 
 
 

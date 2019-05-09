@@ -39,5 +39,13 @@ class M_ciclo_escolar extends CI_Model {
       }
    }
 
+   public function lista_ciclo_escolar(){
+      return $this->db->query('SELECT * FROM Ciclo_escolar')->result();
+ }
+
+ public function obtener_nombre_ciclo_escolar($ciclo){
+   return $this->db->query('SELECT * FROM Ciclo_escolar where id_ciclo_escolar='.$ciclo.'')->result();
+}
+
 
 }

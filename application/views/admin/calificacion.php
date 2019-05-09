@@ -247,7 +247,7 @@ if (document.getElementById("plantel").value === "") {
 
 function cargar_materia(){
   var permisos = new XMLHttpRequest();
-      permisos.open('GET', '/cseiio/c_permisos/get_permiso_plantel?plantel='+document.getElementById("plantel").value, true);
+      permisos.open('GET', '<?php echo base_url();?>index.php/c_permisos/get_permiso_plantel?plantel='+document.getElementById("plantel").value, true);
 
       permisos.onload = function () {
         //console.log(JSON.parse(xhr.response)[0];
@@ -282,7 +282,7 @@ function cargar_materia(){
         var primer_parcial = valor.primer_parcial!==null?valor.primer_parcial:"";
 
         if(permisos_plantel.primer_parcial==="1"){
-          registro+='<td><input type="text" class="form-control" name="primer_parcial" value="'+primer_parcial+'" id="primer_parcial" placeholder="Primer Parcial"></td>';
+          registro+='<td><input type="text" class="form-control" name="primer_parcial" value="'+primer_parcial+'" id="primer_parcial" placeholder="Primer Parcial" onchange="calificaciones(this);"></td>';
         }
         else{
           registro+='<td><input type="text" class="form-control" name="primer_parcial" value="'+primer_parcial+'" id="primer_parcial" placeholder="Primer Parcial" disabled></td>';
@@ -346,6 +346,11 @@ function cargar_materias(){
     xhr.send(null);
     }else{
       document.getElementById("materias").innerHTML = '';
+  }
+
+  function calificaciones(e) {
+    console.log(e,value);
+    
   }
 }
     </script>

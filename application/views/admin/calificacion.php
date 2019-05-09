@@ -298,7 +298,10 @@ function cargar_materia(){
         }
         var examen_final = valor.examen_final!==null?valor.examen_final:"";
         if(permisos_plantel.examen_final==="1"){
+          registro+='<td><input type="text" class="form-control" name="examen_final" value="'+examen_final+'" id="examen_final" placeholder="Examen Final" ></td>';
+        }else{
           registro+='<td><input type="text" class="form-control" name="examen_final" value="'+examen_final+'" id="examen_final" placeholder="Examen Final" disabled></td>';
+
         }
         registro+='</tr>';
         document.getElementById("tablagrupo").innerHTML+=registro;
@@ -341,9 +344,11 @@ function cargar_materias(){
       document.getElementById("materias").innerHTML = '';
   }
 
-  function calificaciones(e) {
-    console.log(e,value);
+}
+
+
+function calificaciones(e) {
+    console.log(e.value);
     
   }
-}
     </script>

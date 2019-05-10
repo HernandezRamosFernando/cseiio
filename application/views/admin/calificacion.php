@@ -183,7 +183,7 @@ function guardar(){
                }else{
                 Swal.fire({
                   type: 'error',
-                  text: 'Alumnos no no guardados'
+                  text: 'Datos no guardados'
                  });
                }
           }

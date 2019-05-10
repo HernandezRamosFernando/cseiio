@@ -86,17 +86,15 @@
           </div>
 
             <div class="col-md-4 offset-md-3">
-              <button type="button" class="btn btn-success btn-lg btn-block" onclick="cargar_materia()" style="padding: 1rem" id="crear_grupo">Mostrar materia</button>
+              <button type="button" class="btn btn-success btn-lg btn-block" onclick="validarcomponente()" style="padding: 1rem" id="crear_grupo">Mostrar materia</button>
             </div>
           </div>
       </div>
 
 
 
-      <div class="row" id="alumnos_oculto" style="display:">
-      
-
-      <div class="col-md-12" id="tabla_alumnos">
+      <div class="row" id="alumnos_oculto" style="display: none">
+      <div class="col-md-12" id="tabla_alumnos" >
         <div class="card card-body">
           <table class="table table-hover" id="tabla_completa_grupo" style="width: 100%">
             <caption>Lista de los alumnos del grupo</caption>
@@ -122,7 +120,7 @@
      </div>
    </form>
     <br>
-        <div class="col-md-12" id="agregar_oculto" style="display: ">
+        <div class="col-md-12" id="agregar_oculto" style="display: none">
         <button type="button" value="nuevo" onclick="guardar()" id="boton_agregar" class="btn btn-success btn-lg btn-block btn-guardar"  style="padding: 1rem"> Guardar cambios</button> 
         </div>
 
@@ -185,7 +183,7 @@ function guardar(){
                }else{
                 Swal.fire({
                   type: 'error',
-                  text: 'Alumnos no no guardados'
+                  text: 'Datos no guardados'
                  });
                }
           }
@@ -247,13 +245,34 @@ if (document.getElementById("plantel").value === "") {
 }
 }
 
+function validarcomponente(){
+
+if(document.getElementById("plantel").value != '' && document.getElementById("grupos").value != '' && document.getElementById("semestre_grupo").value != ''  && document.getElementById("materias").value != ''){
+  cargar_materia();
+}else{
+  Swal.fire({
+        type: 'warning',
+        text: 'Agregue los datos faltantes'
+      });
+  }
+}
+
 
 
 function cargar_materia(){
+  document.getElementById("alumnos_oculto").style.display = "";
+  document.getElementById("agregar_oculto").style.display = "";
   var permisos = new XMLHttpRequest();
       permisos.open('GET', '<?php echo base_url();?>index.php/c_permisos/get_permiso_plantel?plantel='+document.getElementById("plantel").value, true);
-
-      permisos.onload = function () {
+      permisos.onloadstart = function(){
+    $('#div_carga').show();
+  }
+  permisos.error = function (){
+    console.log("error de conexion");
+  }
+  
+  permisos.onload = function(){
+    $('#div_carga').hide();
         //console.log(JSON.parse(xhr.response)[0];
         var permisos_plantel = JSON.parse(permisos.response)[0];
         if(permisos_plantel===undefined){
@@ -276,12 +295,20 @@ function cargar_materia(){
   xhr.error = function (){
     console.log("error de conexion");
   }
+  
   xhr.onload = function(){
     $('#div_carga').hide();
       console.log(JSON.parse(xhr.response));
 
      
       JSON.parse(xhr.response).forEach(function(valor,indice){
+        var promedio="";
+        if(valor.primer_parcial != null && valor.segundo_parcial != null && valor.tercer_parcial != null)
+        {
+          promedio = (parseInt(valor.primer_parcial) + parseInt(valor.segundo_parcial) + parseInt(valor.tercer_parcial))/3;
+          console.log(promedio);
+          promedio = redondeo(promedio);
+        }
         var registro = "<tr>";
         registro+='<td>'+valor.nombre+' '+valor.primer_apellido+' '+valor.segundo_apellido+'</td>';
         registro+='<td>'+valor.no_control+'</td>';
@@ -312,15 +339,20 @@ function cargar_materia(){
           registro+='<td><input type="text" class="form-control" name="tercer_parcial" value="'+(tercer_parcial==="0"?"/":tercer_parcial)+'" id="tercer_parcial" placeholder="Tercer Parcial" disabled></td>';
         }
 
-        registro+='<td><input type="text" class="form-control" name="promedio_modular" value="'+tercer_parcial+'" id="promedio_modular" placeholder="Promedio Modular" onchange="calificaciones(this);" disabled></td>';
-
-        var examen_final = valor.examen_final!==null?valor.examen_final:"";
-        if(permisos_plantel.examen_final==="1"){
-          registro+='<td><input type="text" class="form-control" name="examen_final" value="'+(examen_final==="0"?"/":examen_final)+'" id="examen_final" placeholder="Examen Final" onchange="calificaciones(this);"></td>';
+        if(promedio>=6){
+          registro+='<td><input type="text" class="form-control" name="promedio_modular" value="'+promedio+'" id="promedio_modular" placeholder="Promedio Modular" onchange="calificaciones(this);" disabled></td>';
         }else{
-          registro+='<td><input type="text" class="form-control" name="examen_final" value="'+(examen_final==="0"?"/":examen_final)+'" id="examen_final" placeholder="Examen Final" disabled></td>';
-
+          registro+='<td><input type="text" class="form-control" name="promedio_modular" value="'+promedio+'" id="promedio_modular" placeholder="Promedio Modular" onchange="calificaciones(this);" disabled style="color: red"></td>';
         }
+        
+        var examen_final = valor.examen_final!==null?valor.examen_final:"";
+        if(permisos_plantel.examen_final==="1" && promedio >= 6 ){
+          registro+='<td><input type="text" class="form-control" name="examen_final" value="'+(examen_final==="0"?"/":examen_final)+'" id="examen_final" placeholder="Examen Final" onchange="calificaciones(this);"></td>';
+          }else if (permisos_plantel.examen_final==="1" && promedio < 6){
+              registro+='<td><input type="text" class="form-control" name="examen_final" value="/" id="examen_final" placeholder="Examen Final" onchange="calificaciones(this);" disabled></td>';
+            }else{
+              registro+='<td><input type="text" class="form-control" name="examen_final" value="'+(examen_final==="0"?"/":examen_final)+'" id="examen_final" placeholder="Examen Final" disabled></td>';
+            }
         registro+='</tr>';
         document.getElementById("tablagrupo").innerHTML+=registro;
       });
@@ -382,7 +414,7 @@ function calificaciones(e) {
     e.style.color = "black";
     }else if (output === "/"){
       e.style.color = "black";
-    }else if (output >= 0 && output <= 5 ){
+    }else if (output >= 0 && output < 6 ){
       e.value= 5;
       e.style.color = "red";
     }else{
@@ -393,6 +425,19 @@ function calificaciones(e) {
      e.value="";
    }
    //e.value=output;
-    
+  }
+
+  function redondeo(e) {
+    if(e >= 6 && e <= 10 ){
+    var valor=parseFloat(e);
+    valor = Math.round(valor); 
+    return valor;
+    }else if (e === 0){
+      return "/";
+    }else if (e > 0 && e < 6 ){
+      return 5;
+    }else{
+     return "";
+    }
   }
     </script>

@@ -21,7 +21,7 @@ class M_grupo_estudiante extends CI_Model {
 
             if($calificaciones_estudiante->segundo_parcial!=null){
                 $this->db->query("update Grupo_Estudiante 
-                set segundo_parcial=".$calificaciones_estudiante->segundo_parcial." 
+                set segundo_parcial=".($calificaciones_estudiante->segundo_parcial=="/"?0:$calificaciones_estudiante->segundo_parcial)." 
                 where Grupo_id_grupo='".$calificaciones_estudiante->id_grupo."' and 
                 Estudiante_no_control='".$calificaciones_estudiante->no_control."' and 
                 id_materia='".$calificaciones_estudiante->materia."'");
@@ -30,7 +30,7 @@ class M_grupo_estudiante extends CI_Model {
 
             if($calificaciones_estudiante->tercer_parcial!=null){
                 $this->db->query("update Grupo_Estudiante 
-                set tercer_parcial=".$calificaciones_estudiante->tercer_parcial." 
+                set tercer_parcial=".($calificaciones_estudiante->tercer_parcial=="/"?0:$calificaciones_estudiante->tercer_parcial)." 
                 where Grupo_id_grupo='".$calificaciones_estudiante->id_grupo."' and 
                 Estudiante_no_control='".$calificaciones_estudiante->no_control."' and 
                 id_materia='".$calificaciones_estudiante->materia."'");
@@ -39,7 +39,7 @@ class M_grupo_estudiante extends CI_Model {
 
             if($calificaciones_estudiante->examen_final!=null){
                 $this->db->query("update Grupo_Estudiante 
-                set examen_final=".$calificaciones_estudiante->examen_final." 
+                set examen_final=".($calificaciones_estudiante->examen_final=="/"?0:$calificaciones_estudiante->examen_final)." 
                 where Grupo_id_grupo='".$calificaciones_estudiante->id_grupo."' and 
                 Estudiante_no_control='".$calificaciones_estudiante->no_control."' and 
                 id_materia='".$calificaciones_estudiante->materia."'");

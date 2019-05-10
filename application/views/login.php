@@ -2,7 +2,7 @@
 <div style="text-align: center; clear:both;">
   <img style="text-align: center; background-size: cover;"  src="<?php echo base_url(); ?>/assets/img/header.png">
 </div>
-<div align="center">
+<div text-align="center">
   <h3>Sistema Web Integral de Servicios Escolares del CSEIIO (SISE)</h3>
 </div>
   <br><br>

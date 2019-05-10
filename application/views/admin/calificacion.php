@@ -152,6 +152,8 @@ function guardar(){
       datos.push(dato);
   }
 
+  //console.log(datos);
+
   var xhr = new XMLHttpRequest();
       xhr.open("POST", '<?php echo base_url();?>index.php/c_grupo_estudiante/agregar_calificaciones_materia_grupo', true);
 
@@ -191,6 +193,7 @@ function guardar(){
       xhr.send(JSON.stringify(datos));
 
   console.log(datos);
+  
 }
 
 
@@ -283,10 +286,10 @@ function cargar_materia(){
         var primer_parcial = valor.primer_parcial!==null?valor.primer_parcial:"";
 
         if(permisos_plantel.primer_parcial==="1"){
-          registro+='<td><input type="text" class="form-control" name="primer_parcial" value="'+primer_parcial+'" id="primer_parcial" placeholder="Primer Parcial" onchange="calificaciones(this);"></td>';
+          registro+='<td><input type="text" class="form-control" name="primer_parcial" value="'+(primer_parcial==="0"?"/":primer_parcial)+'" id="primer_parcial" placeholder="Primer Parcial" onchange="calificaciones(this);"></td>';
         }
         else{
-          registro+='<td><input type="text" class="form-control" name="primer_parcial" value="'+primer_parcial+'" id="primer_parcial" placeholder="Primer Parcial" disabled></td>';
+          registro+='<td><input type="text" class="form-control" name="primer_parcial" value="'+(primer_parcial==="0"?"/":primer_parcial)+'" id="primer_parcial" placeholder="Primer Parcial" disabled></td>';
         }
         var segundo_parcial = valor.segundo_parcial!==null?valor.segundo_parcial:"";
         if(permisos_plantel.segundo_parcial==="1"){

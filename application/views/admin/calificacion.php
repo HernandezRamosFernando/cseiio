@@ -293,26 +293,26 @@ function cargar_materia(){
         }
         var segundo_parcial = valor.segundo_parcial!==null?valor.segundo_parcial:"";
         if(permisos_plantel.segundo_parcial==="1"){
-          registro+='<td><input type="text" class="form-control" name="segundo_parcial" value="'+segundo_parcial+'" id="segundo_parcial" placeholder="Segundo Parcial" onchange="calificaciones(this);"></td>';
+          registro+='<td><input type="text" class="form-control" name="segundo_parcial" value="'+(segundo_parcial==="0"?"/":segundo_parcial)+'" id="segundo_parcial" placeholder="Segundo Parcial" onchange="calificaciones(this);"></td>';
         }
 
         else{
-          registro+='<td><input type="text" class="form-control" name="segundo_parcial" value="'+segundo_parcial+'" id="segundo_parcial" placeholder="Segundo Parcial" disabled></td>';
+          registro+='<td><input type="text" class="form-control" name="segundo_parcial" value="'+(segundo_parcial==="0"?"/":segundo_parcial)+'" id="segundo_parcial" placeholder="Segundo Parcial" disabled></td>';
 
         }
         var tercer_parcial = valor.tercer_parcial!==null?valor.tercer_parcial:"";
         if(permisos_plantel.tercer_parcial==="1"){
-          registro+='<td><input type="text" class="form-control" name="tercer_parcial" value="'+tercer_parcial+'" id="tercer_parcial" placeholder="Tercer Parcial" onchange="calificaciones(this);"></td>';
+          registro+='<td><input type="text" class="form-control" name="tercer_parcial" value="'+(tercer_parcial==="0"?"/":tercer_parcial)+'" id="tercer_parcial" placeholder="Tercer Parcial" onchange="calificaciones(this);"></td>';
         }
         else{
-          registro+='<td><input type="text" class="form-control" name="tercer_parcial" value="'+tercer_parcial+'" id="tercer_parcial" placeholder="Tercer Parcial" disabled></td>';
+          registro+='<td><input type="text" class="form-control" name="tercer_parcial" value="'+(tercer_parcial==="0"?"/":tercer_parcial)+'" id="tercer_parcial" placeholder="Tercer Parcial" disabled></td>';
         }
-        registro+='<td><input type="text" class="form-control" name="promedio_modular" value="'+tercer_parcial+'" id="promedio_modular" placeholder="Promedio Modular" onchange="calificaciones(this);" disabled></td>';
+        registro+='<td><input type="text" class="form-control" name="promedio_modular" value="" id="promedio_modular" placeholder="Promedio Modular" onchange="calificaciones(this);" disabled></td>';
         var examen_final = valor.examen_final!==null?valor.examen_final:"";
         if(permisos_plantel.examen_final==="1"){
-          registro+='<td><input type="text" class="form-control" name="examen_final" value="'+examen_final+'" id="examen_final" placeholder="Examen Final" onchange="calificaciones(this);"></td>';
+          registro+='<td><input type="text" class="form-control" name="examen_final" value="'+(examen_final==="0"?"/":examen_final)+'" id="examen_final" placeholder="Examen Final" onchange="calificaciones(this);"></td>';
         }else{
-          registro+='<td><input type="text" class="form-control" name="examen_final" value="'+examen_final+'" id="examen_final" placeholder="Examen Final" disabled></td>';
+          registro+='<td><input type="text" class="form-control" name="examen_final" value="'+(examen_final==="0"?"/":examen_final)+'" id="examen_final" placeholder="Examen Final" disabled></td>';
 
         }
         registro+='</tr>';
@@ -376,7 +376,7 @@ function calificaciones(e) {
     e.style.color = "black";
     }else if (output === "/"){
       e.style.color = "black";
-    }else if (output >= 0 && output <= 5 ){
+    }else if (output >= 0 && output < 6 ){
       e.value= 5;
       e.style.color = "red";
     }else{

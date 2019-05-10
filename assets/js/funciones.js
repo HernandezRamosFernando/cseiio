@@ -397,7 +397,18 @@ document.getElementById("aspirante_documento_carta_extemporaneo_oculto").style =
 console.log(diff/(1000*60*60*24) );
 }
 
+
+function contador_tablas(){
+  var tabla_disponibles = document.getElementById("tabla");
+  document.getElementById("contador_alumnos_restantes").innerText = "Alumnos restantes: "+((tabla_disponibles.childNodes.length)-1);
+  var tabla_agregados = document.getElementById("tablagrupo");
+  console.log(tabla_agregados.childNodes.length);
+  document.getElementById("contador_alumnos_agregados").innerText = "Alumnos agregados: "+tabla_agregados.childNodes.length;
+}
+
 function cambiardetabla(e) {
+
+  
 
   var alumnos = document.getElementById("tabla_completa_grupo").children[2].children;
     var alumnos_json = new Array();
@@ -414,6 +425,8 @@ function cambiardetabla(e) {
       e.innerText = "";
       e.innerText = "Eliminar";
       e.setAttribute("onClick", "regresartabla(this);");
+      contador_tablas();
+      //console.log(tabla_disponibles.childNodes.length);--------------------------
     }
 
     else{
@@ -432,6 +445,7 @@ function regresartabla(e) {
   e.innerText = "";
   e.innerText = "Agregar";
   e.setAttribute("onClick", "cambiardetabla(this);");
+  contador_tablas();
 }
 
 function componente_grupo(e) {

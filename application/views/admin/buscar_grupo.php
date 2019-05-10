@@ -89,7 +89,7 @@
       <div class="row" id="alumnos_oculto" style="display:">
       <div class="col-md-6" style="display:" id="tabla_completa_alumnos">
         <div class="card card-body" >
-        <h3 id="contador_alumnos_restantes">Alumnos restantes:</h3>
+        <h3 id="contador_alumnos_restantes">Alumnos restantes: 0</h3>
           <table class="table table-hover" id="tabla_completa" style="width: 100%">
             <caption>Lista de todos los alumnos de este semestre sin grupo</caption>
             <thead class="thead-light">
@@ -252,6 +252,8 @@ function btnquitar_alumnos() {
         fila += '</tr>';
         document.getElementById("tabla").innerHTML += fila;
       });
+      //console.log(JSON.parse(xhr.response));
+      document.getElementById("contador_alumnos_restantes").innerText="Alumnos restantes: "+JSON.parse(xhr.response).length;
       //formato_tabla();
     };
     xhr.send(null);
@@ -261,6 +263,9 @@ function btnquitar_alumnos() {
   }
 
   function buscar_estudiantes_grupo() {
+    
+
+
     idgrupo=document.getElementById("grupos").value;
     console.log(idgrupo);
     document.getElementById("tablagrupo").innerHTML = "";
@@ -275,6 +280,7 @@ function btnquitar_alumnos() {
       }
       xhr.onload = function(){
         $('#div_carga').hide();
+
       JSON.parse(xhr.response).forEach(function (valor, indice) {
         //console.log(xhr.response);
         var fila = '<tr>';
@@ -290,6 +296,10 @@ function btnquitar_alumnos() {
         fila += '</tr>';
         document.getElementById("tablagrupo").innerHTML += fila;
       });
+      document.getElementById("contador_alumnos_agregados").innerText="Alumnos agregados: "+JSON.parse(xhr.response).length;
+      //console.log(JSON.parse(xhr.response).length);
+      //tabla_restantes = document.getElementById("tabla");
+      
       //formato_tabla();
     };
     xhr.send(null);

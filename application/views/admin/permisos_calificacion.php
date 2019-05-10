@@ -29,7 +29,7 @@
             <caption>Lista de los planteles</caption>
             <thead class="thead-light">
               <tr>
-                <th scope="col" class="col-md-4">Plantel</th>
+                <th scope="col" class="col-md-5">Plantel</th>
                 <th scope="col" class="col-md-1">Parcial 1</th>
                 <th scope="col" class="col-md-1">Parcial 2</th>
                 <th scope="col" class="col-md-1">Parcial 3</th>
@@ -235,7 +235,7 @@ function guardar(){
                }else{
                 Swal.fire({
                   type: 'error',
-                  text: 'Alumnos no no guardados'
+                  text: 'Datos no guardados'
                  });
                }
             }

@@ -117,7 +117,7 @@
       </a>
     </li>
     <li class="nav-item dropdown ">
-      <a class="nav-link nav-dropdown-toggle  <?php ($this->uri->segment(2)=='inscripcion') ? print 'bg-info text-light' : print null; ?>"
+      <a class="nav-link nav-dropdown-toggle  <?php ($this->uri->segment(2)=='control_permisos') ? print 'bg-info text-light' : print null; ?>"
       aria-expanded="false" data-toggle="collapse" href="#submenu2" role="button">
         <i class="material-icons">people_outline</i>
         <span>Control Y Permisos</span>

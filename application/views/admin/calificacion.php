@@ -107,6 +107,7 @@
                 <th scope="col" class="col-md-1">Parcial 1</th>
                 <th scope="col" class="col-md-1">Parcial 2</th>
                 <th scope="col" class="col-md-1">Parcial 3</th>
+                <th scope="col" class="col-md-1">Promedio Modular</th>
                 <th scope="col" class="col-md-1">Examen Final</th>
               </tr>
             </thead>
@@ -289,7 +290,7 @@ function cargar_materia(){
         }
         var segundo_parcial = valor.segundo_parcial!==null?valor.segundo_parcial:"";
         if(permisos_plantel.segundo_parcial==="1"){
-          registro+='<td><input type="text" class="form-control" name="segundo_parcial" value="'+segundo_parcial+'" id="segundo_parcial" placeholder="Segundo Parcial"></td>';
+          registro+='<td><input type="text" class="form-control" name="segundo_parcial" value="'+segundo_parcial+'" id="segundo_parcial" placeholder="Segundo Parcial" onchange="calificaciones(this);"></td>';
         }
 
         else{
@@ -298,14 +299,15 @@ function cargar_materia(){
         }
         var tercer_parcial = valor.tercer_parcial!==null?valor.tercer_parcial:"";
         if(permisos_plantel.tercer_parcial==="1"){
-          registro+='<td><input type="text" class="form-control" name="tercer_parcial" value="'+tercer_parcial+'" id="tercer_parcial" placeholder="Tercer Parcial"></td>';
+          registro+='<td><input type="text" class="form-control" name="tercer_parcial" value="'+tercer_parcial+'" id="tercer_parcial" placeholder="Tercer Parcial" onchange="calificaciones(this);"></td>';
         }
         else{
           registro+='<td><input type="text" class="form-control" name="tercer_parcial" value="'+tercer_parcial+'" id="tercer_parcial" placeholder="Tercer Parcial" disabled></td>';
         }
+        registro+='<td><input type="text" class="form-control" name="promedio_modular" value="'+tercer_parcial+'" id="promedio_modular" placeholder="Promedio Modular" onchange="calificaciones(this);" disabled></td>';
         var examen_final = valor.examen_final!==null?valor.examen_final:"";
         if(permisos_plantel.examen_final==="1"){
-          registro+='<td><input type="text" class="form-control" name="examen_final" value="'+examen_final+'" id="examen_final" placeholder="Examen Final" ></td>';
+          registro+='<td><input type="text" class="form-control" name="examen_final" value="'+examen_final+'" id="examen_final" placeholder="Examen Final" onchange="calificaciones(this);"></td>';
         }else{
           registro+='<td><input type="text" class="form-control" name="examen_final" value="'+examen_final+'" id="examen_final" placeholder="Examen Final" disabled></td>';
 
@@ -355,7 +357,33 @@ function cargar_materias(){
 
 
 function calificaciones(e) {
-    console.log(e.value);
+  var string= e.value.toString();
+
+  for (var i=0, output='', validos="0123456789./"; i<string.length; i++){
+       if (validos.indexOf(string.charAt(i)) != -1)
+          output += string.charAt(i)
+  }
+  console.log(output);
+  if(output != ""){
+   if(output >= 6 && output <= 10 ){
+    var valor=parseFloat(output);
+    valor = Math.round(valor); 
+    console.log(valor)
+    e.value= valor;
+    e.style.color = "black";
+    }else if (output === "/"){
+      e.style.color = "black";
+    }else if (output >= 0 && output <= 5 ){
+      e.value= 5;
+      e.style.color = "red";
+    }else{
+    console.log("valor no valido")
+    e.value = "";
+    }
+   }else{
+     e.value="";
+   }
+   //e.value=output;
     
   }
     </script>

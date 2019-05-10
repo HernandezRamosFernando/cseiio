@@ -122,10 +122,25 @@
         <i class="material-icons">people_outline</i>
         <span>Control Y Permisos</span>
       </a>
-      <div id="submenu2" class="<?php ($this->uri->segment(2)=='permisos_cal'||$this->uri->segment(2)==''||$this->uri->segment(2)==''||$this->uri->segment(2)=='' ||$this->uri->segment(2)=='') ? print 'null' : print 'collapse'; ?> sidebar-submenu">
+      <div id="submenu2" class="<?php ($this->uri->segment(2)=='permisos_cal'||$this->uri->segment(2)==''||$this->uri->segment(2)=='materias'||$this->uri->segment(2)=='componentes' ||$this->uri->segment(2)=='') ? print 'null' : print 'collapse'; ?> sidebar-submenu">
         <a class="nav-link <?php ($this->uri->segment(2)=='permisos_cal') ? print 'bg-info text-light' : print null; ?>" href="<?php echo base_url();?>index.php/c_vistas/permisos_cal">
         <i class="material-icons">person_add</i>
           <span class="font-weight-light">Permisos calificaciones
+          </span>
+        </a>
+        <a class="nav-link <?php ($this->uri->segment(2)=='') ? print 'bg-info text-light' : print null; ?>" href="<?php echo base_url();?>index.php/c_vistas/">
+        <i class="material-icons">person_add</i>
+          <span class="font-weight-light">Control Usuarios
+          </span>
+        </a>
+        <a class="nav-link <?php ($this->uri->segment(2)=='materias') ? print 'bg-info text-light' : print null; ?>" href="<?php echo base_url();?>index.php/c_vistas/materias">
+        <i class="material-icons">person_add</i>
+          <span class="font-weight-light">Control Materias
+          </span>
+        </a>
+        <a class="nav-link <?php ($this->uri->segment(2)=='componentes') ? print 'bg-info text-light' : print null; ?>" href="<?php echo base_url();?>index.php/c_vistas/componentes">
+        <i class="material-icons">person_add</i>
+          <span class="font-weight-light">Control Componentes
           </span>
         </a>
         <hr class="bg-info" style=" border: 3px solid ;">

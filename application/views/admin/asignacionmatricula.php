@@ -110,8 +110,14 @@ function buscar() {
     var plantel = document.getElementById("aspirante_plantel_busqueda").value;
     var query = 'curp=' + curp + '&plantel=' + plantel;
     xhr.open('GET', '<?php echo base_url();?>index.php/c_estudiante/estudiantes_sin_matricula?' + query, true);
-
-    xhr.onload = function () {
+    xhr.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      xhr.error = function (){
+        console.log("error de conexion");
+      }
+      xhr.onload = function(){
+        $('#div_carga').hide();
       //console.log(JSON.parse(xhr.response));
       ////console.log(query);
 
@@ -141,7 +147,7 @@ function buscar() {
         fila += '</td>';
 
         fila += '<td>';
-        fila += '<button class="btn btn-info" type="button" value="' + valor.no_control + '" onclick="asignar_matricula(this,\''+nombre_completo+'\')" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Generar Matrícula</button>';
+        fila += '<button class="btn btn-success" type="button" value="' + valor.no_control + '" onclick="asignar_matricula(this,\''+nombre_completo+'\')"  data-toggle="modal" data-target="#exampleModalCenter">Generar Matrícula</button>';
         fila += '</td>';
 
         fila += '</tr>';
@@ -157,7 +163,7 @@ function buscar() {
     document.getElementById('btn_buscar').setAttribute("onClick", "limpiar();");
     document.getElementById('btn_buscar').innerHTML = 'Limpiar Búsqueda';
     document.getElementById('btn_buscar').classList.remove('btn-success');
-    document.getElementById('btn_buscar').classList.add('btn-dark');
+    document.getElementById('btn_buscar').classList.add('btn-info');
 
   }
 
@@ -165,8 +171,14 @@ function buscar() {
   function asignar_matricula(e,e2) {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', '<?php echo base_url();?>index.php/c_estudiante/generar_matricula?no_control=' + e.value, true);
-
-    xhr.onload = function () {
+    xhr.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      xhr.error = function (){
+        console.log("error de conexion");
+      }
+      xhr.onload = function(){
+        $('#div_carga').hide();
       console.log(xhr.responseText);
 
       if (xhr.responseText.trim() !== "no") {

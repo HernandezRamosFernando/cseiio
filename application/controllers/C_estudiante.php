@@ -546,7 +546,7 @@ public function buscar_aspirantesxplantel(){
 
     $datos['escuela_procedencia'] =$this->M_escuela_procedencia->get_escuela($datos['estudiante']['estudiante'][0]->cct_escuela_procedencia);
 
-    if(!empty($datos['estudiante']['lengua_materna'][0]->id_lengua)){
+    if(isset($datos['estudiante']['lengua_materna'][0]->id_lengua)){
         $datos['nombre_lengua'] = $this->M_lengua->get_nombre_lengua($datos['estudiante']['lengua_materna'][0]->id_lengua)->nombre_lengua;
     $datos['lengua_lee'] =$this->valor_Lengua($datos['estudiante']['lengua_materna'][0]->porcentaje);
     $datos['lengua_habla'] =$this->valor_Lengua($datos['estudiante']['lengua_materna'][1]->porcentaje);
@@ -568,7 +568,7 @@ public function buscar_aspirantesxplantel(){
     
     
     $datos['lista_documentacion'] =$this->M_documentacion->get_documentacion_xnombrede_aspirante($no_control);
-    $this->load->view('contratos/formatofichainscripcion',$datos);
+    $this->load->view('reportes/formatofichainscripcion',$datos);
 }
 
 
@@ -590,29 +590,22 @@ public function generar_matricula(){
         $fecha_inscripcion=$datos->fecha_inscripcion;
         $semestre=$datos->semestre;
         $anio_ciclo=$this->M_estudiante->obtener_ciclo_escolar($fecha_inscripcion);
-        if($anio_ciclo!=null){
+        if($anio_ciclo!=null && $semestre<=6){
             $numconsecutivo=$this->M_estudiante->numero_consecutivo_matricula($anio_ciclo);
             $matricula=$anio_ciclo.$semestre.str_pad($numconsecutivo,4,'0',STR_PAD_LEFT);
-
-
             $datos = array(
             'no_control' => $no_control,
             'matricula' => $matricula,
             'fecha_asignacion_matricula' => date("Y-m-d")
             );
-
             echo $this->M_estudiante->insertar_matricula($datos);
-            
-
-
         }
         else{
             $matricula=null;
             echo "no";
         }
-
-        echo $semestre;  
 }
+    
 
 public function estudiantes_portabilidad(){
     $curp = $this->input->get('curp');

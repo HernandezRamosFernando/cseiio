@@ -279,6 +279,8 @@ function cargar_materia(){
   xhr.onload = function(){
     $('#div_carga').hide();
       console.log(JSON.parse(xhr.response));
+
+     
       JSON.parse(xhr.response).forEach(function(valor,indice){
         var registro = "<tr>";
         registro+='<td>'+valor.nombre+' '+valor.primer_apellido+' '+valor.segundo_apellido+'</td>';

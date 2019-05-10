@@ -301,21 +301,21 @@ $html_1 ='
 </tr>
 
 <tr>
-<td style="text-align: center;"><strong>APELLIDO PATERNO:</strong><BR> '.$estudiante['tutor'][0]->primer_apellido_tutor.'</td>
-<td style="text-align: center;"><strong>APELLIDO MATERNO:</strong><BR> '.strtoupper($estudiante['tutor'][0]->segundo_apellido_tutor).'</td>
-<td style="text-align: center;"><strong>NOMBRE(S):</strong><BR> '.strtoupper($estudiante['tutor'][0]->nombre_tutor).'</td>
+<td style="text-align: center;"><strong>APELLIDO PATERNO:</strong><BR> '.((isset($estudiante['tutor'][0]->primer_apellido_tutor))? strtoupper($estudiante['tutor'][0]->primer_apellido_tutor) : "").'</td>
+<td style="text-align: center;"><strong>APELLIDO MATERNO:</strong><BR> '.((isset($estudiante['tutor'][0]->segundo_apellido_tutor))? strtoupper($estudiante['tutor'][0]->segundo_apellido_tutor) : "").'</td>
+<td style="text-align: center;"><strong>NOMBRE(S):</strong><BR> '.((isset($estudiante['tutor'][0]->nombre_tutor))? strtoupper($estudiante['tutor'][0]->nombre_tutor) : "").'</td>
 </tr>
 
 
 <tr>
-<td ><strong>PARENTESCO:</strong><BR>'.$estudiante['tutor'][0]->parentesco.'</td>
-<td ><strong>OCUPACIÓN:</strong><BR>'.$estudiante['tutor'][0]->ocupacion.'</td>
-<td ><strong>TELÉFONO PARTICULAR:</strong><BR>'.$estudiante['tutor'][0]->telefono_tutor.'</td>
+<td ><strong>PARENTESCO:</strong><BR>'.((isset($estudiante['tutor'][0]->parentesco)) ? strtoupper($estudiante['tutor'][0]->parentesco) : "").'</td>
+<td ><strong>OCUPACIÓN:</strong><BR>'.((isset($estudiante['tutor'][0]->ocupacion)) ? strtoupper($estudiante['tutor'][0]->ocupacion) : "").'</td>
+<td ><strong>TELÉFONO PARTICULAR:</strong><BR>'.((isset($estudiante['tutor'][0]->telefono_tutor)) ? strtoupper($estudiante['tutor'][0]->telefono_tutor) : "").'</td>
 </tr>
 
 <tr>
-<td ><strong>TELÉFONO DE LA COMUNIDAD:</strong><BR>'.$estudiante['tutor'][0]->telefono_comunidad.'</td>
-<td colspan="2"><strong>FOLIO PROSPERA:</strong>'.$estudiante['tutor'][0]->folio_programa_social_tutor.'</td>
+<td ><strong>TELÉFONO DE LA COMUNIDAD:</strong><BR>'.((isset($estudiante['tutor'][0]->telefono_comunidad)) ? strtoupper($estudiante['tutor'][0]->telefono_comunidad) : "").'</td>
+<td colspan="2"><strong>FOLIO PROSPERA:</strong>'.((isset($estudiante['tutor'][0]->folio_programa_social_tutor)) ? strtoupper($estudiante['tutor'][0]->folio_programa_social_tutor) : "").'</td>
 </tr>
 
 </tbody>

@@ -144,7 +144,7 @@ function guardar(){
         primer_parcial:tabla.childNodes[i].childNodes[2].childNodes[0].value===""?null:tabla.childNodes[i].childNodes[2].childNodes[0].value,
         segundo_parcial:tabla.childNodes[i].childNodes[3].childNodes[0].value===""?null:tabla.childNodes[i].childNodes[3].childNodes[0].value,
         tercer_parcial:tabla.childNodes[i].childNodes[4].childNodes[0].value===""?null:tabla.childNodes[i].childNodes[4].childNodes[0].value,
-        examen_final:tabla.childNodes[i].childNodes[5].childNodes[0].value===""?null:tabla.childNodes[i].childNodes[5].childNodes[0].value
+        examen_final:tabla.childNodes[i].childNodes[6].childNodes[0].value===""?null:tabla.childNodes[i].childNodes[6].childNodes[0].value
       }
 
       datos.push(dato);
@@ -256,6 +256,16 @@ if(document.getElementById("plantel").value != '' && document.getElementById("gr
       });
   }
 }
+function limpiarbusqueda(){
+    document.getElementById("grupos").disabled = true;
+    document.getElementById("plantel").disabled = true;
+    document.getElementById("semestre_grupo").disabled = true;
+    document.getElementById("materias").disabled = true;
+    document.getElementById('crear_grupo').classList.remove('btn-success');
+    document.getElementById('crear_grupo').classList.add('btn-info');
+    document.getElementById('crear_grupo').setAttribute("onClick", "limpiar();");
+    document.getElementById('crear_grupo').innerHTML = 'Limpiar Búsqueda';
+  }
 
 
 
@@ -349,7 +359,7 @@ function cargar_materia(){
         if(permisos_plantel.examen_final==="1" && promedio >= 6 ){
           registro+='<td><input type="text" class="form-control" name="examen_final" value="'+(examen_final==="0"?"/":examen_final)+'" id="examen_final" placeholder="Examen Final" onchange="calificaciones(this);"></td>';
           }else if (permisos_plantel.examen_final==="1" && promedio < 6){
-              registro+='<td><input type="text" class="form-control" name="examen_final" value="/" id="examen_final" placeholder="Examen Final" onchange="calificaciones(this);" disabled></td>';
+              registro+='<td><input type="text" class="form-control" name="examen_final" value="'+(examen_final==="0"?"/":examen_final)+'" id="examen_final" placeholder="Examen Final" onchange="calificaciones(this);" disabled></td>';
             }else{
               registro+='<td><input type="text" class="form-control" name="examen_final" value="'+(examen_final==="0"?"/":examen_final)+'" id="examen_final" placeholder="Examen Final" disabled></td>';
             }
@@ -359,6 +369,7 @@ function cargar_materia(){
     }
 
     xhr.send(null);
+    limpiarbusqueda();
         //fin cargar inputs
       };
 

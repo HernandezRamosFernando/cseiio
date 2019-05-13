@@ -389,7 +389,7 @@
           <div class="col-md-4">
             <div class="form-label-group">
               <input type="text" 
-                title="La direccion tiene caracteres incorrectos"  class="form-control text-uppercase" required
+                title="La direccion tiene caracteres incorrectos"  class="form-control text-uppercase" 
                 id="aspirante_direccion_calle" name="aspirante_direccion_calle" 
                 placeholder="Calle y número" style="color: #237087">
               <label for="aspirante_direccion_calle">Calle y número</label>
@@ -400,8 +400,8 @@
             <div class="form-label-group">
               <input type="text"  title="La colonia tiene caracteres incorrectos"
                 class="form-control text-uppercase" id="aspirante_direccion_colonia"
-                name="aspirante_direccion_colonia" placeholder="Colonia" style="color: #237087">
-              <label for="aspirante_direccion_colonia">Colonia</label>
+                name="aspirante_direccion_colonia" placeholder="Colonia/Sección/Paraje/Barrio" style="color: #237087">
+              <label for="aspirante_direccion_colonia">Colonia/Sección/Paraje/Barrio</label>
             </div>
           </div>
 
@@ -567,7 +567,8 @@
                   <option value="0">Nada 0%</option>
                   <option value="25">Poco 25%</option>
                   <option value="50">Regular 50%</option>
-                  <option value="100">Bien 100%</option>
+                  <option value="75">Bien 75%</option>
+                  <option value="100">Muy bien 100%</option>
                 </select>
                 <span>Lee</span>
               </label>
@@ -579,7 +580,8 @@
                   <option value="0">Nada 0%</option>
                   <option value="25">Poco 25%</option>
                   <option value="50">Regular 50%</option>
-                  <option value="100">Bien 100%</option>
+                  <option value="75">Bien 75%</option>
+                  <option value="100">Muy bien 100%</option>
                 </select>
                 <span>Habla</span>
               </label>
@@ -591,7 +593,8 @@
                   <option value="0">Nada 0%</option>
                   <option value="25">Poco 25%</option>
                   <option value="50">Regular 50%</option>
-                  <option value="100">Bien 100%</option>
+                  <option value="75">Bien 75%</option>
+                  <option value="100">Muy bien 100%</option>
                 </select>
                 <span>Escribe</span>
               </label>
@@ -604,7 +607,8 @@
                   <option value="0">Nada 0%</option>
                   <option value="25">Poco 25%</option>
                   <option value="50">Regular 50%</option>
-                  <option value="100">Bien 100%</option>
+                  <option value="75">Bien 75%</option>
+                  <option value="100">Muy bien 100%</option>
                 </select>
                 <span>Entiende</span>
               </label>
@@ -617,7 +621,8 @@
                   <option value="0">Nada 0%</option>
                   <option value="25">Poco 25%</option>
                   <option value="50">Regular 50%</option>
-                  <option value="100">Bien 100%</option>
+                  <option value="75">Bien 75%</option>
+                  <option value="100">Muy bien 100%</option>
                 </select>
                 <span>Traduce</span>
               </label>
@@ -700,6 +705,8 @@
                 <span>Tipo de Subsistema</span>
               </label>
             </div>
+
+           
 
           </div>
 
@@ -835,18 +842,27 @@
             <div class="col-md-4">
               <label class="form-group has-float-label seltitulo">
                 <select class="form-control form-control-lg selcolor" name="aspirante_nuevasecundaria_tipo_subsistema" 
-                  id="aspirante_nuevasecundaria_tipo_subsistema">
+                  id="aspirante_nuevasecundaria_tipo_subsistema" onchange="otro_secundaria();">
                   <option value="">Seleccione un tipo</option>
                   <option value="TELESECUNDARIA">Telesecundaria</option>
                   <option value="GENERAL">General</option>
                   <option value="PARTICULAR">Particular</option>
                   <option value="TÉCNICA">Técnica</option>
                   <option value="COMUNITARIA">Comunitaria</option>
-                  <option value="OTRO">Otro</option>
+                  <option value="OTRO" >Otro</option>
                 </select>
                 <span>Tipo de Subsistema</span>
               </label>
             </div>
+
+            <div class="col-md-4" style="display: none" id="otro_secundaria_oculto">
+              <div class="form-label-group">
+                <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ. 0-9]+"
+                  title="El tipo de la secundaria contiene caracteres incorrectos" class="form-control text-uppercase"
+                  id="aspirante_secundaria_tipo_otro" name="aspirante_secundaria_tipo_otro"
+                  placeholder="Tipo de Secundaria" style="color: #237087">
+                <label for="aspirante_secundaria_tipo_otro">Nombre de Secundaria</label>
+              </div>
 
           </div>
 
@@ -920,6 +936,21 @@
 
 
 <script>
+
+function otro_secundaria(e) {
+  if (document.getElementById("aspirante_nuevasecundaria_tipo_subsistema").value === "otro") {
+    $("#otro_secundaria_oculto").show()
+    document.getElementById("aspirante_secundaria_tipo_otro").name = 'aspirante_nuevasecundaria_tipo_subsistema';
+    document.getElementById("aspirante_nuevasecundaria_tipo_subsistema").name = '';
+    document.getElementById("aspirante_secundaria_tipo_otro").required = true;
+  }
+  else {
+    $("#otro_secundaria_oculto").hide()
+    document.getElementById("aspirante_secundaria_tipo_otro").required = false;
+    document.getElementById("aspirante_secundaria_tipo_otro").value = '';
+  }
+}
+
   cargar_anio();
   function obtener_secundaria(e) {
     console.log(e);

@@ -1128,9 +1128,6 @@ function insertar_secundaria() {
         })
         $('#nuevasecundaria').modal('toggle');
         obtener_secundaria(document.getElementById("aspirante_secundaria_cct").value);
-        document.getElementById("selector_estado_aspirante").value = "";
-        document.getElementById("selector_municipio_aspirante").value = "";
-        document.getElementById("selector_localidad_aspirante").value = "";
       } else {
         Swal.fire({
           type: 'error',

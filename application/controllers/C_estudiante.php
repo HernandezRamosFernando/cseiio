@@ -49,9 +49,9 @@ class C_estudiante extends CI_Controller {
             'primer_apellido' => strtoupper($this->input->post('aspirante_apellido_paterno')),
             'segundo_apellido' => strtoupper($this->input->post('aspirante_apellido_materno')),
             //'fecha_nacimiento' => $this->input->post('aspirante_fecha_nacimiento'),
-            'fecha_nacimento' => $this->input->post('aspirante_anio_nacimiento').'-'.$this->input->post('aspirante_mes_nacimiento').'-'.(strlen($this->input->post('aspirante_dia_nacimiento'))==2?('0'.$this->input->post('aspirante_dia_nacimiento')):$this->input->post('aspirante_dia_nacimiento')),
+            'fecha_nacimiento' => $this->input->post('aspirante_anio_nacimiento').'-'.$this->input->post('aspirante_mes_nacimiento').'-'.(strlen($this->input->post('aspirante_dia_nacimiento'))==1?('0'.$this->input->post('aspirante_dia_nacimiento')):$this->input->post('aspirante_dia_nacimiento')),
             'sexo' => $this->input->post('aspirante_sexo'),
-            'curp' => $this->input->post('aspirante_curp'),
+            'curp' => strtoupper($this->input->post('aspirante_curp')),
             'fecha_registro' => strtoupper(date("Y-m-d")),
             'folio_programa_social' => $this->input->post('aspirante_programa_social'),
             'correo' => strtoupper($this->input->post('aspirante_correo')),
@@ -325,7 +325,7 @@ class C_estudiante extends CI_Controller {
         );
         
     
-        
+        //print_r($datos_estudiante);
 
     }
 

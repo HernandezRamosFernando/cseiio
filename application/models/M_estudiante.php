@@ -78,7 +78,7 @@ public function insertar_estudiante_nuevo_ingreso(
 
             if ($this->db->trans_status() === FALSE)
             {
-               return "no";
+               print_r($this->db->error());
              //return "no";
             }
                

@@ -629,7 +629,16 @@
 
 
   function semestres(){
-    console.log(document.getElementById("grupo_periodo").innerText);
+    if(document.getElementById("grupo_periodo").innerText==="AGOSTO-ENERO"){
+      document.getElementById("semestre_grupo").innerHTML='<option value="1">1</option>';
+      document.getElementById("semestre_grupo").innerHTML+='<option value="3">3</option>';
+      document.getElementById("semestre_grupo").innerHTML+='<option value="5">5</option>';
+    }
+    else{
+      document.getElementById("semestre_grupo").innerHTML='<option value="2">2</option>';
+      document.getElementById("semestre_grupo").innerHTML+='<option value="4">4</option>';
+      document.getElementById("semestre_grupo").innerHTML+='<option value="6">6</option>';
+    }
   }
 
   semestres();

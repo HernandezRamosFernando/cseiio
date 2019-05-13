@@ -400,16 +400,13 @@ console.log(diff/(1000*60*60*24) );
 
 function contador_tablas(){
   var tabla_disponibles = document.getElementById("tabla");
-  document.getElementById("contador_alumnos_restantes").innerText = "Alumnos restantes: "+((tabla_disponibles.childNodes.length)-1);
+  document.getElementById("contador_alumnos_restantes").innerText = "Alumnos restantes: "+tabla_disponibles.childElementCount;
   var tabla_agregados = document.getElementById("tablagrupo");
   console.log(tabla_agregados.childNodes.length);
-  document.getElementById("contador_alumnos_agregados").innerText = "Alumnos agregados: "+tabla_agregados.childNodes.length;
+  document.getElementById("contador_alumnos_agregados").innerText = "Alumnos agregados: "+tabla_agregados.childElementCount;
 }
 
 function cambiardetabla(e) {
-
-  
-
   var alumnos = document.getElementById("tabla_completa_grupo").children[2].children;
     var alumnos_json = new Array();
     for(let i=0;i<alumnos.length;i++){
@@ -459,3 +456,29 @@ function componente_grupo(e) {
     document.getElementById("seleccione_componente_oculto").style.display = "none";
   }
 }
+
+function get_dias(){
+
+  document.getElementById("aspirante_dia_nacimiento").innerHTML ="";
+  num_dias=new Date(document.getElementById("aspirante_anio_nacimiento").value,document.getElementById("aspirante_mes_nacimiento").value,0).getDate();
+  lista_dias="";
+  for(x=1;x<=num_dias;x++){
+      lista_dias+='<option value="'+x+'">'+x+'</opcion>';
+  }
+  document.getElementById("aspirante_dia_nacimiento").innerHTML = lista_dias;
+
+}
+
+function cargar_anio(){
+document.getElementById('aspirante_anio_nacimiento').innerHTML = "";
+  fecha = new Date();
+  anio_actual = fecha.getFullYear();
+  anio_actual = anio_actual - 13;
+  lista_fecha='';
+  for(i=anio_actual;i>=1910;i--){
+      lista_fecha+='<option value="'+i+'">'+i+'</opcion>';
+  }
+  document.getElementById('aspirante_anio_nacimiento').innerHTML =lista_fecha;
+  get_dias();
+}
+

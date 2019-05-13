@@ -65,15 +65,43 @@
 
         <div class="row">
 
-          <div class="col-md-4 ">
-            <div class="form-label-group ">
-                <input class="form-control" placeholder="" type="text" required onchange="validafecha(this);" style="color: #237087"
-                onkeyup="mascara(this,'/',patron,true)" maxlength="10" id="aspirante_fecha_nacimiento" name="aspirante_fecha_nacimiento">
-              <label for="aspirante_fecha_nacimiento">Fecha Nacimiento (dd/mm/aaaa)</label>
-              
-            </div>
+          <div class="col-md-2 ">
+          <label class="form-group has-float-label seltitulo">
+              <select class="form-control form-control-lg selcolor" id="aspirante_anio_nacimiento" required name="aspirante_anio_nacimiento" onclick="get_dias()">
+
+              </select>
+              <span>Año de nacimiento</span>
+            </label>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-2 ">
+          <label class="form-group has-float-label seltitulo">
+              <select class="form-control form-control-lg selcolor" id="aspirante_mes_nacimiento" required name="aspirante_mes_nacimiento" onclick="get_dias()">
+              <option value="1">Enero</option>
+            <option value="2">Febrero</option>
+            <option value="3">Marzo</option>
+            <option value="4">Abril</option>
+            <option value="5">Mayo</option>
+            <option value="6">Junio</option>
+            <option value="7">Julio</option>
+            <option value="8">Agosto</option>
+            <option value="9">Septiembre</option>
+            <option value="10">Octubre</option>
+            <option value="11">Noviembre</option>
+            <option value="12">Diciembre</option>
+              </select>
+              <span>Mes de nacimiento</span>
+            </label>
+          </div>
+          <div class="col-md-2 ">
+          <label class="form-group has-float-label seltitulo">
+              <select class="form-control form-control-lg selcolor" id="aspirante_dia_nacimiento" required name="aspirante_dia_nacimiento" onclick="get_dias('anio','mes','dia')">
+
+              </select>
+              <span>Dia de nacimiento</span>
+            </label>
+          </div>
+
+          <div class="col-md-2">
             <div class="form-label-group">
               <input type="number" title="El numero de telefono debe de ser a 13 digitos" style="color: #237087"
                 class="form-control text-uppercase" id="aspirante_telefono" name="aspirante_telefono"
@@ -892,6 +920,7 @@
 
 
 <script>
+  cargar_anio();
   function obtener_secundaria(e) {
     console.log(e);
     var xhr = new XMLHttpRequest();

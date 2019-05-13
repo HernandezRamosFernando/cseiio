@@ -27,7 +27,7 @@
               <div class="form-label-group">
                 <input type="text" disabled class="form-control" id="fecha_matricula"
                   placeholder="Fecha de la matrícula">
-                <label for="fecha_matricula">Fecha de la matrícula</label>
+                <label for="fecha_matricula">Serie de la matrícula</label>
               </div>
             </div>
 

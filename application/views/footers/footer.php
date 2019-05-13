@@ -20,8 +20,7 @@
 
   <script src="<?php echo base_url();?>assets/js/cambio_estado.js"></script>
   <script src="<?php echo base_url();?>assets/js/cambio_municipio.js"></script>
-  <script src="<?php echo base_url();?>assets/js/funciones.js"></script>
-
+ 
   <script>
             $("#sidebar-toggle").click(function(e) {
                 e.preventDefault();

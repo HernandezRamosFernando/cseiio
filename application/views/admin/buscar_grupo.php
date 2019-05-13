@@ -86,10 +86,10 @@
         </div>
 
 
-      <div class="row" id="alumnos_oculto" style="display:">
-      <div class="col-md-6" style="display:" id="tabla_completa_alumnos">
+      <div class="row" id="alumnos_oculto" style="display: none">
+      <div class="col-md-6" style="display: none" id="tabla_completa_alumnos">
         <div class="card card-body" >
-        <h3 id="contador_alumnos_restantes">Alumnos restantes: 0</h3>
+        <p class="h5" id="contador_alumnos_restantes">Alumnos restantes: 0</p>
           <table class="table table-hover" id="tabla_completa" style="width: 100%">
             <caption>Lista de todos los alumnos de este semestre sin grupo</caption>
             <thead class="thead-light">
@@ -107,7 +107,7 @@
 
       <div class="col-md-6" id="tabla_alumnos">
         <div class="card card-body">
-        <h3 id="contador_alumnos_agregados">Alumnos agregados:</h3>
+        <p class="h5" id="contador_alumnos_agregados">Alumnos agregados: 0</p>
           <table class="table table-hover" id="tabla_completa_grupo" style="width: 100%">
             <caption>Lista del Grupo creado</caption>
             <thead class="thead-light">
@@ -541,6 +541,7 @@ function btnquitar_alumnos() {
       alumnos_json.push(alumnos[i].children[1].innerText);
     }
     $(e).parents('tr').detach();
+    contador_tablas();
 
     console.log(alumnos_json);
   }

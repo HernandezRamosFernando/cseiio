@@ -26,6 +26,8 @@
             <!--<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
             
             <script src="<?php echo base_url();?>assets/vendor/jquery/jquery.min.js"></script>
+            <script src="<?php echo base_url();?>assets/js/funciones.js"></script>
+
 
             <title><?=$title?></title>
 

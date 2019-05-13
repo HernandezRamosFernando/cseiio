@@ -276,7 +276,7 @@
                   <label class="form-group has-float-label seltitulo">
                     <select class="form-control form-control-lg selcolor" name="tipo_sangre" required id="tipo_sangre">
                       <option value="">Seleccione una opción</option>
-                      <option value="No conoce">No conoce su tipo de sangre</option>
+                      <option value="NO CONOCE">No conoce su tipo de sangre</option>
                       <option value="A+">A+</option>
                       <option value="A-">A-</option>
                       <option value="B+">B+</option>
@@ -868,7 +868,8 @@
 
   }
 
-
+//-----------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------
   function cargar_datos_aspirante(e) {
     document.getElementById("selector_municipio_aspirante").innerHTML = "";
     document.getElementById("selector_localidad_aspirante").innerHTML = "";
@@ -894,13 +895,24 @@
       document.getElementById("aspirante_apellido_paterno").value = datos.estudiante[0].primer_apellido;
       document.getElementById("aspirante_apellido_materno").value = datos.estudiante[0].segundo_apellido;
       document.getElementById("aspirante_curp").value = datos.estudiante[0].curp;
-      document.getElementById("aspirante_fecha_nacimiento").value = datos.estudiante[0].fecha_nacimiento;
+
+      var anio = datos.estudiante[0].fecha_nacimiento.split("-")[0];
+      var mes = datos.estudiante[0].fecha_nacimiento.split("-")[1];
+      var dia = parseInt(datos.estudiante[0].fecha_nacimiento.split("-")[2]);
+      dia = dia.toString();
+      //console.log(anio,mes,dia.toString());
+      //$('#aspirante_anio_nacimiento option[value="'+anio+'"]')
+      document.getElementById("aspirante_anio_nacimiento").value = anio;
+      document.getElementById("aspirante_mes_nacimiento").value = mes;
+      document.getElementById("aspirante_dia_nacimiento").value = dia;
+      //document.getElementById("aspirante_fecha_nacimiento").value = datos.estudiante[0].fecha_nacimiento;
+      //-----------------------------------------
       document.getElementById("aspirante_telefono").value = datos.estudiante[0].telefono;
       document.getElementById("aspirante_correo").value = datos.estudiante[0].correo;
       document.getElementById("aspirante_sexo").value = datos.estudiante[0].sexo;
       document.getElementById("aspirante_lugar_nacimiento").value = datos.estudiante[0].lugar_nacimiento;
       //console.log(datos.expediente_medico);
-      document.getElementById("tipo_sangre").value = datos.expediente_medico[2].valor !== "" ? datos.expediente_medico[2].valor : "";
+      document.getElementById("tipo_sangre").value = datos.expediente_medico[2].valor;
       if (datos.expediente_medico[0].valor === "") {
         document.getElementById("aspirante_alergia_combo").value = "2";
         document.getElementById("a").style.display = "none";

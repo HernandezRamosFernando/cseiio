@@ -626,6 +626,13 @@
     document.getElementById('crear_grupo').setAttribute("onClick", "limpiar();");
     document.getElementById('crear_grupo').innerHTML = 'Limpiar Búsqueda';
   }
+
+
+  function semestres(){
+    console.log(document.getElementById("grupo_periodo").innerText);
+  }
+
+  semestres();
 </script>
 
 </html>

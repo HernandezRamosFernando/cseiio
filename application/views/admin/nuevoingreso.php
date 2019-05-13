@@ -188,7 +188,7 @@
           <div class="col-md-4" style="display:none" id="a" name="alergia_medicamento">
             <div class="form-label-group">
               <input type="text" pattern="[A-ZÁÉÍÓÚáéíóúa-z]+[ ]*[A-ZÁÉÍÓÚáéíóúa-z ]*" 
-                class="form-control text-uppercase" id="aspirante_alergia" name="aspirante_alergia "
+                class="form-control text-uppercase" id="aspirante_alergia" name="aspirante_alergia"
                 placeholder="Ingrese el medicamento" style="color: #237087">
               <label for="aspirante_alergia">Ingrese el medicamento</label>
             </div>

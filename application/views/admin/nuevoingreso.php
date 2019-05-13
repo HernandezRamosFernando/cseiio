@@ -94,7 +94,7 @@
           </div>
           <div class="col-md-2 ">
           <label class="form-group has-float-label seltitulo">
-              <select class="form-control form-control-lg selcolor" id="aspirante_dia_nacimiento" required name="aspirante_dia_nacimiento" onclick="get_dias('anio','mes','dia')">
+              <select class="form-control form-control-lg selcolor" id="aspirante_dia_nacimiento" required name="aspirante_dia_nacimiento">
 
               </select>
               <span>Dia de nacimiento</span>

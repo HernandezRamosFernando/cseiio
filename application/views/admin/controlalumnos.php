@@ -75,7 +75,6 @@
               <th scope="col" class="col-md-1">Fecha Ingreso</th>
               <th scope="col" class="col-md-1">Editar</th>
               <th scope="col" class="col-md-1">Imprimir</th>
-              <th scope="col" class="col-md-1">Eliminar</th>
             </tr>
           </thead>
 
@@ -93,30 +92,7 @@
 </div>
 <!-- /.content-wrapper -->
 
-<!-- Modal -->
-<div class="modal fade" id="modal_eliminar_alumno" tabindex="-1" role="dialog" aria-labelledby="modaleliminarTitle">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Confirmación de eliminación</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="container-fluid">
-          ¿Esta seguro que desea eliminar a este alumno? <br>
-          Una vez eliminado, el registro se perdera definitivamente del sistema.
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button type="button" id="btn-confirmacion" class="btn btn-danger" data-dismiss="modal"
-          onclick="confirmacion_eliminar()">Eliminar</button>
-      </div>
-    </div>
-  </div>
-</div>
+
 
 <!-- Modal -->
 <div class="modal fade" id="modalaspirante" tabindex="-1" role="dialog" aria-labelledby="modalaspiranteTitle"
@@ -475,7 +451,7 @@
             <div class="row">
               <div class="col-md-4">
                 <div class="form-label-group">
-                  <input type="text" required="required" title="La direccion tiene caracteres incorrectos"
+                  <input type="text"  title="La direccion tiene caracteres incorrectos"
                     class="form-control" id="aspirante_direccion_calle" name="aspirante_direccion_calle"
                     placeholder="Calle y número" style="color: #237087">
                   <label for="aspirante_direccion_calle">Calle y Número</label>
@@ -485,9 +461,9 @@
               <div class="col-md-4">
                 <div class="form-label-group">
                   <input type="text" title="La colonia tiene caracteres incorrectos" class="form-control"
-                    id="aspirante_direccion_colonia" name="aspirante_direccion_colonia" placeholder="Colonia"
+                    id="aspirante_direccion_colonia" name="aspirante_direccion_colonia" placeholder="Colonia/Sección/Paraje/Barrio"
                     style="color: #237087">
-                  <label for="aspirante_direccion_colonia">Colonia</label>
+                  <label for="aspirante_direccion_colonia">Colonia/Sección/Paraje/Barrio</label>
                 </div>
               </div>
 
@@ -672,7 +648,8 @@
                       <option value="0">Nada 0%</option>
                       <option value="25">Poco 25%</option>
                       <option value="50">Regular 50%</option>
-                      <option value="100">Bien 100%</option>
+                  <option value="75">Bien 75%</option>
+                  <option value="100">Muy bien 100%</option>
                     </select>
                     <span>Habla</span>
                   </label>
@@ -685,7 +662,8 @@
                       <option value="0">Nada 0%</option>
                       <option value="25">Poco 25%</option>
                       <option value="50">Regular 50%</option>
-                      <option value="100">Bien 100%</option>
+                  <option value="75">Bien 75%</option>
+                  <option value="100">Muy bien 100%</option>
                     </select>
                     <span>Escribe</span>
                   </label>
@@ -698,7 +676,8 @@
                       <option value="0">Nada 0%</option>
                       <option value="25">Poco 25%</option>
                       <option value="50">Regular 50%</option>
-                      <option value="100">Bien 100%</option>
+                  <option value="75">Bien 75%</option>
+                  <option value="100">Muy bien 100%</option>
                     </select>
                     <span>Entiende</span>
                   </label>
@@ -712,7 +691,8 @@
                       <option value="0">Nada 0%</option>
                       <option value="25">Poco 25%</option>
                       <option value="50">Regular 50%</option>
-                      <option value="100">Bien 100%</option>
+                  <option value="75">Bien 75%</option>
+                  <option value="100">Muy bien 100%</option>
                     </select>
                     <span>Traduce</span>
                   </label>
@@ -831,43 +811,6 @@
 
 <script>
   cargar_anio();
-
-
-  function confirmacion_eliminar() {
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', '<?php echo base_url();?>index.php/c_estudiante/delete_estudiante?no_control=' + document.getElementById("no_control_borrar").value, true);
-    console.log("este aspirante ha sido borrado " + document.getElementById("no_control_borrar").value);
-    xhr.onloadstart = function () {
-      $('#div_carga').show();
-    }
-    xhr.error = function () {
-      console.log("error de conexion");
-    }
-    xhr.onload = function () {
-      $('#div_carga').hide();
-      console.log(xhr.responseText);
-      if (xhr.responseText === "si") {
-        Swal.fire({
-          type: 'success',
-          title: 'Alumno eliminado correctamente',
-          showConfirmButton: false,
-          timer: 2500
-        })
-        $(boton).parents('tr').detach();
-
-      } else {
-        Swal.fire({
-          type: 'error',
-          title: 'Alumno no eliminado',
-          confirmButtonText: 'Cerrar'
-        })
-      }
-    };
-    xhr.send(null);
-
-
-  }
-
 
   function cargar_datos_aspirante(e) {
     document.getElementById("selector_municipio_aspirante").innerHTML = "";
@@ -1068,9 +1011,6 @@
         fila += '</td>';
         fila += '<td>';
         fila += '<a href="<?php echo base_url();?>index.php/C_estudiante/generar_formato_inscripcion?no_control=' + valor.no_control + '" class="btn btn-lg btn-block btn-info btn btn-primary" target="_blank">Imprimir</a>';
-        fila += '</td>';
-        fila += '<td class="">';
-        fila += '<button class="btn btn-lg btn-block btn-danger" type="button" value="' + valor.no_control + '" onclick="eliminar_aspirante(this)" data-toggle="modal" data-target="#modal_eliminar_alumno">Eliminar</button>';
         fila += '</td>';
         fila += '</tr>';
         document.getElementById("tabla").innerHTML += fila;

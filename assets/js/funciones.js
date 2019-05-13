@@ -334,14 +334,6 @@ function limpiar() {
 }
 
 
-function eliminar_aspirante(e) {
-  document.getElementById("no_control_borrar").value = e.value;
-  //document.getElementById("btn-confirmacion") = e;
-  //console.log(e);
-  boton = e;
-  //console.log(boton);
-}
-
 function formato_tabla() {
   $('#tabla_completa').DataTable({
     //"order": [[ 0, 'desc' ]],
@@ -494,4 +486,6 @@ document.getElementById('aspirante_anio_nacimiento').innerHTML = "";
   document.getElementById('aspirante_anio_nacimiento').innerHTML =lista_fecha;
   get_dias();
 }
+
+
 

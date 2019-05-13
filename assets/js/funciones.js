@@ -48,7 +48,8 @@ function generarCURP() {
     CURP[2] = $("#aspirante_apellido_materno").val().charAt(0).toUpperCase();
   }
   CURP[3] = $("#aspirante_nombre").val().charAt(0).toUpperCase();
-  CURP[4] = fecha_curp($("#aspirante_fecha_nacimiento").val());
+  CURP[4] = $("#aspirante_anio_nacimiento").val().substring(2,4)+$("#aspirante_mes_nacimiento").val()+($("#aspirante_dia_nacimiento").val().length===1?("0"+$("#aspirante_dia_nacimiento").val()):$("#aspirante_dia_nacimiento").val());
+
   CURP[5] = $("#aspirante_sexo").val().toUpperCase();
   CURP[6] = abreviacion[estados.indexOf($("#selector_estado_nacimiento_aspirante option:selected").text().toLowerCase())];
   CURP[7] = $("#aspirante_apellido_paterno").val().slice(1).replace(/[aeiou]/gi, "").charAt(0).toUpperCase();

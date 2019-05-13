@@ -102,7 +102,19 @@ function parentesco(e) {
   }
 }
 
-
+function otro_secundaria(e) {
+  if (document.getElementById("aspirante_nuevasecundaria_tipo_subsistema").value === "OTRO") {
+    $("#otro_secundaria_oculto").show()
+    document.getElementById("aspirante_secundaria_tipo_otro").name = 'aspirante_nuevasecundaria_tipo_subsistema';
+    document.getElementById("aspirante_nuevasecundaria_tipo_subsistema").name = '';
+    document.getElementById("aspirante_secundaria_tipo_otro").required = true;
+  }
+  else {
+    $("#otro_secundaria_oculto").hide()
+    document.getElementById("aspirante_secundaria_tipo_otro").required = false;
+    document.getElementById("aspirante_secundaria_tipo_otro").value = '';
+  }
+}
 
 
 function nacionalidad(e) {

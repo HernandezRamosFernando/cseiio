@@ -861,20 +861,22 @@
                   title="El tipo de la secundaria contiene caracteres incorrectos" class="form-control text-uppercase"
                   id="aspirante_secundaria_tipo_otro" name="aspirante_secundaria_tipo_otro"
                   placeholder="Tipo de Secundaria" style="color: #237087">
-                <label for="aspirante_secundaria_tipo_otro">Nombre de Secundaria</label>
+                <label for="aspirante_secundaria_tipo_otro">Tipo de Secundaria</label>
               </div>
+            </div>
 
           </div>
+          <br>
 
 
           <div class="row">
 
             <div class="col-md-4">
               <label class="form-group has-float-label seltitulo">
-                <select class="form-control form-control-lg selcolor"  name="aspirante_secundaria_estado"
-                  onChange="cambio_estado(selector_estado_secundaria,selector_municipio_secundaria,selector_localidad_secundaria)"
+                <select class="form-control form-control-lg selcolor"  name="selector_estado_secundaria"
+                onChange="cambio_estado(document.getElementById('selector_estado_secundaria'),document.getElementById('selector_municipio_secundaria'),document.getElementById('selector_localidad_secundaria'))"
                   id="selector_estado_secundaria">
-                  <option>Seleccione un estado</option>
+                  <option value ="">Seleccione un estado</option>
 
                   <?php
                               foreach ($estados as $estado)
@@ -891,8 +893,8 @@
 
             <div class="col-md-4">
               <label class="form-group has-float-label seltitulo">
-                <select class="form-control form-control-lg selcolor"  name="aspirante_secundaria_municipio"
-                  onChange="cambio_municipio(selector_municipio_secundaria,selector_localidad_secundaria)"
+                <select class="form-control form-control-lg selcolor"  name="selector_municipio_secundaria"
+                  onChange="cambio_municipio(document.getElementById('selector_municipio_secundaria'),document.getElementById('selector_localidad_secundaria'))"
                   id="selector_municipio_secundaria">
                   <option></option>
 
@@ -904,7 +906,7 @@
 
             <div class="col-md-4">
               <label class="form-group has-float-label seltitulo">
-                <select class="form-control form-control-lg selcolor"  name="aspirante_secundaria_localidad"
+                <select class="form-control form-control-lg selcolor"  name="selector_localidad_secundaria"
                   id="selector_localidad_secundaria">
                   <option></option>
 
@@ -937,19 +939,7 @@
 
 <script>
 
-function otro_secundaria(e) {
-  if (document.getElementById("aspirante_nuevasecundaria_tipo_subsistema").value === "otro") {
-    $("#otro_secundaria_oculto").show()
-    document.getElementById("aspirante_secundaria_tipo_otro").name = 'aspirante_nuevasecundaria_tipo_subsistema';
-    document.getElementById("aspirante_nuevasecundaria_tipo_subsistema").name = '';
-    document.getElementById("aspirante_secundaria_tipo_otro").required = true;
-  }
-  else {
-    $("#otro_secundaria_oculto").hide()
-    document.getElementById("aspirante_secundaria_tipo_otro").required = false;
-    document.getElementById("aspirante_secundaria_tipo_otro").value = '';
-  }
-}
+
 
   cargar_anio();
   function obtener_secundaria(e) {

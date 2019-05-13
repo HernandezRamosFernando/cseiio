@@ -1,5 +1,4 @@
 function cambio_estado(selector_estado,selector_municipio,selector_localidad){
-    //console.log(document.getElementById("selector_estado").value);
     let id_estado = selector_estado.value; 
     selector_municipio.innerHTML = "";
     selector_localidad.innerHTML = "";

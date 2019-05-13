@@ -133,7 +133,6 @@
         <div class="col-md-12" id="agregar_oculto" style="display: none">
         <button type="button" value="nuevo" onclick="enviar_formulario()" id="boton_agregar" class="btn btn-success btn-lg btn-block btn-guardar"  style="padding: 1rem"> Guardar cambios</button> 
         </div>
-
     </div>
   </div>
   <!-- /.content-wrapper -->

@@ -131,17 +131,17 @@
         <div class="row">
             <div class="col-md-6">
               <div class="form-label-group">
-                <input type="text"  class="form-control" id="fecha_inicio" onkeyup="mascara(this,'/',patron,true)" onchange="validafechanormal(this)"
+                <input type="date"  class="form-control" id="fecha_inicio"  
                   placeholder="Fecha de inicio">
-                <label for="fecha_inicio">Fecha de inicio (dd/mm/aaaa)</label>
+                <label for="fecha_inicio">Fecha de inicio </label>
               </div>
             </div>
 
             <div class="col-md-6">
               <div class="form-label-group">
-                <input type="text"  class="form-control" id="fecha_fin" onkeyup="mascara(this,'/',patron,true)" onchange="validafechanormal(this)"
+                <input type="date"  class="form-control" id="fecha_fin"  
                   placeholder="Fecha de finalización ">
-                <label for="fecha_fin">Fecha de finalización (dd/mm/aaaa)</label>
+                <label for="fecha_fin">Fecha de finalización </label>
               </div>
             </div>
 

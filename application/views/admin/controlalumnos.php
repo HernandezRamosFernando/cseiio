@@ -35,8 +35,8 @@
 
             <div class="col-md-8">
               <label class="form-group has-float-label seltitulo">
-                <select class="form-control form-control-lg selcolor" required="required" id="aspirante_plantel_busqueda"
-                  name="aspirante_plantel">
+                <select class="form-control form-control-lg selcolor" required="required"
+                  id="aspirante_plantel_busqueda" name="aspirante_plantel">
                   <option value="">Buscar en todos los planteles</option>
 
                   <?php
@@ -93,31 +93,31 @@
 </div>
 <!-- /.content-wrapper -->
 
-  <!-- Modal -->
-  <div class="modal fade" id="modal_eliminar_alumno" tabindex="-1" role="dialog" aria-labelledby="modaleliminarTitle">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Confirmación de eliminación</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="container-fluid">
-            ¿Esta seguro que desea eliminar a este alumno? <br>
-            Una vez eliminado, el registro se perdera definitivamente del sistema.
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-          <button type="button" id="btn-confirmacion" class="btn btn-danger" data-dismiss="modal"
-            onclick="confirmacion_eliminar()">Eliminar</button>
+<!-- Modal -->
+<div class="modal fade" id="modal_eliminar_alumno" tabindex="-1" role="dialog" aria-labelledby="modaleliminarTitle">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirmación de eliminación</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          ¿Esta seguro que desea eliminar a este alumno? <br>
+          Una vez eliminado, el registro se perdera definitivamente del sistema.
         </div>
       </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" id="btn-confirmacion" class="btn btn-danger" data-dismiss="modal"
+          onclick="confirmacion_eliminar()">Eliminar</button>
+      </div>
     </div>
+  </div>
 </div>
-        
+
 <!-- Modal -->
 <div class="modal fade" id="modalaspirante" tabindex="-1" role="dialog" aria-labelledby="modalaspiranteTitle"
   aria-hidden="true">
@@ -175,16 +175,47 @@
 
             <div class="row">
 
-              <div class="col-md-4 ">
-                <div class="form-label-group ">
-                  <input class="form-control" placeholder="" type="text" required onchange="validafecha(this);"
-                    onkeyup="mascara(this,'/',patron,true)" maxlength="10" id="aspirante_fecha_nacimiento" style="color: #237087"
-                    name="aspirante_fecha_nacimiento">
-                  <label for="aspirante_fecha_nacimiento">Fecha Nacimiento: dd/mm/aaaa</label>
 
-                </div>
+              <div class="col-md-2 ">
+                <label class="form-group has-float-label seltitulo">
+                  <select class="form-control form-control-lg selcolor" id="aspirante_anio_nacimiento" required
+                    name="aspirante_anio_nacimiento" onclick="get_dias()">
+
+                  </select>
+                  <span>Año de nacimiento</span>
+                </label>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-2 ">
+                <label class="form-group has-float-label seltitulo">
+                  <select class="form-control form-control-lg selcolor" id="aspirante_mes_nacimiento" required
+                    name="aspirante_mes_nacimiento" onclick="get_dias()">
+                    <option value="01">Enero</option>
+                    <option value="02">Febrero</option>
+                    <option value="03">Marzo</option>
+                    <option value="04">Abril</option>
+                    <option value="05">Mayo</option>
+                    <option value="06">Junio</option>
+                    <option value="07">Julio</option>
+                    <option value="08">Agosto</option>
+                    <option value="09">Septiembre</option>
+                    <option value="10">Octubre</option>
+                    <option value="11">Noviembre</option>
+                    <option value="12">Diciembre</option>
+                  </select>
+                  <span>Mes de nacimiento</span>
+                </label>
+              </div>
+              <div class="col-md-2 ">
+                <label class="form-group has-float-label seltitulo">
+                  <select class="form-control form-control-lg selcolor" id="aspirante_dia_nacimiento" required
+                    name="aspirante_dia_nacimiento" onclick="get_dias('anio','mes','dia')">
+
+                  </select>
+                  <span>Dia de nacimiento</span>
+                </label>
+              </div>
+
+              <div class="col-md-2">
                 <div class="form-label-group">
                   <input type="number" title="El numero de telefono debe de ser a 13 digitos"
                     class="form-control text-uppercase" id="aspirante_telefono" name="aspirante_telefono"
@@ -214,7 +245,8 @@
             <div class="row">
               <div class="col-md-4">
                 <label class="form-group has-float-label seltitulo">
-                  <select class="form-control form-control-lg selcolor" id="aspirante_sexo" required name="aspirante_sexo">
+                  <select class="form-control form-control-lg selcolor" id="aspirante_sexo" required
+                    name="aspirante_sexo">
                     <option value="">Seleccione</option>
                     <option value="H">Hombre</option>
                     <option value="M">Mujer</option>
@@ -361,7 +393,7 @@
               <div class="col-md-6">
                 <div class="form-label-group">
                   <a name="" id="" class="btn btn-outline-success btn-lg btn-block btn-responsive"
-                    href="https://www.gob.mx/curp/" target="_blank" role="button" >
+                    href="https://www.gob.mx/curp/" target="_blank" role="button">
                     ¿No cuenta con curp? Buscar aquí</a>
                 </div>
               </div>
@@ -453,7 +485,8 @@
               <div class="col-md-4">
                 <div class="form-label-group">
                   <input type="text" title="La colonia tiene caracteres incorrectos" class="form-control"
-                    id="aspirante_direccion_colonia" name="aspirante_direccion_colonia" placeholder="Colonia" style="color: #237087">
+                    id="aspirante_direccion_colonia" name="aspirante_direccion_colonia" placeholder="Colonia"
+                    style="color: #237087">
                   <label for="aspirante_direccion_colonia">Colonia</label>
                 </div>
               </div>
@@ -487,7 +520,8 @@
                 <div class="form-label-group">
                   <input type="text" pattern="[A-Za-z]+[ ]*[A-Za-z ]*" onchange="valida(this)" required
                     title="Introduzca solo letras" class="form-control text-uppercase" id="aspirante_tutor_nombre"
-                    onchange="valida(this)" name="aspirante_tutor_nombre" placeholder="Nombre Completo" style="color: #237087">
+                    onchange="valida(this)" name="aspirante_tutor_nombre" placeholder="Nombre Completo"
+                    style="color: #237087">
                   <label for="aspirante_tutor_nombre">Nombre de Tutor</label>
                 </div>
               </div>
@@ -495,7 +529,8 @@
                 <div class="form-label-group">
                   <input type="text" pattern="[A-Za-z]+[ ]*[A-Za-z ]*" onchange="valida(this)" required
                     title="Introduzca solo letras" class="form-control text-uppercase" id="aspirante_tutor_apellido"
-                    onchange="valida(this)" name="aspirante_tutor_apellido" placeholder="Primer Apellido" style="color: #237087">
+                    onchange="valida(this)" name="aspirante_tutor_apellido" placeholder="Primer Apellido"
+                    style="color: #237087">
                   <label for="aspirante_tutor_apellido">Primer Apellido</label>
                 </div>
               </div>
@@ -503,7 +538,8 @@
                 <div class="form-label-group">
                   <input type="text" pattern="[A-Za-z]+[ ]?[A-Za-z]*" onchange="valida(this)"
                     title="Introduzca solo letras" class="form-control text-uppercase" onchange="valida(this)"
-                    id="aspirante_tutor_apellidodos" name="aspirante_tutor_apellidodos" placeholder="Segundo Apellido" style="color: #237087">
+                    id="aspirante_tutor_apellidodos" name="aspirante_tutor_apellidodos" placeholder="Segundo Apellido"
+                    style="color: #237087">
                   <label for="aspirante_tutor_apellidodos">Segundo Apellido</label>
                 </div>
               </div>
@@ -559,7 +595,8 @@
                   <div class="form-label-group">
                     <input type="text" pattern="[0-9]{10}"
                       title="El numero de telefono debe de ser a 13 digitos con lada" class="form-control"
-                      id="aspirante_tutor_telefono" name="aspirante_tutor_telefono" placeholder="Teléfono particular" style="color: #237087">
+                      id="aspirante_tutor_telefono" name="aspirante_tutor_telefono" placeholder="Teléfono particular"
+                      style="color: #237087">
                     <label for="aspirante_tutor_telefono">Teléfono particular</label>
                   </div>
                 </div>
@@ -788,25 +825,26 @@
   </div>
 </div>
 
-                    
+
 <input type="text" style="display:none" id="no_control_borrar">
 
 
 <script>
+  cargar_anio();
 
 
   function confirmacion_eliminar() {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', '<?php echo base_url();?>index.php/c_estudiante/delete_estudiante?no_control=' + document.getElementById("no_control_borrar").value, true);
     console.log("este aspirante ha sido borrado " + document.getElementById("no_control_borrar").value);
-    xhr.onloadstart = function(){
-        $('#div_carga').show();
-      }
-      xhr.error = function (){
-        console.log("error de conexion");
-      }
-      xhr.onload = function(){
-        $('#div_carga').hide();
+    xhr.onloadstart = function () {
+      $('#div_carga').show();
+    }
+    xhr.error = function () {
+      console.log("error de conexion");
+    }
+    xhr.onload = function () {
+      $('#div_carga').hide();
       console.log(xhr.responseText);
       if (xhr.responseText === "si") {
         Swal.fire({
@@ -830,7 +868,7 @@
 
   }
 
-  
+
   function cargar_datos_aspirante(e) {
     document.getElementById("selector_municipio_aspirante").innerHTML = "";
     document.getElementById("selector_localidad_aspirante").innerHTML = "";
@@ -839,14 +877,14 @@
     document.getElementById("aspirante_discapacidad").value = "";
     var xhr = new XMLHttpRequest();
     xhr.open('GET', '<?php echo base_url();?>index.php/c_estudiante/get_estudiante?no_control=' + e.value, true);
-    xhr.onloadstart = function(){
-        $('#div_carga').show();
-      }
-      xhr.error = function (){
-        console.log("error de conexion");
-      }
-      xhr.onload = function(){
-        $('#div_carga').hide();
+    xhr.onloadstart = function () {
+      $('#div_carga').show();
+    }
+    xhr.error = function () {
+      console.log("error de conexion");
+    }
+    xhr.onload = function () {
+      $('#div_carga').hide();
       let datos = JSON.parse(xhr.response);
       console.log(datos);
       document.getElementById("aspirante_no_control").value = datos.estudiante[0].no_control;
@@ -890,14 +928,14 @@
       var respuesta;
       let direccion = new XMLHttpRequest();
       direccion.open('GET', '<?php echo base_url();?>index.php/c_localidad/get_estado_municipio_localidad_id_localidad?id_localidad=' + datos.estudiante[0].id_localidad, true);
-      
-      direccion.onloadstart = function(){
+
+      direccion.onloadstart = function () {
         $('#div_carga').show();
       }
-      direccion.error = function (){
+      direccion.error = function () {
         console.log("error de conexion");
       }
-      direccion.onload = function(){
+      direccion.onload = function () {
         $('#div_carga').hide();
         var respuesta = JSON.parse(direccion.response);
         //cargar municipios
@@ -996,14 +1034,14 @@
     var plantel = document.getElementById("aspirante_plantel_busqueda").value;
     var query = 'curp=' + curp + '&cct_plantel=' + plantel;
     xhr.open('GET', '<?php echo base_url();?>index.php/c_estudiante/get_estudiantes_curp_plantel?' + query, true);
-    xhr.onloadstart = function(){
-        $('#div_carga').show();
-      }
-      xhr.error = function (){
-        console.log("error de conexion");
-      }
-      xhr.onload = function(){
-        $('#div_carga').hide();
+    xhr.onloadstart = function () {
+      $('#div_carga').show();
+    }
+    xhr.error = function () {
+      console.log("error de conexion");
+    }
+    xhr.onload = function () {
+      $('#div_carga').hide();
       JSON.parse(xhr.response).forEach(function (valor, indice) {
         //console.log(valor);
         var fila = '<tr>';
@@ -1052,14 +1090,14 @@
     console.log(e);
     var xhr = new XMLHttpRequest();
     xhr.open('GET', '<?php echo base_url();?>index.php/c_escuela_procedencia/get_escuela?cct=' + e, true);
-    xhr.onloadstart = function(){
-        $('#div_carga').show();
-      }
-      xhr.error = function (){
-        console.log("error de conexion");
-      }
-      xhr.onload = function(){
-        $('#div_carga').hide();
+    xhr.onloadstart = function () {
+      $('#div_carga').show();
+    }
+    xhr.error = function () {
+      console.log("error de conexion");
+    }
+    xhr.onload = function () {
+      $('#div_carga').hide();
       //console.log(JSON.parse(xhr.response));
       let secundaria = JSON.parse(xhr.response);
       //console.log(xhr.responseText.length);
@@ -1120,12 +1158,12 @@
 
 
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.onloadstart = function(){
-        $('#div_carga').show();
-      }
-      xhr.error = function (){
-        console.log("error de conexion");
-      }
+    xhr.onloadstart = function () {
+      $('#div_carga').show();
+    }
+    xhr.error = function () {
+      console.log("error de conexion");
+    }
 
     xhr.onreadystatechange = function () {
       if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
@@ -1183,12 +1221,12 @@
     var formdata = new FormData(form);
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "<?php echo base_url();?>index.php/c_estudiante/update_estudiante", true);
-    xhr.onloadstart = function(){
-        $('#div_carga').show();
-      }
-      xhr.error = function (){
-        console.log("error de conexion");
-      }
+    xhr.onloadstart = function () {
+      $('#div_carga').show();
+    }
+    xhr.error = function () {
+      console.log("error de conexion");
+    }
     xhr.onreadystatechange = function () {
       if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
         $('#div_carga').hide();

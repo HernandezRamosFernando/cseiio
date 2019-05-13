@@ -77,15 +77,15 @@
           <div class="col-md-2 ">
           <label class="form-group has-float-label seltitulo">
               <select class="form-control form-control-lg selcolor" id="aspirante_mes_nacimiento" required name="aspirante_mes_nacimiento" onclick="get_dias()">
-              <option value="1">Enero</option>
-            <option value="2">Febrero</option>
-            <option value="3">Marzo</option>
-            <option value="4">Abril</option>
-            <option value="5">Mayo</option>
-            <option value="6">Junio</option>
-            <option value="7">Julio</option>
-            <option value="8">Agosto</option>
-            <option value="9">Septiembre</option>
+              <option value="01">Enero</option>
+            <option value="02">Febrero</option>
+            <option value="03">Marzo</option>
+            <option value="04">Abril</option>
+            <option value="05">Mayo</option>
+            <option value="06">Junio</option>
+            <option value="07">Julio</option>
+            <option value="08">Agosto</option>
+            <option value="09">Septiembre</option>
             <option value="10">Octubre</option>
             <option value="11">Noviembre</option>
             <option value="12">Diciembre</option>
@@ -397,7 +397,7 @@
         <div class="col-md-4">
           <div class="form-label-group">
             <input type="text" 
-              title="La direccion tiene caracteres incorrectos"  class="form-control text-uppercase" required
+              title="La direccion tiene caracteres incorrectos"  class="form-control text-uppercase" 
               id="aspirante_direccion_calle" name="aspirante_direccion_calle"  style="color: #237087"
               placeholder="Calle y número">
             <label for="aspirante_direccion_calle">Calle y número</label>
@@ -408,8 +408,8 @@
           <div class="form-label-group">
             <input type="text"  title="La colonia tiene caracteres incorrectos"
               class="form-control text-uppercase" id="aspirante_direccion_colonia"
-              name="aspirante_direccion_colonia" placeholder="Colonia" style="color: #237087">
-            <label for="aspirante_direccion_colonia">Colonia</label>
+              name="aspirante_direccion_colonia" placeholder="Colonia/Sección/Paraje/Barrio" style="color: #237087">
+            <label for="aspirante_direccion_colonia">Colonia/Sección/Paraje/Barrio</label>
           </div>
         </div>
 
@@ -575,7 +575,8 @@
                 <option value="0">Nada 0%</option>
                 <option value="25">Poco 25%</option>
                 <option value="50">Regular 50%</option>
-                <option value="100">Bien 100%</option>
+                  <option value="75">Bien 75%</option>
+                  <option value="100">Muy bien 100%</option>
               </select>
               <span>Lee</span>
             </label>
@@ -587,7 +588,8 @@
                 <option value="0">Nada 0%</option>
                 <option value="25">Poco 25%</option>
                 <option value="50">Regular 50%</option>
-                <option value="100">Bien 100%</option>
+                  <option value="75">Bien 75%</option>
+                  <option value="100">Muy bien 100%</option>
               </select>
               <span>Habla</span>
             </label>
@@ -599,7 +601,8 @@
                 <option value="0">Nada 0%</option>
                 <option value="25">Poco 25%</option>
                 <option value="50">Regular 50%</option>
-                <option value="100">Bien 100%</option>
+                  <option value="75">Bien 75%</option>
+                  <option value="100">Muy bien 100%</option>
               </select>
               <span>Escribe</span>
             </label>
@@ -612,7 +615,8 @@
                 <option value="0">Nada 0%</option>
                 <option value="25">Poco 25%</option>
                 <option value="50">Regular 50%</option>
-                <option value="100">Bien 100%</option>
+                  <option value="75">Bien 75%</option>
+                  <option value="100">Muy bien 100%</option>
               </select>
               <span>Entiende</span>
             </label>
@@ -625,7 +629,8 @@
                 <option value="0">Nada 0%</option>
                 <option value="25">Poco 25%</option>
                 <option value="50">Regular 50%</option>
-                <option value="100">Bien 100%</option>
+                  <option value="75">Bien 75%</option>
+                  <option value="100">Muy bien 100%</option>
               </select>
               <span>Traduce</span>
             </label>
@@ -863,7 +868,7 @@ aria-hidden="true">
           <div class="col-md-4">
             <label class="form-group has-float-label seltitulo">
               <select class="form-control form-control-lg selcolor" name="aspirante_nuevasecundaria_tipo_subsistema" 
-                id="aspirante_nuevasecundaria_tipo_subsistema">
+                  id="aspirante_nuevasecundaria_tipo_subsistema" onchange="otro_secundaria();">
                 <option value="">Seleccione un tipo</option>
                 <option value="TELESECUNDARIA">Educación Profesional Técnica</option>
                 <option value="GENERAL">Bachillerato General</option>
@@ -874,16 +879,27 @@ aria-hidden="true">
             </label>
           </div>
 
-        </div>
+          <div class="col-md-4" style="display: none" id="otro_secundaria_oculto">
+              <div class="form-label-group">
+                <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ. 0-9]+"
+                  title="El tipo de la secundaria contiene caracteres incorrectos" class="form-control text-uppercase"
+                  id="aspirante_secundaria_tipo_otro" name="aspirante_secundaria_tipo_otro"
+                  placeholder="Tipo de Bachillerato" style="color: #237087">
+                <label for="aspirante_secundaria_tipo_otro">Tipo de Bachillerato</label>
+              </div>
+            </div>
+          
 
+        </div>
+        <br>
 
         <div class="row">
 
           <div class="col-md-4">
             <label class="form-group has-float-label seltitulo">
-              <select class="form-control form-control-lg selcolor"  name="aspirante_secundaria_estado"
-                onChange="cambio_estado(selector_estado_secundaria,selector_municipio_secundaria,selector_localidad_secundaria)"
-                id="selector_estado_secundaria">
+              <select class="form-control form-control-lg selcolor"  name="selector_estado_secundaria"
+              onChange="cambio_estado(document.getElementById('selector_estado_secundaria'),document.getElementById('selector_municipio_secundaria'),document.getElementById('selector_localidad_secundaria'))"
+                  id="selector_estado_secundaria">
                 <option>Seleccione un estado</option>
 
                 <?php
@@ -902,8 +918,8 @@ aria-hidden="true">
           <div class="col-md-4">
             <label class="form-group has-float-label seltitulo">
               <select class="form-control form-control-lg selcolor"  name="aspirante_secundaria_municipio"
-                onChange="cambio_municipio(selector_municipio_secundaria,selector_localidad_secundaria)"
-                id="selector_municipio_secundaria">
+              onChange="cambio_municipio(document.getElementById('selector_municipio_secundaria'),document.getElementById('selector_localidad_secundaria'))"
+                  id="selector_municipio_secundaria">
                 <option></option>
 
 
@@ -1112,9 +1128,6 @@ function insertar_secundaria() {
         })
         $('#nuevasecundaria').modal('toggle');
         obtener_secundaria(document.getElementById("aspirante_secundaria_cct").value);
-        document.getElementById("selector_estado_aspirante").value = "";
-        document.getElementById("selector_municipio_aspirante").value = "";
-        document.getElementById("selector_localidad_aspirante").value = "";
       } else {
         Swal.fire({
           type: 'error',

@@ -138,7 +138,7 @@
         fila += '</td>';
 
         fila += '<td>';
-        fila += valor.semestre;
+        fila += valor.semestre_en_curso;
         fila += '</td>';
 
         fila += '<td>';

@@ -171,7 +171,7 @@
             <div class="row">
               <div class="col-md-4">
                 <div class="form-label-group">
-                  <input type="text" class="form-control text-uppercase" id="num_folio" name="num_folio" placeholder="Número de folio" required="required" pattern="([B|b]{1})([I|i]{1})([C|c]{1})([-]{1})([E|e]{1})([ ]{1})([0-9]{4})">
+                  <input type="text" class="form-control text-uppercase" id="num_folio" name="num_folio" placeholder="Número de folio" required="required" pattern="([B|b]{1})([I|i]{1})([C|c]{1})([-]{1})([E|e]{1})([ ]{1})([0-9]{4})" readonly="">
                   <label for="num_folio">Num. Folio</label>
                 </div>
               </div>
@@ -320,7 +320,7 @@
             <div class="row">
               <div class="col-md-4">
                 <div class="form-label-group">
-                  <input type="text" class="form-control text-uppercase" id="mnum_folio" name="mnum_folio" placeholder="Número de folio" required="required" pattern="([B|b]{1})([I|i]{1})([C|c]{1})([-]{1})([E|e]{1})([ ]{1})([0-9]{4})">
+                  <input type="text" class="form-control text-uppercase" id="mnum_folio" name="mnum_folio" placeholder="Número de folio" required="required" pattern="([B|b]{1})([I|i]{1})([C|c]{1})([-]{1})([E|e]{1})([ ]{1})([0-9]{4})" readonly="">
                   <label for="mnum_folio">Num. Folio</label>
                 </div>
               </div>
@@ -400,6 +400,40 @@
 <!-- Modal -->
 
 
+
+
+
+
+<!-- Modal para ingresar el número de inicio consecutivo de los números de resolución de equivalencia-->
+<div class="modal fade" id="modal_ingresar_numero" tabindex="-1" role="dialog" aria-labelledby="modalnumeroTitle" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Ingresar número de equivalencia</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="cerrar_modal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form id="form_numero_equivalencia">
+      <div class="modal-body">
+        <div class="form-group">
+            <div class="row">
+              <div class="col-md-12">
+                <input type="number" name="numero_ingresar" id="numero_ingresar" class="form-control" title="ingrese un número" placeholder="Ingrese un número entero para inicializar" required="">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cerrar_modal()">Cerrar</button>
+        <button type="input" class="btn btn-primary">Aceptar</button>
+      </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+
 <script>
 
 
@@ -436,7 +470,7 @@
         fila += '</td>';
 
         fila += '<td>';
-        fila += valor.semestre;
+        fila += valor.semestre_en_curso;
         fila += '</td>';
 
         fila += '<td>';
@@ -574,6 +608,25 @@ function editar_datos_resolucion(no_control) {
 
  function cargar_datos_resolucion(no_control) {
  	document.getElementById('generar_equivalencia').reset();
+
+  var xhr_num_resolucion = new XMLHttpRequest();
+            xhr_num_resolucion.open('GET', '<?php echo base_url();?>index.php/C_estudiante/get_num_resolucion', true);
+            xhr_num_resolucion.onload = function () {
+                 
+                  if(xhr_num_resolucion.responseText !==''){
+                      
+                      document.getElementById('num_folio').value=xhr_num_resolucion.responseText;
+                  }
+                  else{
+                     
+                      $('#modal_ingresar_numero').modal('show');
+
+                  }
+
+            };
+
+            xhr_num_resolucion.send(null);
+
 
     console.log(no_control);
     var xhr = new XMLHttpRequest();
@@ -731,8 +784,36 @@ var form_2 = document.getElementById("editar_equivalencia");
   }
 
 
+
+function str_pad(str, pad_length, pad_string, pad_type){
+  var len = pad_length - str.length;
+  if(len < 0) return str;
+  var pad = new Array(len + 1).join(pad_string);
+  if(pad_type == "STR_PAD_LEFT") return pad + str;
+  return str + pad;
+}
+
+
+  var form_3 = document.getElementById("form_numero_equivalencia");
+  form_3.onsubmit = function (e) {
+    e.preventDefault();
+    numero=document.getElementById("numero_ingresar").value;
+    formato='BIC-E '+str_pad(numero,4, "0", "STR_PAD_LEFT");
+    document.getElementById("num_folio").value=formato;
+    $("#modal_ingresar_numero").modal('hide');
+    
+  }
+
+
+
 function borrar_formato_tabla(){
       $("#tabla_completa").dataTable().fnDestroy();
+      
+    }
+
+
+function cerrar_modal(){
+      $("#generar_resolucion_equivalencia").modal('hide');
       
     }
 

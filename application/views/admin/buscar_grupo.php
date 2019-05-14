@@ -87,10 +87,10 @@
 
 
       <div class="row" id="alumnos_oculto" style="display: none">
-      <div class="col-md-6" style="display: none" id="tabla_completa_alumnos">
-        <div class="card card-body" >
+      <div class="col-md-6" style="display: none" id="tabla_completa_alumnos" style="width: 100%;  overflow: scroll">
+        <div class="card card-body" style="width: 100%; overflow: scroll">
         <p class="h5" id="contador_alumnos_restantes">Alumnos restantes: 0</p>
-          <table class="table table-hover" id="tabla_completa" style="width: 100%">
+          <table class="table table-hover" id="tabla_completa" style="width: 100%; overflow: scroll">
             <caption>Lista de todos los alumnos de este semestre sin grupo</caption>
             <thead class="thead-light">
               <tr>
@@ -106,9 +106,9 @@
       </div>
 
       <div class="col-md-6" id="tabla_alumnos">
-        <div class="card card-body">
+        <div class="card card-body" style="width: 100%; overflow: scroll">
         <p class="h5" id="contador_alumnos_agregados">Alumnos agregados: 0</p>
-          <table class="table table-hover" id="tabla_completa_grupo" style="width: 100%">
+          <table class="table table-hover" id="tabla_completa_grupo" style="width: 100%; overflow: scroll">
             <caption>Lista del Grupo creado</caption>
             <thead class="thead-light">
               <tr>

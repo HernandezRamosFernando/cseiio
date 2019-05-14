@@ -589,7 +589,7 @@ public function generar_matricula(){
     $mensaje='';
     $datos= $this->M_estudiante->obtener_fecha_inscripcion_semestre($no_control);
         $fecha_inscripcion=$datos->fecha_inscripcion;
-        $semestre=$datos->semestre;
+        $semestre=$datos->semestre_en_curso;
         $anio_ciclo=$this->M_estudiante->obtener_ciclo_escolar($fecha_inscripcion);
         if($anio_ciclo!=null ){
             $numconsecutivo=$this->M_estudiante->numero_consecutivo_matricula($anio_ciclo);
@@ -749,6 +749,21 @@ public function editar_resolucion_equivalencia(){
 
 
     echo $this->M_resolucion_equivalencia->editar_resolucion($datos,$no_control);
+}
+
+public function get_num_resolucion(){
+    $resultado='';
+    $numero=$this->M_resolucion_equivalencia->num_resolucion();
+    if($numero==NULL){
+        $resultado='';
+    }
+    else{
+        $numero=$numero+1;
+        $resultado=$datos['num_resolucion']='BIC-E '.str_pad($numero,4,'0',STR_PAD_LEFT);
+    }
+
+    echo $resultado;
+    
 }
 
 }

@@ -75,11 +75,7 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-<<<<<<< HEAD
 	'hostname' => '192.168.1.115',
-=======
-	'hostname' => '127.0.0.1',
->>>>>>> 9fb57180f391fe8fbf9cdcc9315f7ebebbe9a38e
 	'username' => 'admin',
 	'password' => 'Aspirador1',
 	//'hostname' => '127.0.0.1',

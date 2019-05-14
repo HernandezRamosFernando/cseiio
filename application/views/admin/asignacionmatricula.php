@@ -36,13 +36,13 @@
                 <select class="form-control form-control-lg selcolor" required="required" id="aspirante_plantel_busqueda"
                   name="aspirante_plantel">
                   <option value="">Buscar en todos los planteles</option>
-
                   <?php
-                    foreach ($planteles as $plantel)
-                    {
-                      echo '<option value="'.$plantel->cct.'">'.$plantel->nombre_plantel.'</option>';
-                    }
-                    ?>
+                                        foreach ($planteles as $plantel)
+                                        {
+                                          echo '<option value="'.$plantel->cct_plantel.'">'.$plantel->nombre_plantel.' ----- CCT: '.$plantel->cct_plantel.'</option>';
+                                        }
+                                        ?>
+
 
                 </select>
                 <span>Plantel</span>
@@ -109,6 +109,7 @@ function buscar() {
     var curp = document.getElementById("aspirante_curp_busqueda").value;
     var plantel = document.getElementById("aspirante_plantel_busqueda").value;
     var query = 'curp=' + curp + '&plantel=' + plantel;
+    console.log(query);
     xhr.open('GET', '<?php echo base_url();?>index.php/c_estudiante/estudiantes_sin_matricula?' + query, true);
     xhr.onloadstart = function(){
         $('#div_carga').show();
@@ -118,9 +119,6 @@ function buscar() {
       }
       xhr.onload = function(){
         $('#div_carga').hide();
-      //console.log(JSON.parse(xhr.response));
-      ////console.log(query);
-
 
       JSON.parse(xhr.response).forEach(function (valor, indice) {
         var fila = '<tr>';

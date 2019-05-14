@@ -34,23 +34,35 @@ class MYPDF extends TCPDF {
 
 	//Page header
 	public function Header() {
+		
 		// Logo
-		//$image_file =base_url().'plantilla/img/cabecera.png';
-	//	$this->Image($image_file, 120, 10, 80, '', 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
+		$image_file =base_url().'assets/img/cabecera.png';
+		$this->Image($image_file, 110, 10, 90, '', 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
 
-		//$image_file =base_url().'plantilla/img/ladoderecho.png';
-	//	$this->Image($image_file, 190, 50, 15, '', 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
+		$image_file =base_url().'assets/img/ladoderecho.png';
+		$this->Image($image_file, 190, 50, 15, '', 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
+
+
 		// Set font
-		$this->SetFont('helvetica', 'B', 10);
-		// Title
-		$this->Cell(0, 10, '<< Colegio Superior para la Educación Integral Intercultural de Oaxaca >>', 0, false, 'C', 0, '', 0, false, 'M', 'M');
+		$this->SetFont('helvetica', 'B',6);
+
+
+		$image_file =base_url().'assets/img/fondocseiio.png';
+		$this->Image($image_file,60,90,86,'', 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
+
+
+		// Titulo
+		$this->SetXY(25,31);
+		$this->Cell(0,0, '"2019, AÑO POR LA ERRADICACIÓN DE LA VIOLENCIA CONTRA LA MUJER"', 0, false, 'C', 0, '', 0, false, 'M', 'M');
+
+		
 	}
 
 	// Page footer
 	public function Footer() {
 		// Position at 15 mm from bottom
-		//$image_file =base_url().'plantilla/img/pie.png';
-		//$this->Image($image_file, 150,275, 50, '', 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
+		$image_file =base_url().'assets/img/pie.png';
+		$this->Image($image_file, 135,250, 65, '', 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
 		$this->SetY(-15);
 		// Set font
 		$this->SetFont('helvetica', 'I', 8);
@@ -64,7 +76,7 @@ class MYPDF extends TCPDF {
 }
 
 // create new PDF document
-$pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+$pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT,"LETTER", true, 'UTF-8', false);
 
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
@@ -83,7 +95,7 @@ $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
 $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 
 // set margins
-$pdf->SetMargins(20,16,19);
+$pdf->SetMargins(20,33,25);
 $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
 $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 
@@ -102,7 +114,7 @@ if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
 // ---------------------------------------------------------
 
 // set font
-$pdf->SetFont('helvetica','', 10);
+$pdf->SetFont('helvetica','', 9);
 
 // add a page
 $pdf->AddPage();
@@ -198,7 +210,7 @@ $html_1 ='
 
 
 <tr>
-<td> <strong>SEMESTRE AL QUE INGRESA: </strong>'.$estudiante['estudiante'][0]->semestre.'</td>
+<td> <strong>SEMESTRE AL QUE INGRESA: </strong>'.$estudiante['estudiante'][0]->semestre_en_curso.'</td>
 <td> <strong>SITUACIÓN DE INGRESO: </strong>'.$estudiante['estudiante'][0]->tipo_ingreso.'</td>
 </tr>
 
@@ -428,6 +440,16 @@ if($columna!=0 ){
 $html_3='
 </tbody>
 </table>
+
+
+
+<br>
+<br>
+<br>
+<br>
+<span style="text-align:center; font-weight:bold;text-decoration: underline">'.strtoupper($estudiante['estudiante'][0]->nombre).' '.strtoupper($estudiante['estudiante'][0]->primer_apellido).' '.strtoupper($estudiante['estudiante'][0]->segundo_apellido).'</span><br>
+<span style="text-align:center; font-weight:bold">
+FIRMA DEL ASPIRANTE</span>
 
 ';
 

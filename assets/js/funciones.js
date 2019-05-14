@@ -195,10 +195,14 @@ function valida(e) {
 
 function checkacta() {
   if (document.getElementById("aspirante_documento_acta_nacimiento").checked) {
-    document.getElementById("aspirante_fecha_nacimiento_registro").required = true;
+    document.getElementById("aspirante_anio_nacimiento_registro").required = true;
+    document.getElementById("aspirante_mes_nacimiento_registro").required = true;
+    document.getElementById("aspirante_dia_nacimiento_registro").required = true;
 
   } else {
-    document.getElementById("aspirante_fecha_nacimiento_registro").required = false;
+    document.getElementById("aspirante_anio_nacimiento_registro").required = false;
+    document.getElementById("aspirante_mes_nacimiento_registro").required = false;
+    document.getElementById("aspirante_dia_nacimiento_registro").required = false;
   }
 }
 
@@ -381,13 +385,20 @@ function reverseFecha(str) {
   return joinArray; // "olleh"
 }
 function validaracta(){
-  var fechaInicio = reverseFecha(document.getElementById("aspirante_fecha_nacimiento").value);
+  var fechaInicio = document.getElementById("aspirante_anio_nacimiento").value+"," +document.getElementById("aspirante_mes_nacimiento").value;
+  if(document.getElementById("aspirante_dia_nacimiento").value.length =! 1){
+  fechaInicio = fechaInicio + "," + document.getElementById("aspirante_dia_nacimiento").value
+  }else{
+    fechaInicio = fechaInicio + "," + 0 + document.getElementById("aspirante_dia_nacimiento").value
+  }
+  var fechaFin = document.getElementById("aspirante_anio_nacimiento_registro").value + "," +document.getElementById("aspirante_mes_nacimiento_registro").value;
+  if(document.getElementById("aspirante_dia_nacimiento_registro").value.length =! 1){
+  fechaFin = fechaFin + "," + document.getElementById("aspirante_dia_nacimiento_registro").value
+  }else{
+    fechaFin = fechaFin + "," + 0 + document.getElementById("aspirante_dia_nacimiento_registro").value
+  }
   fechaInicio=new Date(fechaInicio).getTime();
-var fechaFin = reverseFecha(document.getElementById("aspirante_fecha_nacimiento_registro").value);
 fechaFin = new Date(fechaFin).getTime();
-
-console.log(fechaInicio);
-console.log(fechaFin);
 
 var diff = fechaFin - fechaInicio;
 var resultado = diff/(1000*60*60*24);
@@ -463,7 +474,6 @@ function componente_grupo(e) {
 }
 
 function get_dias(){
-
   document.getElementById("aspirante_dia_nacimiento").innerHTML ="";
   num_dias=new Date(document.getElementById("aspirante_anio_nacimiento").value,document.getElementById("aspirante_mes_nacimiento").value,0).getDate();
   lista_dias="";
@@ -471,7 +481,6 @@ function get_dias(){
       lista_dias+='<option value="'+x+'">'+x+'</opcion>';
   }
   document.getElementById("aspirante_dia_nacimiento").innerHTML = lista_dias;
-
 }
 
 function cargar_anio(){
@@ -486,6 +495,30 @@ document.getElementById('aspirante_anio_nacimiento').innerHTML = "";
   document.getElementById('aspirante_anio_nacimiento').innerHTML =lista_fecha;
   get_dias();
 }
+
+function get_dias_registro(){
+  document.getElementById("aspirante_dia_nacimiento_registro").innerHTML ="";
+  num_dias=new Date(document.getElementById("aspirante_anio_nacimiento_registro").value,document.getElementById("aspirante_mes_nacimiento_registro").value,0).getDate();
+  lista_dias="";
+  lista_dias+='<option value="">Seleccione uno</opcion>';
+  for(x=1;x<=num_dias;x++){
+      lista_dias+='<option value="'+x+'">'+x+'</opcion>';
+  }
+  document.getElementById("aspirante_dia_nacimiento_registro").innerHTML = lista_dias;
+}
+
+function cargar_anio_registro(){
+  document.getElementById('aspirante_anio_nacimiento_registro').innerHTML = "";
+    fecha = new Date();
+    anio_actual = fecha.getFullYear();
+    lista_fecha='';
+    lista_fecha+='<option value="">Seleccione uno</opcion>';
+    for(i=anio_actual;i>=1910;i--){
+        lista_fecha+='<option value="'+i+'">'+i+'</opcion>';
+    }
+    document.getElementById('aspirante_anio_nacimiento_registro').innerHTML =lista_fecha;
+    get_dias_registro();
+  }
 
 
 

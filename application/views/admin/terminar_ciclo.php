@@ -54,9 +54,9 @@
 
             <div class="col-md-4">
               <div class="form-label-group">
-              <input class="form-control" placeholder="Fecha de fin de periodo" type="date" name="fecha_fin"
+              <input class="form-control" placeholder="Fecha de finalización de periodo" type="date" name="fecha_fin"
                 id="fecha_fin"  style="color: #237087">
-              <label for="fecha_fin">Fecha de inicio de periodo</label>
+              <label for="fecha_fin">Fecha de finalización de periodo</label>
               </div>
             </div>
   </div>

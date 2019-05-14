@@ -189,9 +189,7 @@
      </div>
    </form>
     <br>
-        <div class="col-md-12" id="agregar_oculto" style="display: none">
-        <button type="button" value="nuevo" onclick="enviar_formulario()" id="boton_agregar" class="btn btn-success btn-lg btn-block btn-guardar" style="padding: 1rem"> Guardar Alumnos</button>
-        </div>
+        
         
         <div class="card" style="overflow:scroll; display: " id="tabla_oculto_asesor" >
       <div class="card-body">
@@ -217,7 +215,9 @@
     <div class="form-group" id="boton_oculto_asesor" style="display: ">
       <div class="row">
         <div class="col-md-12">
-          <button class="btn btn-success btn-lg btn-block btn-guardar" style="padding: 1rem" onclick="guardar()">Guardar</button>
+        <div class="col-md-12" id="agregar_oculto" style="display: none">
+        <button type="button" onclick="enviar_formulario()" value="nuevo" id="boton_agregar" class="btn btn-success btn-lg btn-block btn-guardar" style="padding: 1rem"> Guardar</button>
+        </div>
         </div>
       </div>
     </div>
@@ -429,6 +429,8 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
 
   function alerta_grupo(){
 
+   
+
     if(parseInt(document.getElementById("semestre_grupo").value)<5){
       var id_grupo = document.getElementById("plantel").value+document.getElementById("semestre_grupo").value+document.getElementById("grupo_ciclo_escolar").value+document.getElementById("grupo_periodo").value+document.getElementById("grupo_nombre").value.toUpperCase();
     }
@@ -460,6 +462,67 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
             confirmButtonText:'Agregar'
           });
           buscar();
+
+          ///////////////////////////// cargar asesores
+
+          //cargar select de asesores de ese plantel
+            var asesores = new XMLHttpRequest();
+            asesores.open('GET', '<?php echo base_url();?>index.php/c_asesor/get_asesores_plantel?plantel='+document.getElementById("plantel").value, true);
+
+            asesores.onload = function () {
+
+         //cargar las materias en la tabla-----------------------------------------------
+         var semestre = parseInt(document.getElementById("semestre_grupo").value);
+          if(semestre<5){
+            //api que regrese esas materias
+            var materias = new XMLHttpRequest();
+            materias.open('GET', '/cseiio/c_materias/materias_semestre?semestre='+semestre, true);
+
+            materias.onload = function () {
+              document.getElementById("tabla_asesor").innerHTML="";
+              var tabla =  document.getElementById("tabla_asesor");
+
+              JSON.parse(materias.response).forEach(function(valor,indice){
+                var fila = "<tr>";
+                fila+="<td>"+valor.unidad_contenido.toUpperCase()+"</td>";
+                fila+="<td>"+valor.clave+"</td>";
+                fila+="<td><select>"+asesores.response+"</select><td>";
+                fila+="</tr>";
+                tabla.innerHTML+=fila;
+              });
+            };
+
+            materias.send(null);
+          }
+
+          else{
+            //api que regresa las materias de especialidad
+            var materias = new XMLHttpRequest();
+            materias.open('GET', '/cseiio/c_materias/get_materias_semestre_componente?semestre='+semestre+"&componente="+document.getElementById("seleccione_componente").value.split("-")[0], true);
+
+            materias.onload = function () {
+              document.getElementById("tabla_asesor").innerHTML="";
+              var tabla =  document.getElementById("tabla_asesor");
+
+              JSON.parse(materias.response).forEach(function(valor,indice){
+                var fila = "<tr>";
+                fila+="<td>"+valor.unidad_contenido.toUpperCase()+"</td>";
+                fila+="<td>"+valor.clave+"</td>";
+                fila+="<td><select>"+asesores.response+"</select><td>";
+                fila+="</tr>";
+                tabla.innerHTML+=fila;
+              });
+            };
+
+            materias.send(null);
+          }
+
+    //----------------------------------------------------------------------------------------
+            };
+
+            asesores.send(null);
+
+          ///////////////////////////
         }
         else if(35-JSON.parse(xhr.response)[0].total_alumnos>0){
           swalWithBootstrapButtons.fire({
@@ -473,6 +536,8 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
                   buscar();
                   buscar_estudiantes_grupo(id_grupo);
                   document.getElementById("boton_agregar").value="existente";
+                  //oculta la tabla de asesores porque el grupo ya existe
+                  document.getElementById("tabla_oculto_asesor").style.display="none";
               }
           });
         }
@@ -481,6 +546,8 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
             type: 'warning',
             text: 'El grupo ya existe y se encuentra lleno'
           });
+          //oculta la tabla de asesores porque el grupo ya existe
+          document.getElementById("tabla_oculto_asesor").style.display="none";
         }
       };
       xhr.send(null);
@@ -519,11 +586,25 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
       alumnos_json.push(alumnos[i].children[1].innerText);
     }
 
-    var datos = {
-      grupo:datos_grupo,
-      alumnos:alumnos_json
+    //---------------------------sacar los asesores de cada materia
+    var tabla_asesores = document.getElementById("tabla_asesor");
+    console.log(tabla_asesores);
+    var asesores = new Array();
+    for(let i=0;i<tabla_asesores.childNodes.length;i++){
+      var materia_asesor = {materia:tabla_asesores.childNodes[i].childNodes[1].innerText,
+                            asesor:tabla_asesores.childNodes[i].childNodes[2].childNodes[0].value};
+          asesores.push(materia_asesor);
     }
 
+    //---------------------------
+
+    var datos = {
+      grupo:datos_grupo,
+      alumnos:alumnos_json,
+      asesores_materia:asesores
+    };
+
+    
     var xhr = new XMLHttpRequest();
       xhr.open("POST", '<?php echo base_url();?>index.php/c_acreditacion/agregar_grupo', true);
       //Send the proper header information along with the request
@@ -562,7 +643,11 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
           }
       }
       xhr.send(JSON.stringify(datos));
+      
     }
+
+
+
     else{
       var tabla = document.getElementById("tabla_completa_grupo");
       var filas = tabla.children[2].children;

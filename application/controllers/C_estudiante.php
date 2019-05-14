@@ -312,6 +312,24 @@ class C_estudiante extends CI_Controller {
 
             }
 
+            $check = $this->input->post('aspirante_documento_carta_extemporaneo');
+
+            if($check=="8"){
+                $datos_estudiante_documentos['aspirante_documento_carta_extemporaneo'] = array(
+                    'id_documento' => 8,
+                    'entregado' => 1,
+                    'Estudiante_no_control' => $no_control
+                );
+            }
+
+            else if($check==""){
+                $datos_estudiante_documentos['aspirante_documento_carta_extemporaneo'] = array(
+                    'id_documento' => 8,
+                    'entregado' => 0,
+                    'Estudiante_no_control' => $no_control
+                );
+            }
+
            
 
        
@@ -325,7 +343,8 @@ class C_estudiante extends CI_Controller {
         );
         
     
-        //print_r($datos_estudiante);
+        //print_r($datos_estudiante_documentos['aspirante_documento_carta_extemporaneo']);
+       // print $check;
 
     }
 

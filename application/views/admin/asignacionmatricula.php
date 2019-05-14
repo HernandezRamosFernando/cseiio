@@ -33,8 +33,8 @@
 
             <div class="col-md-8">
               <label class="form-group has-float-label seltitulo">
-                <select class="form-control form-control-lg selcolor" required="required" id="aspirante_plantel_busqueda"
-                  name="aspirante_plantel">
+                <select class="form-control form-control-lg selcolor" required="required"
+                  id="aspirante_plantel_busqueda" name="aspirante_plantel">
                   <option value="">Buscar en todos los planteles</option>
                   <?php
                                         foreach ($planteles as $plantel)
@@ -101,7 +101,7 @@
 
 <script>
 
-function buscar() {
+  function buscar() {
     document.getElementById("aspirante_plantel_busqueda").disabled = true;
     document.getElementById("aspirante_curp_busqueda").disabled = true;
     document.getElementById("tabla").innerHTML = "";
@@ -111,25 +111,26 @@ function buscar() {
     var query = 'curp=' + curp + '&plantel=' + plantel;
     console.log(query);
     xhr.open('GET', '<?php echo base_url();?>index.php/c_estudiante/estudiantes_sin_matricula?' + query, true);
-    xhr.onloadstart = function(){
-        $('#div_carga').show();
-      }
-      xhr.error = function (){
-        console.log("error de conexion");
-      }
-      xhr.onload = function(){
-        $('#div_carga').hide();
+    xhr.onloadstart = function () {
+      $('#div_carga').show();
+    }
+    xhr.error = function () {
+      console.log("error de conexion");
+    }
+    xhr.onload = function () {
+      $('#div_carga').hide();
 
       JSON.parse(xhr.response).forEach(function (valor, indice) {
         var fila = '<tr>';
 
         fila += '<td>';
-        var nombre_completo=valor.nombre + " " + valor.primer_apellido + " " + valor.segundo_apellido;
+        var nombre_completo = valor.nombre + " " + valor.primer_apellido + " " + valor.segundo_apellido;
         fila += nombre_completo;
         fila += '</td>';
 
         fila += '<td>';
-        fila += valor.curp;
+        var curp = valor.curp
+        fila += curp;
         fila += '</td>';
 
         fila += '<td>';
@@ -145,7 +146,7 @@ function buscar() {
         fila += '</td>';
 
         fila += '<td>';
-        fila += '<button class="btn btn-success" type="button" value="' + valor.no_control + '" onclick="asignar_matricula(this,\''+nombre_completo+'\')"  data-toggle="modal" data-target="#exampleModalCenter">Generar Matrícula</button>';
+        fila += '<button class="btn btn-success" type="button" value="' + valor.no_control + '" onclick="asignar_matricula(this,\'' + nombre_completo + '\', \'' + curp + '\')"  data-toggle="modal" data-target="#exampleModalCenter">Generar Matrícula</button>';
         fila += '</td>';
 
         fila += '</tr>';
@@ -166,35 +167,126 @@ function buscar() {
   }
 
 
-  function asignar_matricula(e,e2) {
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', '<?php echo base_url();?>index.php/c_estudiante/generar_matricula?no_control=' + e.value, true);
-    xhr.onloadstart = function(){
-        $('#div_carga').show();
-      }
-      xhr.error = function (){
-        console.log("error de conexion");
-      }
-      xhr.onload = function(){
-        $('#div_carga').hide();
-      console.log(xhr.responseText);
+  function asignar_matricula(e, e2, curp) {
+    console.log(e)
 
-      if (xhr.responseText.trim() !== "no") {
-        Swal.fire({
-          type: 'success',
-          title: 'Matrícula generada correctamente<br>' + xhr.responseText+'<br> asignada a:<br>'+e2
-        })
-        $(e).parents('tr').detach();
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '<?php echo base_url();?>index.php/c_documentacion/get_estudiantes_falta_documentacion_base?curp=' + curp, true);
+    xhr.onloadstart = function () {
+      $('#div_carga').show();
+    }
+    xhr.error = function () {
+      console.log("error de conexion");
+    }
+    xhr.onload = function () {
+      $('#div_carga').hide();
+      console.log(xhr.responseText.length);
+      if (xhr.responseText.length <= 2) {
+        console.log("se puede generar matricula");
+        var xhrmatricula = new XMLHttpRequest();
+        xhrmatricula.open('GET', '<?php echo base_url();?>index.php/c_estudiante/generar_matricula?no_control=' + e.value, true);
+        xhrmatricula.onloadstart = function () {
+          $('#div_carga').show();
+        }
+        xhrmatricula.error = function () {
+          console.log("error de conexion");
+        }
+        xhrmatricula.onload = function () {
+          $('#div_carga').hide();
+          console.log(xhrmatricula.responseText);
+
+          if (xhrmatricula.responseText.trim() !== "no") {
+            Swal.fire({
+              type: 'success',
+              title: 'Matrícula generada correctamente<br>' + xhrmatricula.responseText + '<br> asignada a:<br>' + e2
+            })
+            $(e).parents('tr').detach();
+          } else {
+            Swal.fire({
+              type: 'error',
+              title: 'Matrícula no generada',
+              confirmButtonText: 'Cerrar'
+            })
+          }
+        };
+
+        xhrmatricula.send(null);
       } else {
-        Swal.fire({
-          type: 'error',
-          title: 'Matrícula no generada',
-          confirmButtonText: 'Cerrar'
-        })
+        console.log("No se puede generar matricula");
+        swalWithBootstrapButtons.fire({
+          title: 'Información!',
+          text: "El alumno no ha entregado la documentación base completa. ¿Desea generar la carta compromiso sin la documentación?",
+          type: 'warning',
+          confirmButtonText: 'Aceptar',
+          showCancelButton: true,
+          cancelButtonText: 'Cancelar'
+        }).then(function (result) {
+          if (result.value) {
+            var xhrmatricula = new XMLHttpRequest();
+            xhrmatricula.open('GET', '<?php echo base_url();?>index.php/c_estudiante/generar_matricula?no_control=' + e.value, true);
+            xhrmatricula.onloadstart = function () {
+              $('#div_carga').show();
+            }
+            xhrmatricula.error = function () {
+              console.log("error de conexion");
+            }
+            xhrmatricula.onload = function () {
+              $('#div_carga').hide();
+              console.log(xhrmatricula.responseText);
+
+              if (xhrmatricula.responseText.trim() !== "no") {
+                Swal.fire({
+                  type: 'success',
+                  title: 'Matrícula generada correctamente<br>' + xhrmatricula.responseText + '<br> asignada a:<br>' + e2
+                })
+                $(e).parents('tr').detach();
+              } else {
+                Swal.fire({
+                  type: 'error',
+                  title: 'Matrícula no generada',
+                  confirmButtonText: 'Cerrar'
+                })
+              }
+            };
+
+            xhrmatricula.send(null);
+          }
+        });
       }
     };
 
     xhr.send(null);
 
+
+    /*
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', '<?php echo base_url();?>index.php/c_estudiante/generar_matricula?no_control=' + e.value, true);
+        xhr.onloadstart = function(){
+            $('#div_carga').show();
+          }
+          xhr.error = function (){
+            console.log("error de conexion");
+          }
+          xhr.onload = function(){
+            $('#div_carga').hide();
+          console.log(xhr.responseText);
+    
+          if (xhr.responseText.trim() !== "no") {
+            Swal.fire({
+              type: 'success',
+              title: 'Matrícula generada correctamente<br>' + xhr.responseText+'<br> asignada a:<br>'+e2
+            })
+            $(e).parents('tr').detach();
+          } else {
+            Swal.fire({
+              type: 'error',
+              title: 'Matrícula no generada',
+              confirmButtonText: 'Cerrar'
+            })
+          }
+        };
+    
+        xhr.send(null);
+    */
   }
 </script>

@@ -70,12 +70,12 @@
         </a>
         <a class="nav-link <?php ($this->uri->segment(2)=='buscar_grupo') ? print 'bg-info text-light' : print null; ?>" href="<?php echo base_url();?>index.php/c_vistas/buscar_grupo">
         <i class="material-icons">group_add</i>
-          <span class="font-weight-light">Buscar grupos
+          <span class="font-weight-light">Modificar grupos
           </span>
         </a>
         <a class="nav-link <?php ($this->uri->segment(2)=='asesor_grupo') ? print 'bg-info text-light' : print null; ?>" href="<?php echo base_url();?>index.php/c_vistas/asesor_grupo">
         <i class="material-icons">group_add</i>
-          <span class="font-weight-light">Asignar Asesor
+          <span class="font-weight-light">Modificar Asesor
           </span>
         </a>
         <a class="nav-link <?php ($this->uri->segment(2)=='terminar_ciclo') ? print 'bg-info text-light' : print null; ?>" href="<?php echo base_url();?>index.php/c_vistas/terminar_ciclo">

@@ -1087,6 +1087,8 @@
         console.log("error de conexion");
       }
     xhr.onreadystatechange = function () {
+      console.log(xhr.response);
+      /*
       //console.log(xhr.response);
       if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
         $('#div_carga').hide();
@@ -1113,6 +1115,7 @@
           });
         }
       }
+      */
     }
     xhr.send(formdata);
 

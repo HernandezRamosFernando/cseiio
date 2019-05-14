@@ -312,9 +312,13 @@ class C_estudiante extends CI_Controller {
 
             }
 
+            $check = $this->input->post('aspirante_documento_carta_extemporaneo');
+
+            
+
            
 
-       
+       /*
         echo $this->M_estudiante->insertar_estudiante_nuevo_ingreso(
             $datos_estudiante,
             $datos_estudiante_tutor,
@@ -323,9 +327,10 @@ class C_estudiante extends CI_Controller {
             $datos_estudiante_documentos,
             $datos_estudiante_medicos
         );
-        
+        */
     
-        //print_r($datos_estudiante);
+        //print_r($datos_estudiante_documentos);
+        echo $check;
 
     }
 

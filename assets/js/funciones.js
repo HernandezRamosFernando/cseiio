@@ -421,7 +421,7 @@ function cambiardetabla(e) {
     console.log(alumnos_json);
 
     if(alumnos_json.length<35){
-      var tr = $(e).parents("tr").appendTo("#tabla_completa_grupo tbody");
+      $(e).parents("tr").appendTo("#tabla_completa_grupo tbody");
       e.className = "";
       e.className = "btn btn-lg btn-block btn-danger";
       e.innerText = "";
@@ -441,7 +441,7 @@ function cambiardetabla(e) {
 
 
 function regresartabla(e) {
-  var tr = $(e).parents("tr").appendTo("#tabla_completa tbody");
+  $(e).parents("tr").appendTo("#tabla_completa tbody");
   e.className = "";
   e.className = "btn btn-lg btn-block btn-success";
   e.innerText = "";

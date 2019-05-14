@@ -13,6 +13,19 @@ class C_materias extends CI_Controller {
         
     }
 
+
+    public function materias_semestre(){
+        $semestre = $this->input->get("semestre");
+        echo json_encode($this->M_materia->get_materias_semestre_completo($semestre));
+    }
+
+
+    public function get_materias_semestre_componente(){
+        $semestre = $this->input->get("semestre");
+        $id_componente = $this->input->get("componente");
+        echo json_encode($this->M_materia->get_materias_semestre_componente($semestre,$id_componente));
+    }
+
    
 
     public function lista_materias()

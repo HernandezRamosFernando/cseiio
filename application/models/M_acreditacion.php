@@ -12,6 +12,20 @@ class M_acreditacion extends CI_Model {
        return $this->db->query("select count(*) as total_estudiante from Estudiante where semestre_en_curso=".$datos['semestre']." and Plantel_cct_plantel='".$datos['cct']."'")->result();
    }
 
+
+
+   function asesor_de_materia($materias_asesores,$clave_materia){
+       $respuesta = "";
+        foreach($materias_asesores as $materia_asesor){
+            if($materia_asesor->materia==$clave_materia){
+                $respuesta = $materia_asesor->asesor;
+                break;
+            }
+        }
+
+        return $respuesta;
+   }
+
    
 
 
@@ -55,6 +69,8 @@ class M_acreditacion extends CI_Model {
                 'Estudiante_no_control'=>$alumno,
                 'Ciclo_escolar_id_ciclo_escolar'=>$datos->grupo->ciclo_escolar,
                 'id_materia'=>$materia->clave,
+                'id_asesor'=>$this->asesor_de_materia($datos->asesores_materia,$materia->clave)
+                //'id_materia'=>
 
             ));
 

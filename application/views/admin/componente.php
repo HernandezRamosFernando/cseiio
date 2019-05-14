@@ -297,8 +297,14 @@ function cargar_tabla() {
     document.getElementById("tabla").innerHTML="";
     var xhr = new XMLHttpRequest();
       xhr.open('GET', '<?php echo base_url();?>index.php/C_componente/get_lista/', true);
-
-      xhr.onload = function () {
+      xhr.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      xhr.error = function (){
+        console.log("error de conexion");
+      }
+      xhr.onload = function(){
+        $('#div_carga').hide();
         //console.log(JSON.parse(xhr.response));
         let datos = JSON.parse(xhr.response);
         //datos de materia
@@ -347,9 +353,16 @@ var form = document.getElementById("nuevocomponente");
 		var formdata = new FormData(form);
 		var xhr =  new XMLHttpRequest();
 		xhr.open("POST","<?php echo base_url();?>index.php/C_componente/agregar_componente",true);
-    xhr.onreadystatechange = function() { 
+    xhr.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      xhr.error = function (){
+        console.log("error de conexion");
+      }
+  xhr.onreadystatechange = function () {
     if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-      //console.log();
+      console.log(xhr.responseText);
+      $('#div_carga').hide();
       if(xhr.responseText==="si"){
         Swal.fire({
             type: 'success',
@@ -389,9 +402,16 @@ var form = document.getElementById("nuevocomponente");
     var formdata_modificar = new FormData(form_modificar);
     var xhr =  new XMLHttpRequest();
     xhr.open("POST","<?php echo base_url();?>index.php/C_componente/modificar_componente",true);
-    xhr.onreadystatechange = function() { 
+    xhr.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      xhr.error = function (){
+        console.log("error de conexion");
+      }
+  xhr.onreadystatechange = function () {
     if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-      //console.log();
+      console.log(xhr.responseText);
+      $('#div_carga').hide();
       if(xhr.responseText==="si"){
         Swal.fire({
             type: 'success',
@@ -428,9 +448,16 @@ var form = document.getElementById("nuevocomponente");
     var formdata_eliminar = new FormData(form_eliminar);
     var xhr =  new XMLHttpRequest();
     xhr.open("POST","<?php echo base_url();?>index.php/C_componente/eliminar_componente",true);
-    xhr.onreadystatechange = function() { 
+    xhr.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      xhr.error = function (){
+        console.log("error de conexion");
+      }
+  xhr.onreadystatechange = function () {
     if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-      //console.log();
+      console.log(xhr.responseText);
+      $('#div_carga').hide();
       if(xhr.responseText==="si"){
         Swal.fire({
             type: 'success',

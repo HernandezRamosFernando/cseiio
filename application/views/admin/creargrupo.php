@@ -630,113 +630,21 @@
     document.getElementById('crear_grupo').innerHTML = 'Limpiar Búsqueda';
   }
 
-  function cargar_select_asesores(){
-    //cargar select de asesores de ese plantel
-    var asesores = new XMLHttpRequest();
-    asesores.open('GET', '<?php echo base_url();?>index.php/c_asesor/get_asesores_plantel?plantel='+document.getElementById("plantel").value, true);
-    asesores.onload = function () {
-      //cargar materia y asesores ya guardados
-  document.getElementById("tabla_asesor").innerHTML= "";
-  var xhr = new XMLHttpRequest();
-    xhr.open('GET', '<?php echo base_url();?>index.php/c_grupo/get_materias_grupo_asesor?grupo='+document.getElementById("grupos").value, true);
-    xhr.onloadstart = function(){
-        $('#div_carga').show();
-      }
-      xhr.error = function (){
-        console.log("error de conexion");
-      }
-      xhr.onload = function(){
-        //console.log(xhr.response);
-        $('#div_carga').hide();
-        
-      console.log(JSON.parse(xhr.response));
-      
-      JSON.parse(xhr.response).forEach(async function(valor,indice){
-        var fila ="<tr>";
-        fila+="<td>"+valor.unidad_contenido+"</td>";
-        fila+="<td>"+valor.clave+"</td>";
-        fila+='<td><select id="s'+indice+'" class="form-control form-control-lg">'+asesores.response+'</select><td>';
-        //var asesor = valor.asesor==="null"?"":valor.asesor;
-        //fila+='<td><input type="text" class="form-control" name="input_asesor" id="input_asesor" value="'+asesor+'" placeholder="Nombre de asesor"></td>';
-        fila+="</tr>";
-        document.getElementById("tabla").innerHTML+=fila;
-        $("#s"+indice+" option[value="+valor.id_asesor+"]").attr('selected', 'selected');
-  
-      });
 
-
-      
-    };
-
-    xhr.send(null);
-    limpiarbusqueda();
-    document.getElementById("tabla_oculto_asesor").style.display="";
-    document.getElementById("boton_oculto_asesor").style.display="";
-    };
-
-    asesores.send(null);
-}
-
-function guardar_asesor(){
-  
-  
-  var tabla = document.getElementById("tabla").children;
-  var datos = new Array();
-  
-  for(let i=0;i<tabla.length;i++){
-    //var a = tabla[i].children[2].children
-    //console.log(a[0].value);
-    var dato={
-      id_grupo:document.getElementById("grupos").value,
-      id_materia:tabla[i].children[1].innerText,
-      asesor:tabla[i].children[2].children[0].value
+  function semestres(){
+    if(document.getElementById("grupo_periodo").innerText==="AGOSTO-ENERO"){
+      document.getElementById("semestre_grupo").innerHTML='<option value="1">1</option>';
+      document.getElementById("semestre_grupo").innerHTML+='<option value="3">3</option>';
+      document.getElementById("semestre_grupo").innerHTML+='<option value="5">5</option>';
     }
-
-    datos.push(dato);
+    else{
+      document.getElementById("semestre_grupo").innerHTML='<option value="2">2</option>';
+      document.getElementById("semestre_grupo").innerHTML+='<option value="4">4</option>';
+      document.getElementById("semestre_grupo").innerHTML+='<option value="6">6</option>';
+    }
   }
 
-  console.log(datos);
-
-
-  var xhr = new XMLHttpRequest();
-      xhr.open("POST", '<?php echo base_url();?>index.php/c_grupo/agregar_asesor_materias', true);
-      xhr.setRequestHeader("Content-Type", "application/json");
-      xhr.onloadstart = function(){
-        $('#div_carga').show();
-      }
-      xhr.error = function (){
-        console.log("error de conexion");
-      }
-      xhr.onreadystatechange = function() { // Call a function when the state changes.
-          if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-            $('#div_carga').hide();
-              if (xhr.responseText.trim() === "si") {
-                console.log(xhr.response);
-                    swalWithBootstrapButtons.fire({
-                    type: 'success',
-                    text: 'Datos guardados correctamente',
-                    confirmButtonText: 'Aceptar'
-                    }).then((result) => {
-                    if (result.value) {
-                    //aqui va el aceptar
-                    $(document).scrollTop(0);
-                    location.reload(); 
-                      }
-                    //aqui va si cancela
-                    });
-               }else{
-                Swal.fire({
-                  type: 'error',
-                  text: 'Datos no guardados'
-                 });
-               }
-          }
-      }
-      xhr.send(JSON.stringify(datos));
-
- // console.log(datos);
- 
-}
+  semestres();
 </script>
 
 </html>

@@ -70,7 +70,7 @@
               <select class="form-control form-control-lg selcolor" id="aspirante_anio_nacimiento" required name="aspirante_anio_nacimiento" onclick="get_dias()">
 
               </select>
-              <span>Año de nacimiento</span>
+              <span>Año</span>
             </label>
           </div>
           <div class="col-md-2 ">
@@ -89,15 +89,15 @@
             <option value="11">Noviembre</option>
             <option value="12">Diciembre</option>
               </select>
-              <span>Mes de nacimiento</span>
+              <span>Mes</span>
             </label>
           </div>
           <div class="col-md-2 ">
           <label class="form-group has-float-label seltitulo">
-              <select class="form-control form-control-lg selcolor" id="aspirante_dia_nacimiento" required name="aspirante_dia_nacimiento" onclick="get_dias('anio','mes','dia')">
+              <select class="form-control form-control-lg selcolor" id="aspirante_dia_nacimiento" required name="aspirante_dia_nacimiento">
 
               </select>
-              <span>Dia de nacimiento</span>
+              <span>Día</span>
             </label>
           </div>
 
@@ -188,7 +188,7 @@
           <div class="col-md-4" style="display:none" id="a" name="alergia_medicamento">
             <div class="form-label-group">
               <input type="text" pattern="[A-ZÁÉÍÓÚáéíóúa-z]+[ ]*[A-ZÁÉÍÓÚáéíóúa-z ]*" 
-                class="form-control text-uppercase" id="aspirante_alergia" name="aspirante_alergia "
+                class="form-control text-uppercase" id="aspirante_alergia" name="aspirante_alergia"
                 placeholder="Ingrese el medicamento" style="color: #237087">
               <label for="aspirante_alergia">Ingrese el medicamento</label>
             </div>

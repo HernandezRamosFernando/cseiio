@@ -314,11 +314,25 @@ class C_estudiante extends CI_Controller {
 
             $check = $this->input->post('aspirante_documento_carta_extemporaneo');
 
-            
+            if($check=="8"){
+                $datos_estudiante_documentos['aspirante_documento_carta_extemporaneo'] = array(
+                    'id_documento' => 8,
+                    'entregado' => 1,
+                    'Estudiante_no_control' => $no_control
+                );
+            }
+
+            else if($check==""){
+                $datos_estudiante_documentos['aspirante_documento_carta_extemporaneo'] = array(
+                    'id_documento' => 8,
+                    'entregado' => 0,
+                    'Estudiante_no_control' => $no_control
+                );
+            }
 
            
 
-       /*
+       
         echo $this->M_estudiante->insertar_estudiante_nuevo_ingreso(
             $datos_estudiante,
             $datos_estudiante_tutor,
@@ -327,10 +341,10 @@ class C_estudiante extends CI_Controller {
             $datos_estudiante_documentos,
             $datos_estudiante_medicos
         );
-        */
+        
     
-        //print_r($datos_estudiante_documentos);
-        echo $check;
+        //print_r($datos_estudiante_documentos['aspirante_documento_carta_extemporaneo']);
+       // print $check;
 
     }
 

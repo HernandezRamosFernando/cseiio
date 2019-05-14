@@ -70,7 +70,7 @@
               <select class="form-control form-control-lg selcolor" id="aspirante_anio_nacimiento" required name="aspirante_anio_nacimiento" onclick="get_dias()">
 
               </select>
-              <span>Año de nacimiento</span>
+              <span>Año</span>
             </label>
           </div>
           <div class="col-md-2 ">
@@ -89,7 +89,7 @@
             <option value="11">Noviembre</option>
             <option value="12">Diciembre</option>
               </select>
-              <span>Mes de nacimiento</span>
+              <span>Mes</span>
             </label>
           </div>
           <div class="col-md-2 ">
@@ -97,7 +97,7 @@
               <select class="form-control form-control-lg selcolor" id="aspirante_dia_nacimiento" required name="aspirante_dia_nacimiento">
 
               </select>
-              <span>Dia de nacimiento</span>
+              <span>Día</span>
             </label>
           </div>
 

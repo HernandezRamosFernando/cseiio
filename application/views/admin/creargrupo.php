@@ -196,7 +196,9 @@
         class="btn btn-success btn-lg btn-block btn-guardar" style="padding: 1rem"> Guardar Alumnos</button>
     </div>
 
-    <div class="card" style="overflow:scroll; display: none" id="tabla_oculto" >
+
+
+    <div class="card" style="overflow:scroll; display: none" id="tabla_oculto_asesor" >
       <div class="card-body">
         <table class="table table-hover" id="tabla_completa" style="width: 100%">
           <caption>Lista de las materias del grupo</caption>
@@ -210,7 +212,7 @@
 
 
 
-          <tbody id="tabla">
+          <tbody id="tabla_asesor">
 
           </tbody>
         </table>
@@ -545,7 +547,7 @@
                 if (result.value) {
                   //aqui va el aceptar
                   $(document).scrollTop(0);
-                  location.reload();
+                  cargar_select_asesores();
                 }
                 //aqui va si cancela
               });
@@ -601,7 +603,7 @@
                 if (result.value) {
                   //aqui va el aceptar
                   $(document).scrollTop(0);
-                  location.reload();
+                  cargar_select_asesores();
                 }
                 //aqui va si cancela
               });
@@ -615,6 +617,7 @@
           }
         }
         xhr.send(JSON.stringify(datos));
+        
 
       }
     }

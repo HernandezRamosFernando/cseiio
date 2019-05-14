@@ -181,9 +181,7 @@ console.log(datos);
     xhr.onreadystatechange = function () { // Call a function when the state changes.
       if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
         $('#div_carga').hide();
-        console.log(xhr.response);
         if (xhr.responseText.trim() === "si") {
-          console.log(xhr.response);
           swalWithBootstrapButtons.fire({
             type: 'success',
             text: 'Datos agregados correctamente',

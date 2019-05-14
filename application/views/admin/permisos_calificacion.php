@@ -121,7 +121,7 @@
   <div class="modal-dialog modal-dialog-centered" style="max-width: 80% !important;" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Asignar fecha de permiso</h5>
+        <h5 class="modal-title">Asignar fecha de permiso de asignación de calificaciones</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -133,7 +133,7 @@
               <div class="form-label-group">
                 <input type="date"  class="form-control" id="fecha_inicio"  
                   placeholder="Fecha de inicio">
-                <label for="fecha_inicio">Fecha de inicio </label>
+                <label for="fecha_inicio">Fecha de inicio de permiso </label>
               </div>
             </div>
 
@@ -141,7 +141,7 @@
               <div class="form-label-group">
                 <input type="date"  class="form-control" id="fecha_fin"  
                   placeholder="Fecha de finalización ">
-                <label for="fecha_fin">Fecha de finalización </label>
+                <label for="fecha_fin">Fecha de finalización de permiso </label>
               </div>
             </div>
 
@@ -307,7 +307,7 @@ function guardar(){
         $('#div_carga').hide();
         var fila = '<tr>';
         fila += '<td>';
-        fila += 'Seleccionar todos';
+        fila += 'Todos los planteles';
         fila += '</td>';
         fila += '<td>';
         fila += '';
@@ -316,16 +316,16 @@ function guardar(){
         fila += '';
         fila += '</td>';
         fila += '<td class="">';
-        fila += "<input type='checkbox' class='form-check-input' id='parcial1' onclick='toggle(this)'>"
+        fila += "<input type='checkbox' class='form-check-input' id='parcial1' onclick='toggle(this)'> Seleccionar todos"
         fila += '</td>';
         fila += '<td class="">';
-        fila += "<input type='checkbox' class='form-check-input' id='parcial2' onclick='toggle2(this)'>"
+        fila += "<input type='checkbox' class='form-check-input' id='parcial2' onclick='toggle2(this)'> Seleccionar todos"
         fila += '</td>';
         fila += '<td class="">';
-        fila += "<input type='checkbox' class='form-check-input' id='parcial3' onclick='toggle3(this)'>"
+        fila += "<input type='checkbox' class='form-check-input' id='parcial3' onclick='toggle3(this)'> Seleccionar todos"
         fila += '</td>';
         fila += '<td class="">';
-        fila += "<input type='checkbox' class='form-check-input' id='examnefinal' onclick='toggle4(this)'>"
+        fila += "<input type='checkbox' class='form-check-input' id='examenfinal' onclick='toggle4(this)'> Seleccionar todos"
         fila += '</td>';
         fila += '</tr>';
         document.getElementById("tablaplantel").innerHTML += fila;

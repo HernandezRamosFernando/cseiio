@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 //s$config['base_url'] = 'http://localhost/cseiio/';
-$config['base_url'] = 'http://localhost/cseiio/';
+$config['base_url'] = 'http://192.168.1.82/cseiio/';
 
 /*
 |--------------------------------------------------------------------------

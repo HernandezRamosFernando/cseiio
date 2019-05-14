@@ -39,11 +39,12 @@
                       <option value="">Buscar en todos los planteles</option>
 
                       <?php
-            foreach ($planteles as $plantel)
-            {
-                    echo '<option value="'.$plantel->cct_plantel.'">'.$plantel->nombre_plantel.'</option>';
-            }
-            ?>
+                                        foreach ($planteles as $plantel)
+                                        {
+                                          echo '<option value="'.$plantel->cct_plantel.'">'.$plantel->nombre_plantel.' ----- CCT: '.$plantel->cct_plantel.'</option>';
+                                        }
+                                        ?>
+
 
                     </select>
                     <span>Plantel</span>

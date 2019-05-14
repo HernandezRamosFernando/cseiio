@@ -33,7 +33,7 @@
             <div class="form-label-group">
               <input type="text" pattern="[A-Za-z]+[ ]*[A-Za-z ]*" required title="Introduzca solo letras validas"
                 class="form-control text-uppercase" id="aspirante_nombre" name="aspirante_nombre"
-                onchange="valida(this);" placeholder="Nombre(s)" style="color: #237087">
+                onchange="valida(this);" placeholder="Nombre(s)" style="color: #237087 ">
               <label for="aspirante_nombre">Nombre(s)</label>
             </div>
           </div>
@@ -42,7 +42,7 @@
             <div class="form-label-group">
               <input type="text" pattern="[A-Za-z]+[ ]*[A-Za-z ]*" required title="Introduzca solo letras"
                 class="form-control text-uppercase" id="aspirante_apellido_paterno" name="aspirante_apellido_paterno"
-                onchange="valida(this);" placeholder="Apellido Paterno" style="color: #237087">
+                onchange="valida(this);" placeholder="Apellido Paterno" style="color: #237087 ">
               <label for="aspirante_apellido_paterno">Primer Apellido</label>
             </div>
           </div>
@@ -51,7 +51,7 @@
             <div class="form-label-group">
               <input type="text" pattern="[A-Za-z]+[ ]*[A-Za-z ]*" title="Introduzca solo letras"
                 class="form-control text-uppercase" id="aspirante_apellido_materno" name="aspirante_apellido_materno"
-                onchange="valida(this);" placeholder="Apellido Materno" style="color: #237087">
+                onchange="valida(this);" placeholder="Apellido Materno" style="color: #237087 ">
               <label for="aspirante_apellido_materno">Segundo Apellido</label>
             </div>
           </div>
@@ -59,13 +59,18 @@
 
       </div>
 
+      
 
 
-      <div class="form-group">
+
+      <div class="card form-group">
+      <div>
+      <label class="form-group has-float-label text-center" style="font-size: 12pt; font-weight: bold; color:#777;" >Fecha de nacimiento</label>
+      </div>
 
         <div class="row">
-
-          <div class="col-md-2 ">
+         
+          <div class=" col-md-4 ">
           <label class="form-group has-float-label seltitulo">
               <select class="form-control form-control-lg selcolor" id="aspirante_anio_nacimiento" required name="aspirante_anio_nacimiento" onclick="get_dias()">
 
@@ -73,7 +78,7 @@
               <span>Año</span>
             </label>
           </div>
-          <div class="col-md-2 ">
+          <div class="col-md-4">
           <label class="form-group has-float-label seltitulo">
               <select class="form-control form-control-lg selcolor" id="aspirante_mes_nacimiento" required name="aspirante_mes_nacimiento" onclick="get_dias()">
               <option value="01">Enero</option>
@@ -92,7 +97,7 @@
               <span>Mes</span>
             </label>
           </div>
-          <div class="col-md-2 ">
+          <div class="col-md-4 ">
           <label class="form-group has-float-label seltitulo">
               <select class="form-control form-control-lg selcolor" id="aspirante_dia_nacimiento" required name="aspirante_dia_nacimiento">
 
@@ -101,9 +106,18 @@
             </label>
           </div>
 
-          <div class="col-md-2">
+
+        </div>
+
+</div>
+
+          <div class="form-group">
+
+        <div class="row">
+
+          <div class="col-md-4">
             <div class="form-label-group">
-              <input type="number" title="El numero de telefono debe de ser a 13 digitos" style="color: #237087"
+              <input type="number" title="El numero de telefono debe de ser a 13 digitos" style="color: #237087 "
                 class="form-control text-uppercase" id="aspirante_telefono" name="aspirante_telefono"
                 placeholder="Telefono">
               <label for="aspirante_telefono">Teléfono</label>
@@ -114,21 +128,11 @@
               <input type="email"
                 pattern="^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$"
                 title="Introduzca un correo valido" class="form-control text-lowercase" id="aspirante_correo"
-                name="aspirante_correo" placeholder="Correo Electrónico" style="color: #237087">
+                name="aspirante_correo" placeholder="Correo Electrónico" style="color: #237087 ">
               <label for="aspirante_correo">Correo electrónico</label>
             </div>
           </div>
 
-
-        </div>
-
-      </div>
-
-
-
-      <div class="form-group">
-
-        <div class="row">
           <div class="col-md-4">
             <label class="form-group has-float-label seltitulo">
               <select class="form-control form-control-lg selcolor" id="aspirante_sexo" required name="aspirante_sexo">
@@ -140,17 +144,27 @@
             </label>
           </div>
 
+        </div>
+
+      </div>
+
+
+
+      <div class="form-group">
+        <div class="row">
+         
+
           <div class="col-md-4">
             <div class="form-label-group">
               <input type="number" pattern="[0-9]{11}" title="Introduzca 11 digitos" class="form-control text-uppercase"
-                id="aspirante_nss" name="aspirante_nss" placeholder="Numero de Seguro Social" style="color: #237087">
+                id="aspirante_nss" name="aspirante_nss" placeholder="Numero de Seguro Social" style="color: #237087 ">
               <label for="aspirante_nss">NSS (IMSS)</label>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-label-group">
               <input type="text" class="form-control text-uppercase" id="aspirante_programa_social"
-                name="aspirante_programa_social" placeholder="Folio de programa social" style="color: #237087">
+                name="aspirante_programa_social" placeholder="Folio de programa social" style="color: #237087 ">
               <label for="aspirante_programa_social">Folio de Prospera</label>
             </div>
           </div>
@@ -175,6 +189,12 @@
             </div>
           </div>
 
+          </div>
+      </div>
+
+          <div class="form-group">
+        <div class="row">
+
           <div class="col-md-4">
             <label class="form-group has-float-label seltitulo">
               <select class="form-control form-control-lg selcolor" id="aspirante_alergia_combo" name="aspirante_alergia_combo"
@@ -189,7 +209,7 @@
             <div class="form-label-group">
               <input type="text" pattern="[A-ZÁÉÍÓÚáéíóúa-z]+[ ]*[A-ZÁÉÍÓÚáéíóúa-z ]*" 
                 class="form-control text-uppercase" id="aspirante_alergia" name="aspirante_alergia"
-                placeholder="Ingrese el medicamento" style="color: #237087">
+                placeholder="Ingrese el medicamento" style="color: #237087 ">
               <label for="aspirante_alergia">Ingrese el medicamento</label>
             </div>
           </div>
@@ -209,13 +229,12 @@
             <div class="form-label-group">
               <input type="text" pattern="[A-ZÁÉÍÓÚáéíóúa-z]+[ ]*[A-ZÁÉÍÓÚáéíóúa-z ]*" 
                 class="form-control text-uppercase" id="aspirante_discapacidad" name="aspirante_discapacidad"
-                placeholder="Ingrese la discapacidad" style="color: #237087">
+                placeholder="Ingrese la discapacidad" style="color: #237087 ">
               <label for="aspirante_discapacidad">Ingrese la discapacidad</label>
             </div>
           </div>
 
         </div>
-
       </div>
 
 
@@ -286,7 +305,7 @@
             <div class="form-label-group">
               <input type="text" pattern="[A-Za-z0-9]{18}" title="Faltan datos" 
                 class="form-control text-uppercase" id="aspirante_curp" name="aspirante_curp" 
-                onchange="valida(this);" placeholder="CURP" style="color: #237087">
+                onchange="valida(this);" placeholder="CURP" style="color: #237087 ">
               <label for="aspirante_curp">CURP</label>
             </div>
           </div>
@@ -306,17 +325,50 @@
             <div class="form-label-group">
               <input type="text" title="Datos incorrectos" class="form-control text-uppercase"
                 id="aspirante_lugar_nacimiento" name="aspirante_lugar_nacimiento" required
-                 placeholder="Lugar de nacimiento"style="color: #237087">
+                 placeholder="Lugar de nacimiento"style="color: #237087 ">
               <label for="aspirante_lugar_nacimiento">Lugar de Nacimiento</label>
             </div>
           </div>
-          <div class="col-md-5 ">
-            <div class="form-label-group">
-                <input class="form-control" placeholder="Fecha de Registro de Nacimiento: dd/mm/aaaa" type="text" name="fecha" onchange="validafecharegistro(this);validaracta();"
-                onkeyup="mascara(this,'/',patron,true)" maxlength="10" id="aspirante_fecha_nacimiento_registro" name="aspirante_fecha_nacimiento_registro" style="color: #237087">
-              <label for="aspirante_fecha_nacimiento_registro">Fecha de Registro de Nacimiento (dd/mm/aaaa)</label>
-            </div>
+
+          <label class="form-group has-float-label text-center" style="font-size: 12pt; font-weight: bold; color:#777;">Fecha de registro de Acta</label>
+
+          <div class=" col-md-2 ">
+          <label class="form-group has-float-label seltitulo">
+              <select class="form-control form-control-lg selcolor" id="aspirante_anio_nacimiento_registro"  name="aspirante_anio_nacimiento_registro" onclick="get_dias_registro()">
+
+              </select>
+              <span>Año</span>
+            </label>
           </div>
+          <div class="col-md-2">
+          <label class="form-group has-float-label seltitulo">
+              <select class="form-control form-control-lg selcolor" id="aspirante_mes_nacimiento_registro"  name="aspirante_anio_nacimiento_registro" onclick="get_dias_registro()">
+              <option value="">Seleccione uno</option>
+              <option value="01">Enero</option>
+            <option value="02">Febrero</option>
+            <option value="03">Marzo</option>
+            <option value="04">Abril</option>
+            <option value="05">Mayo</option>
+            <option value="06">Junio</option>
+            <option value="07">Julio</option>
+            <option value="08">Agosto</option>
+            <option value="09">Septiembre</option>
+            <option value="10">Octubre</option>
+            <option value="11">Noviembre</option>
+            <option value="12">Diciembre</option>
+              </select>
+              <span>Mes</span>
+            </label>
+          </div>
+          <div class="col-md-2 ">
+          <label class="form-group has-float-label seltitulo">
+              <select class="form-control form-control-lg selcolor" id="aspirante_dia_nacimiento_registro"  name="aspirante_dia_nacimiento_registro" onchange="validaracta()">
+
+              </select>
+              <span>Día</span>
+            </label>
+          </div>
+
 
         </div>
 
@@ -391,7 +443,7 @@
               <input type="text" 
                 title="La direccion tiene caracteres incorrectos"  class="form-control text-uppercase" 
                 id="aspirante_direccion_calle" name="aspirante_direccion_calle" 
-                placeholder="Calle y número" style="color: #237087">
+                placeholder="Calle y número" style="color: #237087 ">
               <label for="aspirante_direccion_calle">Calle y número</label>
             </div>
           </div>
@@ -400,7 +452,7 @@
             <div class="form-label-group">
               <input type="text"  title="La colonia tiene caracteres incorrectos"
                 class="form-control text-uppercase" id="aspirante_direccion_colonia"
-                name="aspirante_direccion_colonia" placeholder="Colonia/Sección/Paraje/Barrio" style="color: #237087">
+                name="aspirante_direccion_colonia" placeholder="Colonia/Sección/Paraje/Barrio" style="color: #237087 ">
               <label for="aspirante_direccion_colonia">Colonia/Sección/Paraje/Barrio</label>
             </div>
           </div>
@@ -409,7 +461,7 @@
             <div class="form-label-group">
               <input type="number" pattern="[0-9]{5}" title="El código postal solo debe contener 5 dígitos"
                 class="form-control text-uppercase" id="aspirante_direccion_cp" name="aspirante_direccion_cp"
-                placeholder="Código Postal" style="color: #237087">
+                placeholder="Código Postal" style="color: #237087 ">
               <label for="aspirante_direccion_cp">Código Postal</label>
             </div>
           </div>
@@ -433,7 +485,7 @@
             <div class="form-label-group">
               <input type="text" pattern="[A-ZÁÉÍÓÚáéíóúa-z]+[ ]*[A-ZÁÉÍÓÚáéíóúa-z ]*" required
                 title="Introduzca solo letras" class="form-control text-uppercase" id="aspirante_tutor_nombre"
-               name="aspirante_tutor_nombre" placeholder="Nombre de Tutor" style="color: #237087">
+               name="aspirante_tutor_nombre" placeholder="Nombre de Tutor" style="color: #237087 ">
               <label for="aspirante_tutor_nombre">Nombre de Tutor</label>
             </div>
           </div>
@@ -441,7 +493,7 @@
             <div class="form-label-group">
               <input type="text" pattern="[A-ZÁÉÍÓÚáéíóúa-z]+[ ]*[A-ZÁÉÍÓÚáéíóúa-z ]*" required
                 title="Introduzca solo letras" class="form-control text-uppercase" id="aspirante_tutor_apellido"
-                name="aspirante_tutor_apellido" placeholder="Primer Apellido" style="color: #237087">
+                name="aspirante_tutor_apellido" placeholder="Primer Apellido" style="color: #237087 ">
               <label for="aspirante_tutor_apellido">Primer Apellido</label>
             </div>
           </div>
@@ -449,7 +501,7 @@
             <div class="form-label-group">
               <input type="text" pattern="[A-ZÁÉÍÓÚáéíóúa-z]+[ ]*[A-ZÁÉÍÓÚáéíóúa-z ]*" title="Introduzca solo letras"
                 class="form-control text-uppercase" id="aspirante_tutor_apellidodos" name="aspirante_tutor_apellidodos"
-                placeholder="Segundo Apellido" style="color: #237087">
+                placeholder="Segundo Apellido" style="color: #237087 ">
               <label for="aspirante_tutor_apellidodos">Segundo Apellido</label>
             </div>
           </div>
@@ -482,7 +534,7 @@
             <div class="form-label-group">
               <input type="text" pattern="[A-ZÁÉÍÓÚáéíóúa-z]+[ ]*[A-ZÁÉÍÓÚáéíóúa-z ]*" 
                 class="form-control text-uppercase" id="aspirante_tutor_otro" name="aspirante_tutor_otro"
-                 placeholder="Escriba el parentesco"style="color: #237087">
+                 placeholder="Escriba el parentesco"style="color: #237087 ">
               <label for="aspirante_tutor_otro">Escriba el parentesco</label>
             </div>
           </div>
@@ -499,7 +551,7 @@
               <div class="form-label-group">
                 <input type="text" pattern="[A-ZÁÉÍÓÚáéíóúa-z]+[ ]*[A-ZÁÉÍÓÚáéíóúa-z ]*" 
                   title="Introduzca solo letras" class="form-control text-uppercase" id="aspirante_tutor_ocupacion"
-                  name="aspirante_tutor_ocupacion" placeholder="Ocupación" style="color: #237087">
+                  name="aspirante_tutor_ocupacion" placeholder="Ocupación" style="color: #237087 ">
                 <label for="aspirante_tutor_ocupacion">Ocupación</label>
               </div>
             </div>
@@ -508,14 +560,14 @@
               <div class="form-label-group">
                 <input type="number" title="El numero de telefono debe de ser a 13 dígitos con lada"
                   class="form-control text-uppercase" id="aspirante_tutor_telefono" name="aspirante_tutor_telefono"
-                  placeholder="Teléfono particular"style="color: #237087">
+                  placeholder="Teléfono particular"style="color: #237087 ">
                 <label for="aspirante_tutor_telefono">Teléfono particular</label>
               </div>
             </div>
             <div class="col-md-3">
               <div class="form-label-group">
                 <input type="number" title="El numero de telefono debe de ser a 13 digitos con lada"
-                  class="form-control text-uppercase" id="aspirante_tutor_telefono_comunidad" style="color: #237087"
+                  class="form-control text-uppercase" id="aspirante_tutor_telefono_comunidad" style="color: #237087 "
                   name="aspirante_tutor_telefono_comunidad" placeholder="Teléfono de la comunidad">
                 <label for="aspirante_tutor_telefono_comunidad">Teléfono de la comunidad</label>
               </div>
@@ -525,7 +577,7 @@
             <div class="col-md-3">
               <div class="form-label-group">
                 <input type="text" class="form-control text-uppercase" id="aspirante_tutor_prospera"
-                  name="aspirante_tutor_prospera" placeholder="Folio de Prospera" style="color: #237087">
+                  name="aspirante_tutor_prospera" placeholder="Folio de Prospera" style="color: #237087 ">
                 <label for="aspirante_tutor_prospera">Folio de Prospera</label>
               </div>
             </div>
@@ -650,7 +702,7 @@
               <div class="form-label-group">
 
                 <input list="secundarias" class="form-control text-uppercase" id="aspirante_secundaria_cct"
-                  name="aspirante_secundaria_cct" placeholder="Buscar secundaria por CCT" style="color: #237087">
+                  name="aspirante_secundaria_cct" placeholder="Buscar secundaria por CCT" style="color: #237087 ">
                 <datalist id="secundarias">
 
                   <?php
@@ -684,7 +736,7 @@
                 <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ. 0-9]+"
                   title="El nombre de la secundaria contiene caracteres incorrectos" class="form-control text-uppercase"
                   id="aspirante_secundaria_nombre" name="aspirante_secundaria_nombre"
-                  placeholder="Nombre de Secundaria" style="color: #237087">
+                  placeholder="Nombre de Secundaria" style="color: #237087 ">
                 <label for="aspirante_secundaria_nombre">Nombre de Secundaria</label>
               </div>
               <br>
@@ -824,7 +876,7 @@
                 <input type="text" pattern="[A-ZÁÉÍÓÚáéíóúa-z0-9]+[ ]*[A-ZÁÉÍÓÚáéíóúa-z0-9]*" 
                   title="El nombre de la secundaria contiene caracteres incorrectos" class="form-control text-uppercase"
                   id="aspirante_nuevasecundaria_cct" name="aspirante_nuevasecundaria_cct"
-                  placeholder="CCT de Secundaria" style="color: #237087">
+                  placeholder="CCT de Secundaria" style="color: #237087 ">
                 <label for="aspirante_nuevasecundaria_cct">C C T</label>
               </div>
               <br>
@@ -833,7 +885,7 @@
               <div class="form-label-group">
                 <input type="text" ppattern="[A-ZÁÉÍÓÚáéíóúa-z0-9]+[ ]*[A-ZÁÉÍÓÚáéíóúa-z0-9]*" 
                   class="form-control text-uppercase" id="aspirante_nuevasecundaria_nombre"
-                  name="aspirante_secundaria_nombre" placeholder="Nombre de Secundaria" style="color: #237087">
+                  name="aspirante_secundaria_nombre" placeholder="Nombre de Secundaria" style="color: #237087 ">
                 <label for="aspirante_nuevasecundaria_nombre">Nombre de Secundaria</label>
               </div>
               <br>
@@ -860,7 +912,7 @@
                 <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ. 0-9]+"
                   title="El tipo de la secundaria contiene caracteres incorrectos" class="form-control text-uppercase"
                   id="aspirante_secundaria_tipo_otro" name="aspirante_secundaria_tipo_otro"
-                  placeholder="Tipo de Secundaria" style="color: #237087">
+                  placeholder="Tipo de Secundaria" style="color: #237087 ">
                 <label for="aspirante_secundaria_tipo_otro">Tipo de Secundaria</label>
               </div>
             </div>
@@ -942,6 +994,7 @@
 
 
   cargar_anio();
+  cargar_anio_registro();
   function obtener_secundaria(e) {
     console.log(e);
     var xhr = new XMLHttpRequest();

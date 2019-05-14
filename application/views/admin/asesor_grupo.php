@@ -68,16 +68,16 @@
           </div>
 
             <div class="col-md-4 offset-md-3">
-              <button type="button" class="btn btn-success btn-lg btn-block" onclick="validarcomponente()" style="padding: 1rem" id="crear_grupo">Mostrar grupo</button>
+              <button type="button" class="btn btn-success btn-lg btn-block" onclick="validarcomponente_asesor()" style="padding: 1rem" id="crear_grupo">Mostrar grupo</button>
             </div>
           </div>
       </div>
 
 
 
-    <div class="card" style="overflow:scroll; display: none" id="tabla_oculto" >
+    <div class="card" style="overflow:scroll; display: none" id="tabla_oculto_asesor" >
       <div class="card-body">
-        <table class="table table-hover" id="tabla_completa" style="width: 100%">
+        <table class="table table-hover" id="tabla_completa_asesor" style="width: 100%">
           <caption>Lista de las materias del grupo</caption>
           <thead class="thead-light">
             <tr>
@@ -89,14 +89,14 @@
 
 
 
-          <tbody id="tabla">
+          <tbody id="tabla_asesor">
 
           </tbody>
         </table>
       </div>
       </div>
         <br>
-    <div class="form-group" id="boton_oculto" style="display: none">
+    <div class="form-group" id="boton_oculto_asesor" style="display: none">
       <div class="row">
         <div class="col-md-12">
           <button class="btn btn-success btn-lg btn-block btn-guardar" style="padding: 1rem" onclick="guardar()">Guardar</button>
@@ -115,7 +115,7 @@
 <!-- /#wrapper -->
 
 <script>
-function validarcomponente(){
+function validarcomponente_asesor(){
 
 if(document.getElementById("plantel").value != '' && document.getElementById("grupos").value != '' && document.getElementById("semestre_grupo").value != '' ){
   cargar_select_asesores();
@@ -174,7 +174,7 @@ function cargar_select_asesores(){
 
     asesores.onload = function () {
       //cargar materia y asesores ya guardados
-  document.getElementById("tabla").innerHTML= "";
+  document.getElementById("tabla_asesor").innerHTML= "";
   var xhr = new XMLHttpRequest();
     xhr.open('GET', '<?php echo base_url();?>index.php/c_grupo/get_materias_grupo_asesor?grupo='+document.getElementById("grupos").value, true);
     xhr.onloadstart = function(){
@@ -197,7 +197,7 @@ function cargar_select_asesores(){
         //var asesor = valor.asesor==="null"?"":valor.asesor;
         //fila+='<td><input type="text" class="form-control" name="input_asesor" id="input_asesor" value="'+asesor+'" placeholder="Nombre de asesor"></td>';
         fila+="</tr>";
-        document.getElementById("tabla").innerHTML+=fila;
+        document.getElementById("tabla_asesor").innerHTML+=fila;
         $("#s"+indice+" option[value="+valor.id_asesor+"]").attr('selected', 'selected');
   
       });
@@ -208,8 +208,8 @@ function cargar_select_asesores(){
 
     xhr.send(null);
     limpiarbusqueda();
-    document.getElementById("tabla_oculto").style.display="";
-    document.getElementById("boton_oculto").style.display="";
+    document.getElementById("tabla_oculto_asesor").style.display="";
+    document.getElementById("boton_oculto_asesor").style.display="";
     };
 
     asesores.send(null);
@@ -234,7 +234,7 @@ function limpiarbusqueda(){
 function guardar(){
   
   
-  var tabla = document.getElementById("tabla").children;
+  var tabla = document.getElementById("tabla_asesor").children;
   var datos = new Array();
   
   for(let i=0;i<tabla.length;i++){

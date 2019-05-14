@@ -784,7 +784,7 @@
         <div class="form-check" id="aspirante_documento_carta_extemporaneo_oculto" style="display:none">
           <label class="form-check-label">
             <input type="checkbox" class="form-check-input" name="aspirante_documento_carta_extemporaneo"
-              id="aspirante_documento_carta_extemporaneo" value="7" unchecked>
+              id="aspirante_documento_carta_extemporaneo" value="7" checked>
             Carta de registro extemporaneo
           </label>
         </div>
@@ -1100,10 +1100,8 @@
             showConfirmButton: false,
             timer: 2500
           });
-
-          //document.getElementById("formulario").reset();
-          //document.getElementById("selector_municipio_aspirante").value = "";
-          //document.getElementById("selector_localidad_aspirante").value = "";
+          $(document).scrollTop(0);
+          location.reload(); 
         }
 
         else {

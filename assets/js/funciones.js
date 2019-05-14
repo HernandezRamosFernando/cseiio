@@ -405,9 +405,13 @@ var resultado = diff/(1000*60*60*24);
 if(resultado > 2193){
 console.log("Necesita acta de registro extemporaneo");
 document.getElementById("aspirante_documento_carta_extemporaneo_oculto").style = "display:";
+document.getElementById("aspirante_documento_carta_extemporaneo").value="8";
+document.getElementById("aspirante_documento_carta_extemporaneo").checked = false;
 }else{
   console.log("No Necesita acta de registro extemporaneo");
   document.getElementById("aspirante_documento_carta_extemporaneo_oculto").style = "display: none";
+  document.getElementById("aspirante_documento_carta_extemporaneo").value="7";
+  document.getElementById("aspirante_documento_carta_extemporaneo").checked = true;
 }
 
 console.log(diff/(1000*60*60*24) );

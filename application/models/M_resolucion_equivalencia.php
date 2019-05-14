@@ -64,6 +64,19 @@ class M_resolucion_equivalencia extends CI_Model {
     public function get_resolucion_equivalencia($no_control){
         return $this->db->query("select * from Resolucion_equivalencia where id_estudiante='".$no_control."'")->result();
    }
+
+
+
+
+
+
+   //----------------------------- inicia operacion panzer
+public function num_resolucion(){
+    $consulta=$this->db->query("SELECT max(CONVERT(SUBSTRING(r.folio,7,LENGTH(r.folio)),SIGNED INTEGER)) as numero from Resolucion_equivalencia r")->result();
+    return $consulta[0]->numero;    
+   }
+
+
 }
 
 ?>

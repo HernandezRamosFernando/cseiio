@@ -193,7 +193,7 @@
     <br>
         
         
-        <div class="card" style="overflow:scroll; display: " id="tabla_oculto_asesor" >
+        <div class="card" style=" display: none " id="tabla_oculto_asesor" >
       <div class="card card-body" style="width: 100%; overflow: scroll">
         <table class="table table-hover" id="tabla_completa_asesor" style="width: 100%; overflow: scroll">
           <caption>Lista de las materias del grupo</caption>
@@ -201,7 +201,7 @@
             <tr>
               <th scope="col">Materia</th>
               <th scope="col" >Clave</th>
-              <th scope="col" style="width:35%">Nombre de Asesor</th>
+              <th scope="col" >Nombre de Asesor</th>
             </tr>
           </thead>
 
@@ -488,14 +488,15 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
                 var fila = "<tr>";
                 fila+="<td>"+valor.unidad_contenido.toUpperCase()+"</td>";
                 fila+="<td>"+valor.clave+"</td>";
-                fila+="<td><select>"+asesores.response+"</select><td>";
+                fila+="<td><select class='form-control form-control-lg selcolor'>"+asesores.response+"</select><td>";
                 fila+="</tr>";
                 tabla.innerHTML+=fila;
               });
             };
 
             materias.send(null);
-          }
+            document.getElementById("tabla_oculto_asesor").style.display=""          
+            }
 
           else{
             //api que regresa las materias de especialidad

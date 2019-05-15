@@ -63,7 +63,7 @@
             </div>
           </div>
         </div>
-        <div class="card" style="overflow:scroll">
+        <div class="card" style="overflow:scroll; display:none" id="busqueda_oculto"">
           <div class="card-body">
             <table class="table table-hover" id="tabla_completa" style="width: 100%; overflow:scroll">
               <caption>Lista de todos los alumnos</caption>
@@ -474,7 +474,8 @@ https://www.youtube.com/results?search_query=+AJAX+File+Upload+with+Progress
       xhr.send(null); document.getElementById('btn_buscar').setAttribute("onClick", "limpiar();");
       document.getElementById('btn_buscar').innerHTML = 'Limpiar Búsqueda';
       document.getElementById('btn_buscar').classList.remove('btn-success');
-      document.getElementById('btn_buscar').classList.add('btn-dark');
+      document.getElementById('btn_buscar').classList.add('btn-info');
+      document.getElementById('busqueda_oculto').style.display="";
     }
 
 function refrescar_tabla(){

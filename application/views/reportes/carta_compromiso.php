@@ -30,17 +30,30 @@ class MYPDF extends TCPDF {
 
 	//Page header
 	public function Header() {
+		
 		// Logo
-		//$image_file =base_url().'plantilla/img/cabecera.png';
-	//	$this->Image($image_file, 120, 10, 80, '', 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
+		$image_file =base_url().'assets/img/cabecera.png';
+		$this->Image($image_file, 110, 10, 90, '', 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
 
-		//$image_file =base_url().'plantilla/img/ladoderecho.png';
-	//	$this->Image($image_file, 190, 50, 15, '', 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
+		$image_file =base_url().'assets/img/ladoderecho.png';
+		$this->Image($image_file, 190, 50, 15, '', 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
+
+
 		// Set font
-		$this->SetFont('helvetica', 'B', 10);
-		// Title
-		$this->Cell(0, 10, '<< Colegio Superior para la Educación Integral Intercultural de Oaxaca >>', 0, false, 'C', 0, '', 0, false, 'M', 'M');
+		$this->SetFont('helvetica', 'B',6);
+
+
+		$image_file =base_url().'assets/img/fondocseiio.png';
+		$this->Image($image_file,60,90,86,'', 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
+
+
+		// Titulo
+		$this->SetXY(25,31);
+		$this->Cell(0,0, '"2019, AÑO POR LA ERRADICACIÓN DE LA VIOLENCIA CONTRA LA MUJER"', 0, false, 'C', 0, '', 0, false, 'M', 'M');
+
+		
 	}
+
 
 	// Page footer
 	public function Footer() {

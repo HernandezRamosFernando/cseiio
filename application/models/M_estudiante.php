@@ -224,7 +224,7 @@ function listar_aspirantes_xplantel($curp, $plantel){
 
 public function obtener_fecha_inscripcion_semestre($no_control){
    //select fecha_inscripcion FROM Aspirante where no_control='CSEIIO1910002' 
-   $this->db->select('semestre_en_curso,fecha_inscripcion');
+   $this->db->select('semestre_ingreso,fecha_inscripcion');
    $this->db->from('Estudiante e');
    $this->db->where('e.no_control',$no_control);
    $consulta = $this->db->get();

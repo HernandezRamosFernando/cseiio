@@ -176,6 +176,12 @@ $html_2 .= '<tr>
 $contador+=1;
 };
 
+$fecha_separada = explode("-",$fecha_carta[0]->fecha);
+
+$dateObj   = DateTime::createFromFormat('!m', intval($fecha_separada[1]));
+$mes = strftime('%B', $dateObj->getTimestamp());
+//echo $monthName;
+
 $html_3 = '</tbody>
 </table>
 
@@ -187,7 +193,7 @@ $html_3 = '</tbody>
 y cuando medie juicio civil por correcciones de nombre, apellido o algún dato del acta de nacimiento.<br>
 Estoy consiente del compromiso que suscribo, sabedor de una vez que entregue mi documentación completa, gozaré de matrícula y estaré oficialmente inscrito.
 Por lo tanto de no ser Alumno oficial del CSEIIO los semestres que haya cursado en el plantel no se reconocerán y ante de el incumplimiento y la falta 
-de estos requisitos, seré dado de baja del Bachillerato en el que obtuve mi alta. Firmo la presente a mi enterea satisfacción en a los días del mes del año.
+de estos requisitos, seré dado de baja del Bachillerato en el que obtuve mi alta. Firmo la presente a mi enterea satisfacción en a los '.$fecha_separada[2].' días del mes de '.$mes.' del año '.$fecha_separada[0].'.
 </span>
 
 <br>

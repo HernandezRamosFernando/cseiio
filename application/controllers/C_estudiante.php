@@ -71,12 +71,15 @@ class C_estudiante extends CI_Controller {
             $datos_estudiante['tipo_ingreso'] = 'NUEVO INGRESO';
             $datos_estudiante['semestre'] = 1;
             $datos_estudiante['semestre_en_curso'] = 1;
+            $datos_estudiante['semestre_ingreso'] = 1;
+
         }
 
         else{
             $datos_estudiante['tipo_ingreso'] = 'PORTABILIDAD';
             $datos_estudiante['semestre'] = $this->input->post('aspirante_semestre');
             $datos_estudiante['semestre_en_curso'] = $this->input->post('aspirante_semestre');
+            $datos_estudiante['semestre_ingreso'] = $this->input->post('aspirante_semestre');
         }
 
         //print_r($datos_estudiante);
@@ -608,7 +611,7 @@ public function generar_matricula(){
     $mensaje='';
     $datos= $this->M_estudiante->obtener_fecha_inscripcion_semestre($no_control);
         $fecha_inscripcion=$datos->fecha_inscripcion;
-        $semestre=$datos->semestre_en_curso;
+        $semestre=$datos->semestre_ingreso;
         $anio_ciclo=$this->M_estudiante->obtener_ciclo_escolar($fecha_inscripcion);
         if($anio_ciclo!=null ){
             $numconsecutivo=$this->M_estudiante->numero_consecutivo_matricula($anio_ciclo);

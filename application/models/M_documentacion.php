@@ -95,7 +95,7 @@ class M_documentacion extends CI_Model {
    }
 
    function documentos_base_faltantes_aspirante($no_control){
-      return $this->db->query("SELECT id_documento,nombre_documento FROM Documentacion inner join Documento 
+      return $this->db->query("SELECT Documento.id_documento,Documento.nombre_documento FROM Documentacion inner join Documento 
       on Documentacion.id_documento = Documento.id_documento
       where Estudiante_no_control ='".$no_control."' 
       and tipo ='base'

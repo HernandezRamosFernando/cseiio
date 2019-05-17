@@ -53,4 +53,11 @@ class C_documentacion extends CI_Controller {
 
 
     }
+
+
+    public function get_documentacion_base_faltante_estudiante(){
+        $no_control = $this->input->get("no_control");
+        //echo $no_control;
+        echo json_encode($this->M_documentacion->documentos_base_faltantes_aspirante($no_control));
+    }
 }

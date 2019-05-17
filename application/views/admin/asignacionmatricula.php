@@ -212,10 +212,26 @@
 
         xhrmatricula.send(null);
       } else {
+
+        var documentos_faltantes = new XMLHttpRequest();
+        documentos_faltantes.open('GET', '/cseiio/c_documentacion/get_documentacion_base_faltante_estudiante?no_control='+e.value, true);
+
+        documentos_faltantes.onload = function () {
+            console.log(JSON.parse(documentos_faltantes.response));
+            //console.log(e.value);
+            //console.log(documentos_faltantes.response);
+            var docs = "";
+            JSON.parse(documentos_faltantes.response).forEach(function(valor,indice){
+                docs+="<p style='text-align:left;margin-left:30%'> - "+valor.nombre_documento+"</p>";
+            });
+
+            docs = docs.substring(0,docs.length-1);
+          
+        //-------------------------------------------------------
         console.log("No se puede generar matricula");
         swalWithBootstrapButtons.fire({
           title: 'Información!',
-          text: "El alumno no ha entregado la documentación base completa. ¿Desea generar la carta compromiso sin la documentación?",
+          html: "<p>El alumno no ha entregado la documentación base completa. ¿Desea generar la carta compromiso sin la documentación?</p> <p>Documentos faltantes: </p>"+docs,
           type: 'warning',
           confirmButtonText: 'Aceptar',
           showCancelButton: true,
@@ -252,6 +268,10 @@
             xhrmatricula.send(null);
           }
         });
+        
+        //---------------------------------------------------------------------------------
+      };
+        documentos_faltantes.send(null);
       }
     };
 

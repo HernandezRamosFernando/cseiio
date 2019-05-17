@@ -28,8 +28,10 @@ class M_reinscripcion extends CI_Model {
                     $tercer_parcial = $materia->tercer_parcial==null?0:intval($materia->tercer_parcial);
                     $examen_final = $materia->examen_final==null?0:intval($materia->examen_final);
 
-                    $promedio_modular = ($primer_parcial+$segundo_parcial+$tercer_parcial);
+                    $promedio_modular = ($primer_parcial+$segundo_parcial+$tercer_parcial)/3;
                     $promedio_final = ($promedio_modular+$examen_final)/2;
+
+                    $this->db->query("update Grupo_Estudiante set calificacion_final=".(round($promedio_final,0,PHP_ROUND_HALF_UP))." where id_materia='".$materia->id_materia."' and Estudiante_no_control='".$estudiante->no_control."'");
 
                     if($promedio_final<6){
                         $contador_materias_reprobadas+=1;

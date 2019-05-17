@@ -175,7 +175,7 @@
       <label class="form-group has-float-label seltitulo">
         <select class="form-control form-control-lg selcolor" name="tipo_sangre" required id="tipo_sangre">
           <option value="">Seleccione una opción</option>
-          <option value="No conoce">No conoce su tipo de sangre</option>
+          <option value="NO CONOCE">No conoce su tipo de sangre</option>
           <option value="A+">A+</option>
           <option value="A-">A-</option>
           <option value="B+">B+</option>

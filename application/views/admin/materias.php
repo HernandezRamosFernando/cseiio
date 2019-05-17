@@ -391,8 +391,14 @@ function reset_modal_ingresar(){
     document.getElementById("tabla").innerHTML="";
     var xhr = new XMLHttpRequest();
       xhr.open('GET', '<?php echo base_url();?>index.php/C_materias/lista_materias/', true);
-
-      xhr.onload = function () {
+      xhr.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      xhr.error = function (){
+        console.log("error de conexion");
+      }
+      xhr.onload = function(){
+        $('#div_carga').hide();
         //console.log(JSON.parse(xhr.response));
         let datos = JSON.parse(xhr.response);
         //datos de materia
@@ -474,8 +480,14 @@ function cargar_datos_materias(e) {
       limpiar_formulario_actualizar();
       var xhr = new XMLHttpRequest();
       xhr.open('GET', '<?php echo base_url();?>index.php/C_materias/get_datos_materia/'+e.value, true);
-
-      xhr.onload = function () {
+      xhr.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      xhr.error = function (){
+        console.log("error de conexion");
+      }
+      xhr.onload = function(){
+        $('#div_carga').hide();
         console.log(JSON.parse(xhr.response));
         let datos = JSON.parse(xhr.response);
         //datos personales
@@ -534,9 +546,16 @@ var form = document.getElementById("nuevamateria");
 		var formdata = new FormData(form);
 		var xhr =  new XMLHttpRequest();
 		xhr.open("POST","<?php echo base_url();?>index.php/C_materias/agregarMateria",true);
-    xhr.onreadystatechange = function() { 
+    xhr.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      xhr.error = function (){
+        console.log("error de conexion");
+      }
+  xhr.onreadystatechange = function () {
     if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-      //console.log();
+      console.log(xhr.responseText);
+      $('#div_carga').hide();
       if(xhr.responseText==="si"){
         Swal.fire({
             type: 'success',
@@ -576,9 +595,16 @@ var form = document.getElementById("nuevamateria");
     var formdata_modificar = new FormData(form_modificar);
     var xhr =  new XMLHttpRequest();
     xhr.open("POST","<?php echo base_url();?>index.php/C_materias/modificarMateria",true);
-    xhr.onreadystatechange = function() { 
+    xhr.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      xhr.error = function (){
+        console.log("error de conexion");
+      }
+  xhr.onreadystatechange = function () {
     if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-      //console.log();
+      console.log(xhr.responseText);
+      $('#div_carga').hide();
       if(xhr.responseText==="si"){
         Swal.fire({
             type: 'success',
@@ -615,9 +641,16 @@ var form = document.getElementById("nuevamateria");
     var formdata_eliminar = new FormData(form_eliminar);
     var xhr =  new XMLHttpRequest();
     xhr.open("POST","<?php echo base_url();?>index.php/C_materias/eliminarMateria",true);
-    xhr.onreadystatechange = function() { 
+    xhr.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      xhr.error = function (){
+        console.log("error de conexion");
+      }
+  xhr.onreadystatechange = function () {
     if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-      //console.log();
+      console.log(xhr.responseText);
+      $('#div_carga').hide();
       if(xhr.responseText==="si"){
         Swal.fire({
             type: 'success',

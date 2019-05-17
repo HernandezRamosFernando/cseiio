@@ -170,24 +170,29 @@ public function portabilidad(){
     }
 
     public function acreditacion(){
+        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
         $data= array('title'=>'Acreditación');
         $this->load->view("headers/cabecera", $data);
         $this->load->view("headers/menuarriba");
         $this->load->view("headers/menuizquierda");
         $this->load->view("admin/acreditacion");
         $this->load->view("footers/footer");
+        }
     }
 
     public function control_permisos(){
+        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
         $data= array('title'=>'Control y Permisos');
         $this->load->view("headers/cabecera", $data);
         $this->load->view("headers/menuarriba");
         $this->load->view("headers/menuizquierda");
         $this->load->view("admin/controlypermisos");
         $this->load->view("footers/footer");
+        }
     }
 
     public function crear_grupo(){
+        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
         $datos['planteles'] = $this->M_plantel->get_planteles();
         $datos['ciclo_escolar'] = $this->M_ciclo_escolar->get_ciclo_escolar();
         
@@ -197,9 +202,11 @@ public function portabilidad(){
         $this->load->view("headers/menuizquierda");
         $this->load->view("admin/creargrupo", $datos);
         $this->load->view("footers/footer");
+        }
     }
 
     public function buscar_grupo(){
+        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
         $datos['planteles'] = $this->M_plantel->get_planteles();
         $datos['ciclo_escolar'] = $this->M_ciclo_escolar->get_ciclo_escolar();
         
@@ -209,8 +216,10 @@ public function portabilidad(){
         $this->load->view("headers/menuizquierda");
         $this->load->view("admin/buscar_grupo", $datos);
         $this->load->view("footers/footer");
+        }
     }
     public function asesor_grupo(){
+        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
         $datos['planteles'] = $this->M_plantel->get_planteles();
     
         $data= array('title'=>'Asignación de Asesor');
@@ -219,16 +228,18 @@ public function portabilidad(){
         $this->load->view("headers/menuizquierda");
         $this->load->view("admin/asesor_grupo", $datos);
         $this->load->view("footers/footer");
+        }
     }
 
     public function terminar_ciclo(){
-    
+        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
         $data= array('title'=>'Terminacion de ciclo escolar');
         $this->load->view("headers/cabecera", $data);
         $this->load->view("headers/menuarriba");
         $this->load->view("headers/menuizquierda");
         $this->load->view("admin/terminar_ciclo");
         $this->load->view("footers/footer");
+        }
     }
 
     public function calificacion(){
@@ -283,6 +294,7 @@ public function portabilidad(){
     }
 
     public function resolucion_equivalencia(){
+        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
         $datos['planteles'] = $this->M_plantel->get_planteles();
         $datos['ciclo_escolar'] = $this->M_ciclo_escolar->lista_ciclo_escolar();
         $data= array('title'=>'Resolución de Equivalencia');
@@ -291,6 +303,7 @@ public function portabilidad(){
         $this->load->view("headers/menuizquierda");
         $this->load->view("admin/resolucion_equivalencia", $datos);
         $this->load->view("footers/footer");
+        }
     } 
         
     //-------------------------------------------------termina vistas

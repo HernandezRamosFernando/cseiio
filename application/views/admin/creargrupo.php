@@ -56,15 +56,6 @@
           </div>
 
 
-          <div class="col-md-4" style="display: none" id="grupo_componente_oculto">
-            <label class="form-group has-float-label seltitulo">
-              <select class="form-control form-control-lg selcolor" name="grupo_componente" id="grupo_componente">
-                <option value="SI">SI</option>
-              </select>
-              <span>¿Es de componente?</span>
-            </label>
-          </div>
-
           <div class="col-md-4" style="display: none" id="seleccione_componente_oculto">
             <label class="form-group has-float-label seltitulo">
               <select class="form-control form-control-lg selcolor" name="seleccione_componente" id="seleccione_componente">
@@ -135,7 +126,11 @@
                 <?php
                                         foreach ($ciclo_escolar as $ciclo)
                                         {
-                                          echo '<option value="'.$ciclo->id_ciclo_escolar.'">'.$ciclo->periodo.'</option>';
+                                          if($ciclo->periodo == "AGOSTO-ENERO"){
+                                            echo '<option value="B">'.$ciclo->periodo.'</option>';
+                                          }else{
+                                            echo '<option value="A">'.$ciclo->periodo.'</option>';
+                                          }
                                         }
                                         ?>
               </select>
@@ -232,6 +227,13 @@
 <!-- /#wrapper -->
 
 <script>
+
+function limpiarbusqueda(){
+    document.getElementById('crear_grupo').classList.remove('btn-success');
+    document.getElementById('crear_grupo').classList.add('btn-info');
+    document.getElementById('crear_grupo').setAttribute("onClick", "limpiar();");
+    document.getElementById('crear_grupo').innerHTML = 'Limpiar Búsqueda';
+  }
 
 function llenar_especialidad(){
   seleccione_componente.innerHTML = "Cargando datos";
@@ -475,10 +477,10 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
 
          //cargar las materias en la tabla-----------------------------------------------
          var semestre = parseInt(document.getElementById("semestre_grupo").value);
-          if(semestre<5){
+          if(semestre<6){
             //api que regrese esas materias
             var materias = new XMLHttpRequest();
-            materias.open('GET', '/cseiio/c_materias/materias_semestre?semestre='+semestre, true);
+            materias.open('GET', '<?php echo base_url();?>index.php/c_materias/materias_semestre?semestre='+semestre, true);
 
             materias.onload = function () {
               document.getElementById("tabla_asesor").innerHTML="";
@@ -501,7 +503,7 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
           else{
             //api que regresa las materias de especialidad
             var materias = new XMLHttpRequest();
-            materias.open('GET', '/cseiio/c_materias/get_materias_semestre_componente?semestre='+semestre+"&componente="+document.getElementById("seleccione_componente").value.split("-")[0], true);
+            materias.open('GET', '<?php echo base_url();?>index.php/c_materias/get_materias_semestre_componente?semestre='+semestre+"&componente="+document.getElementById("seleccione_componente").value.split("-")[0], true);
 
             materias.onload = function () {
               document.getElementById("tabla_asesor").innerHTML="";
@@ -541,6 +543,11 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
                   document.getElementById("boton_agregar").value="existente";
                   //oculta la tabla de asesores porque el grupo ya existe
                   document.getElementById("tabla_oculto_asesor").style.display="none";
+              }else{
+                document.getElementById('crear_grupo').classList.remove('btn-success');
+                document.getElementById('crear_grupo').classList.add('btn-info');
+                document.getElementById('crear_grupo').setAttribute("onClick", "limpiar();");
+                document.getElementById('crear_grupo').innerHTML = 'Limpiar Búsqueda';
               }
           });
         }
@@ -718,12 +725,14 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
   }
   function semestres(){
     if(document.getElementById("grupo_periodo").innerText==="AGOSTO-ENERO"){
-      document.getElementById("semestre_grupo").innerHTML='<option value="1">1</option>';
+      document.getElementById("semestre_grupo").innerHTML='<option value=" ">Seleccione uno</option>';
+      document.getElementById("semestre_grupo").innerHTML+='<option value="1">1</option>';
       document.getElementById("semestre_grupo").innerHTML+='<option value="3">3</option>';
       document.getElementById("semestre_grupo").innerHTML+='<option value="5">5</option>';
     }
     else{
-      document.getElementById("semestre_grupo").innerHTML='<option value="2">2</option>';
+      document.getElementById("semestre_grupo").innerHTML='<option value=" ">Seleccione uno</option>';
+      document.getElementById("semestre_grupo").innerHTML+='<option value="2">2</option>';
       document.getElementById("semestre_grupo").innerHTML+='<option value="4">4</option>';
       document.getElementById("semestre_grupo").innerHTML+='<option value="6">6</option>';
     }

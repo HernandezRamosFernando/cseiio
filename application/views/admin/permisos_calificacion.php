@@ -5,7 +5,7 @@
     <!-- Breadcrumbs-->
     <ol class="breadcrumb">
       <li class="breadcrumb-item">
-        <a>Asignar perimisos de para calificaciones</a>
+        <a>Asignar permisos de para calificaciones</a>
       </li>
       <li class="breadcrumb-item active">Ingrese los datos requeridos para crear un grupo</li>
     </ol>
@@ -132,7 +132,11 @@
             <div class="col-md-6">
               <div class="form-label-group">
                 <input type="date"  class="form-control" id="fecha_inicio"  
-                  placeholder="Fecha de inicio">
+                  placeholder="Fecha de inicio" min=
+                <?php
+                echo date('Y-m-d');
+                ?>
+                >
                 <label for="fecha_inicio">Fecha de inicio de permiso </label>
               </div>
             </div>
@@ -140,7 +144,11 @@
             <div class="col-md-6">
               <div class="form-label-group">
                 <input type="date"  class="form-control" id="fecha_fin"  
-                  placeholder="Fecha de finalización ">
+                  placeholder="Fecha de finalización "min=
+                <?php
+                echo date('Y-m-d');
+                ?>
+                >
                 <label for="fecha_fin">Fecha de finalización de permiso </label>
               </div>
             </div>
@@ -150,7 +158,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button type="button" onclick="guardar()" class="btn btn-success">Guardar fecha</button>
+        <button type="button" onclick="validarcomponente()" class="btn btn-success">Guardar fecha</button>
       </div>
     </div>
   </div>
@@ -159,12 +167,29 @@
 
 <script>
 
+function validarcomponente() {
+    validafecha(document.getElementById("fecha_inicio"));
+     validafecha(document.getElementById("fecha_fin"));
+
+    if (document.getElementById("fecha_fin").value != '' && document.getElementById("fecha_inicio").value != '') {
+      guardar()
+    } else {
+      Swal.fire({
+        type: 'warning',
+        text: 'La fecha ingresada es incorrecta'
+      });
+    }
+  }
+
 function fecha_sql(fecha){
 let fecha_separada = fecha.split("/").reverse();
 return fecha_separada.join("-");
 }
 
 function guardar(){
+  validafecha(document.getElementById("fecha_inicio"));
+     validafecha(document.getElementById("fecha_fin"));
+
   var datos = new Array();
   if(document.getElementById("boton_agregar").value==="todos"){
     var tabla = document.getElementById("tablaplantel");

@@ -268,15 +268,27 @@ function mascara(d, sep, pat, nums) {
 
 function validafecha(e){
   console.log(e.value);
-  fecha= e.value.split('/');
-  if(fecha[0] <= "31" && fecha[1] <= "12" && fecha[2] <= "2004"){
+  fecha= e.value.split('-');
+  var today = new Date();
+  var dd = today.getDate();
+  var mm = today.getMonth()+1; //January is 0!
+  var yyyy = today.getFullYear();
+  if(dd<10){
+        dd='0'+dd
+    } 
+    if(mm<10){
+        mm='0'+mm
+    } 
+  today = yyyy+mm+dd;
+  fecha = fecha.join('');
+
+  if(fecha >= today){
   }else{
     Swal.fire({
       type: 'error',
       title: 'La fecha ingresada es incorrecta',
       confirmButtonText: 'Cerrar'
-
-    })
+    });
     e.value='';
   }
 }
@@ -468,11 +480,8 @@ function regresartabla(e) {
 function componente_grupo(e) {
   if (document.getElementById("semestre_grupo").value === "5" || document.getElementById("semestre_grupo").value === "6") {
     llenar_especialidad();
-    document.getElementById("grupo_componente_oculto").style.display = "";
     document.getElementById("seleccione_componente_oculto").style.display = "";
-
   } else {
-    document.getElementById("grupo_componente_oculto").style.display = "none";
     document.getElementById("seleccione_componente_oculto").style.display = "none";
   }
 }

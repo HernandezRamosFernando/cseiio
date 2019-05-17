@@ -264,7 +264,6 @@ function bloquearcomponente(){
     document.getElementById("plantel").disabled = true;
     document.getElementById("grupo_ciclo_escolar").disabled = true;
     document.getElementById("seleccione_componente").disabled = true;
-    document.getElementById("grupo_componente").disabled = true;
 }
 
 function bloquearnormal(){
@@ -283,12 +282,11 @@ function nobloquear(){
     document.getElementById("plantel").disabled = false;
     document.getElementById("grupo_ciclo_escolar").disabled = false;
     document.getElementById("seleccione_componente").disabled = false;
-    document.getElementById("grupo_componente").disabled = false;
 }
 
 function validarcomponente(){
 if (document.getElementById("semestre_grupo").value === "5" || document.getElementById("semestre_grupo").value === "6") {
-  if(document.getElementById("plantel").value != '' && document.getElementById("grupo_periodo").value != '' && document.getElementById("semestre_grupo").value != '' && document.getElementById("grupo_ciclo_escolar").value != '' && document.getElementById("grupo_nombre").value != "" && document.getElementById("seleccione_componente").value != "" && document.getElementById("grupo_componente").value != ""){
+  if(document.getElementById("plantel").value != '' && document.getElementById("grupo_periodo").value != '' && document.getElementById("semestre_grupo").value != '' && document.getElementById("grupo_ciclo_escolar").value != '' && document.getElementById("grupo_nombre").value != "" && document.getElementById("seleccione_componente").value != "" ){
     bloquearcomponente();
     alerta_grupo();
 
@@ -477,7 +475,7 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
 
          //cargar las materias en la tabla-----------------------------------------------
          var semestre = parseInt(document.getElementById("semestre_grupo").value);
-          if(semestre<6){
+          if(semestre<5){
             //api que regrese esas materias
             var materias = new XMLHttpRequest();
             materias.open('GET', '<?php echo base_url();?>index.php/c_materias/materias_semestre?semestre='+semestre, true);
@@ -497,7 +495,7 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
             };
 
             materias.send(null);
-            document.getElementById("tabla_oculto_asesor").style.display=""          
+            document.getElementById("tabla_oculto_asesor").style.display="";         
             }
 
           else{
@@ -520,6 +518,7 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
             };
 
             materias.send(null);
+            document.getElementById("tabla_oculto_asesor").style.display="";
           }
 
     //----------------------------------------------------------------------------------------

@@ -23,7 +23,7 @@
                          
                         </div>
                         <div class="col-md-4 col-lg-4">
-                            <a href="../views/reinscripcion.html" 
+                        <a href="<?php echo base_url();?>index.php/c_vistas/reinscripcion" 
                             class="btn btn-primary btn-lg btn-block valign-center btn-responsive menu btn-2" > 
                             <i class="material-icons">redoperson</i>Reinscripción
                             </a>

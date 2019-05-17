@@ -61,7 +61,7 @@
         </div>
       </div>
     </div>
-    <div class="card" style="overflow:scroll">
+    <div class="card" style="overflow:scroll; display:none" id="busqueda_oculto">
       <div class="card-body">
         <table class="table table-hover" id="tabla_completa" style="width: 100%">
           <caption>Lista de todos los alumnos</caption>
@@ -147,169 +147,178 @@
 
 
 
-          <div class="form-group">
+          <div class="card form-group">
+      <div>
+      <label class="form-group has-float-label text-center" style="font-size: 12pt; font-weight: bold; color:#777;" >Fecha de nacimiento</label>
+      </div>
 
-            <div class="row">
+        <div class="row">
+         
+          <div class=" col-md-4 ">
+          <label class="form-group has-float-label seltitulo">
+              <select class="form-control form-control-lg selcolor" id="aspirante_anio_nacimiento" required name="aspirante_anio_nacimiento" onclick="get_dias()">
 
+              </select>
+              <span>Año</span>
+            </label>
+          </div>
+          <div class="col-md-4">
+          <label class="form-group has-float-label seltitulo">
+              <select class="form-control form-control-lg selcolor" id="aspirante_mes_nacimiento" required name="aspirante_mes_nacimiento" onclick="get_dias()">
+              <option value="01">Enero</option>
+            <option value="02">Febrero</option>
+            <option value="03">Marzo</option>
+            <option value="04">Abril</option>
+            <option value="05">Mayo</option>
+            <option value="06">Junio</option>
+            <option value="07">Julio</option>
+            <option value="08">Agosto</option>
+            <option value="09">Septiembre</option>
+            <option value="10">Octubre</option>
+            <option value="11">Noviembre</option>
+            <option value="12">Diciembre</option>
+              </select>
+              <span>Mes</span>
+            </label>
+          </div>
+          <div class="col-md-4 ">
+          <label class="form-group has-float-label seltitulo">
+              <select class="form-control form-control-lg selcolor" id="aspirante_dia_nacimiento" required name="aspirante_dia_nacimiento">
 
-              <div class="col-md-2 ">
-                <label class="form-group has-float-label seltitulo">
-                  <select class="form-control form-control-lg selcolor" id="aspirante_anio_nacimiento" required
-                    name="aspirante_anio_nacimiento" onclick="get_dias()">
-
-                  </select>
-                  <span>Año de nacimiento</span>
-                </label>
-              </div>
-              <div class="col-md-2 ">
-                <label class="form-group has-float-label seltitulo">
-                  <select class="form-control form-control-lg selcolor" id="aspirante_mes_nacimiento" required
-                    name="aspirante_mes_nacimiento" onclick="get_dias()">
-                    <option value="01">Enero</option>
-                    <option value="02">Febrero</option>
-                    <option value="03">Marzo</option>
-                    <option value="04">Abril</option>
-                    <option value="05">Mayo</option>
-                    <option value="06">Junio</option>
-                    <option value="07">Julio</option>
-                    <option value="08">Agosto</option>
-                    <option value="09">Septiembre</option>
-                    <option value="10">Octubre</option>
-                    <option value="11">Noviembre</option>
-                    <option value="12">Diciembre</option>
-                  </select>
-                  <span>Mes de nacimiento</span>
-                </label>
-              </div>
-              <div class="col-md-2 ">
-                <label class="form-group has-float-label seltitulo">
-                  <select class="form-control form-control-lg selcolor" id="aspirante_dia_nacimiento" required
-                    name="aspirante_dia_nacimiento" onclick="get_dias('anio','mes','dia')">
-
-                  </select>
-                  <span>Dia de nacimiento</span>
-                </label>
-              </div>
-
-              <div class="col-md-2">
-                <div class="form-label-group">
-                  <input type="number" title="El numero de telefono debe de ser a 13 digitos"
-                    class="form-control text-uppercase" id="aspirante_telefono" name="aspirante_telefono"
-                    placeholder="Telefono" style="color: #237087">
-                  <label for="aspirante_telefono">Teléfono</label>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="form-label-group">
-                  <input type="email"
-                    pattern="^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$"
-                    title="Introduzca un correo valido" class="form-control text-lowercase" id="aspirante_correo"
-                    name="aspirante_correo" placeholder="Correo Electrónico" style="color: #237087">
-                  <label for="aspirante_correo">Correo electrónico</label>
-                </div>
-              </div>
-
-
-            </div>
-
+              </select>
+              <span>Día</span>
+            </label>
           </div>
 
 
+        </div>
+
+        </div>
 
           <div class="form-group">
 
-            <div class="row">
-              <div class="col-md-4">
-                <label class="form-group has-float-label seltitulo">
-                  <select class="form-control form-control-lg selcolor" id="aspirante_sexo" required
-                    name="aspirante_sexo">
-                    <option value="">Seleccione</option>
-                    <option value="H">Hombre</option>
-                    <option value="M">Mujer</option>
-                  </select>
-                  <span>Sexo</span>
-                </label>
-              </div>
+        <div class="row">
 
-              <div class="col-md-4">
-                <div class="form-label-group">
-                  <input type="number" pattern="[0-9]{11}" title="Introduzca 11 digitos"
-                    class="form-control text-uppercase" id="aspirante_nss" name="aspirante_nss"
-                    placeholder="Numero de Seguro Social" style="color: #237087">
-                  <label for="aspirante_nss">NSS (IMSS)</label>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="form-label-group">
-                  <input type="text" class="form-control text-uppercase" id="aspirante_programa_social"
-                    name="aspirante_programa_social" placeholder="Folio de programa social" style="color: #237087">
-                  <label for="aspirante_programa_social">Folio de Prospera</label>
-                </div>
-              </div>
-
-              <div class="col-md-4">
-                <div class="form-group">
-                  <label class="form-group has-float-label seltitulo">
-                    <select class="form-control form-control-lg selcolor" name="tipo_sangre" required id="tipo_sangre">
-                      <option value="">Seleccione una opción</option>
-                      <option value="NO CONOCE">No conoce su tipo de sangre</option>
-                      <option value="A+">A+</option>
-                      <option value="A-">A-</option>
-                      <option value="B+">B+</option>
-                      <option value="B-">B-</option>
-                      <option value="AB+">AB+</option>
-                      <option value="AB-">AB-</option>
-                      <option value="A+">O+</option>
-                      <option value="A-">O-</option>
-                    </select>
-                    <span>Tipo de sangre</span>
-                  </label>
-                </div>
-              </div>
-
-
-              <div class="col-md-4">
-                <label class="form-group has-float-label seltitulo">
-                  <select class="form-control form-control-lg selcolor" id="aspirante_alergia_combo"
-                    name="aspirante_alergia_combo" onchange="alergia(this)">
-                    <option value="2">No</option>
-                    <option value="1">Si</option>
-                  </select>
-                  <span>¿Alérgico a algún medicamento?</span>
-                </label>
-              </div>
-              <div class="col-md-4" style="display:none" id="a" name="alergia_medicamento">
-                <div class="form-label-group">
-                  <input type="text" pattern="[A-Za-z]+[ ]*[A-Za-z ]*" onchange="valida(this)"
-                    class="form-control text-uppercase" id="aspirante_alergia" name="aspirante_alergia"
-                    onchange="valida(this)" placeholder="Ingrese el medicamento" style="color: #237087">
-                  <label for="aspirante_alergia">Ingrese el medicamento</label>
-                </div>
-              </div>
-
-
-              <div class="col-md-4">
-                <label class="form-group has-float-label seltitulo">
-                  <select class="form-control form-control-lg selcolor" id="aspirante_discapacidad_combo"
-                    name="aspirante_discapacidad_combo" onchange="discapacidad(this)">
-                    <option value="2">No</option>
-                    <option value="1">Si</option>
-                  </select>
-                  <span>¿Padece alguna discapacidad?</span>
-                </label>
-              </div>
-              <div class="col-md-4" style="display:none" id="b" name="discapacidad">
-                <div class="form-label-group">
-                  <input type="text" pattern="[A-Za-z]+[ ]*[A-Za-z ]*" onchange="valida(this)"
-                    class="form-control text-uppercase" id="aspirante_discapacidad" name="aspirante_discapacidad"
-                    onchange="valida(this)" placeholder="Ingrese la discapacidad" style="color: #237087">
-                  <label for="aspirante_discapacidad">Ingrese la discapacidad</label>
-                </div>
-              </div>
-
+          <div class="col-md-4">
+            <div class="form-label-group">
+              <input type="number" title="El numero de telefono debe de ser a 13 digitos" style="color: #237087 "
+                class="form-control text-uppercase" id="aspirante_telefono" name="aspirante_telefono"
+                placeholder="Telefono">
+              <label for="aspirante_telefono">Teléfono</label>
             </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-label-group">
+              <input type="email"
+                title="Introduzca un correo valido" class="form-control text-lowercase" id="aspirante_correo"
+                name="aspirante_correo" placeholder="Correo Electrónico" style="color: #237087 ">
+              <label for="aspirante_correo">Correo electrónico</label>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-group has-float-label seltitulo">
+              <select class="form-control form-control-lg selcolor" id="aspirante_sexo" required name="aspirante_sexo">
+                <option value="">Seleccione</option>
+                <option value="H">Hombre</option>
+                <option value="M">Mujer</option>
+              </select>
+              <span>Sexo</span>
+            </label>
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+      <div class="form-group">
+        <div class="row">
+         
+
+          <div class="col-md-4">
+            <div class="form-label-group">
+              <input type="number" pattern="[0-9]{11}" title="Introduzca 11 digitos" class="form-control text-uppercase"
+                id="aspirante_nss" name="aspirante_nss" placeholder="Numero de Seguro Social" style="color: #237087 ">
+              <label for="aspirante_nss">NSS (IMSS)</label>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-label-group">
+              <input type="text" class="form-control text-uppercase" id="aspirante_programa_social"
+                name="aspirante_programa_social" placeholder="Folio de programa social" style="color: #237087 ">
+              <label for="aspirante_programa_social">Folio de Prospera</label>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="form-group has-float-label seltitulo">
+                <select class="form-control form-control-lg selcolor" name="tipo_sangre" required id="tipo_sangre">
+                  <option value="">Seleccione una opción</option>
+                  <option value="No conoce">No conoce su tipo de sangre</option>
+                  <option value="A+">A+</option>
+                  <option value="A-">A-</option>
+                  <option value="B+">B+</option>
+                  <option value="B-">B-</option>
+                  <option value="AB+">AB+</option>
+                  <option value="AB-">AB-</option>
+                  <option value="A+">O+</option>
+                  <option value="A-">O-</option>
+                </select>
+                <span>Tipo de sangre</span>
+              </label>
+            </div>
+          </div>
 
           </div>
+      </div>
+
+          <div class="form-group">
+        <div class="row">
+
+          <div class="col-md-4">
+            <label class="form-group has-float-label seltitulo">
+              <select class="form-control form-control-lg selcolor" id="aspirante_alergia_combo" name="aspirante_alergia_combo"
+                onchange="alergia(this)">
+                <option value="2">No</option>
+                <option value="1">Si</option>
+              </select>
+              <span>¿Alérgico a algún medicamento?</span>
+            </label>
+          </div>
+          <div class="col-md-4" style="display:none" id="a" name="alergia_medicamento">
+            <div class="form-label-group">
+              <input type="text" pattern="[A-ZÁÉÍÓÚáéíóúa-z]+[ ]*[A-ZÁÉÍÓÚáéíóúa-z ]*" 
+                class="form-control text-uppercase" id="aspirante_alergia" name="aspirante_alergia"
+                placeholder="Ingrese el medicamento" style="color: #237087 ">
+              <label for="aspirante_alergia">Ingrese el medicamento</label>
+            </div>
+          </div>
+
+
+          <div class="col-md-4">
+            <label class="form-group has-float-label seltitulo">
+              <select class="form-control form-control-lg selcolor" id="aspirante_discapacidad_combo"
+                name="aspirante_discapacidad_combo" onchange="discapacidad(this)">
+                <option value="2">No</option>
+                <option value="1">Si</option>
+              </select>
+              <span>¿Padece alguna discapacidad?</span>
+            </label>
+          </div>
+          <div class="col-md-4" style="display:none" id="b" name="discapacidad">
+            <div class="form-label-group">
+              <input type="text" pattern="[A-ZÁÉÍÓÚáéíóúa-z]+[ ]*[A-ZÁÉÍÓÚáéíóúa-z ]*" 
+                class="form-control text-uppercase" id="aspirante_discapacidad" name="aspirante_discapacidad"
+                placeholder="Ingrese la discapacidad" style="color: #237087 ">
+              <label for="aspirante_discapacidad">Ingrese la discapacidad</label>
+            </div>
+          </div>
+
+        </div>
+      </div>
 
 
           <div class="form-group">
@@ -1032,7 +1041,8 @@
     document.getElementById('btn_buscar').setAttribute("onClick", "limpiar();");
     document.getElementById('btn_buscar').innerHTML = 'Limpiar Búsqueda';
     document.getElementById('btn_buscar').classList.remove('btn-success');
-    document.getElementById('btn_buscar').classList.add('btn-dark');
+    document.getElementById('btn_buscar').classList.add('btn-info');
+    document.getElementById('busqueda_oculto').style.display="";
   }
 
 

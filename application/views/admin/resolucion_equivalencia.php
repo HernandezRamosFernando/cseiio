@@ -65,7 +65,7 @@
 
 
 
-    <div class="card" style="overflow:scroll">
+    <div class="card" style="overflow:scroll; display:none" id="busqueda_oculto">
       <div class="card-body">
         <table class="table table-hover" id="tabla_completa">
           <caption>Lista de Alumnos sin matrícula asignada</caption>
@@ -448,8 +448,14 @@
     var plantel = document.getElementById("aspirante_plantel_busqueda").value;
     var query = 'curp=' + curp + '&plantel=' + plantel;
     xhr.open('GET', '<?php echo base_url();?>index.php/c_estudiante/estudiantes_portabilidad?' + query, true);
-
+    xhr.onloadstart = function () {
+      $('#div_carga').show();
+    }
+    xhr.error = function () {
+      console.log("error de conexion");
+    }
     xhr.onload = function () {
+      $('#div_carga').hide();
       console.log(JSON.parse(xhr.response));
       ////console.log(query);
 
@@ -529,6 +535,7 @@
     document.getElementById('btn_buscar').innerHTML = 'Limpiar Búsqueda';
     document.getElementById('btn_buscar').classList.remove('btn-success');
     document.getElementById('btn_buscar').classList.add('btn-dark');
+    document.getElementById('busqueda_oculto').style.display="";
 
   }
 

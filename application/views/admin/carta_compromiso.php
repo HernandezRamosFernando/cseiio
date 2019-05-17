@@ -67,7 +67,7 @@
      
 
 
-        <div class="card" style="overflow:scroll">
+        <div class="card" style="overflow:scroll; display:none" id="busqueda_oculto">
           <div class="card-body">
             <table class="table table-hover" id="tabla_completa">
               <caption>Lista de Alumnos que generan carta compromiso</caption>
@@ -360,7 +360,8 @@
       document.getElementById('btn_buscar').setAttribute("onClick", "limpiar();");
       document.getElementById('btn_buscar').innerHTML = 'Limpiar Búsqueda';
       document.getElementById('btn_buscar').classList.remove('btn-success');
-      document.getElementById('btn_buscar').classList.add('btn-dark');
+      document.getElementById('btn_buscar').classList.add('btn-info');
+      document.getElementById('busqueda_oculto').style.display="";
     }
 
 

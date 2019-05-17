@@ -201,7 +201,7 @@
       <select class="form-control form-control-lg selcolor" id="aspirante_alergia_combo" name="aspirante_alergia_combo"
         onchange="alergia(this)">
         <option value="2">No</option>
-        <option value="1">Si</option>
+        <option value="1">Sí</option>
       </select>
       <span>¿Alérgico a algún medicamento?</span>
     </label>
@@ -221,7 +221,7 @@
       <select class="form-control form-control-lg selcolor" id="aspirante_discapacidad_combo"
         name="aspirante_discapacidad_combo" onchange="discapacidad(this)">
         <option value="2">No</option>
-        <option value="1">Si</option>
+        <option value="1">Sí</option>
       </select>
       <span>¿Padece alguna discapacidad?</span>
     </label>

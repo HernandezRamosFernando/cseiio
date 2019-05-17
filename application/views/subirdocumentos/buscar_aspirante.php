@@ -63,7 +63,7 @@
             </div>
           </div>
         </div>
-        <div class="card" style="overflow:scroll">
+        <div class="card" style="overflow:scroll; display:none" id="busqueda_oculto"">
           <div class="card-body">
             <table class="table table-hover" id="tabla_completa" style="width: 100%; overflow:scroll">
               <caption>Lista de todos los alumnos</caption>
@@ -226,7 +226,7 @@ https://www.youtube.com/results?search_query=+AJAX+File+Upload+with+Progress
           fila += '</label></div></td>';
 
           fila += '<td>';
-          fila += '<input type="file" name="file' + cont2 + '" id="file' + cont2 + '" onchange="validarArchivo(this,\'status' + cont2 + '\',\'status_error' + cont2 + '\',\'boton' + cont2 + '\')" '+estatusdoc+' required/><br><span class="badge badge-danger">* El archivo debe estar en formato PDF, JPG y PNG.</span><progress id="progressBar' + cont2 + '" value="0" max="100"></progress><span id="status' + cont2 + '" class="status_upload"></span><span id="status_error' + cont2 + '" class="status_upload_error"></span> <input  id="boton' + cont2 + '" class="btn btn-success" type="button" value="Cargar archivo" onclick="uploadFile(\'file' + cont2 + '\',\'documento' + cont2 + '\',\'progressBar' + cont2 + '\',\'status' + cont2 + '\',\'status_error' + cont2 + '\',\'enlace' + cont2 + '\',\'enlaceview' + cont2 + '\',\'view' + cont2 + '\')" disabled>';
+          fila += '<input type="file" name="file' + cont2 + '" id="file' + cont2 + '" onchange="validarArchivo(this,\'status' + cont2 + '\',\'status_error' + cont2 + '\',\'boton' + cont2 + '\')" '+estatusdoc+' required/><br><span class="badge badge-danger">* El archivo debe estar en formato PDF, JPG o PNG y pesar menos de 2 MB.</span><progress id="progressBar' + cont2 + '" value="0" max="100"></progress><span id="status' + cont2 + '" class="status_upload"></span><span id="status_error' + cont2 + '" class="status_upload_error"></span> <input  id="boton' + cont2 + '" class="btn btn-success" type="button" value="Cargar archivo" onclick="uploadFile(\'file' + cont2 + '\',\'documento' + cont2 + '\',\'progressBar' + cont2 + '\',\'status' + cont2 + '\',\'status_error' + cont2 + '\',\'enlace' + cont2 + '\',\'enlaceview' + cont2 + '\',\'view' + cont2 + '\')" disabled>';
           fila += '</td>';
 
           if (valor.ruta !== null && valor.ruta.length!==0) {
@@ -474,7 +474,8 @@ https://www.youtube.com/results?search_query=+AJAX+File+Upload+with+Progress
       xhr.send(null); document.getElementById('btn_buscar').setAttribute("onClick", "limpiar();");
       document.getElementById('btn_buscar').innerHTML = 'Limpiar Búsqueda';
       document.getElementById('btn_buscar').classList.remove('btn-success');
-      document.getElementById('btn_buscar').classList.add('btn-dark');
+      document.getElementById('btn_buscar').classList.add('btn-info');
+      document.getElementById('busqueda_oculto').style.display="";
     }
 
 function refrescar_tabla(){

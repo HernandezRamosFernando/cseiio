@@ -46,8 +46,12 @@
 
           <div class="col-md-4">
               <div class="form-label-group">
-              <input class="form-control" placeholder="Fecha de inicio de periodo" type="date" name="fecha_inicio"
-                id="fecha_inicio"  style="color: #237087">
+              <input class="form-control" placeholder="Fecha de inicio de periodo" type="date" name="fecha_inicio" 
+                id="fecha_inicio"  style="color: #237087" min=
+                <?php
+                echo date('Y-m-d');
+                ?>
+                >
               <label for="fecha_inicio">Fecha de inicio de periodo</label>
               </div>
             </div>
@@ -55,7 +59,11 @@
             <div class="col-md-4">
               <div class="form-label-group">
               <input class="form-control" placeholder="Fecha de finalización de periodo" type="date" name="fecha_fin"
-                id="fecha_fin"  style="color: #237087">
+                id="fecha_fin"  style="color: #237087"min=
+                <?php
+                echo date('Y-m-d');
+                ?>
+                >
               <label for="fecha_fin">Fecha de finalización de periodo</label>
               </div>
             </div>
@@ -143,13 +151,15 @@
   }
 
   function validarcomponente() {
+    validafecha(document.getElementById("fecha_inicio"));
+     validafecha(document.getElementById("fecha_fin"));
 
     if (document.getElementById("fecha_fin").value != '' && document.getElementById("fecha_inicio").value != '') {
       agregar_ciclo()
     } else {
       Swal.fire({
         type: 'warning',
-        text: 'Agregue los datos faltantes'
+        text: 'La fecha ingresada es incorrecta'
       });
     }
   }

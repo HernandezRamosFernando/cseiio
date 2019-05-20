@@ -182,5 +182,35 @@ function cargarmaterias() {
     document.getElementById('alumnos_oculto').style.display = "";
     //limpiarbusqueda();
   }
+
+
+
+  function enviar_formulario(){
+    var tabla = document.getElementById("tabla");
+    var datos = new Array();
+
+   for(let i=0;i<tabla.childNodes.length;i++){
+      //console.log(tabla.childNodes[i].childNodes[1].innerText);
+      var dato = {
+        no_control:tabla.childNodes[i].childNodes[1].innerText,
+        id_materia:document.getElementById("materias").value,
+        calificacion:tabla.childNodes[i].childNodes[4].childNodes[0].value
+      };
+      datos.push(dato);
+   }
+
+   var xhr = new XMLHttpRequest();
+      xhr.open("POST", '/cseiio/c_regularizacion/agregar_regularizacion', true);
+
+      //Send the proper header information along with the request
+      xhr.setRequestHeader("Content-Type", "application/json");
+
+      xhr.onreadystatechange = function() { // Call a function when the state changes.
+          if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+              console.log(xhr.response);
+          }
+      }
+      xhr.send(JSON.stringify(datos));
+  }
 </script>
 </html>

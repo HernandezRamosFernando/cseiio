@@ -36,4 +36,10 @@ class C_regularizacion extends CI_Controller {
         echo json_encode($this->M_regularizacion->estudiantes_materia($plantel,$materia));        
 
     }
+
+    public function agregar_regularizacion(){
+        $datos = json_decode($this->input->raw_input_stream);
+        //print_r($datos);
+        echo $this->M_regularizacion->agregar_regularizacion($datos);
+    }
 }

@@ -182,5 +182,35 @@ function cargarmaterias() {
     document.getElementById('alumnos_oculto').style.display = "";
     //limpiarbusqueda();
   }
+
+  function calificaciones(e) {
+  var string= e.value.toString();
+
+  for (var i=0, output='', validos="0123456789./"; i<string.length; i++){
+       if (validos.indexOf(string.charAt(i)) != -1)
+          output += string.charAt(i)
+  }
+  console.log(output);
+  if(output != ""){
+   if(output >= 6 && output <= 10 ){
+    var valor=parseFloat(output);
+    valor = Math.round(valor); 
+    console.log(valor)
+    e.value= valor;
+    e.style.color = "black";
+    }else if (output === "/"){
+      e.style.color = "black";
+    }else if (output >= 0 && output < 6 ){
+      e.value= 5;
+      e.style.color = "red";
+    }else{
+    console.log("valor no valido")
+    e.value = "";
+    }
+   }else{
+     e.value="";
+   }
+   //e.value=output;
+  }
 </script>
 </html>

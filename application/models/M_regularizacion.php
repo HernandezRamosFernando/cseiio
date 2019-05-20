@@ -34,10 +34,10 @@ class M_regularizacion extends CI_Model {
    public function estudiantes_materia($plantel,$materia){
 
       return $this->db->query("SELECT 
-      ge.Estudiante_no_control,ge.id_materia,m.semestre
+      ge.Estudiante_no_control,ge.id_materia,m.semestre,e.semestre_en_curso,e.nombre,e.primer_apellido,e.segundo_apellido
        FROM
            Grupo_Estudiante AS ge
-       INNER JOIN Materia AS m ON ge.id_materia = m.clave INNER JOIN Grupo as g on g.id_grupo=ge.Grupo_id_grupo 
+       INNER JOIN Materia AS m ON ge.id_materia = m.clave INNER JOIN Grupo as g on g.id_grupo=ge.Grupo_id_grupo INNER JOIN Estudiante as e on e.no_control=ge.Estudiante_no_control
        WHERE
            calificacion_final < 6 and plantel='".$plantel."'
          AND id_materia NOT IN (SELECT 

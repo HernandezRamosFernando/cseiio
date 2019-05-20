@@ -105,9 +105,10 @@
       </a>
     </li>
     <li class="nav-item ">
-      <a class="nav-link" href="<?php echo base_url();?>index.php/c_menu/principal">
+      <a class="nav-link <?php ($this->uri->segment(2)=='regularizacion') ? print 'bg-info text-light' : print 'null'; ?>" 
+      href="<?php echo base_url();?>index.php/c_vistas/regularizacion">
         <i class="material-icons">assignment_turned_in</i>
-        <span>Certificación</span>
+        <span>Regularización</span>
       </a>
     </li>
     <li class="nav-item ">

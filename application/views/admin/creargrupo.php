@@ -511,7 +511,7 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
                 var fila = "<tr>";
                 fila+="<td>"+valor.unidad_contenido.toUpperCase()+"</td>";
                 fila+="<td>"+valor.clave+"</td>";
-                fila+="<td><select>"+asesores.response+"</select><td>";
+                fila+="<td><select class='form-control form-control-lg selcolor'>"+asesores.response+"</select><td>";
                 fila+="</tr>";
                 tabla.innerHTML+=fila;
               });

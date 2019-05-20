@@ -14,10 +14,17 @@ class C_regularizacion extends CI_Controller {
         $respuesta = "";
         $plantel = $this->input->get("plantel");
         $materias = $this->M_regularizacion->materias_con_reprobados_html($plantel);
-        foreach($materias as $materia){
-            $respuesta.='<option value="'.$materia->id_materia.'">'.$materia->unidad_contenido.'</option>';
+        if(sizeof($materias) == 0){
+            $respuesta ="";
+        }else{
+            $respuesta.='<option value =""> Seleccione una materia </option>';
+            foreach($materias as $materia){
+                $respuesta.='<option value="'.$materia->id_materia.'">'.$materia->unidad_contenido.'</option>';
+            }
         }
 
         echo $respuesta;
+
+       
     }
 }

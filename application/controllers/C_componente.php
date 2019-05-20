@@ -23,8 +23,8 @@ class C_componente extends CI_Controller
     {
      
      $datos_componente = array(
-            'nombre' => strtoupper($this->input->post('componente')),
-            'nombre_corto' => strtoupper($this->input->post('nombre_corto'))
+            'nombre' => mb_strtoupper($this->input->post('componente')),
+            'nombre_corto' => mb_strtoupper($this->input->post('nombre_corto'))
         );
      echo $this->M_componente->insertar_componente($datos_componente);
     }
@@ -40,17 +40,17 @@ public function modificar_componente()
     {
      
      $datos_componente = array(
-            'nombre' => strtoupper($this->input->post('mcomponente')),
-            'nombre_corto' => strtoupper($this->input->post('mnombre_corto'))
+            'nombre' => mb_strtoupper($this->input->post('mcomponente')),
+            'nombre_corto' => mb_strtoupper($this->input->post('mnombre_corto'))
         );
-     $idcomponente=strtoupper($this->input->post('midcomponente'));
+     $idcomponente=mb_strtoupper($this->input->post('midcomponente'));
      echo $this->M_componente->modificar_componente($datos_componente,$idcomponente);
     }
 
 
     public function eliminar_componente()
     {
-     $id=strtoupper($this->input->post('eidcomponente'));
+     $id=mb_strtoupper($this->input->post('eidcomponente'));
      echo $this->M_componente->eliminar_componente($id);
     }
     

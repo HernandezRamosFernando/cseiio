@@ -2,6 +2,8 @@
 class M_reinscripcion extends CI_Model { 
    public function __construct() {
       parent::__construct();
+      $this->load->model('M_grupo_estudiante');
+      $this->load->model("M_regularizacion");
    }
 
 
@@ -30,8 +32,9 @@ class M_reinscripcion extends CI_Model {
 
                     $promedio_modular = ($primer_parcial+$segundo_parcial+$tercer_parcial)/3;
                     $promedio_final = ($promedio_modular+$examen_final)/2;
+                    $promedio_final = round($promedio_final,0,PHP_ROUND_HALF_UP);
 
-                    $this->db->query("update Grupo_Estudiante set calificacion_final=".(round($promedio_final,0,PHP_ROUND_HALF_UP))." where id_materia='".$materia->id_materia."' and Estudiante_no_control='".$estudiante->no_control."'");
+                    $this->db->query("update Grupo_Estudiante set calificacion_final=".$promedio_final." where id_materia='".$materia->id_materia."' and Estudiante_no_control='".$estudiante->no_control."'");
 
                     if($promedio_final<6){
                         $contador_materias_reprobadas+=1;
@@ -41,6 +44,10 @@ class M_reinscripcion extends CI_Model {
                 //--------------- validacion del tipo deestatus que tendra el estudiante a partir de sus materias reprobadas
                 if($contador_materias_reprobadas==0){
                     $this->db->query("update Estudiante set estatus='REGULAR',semestre_en_curso=semestre_en_curso+1 where no_control='".$estudiante->no_control."'");
+                }
+
+                else if($contador_materias_reprobadas==count($materias_estudiante)){
+                    $this->db->query("update Estudiante set estatus='DESERTOR' where no_control='".$estudiante->no_control."'");
                 }
 
                 else if($contador_materias_reprobadas<=3){
@@ -60,8 +67,52 @@ class M_reinscripcion extends CI_Model {
 
             }
 
-            else{
-                //aqui se valida si es irregular cuantas ya paso
+            else if($estudiante->estatus=="IRREGULAR" || $estudiante->estatus=="INCORPORADO"){
+
+                $materias_reprobadas = $this->M_grupo_estudiante->get_materias_reprobadas_estudiante_semestres_pasados($estudiante->no_control);
+                $mtaerias_pasadas_regularizacion = $this->M_regularizacion->get_materias_pasadas_estudiante($estudiante->no_control);
+                $materias_debe = sizeof($materias_reprobadas)-sizeof($mtaerias_pasadas_regularizacion);
+                //aqui se valida si es irregular cuantas ya paso primero necesito las materias anteriores y luego las actuales
+                $materias_estudiante = $this->materias_cursando_estudiante($estudiante->no_control);
+                $contador_materias_reprobadas = 0;
+
+                //recorrido de su carga de materias de el estudiante una por una
+                foreach($materias_estudiante as $materia){
+                    $primer_parcial = $materia->primer_parcial==null?0:intval($materia->primer_parcial);
+                    $segundo_parcial = $materia->segundo_parcial==null?0:intval($materia->segundo_parcial);
+                    $tercer_parcial = $materia->tercer_parcial==null?0:intval($materia->tercer_parcial);
+                    $examen_final = $materia->examen_final==null?0:intval($materia->examen_final);
+
+                    $promedio_modular = ($primer_parcial+$segundo_parcial+$tercer_parcial)/3;
+                    $promedio_final = ($promedio_modular+$examen_final)/2;
+                    $promedio_final = round($promedio_final,0,PHP_ROUND_HALF_UP);
+
+                    $this->db->query("update Grupo_Estudiante set calificacion_final=".$promedio_final." where id_materia='".$materia->id_materia."' and Estudiante_no_control='".$estudiante->no_control."'");
+
+                    if($promedio_final<6){
+                        $contador_materias_reprobadas+=1;
+                    }
+
+                }
+
+                $materias_reprobadas_total = $contador_materias_reprobadas+$materias_debe;
+
+                if($contador_materias_reprobadas==count($materias_estudiante)){
+                    $this->db->query("update Estudiante set estatus='DESERTOR' where no_control='".$estudiante->no_control."'");
+                }
+
+                else if($materias_reprobadas_total<=3){
+                    $this->db->query("update Estudiante set estatus='IRREGULAR',semestre_en_curso=semestre_en_curso+1 where no_control='".$estudiante->no_control."'");
+                }
+
+                else if($materias_reprobadas_total>3 && $materias_reprobadas_total<6){
+                    $this->db->query("update Estudiante set estatus='SIN DERECHO' where no_control='".$estudiante->no_control."'");
+                }
+
+                else if($materias_reprobadas_total>=6){
+                    $this->db->query("update Estudiante set estatus='REPROBADO' where no_control='".$estudiante->no_control."'");
+                }
+
             }
        }
        //fin materias de un estudiante

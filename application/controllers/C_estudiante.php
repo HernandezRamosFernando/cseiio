@@ -45,25 +45,25 @@ class C_estudiante extends CI_Controller {
         //inicio estudiante
         $datos_estudiante = array(
             'no_control' => $no_control,
-            'nombre' => strtoupper($this->input->post('aspirante_nombre')),
-            'primer_apellido' => strtoupper($this->input->post('aspirante_apellido_paterno')),
-            'segundo_apellido' => strtoupper($this->input->post('aspirante_apellido_materno')),
+            'nombre' => mb_strtoupper($this->input->post('aspirante_nombre')),
+            'primer_apellido' => mb_strtoupper($this->input->post('aspirante_apellido_paterno')),
+            'segundo_apellido' => mb_strtoupper($this->input->post('aspirante_apellido_materno')),
             //'fecha_nacimiento' => $this->input->post('aspirante_fecha_nacimiento'),
             'fecha_nacimiento' => $this->input->post('aspirante_anio_nacimiento').'-'.$this->input->post('aspirante_mes_nacimiento').'-'.(strlen($this->input->post('aspirante_dia_nacimiento'))==1?('0'.$this->input->post('aspirante_dia_nacimiento')):$this->input->post('aspirante_dia_nacimiento')),
             'sexo' => $this->input->post('aspirante_sexo'),
-            'curp' => strtoupper($this->input->post('aspirante_curp')),
-            'fecha_registro' => strtoupper(date("Y-m-d")),
+            'curp' => mb_strtoupper($this->input->post('aspirante_curp')),
+            'fecha_registro' => mb_strtoupper(date("Y-m-d")),
             'folio_programa_social' => $this->input->post('aspirante_programa_social'),
-            'correo' => strtoupper($this->input->post('aspirante_correo')),
-            'nss' => strtoupper($this->input->post('aspirante_nss')),
-            'calle' => strtoupper($this->input->post('aspirante_direccion_calle')),
-            'colonia' => strtoupper($this->input->post('aspirante_direccion_colonia')),
+            'correo' => mb_strtoupper($this->input->post('aspirante_correo')),
+            'nss' => mb_strtoupper($this->input->post('aspirante_nss')),
+            'calle' => mb_strtoupper($this->input->post('aspirante_direccion_calle')),
+            'colonia' => mb_strtoupper($this->input->post('aspirante_direccion_colonia')),
             'cp' => $this->input->post('aspirante_direccion_cp'),
             'id_localidad' => $this->input->post('aspirante_direccion_localidad'),
             'fecha_inscripcion' => date("Y-m-d"),
             'telefono' => $this->input->post('aspirante_telefono'),
             'Plantel_cct_plantel' => $this->input->post('aspirante_plantel'),
-            'lugar_nacimiento' => strtoupper($this->input->post('aspirante_lugar_nacimiento')),
+            'lugar_nacimiento' => mb_strtoupper($this->input->post('aspirante_lugar_nacimiento')),
             'cct_escuela_procedencia' => $this->input->post('aspirante_secundaria_cct')
         );
 
@@ -87,16 +87,16 @@ class C_estudiante extends CI_Controller {
         //fin estudiante
 
         $datos_estudiante_tutor = array(
-            'nombre_tutor' => strtoupper($this->input->post('aspirante_tutor_nombre')),
-            'primer_apellido_tutor' =>strtoupper($this->input->post('aspirante_tutor_apellido')),
-            'segundo_apellido_tutor' =>strtoupper($this->input->post('aspirante_tutor_apellidodos')),
+            'nombre_tutor' => mb_strtoupper($this->input->post('aspirante_tutor_nombre')),
+            'primer_apellido_tutor' =>mb_strtoupper($this->input->post('aspirante_tutor_apellido')),
+            'segundo_apellido_tutor' =>mb_strtoupper($this->input->post('aspirante_tutor_apellidodos')),
             'folio_programa_social_tutor' => $this->input->post('aspirante_tutor_prospera'),
-            'telefono_comunidad' => strtoupper($this->input->post('aspirante_tutor_telefono_comunidad')),
-            'telefono_tutor' => strtoupper($this->input->post('aspirante_tutor_telefono')==''?null:$this->input->post('aspirante_tutor_telefono')),
-            'ocupacion' => strtoupper($this->input->post('aspirante_tutor_ocupacion'))
+            'telefono_comunidad' => mb_strtoupper($this->input->post('aspirante_tutor_telefono_comunidad')),
+            'telefono_tutor' => mb_strtoupper($this->input->post('aspirante_tutor_telefono')==''?null:$this->input->post('aspirante_tutor_telefono')),
+            'ocupacion' => mb_strtoupper($this->input->post('aspirante_tutor_ocupacion'))
         );
 
-        $parentesco_estudiante_tutor = strtoupper($this->input->post('aspirante_tutor_parentesco')); 
+        $parentesco_estudiante_tutor = mb_strtoupper($this->input->post('aspirante_tutor_parentesco')); 
 
         //print_r($datos_estudiante_tutor);
 
@@ -150,19 +150,19 @@ class C_estudiante extends CI_Controller {
 
         $datos_estudiante_medicos['alergia'] = array(
             'descripcion' => 'ALERGIA',
-            'valor' => strtoupper($this->input->post('aspirante_alergia')),
+            'valor' => mb_strtoupper($this->input->post('aspirante_alergia')),
             'Estudiante_no_control' => $no_control
         );
 
         $datos_estudiante_medicos['discapacidad'] = array(
             'descripcion' => 'DISCAPACIDAD',
-            'valor' => strtoupper($this->input->post('aspirante_discapacidad')),
+            'valor' => mb_strtoupper($this->input->post('aspirante_discapacidad')),
             'Estudiante_no_control' => $no_control
         );
 
         $datos_estudiante_medicos['sangre'] = array(
             'descripcion' => 'TIPO DE SANGRE',
-            'valor' => strtoupper($this->input->post('tipo_sangre')),
+            'valor' => mb_strtoupper($this->input->post('tipo_sangre')),
             'Estudiante_no_control' => $no_control
         );
 
@@ -360,21 +360,21 @@ class C_estudiante extends CI_Controller {
         $id_tutor = $this->input->post("id_tutor");
         $datos_estudiante = array(
             //'no_control' => $no_control,
-            'nombre' => strtoupper($this->input->post('aspirante_nombre')),
-            'primer_apellido' => strtoupper($this->input->post('aspirante_apellido_paterno')),
-            'segundo_apellido' => strtoupper($this->input->post('aspirante_apellido_materno')),
+            'nombre' => mb_strtoupper($this->input->post('aspirante_nombre')),
+            'primer_apellido' => mb_strtoupper($this->input->post('aspirante_apellido_paterno')),
+            'segundo_apellido' => mb_strtoupper($this->input->post('aspirante_apellido_materno')),
             'fecha_nacimiento' => $this->input->post('aspirante_anio_nacimiento').'-'.$this->input->post('aspirante_mes_nacimiento').'-'.$this->input->post('aspirante_dia_nacimiento'),
             'sexo' => $this->input->post('aspirante_sexo'),
             'curp' => $this->input->post('aspirante_curp'),
-            'fecha_registro' => strtoupper(date("Y-m-d")),
+            'fecha_registro' => mb_strtoupper(date("Y-m-d")),
             //'tipo_ingreso' => 'NUEVO INGRESO',
             //'semestre' => 1,
             'folio_programa_social' => $this->input->post('aspirante_programa_social'),
-            //'matricula' => strtoupper($this->input->post('aspirante_curp')),
-            'correo' => strtoupper($this->input->post('aspirante_correo')),
-            'nss' => strtoupper($this->input->post('aspirante_nss')),
-            'calle' => strtoupper($this->input->post('aspirante_direccion_calle')),
-            'colonia' => strtoupper($this->input->post('aspirante_direccion_colonia')),
+            //'matricula' => mb_strtoupper($this->input->post('aspirante_curp')),
+            'correo' => mb_strtoupper($this->input->post('aspirante_correo')),
+            'nss' => mb_strtoupper($this->input->post('aspirante_nss')),
+            'calle' => mb_strtoupper($this->input->post('aspirante_direccion_calle')),
+            'colonia' => mb_strtoupper($this->input->post('aspirante_direccion_colonia')),
             'cp' => $this->input->post('aspirante_direccion_cp'),
             'id_localidad' => $this->input->post('aspirante_direccion_localidad'),
             //'semestre_en_curso' => $this->input->post('/d'),
@@ -382,7 +382,7 @@ class C_estudiante extends CI_Controller {
             'telefono' => $this->input->post('aspirante_telefono'),
             'Plantel_cct_plantel' => $this->input->post('aspirante_plantel'),
             //'nacinalidad' => $this->input->post('/d'),
-            'lugar_nacimiento' => strtoupper($this->input->post('aspirante_lugar_nacimiento')),
+            'lugar_nacimiento' => mb_strtoupper($this->input->post('aspirante_lugar_nacimiento')),
             'cct_escuela_procedencia' => $this->input->post('aspirante_secundaria_cct'),
             'semestre' => $this->input->post('aspirante_semestre')
         );
@@ -393,16 +393,16 @@ class C_estudiante extends CI_Controller {
         //fin estudiante
 
         $datos_estudiante_tutor = array(
-            'nombre_tutor' => strtoupper($this->input->post('aspirante_tutor_nombre')),
-            'primer_apellido_tutor' =>strtoupper($this->input->post('aspirante_tutor_apellido')),
-            'segundo_apellido_tutor' =>strtoupper($this->input->post('aspirante_tutor_apellidodos')),
+            'nombre_tutor' => mb_strtoupper($this->input->post('aspirante_tutor_nombre')),
+            'primer_apellido_tutor' =>mb_strtoupper($this->input->post('aspirante_tutor_apellido')),
+            'segundo_apellido_tutor' =>mb_strtoupper($this->input->post('aspirante_tutor_apellidodos')),
             'folio_programa_social_tutor' => $this->input->post('aspirante_tutor_prospera'),
-            'telefono_comunidad' => strtoupper($this->input->post('aspirante_tutor_telefono_comunidad')),
-            'telefono_tutor' => strtoupper($this->input->post('aspirante_tutor_telefono')==''?null:$this->input->post('aspirante_tutor_telefono')),
-            'ocupacion' => strtoupper($this->input->post('aspirante_tutor_ocupacion'))
+            'telefono_comunidad' => mb_strtoupper($this->input->post('aspirante_tutor_telefono_comunidad')),
+            'telefono_tutor' => mb_strtoupper($this->input->post('aspirante_tutor_telefono')==''?null:$this->input->post('aspirante_tutor_telefono')),
+            'ocupacion' => mb_strtoupper($this->input->post('aspirante_tutor_ocupacion'))
         );
 
-        $parentesco_estudiante_tutor = strtoupper($this->input->post('aspirante_tutor_parentesco')); 
+        $parentesco_estudiante_tutor = mb_strtoupper($this->input->post('aspirante_tutor_parentesco')); 
 
         //print_r($datos_estudiante_tutor);
 
@@ -449,17 +449,17 @@ class C_estudiante extends CI_Controller {
 
         $datos_estudiante_medicos['alergia'] = array(
             'descripcion' => 'ALERGIA',
-            'valor' => strtoupper($this->input->post('aspirante_alergia'))
+            'valor' => mb_strtoupper($this->input->post('aspirante_alergia'))
         );
 
         $datos_estudiante_medicos['discapacidad'] = array(
             'descripcion' => 'DISCAPACIDAD',
-            'valor' => strtoupper($this->input->post('aspirante_discapacidad'))
+            'valor' => mb_strtoupper($this->input->post('aspirante_discapacidad'))
         );
 
         $datos_estudiante_medicos['sangre'] = array(
             'descripcion' => 'TIPO DE SANGRE',
-            'valor' => strtoupper($this->input->post('tipo_sangre'))
+            'valor' => mb_strtoupper($this->input->post('tipo_sangre'))
         );
 
         //fin datos medicos
@@ -697,7 +697,7 @@ public function ciclos_escolares_acreditados($ciclo_escolar,$semestre_acreditado
 
 public function generar_resolucion_equivalencia(){
     $no_control = $this->input->post('num_control_estudiante');
-    $num_folio = strtoupper($this->input->post('num_folio'));
+    $num_folio = mb_strtoupper($this->input->post('num_folio'));
     $plantel_inscrito = $this->input->post('plantel_inscrito');
     $fecha_expedicion = $this->input->post('fecha_expedicion');
     $ciclo_escolar= $this->input->post('ciclo_escolar');

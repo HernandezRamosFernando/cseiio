@@ -49,14 +49,14 @@
           </div>
 
             <div class="col-md-4 offset-md-3">
-              <button type="button" class="btn btn-success btn-lg btn-block" onclick="" style="padding: 1rem" id="mostrar_materias">Mostrar Materia</button>
+              <button type="button" class="btn btn-success btn-lg btn-block" onclick="validarcomponente();" style="padding: 1rem" id="mostrar_materias">Mostrar Materia</button>
             </div>
           </div>
       </div>
 
 
       <div class="row" id="alumnos_oculto" style="display:none">
-      <div class=" col-md-6">
+      <div class=" col-md-12">
         <div class="card card-body" style="width: 100%; overflow: scroll">
           <table class="table table-hover" id="tabla_completa" style="width: 100%; overflow: scroll">
             <caption>Lista de los alumnos que deben regularizar</caption>
@@ -78,6 +78,9 @@
      </div>
    </form>
     <br>
+    <div class="col-md-12" id="agregar_oculto" style="display: none">
+        <button type="button" value="nuevo" onclick="enviar_formulario()" id="boton_agregar" class="btn btn-success btn-lg btn-block btn-guardar"  style="padding: 1rem"> Guardar cambios</button> 
+        </div>
 
 
     </div>
@@ -140,7 +143,9 @@ function cargarmaterias() {
   function buscar() { 
     var xhr = new XMLHttpRequest();
     var plantel = document.getElementById("plantel").value;
-    xhr.open('GET', '<?php echo base_url();?>index.php/c_regularizacion/materias_con_reprobados_html?' + plantel, true);
+    var materia = document.getElementById("materias").value;
+    document.getElementById("tabla").innerHTML="";
+    xhr.open('GET', '<?php echo base_url();?>index.php/c_regularizacion/estudiantes_materia?plantel=' + plantel +'&materia=' + materia, true);
     xhr.onloadstart = function(){
         $('#div_carga').show();
       }
@@ -153,25 +158,29 @@ function cargarmaterias() {
         //console.log(valor);
         var fila = '<tr>';
         fila += '<td>';
-        fila += valor.no_control;
+        fila += valor.nombre+ ' ' + valor.primer_apellido + ' ' + valor.segundo_apellido;
         fila += '</td>';
         fila += '<td>';
-        fila += valor.no_control;
+        fila += valor.Estudiante_no_control;
+        fila += '</td>';
+        fila += '<td>';
+        fila += valor.semestre_en_curso;
+        fila += '</td>';
+        fila += '<td>';
+        fila += valor.semestre;
         fila += '</td>';
         fila += '<td class="">';
-        fila += '<button class="btn btn-lg btn-block btn-success" type="button" value="' + valor.no_control + '" id="botoncambio" onclick="cambiardetabla(this);">Agregar</button>';
+        fila += '<input type="text" class="form-control" id="calificacion" onchange="calificaciones(this);" ></input>';
         fila += '</td>';
         fila += '</tr>';
         document.getElementById("tabla").innerHTML += fila;
       });
-      //console.log(JSON.parse(xhr.response));
-      document.getElementById("contador_alumnos_restantes").innerText="Alumnos restantes: "+JSON.parse(xhr.response).length;
-      //formato_tabla();
+      console.log(JSON.parse(xhr.response));
     };
     xhr.send(null);
-    document.getElementById('boton_agregar').style.display = "";
+    document.getElementById('agregar_oculto').style.display = "";
     document.getElementById('alumnos_oculto').style.display = "";
-    limpiarbusqueda();
+    //limpiarbusqueda();
   }
 </script>
 </html>

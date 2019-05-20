@@ -29,4 +29,23 @@ class M_regularizacion extends CI_Model {
            WHERE
                calificacion >= 6)")->result();
    }
+
+
+   public function estudiantes_materia($plantel,$materia){
+
+      return $this->db->query("SELECT 
+      ge.Estudiante_no_control,ge.id_materia,m.semestre
+       FROM
+           Grupo_Estudiante AS ge
+       INNER JOIN Materia AS m ON ge.id_materia = m.clave INNER JOIN Grupo as g on g.id_grupo=ge.Grupo_id_grupo 
+       WHERE
+           calificacion_final < 6 and plantel='".$plantel."'
+         AND id_materia NOT IN (SELECT 
+                   id_materia
+               FROM
+                   Regularizacion
+               WHERE
+                   calificacion >= 6) and id_materia='".$materia."'")->result();
+
+   }
 }

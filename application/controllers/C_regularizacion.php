@@ -27,4 +27,13 @@ class C_regularizacion extends CI_Controller {
 
        
     }
+
+
+    public function estudiantes_materia(){
+        $plantel = $this->input->get("plantel");
+        $materia = $this->input->get("materia");
+
+        echo json_encode($this->M_regularizacion->estudiantes_materia($plantel,$materia));        
+
+    }
 }

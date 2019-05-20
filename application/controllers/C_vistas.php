@@ -178,6 +178,17 @@ public function portabilidad(){
         $this->load->view("admin/acreditacion");
         $this->load->view("footers/footer");
         }
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
+            $data= array('title'=>'Acreditación');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierdaplantel");
+            $this->load->view("plantel/acreditacionplantel");
+            $this->load->view("footers/footer");
+            }
+            else{
+            redirect(base_url().'index.php/c_usuario');
+            }
     }
 
     public function control_permisos(){
@@ -253,6 +264,19 @@ public function portabilidad(){
         $this->load->view("admin/calificacion", $datos);
         $this->load->view("footers/footer");
         }
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
+            $datos['planteles'] = $this->M_plantel->get_plantel($this->session->userdata('user')['plantel']);
+            $data= array('title'=>'Control de Alumnos');
+            $data= array('title'=>'Calificaciones');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierda");
+            $this->load->view("plantel/calificacion", $datos);
+            $this->load->view("footers/footer");
+        }
+        else{
+            redirect(base_url().'index.php/c_usuario');
+        }
     }
 
     public function materias(){
@@ -304,7 +328,51 @@ public function portabilidad(){
         $this->load->view("admin/resolucion_equivalencia", $datos);
         $this->load->view("footers/footer");
         }
-    } 
+    }
+    public function reinscripcion(){
+        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
+        $data= array('title'=>'Reinscripción');
+        $this->load->view("headers/cabecera", $data);
+        $this->load->view("headers/menuarriba");
+        $this->load->view("headers/menuizquierda");
+        $this->load->view("admin/reinscripcion");
+        $this->load->view("footers/footer");
+        }
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
+            $data= array('title'=>'Reinscripción');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierdaplantel");
+            $this->load->view("plantel/acreditacionplantel");
+            $this->load->view("footers/footer");
+            }
+            else{
+            redirect(base_url().'index.php/c_usuario');
+            }
+    }
+    public function regularizacion(){
+        $datos['planteles'] = $this->M_plantel->get_planteles();
+
+        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
+        $data= array('title'=>'Regularización');
+        $this->load->view("headers/cabecera", $data);
+        $this->load->view("headers/menuarriba");
+        $this->load->view("headers/menuizquierda");
+        $this->load->view("admin/regularizacion" , $datos);
+        $this->load->view("footers/footer");
+        }
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
+            $data= array('title'=>'Regularización');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierdaplantel");
+            $this->load->view("plantel/acreditacionplantel", $datos);
+            $this->load->view("footers/footer");
+            }
+            else{
+            redirect(base_url().'index.php/c_usuario');
+            }
+    }  
         
     //-------------------------------------------------termina vistas
 }

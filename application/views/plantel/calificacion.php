@@ -18,7 +18,6 @@
           <div class="col-md-8">
             <label class="form-group has-float-label seltitulo">
               <select class="form-control form-control-lg selcolor" id="plantel"   name="plantel">
-                <option value="">Seleccione el plantel donde buscar el grupo</option>
 
                 <?php
                                         foreach ($planteles as $plantel)
@@ -85,11 +84,8 @@
             </label>
           </div>
 
-            <div class="col-md-4 offset-md-2">
+            <div class="col-md-4 offset-md-3">
               <button type="button" class="btn btn-success btn-lg btn-block" onclick="validarcomponente()" style="padding: 1rem" id="crear_grupo">Mostrar materia</button>
-            </div>
-            <div class="col-md-2" id="limpiar_oculto" style="display: none">
-              <button type="button" class="btn btn-warning btn-lg btn-block" onclick="recargar();" style="padding: 1rem" id="limpiar">Limpiar búsqueda</button>
             </div>
           </div>
       </div>
@@ -179,7 +175,7 @@ function guardar(){
                     if (result.value) {
                     //aqui va el aceptar
                     $(document).scrollTop(0);
-                    //location.reload(); 
+                    location.reload(); 
                       }
                     //aqui va si cancela
                     });
@@ -197,11 +193,18 @@ function guardar(){
   
 }
 
-function recargar() {
-  location.reload();
-  
-}
 
+function validarcomponente(){
+
+if(document.getElementById("plantel").value != '' && document.getElementById("grupos").value != '' && document.getElementById("semestre_grupo").value != '' ){
+  //
+}else{
+  Swal.fire({
+        type: 'warning',
+        text: 'Agregue los datos faltantes'
+      });
+  }
+}
 
 function cargargrupos() {
 if (document.getElementById("plantel").value === "") {
@@ -252,17 +255,16 @@ if(document.getElementById("plantel").value != '' && document.getElementById("gr
       });
   }
 }
-function cambiarbusqueda(){
+function limpiarbusqueda(){
     document.getElementById("grupos").disabled = true;
     document.getElementById("plantel").disabled = true;
     document.getElementById("semestre_grupo").disabled = true;
+    document.getElementById("materias").disabled = true;
     document.getElementById('crear_grupo').classList.remove('btn-success');
     document.getElementById('crear_grupo').classList.add('btn-info');
-    document.getElementById('crear_grupo').innerHTML = 'Buscar de nuevo';
-    document.getElementById('limpiar_oculto').style.display ="";
+    document.getElementById('crear_grupo').setAttribute("onClick", "limpiar();");
+    document.getElementById('crear_grupo').innerHTML = 'Limpiar Búsqueda';
   }
-  
-
 
 
 
@@ -366,7 +368,7 @@ function cargar_materia(){
     }
 
     xhr.send(null);
-    cambiarbusqueda();
+    limpiarbusqueda();
         //fin cargar inputs
       };
 

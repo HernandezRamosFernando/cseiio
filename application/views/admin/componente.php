@@ -239,44 +239,19 @@ function eliminar_componente(e,nombrecomponente) {
       document.getElementById("enombre_componente").innerHTML =nombrecomponente;
     }
 
-function formato_tabla() {
-      $('#tabla_completa').DataTable({
-        //"order": [[ 0, 'desc' ]],
-        "language": {
-          "sProcessing": "Procesando...",
-          "sLengthMenu": "Mostrar _MENU_ registros",
-          "sZeroRecords": "No se encontraron resultados",
-          "sEmptyTable": "Ningún dato disponible en esta tabla",
-          "sInfo": "Mostrando del _START_ al _END_ de un total de _TOTAL_ ",
-          "sInfoEmpty": "Mostrando del 0 al 0 de un total de 0 ",
-          "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-          "sInfoPostFix": "",
-          "sSearch": "Buscar específico:",
-          "sUrl": "",
-          "sInfoThousands": ",",
-          "sLoadingRecords": "Cargando...",
-          "oPaginate": {
-            "sFirst": "Primero",
-            "sLast": "Último",
-            "sNext": "Siguiente",
-            "sPrevious": "Anterior"
-          },
-          "oAria": {
-            "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
-            "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-          }
-        }
-      });
-    } 
-
-
 
 function cargar_datos_componente(e) {
       
       var xhr = new XMLHttpRequest();
       xhr.open('GET', '<?php echo base_url();?>index.php/C_componente/get_componente/'+e.value, true);
-
-      xhr.onload = function () {
+      xhr.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      xhr.error = function (){
+        console.log("error de conexion");
+      }
+      xhr.onload = function(){
+        $('#div_carga').hide();
         console.log(JSON.parse(xhr.response));
         let datos = JSON.parse(xhr.response);
         //datos personales

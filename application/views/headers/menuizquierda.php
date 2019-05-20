@@ -44,9 +44,10 @@
     </li>
     
     <li class="nav-item ">
-      <a class="nav-link" href="<?php echo base_url();?>index.php/c_menu/principal">
+    <a class="nav-link nav-dropdown-toggle  <?php ($this->uri->segment(2)=='reinscripcion') ? print 'bg-info text-light' : print null; ?>"
+      aria-expanded="false" data-toggle="collapse" href="#submenu3" role="button">
         <i class="material-icons">redoperson</i>
-        <span>Reinscripción</span>
+        <span class="font-weight-light">Reinscripción<span>
       </a>
     </li>
     <li class="nav-item ">
@@ -104,9 +105,10 @@
       </a>
     </li>
     <li class="nav-item ">
-      <a class="nav-link" href="<?php echo base_url();?>index.php/c_menu/principal">
+      <a class="nav-link <?php ($this->uri->segment(2)=='regularizacion') ? print 'bg-info text-light' : print 'null'; ?>" 
+      href="<?php echo base_url();?>index.php/c_vistas/regularizacion">
         <i class="material-icons">assignment_turned_in</i>
-        <span>Certificación</span>
+        <span>Regularización</span>
       </a>
     </li>
     <li class="nav-item ">

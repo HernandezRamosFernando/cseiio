@@ -20,7 +20,7 @@
               <div class="row">
                 <div class="col-md-4">
                   <div class="form-label-group">
-                    <input type="text" pattern="[A-Za-zñ]+" title="Introduzca solo letras" class="form-control"
+                    <input type="text"pattern="[A-Za-z0-9]{18}" title="Faltan datos" class="form-control text-uppercase"
                       id="aspirante_curp_busqueda" placeholder="CURP" style="color: #237087">
                     <label for="aspirante_curp_busqueda">CURP</label>
                   </div>

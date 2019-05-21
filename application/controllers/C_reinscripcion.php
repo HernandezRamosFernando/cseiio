@@ -20,6 +20,10 @@ class C_reinscripcion extends CI_Controller {
         echo $this->M_reinscripcion->reinscribir();
     }
 
+    function cerrar_calificaciones(){
+        echo $this->M_reinscripcion->cerrar_calificaciones();
+    }
+
 
     function materias_cursando_estudiante(){ 
         $no_control = $this->input->get("no_control");

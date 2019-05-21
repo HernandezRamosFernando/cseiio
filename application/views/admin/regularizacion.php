@@ -194,7 +194,7 @@ function cargarmaterias() {
       var dato = {
         no_control:tabla.childNodes[i].childNodes[1].innerText,
         id_materia:document.getElementById("materias").value,
-        calificacion:tabla.childNodes[i].childNodes[4].childNodes[0].value
+        calificacion:tabla.childNodes[i].childNodes[4].childNodes[0].value == ""?"0":tabla.childNodes[i].childNodes[4].childNodes[0].value
       };
       datos.push(dato);
    }

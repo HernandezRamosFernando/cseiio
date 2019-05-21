@@ -42,4 +42,10 @@ class C_regularizacion extends CI_Controller {
         //print_r($datos);
         echo $this->M_regularizacion->agregar_regularizacion($datos);
     }
+
+
+    public function materias_debe_estudiante_actualmente(){
+        $no_control = $this->input->get("estudiante");
+        echo $this->M_regularizacion->materias_debe_estudiante_actualmente($no_control);
+    }
 }

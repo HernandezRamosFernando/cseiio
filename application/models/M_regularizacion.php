@@ -48,4 +48,27 @@ class M_regularizacion extends CI_Model {
                    calificacion >= 6) and id_materia='".$materia."'")->result();
 
    }
+
+
+
+   public function agregar_regularizacion($datos){
+      
+      $this->db->trans_start();
+      foreach($datos as $regularizacion){
+
+         $this->db->query("insert into Regularizacion (Estudiante_no_control,id_materia,calificacion,fecha) 
+         values ('".$regularizacion->no_control."','".$regularizacion->id_materia."',".$regularizacion->calificacion.",'".date("Y-m-d")."')");
+
+      }
+      $this->db->trans_complete();
+      
+      if ($this->db->trans_status() === FALSE)
+      {
+              return "no";
+      }
+
+      else{
+         return "si";
+      }
+   }
 }

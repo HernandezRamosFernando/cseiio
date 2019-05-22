@@ -669,30 +669,7 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
 
 
             }
-            /*
-            console.log(xhr.response);
-            $('#div_carga').hide();
-            if (xhr.responseText.trim() === "si") {      
-              console.log(xhr.response);
-                swalWithBootstrapButtons.fire({
-                type: 'success',
-                text: 'Datos agregados correctamente',
-                confirmButtonText: 'Aceptar'
-                }).then((result) => {
-                if (result.value) {
-                 //aqui va el aceptar
-                 $(document).scrollTop(0);
-                    location.reload(); 
-                 }
-                    //aqui va si cancela
-                });
-               }else{
-                Swal.fire({
-                  type: 'error',
-                  text: 'Datos no agregados'
-                 });
-               }
-               */
+           
           }
           
       }
@@ -740,6 +717,20 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
             if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
               $('#div_carga').hide();
               if (xhr.responseText.trim() === "si") {
+
+                var friae = new XMLHttpRequest();
+                friae.open("POST", '/cseiio/c_friae/agregar_estudiantes_friae', true);
+
+                    //Send the proper header information along with the request
+                    friae.setRequestHeader("Content-Type", "application/json");
+
+                    friae.onreadystatechange = function() { // Call a function when the state changes.
+                        if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                            console.log(friae.response);
+                        }
+                    }
+                    friae.send(JSON.stringify(datos));
+                /*
                 console.log(xhr.response);
                 swalWithBootstrapButtons.fire({
                 type: 'success',
@@ -753,6 +744,7 @@ if (document.getElementById("semestre_grupo").value === "5" || document.getEleme
                  }
                     //aqui va si cancela
                 });
+                */
 
                }else{
                 Swal.fire({

@@ -60,10 +60,11 @@ class M_regularizacion extends CI_Model {
       $this->db->trans_start();
       foreach($datos as $regularizacion){
          $folio = $this->db->query("select max(Friae_folio) as folio from Friae_Estudiante where Estudiante_no_control='".$regularizacion->no_control."'")->result()[0]->folio;
-
+         $estudiante_en_grupo = $this->db->query("select IF(count(distinct Estudiante_no_control),'si','no') as respuesta from Grupo_Estudiante as ge inner join Grupo as g where estatus=1 and Estudiante_no_control='".$regularizacion->no_control."'")->result()[0]->respuesta;
          $this->db->query("insert into Regularizacion (Estudiante_no_control,id_materia,calificacion,fecha) 
          values ('".$regularizacion->no_control."','".$regularizacion->id_materia."',".$regularizacion->calificacion.",'".date("Y-m-d")."')");
 
+         if($estudiante_en_grupo=="si"){
          if(date("m")=="05" || date("m")=="01"){
             $materias_debe = $this->materias_debe_estudiante_actualmente($regularizacion->no_control);
             $materias_ids="";
@@ -111,6 +112,47 @@ class M_regularizacion extends CI_Model {
            }
 
          }
+      }//cierre if si tiene grupo
+
+      else{//si no tiene grupo
+         $materias_debe = $this->materias_debe_estudiante_actualmente($regularizacion->no_control);
+         if(sizeof($materias_debe)==0){
+               
+            if($datos_estudiante->tipo_ingreso=="SIN DERECHO"){
+               $this->db->query("update Estudiante set tipo_ingreso='PROBABLE REINCORPORADO',estatus='REGULAR' where no_control='".$regularizacion->no_control."'");
+               //$this->db->query("update Friae_Estudiante set tipo_ingreso_despues_regularizacion='REINCORPORADO', adeudos_segunda_regularizacion=".sizeof($materias_debe).", id_materia_adeudos_segunda_regularizacion='".$materias_ids."' where Estudiante_no_control='".$regularizacion->no_control."' and Friae_folio=".$folio);
+            }
+            else{
+               $this->db->query("update Estudiante set tipo_ingreso='NUEVO INGRESO',estatus='REGULAR' where no_control='".$regularizacion->no_control."'");
+               //$this->db->query("update Friae_Estudiante set tipo_ingreso_despues_regularizacion='NUEVO_INGRESO', adeudos_segunda_regularizacion=".sizeof($materias_debe).", id_materia_adeudos_segunda_regularizacion='".$materias_ids."' where Estudiante_no_control='".$regularizacion->no_control."' and Friae_folio=".$folio);
+            }
+            
+        }
+
+        else if(sizeof($materias_debe)>0 && sizeof($materias_debe)<=3){
+            
+            if($datos_estudiante->tipo_ingreso=="SIN DERECHO"){
+               $this->db->query("update Estudiante set tipo_ingreso='PROBABLE REINCORPORADO',estatus='IRREGULAR' where no_control='".$regularizacion->no_control."'");
+               //$this->db->query("update Friae_Estudiante set tipo_ingreso_despues_regularizacion='REINCORPORADO', adeudos_segunda_regularizacion=".sizeof($materias_debe).", id_materia_adeudos_segunda_regularizacion='".$materias_ids."' where Estudiante_no_control='".$regularizacion->no_control."' and Friae_folio=".$folio);
+            }
+            
+            else{
+               $this->db->query("update Estudiante set tipo_ingreso='NUEVO INGRESO',estatus='IRREGULAR' where no_control='".$regularizacion->no_control."'");
+               //$this->db->query("update Friae_Estudiante set tipo_ingreso_despues_regularizacion='NUEVO INGRESO', adeudos_segunda_regularizacion=".sizeof($materias_debe).", id_materia_adeudos_segunda_regularizacion='".$materias_ids."' where Estudiante_no_control='".$regularizacion->no_control."' and Friae_folio=".$folio);
+            }
+        }
+
+        else if(sizeof($materias_debe)>3 && sizeof($materias_debe)<=5){
+            $this->db->query("update Estudiante set tipo_ingreso='SIN DERECHO',estatus='IRREGULAR' where no_control='".$regularizacion->no_control."'");
+            //$this->db->query("update Friae_Estudiante set tipo_ingreso_despues_regularizacion='SIN DERECHO', adeudos_segunda_regularizacion=".sizeof($materias_debe).", id_materia_adeudos_segunda_regularizacion='".$materias_ids."' where Estudiante_no_control='".$regularizacion->no_control."' and Friae_folio=".$folio);
+        }
+
+        else if(sizeof($materias_debe)>5){
+            $this->db->query("update Estudiante set tipo_ingreso='REPETIDOR',estatus='IRREGULAR' where no_control='".$regularizacion->no_control."'");
+            //$this->db->query("update Friae_Estudiante set tipo_ingreso_despues_regularizacion='REPETIDOR', adeudos_segunda_regularizacion=".sizeof($materias_debe).", id_materia_adeudos_segunda_regularizacion='".$materias_ids."' where Estudiante_no_control='".$regularizacion->no_control."' and Friae_folio=".$folio);
+          
+        }
+      }
 
       }
       $this->db->trans_complete();

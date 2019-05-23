@@ -884,7 +884,7 @@
         document.getElementById("b").style.display = "";
       }
       document.getElementById("aspirante_plantel").value = datos.estudiante[0].Plantel_cct_plantel;
-      document.getElementById("aspirante_semestre").value = datos.estudiante[0].semestre;
+      document.getElementById("aspirante_semestre").value = datos.estudiante[0].semestre_en_curso;
       //fin datos personales
       //direccion aspirante
       //llamada al api que regresa los ids de la direccion del estudiante

@@ -14,4 +14,14 @@ class C_friae extends CI_Controller {
         $datos = json_decode($this->input->raw_input_stream);
         echo $this->M_friae->crear_friae($datos);
     }
+
+    public function agregar_estudiantes_friae(){
+        $datos = json_decode($this->input->raw_input_stream);
+        echo $this->M_friae->agregar_estudiantes_friae($datos);
+    }
+
+    public function quitar_estudiante(){
+        $datos = json_decode($this->input->raw_input_stream);
+        echo $this->M_friae->quitar_estudiante($datos);
+    }
 }

@@ -20,7 +20,7 @@ class C_reinscripcion extends CI_Controller {
         echo $this->M_reinscripcion->reinscribir();
     }
 
-    function cerrar_calificaciones(){
+    function cerrar_calificaciones(){//primera*-*-**-*-**-*-*-*-*-*-*-*-*-
         echo $this->M_reinscripcion->cerrar_calificaciones();
     }
 
@@ -28,5 +28,10 @@ class C_reinscripcion extends CI_Controller {
     function materias_cursando_estudiante(){ 
         $no_control = $this->input->get("no_control");
         echo json_encode($this->M_reinscripcion->materias_cursando_estudiante($no_control));
+    }
+
+
+    function actualizar_tipo_ingreso_despues_calificar_estudiante(){//segundo*/*/*/*/*/*/*/*/*/*
+            echo $this->M_reinscripcion->actualizar_tipo_ingreso_despues_calificar_estudiante();
     }
 }

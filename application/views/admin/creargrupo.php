@@ -12,117 +12,119 @@
 
 
     <form class="card" id="formulario">
-      <div class="form-group">
+      <div class="card-body">
+        <div class="form-group">
 
-        <div class="row">
-          <div class="col-md-8">
-            <label class="form-group has-float-label seltitulo">
-              <select class="form-control form-control-lg selcolor" id="plantel" name="plantel">
-                <option value="">Seleccione el plantel donde creará el grupo</option>
+          <div class="row">
+            <div class="col-md-8">
+              <label class="form-group has-float-label seltitulo">
+                <select class="form-control form-control-lg selcolor" id="plantel" name="plantel">
+                  <option value="">Seleccione el plantel donde creará el grupo</option>
 
-                <?php
+                  <?php
                                         foreach ($planteles as $plantel)
                                         {
                                           echo '<option value="'.$plantel->cct_plantel.'">'.$plantel->nombre_plantel.' ----- CCT: '.$plantel->cct_plantel.'</option>';
                                         }
                                         ?>
 
-              </select>
-              <span>Plantel</span>
-            </label>
+                </select>
+                <span>Plantel</span>
+              </label>
+            </div>
+
           </div>
 
         </div>
 
-      </div>
+        <div class="form-group">
+          <div class="row">
 
-      <div class="form-group">
-        <div class="row">
+            <div class="col-md-4">
+              <label class="form-group has-float-label seltitulo">
+                <select class="form-control form-control-lg selcolor" onchange="numero_alumnos(this)"
+                  name="semestre_grupo" id="semestre_grupo">
+                  <option value="">Seleccione uno</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                </select>
+                <span>Semestre del grupo a crear</span>
+              </label>
+            </div>
 
-          <div class="col-md-4">
-            <label class="form-group has-float-label seltitulo">
-              <select class="form-control form-control-lg selcolor" onchange="numero_alumnos(this)"
-                name="semestre_grupo" id="semestre_grupo">
-                <option value="">Seleccione uno</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-              </select>
-              <span>Semestre del grupo a crear</span>
-            </label>
+
+            <div class="col-md-4" style="display: none" id="seleccione_componente_oculto">
+              <label class="form-group has-float-label seltitulo">
+                <select class="form-control form-control-lg selcolor" name="seleccione_componente"
+                  id="seleccione_componente">
+                  <option value="">Seleccione un componente</option>
+                </select>
+                <span>Componente</span>
+              </label>
+            </div>
+
           </div>
-
-
-          <div class="col-md-4" style="display: none" id="seleccione_componente_oculto">
-            <label class="form-group has-float-label seltitulo">
-              <select class="form-control form-control-lg selcolor" name="seleccione_componente"
-                id="seleccione_componente">
-                <option value="">Seleccione un componente</option>
-              </select>
-              <span>Componente</span>
-            </label>
-          </div>
-
         </div>
-      </div>
 
-      <div class="form-group">
-        <div class="row">
-          <div class="col-md-4">
-            <label class="form-group has-float-label seltitulo">
-              <select class="form-control form-control-lg selcolor" id="grupo_ciclo_escolar" name="grupo_ciclo_escolar">
-                <?php
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-4">
+              <label class="form-group has-float-label seltitulo">
+                <select class="form-control form-control-lg selcolor" id="grupo_ciclo_escolar"
+                  name="grupo_ciclo_escolar">
+                  <?php
                                         foreach ($ciclo_escolar as $ciclo)
                                         {
                                           echo '<option value="'.$ciclo->id_ciclo_escolar.'">'.$ciclo->nombre_ciclo_escolar.'</option>';
                                         }
                                         ?>
 
-              </select>
-              <span>Ciclo escolar</span>
-            </label>
+                </select>
+                <span>Ciclo escolar</span>
+              </label>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="form-group">
-        <div class="row">
+        <div class="form-group">
+          <div class="row">
 
-          <div class="col-md-4">
-            <label class="form-group has-float-label seltitulo">
-              <select class="form-control form-control-lg selcolor" name="grupo_nombre" id="grupo_nombre">
-                <option value="">Elegir</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
-                <option value="E">E</option>
-                <option value="F">F</option>
-              </select>
-              <span>Nombre del grupo</span>
-            </label>
-          </div>
+            <div class="col-md-4">
+              <label class="form-group has-float-label seltitulo">
+                <select class="form-control form-control-lg selcolor" name="grupo_nombre" id="grupo_nombre">
+                  <option value="">Elegir</option>
+                  <option value="A">A</option>
+                  <option value="B">B</option>
+                  <option value="C">C</option>
+                  <option value="D">D</option>
+                  <option value="E">E</option>
+                  <option value="F">F</option>
+                </select>
+                <span>Nombre del grupo</span>
+              </label>
+            </div>
 
-          <div class="col-md-3">
-          </div>
+            <div class="col-md-3">
+            </div>
 
-          <div class="col-md-4" style="display: none" id="cantidad_alumnos_oculto">
-            <label id="cantidad_alumnos">Cantidad de alumnos:</label>
+            <div class="col-md-4" style="display: none" id="cantidad_alumnos_oculto">
+              <label id="cantidad_alumnos">Cantidad de alumnos:</label>
 
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="form-group">
-        <div class="row">
+        <div class="form-group">
+          <div class="row">
 
-          <div class="col-md-4">
-            <label class="form-group has-float-label seltitulo">
-              <select class="form-control form-control-lg selcolor" name="grupo_periodo" id="grupo_periodo">
-                <?php
+            <div class="col-md-4">
+              <label class="form-group has-float-label seltitulo">
+                <select class="form-control form-control-lg selcolor" name="grupo_periodo" id="grupo_periodo">
+                  <?php
                                         foreach ($ciclo_escolar as $ciclo)
                                         {
                                           if($ciclo->periodo == "AGOSTO-ENERO"){
@@ -132,55 +134,58 @@
                                           }
                                         }
                                         ?>
-              </select>
-              <span>Periodo del grupo</span>
-            </label>
-          </div>
+                </select>
+                <span>Periodo del grupo</span>
+              </label>
+            </div>
 
-          <div class="col-md-4 offset-md-3">
-            <button type="button" class="btn btn-success btn-lg btn-block" onclick="validarcomponente()"
-              style="padding: 1rem" id="crear_grupo">Crear grupo</button>
-          </div>
-        </div>
-      </div>
-
-
-      <div class="row" id="alumnos_oculto" style="display:none">
-        <div class=" col-md-6">
-          <div class="card card-body" style="width: 100%; overflow: scroll">
-            <p class="h5" id="contador_alumnos_restantes">Alumnos restantes: 0</p>
-            <table class="table table-hover" id="tabla_completa" style="width: 100%; overflow: scroll">
-              <caption>Lista de todos los alumnos de este semestre sin grupo</caption>
-              <thead class="thead-light">
-                <tr>
-                  <th scope="col" class="col-md-1">Nombre completo</th>
-                  <th scope="col" class="col-md-1">N° control</th>
-                  <th scope="col" class="col-md-1">Agregar</th>
-                </tr>
-              </thead>
-              <tbody id="tabla">
-              </tbody>
-            </table>
+            <div class="col-md-4 offset-md-3">
+              <button type="button" class="btn btn-success btn-lg btn-block" onclick="validarcomponente()"
+                style="padding: 1rem" id="crear_grupo">Crear grupo</button>
+            </div>
           </div>
         </div>
 
-        <div class="col-md-6">
-          <div class="card card-body" style="width: 100%; overflow: scroll">
-            <p class="h5" id="contador_alumnos_agregados">Alumnos restantes: 0</p>
-            <table class="table table-hover" id="tabla_completa_grupo" style="width: 100%; overflow: scroll">
-              <caption>Lista del Grupo creado</caption>
-              <thead class="thead-light">
-                <tr>
-                  <th scope="col" class="col-md-1">Nombre completo</th>
-                  <th scope="col" class="col-md-1">N° control</th>
-                  <th scope="col" class="col-md-1">Eliminar</th>
-                </tr>
-              </thead>
 
-              <tbody id="tablagrupo">
+        <div class="row" id="alumnos_oculto" style="display:none">
+          <div class=" col-md-6">
+            <div class="card card-body" style="width: 100%; overflow: scroll">
+              <p class="h5" id="contador_alumnos_restantes">Alumnos restantes: 0</p>
+              <table class="table table-hover" id="tabla_completa" style="width: 100%; overflow: scroll">
+                <caption>Lista de todos los alumnos de este semestre sin grupo</caption>
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col" class="col-md-1">Nombre completo</th>
+                    <th scope="col" class="col-md-1">N° control</th>
+                    <th scope="col" class="col-md-1">Sexo</th>
+                    <th scope="col" class="col-md-1">Agregar</th>
+                  </tr>
+                </thead>
+                <tbody id="tabla">
+                </tbody>
+              </table>
+            </div>
+          </div>
 
-              </tbody>
-            </table>
+          <div class="col-md-6">
+            <div class="card card-body" style="width: 100%; overflow: scroll">
+              <p class="h5" id="contador_alumnos_agregados">Alumnos restantes: 0</p>
+              <table class="table table-hover" id="tabla_completa_grupo" style="width: 100%; overflow: scroll">
+                <caption>Lista del Grupo creado</caption>
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col" class="col-md-1">Nombre completo</th>
+                    <th scope="col" class="col-md-1">N° control</th>
+                    <th scope="col" class="col-md-1">Sexo</th>
+                    <th scope="col" class="col-md-1">Eliminar</th>
+                  </tr>
+                </thead>
+
+                <tbody id="tablagrupo">
+
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
@@ -335,6 +340,9 @@
         fila += '<td>';
         fila += valor.no_control;
         fila += '</td>';
+        fila += '<td>';
+        fila += valor.sexo;
+        fila += '</td>';
         fila += '<td class="">';
         fila += '<button class="btn btn-lg btn-block btn-success" type="button" value="' + valor.no_control + '" id="botoncambio" onclick="cambiardetabla(this);">Agregar</button>';
         fila += '</td>';
@@ -372,6 +380,9 @@
         fila += '</td>';
         fila += '<td>';
         fila += valor.no_control;
+        fila += '</td>';
+        fila += '<td>';
+        fila += valor.sexo;
         fila += '</td>';
         fila += '<td class="">';
         fila += '<button class="btn btn-lg btn-block btn-danger" type="button" value="' + valor.no_control + '" id="botoncambio" disabled="true">Eliminar</button>';
@@ -577,11 +588,8 @@
         type: 'error',
         text: 'No se pueden guardar grupos vacios'
       });
-    }
-
-    else {
+    } else {
       if (document.getElementById("boton_agregar").value === "nuevo") {
-
         var datos_grupo = {
           plantel: document.getElementById("plantel").value,
           semestre: parseInt(document.getElementById("semestre_grupo").value),
@@ -608,19 +616,14 @@
           };
           asesores.push(materia_asesor);
         }
-
         //---------------------------
-
         var datos = {
           grupo: datos_grupo,
           alumnos: alumnos_json,
           asesores_materia: asesores
         };
-
-
         var xhr = new XMLHttpRequest();
         xhr.open("POST", '<?php echo base_url();?>index.php/c_acreditacion/agregar_grupo', true);
-        //Send the proper header information along with the request
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.onloadstart = function () {
           $('#div_carga').show();
@@ -628,26 +631,18 @@
         xhr.error = function () {
           console.log("error de conexion");
         }
-
         xhr.onreadystatechange = function () {
-          // Call a function when the state changes.
-
           if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {//agrego el grupo
             if (xhr.responseText.trim() === "si") {
-
-
               var friae = new XMLHttpRequest();
               friae.open("POST", '<?php echo base_url();?>index.php/c_friae/crear_friae', true);
-
-              //Send the proper header information along with the request
               friae.setRequestHeader("Content-Type", "application/json");
               friae.onloadstart = function () {
                 $('#div_carga').show();
-                }
+              }
               friae.error = function () {
-                 console.log("error de conexion");
-                }
-
+                console.log("error de conexion");
+              }
               friae.onreadystatechange = function () { // Call a function when the state changes.
                 if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
                   console.log(friae.response);
@@ -675,27 +670,21 @@
                 }
               }
               friae.send(JSON.stringify(datos));
-
-
             }
           }
 
         }
         xhr.send(JSON.stringify(datos));
 
-      }
-
-
-
-      else {
+      } else {
         var tabla = document.getElementById("tabla_completa_grupo");
         var filas = tabla.children[2].children;
         var estudiantes = new Array();
 
         for (let i = 0; i < filas.length; i++) {
           //console.log(filas[i].children[2].children.botoncambio.disabled);
-          if (filas[i].children[2].children.botoncambio.disabled === false) {
-            estudiantes.push(filas[i].children[2].children.botoncambio.value);
+          if (filas[i].children[3].children.botoncambio.disabled === false) {
+            estudiantes.push(filas[i].children[3].children.botoncambio.value);
           }
         }
         var datos = {
@@ -706,10 +695,6 @@
           componente: document.getElementById("seleccione_componente").value.split("-")[1],
           id_componente: document.getElementById("seleccione_componente").value.split("-")[0]
         };
-
-
-
-
 
         var xhr = new XMLHttpRequest();
         xhr.open("POST", '<?php echo base_url();?>index.php/c_acreditacion/agregar_estudiantes_grupo', true);
@@ -725,30 +710,48 @@
           if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
             $('#div_carga').hide();
             if (xhr.responseText.trim() === "si") {
-              console.log(xhr.response);
-              swalWithBootstrapButtons.fire({
-                type: 'success',
-                text: 'Datos agregados correctamente',
-                confirmButtonText: 'Aceptar'
-              }).then((result) => {
-                if (result.value) {
-                  //aqui va el aceptar
-                  $(document).scrollTop(0);
-                  location.reload();
-                }
-                //aqui va si cancela
-              });
+              var friae = new XMLHttpRequest();
+              friae.open("POST", '<?php echo base_url();?>index.php/c_friae/agregar_estudiantes_friae', true);
 
-            } else {
-              Swal.fire({
-                type: 'error',
-                text: 'Datos no agregados'
-              });
+              //Send the proper header information along with the request
+              friae.setRequestHeader("Content-Type", "application/json");
+              friae.onloadstart = function () {
+                $('#div_carga').show();
+              }
+              friae.error = function () {
+                console.log("error de conexion");
+              }
+              friae.onreadystatechange = function () { // Call a function when the state changes.
+                if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                  console.log(friae.response);
+                  $('#div_carga').hide();
+                  if (friae.responseText.trim() === "si") {
+                    console.log(friae.response);
+                    swalWithBootstrapButtons.fire({
+                      type: 'success',
+                      text: 'Datos agregados correctamente',
+                      confirmButtonText: 'Aceptar'
+                    }).then((result) => {
+                      if (result.value) {
+                        //aqui va el aceptar
+                        $(document).scrollTop(0);
+                        location.reload();
+                      }
+                      //aqui va si cancela
+                    });
+                  } else {
+                    Swal.fire({
+                      type: 'error',
+                      text: 'Datos no agregados'
+                    });
+                  }
+                }
+              }
+              friae.send(JSON.stringify(datos));
             }
           }
         }
         xhr.send(JSON.stringify(datos));
-
       }
     }
   }

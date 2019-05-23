@@ -81,7 +81,7 @@
     </form>
     <br>
     <div class="col-md-12" id="agregar_oculto" style="display: none">
-      <button type="button" value="nuevo" onclick="enviar_formulario()" id="boton_agregar"
+      <button type="button" data-toggle="modal" data-target="#fechacalificacion" value="nuevo"  id="boton_agregar"
         class="btn btn-success btn-lg btn-block btn-guardar" style="padding: 1rem"> Guardar cambios</button>
     </div>
 
@@ -92,7 +92,49 @@
 </div>
 <!-- /#wrapper -->
 
+<div class="modal fade" id="fechacalificacion" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" style="max-width: 50% !important;" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Agregar fecha de calificación de regularización</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+      <div class="modal-body">
+              <div class="form-label-group">
+                <input type="date"  class="form-control" id="fecha_inicio"  
+                  placeholder="Fecha de calificación" min=
+                <?php
+                $fecha_actual = date("d-m-Y");
+                date("d-m-Y",strtotime($fecha_actual."- 60 days")); 
+                ?>
+                >
+                <label for="fecha_inicio">Fecha de calificación </label>
+
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" value="nuevo"  class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" onclick="validarcomponentefecha()" class="btn btn-success">Guardar fecha</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
+  function validarcomponentefecha() {
+
+if (document.getElementById("fecha_inicio").value != '' ) {
+  enviar_formulario();
+} else {
+  Swal.fire({
+    type: 'warning',
+    text: 'Agregue los datos faltantes'
+  });
+}
+}
 
   function validarcomponente() {
 
@@ -223,7 +265,8 @@
       var dato = {
         no_control:tabla.childNodes[i].childNodes[1].innerText,
         id_materia:document.getElementById("materias").value,
-        calificacion:tabla.childNodes[i].childNodes[4].childNodes[0].value == ""?"0":tabla.childNodes[i].childNodes[4].childNodes[0].value
+        calificacion:tabla.childNodes[i].childNodes[4].childNodes[0].value == ""?"0":tabla.childNodes[i].childNodes[4].childNodes[0].value,
+        fecha_calificacion:document.getElementById("fecha_inicio").value
       };
       datos.push(dato);
     }
@@ -233,7 +276,7 @@
             text: 'Al aceptar no podrá realizar cambio alguno ¿Esta seguro?',
             confirmButtonText: 'Aceptar',
             showCancelButton: 'true',
-            cancelbuttonText: 'Cancelar'
+            cancelButtonText: 'Cancelar'
           }).then((result) => {
             if (result.value) {
           

@@ -1110,8 +1110,7 @@ function envioform(form) {
         Swal.fire({
           type: 'success',
           title: 'Registro exitoso',
-          showConfirmButton: false,
-          timer: 2500
+          confirmButtonText: "Aceptar"
         });
         $(document).scrollTop(0);
         location.reload(); 

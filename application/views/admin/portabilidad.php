@@ -263,7 +263,6 @@
               <select class="form-control form-control-lg selcolor" required id="aspirante_semestre" name="aspirante_semestre"
                 >
                 <option value="">Seleccione un semestre</option>
-                <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
                 <option value="4">4</option>
@@ -324,17 +323,35 @@
     </div>
 
     <div class="form-group">
-      <div class="row">
-        <div class="col-md-4">
-          <div class="form-label-group">
-            <input type="text" title="Datos incorrectos" class="form-control text-uppercase"
-              id="aspirante_lugar_nacimiento" name="aspirante_lugar_nacimiento" required
-               placeholder="Lugar de nacimiento"style="color: #237087">
-            <label for="aspirante_lugar_nacimiento">Lugar de Nacimiento </label>
+        <div class="row">
+      <div class="col-md-4">
+            <label class="form-group has-float-label seltitulo">
+              <select class="form-control form-control-lg selcolor" id="aspirante_nacionalidad" required name="aspirante_nacionalidad">
+              <option value="">Seleccione</option>
+                <option value="MEXICANA">MEXICANA</option>
+                <option value="EXTRANJERA">EXTRANJERA</option>
+              </select>
+              <span>Nacionalidad</span>
+            </label>
           </div>
-        </div>
-        
-        <label class="form-group has-float-label text-center" style="font-size: 12pt; font-weight: bold; color:#777;">Fecha de registro de Acta</label>
+
+          <div class="col-md-4">
+            <div class="form-label-group">
+              <input type="text" title="Datos incorrectos" class="form-control text-uppercase"
+                id="aspirante_lugar_nacimiento" name="aspirante_lugar_nacimiento" required
+                 placeholder="Lugar de nacimiento"style="color: #237087 ">
+              <label for="aspirante_lugar_nacimiento">Lugar de Nacimiento</label>
+            </div>
+          </div>
+
+                            </div>
+                            </div>
+
+      <div class="form-group">
+        <div class="row">
+        <div class=" col-md-2 ">
+          <label class="form-group has-float-label text-center" style="font-size: 12pt; font-weight: bold; color:#777;">Fecha de registro de Acta</label>
+          </div>
 
           <div class=" col-md-2 ">
           <label class="form-group has-float-label seltitulo">
@@ -373,9 +390,11 @@
             </label>
           </div>
 
+
+        </div>
+
       </div>
 
-    </div>
 
     <!--direccion------------------------------------------------------>
     <p class="text-center text-white rounded titulo-form h4">Dirección familiar del Aspirante</p>
@@ -610,6 +629,7 @@
                                     echo '<option value="'.$lengua->id_lengua.'">'.strtoupper($lengua->nombre_lengua).'</option>';
                             }
                             ?>
+                            <option value="otra">OTRA</option>
 
               </select>
               <span>Lengua</span>
@@ -687,6 +707,18 @@
 
 
         </div>
+
+        <div class="row" id="lengua_oculto" style="display: none">
+
+<div class="col-md-2"  >
+  <div class="form-label-group">
+    <input type="text" class="form-control text-uppercase" id="aspirante_lengua_oculto"
+      name="aspirante_lengua_oculto" placeholder="Agregue lengua" style="color: #237087 ">
+    <label for="aspirante_lengua_oculto">Agregue lengua</label>
+  </div>
+</div>
+                </div>
+                </div>
 
       </div>
 
@@ -829,7 +861,7 @@
           <label class="form-check-label">
             <input type="checkbox" class="form-check-input" name="aspirante_documento_resolucion"
               id="aspirante_documento_resolucion" value="6" unchecked>
-            Resolucion de Equivalencia
+            Solicitud de Equivalencia
           </label>
         </div>
         <br>

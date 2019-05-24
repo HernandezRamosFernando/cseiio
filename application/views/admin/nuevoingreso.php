@@ -321,6 +321,17 @@
 
       <div class="form-group">
         <div class="row">
+      <div class="col-md-4">
+            <label class="form-group has-float-label seltitulo">
+              <select class="form-control form-control-lg selcolor" id="aspirante_nacionalidad" required name="aspirante_nacionalidad">
+                <option value="">Seleccione</option>
+                <option value="MEXICANA">MEXICANA</option>
+                <option value="EXTRANJERA">EXTRANJERA</option>
+              </select>
+              <span>Nacionalidad</span>
+            </label>
+          </div>
+
           <div class="col-md-4">
             <div class="form-label-group">
               <input type="text" title="Datos incorrectos" class="form-control text-uppercase"
@@ -330,7 +341,14 @@
             </div>
           </div>
 
+                            </div>
+                            </div>
+
+      <div class="form-group">
+        <div class="row">
+        <div class=" col-md-2 ">
           <label class="form-group has-float-label text-center" style="font-size: 12pt; font-weight: bold; color:#777;">Fecha de registro de Acta</label>
+          </div>
 
           <div class=" col-md-2 ">
           <label class="form-group has-float-label seltitulo">
@@ -607,6 +625,7 @@
                                       echo '<option value="'.$lengua->id_lengua.'">'.strtoupper($lengua->nombre_lengua).'</option>';
                               }
                               ?>
+                              <option value="otra">OTRA</option>
 
                 </select>
                 <span>Lengua</span>
@@ -684,6 +703,18 @@
 
 
           </div>
+
+          <div class="row" id="lengua_oculto" style="display: none">
+
+            <div class="col-md-2"  >
+              <div class="form-label-group">
+                <input type="text" class="form-control text-uppercase" id="aspirante_lengua_oculto"
+                  name="aspirante_lengua_oculto" placeholder="Agregue lengua" style="color: #237087 ">
+                <label for="aspirante_lengua_oculto">Agregue lengua</label>
+              </div>
+            </div>
+                            </div>
+                            </div>
 
         </div>
 
@@ -1177,4 +1208,30 @@
   }
 
 }
+
+$('form').find(':input').change(function(){
+  var dirtyForm = $(this).parents('form');
+ 
+  // change form status to dirty
+  dirtyForm.addClass('unsavedForm');
+});
+ 
+$('form').submit(function () {
+  $(this).removeClass('unsavedForm');
+});
+ 
+window.onbeforeunload = function(e) {
+  e = e || window.event,
+  message = "lorem ipsum";
+ 
+  // show alert if there are some unsaved form
+  if ($('.unsavedForm').size()) {
+    // For IE and Firefox
+                if (e) {
+                  e.returnValue = message;
+                }
+                // For Safari
+                return message;
+  }
+};
 </script>

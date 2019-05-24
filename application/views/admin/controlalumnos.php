@@ -381,25 +381,35 @@
                     href="https://www.gob.mx/curp/" target="_blank" role="button">
                     ¿No cuenta con curp? Buscar aquí</a>
                 </div>
-              </div>
-            </div>
-          </div>
+              </div> 
+                                      </div>
+      </div>
 
           <div class="form-group">
-            <div class="row">
-              <div class="col-md-4">
-                <div class="form-label-group">
-                  <input type="text" title="Datos incorrectos" class="form-control text-uppercase"
-                    id="aspirante_lugar_nacimiento" name="aspirante_lugar_nacimiento" required onchange="valida(this)"
-                    placeholder="Lugar de nacimiento" style="color: #237087">
-                  <label for="aspirante_lugar_nacimiento">Lugar de Nacimiento</label>
-                </div>
-              </div>
-
-
-            </div>
-
+        <div class="row">
+          <div class="col-md-4">
+            <label class="form-group has-float-label seltitulo">
+              <select class="form-control form-control-lg selcolor" id="aspirante_nacionalidad" required name="aspirante_nacionalidad">
+              <option value="">Seleccione</option>
+                <option value="MEXICANA">MEXICANA</option>
+                <option value="EXTRANJERA">EXTRANJERA</option>
+              </select>
+              <span>Nacionalidad</span>
+            </label>
           </div>
+
+          <div class="col-md-4">
+            <div class="form-label-group">
+              <input type="text" title="Datos incorrectos" class="form-control text-uppercase"
+                id="aspirante_lugar_nacimiento" name="aspirante_lugar_nacimiento" required
+                 placeholder="Lugar de nacimiento"style="color: #237087 ">
+              <label for="aspirante_lugar_nacimiento">Lugar de Nacimiento</label>
+            </div>
+          </div>
+
+                            </div>
+                            </div>
+
           <!--direccion------------------------------------------------------>
           <p class="text-center text-white rounded titulo-form h4">
             Dirección familiar del Aspirante
@@ -631,6 +641,7 @@
                                       echo '<option value="'.$lengua->id_lengua.'">'.strtoupper($lengua->nombre_lengua).'</option>';
                               }
                               ?>
+                               <option value="otra">OTRA</option>
 
                     </select>
                     <span>Lengua</span>
@@ -711,6 +722,19 @@
 
 
               </div>
+
+              <div class="row" id="lengua_oculto" style="display: none">
+
+<div class="col-md-2"  >
+  <div class="form-label-group">
+    <input type="text" class="form-control text-uppercase" id="aspirante_lengua_oculto"
+      name="aspirante_lengua_oculto" placeholder="Agregue lengua" style="color: #237087 ">
+    <label for="aspirante_lengua_oculto">Agregue lengua</label>
+  </div>
+</div>
+                </div>
+                </div>
+                
 
             </div>
 
@@ -862,6 +886,7 @@
       document.getElementById("aspirante_correo").value = datos.estudiante[0].correo;
       document.getElementById("aspirante_sexo").value = datos.estudiante[0].sexo;
       document.getElementById("aspirante_lugar_nacimiento").value = datos.estudiante[0].lugar_nacimiento;
+      document.getElementById("aspirante_nacionalidad").value = datos.estudiante[0].nacionalidad;
       //console.log(datos.expediente_medico);
       document.getElementById("tipo_sangre").value = datos.expediente_medico[2].valor;
       if (datos.expediente_medico[0].valor === "") {

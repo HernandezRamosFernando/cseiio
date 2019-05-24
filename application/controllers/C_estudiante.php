@@ -64,7 +64,8 @@ class C_estudiante extends CI_Controller {
             'telefono' => $this->input->post('aspirante_telefono'),
             'Plantel_cct_plantel' => $this->input->post('aspirante_plantel'),
             'lugar_nacimiento' => mb_strtoupper($this->input->post('aspirante_lugar_nacimiento')),
-            'cct_escuela_procedencia' => $this->input->post('aspirante_secundaria_cct')
+            'cct_escuela_procedencia' => $this->input->post('aspirante_secundaria_cct'),
+            'nacionalidad' => $this->post('aspirante_nacionalidad')
         );
 
         if($tipo_estudiante=='nuevo_ingreso'){
@@ -383,7 +384,8 @@ class C_estudiante extends CI_Controller {
             'Plantel_cct_plantel' => $this->input->post('aspirante_plantel'),
             //'nacinalidad' => $this->input->post('/d'),
             'lugar_nacimiento' => mb_strtoupper($this->input->post('aspirante_lugar_nacimiento')),
-            'cct_escuela_procedencia' => $this->input->post('aspirante_secundaria_cct')
+            'cct_escuela_procedencia' => $this->input->post('aspirante_secundaria_cct'),
+            'nacionalidad' => $this->input->post('aspirante_nacionalidad')
             //'semestre' => $this->input->post('aspirante_semestre')
         );
 

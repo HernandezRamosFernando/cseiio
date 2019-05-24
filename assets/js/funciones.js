@@ -180,6 +180,9 @@ function borrarmodal() {
 function cct() {
   document.getElementById("aspirante_nuevasecundaria_cct").value = document.getElementById("aspirante_secundaria_cct").value;
 }
+function cctbachillerato() {
+  document.getElementById("aspirante_nuevobachillerato_cct").value = document.getElementById("aspirante_bachillerato_cct").value;
+}
 
 function valida(e) {
   regexp = / +/g; /* Expresión regular para buscar todos los espacios múltiples */
@@ -344,9 +347,7 @@ function validafecharegistro(e){
     $('#selector_localidad_secundaria').val('');
   }
 
-  function cct() {
-    document.getElementById("aspirante_nuevasecundaria_cct").value = document.getElementById("aspirante_secundaria_cct").value;
-  }
+
 
   function limpiar() {
     location.reload();

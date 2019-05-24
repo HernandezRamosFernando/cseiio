@@ -1157,7 +1157,7 @@
           confirmButtonText: 'Cerrar'
 
         })
-  }else{
+   }else{
     let secundaria = "";
     secundaria = {
       "cct_escuela_procedencia": document.getElementById("aspirante_nuevasecundaria_cct").value,

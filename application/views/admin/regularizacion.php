@@ -200,7 +200,7 @@ function cargarmaterias() {
    }
 
    var xhr = new XMLHttpRequest();
-      xhr.open("POST", '/cseiio/c_regularizacion/agregar_regularizacion', true);
+      xhr.open("POST", '<?php echo base_url();?>index.php/c_regularizacion/agregar_regularizacion', true);
 
       //Send the proper header information along with the request
       xhr.setRequestHeader("Content-Type", "application/json");

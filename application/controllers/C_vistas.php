@@ -25,7 +25,8 @@ public function portabilidad(){
         //$datos['localidades'] = $this->M_localidad->get_localidades_municipio(1);
         $datos['ciclo_escolar'] = $this->M_ciclo_escolar->get_ciclo_escolar();
         $datos['lenguas'] = $this->M_lengua->get_lenguas();
-        //$datos['secundarias'] = $this->M_secundaria->get_secundarias();
+        $datos['secundarias'] = $this->M_escuela_procedencia->get_secundarias();
+        $datos['bachilleratos'] = $this->M_escuela_procedencia->get_bachilleratos();
         
         
 
@@ -61,7 +62,7 @@ public function portabilidad(){
         //$datos['localidades'] = $this->M_localidad->get_localidades_municipio(1);
         $datos['lenguas'] = $this->M_lengua->get_lenguas();
         $datos['ciclo_escolar'] = $this->M_ciclo_escolar->get_ciclo_escolar();
-        $datos['escuela_procedencia'] = $this->M_escuela_procedencia->get_escuelas();
+        $datos['escuela_procedencia'] = $this->M_escuela_procedencia->get_secundarias();
 
        
 

@@ -739,9 +739,9 @@
                 <datalist id="secundarias">
 
                   <?php
-                              foreach ($escuela_procedencia as $escuela)
+                              foreach ($secundarias as $secundaria)
                               {
-                                      echo '<option value="'.$escuela->cct_escuela_procedencia.'">';
+                                      echo '<option value="'.$secundaria->cct_escuela_procedencia.'">';
                               }
                               ?>
                 </datalist>
@@ -811,14 +811,14 @@
           <div class="col-md-4">
             <div class="form-label-group">
 
-              <input list="secundarias" class="form-control text-uppercase" id="aspirante_bachillerato_cct"
+              <input list="bachilleratos" class="form-control text-uppercase" id="aspirante_bachillerato_cct"
                 name="aspirante_bachillerato_cct" placeholder="Buscar Bachillerato por CCT" style="color: #237087">
-              <datalist id="secundarias">
+              <datalist id="bachilleratos">
 
                 <?php
-                            foreach ($escuela_procedencia as $escuela)
+                            foreach ($bachilleratos as $bachillerato)
                             {
-                                    echo '<option value="'.$escuela->cct_escuela_procedencia.'">';
+                                    echo '<option value="'.$bachillerato->cct_escuela_procedencia.'">';
                             }
                             ?>
               </datalist>
@@ -1422,7 +1422,7 @@ function insertar_bachillerato() {
 
   let secundaria = "";
   secundaria = {
-    "cct_escuela_procedencia": document.getElementById("aspirante_nuevobachillerato_cct").value,
+    "cct_escuela_procedencia": document.getElementById("aspirante_nuevobachillerato_cct").value.toUpperCase(),
     "nombre_escuela_procedencia": document.getElementById("aspirante_nuevobachillerato_nombre").value,
     "tipo_subsistema": document.getElementById("aspirante_nuevobachillerato_tipo_subsistema").value,
     "id_localidad_escuela_procedencia": parseInt(document.getElementById("selector_localidad_bachillerato").value),

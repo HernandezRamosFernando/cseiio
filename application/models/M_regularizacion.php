@@ -65,7 +65,7 @@ class M_regularizacion extends CI_Model {
          values ('".$regularizacion->no_control."','".$regularizacion->id_materia."',".$regularizacion->calificacion.",'".date("Y-m-d")."')");
 
          if($estudiante_en_grupo=="si"){
-         if(date("m")=="05" || date("m")=="01"){
+         if(date("m")=="07" || date("m")=="01"){
             $materias_debe = $this->materias_debe_estudiante_actualmente($regularizacion->no_control);
             $materias_ids="";
             foreach($materias_debe as $id){

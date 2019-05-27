@@ -148,177 +148,183 @@
 
 
           <div class="card form-group">
-      <div>
-      <label class="form-group has-float-label text-center" style="font-size: 12pt; font-weight: bold; color:#777;" >Fecha de nacimiento</label>
-      </div>
+            <div>
+              <label class="form-group has-float-label text-center"
+                style="font-size: 12pt; font-weight: bold; color:#777;">Fecha de nacimiento</label>
+            </div>
 
-        <div class="row">
-         
-          <div class=" col-md-4 ">
-          <label class="form-group has-float-label seltitulo">
-              <select class="form-control form-control-lg selcolor" id="aspirante_anio_nacimiento" required name="aspirante_anio_nacimiento" onclick="get_dias()">
+            <div class="row">
 
-              </select>
-              <span>Año</span>
-            </label>
+              <div class=" col-md-4 ">
+                <label class="form-group has-float-label seltitulo">
+                  <select class="form-control form-control-lg selcolor" id="aspirante_anio_nacimiento" required
+                    name="aspirante_anio_nacimiento" onclick="get_dias()">
+
+                  </select>
+                  <span>Año</span>
+                </label>
+              </div>
+              <div class="col-md-4">
+                <label class="form-group has-float-label seltitulo">
+                  <select class="form-control form-control-lg selcolor" id="aspirante_mes_nacimiento" required
+                    name="aspirante_mes_nacimiento" onclick="get_dias()">
+                    <option value="01">Enero</option>
+                    <option value="02">Febrero</option>
+                    <option value="03">Marzo</option>
+                    <option value="04">Abril</option>
+                    <option value="05">Mayo</option>
+                    <option value="06">Junio</option>
+                    <option value="07">Julio</option>
+                    <option value="08">Agosto</option>
+                    <option value="09">Septiembre</option>
+                    <option value="10">Octubre</option>
+                    <option value="11">Noviembre</option>
+                    <option value="12">Diciembre</option>
+                  </select>
+                  <span>Mes</span>
+                </label>
+              </div>
+              <div class="col-md-4 ">
+                <label class="form-group has-float-label seltitulo">
+                  <select class="form-control form-control-lg selcolor" id="aspirante_dia_nacimiento" required
+                    name="aspirante_dia_nacimiento">
+
+                  </select>
+                  <span>Día</span>
+                </label>
+              </div>
+
+
+            </div>
+
           </div>
-          <div class="col-md-4">
-          <label class="form-group has-float-label seltitulo">
-              <select class="form-control form-control-lg selcolor" id="aspirante_mes_nacimiento" required name="aspirante_mes_nacimiento" onclick="get_dias()">
-              <option value="01">Enero</option>
-            <option value="02">Febrero</option>
-            <option value="03">Marzo</option>
-            <option value="04">Abril</option>
-            <option value="05">Mayo</option>
-            <option value="06">Junio</option>
-            <option value="07">Julio</option>
-            <option value="08">Agosto</option>
-            <option value="09">Septiembre</option>
-            <option value="10">Octubre</option>
-            <option value="11">Noviembre</option>
-            <option value="12">Diciembre</option>
-              </select>
-              <span>Mes</span>
-            </label>
-          </div>
-          <div class="col-md-4 ">
-          <label class="form-group has-float-label seltitulo">
-              <select class="form-control form-control-lg selcolor" id="aspirante_dia_nacimiento" required name="aspirante_dia_nacimiento">
-
-              </select>
-              <span>Día</span>
-            </label>
-          </div>
-
-
-        </div>
-
-        </div>
 
           <div class="form-group">
 
-        <div class="row">
+            <div class="row">
 
-          <div class="col-md-4">
-            <div class="form-label-group">
-              <input type="number" title="El numero de telefono debe de ser a 13 digitos" style="color: #237087 "
-                class="form-control text-uppercase" id="aspirante_telefono" name="aspirante_telefono"
-                placeholder="Telefono">
-              <label for="aspirante_telefono">Teléfono</label>
+              <div class="col-md-4">
+                <div class="form-label-group">
+                  <input type="number" title="El numero de telefono debe de ser a 13 digitos" style="color: #237087 "
+                    class="form-control text-uppercase" id="aspirante_telefono" name="aspirante_telefono"
+                    placeholder="Telefono">
+                  <label for="aspirante_telefono">Teléfono</label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-label-group">
+                  <input type="email" title="Introduzca un correo valido" class="form-control text-lowercase"
+                    id="aspirante_correo" name="aspirante_correo" placeholder="Correo Electrónico"
+                    style="color: #237087 ">
+                  <label for="aspirante_correo">Correo electrónico</label>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <label class="form-group has-float-label seltitulo">
+                  <select class="form-control form-control-lg selcolor" id="aspirante_sexo" required
+                    name="aspirante_sexo">
+                    <option value="">Seleccione</option>
+                    <option value="H">Hombre</option>
+                    <option value="M">Mujer</option>
+                  </select>
+                  <span>Sexo</span>
+                </label>
+              </div>
+
             </div>
-          </div>
-          <div class="col-md-4">
-            <div class="form-label-group">
-              <input type="email"
-                title="Introduzca un correo valido" class="form-control text-lowercase" id="aspirante_correo"
-                name="aspirante_correo" placeholder="Correo Electrónico" style="color: #237087 ">
-              <label for="aspirante_correo">Correo electrónico</label>
-            </div>
-          </div>
-
-          <div class="col-md-4">
-            <label class="form-group has-float-label seltitulo">
-              <select class="form-control form-control-lg selcolor" id="aspirante_sexo" required name="aspirante_sexo">
-                <option value="">Seleccione</option>
-                <option value="H">Hombre</option>
-                <option value="M">Mujer</option>
-              </select>
-              <span>Sexo</span>
-            </label>
-          </div>
-
-        </div>
-
-      </div>
-
-
-
-      <div class="form-group">
-        <div class="row">
-         
-
-          <div class="col-md-4">
-            <div class="form-label-group">
-              <input type="number" pattern="[0-9]{11}" title="Introduzca 11 digitos" class="form-control text-uppercase"
-                id="aspirante_nss" name="aspirante_nss" placeholder="Numero de Seguro Social" style="color: #237087 ">
-              <label for="aspirante_nss">NSS (IMSS)</label>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="form-label-group">
-              <input type="text" class="form-control text-uppercase" id="aspirante_programa_social"
-                name="aspirante_programa_social" placeholder="Folio de programa social" style="color: #237087 ">
-              <label for="aspirante_programa_social">Folio de Prospera</label>
-            </div>
-          </div>
-
-          <div class="col-md-4">
-            <div class="form-group">
-              <label class="form-group has-float-label seltitulo">
-                <select class="form-control form-control-lg selcolor" name="tipo_sangre" required id="tipo_sangre">
-                  <option value="">Seleccione una opción</option>
-                  <option value="No conoce">No conoce su tipo de sangre</option>
-                  <option value="A+">A+</option>
-                  <option value="A-">A-</option>
-                  <option value="B+">B+</option>
-                  <option value="B-">B-</option>
-                  <option value="AB+">AB+</option>
-                  <option value="AB-">AB-</option>
-                  <option value="A+">O+</option>
-                  <option value="A-">O-</option>
-                </select>
-                <span>Tipo de sangre</span>
-              </label>
-            </div>
-          </div>
 
           </div>
-      </div>
+
+
 
           <div class="form-group">
-        <div class="row">
+            <div class="row">
 
-          <div class="col-md-4">
-            <label class="form-group has-float-label seltitulo">
-              <select class="form-control form-control-lg selcolor" id="aspirante_alergia_combo" name="aspirante_alergia_combo"
-                onchange="alergia(this)">
-                <option value="2">No</option>
-                <option value="1">Si</option>
-              </select>
-              <span>¿Alérgico a algún medicamento?</span>
-            </label>
-          </div>
-          <div class="col-md-4" style="display:none" id="a" name="alergia_medicamento">
-            <div class="form-label-group">
-              <input type="text" pattern="[A-ZÁÉÍÓÚáéíóúa-z]+[ ]*[A-ZÁÉÍÓÚáéíóúa-z ]*" 
-                class="form-control text-uppercase" id="aspirante_alergia" name="aspirante_alergia"
-                placeholder="Ingrese el medicamento" style="color: #237087 ">
-              <label for="aspirante_alergia">Ingrese el medicamento</label>
+
+              <div class="col-md-4">
+                <div class="form-label-group">
+                  <input type="number" pattern="[0-9]{11}" title="Introduzca 11 digitos"
+                    class="form-control text-uppercase" id="aspirante_nss" name="aspirante_nss"
+                    placeholder="Numero de Seguro Social" style="color: #237087 ">
+                  <label for="aspirante_nss">NSS (IMSS)</label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-label-group">
+                  <input type="text" class="form-control text-uppercase" id="aspirante_programa_social"
+                    name="aspirante_programa_social" placeholder="Folio de programa social" style="color: #237087 ">
+                  <label for="aspirante_programa_social">Folio de Prospera</label>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="form-group has-float-label seltitulo">
+                    <select class="form-control form-control-lg selcolor" name="tipo_sangre" required id="tipo_sangre">
+                      <option value="">Seleccione una opción</option>
+                      <option value="No conoce">No conoce su tipo de sangre</option>
+                      <option value="A+">A+</option>
+                      <option value="A-">A-</option>
+                      <option value="B+">B+</option>
+                      <option value="B-">B-</option>
+                      <option value="AB+">AB+</option>
+                      <option value="AB-">AB-</option>
+                      <option value="A+">O+</option>
+                      <option value="A-">O-</option>
+                    </select>
+                    <span>Tipo de sangre</span>
+                  </label>
+                </div>
+              </div>
+
             </div>
           </div>
 
+          <div class="form-group">
+            <div class="row">
 
-          <div class="col-md-4">
-            <label class="form-group has-float-label seltitulo">
-              <select class="form-control form-control-lg selcolor" id="aspirante_discapacidad_combo"
-                name="aspirante_discapacidad_combo" onchange="discapacidad(this)">
-                <option value="2">No</option>
-                <option value="1">Si</option>
-              </select>
-              <span>¿Padece alguna discapacidad?</span>
-            </label>
-          </div>
-          <div class="col-md-4" style="display:none" id="b" name="discapacidad">
-            <div class="form-label-group">
-              <input type="text" pattern="[A-ZÁÉÍÓÚáéíóúa-z]+[ ]*[A-ZÁÉÍÓÚáéíóúa-z ]*" 
-                class="form-control text-uppercase" id="aspirante_discapacidad" name="aspirante_discapacidad"
-                placeholder="Ingrese la discapacidad" style="color: #237087 ">
-              <label for="aspirante_discapacidad">Ingrese la discapacidad</label>
+              <div class="col-md-4">
+                <label class="form-group has-float-label seltitulo">
+                  <select class="form-control form-control-lg selcolor" id="aspirante_alergia_combo"
+                    name="aspirante_alergia_combo" onchange="alergia(this)">
+                    <option value="2">No</option>
+                    <option value="1">Si</option>
+                  </select>
+                  <span>¿Alérgico a algún medicamento?</span>
+                </label>
+              </div>
+              <div class="col-md-4" style="display:none" id="a" name="alergia_medicamento">
+                <div class="form-label-group">
+                  <input type="text" pattern="[A-ZÁÉÍÓÚáéíóúa-z]+[ ]*[A-ZÁÉÍÓÚáéíóúa-z ]*"
+                    class="form-control text-uppercase" id="aspirante_alergia" name="aspirante_alergia"
+                    placeholder="Ingrese el medicamento" style="color: #237087 ">
+                  <label for="aspirante_alergia">Ingrese el medicamento</label>
+                </div>
+              </div>
+
+
+              <div class="col-md-4">
+                <label class="form-group has-float-label seltitulo">
+                  <select class="form-control form-control-lg selcolor" id="aspirante_discapacidad_combo"
+                    name="aspirante_discapacidad_combo" onchange="discapacidad(this)">
+                    <option value="2">No</option>
+                    <option value="1">Si</option>
+                  </select>
+                  <span>¿Padece alguna discapacidad?</span>
+                </label>
+              </div>
+              <div class="col-md-4" style="display:none" id="b" name="discapacidad">
+                <div class="form-label-group">
+                  <input type="text" pattern="[A-ZÁÉÍÓÚáéíóúa-z]+[ ]*[A-ZÁÉÍÓÚáéíóúa-z ]*"
+                    class="form-control text-uppercase" id="aspirante_discapacidad" name="aspirante_discapacidad"
+                    placeholder="Ingrese la discapacidad" style="color: #237087 ">
+                  <label for="aspirante_discapacidad">Ingrese la discapacidad</label>
+                </div>
+              </div>
+
             </div>
           </div>
-
-        </div>
-      </div>
 
 
           <div class="form-group">
@@ -381,34 +387,35 @@
                     href="https://www.gob.mx/curp/" target="_blank" role="button">
                     ¿No cuenta con curp? Buscar aquí</a>
                 </div>
-              </div> 
-                                      </div>
-      </div>
-
-          <div class="form-group">
-        <div class="row">
-          <div class="col-md-4">
-            <label class="form-group has-float-label seltitulo">
-              <select class="form-control form-control-lg selcolor" id="aspirante_nacionalidad" required name="aspirante_nacionalidad">
-              <option value="">Seleccione</option>
-                <option value="MEXICANA">MEXICANA</option>
-                <option value="EXTRANJERA">EXTRANJERA</option>
-              </select>
-              <span>Nacionalidad</span>
-            </label>
-          </div>
-
-          <div class="col-md-4">
-            <div class="form-label-group">
-              <input type="text" title="Datos incorrectos" class="form-control text-uppercase"
-                id="aspirante_lugar_nacimiento" name="aspirante_lugar_nacimiento" required
-                 placeholder="Lugar de nacimiento"style="color: #237087 ">
-              <label for="aspirante_lugar_nacimiento">Lugar de Nacimiento</label>
+              </div>
             </div>
           </div>
 
-                            </div>
-                            </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-4">
+                <label class="form-group has-float-label seltitulo">
+                  <select class="form-control form-control-lg selcolor" id="aspirante_nacionalidad" required
+                    name="aspirante_nacionalidad">
+                    <option value="">Seleccione</option>
+                    <option value="MEXICANA">MEXICANA</option>
+                    <option value="EXTRANJERA">EXTRANJERA</option>
+                  </select>
+                  <span>Nacionalidad</span>
+                </label>
+              </div>
+
+              <div class="col-md-4">
+                <div class="form-label-group">
+                  <input type="text" title="Datos incorrectos" class="form-control text-uppercase"
+                    id="aspirante_lugar_nacimiento" name="aspirante_lugar_nacimiento" required
+                    placeholder="Lugar de nacimiento" style="color: #237087 ">
+                  <label for="aspirante_lugar_nacimiento">Lugar de Nacimiento</label>
+                </div>
+              </div>
+
+            </div>
+          </div>
 
           <!--direccion------------------------------------------------------>
           <p class="text-center text-white rounded titulo-form h4">
@@ -470,9 +477,9 @@
             <div class="row">
               <div class="col-md-4">
                 <div class="form-label-group">
-                  <input type="text"  title="La direccion tiene caracteres incorrectos"
-                    class="form-control" id="aspirante_direccion_calle" name="aspirante_direccion_calle"
-                    placeholder="Calle y número" style="color: #237087">
+                  <input type="text" title="La direccion tiene caracteres incorrectos" class="form-control"
+                    id="aspirante_direccion_calle" name="aspirante_direccion_calle" placeholder="Calle y número"
+                    style="color: #237087">
                   <label for="aspirante_direccion_calle">Calle y Número</label>
                 </div>
               </div>
@@ -480,8 +487,8 @@
               <div class="col-md-4">
                 <div class="form-label-group">
                   <input type="text" title="La colonia tiene caracteres incorrectos" class="form-control"
-                    id="aspirante_direccion_colonia" name="aspirante_direccion_colonia" placeholder="Colonia/Sección/Paraje/Barrio"
-                    style="color: #237087">
+                    id="aspirante_direccion_colonia" name="aspirante_direccion_colonia"
+                    placeholder="Colonia/Sección/Paraje/Barrio" style="color: #237087">
                   <label for="aspirante_direccion_colonia">Colonia/Sección/Paraje/Barrio</label>
                 </div>
               </div>
@@ -641,7 +648,7 @@
                                       echo '<option value="'.$lengua->id_lengua.'">'.strtoupper($lengua->nombre_lengua).'</option>';
                               }
                               ?>
-                               <option value="otra">OTRA</option>
+                      <option value="otra">OTRA</option>
 
                     </select>
                     <span>Lengua</span>
@@ -668,8 +675,8 @@
                       <option value="0">Nada 0%</option>
                       <option value="25">Poco 25%</option>
                       <option value="50">Regular 50%</option>
-                  <option value="75">Bien 75%</option>
-                  <option value="100">Muy bien 100%</option>
+                      <option value="75">Bien 75%</option>
+                      <option value="100">Muy bien 100%</option>
                     </select>
                     <span>Habla</span>
                   </label>
@@ -682,8 +689,8 @@
                       <option value="0">Nada 0%</option>
                       <option value="25">Poco 25%</option>
                       <option value="50">Regular 50%</option>
-                  <option value="75">Bien 75%</option>
-                  <option value="100">Muy bien 100%</option>
+                      <option value="75">Bien 75%</option>
+                      <option value="100">Muy bien 100%</option>
                     </select>
                     <span>Escribe</span>
                   </label>
@@ -696,8 +703,8 @@
                       <option value="0">Nada 0%</option>
                       <option value="25">Poco 25%</option>
                       <option value="50">Regular 50%</option>
-                  <option value="75">Bien 75%</option>
-                  <option value="100">Muy bien 100%</option>
+                      <option value="75">Bien 75%</option>
+                      <option value="100">Muy bien 100%</option>
                     </select>
                     <span>Entiende</span>
                   </label>
@@ -711,8 +718,8 @@
                       <option value="0">Nada 0%</option>
                       <option value="25">Poco 25%</option>
                       <option value="50">Regular 50%</option>
-                  <option value="75">Bien 75%</option>
-                  <option value="100">Muy bien 100%</option>
+                      <option value="75">Bien 75%</option>
+                      <option value="100">Muy bien 100%</option>
                     </select>
                     <span>Traduce</span>
                   </label>
@@ -725,105 +732,170 @@
 
               <div class="row" id="lengua_oculto" style="display: none">
 
-<div class="col-md-2"  >
-  <div class="form-label-group">
-    <input type="text" class="form-control text-uppercase" id="aspirante_lengua_oculto"
-      name="aspirante_lengua_oculto" placeholder="Agregue lengua" style="color: #237087 ">
-    <label for="aspirante_lengua_oculto">Agregue lengua</label>
-  </div>
-</div>
+                <div class="col-md-2">
+                  <div class="form-label-group">
+                    <input type="text" class="form-control text-uppercase" id="aspirante_lengua_oculto"
+                      name="aspirante_lengua_oculto" placeholder="Agregue lengua" style="color: #237087 ">
+                    <label for="aspirante_lengua_oculto">Agregue lengua</label>
+                  </div>
                 </div>
-                </div>
-                
-
+              </div>
             </div>
 
-            <!--fin legua materna------------------------------------------------------>
+
+          </div>
+
+          <!--fin legua materna------------------------------------------------------>
 
 
 
-            <!--datos secundaria------------------------------------------------------>
-            <p class="text-center text-white rounded titulo-form h4">
-              Datos de Escuela de procedencia
-              <hr>
-            </p>
+          <!--datos secundaria------------------------------------------------------>
+          <p class="text-center text-white rounded titulo-form h4">
+            Datos de Escuela de procedencia
+            <hr>
+          </p>
 
-            <div class="form-group">
+          <div class="form-group">
 
-              <div class="row">
-                <div class="col-md-4">
-                  <div class="form-label-group">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-label-group">
 
-                    <input list="secundarias" class="form-control text-uppercase" id="aspirante_secundaria_cct"
-                      name="aspirante_secundaria_cct" placeholder="Buscar escuela por CCT" style="color: #237087">
-                    <datalist id="secundarias">
+                  <input list="secundarias" class="form-control text-uppercase" id="aspirante_secundaria_cct"
+                    name="aspirante_secundaria_cct" placeholder="Buscar escuela por CCT" style="color: #237087">
+                  <datalist id="secundarias">
 
-                      <?php
+                    <?php
                               foreach ($escuela_procedencia as $escuela)
                               {
                                       echo '<option value="'.$escuela->cct_escuela_procedencia.'">';
                               }
                               ?>
-                    </datalist>
+                  </datalist>
 
-                    <label for="aspirante_secundaria_cct">Buscar escuela por CCT</label>
-                  </div>
-                  <br>
+                  <label for="aspirante_secundaria_cct">Buscar secundaria por CCT</label>
                 </div>
-                <div class="col-md-4">
-                  <div class="form-label-group">
-                    <button type="button" class="btn btn-outline-success btn-lg"
-                      onclick="obtener_secundaria(document.getElementById('aspirante_secundaria_cct').value)">
-                      Buscar escuela
-                    </button>
+                <br>
+              </div>
+              <div class="col-md-4">
+                <div class="form-label-group">
+                  <button type="button" class="btn btn-outline-success btn-lg"
+                    onclick="obtener_secundaria(document.getElementById('aspirante_secundaria_cct').value)">
+                    Buscar escuela
+                  </button>
 
 
-                  </div>
-                  <br>
                 </div>
+                <br>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-4" style="display: none" id="nombre_secundaria_oculto">
+                <div class="form-label-group">
+                  <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ. 0-9]+"
+                    title="El nombre de la secundaria contiene caracteres incorrectos"
+                    class="form-control text-uppercase" id="aspirante_secundaria_nombre" style="color: #237087"
+                    name="aspirante_secundaria_nombre" placeholder="Nombre de Secundaria">
+                  <label for="aspirante_secundaria_nombre">Nombre de Secundaria</label>
+                </div>
+                <br>
               </div>
 
-              <div class="row">
-                <div class="col-md-4" style="display: none" id="nombre_secundaria_oculto">
-                  <div class="form-label-group">
-                    <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ. 0-9]+"
-                      title="El nombre de la secundaria contiene caracteres incorrectos"
-                      class="form-control text-uppercase" id="aspirante_secundaria_nombre" style="color: #237087"
-                      name="aspirante_secundaria_nombre" placeholder="Nombre de Secundaria">
-                    <label for="aspirante_secundaria_nombre">Nombre de Secundaria</label>
-                  </div>
-                  <br>
-                </div>
-
-                <div class="col-md-4" style="display: none" id="tipo_subsistema_oculto">
-                  <label class="form-group has-float-label seltitulo">
-                    <select class="form-control form-control-lg selcolor" name="aspirante_secundaria_tipo_subsistema"
-                      id="aspirante_secundaria_tipo_subsistema">
-                      <option value="">Seleccione un tipo</option>
-                      <option value="TELESECUNDARIA">Telesecundaria</option>
-                      <option value="GENERAL">General</option>
-                      <option value="PARTICULAR">Particular</option>
-                      <option value="TÉCNICA">Técnica</option>
-                      <option value="COMUNITARIA">Comunitaria</option>
-                      <option value="OTRO">Otro</option>
-                    </select>
-                    <span>Tipo de Subsistema</span>
-                  </label>
-                </div>
-
+              <div class="col-md-4" style="display: none" id="tipo_subsistema_oculto">
+                <label class="form-group has-float-label seltitulo">
+                  <select class="form-control form-control-lg selcolor" name="aspirante_secundaria_tipo_subsistema"
+                    id="aspirante_secundaria_tipo_subsistema">
+                    <option value="">Seleccione un tipo</option>
+                    <option value="TELESECUNDARIA">Telesecundaria</option>
+                    <option value="GENERAL">General</option>
+                    <option value="PARTICULAR">Particular</option>
+                    <option value="TÉCNICA">Técnica</option>
+                    <option value="COMUNITARIA">Comunitaria</option>
+                    <option value="OTRO">Otro</option>
+                  </select>
+                  <span>Tipo de Subsistema</span>
+                </label>
               </div>
 
             </div>
 
-            <!--fin datos secundaria------------------------------------------------------>
-            <input type="text" id="aspirante_no_control" name="aspirante_no_control" style="display:none">
-            <input type="text" id="id_tutor" name="id_tutor" style="display:none">
+          </div>
+
+          <div class="form-group" id="bachillerato_oculto" style="display:none">
+
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-label-group">
+
+                  <input list="secundarias" class="form-control text-uppercase" id="aspirante_bachillerato_cct"
+                    name="aspirante_bachillerato_cct" placeholder="Buscar escuela por CCT" style="color: #237087">
+                  <datalist id="secundarias">
+
+                    <?php
+                              foreach ($escuela_procedencia as $escuela)
+                              {
+                                      echo '<option value="'.$escuela->cct_escuela_procedencia.'">';
+                              }
+                              ?>
+                  </datalist>
+
+                  <label for="aspirante_bachillerato_cct">Buscar Bachillerato por CCT</label>
+                </div>
+                <br>
+              </div>
+              <div class="col-md-4">
+                <div class="form-label-group">
+                  <button type="button" class="btn btn-outline-success btn-lg"
+                    onclick="obtener_secundaria(document.getElementById('aspirante_bachillerato_cct').value)">
+                    Buscar escuela
+                  </button>
+
+
+                </div>
+                <br>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-4" style="display: none" id="nombre_bachillerato_oculto">
+                <div class="form-label-group">
+                  <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ. 0-9]+"
+                    title="El nombre de la secundaria contiene caracteres incorrectos"
+                    class="form-control text-uppercase" id="aspirante_bachillerato_nombre" style="color: #237087"
+                    name="aspirante_bachillerato_nombre" placeholder="Nombre de Bachillerato">
+                  <label for="aspirante_bachillerato_nombre">Nombre de Bachillerato</label>
+                </div>
+                <br>
+              </div>
+
+              <div class="col-md-4" style="display: none" id="tipo_subsistema_bachillerato_oculto">
+                <label class="form-group has-float-label seltitulo">
+                  <select class="form-control form-control-lg selcolor" name="aspirante_bachillerato_tipo_subsistema"
+                    id="aspirante_bachillerato_tipo_subsistema">
+                    <option value="">Seleccione un tipo</option>
+                    <option value="TELESECUNDARIA">Educación Profesional Técnica</option>
+                    <option value="GENERAL">Bachillerato General</option>
+                    <option value="PARTICULAR">Bachillerato Tecnológico</option>
+                    <option value="OTRO">Otro</option>
+                  </select>
+                  <span>Tipo de Subsistema</span>
+                </label>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!--fin datos secundaria------------------------------------------------------>
+          <input type="text" id="aspirante_no_control" name="aspirante_no_control" style="display:none">
+          <input type="text" id="id_tutor" name="id_tutor" style="display:none">
 
 
 
-            <br>
-            <button type="submit" class="btn btn-success btn-lg btn-block" style="padding: 1.5rem">Actualizar
-              Datos</button>
+          <br>
+          <button type="submit" class="btn btn-success btn-lg btn-block" style="padding: 1.5rem">Actualizar
+            Datos</button>
 
 
         </form>
@@ -999,7 +1071,14 @@
       }
       //fin datos lengua materna
       //secundaria
-      document.getElementById("aspirante_secundaria_cct").value = datos.estudiante[0].cct_escuela_procedencia;
+      if(datos.estudiante[0].tipo_ingreso ==="NUEVO INGRESO"){
+        document.getElementById("aspirante_secundaria_cct").value = datos.estudiante[0].cct_escuela_procedencia;
+      }else{
+        document.getElementById("aspirante_secundaria_cct").value = datos.estudiante[0].cct_escuela_procedencia;
+        document.getElementById("bachillerato_oculto").style.display ="";
+        document.getElementById("aspirante_bachillerato_cct").value = datos.estudiante[0].cct_escuela_procedencia;
+      }
+      
       /*
       document.getElementById("aspirante_secundaria_nombre").value = datos.secundaria_aspirante[0].nombre_secundaria;
       document.getElementById("aspirante_secundaria_nombre").disabled = true;
@@ -1067,10 +1146,8 @@
     document.getElementById('btn_buscar').innerHTML = 'Limpiar Búsqueda';
     document.getElementById('btn_buscar').classList.remove('btn-success');
     document.getElementById('btn_buscar').classList.add('btn-info');
-    document.getElementById('busqueda_oculto').style.display="";
+    document.getElementById('busqueda_oculto').style.display = "";
   }
-
-
 
   function obtener_secundaria(e) {
     console.log(e);
@@ -1087,9 +1164,6 @@
       //console.log(JSON.parse(xhr.response));
       let secundaria = JSON.parse(xhr.response);
       //console.log(xhr.responseText.length);
-
-
-
       if (secundaria.length == 1) {
         document.getElementById("nombre_secundaria_oculto").style.display = "";
         document.getElementById("aspirante_secundaria_nombre").value = secundaria[0].nombre_escuela_procedencia;
@@ -1100,7 +1174,6 @@
         document.getElementById("aspirante_secundaria_tipo_subsistema").value = secundaria[0].tipo_subsistema;
         document.getElementById("aspirante_secundaria_tipo_subsistema").disabled = true;
       }
-
       else {
         document.getElementById("nombre_secundaria_oculto").style.display = "none";
         document.getElementById("tipo_subsistema_oculto").style.display = "none";
@@ -1122,10 +1195,7 @@
     };
 
     xhr.send(null);
-
   }
-
-
   function insertar_secundaria() {
     let secundaria = "";
     secundaria = {
@@ -1134,15 +1204,10 @@
       "subsistema": document.getElementById("aspirante_nuevasecundaria_tipo_subsistema").value,
       "localidad": parseInt(document.getElementById("selector_localidad_secundaria").value)
     };
-
     document.getElementById("secundarias").innerHTML += '<option value="' + document.getElementById("aspirante_nuevasecundaria_cct").value + '">'
     console.log(secundaria);
-
-
     var xhr = new XMLHttpRequest();
     xhr.open("POST", '<?php echo base_url();?>index.php/c_secundaria/insert_secundaria', true);
-
-
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhr.onloadstart = function () {
       $('#div_carga').show();

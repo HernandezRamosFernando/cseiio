@@ -546,6 +546,38 @@ function cargar_anio_registro(){
     get_dias_registro();
   }
 
+  function procedencia_combo(){
+    if(document.getElementById("aspirante_procedencia_combo").value === "extranjero"){
+      document.getElementById("aspirante_procedencia_extranjero_oculto").style.display ="";
+      document.getElementById("aspirante_procedencia_extranjero").required = true;
+      document.getElementById("aspirante_procedencia_estado_oculto").style.display ="none";
+      document.getElementById("aspirante_procedencia_municipio_oculto").style.display ="none";
+      document.getElementById("aspirante_procedencia_localidad_oculto").style.display ="none";
+      document.getElementById("aspirante_procedencia_estado").required = false;
+      document.getElementById("aspirante_procedencia_municipio").required = false;
+      document.getElementById("aspirante_procedencia_localidad").required = false;
+  
+    }else if(document.getElementById("aspirante_procedencia_combo").value === "diferente"){
+      document.getElementById("aspirante_procedencia_estado_oculto").style.display ="";
+      document.getElementById("aspirante_procedencia_municipio_oculto").style.display ="";
+      document.getElementById("aspirante_procedencia_localidad_oculto").style.display ="";
+      document.getElementById("aspirante_procedencia_estado").required = true;
+      document.getElementById("aspirante_procedencia_municipio").required = true;
+      document.getElementById("aspirante_procedencia_localidad").required = true;
+      document.getElementById("aspirante_procedencia_extranjero_oculto").style.display ="none";
+      document.getElementById("aspirante_procedencia_extranjero").required = false;
+    }else{
+      document.getElementById("aspirante_procedencia_estado_oculto").style.display ="none";
+      document.getElementById("aspirante_procedencia_municipio_oculto").style.display ="none";
+      document.getElementById("aspirante_procedencia_localidad_oculto").style.display ="none";
+      document.getElementById("aspirante_procedencia_extranjero_oculto").style.display ="none";
+      document.getElementById("aspirante_procedencia_estado").required = false;
+      document.getElementById("aspirante_procedencia_municipio").required = false;
+      document.getElementById("aspirante_procedencia_localidad").required = false;
+      document.getElementById("aspirante_procedencia_extranjero").required = false;
+    }
+  }
+
 
 
 

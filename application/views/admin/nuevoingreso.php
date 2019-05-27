@@ -518,7 +518,7 @@
 
           <div class="col-md-4" id="aspirante_procedencia_estado_oculto" style="display:none">
             <label class="form-group has-float-label seltitulo">
-              <select class="form-control form-control-lg selcolor"  name="aspirante_procedencia_estado" required
+              <select class="form-control form-control-lg selcolor"  name="aspirante_procedencia_estado" 
                 onChange="cambio_estado(aspirante_procedencia_estado,aspirante_procedencia_municipio,aspirante_procedencia_localidad)"
                 id="aspirante_procedencia_estado">
                 <option value="">Seleccione el estado</option>
@@ -540,7 +540,7 @@
 
           <div class="col-md-4" id="aspirante_procedencia_municipio_oculto" style="display:none">
             <label class="form-group has-float-label seltitulo" >
-              <select class="form-control form-control-lg selcolor"  name="aspirante_procedencia_municipio" required
+              <select class="form-control form-control-lg selcolor"  name="aspirante_procedencia_municipio" 
                 onclick="cambio_municipio(aspirante_procedencia_municipio,aspirante_procedencia_localidad)"
                 id="aspirante_procedencia_municipio">
                 <option value="">Seleccione un municipio</option>
@@ -553,7 +553,7 @@
 
           <div class="col-md-4" id="aspirante_procedencia_localidad_oculto" style="display:none">
             <label class="form-group has-float-label seltitulo" >
-              <select class="form-control form-control-lg selcolor"  name="aspirante_procedencia_localidad" required
+              <select class="form-control form-control-lg selcolor"  name="aspirante_procedencia_localidad" 
                 id="aspirante_procedencia_localidad">
                 <option value="">Seleccione una localidad</option>
 
@@ -571,7 +571,6 @@
             </div>
           </div>
 
-        </div>
 
       </div>
 
@@ -1301,24 +1300,7 @@
 
 }
 
-function procedencia_combo(){
-  if(document.getElementById("aspirante_procedencia_combo").value === "extranjero"){
-    document.getElementById("aspirante_procedencia_extranjero_oculto").style.display ="";
-    document.getElementById("aspirante_procedencia_estado_oculto").style.display ="none";
-    document.getElementById("aspirante_procedencia_municipio_oculto").style.display ="none";
-    document.getElementById("aspirante_procedencia_localidad_oculto").style.display ="none";
 
-  }else if(document.getElementById("aspirante_procedencia_combo").value === "diferente"){
-    document.getElementById("aspirante_procedencia_estado_oculto").style.display ="";
-    document.getElementById("aspirante_procedencia_municipio_oculto").style.display ="";
-    document.getElementById("aspirante_procedencia_localidad_oculto").style.display ="";
-  }else{
-    document.getElementById("aspirante_procedencia_estado_oculto").style.display ="none";
-    document.getElementById("aspirante_procedencia_municipio_oculto").style.display ="none";
-    document.getElementById("aspirante_procedencia_localidad_oculto").style.display ="none";
-    document.getElementById("aspirante_procedencia_extranjero_oculto").style.display ="none";
-  }
-}
 
 var bPreguntar = true;
 window.onbeforeunload = preguntarAntesDeSalir;

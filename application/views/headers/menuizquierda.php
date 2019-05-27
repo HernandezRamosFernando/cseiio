@@ -84,11 +84,12 @@
           <span class="font-weight-light">Calificaciones
           </span>
         </a>
-        <a class="nav-link <?php ($this->uri->segment(2)=='terminar_ciclo') ? print 'bg-info text-light' : print null; ?>" href="<?php echo base_url();?>index.php/c_vistas/terminar_ciclo">
+        <a class="nav-link <?php ($this->uri->segment(2)=='regularizacion') ? print 'bg-info text-light' : print null; ?>" href="<?php echo base_url();?>index.php/c_vistas/regularizacion">
         <i class="material-icons">group_add</i>
-          <span class="font-weight-light">Finalizar periodo
+          <span class="font-weight-light">Regularización
           </span>
         </a>
+        
         <hr class="bg-info" style=" border: 3px solid ;">
       </div>
     </li>
@@ -105,10 +106,10 @@
       </a>
     </li>
     <li class="nav-item ">
-      <a class="nav-link <?php ($this->uri->segment(2)=='regularizacion') ? print 'bg-info text-light' : print 'null'; ?>" 
-      href="<?php echo base_url();?>index.php/c_vistas/regularizacion">
+      <a class="nav-link " 
+      href="<?php echo base_url();?>index.php/c_menu/principal">
         <i class="material-icons">assignment_turned_in</i>
-        <span>Regularización</span>
+        <span>Acreditiación</span>
       </a>
     </li>
     <li class="nav-item ">
@@ -143,6 +144,11 @@
         <a class="nav-link <?php ($this->uri->segment(2)=='componentes') ? print 'bg-info text-light' : print null; ?>" href="<?php echo base_url();?>index.php/c_vistas/componentes">
         <i class="material-icons">person_add</i>
           <span class="font-weight-light">Control Componentes
+          </span>
+        </a>
+        <a class="nav-link <?php ($this->uri->segment(2)=='terminar_ciclo') ? print 'bg-info text-light' : print null; ?>" href="<?php echo base_url();?>index.php/c_vistas/terminar_ciclo">
+        <i class="material-icons">group_add</i>
+          <span class="font-weight-light">Finalizar periodo
           </span>
         </a>
         <hr class="bg-info" style=" border: 3px solid ;">

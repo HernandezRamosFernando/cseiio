@@ -98,11 +98,7 @@
                 <select class="form-control form-control-lg selcolor" name="grupo_nombre" id="grupo_nombre">
                   <option value="">Elegir</option>
                   <option value="A">A</option>
-                  <option value="B">B</option>
-                  <option value="C">C</option>
-                  <option value="D">D</option>
-                  <option value="E">E</option>
-                  <option value="F">F</option>
+
                 </select>
                 <span>Nombre del grupo</span>
               </label>
@@ -150,7 +146,8 @@
         <div class="row" id="alumnos_oculto" style="display:none">
           <div class=" col-md-6">
             <div class="card card-body" style="width: 100%; overflow: scroll">
-              <p class="h5" id="contador_alumnos_restantes">Alumnos restantes: 0</p>
+            <p class="h5" id="">Alumnos registrados en este plantel</p>
+              <p class="h5" id="contador_alumnos_restantes">Restantes para agregar: 0</p>
               <table class="table table-hover" id="tabla_completa" style="width: 100%; overflow: scroll">
                 <caption>Lista de todos los alumnos de este semestre sin grupo</caption>
                 <thead class="thead-light">
@@ -169,7 +166,8 @@
 
           <div class="col-md-6">
             <div class="card card-body" style="width: 100%; overflow: scroll">
-              <p class="h5" id="contador_alumnos_agregados">Alumnos restantes: 0</p>
+            <p class="h5" id="">Alumnos en el grupo</p>
+              <p class="h5" id="contador_alumnos_agregados">Agregados: 0</p>
               <table class="table table-hover" id="tabla_completa_grupo" style="width: 100%; overflow: scroll">
                 <caption>Lista del Grupo creado</caption>
                 <thead class="thead-light">
@@ -350,6 +348,7 @@
         document.getElementById("tabla").innerHTML += fila;
       });
       //formato_tabla();
+      contador_tablas();
     };
     xhr.send(null);
     document.getElementById('crear_grupo').classList.remove('btn-success');
@@ -357,6 +356,7 @@
     document.getElementById('crear_grupo').disabled = true;
     document.getElementById('agregar_oculto').style.display = "";
     document.getElementById('alumnos_oculto').style.display = "";
+    
   }
 
   function buscar_estudiantes_grupo(idgrupo) {
@@ -391,6 +391,7 @@
         document.getElementById("tablagrupo").innerHTML += fila;
       });
       //formato_tabla();
+      contador_tablas();
     };
     xhr.send(null);
     document.getElementById('crear_grupo').classList.remove('btn-success');
@@ -423,14 +424,49 @@
       xhr.onload = function () {
         $('#div_carga').hide();
         document.getElementById("cantidad_alumnos_oculto").style.display = "";
+        document.getElementById("grupo_nombre").innerHTML = "";
         console.log(xhr.response);
         var cAlumnos = JSON.parse(xhr.response)[0].total_estudiante;
         if (cAlumnos <= 35) {
           document.getElementById("cantidad_alumnos").innerHTML = "La cantidad de Alumnos registrados en este semestre es: " + cAlumnos + " se recomienda crear 1 grupo";
+          var select = document.getElementById("grupo_nombre");
+          var option = document.createElement("option");
+          option.text = "A";
+          option.value = "A"
+          select.add(option);
         } else {
           var cGrupos = parseInt(cAlumnos / 35);
           cGrupos = cGrupos + 1;
           document.getElementById("cantidad_alumnos").innerHTML = "La cantidad de Alumnos registrados en este semestre es: " + cAlumnos + " se recomienda crear " + cGrupos + " grupos";
+          var select = document.getElementById("grupo_nombre");
+          var option = document.createElement("option");
+          option.text = "Seleccione uno";
+          option.value = "";
+          select.add(option);
+          var option = document.createElement("option");
+          option.text = "A";
+          option.value = "A";
+          select.add(option);
+          var option = document.createElement("option");
+          option.text = "B";
+          option.value = "B";
+          select.add(option);
+          var option = document.createElement("option");
+          option.text = "C";
+          option.value = "C";
+          select.add(option);
+          var option = document.createElement("option");
+          option.text = "D";
+          option.value = "D";
+          select.add(option);
+          var option = document.createElement("option");
+          option.text = "E";
+          option.value = "E";
+          select.add(option);
+          var option = document.createElement("option");
+          option.text = "F";
+          option.value = "F";
+          select.add(option);
 
         }
       };
@@ -773,12 +809,11 @@
   semestres();
 
   var bPreguntar = true;
-window.onbeforeunload = preguntarAntesDeSalir;
-function preguntarAntesDeSalir()
-{
-  if (bPreguntar)
-    return "¿Seguro que quieres salir?";
-}
+  window.onbeforeunload = preguntarAntesDeSalir;
+  function preguntarAntesDeSalir() {
+    if (bPreguntar)
+      return "¿Seguro que quieres salir?";
+  }
 </script>
 
 </html>

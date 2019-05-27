@@ -53,9 +53,9 @@
                             </a>
                         </div>
                         <div class="col-md-4 col-lg-4">
-                            <a href="<?php echo base_url();?>index.php/c_vistas/regularizacion" 
+                            <a href="<?php echo base_url();?>index.php/c_vistas/menu" 
                             class="btn btn-primary btn-lg btn-block valign-center btn-responsive menu btn-7" >
-                            <i class="material-icons">assignment_turned_in</i> &nbsp;Regularización
+                            <i class="material-icons">assignment_turned_in</i> &nbsp;Acreditacion
                             </a>
                         </div>
                         <div class="col-md-4 col-lg-4">

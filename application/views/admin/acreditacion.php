@@ -41,10 +41,10 @@
             </a>
           </div>
           <div class="col-md-4 col-lg-4">
-          <a href="<?php echo base_url();?>index.php/c_vistas/terminar_ciclo"
+          <a href="<?php echo base_url();?>index.php/c_vistas/regularizacion"
               class="btn btn-primary btn-lg btn-block menu valign-center btn-5 btn-responsive">
               <i class="material-icons">thumbs_up_down</i>&nbsp;
-              Terminar periodo de ciclo escolar
+              Regularización
             </a>
           </div>
         </div>

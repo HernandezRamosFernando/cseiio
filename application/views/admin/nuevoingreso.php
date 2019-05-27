@@ -393,7 +393,7 @@
       </div>
 
       <!--direccion------------------------------------------------------>
-      <p class="text-center text-white rounded titulo-form h4">Dirección familiar del Aspirante</p>
+      <p class="text-center text-white rounded titulo-form h4">Dirección actual del Aspirante</p>
       <hr>
 
 
@@ -489,6 +489,97 @@
 
       <!--fin direccion------------------------------------------------------>
 
+      <!--direccion procedencia------------------------------------------------------>
+      <p class="text-center text-white rounded titulo-form h4">Dirección de procedencia del Aspirante</p>
+      <hr>
+
+      <div class="form_group">
+        <div class="row">
+        <div class="col-md-8">
+            <label class="form-group has-float-label seltitulo">
+              <select class="form-control form-control-lg selcolor"  name="aspirante_procedencia_combo" required
+                id="aspirante_procedencia_combo" onchange="procedencia_combo();">
+                <option value="">Seleccione una</option>
+                <option value="igual">Dirección de procedencia igual a direccion actual</option>
+                <option value="diferente">Dirección de procedencia diferente a direccion actual</option>
+                <option value="extranjero">Dirección de procedencia del extranjero</option>
+
+              </select>
+              <span>Procedencia</span>
+            </label>
+          </div>                    
+      </div>                  
+    </div>
+
+
+      <div class="form-group">
+
+        <div class="row">
+
+          <div class="col-md-4" id="aspirante_procedencia_estado_oculto" style="display:none">
+            <label class="form-group has-float-label seltitulo">
+              <select class="form-control form-control-lg selcolor"  name="aspirante_procedencia_estado" required
+                onChange="cambio_estado(aspirante_procedencia_estado,aspirante_procedencia_municipio,aspirante_procedencia_localidad)"
+                id="aspirante_procedencia_estado">
+                <option value="">Seleccione el estado</option>
+
+                <?php
+                              foreach ($estados as $estado)
+                              {
+                                      echo '<option value="'.$estado->id_estado.'">'.$estado->nombre_estado.'</option>';
+                              }
+                              ?>
+
+
+
+              </select>
+              <span>Estado</span>
+            </label>
+          </div>
+
+
+          <div class="col-md-4" id="aspirante_procedencia_municipio_oculto" style="display:none">
+            <label class="form-group has-float-label seltitulo" >
+              <select class="form-control form-control-lg selcolor"  name="aspirante_procedencia_municipio" required
+                onclick="cambio_municipio(aspirante_procedencia_municipio,aspirante_procedencia_localidad)"
+                id="aspirante_procedencia_municipio">
+                <option value="">Seleccione un municipio</option>
+
+              </select>
+              <span>Municipio</span>
+            </label>
+
+          </div>
+
+          <div class="col-md-4" id="aspirante_procedencia_localidad_oculto" style="display:none">
+            <label class="form-group has-float-label seltitulo" >
+              <select class="form-control form-control-lg selcolor"  name="aspirante_procedencia_localidad" required
+                id="aspirante_procedencia_localidad">
+                <option value="">Seleccione una localidad</option>
+
+
+              </select>
+              <span>Localidad</span>
+            </label>
+          </div>
+
+          <div class="col-md-4" id="aspirante_procedencia_extranjero_oculto" style="display:none">
+            <div class="form-label-group">
+              <input type="text" class="form-control text-uppercase" id="aspirante_procedencia_extranjero" name="aspirante_procedencia_extranjero"
+                placeholder="Ingrese la localidad" style="color: #237087 ">
+              <label for="aspirante_procedencia_extranjero">Ingrese la localidad</label>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+      </div>
+
+      <!--fin direccion procedencia------------------------------------------------------>
 
 
 
@@ -1208,6 +1299,25 @@
 
   }
 
+}
+
+function procedencia_combo(){
+  if(document.getElementById("aspirante_procedencia_combo").value === "extranjero"){
+    document.getElementById("aspirante_procedencia_extranjero_oculto").style.display ="";
+    document.getElementById("aspirante_procedencia_estado_oculto").style.display ="none";
+    document.getElementById("aspirante_procedencia_municipio_oculto").style.display ="none";
+    document.getElementById("aspirante_procedencia_localidad_oculto").style.display ="none";
+
+  }else if(document.getElementById("aspirante_procedencia_combo").value === "diferente"){
+    document.getElementById("aspirante_procedencia_estado_oculto").style.display ="";
+    document.getElementById("aspirante_procedencia_municipio_oculto").style.display ="";
+    document.getElementById("aspirante_procedencia_localidad_oculto").style.display ="";
+  }else{
+    document.getElementById("aspirante_procedencia_estado_oculto").style.display ="none";
+    document.getElementById("aspirante_procedencia_municipio_oculto").style.display ="none";
+    document.getElementById("aspirante_procedencia_localidad_oculto").style.display ="none";
+    document.getElementById("aspirante_procedencia_extranjero_oculto").style.display ="none";
+  }
 }
 
 var bPreguntar = true;

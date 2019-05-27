@@ -94,13 +94,15 @@
           <div class="col-md-6" style="display: none" id="tabla_completa_alumnos"
             style="width: 100%;  overflow: scroll">
             <div class="card card-body" style="width: 100%; overflow: scroll">
-              <p class="h5" id="contador_alumnos_restantes">Alumnos restantes: 0</p>
+            <p class="h5" id="">Alumnos registrados en este plantel</p>
+              <p class="h5" id="contador_alumnos_restantes">Restantes para agregar: 0</p>
               <table class="table table-hover" id="tabla_completa" style="width: 100%; overflow: scroll">
                 <caption>Lista de todos los alumnos de este semestre sin grupo</caption>
                 <thead class="thead-light">
                   <tr>
                     <th scope="col" class="col-md-1">Nombre completo</th>
                     <th scope="col" class="col-md-1">N° control</th>
+                    <th scope="col" class="col-md-1">Sexo</th>
                     <th scope="col" class="col-md-1">Opción</th>
                   </tr>
                 </thead>
@@ -112,13 +114,15 @@
 
           <div class="col-md-6" id="tabla_alumnos">
             <div class="card card-body" style="width: 100%; overflow: scroll">
-              <p class="h5" id="contador_alumnos_agregados">Alumnos agregados: 0</p>
+            <p class="h5" id="">Alumnos en el grupo</p>
+              <p class="h5" id="contador_alumnos_agregados">Agregados: 0</p>
               <table class="table table-hover" id="tabla_completa_grupo" style="width: 100%; overflow: scroll">
                 <caption>Lista del Grupo creado</caption>
                 <thead class="thead-light">
                   <tr>
                     <th scope="col" class="col-md-1">Nombre completo</th>
                     <th scope="col" class="col-md-1">N° control</th>
+                    <th scope="col" class="col-md-1">Sexo</th>
                     <th scope="col" class="col-md-1">Opción</th>
                   </tr>
                 </thead>
@@ -250,6 +254,9 @@
         fila += '<td>';
         fila += valor.no_control;
         fila += '</td>';
+        fila += '<td>';
+        fila += valor.sexo;
+        fila += '</td>';
         fila += '<td class="">';
         fila += '<button class="btn btn-lg btn-block btn-success" type="button" value="' + valor.no_control + '" id="botoncambio" onclick="cambiardetabla(this);">Agregar</button>';
         fila += '</td>';
@@ -293,6 +300,9 @@
         fila += '</td>';
         fila += '<td>';
         fila += valor.no_control;
+        fila += '</td>';
+        fila += '<td>';
+        fila += valor.sexo;
         fila += '</td>';
         fila += '<td class="">';
         fila += '<button class="btn btn-lg btn-block btn-dark" type="button" value="' + valor.no_control + '" id="botoncambio" disabled="true">Deshabilitado</button>';
@@ -348,6 +358,9 @@
         fila += '</td>';
         fila += '<td>';
         fila += valor.no_control;
+        fila += '</td>';
+        fila += '<td>';
+        fila += valor.sexo;
         fila += '</td>';
         fila += '<td class="">';
         fila += '<button class="btn btn-lg btn-block btn-danger" type="button" value="' + valor.no_control + '" id="botoncambio" onclick="eliminar(this)" >Eliminar</button>';

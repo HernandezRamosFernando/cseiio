@@ -42,12 +42,12 @@
       </a>
     </div>
     <div class="col-md-4 col-lg-4">
-      <a href="<?php echo base_url();?>index.php/c_vistas/"
-        class="btn btn-primary btn-lg btn-block menu valign-center btn-5 btn-responsive">
-        <i class="material-icons">transfer_within_a_station</i>&nbsp;
-        
-      </a>
-    </div>
+          <a href="<?php echo base_url();?>index.php/c_vistas/terminar_ciclo"
+              class="btn btn-primary btn-lg btn-block menu valign-center btn-5 btn-responsive">
+              <i class="material-icons">thumbs_up_down</i>&nbsp;
+              Terminar periodo de ciclo escolar
+            </a>
+          </div>
 
   </div>
 

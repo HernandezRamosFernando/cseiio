@@ -5,6 +5,10 @@ class M_estudiante extends CI_Model {
       
    }
 
+   public function obtener_nombre_tutor_estudiante($no_control){
+        return $this->db->query("select nombre_tutor,primer_apellido_tutor,segundo_apellido_tutor from Estudiante_Tutor as et inner join Tutor as t on et.Tutor_id_tutor=t.id_tutor where et.Estudiante_no_control='".$no_control."'")->result()[0];
+   }
+
 
 //generacion de matricula
 
@@ -109,6 +113,8 @@ public function get_estudiante($no_control){
       'no_control' => $no_control
    ))->result();
 
+   $datos['escuela_procedencia'] = $this->db->query("select Escuela_procedencia_cct_escuela_procedencia,tipo_escuela_procedencia from Estudiante_Escuela_procedencia as ee inner join Escuela_procedencia as ep on ee.Escuela_procedencia_cct_escuela_procedencia=ep.cct_escuela_procedencia where Estudiante_no_control='".$no_control."' order by tipo_escuela_procedencia desc")->result();
+
    $datos['tutor'] =$this->db->query("SELECT * from Estudiante_Tutor as et inner join Tutor as t on et.Tutor_id_tutor=t.id_tutor  where Estudiante_no_control='".$no_control."'")->result();
 
    $datos['expediente_medico'] = $this->db->query("SELECT * from Expediente_medico where Estudiante_no_control='".$no_control."'")->result();
@@ -123,7 +129,8 @@ public function update_estudiante(
    $datos_estudiante_lengua_materna,
    $datos_estudiante_medicos,
    $no_control,
-   $id_tutor){
+   $id_tutor,
+   $datos_escuela_procedencia){
 
       
 
@@ -162,6 +169,11 @@ public function update_estudiante(
                   'descripcion' => $dato_lengua['descripcion']
                ));
                $this->db->update('Datos_lengua_materna',$dato_lengua);
+            }
+
+            $this->db->query("delete from Estudiante_Escuela_procedencia where Estudiante_no_control='".$no_control."'");
+            foreach($datos_escuela_procedencia as $escuela){
+               $this->db->insert("Estudiante_Escuela_procedencia",$escuela);
             }
 
             
@@ -298,6 +310,10 @@ public function obtener_fecha_inscripcion_semestre($no_control){
 
       return $this->db->query("select *,(select count(*) from Resolucion_equivalencia r where r.id_estudiante=e.no_control) as entregado from Estudiante e where e.Plantel_cct_plantel like'".$plantel."%' and e.curp like'".$curp."%' and e.tipo_ingreso='PORTABILIDAD'")->result();
       
+   }
+
+   public function get_tipo_ingreso_estudiante($no_control){
+      return $this->db->query("select tipo_ingreso from Estudiante where no_control='".$no_control."'")->result()[0]->tipo_ingreso;
    }
 
 }

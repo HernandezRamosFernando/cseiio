@@ -219,11 +219,10 @@ de estos requisitos, seré dado de baja del Bachillerato en el que obtuve mi alt
 <table  border="1">
 <tbody>
 <tr>
-<td><br><br><br><br><br><br></td>
-<td></td>
-<td>Vo. Bo.</td>
+<td style="text-align:center"><br><br><br><br><br><br>'.$estudiante_plantel[0]->nombre.' '.$estudiante_plantel[0]->primer_apellido.' '.$estudiante_plantel[0]->segundo_apellido.'</td>
+<td style="text-align:center"><br><br><br><br><br><br>'.$nombre_tutor->nombre_tutor.' '.$nombre_tutor->primer_apellido_tutor.' '.$nombre_tutor->segundo_apellido_tutor.'</td>
+<td style="text-align:center">Vo. Bo.<br><br><br><br><br>'.$estudiante_plantel[0]->director.'</td>
 </tr>
-
 <tr>
 <td style="text-align:center">Nombre y firma del aspirante</td>
 <td style="text-align:center">Nombre y firma del tutor o responsable</td>

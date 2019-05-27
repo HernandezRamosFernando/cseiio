@@ -36,4 +36,9 @@ class M_localidad extends CI_Model {
       return $this->db->get()->result();
    }
 
+
+   public function get_nombre_localidad($localidad){
+      return $this->db->query("select nombre_localidad,nombre_municipio from Localidad as l inner join Municipio as m on l.Municipio_id_municipio=m.id_municipio where id_localidad=".$localidad)->result()[0];
+  }
+
 }

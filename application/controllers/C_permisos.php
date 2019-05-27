@@ -22,4 +22,12 @@ class C_permisos extends CI_Controller {
         $plantel = $this->input->get("plantel");
         echo json_encode($this->M_permisos->get_permiso_plantel($plantel));
     }
+
+    public function get_permisos_plantel_grupo_materia(){
+        $plantel = $this->input->get('plantel');
+        $grupo = $this->input->get('grupo');
+        $materia = $this->input->get('materia');
+
+        echo json_encode($this->M_permisos->get_permisos_plantel_grupo_materia($plantel,$grupo,$materia));
+    }
 }

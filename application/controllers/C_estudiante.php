@@ -19,6 +19,9 @@ class C_estudiante extends CI_Controller {
     }
 
 
+    
+
+
     //generacion de matricula
     public function generar_numcontrol($semestre){
 
@@ -42,6 +45,19 @@ class C_estudiante extends CI_Controller {
         $no_control=$this->generar_numcontrol(1);
         $tipo_estudiante = $this->input->post('formulario');
 
+        if($this->input->post("aspirante_procedencia_combo")=="igual"){
+            $localidad_origen = $this->M_localidad->get_nombre_localidad($this->input->post('aspirante_direccion_localidad'))->nombre_localidad.'-'.$this->M_localidad->get_nombre_localidad($this->input->post('aspirante_direccion_localidad'))->nombre_municipio;
+        }
+
+        else if($this->input->post("aspirante_procedencia_combo")=="diferente"){
+            $localidad_origen = $this->M_localidad->get_nombre_localidad($this->input->post('aspirante_procedencia_localidad'))->nombre_localidad.'-'.$this->M_localidad->get_nombre_localidad($this->input->post('aspirante_procedencia_localidad'))->nombre_municipio;
+            //$localidad_origen = $this->M_localidad->get_nombre_localidad($this->input->post('aspirante_procedencia_localidad'))->nombre_localidad;
+        }
+
+        else if($this->input->post("aspirante_procedencia_combo")=="extranjero"){
+            $localidad_origen = $this->input->post("aspirante_procedencia_extranjero");
+        }
+
         //inicio estudiante
         $datos_estudiante = array(
             'no_control' => $no_control,
@@ -64,7 +80,8 @@ class C_estudiante extends CI_Controller {
             'telefono' => $this->input->post('aspirante_telefono'),
             'Plantel_cct_plantel' => $this->input->post('aspirante_plantel'),
             'lugar_nacimiento' => mb_strtoupper($this->input->post('aspirante_lugar_nacimiento')),
-            'nacionalidad' => $this->input->post('aspirante_nacionalidad')
+            'nacionalidad' => $this->input->post('aspirante_nacionalidad'),
+            'localidad_origen' => $localidad_origen
         );
 
         if($tipo_estudiante=='nuevo_ingreso'){
@@ -399,10 +416,31 @@ class C_estudiante extends CI_Controller {
             'Plantel_cct_plantel' => $this->input->post('aspirante_plantel'),
             //'nacinalidad' => $this->input->post('/d'),
             'lugar_nacimiento' => mb_strtoupper($this->input->post('aspirante_lugar_nacimiento')),
-            'cct_escuela_procedencia' => $this->input->post('aspirante_secundaria_cct'),
+            //'cct_escuela_procedencia' => $this->input->post('aspirante_secundaria_cct'),
             'nacionalidad' => $this->input->post('aspirante_nacionalidad')
             //'semestre' => $this->input->post('aspirante_semestre')
         );
+
+        $tipo_ingreso = $this->M_estudiante->get_tipo_ingreso_estudiante($no_control);
+
+        if($tipo_ingreso=="NUEVO INGRESO"){
+            $datos_escuela_procedencia['secundaria']=array(
+                'Estudiante_no_control'=>$no_control,
+                'Escuela_procedencia_cct_escuela_procedencia'=>$this->input->post('aspirante_secundaria_cct')
+            );
+        }
+
+        else{
+            $datos_escuela_procedencia['secundaria']=array(
+                'Estudiante_no_control'=>$no_control,
+                'Escuela_procedencia_cct_escuela_procedencia'=>$this->input->post('aspirante_secundaria_cct')
+            );
+
+            $datos_escuela_procedencia['bachillerato']=array(
+                'Estudiante_no_control'=>$no_control,
+                'Escuela_procedencia_cct_escuela_procedencia'=>$this->input->post('aspirante_bachillerato_cct')
+            );
+        }
 
        
 
@@ -489,7 +527,8 @@ class C_estudiante extends CI_Controller {
             $datos_estudiante_lengua_materna,
             $datos_estudiante_medicos,
             $no_control,
-            $id_tutor
+            $id_tutor,
+            $datos_escuela_procedencia
         );
         
         

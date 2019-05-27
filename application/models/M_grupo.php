@@ -114,4 +114,8 @@ class M_grupo extends CI_Model {
     return $this->db->query("select * from Grupo_Estudiante as ge inner join Estudiante as e on ge.Estudiante_no_control=e.no_control  where Grupo_id_grupo='".$id_grupo."' and id_materia='".$id_materia."'")->result();
    }
 
+   public function get_grupos_activos_plantel($plantel){
+       return $this->db->query("select id_grupo from Grupo where estatus=1 and plantel='".$plantel."'")->result();
+   }
+
 }

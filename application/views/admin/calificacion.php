@@ -275,7 +275,7 @@
     document.getElementById("alumnos_oculto").style.display = "";
     document.getElementById("agregar_oculto").style.display = "";
     var permisos = new XMLHttpRequest();
-    permisos.open('GET', '<?php echo base_url();?>index.php/c_permisos/get_permiso_plantel?plantel=' + document.getElementById("plantel").value, true);
+    permisos.open('GET', '<?php echo base_url();?>index.php/c_permisos/get_permisos_plantel_grupo_materia?plantel=' + document.getElementById("plantel").value+'&grupo='+document.getElementById("grupos").value+'&materia='+document.getElementById("materias").value, true);
     permisos.onloadstart = function () {
       $('#div_carga').show();
     }

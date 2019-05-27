@@ -64,8 +64,7 @@ class C_estudiante extends CI_Controller {
             'telefono' => $this->input->post('aspirante_telefono'),
             'Plantel_cct_plantel' => $this->input->post('aspirante_plantel'),
             'lugar_nacimiento' => mb_strtoupper($this->input->post('aspirante_lugar_nacimiento')),
-            'cct_escuela_procedencia' => $this->input->post('aspirante_secundaria_cct'),
-            'nacionalidad' => $this->post('aspirante_nacionalidad')
+            'nacionalidad' => $this->input->post('aspirante_nacionalidad')
         );
 
         if($tipo_estudiante=='nuevo_ingreso'){
@@ -73,7 +72,10 @@ class C_estudiante extends CI_Controller {
             $datos_estudiante['semestre'] = 1;
             $datos_estudiante['semestre_en_curso'] = 1;
             $datos_estudiante['semestre_ingreso'] = 1;
-
+            $datos_escuela_procedencia['secundaria']=array(
+                'Estudiante_no_control'=>$no_control,
+                'Escuela_procedencia_cct_escuela_procedencia'=>$this->input->post('aspirante_secundaria_cct')
+            );
         }
 
         else{
@@ -81,7 +83,19 @@ class C_estudiante extends CI_Controller {
             $datos_estudiante['semestre'] = $this->input->post('aspirante_semestre');
             $datos_estudiante['semestre_en_curso'] = $this->input->post('aspirante_semestre');
             $datos_estudiante['semestre_ingreso'] = $this->input->post('aspirante_semestre');
+            $datos_escuela_procedencia['secundaria']=array(
+                'Estudiante_no_control'=>$no_control,
+                'Escuela_procedencia_cct_escuela_procedencia'=>$this->input->post('aspirante_secundaria_cct')
+            );
+
+            $datos_escuela_procedencia['bachillerato']=array(
+                'Estudiante_no_control'=>$no_control,
+                'Escuela_procedencia_cct_escuela_procedencia'=>$this->input->post('aspirante_bachillerato_cct')
+            );
         }
+
+
+        
 
         //print_r($datos_estudiante);
         
@@ -343,7 +357,8 @@ class C_estudiante extends CI_Controller {
             $parentesco_estudiante_tutor,
             $datos_estudiante_lengua_materna,
             $datos_estudiante_documentos,
-            $datos_estudiante_medicos
+            $datos_estudiante_medicos,
+            $datos_escuela_procedencia
         );
         
     

@@ -33,7 +33,8 @@ public function insertar_estudiante_nuevo_ingreso(
    $parentesco_estudiante_tutor,
    $datos_estudiante_lengua_materna,
    $datos_estudiante_documentos,
-   $datos_estudiante_medicos){
+   $datos_estudiante_medicos,
+   $datos_escuela_procedencia){
 
       
 
@@ -69,6 +70,12 @@ public function insertar_estudiante_nuevo_ingreso(
 
                $this->db->insert('Documentacion',$documento);
          }
+
+
+         foreach($datos_escuela_procedencia as $escuela){
+               $this->db->insert('Estudiante_Escuela_procedencia',$escuela);
+         }
+         
          
          
 

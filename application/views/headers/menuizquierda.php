@@ -109,7 +109,7 @@
       <a class="nav-link " 
       href="<?php echo base_url();?>index.php/c_menu/principal">
         <i class="material-icons">assignment_turned_in</i>
-        <span>Acreditiación</span>
+        <span>Acreditación</span>
       </a>
     </li>
     <li class="nav-item ">

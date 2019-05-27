@@ -10,6 +10,9 @@
       <li class="breadcrumb-item active">Seleccione e ingrese los datos solicitados</li>
     </ol>
 
+    <form class="card" id="formulario">
+    <div class="card-body">
+
     <div class="form-group">
         <div class="row">
           <div class="col-md-8">
@@ -73,6 +76,8 @@
           </div>
       </div>
 
+                                    
+
 
 
     <div class="card" style="overflow:scroll; display: none" id="tabla_oculto_asesor" >
@@ -95,6 +100,8 @@
         </table>
       </div>
       </div>
+      </div>
+                                      </form>
         <br>
     <div class="form-group" id="boton_oculto_asesor" style="display: none">
       <div class="row">

@@ -69,8 +69,20 @@ function curp() {
 
 
 function lenguas_evento(e) {
-  //console.log(e.value);
-  if (e.value > 0) {
+  if(document.getElementById("aspirante_lengua_nombre").value === "otra"){
+    console.log("agregue otra");
+    $("#lengua_oculto").show()
+    document.getElementById("aspirante_lengua_oculto").name = 'aspirante_lengua_nombre';
+    document.getElementById("aspirante_lengua_nombre").name = '';
+    document.getElementById("aspirante_lengua_oculto").required = true;
+  }
+  else {
+    $("#lengua_oculto").hide()
+    document.getElementById("aspirante_lengua_oculto").required = false;
+    document.getElementById("aspirante_lengua_oculto").value = '';
+  }
+
+  if (e.value != "") {
     document.getElementById("aspirante_lengua_lee").disabled = false;
     document.getElementById("aspirante_lengua_habla").disabled = false;
     document.getElementById("aspirante_lengua_escribe").disabled = false;
@@ -168,6 +180,9 @@ function borrarmodal() {
 function cct() {
   document.getElementById("aspirante_nuevasecundaria_cct").value = document.getElementById("aspirante_secundaria_cct").value;
 }
+function cctbachillerato() {
+  document.getElementById("aspirante_nuevobachillerato_cct").value = document.getElementById("aspirante_bachillerato_cct").value;
+}
 
 function valida(e) {
   regexp = / +/g; /* Expresión regular para buscar todos los espacios múltiples */
@@ -194,7 +209,7 @@ function valida(e) {
 }
 
 function checkacta() {
-  if (document.getElementById("aspirante_documento_acta_nacimiento").checked) {
+  if (document.getElementById("aspirante_documento_acta_nacimiento").checked && document.getElementById("aspirante_nacionalidad").value === "MEXICANA") {
     document.getElementById("aspirante_anio_nacimiento_registro").required = true;
     document.getElementById("aspirante_mes_nacimiento_registro").required = true;
     document.getElementById("aspirante_dia_nacimiento_registro").required = true;
@@ -332,9 +347,7 @@ function validafecharegistro(e){
     $('#selector_localidad_secundaria').val('');
   }
 
-  function cct() {
-    document.getElementById("aspirante_nuevasecundaria_cct").value = document.getElementById("aspirante_secundaria_cct").value;
-  }
+
 
   function limpiar() {
     location.reload();
@@ -414,7 +427,7 @@ fechaFin = new Date(fechaFin).getTime();
 
 var diff = fechaFin - fechaInicio;
 var resultado = diff/(1000*60*60*24);
-if(resultado > 2193){
+if(resultado > 2193 && document.getElementById("aspirante_nacionalidad").value === "MEXICANA"){
 console.log("Necesita acta de registro extemporaneo");
 document.getElementById("aspirante_documento_carta_extemporaneo_oculto").style = "display:";
 document.getElementById("aspirante_documento_carta_extemporaneo").value="8";
@@ -532,6 +545,7 @@ function cargar_anio_registro(){
     document.getElementById('aspirante_anio_nacimiento_registro').innerHTML =lista_fecha;
     get_dias_registro();
   }
+
 
 
 

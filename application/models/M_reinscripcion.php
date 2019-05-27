@@ -8,12 +8,12 @@ class M_reinscripcion extends CI_Model {
 
 
    public function estudiantes_en_grupos_activos(){
-       return $this->db->query("select no_control,estatus,tipo_ingreso from Estudiante as e inner join (select distinct Estudiante_no_control from Grupo_Estudiante as ge inner join Grupo as g on ge.Grupo_id_grupo=g.id_grupo) as g on e.no_control=g.Estudiante_no_control")->result();
+       return $this->db->query("select no_control,estatus,tipo_ingreso from Estudiante as e inner join (select distinct Estudiante_no_control from Grupo_Estudiante as ge inner join Grupo as g on ge.Grupo_id_grupo=g.id_grupo  where g.estatus=1) as g on e.no_control=g.Estudiante_no_control")->result();
    }
 
 
 
-   public function cerrar_calificaciones(){
+   public function cerrar_calificaciones(){//primera--------*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
     $this->db->trans_start();
     $estudiantes = $this->estudiantes_en_grupos_activos();
     foreach($estudiantes as $estudiante){
@@ -181,6 +181,61 @@ class M_reinscripcion extends CI_Model {
             return $this->db->query("select max(semestre) as semestre from Grupo_Estudiante as ge inner join Grupo as g on ge.Grupo_id_grupo=g.id_grupo where ge.Estudiante_no_control='".$no_control."' and estatus=0")->result();
     }
 
+
+    function actualizar_tipo_ingreso_despues_calificar_estudiante(){//segunda/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*
+        
+        $this->db->trans_start();
+        $estudiantes = $this->estudiantes_en_grupos_activos();
+        
+
+        
+        foreach($estudiantes as $estudiante){
+            $folio = $this->db->query("select max(Friae_folio) as folio from Friae_Estudiante where Estudiante_no_control='".$estudiante->no_control."'")->result()[0]->folio;
+            $materias_debe = $this->M_regularizacion->materias_debe_estudiante_actualmente($estudiante->no_control);
+            $materias_ids="";
+            foreach($materias_debe as $id){
+                $materias_ids.=$id->id_materia.",";
+            }
+
+            $materias_ids = substr($materias_ids,0,-1);
+            
+            
+            if(sizeof($materias_debe)==0){
+                $this->db->query("update Estudiante set tipo_ingreso='NUEVO INGRESO',estatus='REGULAR' where no_control='".$estudiante->no_control."'");
+                $this->db->query("update Friae_Estudiante set tipo_ingreso_fin_semestre='NUEVO INGRESO', adeudos_fin_semestre=".sizeof($materias_debe).", id_materia_adeudos_fin_semestre='".$materias_ids."' where Estudiante_no_control='".$estudiante->no_control."' and Friae_folio=".$folio);
+            }
+
+            else if(sizeof($materias_debe)>0 && sizeof($materias_debe)<=3){
+                $this->db->query("update Estudiante set tipo_ingreso='NUEVO INGRESO',estatus='IRREGULAR' where no_control='".$estudiante->no_control."'");
+                $this->db->query("update Friae_Estudiante set tipo_ingreso_fin_semestre='NUEVO INGRESO', adeudos_fin_semestre=".sizeof($materias_debe).", id_materia_adeudos_fin_semestre='".$materias_ids."' where Estudiante_no_control='".$estudiante->no_control."' and Friae_folio=".$folio);
+             
+                
+            }
+
+            else if(sizeof($materias_debe)>3 && sizeof($materias_debe)<=5){
+                $this->db->query("update Estudiante set tipo_ingreso='SIN DERECHO',estatus='IRREGULAR' where no_control='".$estudiante->no_control."'");
+                $this->db->query("update Friae_Estudiante set tipo_ingreso_fin_semestre='SIN DERECHO', adeudos_fin_semestre=".sizeof($materias_debe).", id_materia_adeudos_fin_semestre='".$materias_ids."' where Estudiante_no_control='".$estudiante->no_control."' and Friae_folio=".$folio);
+            }
+
+            else if(sizeof($materias_debe)>5){
+                $this->db->query("update Estudiante set tipo_ingreso='REPETIDOR',estatus='IRREGULAR' where no_control='".$estudiante->no_control."'");
+                $this->db->query("update Friae_Estudiante set tipo_ingreso_fin_semestre='REPETIDOR', adeudos_fin_semestre=".sizeof($materias_debe).", id_materia_adeudos_fin_semestre='".$materias_ids."' where Estudiante_no_control='".$estudiante->no_control."' and Friae_folio=".$folio);
+              
+            }
+        }
+
+        $this->db->trans_complete();
+
+        if ($this->db->trans_status() === FALSE)
+        {
+                return "no";
+        }
+
+        else{
+            return "si";
+        }
+        
+    }
 
 
 

@@ -23,7 +23,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-//s$config['base_url'] = 'http://localhost/cseiio/';
 $config['base_url'] = 'http://localhost/cseiio/';
 
 /*
@@ -252,7 +251,10 @@ $config['log_path'] = '';
 $config['log_file_extension'] = '';
 
 /*
-|--------------------------------------------------------------------------
+|-----------------------
+Lista de grupos
+Lista de materias del grupo
+---------------------------------------------------
 | Log File Permissions
 |--------------------------------------------------------------------------
 |

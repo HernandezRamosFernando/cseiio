@@ -263,7 +263,6 @@
               <select class="form-control form-control-lg selcolor" required id="aspirante_semestre" name="aspirante_semestre"
                 >
                 <option value="">Seleccione un semestre</option>
-                <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
                 <option value="4">4</option>
@@ -324,17 +323,35 @@
     </div>
 
     <div class="form-group">
-      <div class="row">
-        <div class="col-md-4">
-          <div class="form-label-group">
-            <input type="text" title="Datos incorrectos" class="form-control text-uppercase"
-              id="aspirante_lugar_nacimiento" name="aspirante_lugar_nacimiento" required
-               placeholder="Lugar de nacimiento"style="color: #237087">
-            <label for="aspirante_lugar_nacimiento">Lugar de Nacimiento </label>
+        <div class="row">
+      <div class="col-md-4">
+            <label class="form-group has-float-label seltitulo">
+              <select class="form-control form-control-lg selcolor" id="aspirante_nacionalidad" required name="aspirante_nacionalidad">
+              <option value="">Seleccione</option>
+                <option value="MEXICANA">MEXICANA</option>
+                <option value="EXTRANJERA">EXTRANJERA</option>
+              </select>
+              <span>Nacionalidad</span>
+            </label>
           </div>
-        </div>
-        
-        <label class="form-group has-float-label text-center" style="font-size: 12pt; font-weight: bold; color:#777;">Fecha de registro de Acta</label>
+
+          <div class="col-md-4">
+            <div class="form-label-group">
+              <input type="text" title="Datos incorrectos" class="form-control text-uppercase"
+                id="aspirante_lugar_nacimiento" name="aspirante_lugar_nacimiento" required
+                 placeholder="Lugar de nacimiento"style="color: #237087 ">
+              <label for="aspirante_lugar_nacimiento">Lugar de Nacimiento</label>
+            </div>
+          </div>
+
+                            </div>
+                            </div>
+
+      <div class="form-group">
+        <div class="row">
+        <div class=" col-md-2 ">
+          <label class="form-group has-float-label text-center" style="font-size: 12pt; font-weight: bold; color:#777;">Fecha de registro de Acta</label>
+          </div>
 
           <div class=" col-md-2 ">
           <label class="form-group has-float-label seltitulo">
@@ -373,9 +390,11 @@
             </label>
           </div>
 
+
+        </div>
+
       </div>
 
-    </div>
 
     <!--direccion------------------------------------------------------>
     <p class="text-center text-white rounded titulo-form h4">Dirección familiar del Aspirante</p>
@@ -610,6 +629,7 @@
                                     echo '<option value="'.$lengua->id_lengua.'">'.strtoupper($lengua->nombre_lengua).'</option>';
                             }
                             ?>
+                            <option value="otra">OTRA</option>
 
               </select>
               <span>Lengua</span>
@@ -688,13 +708,100 @@
 
         </div>
 
+        <div class="row" id="lengua_oculto" style="display: none">
+
+<div class="col-md-2"  >
+  <div class="form-label-group">
+    <input type="text" class="form-control text-uppercase" id="aspirante_lengua_oculto"
+      name="aspirante_lengua_oculto" placeholder="Agregue lengua" style="color: #237087 ">
+    <label for="aspirante_lengua_oculto">Agregue lengua</label>
+  </div>
+</div>
+                </div>
+                </div>
+
       </div>
 
       <!--fin legua materna------------------------------------------------------>
 
+              <!--datos secundaria------------------------------------------------------>
+              <p class="text-center text-white rounded titulo-form h4">Datos de Secundaria de procedencia</p>
+        <hr>
+
+        <div class="form-group">
+
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-label-group">
+
+                <input list="secundarias" class="form-control text-uppercase" id="aspirante_secundaria_cct"
+                  name="aspirante_secundaria_cct" placeholder="Buscar secundaria por CCT" style="color: #237087 ">
+                <datalist id="secundarias">
+
+                  <?php
+                              foreach ($escuela_procedencia as $escuela)
+                              {
+                                      echo '<option value="'.$escuela->cct_escuela_procedencia.'">';
+                              }
+                              ?>
+                </datalist>
+
+                <label for="aspirante_secundaria_cct">Buscar secundaria por CCT</label>
+              </div>
+              <br>
+            </div>
+            <div class="col-md-4">
+              <div class="form-label-group">
+                <button type="button" class="btn btn-outline-success btn-lg"
+                  onclick="obtener_secundaria(document.getElementById('aspirante_secundaria_cct').value)">
+                  Buscar secundaria
+                </button>
 
 
-      <!--datos secundaria------------------------------------------------------>
+              </div>
+              <br>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4" style="display: none" id="nombre_secundaria_oculto">
+              <div class="form-label-group">
+                <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ. 0-9]+"
+                  title="El nombre de la secundaria contiene caracteres incorrectos" class="form-control text-uppercase"
+                  id="aspirante_secundaria_nombre" name="aspirante_secundaria_nombre"
+                  placeholder="Nombre de Secundaria" style="color: #237087 ">
+                <label for="aspirante_secundaria_nombre">Nombre de Secundaria</label>
+              </div>
+              <br>
+            </div>
+
+            <div class="col-md-4" style="display: none" id="tipo_subsistema_oculto">
+              <label class="form-group has-float-label seltitulo">
+                <select class="form-control form-control-lg selcolor" name="aspirante_secundaria_tipo_subsistema"
+                  id="aspirante_secundaria_tipo_subsistema">
+                  <option value="">Seleccione un tipo</option>
+                  <option value="TELESECUNDARIA">Telesecundaria</option>
+                  <option value="GENERAL">General</option>
+                  <option value="PARTICULAR">Particular</option>
+                  <option value="TÉCNICA">Técnica</option>
+                  <option value="COMUNITARIA">Comunitaria</option>
+                  <option value="OTRO">Otro</option>
+                </select>
+                <span>Tipo de Subsistema</span>
+              </label>
+            </div>
+
+           
+
+          </div>
+
+        </div>
+
+        <!--fin datos secundaria------------------------------------------------------>
+
+
+
+      <!--datos bachillerato------------------------------------------------------>
       <p class="text-center text-white rounded titulo-form h4">Datos de Bachillerato de procedencia</p>
       <hr>
 
@@ -704,8 +811,8 @@
           <div class="col-md-4">
             <div class="form-label-group">
 
-              <input list="secundarias" class="form-control text-uppercase" id="aspirante_secundaria_cct"
-                name="aspirante_secundaria_cct" placeholder="Buscar Bachillerato por CCT" style="color: #237087">
+              <input list="secundarias" class="form-control text-uppercase" id="aspirante_bachillerato_cct"
+                name="aspirante_bachillerato_cct" placeholder="Buscar Bachillerato por CCT" style="color: #237087">
               <datalist id="secundarias">
 
                 <?php
@@ -716,14 +823,14 @@
                             ?>
               </datalist>
 
-              <label for="aspirante_secundaria_cct">Buscar Bachillerato por CCT</label>
+              <label for="aspirante_bachillerato_cct">Buscar Bachillerato por CCT</label>
             </div>
             <br>
           </div>
           <div class="col-md-4">
             <div class="form-label-group">
               <button type="button" class="btn btn-outline-success btn-lg"
-                onclick="obtener_secundaria(document.getElementById('aspirante_secundaria_cct').value)">
+                onclick="obtener_bachillerato(document.getElementById('aspirante_bachillerato_cct').value)">
                 Buscar Bachillerato
               </button>
 
@@ -734,27 +841,25 @@
         </div>
 
         <div class="row">
-          <div class="col-md-4" style="display: none" id="nombre_secundaria_oculto">
+          <div class="col-md-4" style="display: none" id="nombre_bachillerato_oculto">
             <div class="form-label-group">
               <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ. 0-9]+"
                 title="El nombre de la secundaria contiene caracteres incorrectos" class="form-control text-uppercase"
-                id="aspirante_secundaria_nombre" name="aspirante_secundaria_nombre"style="color: #237087"
+                id="aspirante_bachillerato_nombre" name="aspirante_bachillerato_nombre"style="color: #237087"
                 placeholder="Nombre de Bachillerato">
-              <label for="aspirante_secundaria_nombre">Nombre de Bachillerato</label>
+              <label for="aspirante_bachillerato_nombre">Nombre de Bachillerato</label>
             </div>
             <br>
           </div>
 
-          <div class="col-md-4" style="display: none" id="tipo_subsistema_oculto">
+          <div class="col-md-4" style="display: none" id="tipo_subsistema_bachillerato_oculto">
             <label class="form-group has-float-label seltitulo">
-              <select class="form-control form-control-lg selcolor" name="aspirante_secundaria_tipo_subsistema"
-                id="aspirante_secundaria_tipo_subsistema">
+              <select class="form-control form-control-lg selcolor" name="aspirante_bachillerato_tipo_subsistema"
+                id="aspirante_bachillerato_tipo_subsistema">
                 <option value="">Seleccione un tipo</option>
-                <option value="TELESECUNDARIA">Telesecundaria</option>
-                <option value="GENERAL">General</option>
-                <option value="PARTICULAR">Particular</option>
-                <option value="TÉCNICA">Técnica</option>
-                <option value="COMUNITARIA">Comunitaria</option>
+                <option value="TELESECUNDARIA">Educación Profesional Técnica</option>
+                <option value="GENERAL">Bachillerato General</option>
+                <option value="PARTICULAR">Bachillerato Tecnológico</option>
                 <option value="OTRO">Otro</option>
               </select>
               <span>Tipo de Subsistema</span>
@@ -829,7 +934,7 @@
           <label class="form-check-label">
             <input type="checkbox" class="form-check-input" name="aspirante_documento_resolucion"
               id="aspirante_documento_resolucion" value="6" unchecked>
-            Resolucion de Equivalencia
+            Solicitud de Equivalencia
           </label>
         </div>
         <br>
@@ -879,7 +984,7 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="nuevasecundaria" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+<div class="modal fade" id="nuevobachillerato" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
 aria-hidden="true">
 <div class="modal-dialog modal-dialog-centered" style="max-width: 80% !important;" role="document">
   <div class="modal-content">
@@ -896,26 +1001,26 @@ aria-hidden="true">
             <div class="form-label-group">
               <input type="text" pattern="[A-ZÁÉÍÓÚáéíóúa-z0-9]+[ ]*[A-ZÁÉÍÓÚáéíóúa-z0-9]*" 
                 title="El nombre de la secundaria contiene caracteres incorrectos" class="form-control text-uppercase"
-                id="aspirante_nuevasecundaria_cct" name="aspirante_nuevasecundaria_cct" style="color: #237087"
+                id="aspirante_nuevobachillerato_cct" name="aspirante_nuevobachillerato_cct" style="color: #237087"
                 placeholder="CCT de Bachillerato">
-              <label for="aspirante_nuevasecundaria_cct">C C T</label>
+              <label for="aspirante_nuevobachillerato_cct">C C T</label>
             </div>
             <br>
           </div>
           <div class="col-md-4">
             <div class="form-label-group">
               <input type="text" ppattern="[A-ZÁÉÍÓÚáéíóúa-z0-9]+[ ]*[A-ZÁÉÍÓÚáéíóúa-z0-9]*" 
-                class="form-control text-uppercase" id="aspirante_nuevasecundaria_nombre" style="color: #237087"
-                name="aspirante_secundaria_nombre" placeholder="Nombre de Bachillerato">
-              <label for="aspirante_nuevasecundaria_nombre">Nombre de Bachillerato</label>
+                class="form-control text-uppercase" id="aspirante_nuevobachillerato_nombre" style="color: #237087"
+                name="aspirante_nuevobachillerato_nombre" placeholder="Nombre de Bachillerato">
+              <label for="aspirante_nuevobachillerato_nombre">Nombre de Bachillerato</label>
             </div>
             <br>
           </div>
 
           <div class="col-md-4">
             <label class="form-group has-float-label seltitulo">
-              <select class="form-control form-control-lg selcolor" name="aspirante_nuevasecundaria_tipo_subsistema" 
-                  id="aspirante_nuevasecundaria_tipo_subsistema" onchange="otro_secundaria();">
+              <select class="form-control form-control-lg selcolor" name="aspirante_nuevobachillerato_tipo_subsistema" 
+                  id="aspirante_nuevobachillerato_tipo_subsistema" onchange="otro_secundaria();">
                 <option value="">Seleccione un tipo</option>
                 <option value="TELESECUNDARIA">Educación Profesional Técnica</option>
                 <option value="GENERAL">Bachillerato General</option>
@@ -944,9 +1049,9 @@ aria-hidden="true">
 
           <div class="col-md-4">
             <label class="form-group has-float-label seltitulo">
-              <select class="form-control form-control-lg selcolor"  name="selector_estado_secundaria"
-              onChange="cambio_estado(document.getElementById('selector_estado_secundaria'),document.getElementById('selector_municipio_secundaria'),document.getElementById('selector_localidad_secundaria'))"
-                  id="selector_estado_secundaria">
+              <select class="form-control form-control-lg selcolor"  name="selector_estado_bachillerato"
+              onChange="cambio_estado(document.getElementById('selector_estado_bachillerato'),document.getElementById('selector_municipio_bachillerato'),document.getElementById('selector_localidad_bachillerato'))"
+                  id="selector_estado_bachillerato">
                 <option>Seleccione un estado</option>
 
                 <?php
@@ -964,9 +1069,9 @@ aria-hidden="true">
 
           <div class="col-md-4">
             <label class="form-group has-float-label seltitulo">
-              <select class="form-control form-control-lg selcolor"  name="aspirante_secundaria_municipio"
-              onChange="cambio_municipio(document.getElementById('selector_municipio_secundaria'),document.getElementById('selector_localidad_secundaria'))"
-                  id="selector_municipio_secundaria">
+              <select class="form-control form-control-lg selcolor"  name="aspirante_bachillerato_municipio"
+              onChange="cambio_municipio(document.getElementById('selector_municipio_bachillerato'),document.getElementById('selector_localidad_bachillerato'))"
+                  id="selector_municipio_bachillerato">
                 <option></option>
 
 
@@ -977,8 +1082,8 @@ aria-hidden="true">
 
           <div class="col-md-4">
             <label class="form-group has-float-label seltitulo">
-              <select class="form-control form-control-lg selcolor"  name="aspirante_secundaria_localidad"
-                id="selector_localidad_secundaria">
+              <select class="form-control form-control-lg selcolor"  name="aspirante_bachillerato_localidad"
+                id="selector_localidad_bachillerato">
                 <option></option>
 
 
@@ -992,10 +1097,132 @@ aria-hidden="true">
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="borrarmodal()">Cancelar</button>
-      <button type="button" class="btn btn-success" id="insertarsecundaria" onclick="insertar_secundaria()">Guardar</button>
+      <button type="button" class="btn btn-success" id="insertarsecundaria" onclick="insertar_bachillerato()">Guardar</button>
     </div>
   </div>
 </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="nuevasecundaria" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" style="max-width: 80% !important;" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Agregar nueva secundaria</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-label-group">
+                <input type="text" pattern="[A-ZÁÉÍÓÚáéíóúa-z0-9]+[ ]*[A-ZÁÉÍÓÚáéíóúa-z0-9]*" 
+                  title="El nombre de la secundaria contiene caracteres incorrectos" class="form-control text-uppercase"
+                  id="aspirante_nuevasecundaria_cct" name="aspirante_nuevasecundaria_cct"
+                  placeholder="CCT de Secundaria" style="color: #237087 ">
+                <label for="aspirante_nuevasecundaria_cct">C C T</label>
+              </div>
+              <br>
+            </div>
+            <div class="col-md-4">
+              <div class="form-label-group">
+                <input type="text" ppattern="[A-ZÁÉÍÓÚáéíóúa-z0-9]+[ ]*[A-ZÁÉÍÓÚáéíóúa-z0-9]*" 
+                  class="form-control text-uppercase" id="aspirante_nuevasecundaria_nombre"
+                  name="aspirante_secundaria_nombre" placeholder="Nombre de Secundaria" style="color: #237087 ">
+                <label for="aspirante_nuevasecundaria_nombre">Nombre de Secundaria</label>
+              </div>
+              <br>
+            </div>
+
+            <div class="col-md-4">
+              <label class="form-group has-float-label seltitulo">
+                <select class="form-control form-control-lg selcolor" name="aspirante_nuevasecundaria_tipo_subsistema" 
+                  id="aspirante_nuevasecundaria_tipo_subsistema" onchange="otro_secundaria();">
+                  <option value="">Seleccione un tipo</option>
+                  <option value="TELESECUNDARIA">Telesecundaria</option>
+                  <option value="GENERAL">General</option>
+                  <option value="PARTICULAR">Particular</option>
+                  <option value="TÉCNICA">Técnica</option>
+                  <option value="COMUNITARIA">Comunitaria</option>
+                  <option value="OTRO" >Otro</option>
+                </select>
+                <span>Tipo de Subsistema</span>
+              </label>
+            </div>
+
+            <div class="col-md-4" style="display: none" id="otro_secundaria_oculto">
+              <div class="form-label-group">
+                <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ. 0-9]+"
+                  title="El tipo de la secundaria contiene caracteres incorrectos" class="form-control text-uppercase"
+                  id="aspirante_secundaria_tipo_otro" name="aspirante_secundaria_tipo_otro"
+                  placeholder="Tipo de Secundaria" style="color: #237087 ">
+                <label for="aspirante_secundaria_tipo_otro">Tipo de Secundaria</label>
+              </div>
+            </div>
+
+          </div>
+          <br>
+
+
+          <div class="row">
+
+            <div class="col-md-4">
+              <label class="form-group has-float-label seltitulo">
+                <select class="form-control form-control-lg selcolor"  name="selector_estado_secundaria"
+                onChange="cambio_estado(document.getElementById('selector_estado_secundaria'),document.getElementById('selector_municipio_secundaria'),document.getElementById('selector_localidad_secundaria'))"
+                  id="selector_estado_secundaria">
+                  <option value ="">Seleccione un estado</option>
+
+                  <?php
+                              foreach ($estados as $estado)
+                              {
+                                      echo '<option value="'.$estado->id_estado.'">'.$estado->nombre_estado.'</option>';
+                              }
+                              ?>
+
+                </select>
+                <span>Estado</span>
+              </label>
+            </div>
+
+
+            <div class="col-md-4">
+              <label class="form-group has-float-label seltitulo">
+                <select class="form-control form-control-lg selcolor"  name="selector_municipio_secundaria"
+                  onChange="cambio_municipio(document.getElementById('selector_municipio_secundaria'),document.getElementById('selector_localidad_secundaria'))"
+                  id="selector_municipio_secundaria">
+                  <option></option>
+
+
+                </select>
+                <span>Municipio</span>
+              </label>
+            </div>
+
+            <div class="col-md-4">
+              <label class="form-group has-float-label seltitulo">
+                <select class="form-control form-control-lg selcolor"  name="selector_localidad_secundaria"
+                  id="selector_localidad_secundaria">
+                  <option></option>
+
+
+
+                </select>
+                <span>Localidad</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="borrarmodal()">Cancelar</button>
+        <button type="button" class="btn btn-success" onclick="insertar_secundaria()">Guardar</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 
@@ -1011,7 +1238,60 @@ aria-hidden="true">
 <script>
   cargar_anio();
   cargar_anio_registro();
-function obtener_secundaria(e) {
+
+  function obtener_secundaria(e) {
+    console.log(e);
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '<?php echo base_url();?>index.php/c_escuela_procedencia/get_escuela?cct=' + e, true);
+    xhr.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      xhr.error = function (){
+        console.log("error de conexion");
+      }
+      xhr.onload = function(){
+        $('#div_carga').hide();
+      //console.log(JSON.parse(xhr.response));
+      let secundaria = JSON.parse(xhr.response);
+      //console.log(xhr.responseText.length);
+
+
+
+      if (secundaria.length == 1) {
+        document.getElementById("nombre_secundaria_oculto").style.display = "";
+        document.getElementById("aspirante_secundaria_nombre").value = secundaria[0].nombre_escuela_procedencia;
+        document.getElementById("aspirante_secundaria_nombre").disabled = true;
+        //tipo_subsistema_oculto
+        document.getElementById("tipo_subsistema_oculto").style.display = "";
+        //aspirante_secundaria_tipo_subsistema
+        document.getElementById("aspirante_secundaria_tipo_subsistema").value = secundaria[0].tipo_subsistema;
+        document.getElementById("aspirante_secundaria_tipo_subsistema").disabled = true;
+      }
+
+      else {
+        document.getElementById("nombre_secundaria_oculto").style.display = "none";
+        document.getElementById("tipo_subsistema_oculto").style.display = "none";
+
+        swalWithBootstrapButtons.fire({
+          type: 'info',
+          text: 'Esta secundaria no existe porfavor agreguela:',
+          showCancelButton: true,
+          confirmButtonText: 'Agregar',
+          cancelButtonText: 'Cancelar',
+        }).then((result) => {
+          if (result.value) {
+            $('#nuevasecundaria').modal().show();
+            cct();
+
+          }
+        })
+      }
+    };
+
+    xhr.send(null);
+
+  }
+function obtener_bachillerato(e) {
   console.log(e);
   var xhr = new XMLHttpRequest();
   xhr.open('GET', '<?php echo base_url();?>index.php/c_escuela_procedencia/get_escuela?cct=' + e, true);
@@ -1030,19 +1310,19 @@ function obtener_secundaria(e) {
 
 
     if (secundaria.length == 1) {
-      document.getElementById("nombre_secundaria_oculto").style.display = "";
-      document.getElementById("aspirante_secundaria_nombre").value = secundaria[0].nombre_escuela_procedencia;
-      document.getElementById("aspirante_secundaria_nombre").disabled = true;
+      document.getElementById("nombre_bachillerato_oculto").style.display = "";
+      document.getElementById("aspirante_bachillerato_nombre").value = secundaria[0].nombre_escuela_procedencia;
+      document.getElementById("aspirante_bachillerato_nombre").disabled = true;
       //tipo_subsistema_oculto
-      document.getElementById("tipo_subsistema_oculto").style.display = "";
+      document.getElementById("tipo_subsistema_bachillerato_oculto").style.display = "";
       //aspirante_secundaria_tipo_subsistema
-      document.getElementById("aspirante_secundaria_tipo_subsistema").value = secundaria[0].tipo_subsistema;
-      document.getElementById("aspirante_secundaria_tipo_subsistema").disabled = true;
+      document.getElementById("aspirante_bachillerato_tipo_subsistema").value = secundaria[0].tipo_subsistema;
+      document.getElementById("aspirante_bachillerato_tipo_subsistema").disabled = true;
     }
 
     else {
-      document.getElementById("nombre_secundaria_oculto").style.display = "none";
-      document.getElementById("tipo_subsistema_oculto").style.display = "none";
+      document.getElementById("nombre_bachillerato_oculto").style.display = "none";
+      document.getElementById("tipo_subsistema_bachillerato_oculto").style.display = "none";
 
       swalWithBootstrapButtons.fire({
         type: 'info',
@@ -1052,8 +1332,8 @@ function obtener_secundaria(e) {
         cancelButtonText: 'Cancelar',
       }).then((result) => {
         if (result.value) {
-          $('#nuevasecundaria').modal().show();
-          cct();
+          $('#nuevobachillerato').modal().show();
+          cctbachillerato();
 
         }
       })
@@ -1092,6 +1372,7 @@ form.onsubmit = function (e) {
 
 }
 function envioform(form) {
+  bPreguntar = false;
   var formdata = new FormData(form);
 
   var xhr = new XMLHttpRequest();
@@ -1110,8 +1391,7 @@ function envioform(form) {
         Swal.fire({
           type: 'success',
           title: 'Registro exitoso',
-          showConfirmButton: false,
-          timer: 2500
+          confirmButtonText: "Aceptar"
         });
         $(document).scrollTop(0);
         location.reload(); 
@@ -1131,8 +1411,8 @@ function envioform(form) {
 
 }
 
-function insertar_secundaria() {
-  if(document.getElementById("aspirante_nuevasecundaria_cct").value === ''||document.getElementById("aspirante_nuevasecundaria_nombre").value === ''||document.getElementById("aspirante_nuevasecundaria_tipo_subsistema").value===''){
+function insertar_bachillerato() {
+  if(document.getElementById("aspirante_nuevobachillerato_cct").value === ''||document.getElementById("aspirante_nuevobachillerato_nombre").value === ''||document.getElementById("aspirante_nuevobachillerato_tipo_subsistema").value===''){
     Swal.fire({
           type: 'error',
           title: 'Bachillerato no agregado',
@@ -1143,14 +1423,14 @@ function insertar_secundaria() {
 
   let secundaria = "";
   secundaria = {
-    "cct_escuela_procedencia": document.getElementById("aspirante_nuevasecundaria_cct").value,
-    "nombre_escuela_procedencia": document.getElementById("aspirante_nuevasecundaria_nombre").value,
-    "tipo_subsistema": document.getElementById("aspirante_nuevasecundaria_tipo_subsistema").value,
-    "id_localidad_escuela_procedencia": parseInt(document.getElementById("selector_localidad_secundaria").value),
+    "cct_escuela_procedencia": document.getElementById("aspirante_nuevobachillerato_cct").value,
+    "nombre_escuela_procedencia": document.getElementById("aspirante_nuevobachillerato_nombre").value,
+    "tipo_subsistema": document.getElementById("aspirante_nuevobachillerato_tipo_subsistema").value,
+    "id_localidad_escuela_procedencia": parseInt(document.getElementById("selector_localidad_bachillerato").value),
     "tipo_escuela_procedencia": "BACHILLERATO"
   };
 
-  document.getElementById("secundarias").innerHTML += '<option value="' + document.getElementById("aspirante_nuevasecundaria_cct").value + '">'
+  document.getElementById("secundarias").innerHTML += '<option value="' + document.getElementById("aspirante_nuevobachillerato_cct").value + '">'
   //console.log(secundaria);
   var xhr = new XMLHttpRequest();
   
@@ -1172,8 +1452,8 @@ function insertar_secundaria() {
           showConfirmButton: false,
           timer: 2500
         })
-        $('#nuevasecundaria').modal('toggle');
-        obtener_secundaria(document.getElementById("aspirante_secundaria_cct").value);
+        $('#nuevobachillerato').modal('toggle');
+        obtener_bachillerato(document.getElementById("aspirante_bachillerato_cct").value);
       } else {
         Swal.fire({
           type: 'error',
@@ -1190,5 +1470,71 @@ function insertar_secundaria() {
   }
 }
 
+function insertar_secundaria() {
+    if(document.getElementById("aspirante_nuevasecundaria_cct").value === ''||document.getElementById("aspirante_nuevasecundaria_nombre").value === ''||document.getElementById("aspirante_nuevasecundaria_tipo_subsistema").value===''){
+    Swal.fire({
+          type: 'error',
+          title: 'Secundaria no agregada',
+          confirmButtonText: 'Cerrar'
+
+        })
+   }else{
+    let secundaria = "";
+    secundaria = {
+      "cct_escuela_procedencia": document.getElementById("aspirante_nuevasecundaria_cct").value,
+      "nombre_escuela_procedencia": document.getElementById("aspirante_nuevasecundaria_nombre").value,
+      "tipo_subsistema": document.getElementById("aspirante_nuevasecundaria_tipo_subsistema").value,
+      "id_localidad_escuela_procedencia": parseInt(document.getElementById("selector_localidad_secundaria").value),
+      "tipo_escuela_procedencia": "SECUNDARIA"
+    };
+
+    document.getElementById("secundarias").innerHTML += '<option value="' + document.getElementById("aspirante_nuevasecundaria_cct").value + '">'
+    //console.log(secundaria);
+    var xhr = new XMLHttpRequest();
+    
+    xhr.open("POST", '<?php echo base_url();?>index.php/c_escuela_procedencia/insert_escuela', true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      xhr.error = function (){
+        console.log("error de conexion");
+      }
+
+    xhr.onreadystatechange = function () {
+      if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+        $('#div_carga').hide();
+        if (xhr.responseText === "si") {
+          Swal.fire({
+            type: 'success',
+            title: 'Secundaria agregada correctamente',
+            showConfirmButton: false,
+            timer: 2500
+          })
+          $('#nuevasecundaria').modal('toggle');
+          obtener_secundaria(document.getElementById("aspirante_secundaria_cct").value);
+        } else {
+          Swal.fire({
+            type: 'error',
+            title: 'Secundaria no agregada',
+            confirmButtonText: 'Cerrar'
+
+          })
+        }
+
+      }
+    }
+    xhr.send(JSON.stringify(secundaria));
+
+  }
+
+}
+var bPreguntar = true;
+window.onbeforeunload = preguntarAntesDeSalir;
+function preguntarAntesDeSalir()
+{
+  if (bPreguntar)
+    return "¿Seguro que quieres salir?";
+}
 
 </script>

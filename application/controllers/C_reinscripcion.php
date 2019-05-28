@@ -20,6 +20,11 @@ class C_reinscripcion extends CI_Controller {
         echo $this->M_reinscripcion->reinscribir();
     }
 
+    function cerrar_calificaciones_plantel(){//primera*-*-**-*-**-*-*-*-*-*-*-*-*-
+        $plantel = $this->input->get("plantel");
+        echo $this->M_reinscripcion->cerrar_calificaciones_plantel($plantel);
+    }
+
     function cerrar_calificaciones(){//primera*-*-**-*-**-*-*-*-*-*-*-*-*-
         echo $this->M_reinscripcion->cerrar_calificaciones();
     }

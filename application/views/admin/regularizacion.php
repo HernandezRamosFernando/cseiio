@@ -271,6 +271,8 @@ if (document.getElementById("fecha_inicio").value != '' ) {
       datos.push(dato);
    }
 
+   console.log(datos);
+
    var xhr = new XMLHttpRequest();
       xhr.open("POST", '<?php echo base_url();?>index.php/c_regularizacion/agregar_regularizacion', true);
 

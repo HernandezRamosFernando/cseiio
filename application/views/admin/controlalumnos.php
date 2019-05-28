@@ -847,7 +847,7 @@
               <div class="col-md-4">
                 <div class="form-label-group">
                   <button type="button" class="btn btn-outline-success btn-lg"
-                    onclick="obtener_secundaria(document.getElementById('aspirante_bachillerato_cct').value)">
+                    onclick="obtener_bachillerato(document.getElementById('aspirante_bachillerato_cct').value)">
                     Buscar escuela
                   </button>
 
@@ -1181,9 +1181,57 @@
 
         swalWithBootstrapButtons.fire({
           type: 'info',
-          text: 'Esta secundaria no existe porfavor agreguela:',
+          text: 'Esta secundaria no existe',
           showCancelButton: true,
-          confirmButtonText: 'Agregar',
+          showConfirmButton: false,
+          cancelButtonText: 'Cancelar',
+        }).then((result) => {
+          if (result.value) {
+            $('#nuevasecundaria').modal().show();
+            cct();
+
+          }
+        })
+      }
+    };
+
+    xhr.send(null);
+  }
+
+  function obtener_bachillerato(e) {
+    console.log(e);
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '<?php echo base_url();?>index.php/c_escuela_procedencia/get_escuela?cct=' + e, true);
+    xhr.onloadstart = function () {
+      $('#div_carga').show();
+    }
+    xhr.error = function () {
+      console.log("error de conexion");
+    }
+    xhr.onload = function () {
+      $('#div_carga').hide();
+      //console.log(JSON.parse(xhr.response));
+      let secundaria = JSON.parse(xhr.response);
+      //console.log(xhr.responseText.length);
+      if (secundaria.length == 1) {
+        document.getElementById("nombre_bachillerato_oculto").style.display = "";
+        document.getElementById("aspirante_bachillerato_nombre").value = secundaria[0].nombre_escuela_procedencia;
+        document.getElementById("aspirante_bachillerato_nombre").disabled = true;
+        //tipo_subsistema_oculto
+        document.getElementById("tipo_subsistema_bachillerato_oculto").style.display = "";
+        //aspirante_secundaria_tipo_subsistema
+        document.getElementById("aspirante_bachillerato_tipo_subsistema").value = secundaria[0].tipo_subsistema;
+        document.getElementById("aspirante_bachillerato_tipo_subsistema").disabled = true;
+      }
+      else {
+        document.getElementById("nombre_bachillerato_oculto").style.display = "none";
+        document.getElementById("tipo_subsistema_bachillerato_oculto").style.display = "none";
+
+        swalWithBootstrapButtons.fire({
+          type: 'info',
+          text: 'Esta secundaria no existe',
+          showCancelButton: true,
+          showConfirmButton: false,
           cancelButtonText: 'Cancelar',
         }).then((result) => {
           if (result.value) {

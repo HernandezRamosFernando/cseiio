@@ -185,6 +185,9 @@
               //aqui va el aceptar
               $(document).scrollTop(0);
               //location.reload(); 
+              document.getElementById("alumnos_oculto").style.display = "none";
+              document.getElementById("agregar_oculto").style.display = "none";
+              
             }
             //aqui va si cancela
           });

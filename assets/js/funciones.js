@@ -557,7 +557,7 @@ function cargar_anio_registro(){
       document.getElementById("aspirante_procedencia_municipio").required = false;
       document.getElementById("aspirante_procedencia_localidad").required = false;
   
-    }else if(document.getElementById("aspirante_procedencia_combo").value === "diferente"){
+    }else if(document.getElementById("aspirante_procedencia_combo").value === "difer ente"){
       document.getElementById("aspirante_procedencia_estado_oculto").style.display ="";
       document.getElementById("aspirante_procedencia_municipio_oculto").style.display ="";
       document.getElementById("aspirante_procedencia_localidad_oculto").style.display ="";

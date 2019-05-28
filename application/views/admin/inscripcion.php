@@ -48,7 +48,7 @@
             <p style="font-size: 80px;  float: left;">3</p>
           </div>
           <div class="menubotones">
-            &nbsp;&nbsp;<p class="h5"><strong>Asignar Matrícula</strong></p> &nbsp;
+            &nbsp;&nbsp;<p class="h5"><strong>Asignar Matrícula</strong></p>&nbsp;
           </div>
           <div style="width : 45%; heigth: 100%; float:left;">
             <i class="material-icons md-48">assignment_turned_in</i>

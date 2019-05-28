@@ -1,54 +1,89 @@
+<div id="content-wrapper">
 
-    <div id="content-wrapper">
+  <div class="container-fluid ">
 
-      <div class="container-fluid ">
+    <!-- Breadcrumbs-->
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a>Inscripción</a>
+      </li>
+      <li class="breadcrumb-item active">Seleccione un elemento de los mostrados</li>
+    </ol>
 
-        <!-- Breadcrumbs-->
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item">
-            <a>Inscripción</a>
-          </li>
-          <li class="breadcrumb-item active">Seleccione un elemento de los mostrados</li>
-        </ol>
+    <!-- Botones-->
+    <div class="row position-static" style="">
+      <div class="col-md-4 col-lg-4">
+        <a href="<?php echo base_url();?>index.php/c_vistas/nuevo_ingreso"
+          class="btn btn-primary btn-lg btn-block valign-center btn-responsive menu btn-1">
+          <div class="valign-center" style="width : 10%; heigth: 100%;">
+            <p style="font-size: 80px;  float: left;">1</p>
+          </div>
+          <div class="valign-center" style="width : 100%; heigth: 100%; float:left;">
+            <p class="h3"><strong>Inscripción Nuevo Ingreso</strong></p> &nbsp;
+          </div>
+          <div style="width : 45%; heigth: 100%; float:left;">
+            <i class="material-icons md-48">person_add</i>
+          </div>
+        </a>
 
-        <!-- Botones-->
-        <div class="row position-static" style="">
-          <div class="col-md-4 col-lg-4">
-            <a href="<?php echo base_url();?>index.php/c_vistas/nuevo_ingreso"
-              class="btn btn-primary btn-lg btn-block menu valign-center btn-1 btn-responsive   align-content-between">
-              <i class="material-icons">person_add</i>&nbsp;
-              Inscripción Nuevo Ingreso
-            </a>
+      </div>
+      <div class="col-md-4 col-lg-4">
+        <a href="<?php echo base_url();?>index.php/c_vistas/portabilidad"
+          class="btn btn-primary btn-lg btn-block valign-center btn-responsive menu btn-2">
+          <div class="valign-center" style="width : 10%; heigth: 100%;">
+            <p style="font-size: 80px;  float: left;">2</p>
           </div>
-          <div class="col-md-4 col-lg-4">
-            <a href="<?php echo base_url();?>index.php/c_vistas/portabilidad"
-              class="btn btn-primary btn-lg btn-block menu valign-center btn-2 btn-responsive">
-              <i class="material-icons">person_outline</i>&nbsp;
-              Inscripción Portabilidad
-            </a>
+          <div class="valign-center" style="width : 100%; heigth: 100%; float:left;">
+            <p class="h3"><strong>Inscripción Portabilidad</strong></p> &nbsp;
           </div>
-          <div class="col-md-4 col-lg-4">
-            <a href="<?php echo base_url();?>index.php/c_vistas/asignar_matricula"
-              class="btn btn-primary btn-lg btn-block menu valign-center btn-3 btn-responsive ">
-              <i class="material-icons">assignment_turned_in</i>&nbsp;
-              Asignar Matrícula
-            </a>
+          <div style="width : 45%; heigth: 100%; float:left;">
+            <i class="material-icons md-48">person_outline</i>
           </div>
-          <div class="col-md-4 col-lg-4">
-            <a href="<?php echo base_url();?>index.php/c_vistas/carta_compromiso"
-              class="btn btn-primary btn-lg btn-block menu valign-center btn-4 btn-responsive">
-              <i class="material-icons">thumbs_up_down</i>&nbsp;
-              Generación de Carta Compromiso
-            </a>
+        </a>
+      </div>
+      <div class="col-md-4 col-lg-4">
+        <a href="<?php echo base_url();?>index.php/c_vistas/asignar_matricula"
+          class="btn btn-primary btn-lg btn-block valign-center btn-responsive menu btn-3">
+          <div class="valign-center" style="width : 10%; heigth: 100%;">
+            <p style="font-size: 80px;  float: left;">3</p>
           </div>
-          <div class="col-md-4 col-lg-4">
-            <a href="<?php echo base_url();?>index.php/c_vistas/resolucion_equivalencia"
-              class="btn btn-primary btn-lg btn-block menu valign-center btn-5 btn-responsive">
-              <i class="material-icons">transfer_within_a_station</i>&nbsp;
-              Generación de Resolución de Equivalencia
-            </a>
+          <div class="valign-center" style="width : 100%; heigth: 100%; float:left;">
+            <p class="h3"><strong>Asignar Matrícula</strong></p> &nbsp;
           </div>
-          <!--
+          <div style="width : 45%; heigth: 100%; float:left;">
+            <i class="material-icons md-48">assignment_turned_in</i>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 col-lg-4">
+        <a href="<?php echo base_url();?>index.php/c_vistas/carta_compromiso"
+          class="btn btn-primary btn-lg btn-block valign-center btn-responsive menu btn-4">
+          <div class="valign-center" style="width : 10%; heigth: 100%;">
+            <p style="font-size: 80px;  float: left;">4</p>
+          </div>
+          <div class="valign-center" style="width : 100%; heigth: 100%; float:left;">
+            <p class="h3"><strong>Generación de Carta Compromiso</strong></p> &nbsp;
+          </div>
+          <div style="width : 45%; heigth: 100%; float:left;">
+            <i class="material-icons md-48">thumbs_up_down</i>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 col-lg-4">
+        <a href="<?php echo base_url();?>index.php/c_vistas/resolucion_equivalencia"
+          class="btn btn-primary btn-lg btn-block valign-center btn-responsive menu btn-5">
+          <div class="valign-center" style="width : 10%; heigth: 100%;">
+            <p style="font-size: 80px;  float: left;">5</p>
+          </div>
+          <div class="valign-center" style="width : 100%; heigth: 100%; float:left;">
+            <p class="h3"><strong>Generación de Resolución de Equivalencia</strong></p> &nbsp;
+          </div>
+          <div style="width : 45%; heigth: 100%; float:left;">
+            <i class="material-icons md-48">transfer_within_a_station</i>
+          </div>
+        </a>
+      </div>
+      <!--
           <div class="col col-lg-4">
             <a href="<?php echo base_url();?>index.php/c_vistas/carta_compromiso"
               class="btn btn-primary btn-lg btn-block stretched-link center-block fas fa-clipboard-check btn-responsive"
@@ -64,14 +99,11 @@
             </a>
           </div>
           -->
-        </div>
-
-
-      </div>
     </div>
-    <!-- /.content-wrapper -->
+
+
   </div>
-  <!-- /#wrapper -->
-
-  
-
+</div>
+<!-- /.content-wrapper -->
+</div>
+<!-- /#wrapper -->

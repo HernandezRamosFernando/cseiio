@@ -19,11 +19,11 @@
                     <div class="valign-center" style="width : 10%; heigth: 100%;">
                         <p style="font-size: 80px;  float: left;">1</p>
                     </div>
-                    <div class="valign-center" style="width : 100%; heigth: 100%; float:left;">
-                        <p class="h3"><strong>Permisos de asignación de calificaciones</strong></p> &nbsp;
+                    <div class="menubotones">
+                    &nbsp; &nbsp;<p class="h5"><strong>Permisos de asignación de calificaciones</strong></p> &nbsp;
                     </div>
                     <div style="width : 45%; heigth: 100%; float:left;">
-                        <i class="material-icons md-48">person_add</i>
+                    <img src="<?php echo base_url();?>assets/img/permisoscal.ico">
                     </div>
       </a>
     </div>
@@ -33,8 +33,8 @@
                     <div class="valign-center" style="width : 10%; heigth: 100%;">
                         <p style="font-size: 80px;  float: left;">2</p>
                     </div>
-                    <div class="valign-center" style="width : 100%; heigth: 100%; float:left;">
-                        <p class="h3"><strong>Control de usuarios</strong></p> &nbsp;
+                    <div class="menubotones">
+                        &nbsp; &nbsp;<p class="h5"><strong>Control de usuarios</strong></p> &nbsp;
                     </div>
                     <div style="width : 45%; heigth: 100%; float:left;">
                         <i class="material-icons md-48">person_add</i>
@@ -47,11 +47,11 @@
                     <div class="valign-center" style="width : 10%; heigth: 100%;">
                         <p style="font-size: 80px;  float: left;">3</p>
                     </div>
-                    <div class="valign-center" style="width : 100%; heigth: 100%; float:left;">
-                        <p class="h3"><strong>Control de materias</strong></p> &nbsp;
+                    <div class="menubotones">
+                        &nbsp; &nbsp;<p class="h5"><strong>Control de materias</strong></p> &nbsp;
                     </div>
                     <div style="width : 45%; heigth: 100%; float:left;">
-                        <i class="material-icons md-48">person_add</i>
+                    <img src="<?php echo base_url();?>assets/img/controlmaterias.ico">
                     </div>
       </a>
     </div>
@@ -61,11 +61,11 @@
                     <div class="valign-center" style="width : 10%; heigth: 100%;">
                         <p style="font-size: 80px;  float: left;">4</p>
                     </div>
-                    <div class="valign-center" style="width : 100%; heigth: 100%; float:left;">
-                        <p class="h3"><strong>Control de componentes</strong></p> &nbsp;
+                    <div class="menubotones">
+                        &nbsp; &nbsp;<p class="h5"><strong>Control de componentes</strong></p> &nbsp;
                     </div>
                     <div style="width : 45%; heigth: 100%; float:left;">
-                        <i class="material-icons md-48">person_add</i>
+                    <img src="<?php echo base_url();?>assets/img/controlcomponentes.ico">
                     </div>
       </a>
     </div>
@@ -75,11 +75,11 @@
                     <div class="valign-center" style="width : 10%; heigth: 100%;">
                         <p style="font-size: 80px;  float: left;">5</p>
                     </div>
-                    <div class="valign-center" style="width : 100%; heigth: 100%; float:left;">
-                        <p class="h3"><strong>Terminar periodo de ciclo escolar</strong></p> &nbsp;
+                    <div class="menubotones">
+                        &nbsp; &nbsp;<p class="h5"><strong>Terminar periodo de ciclo escolar</strong></p> &nbsp;
                     </div>
                     <div style="width : 45%; heigth: 100%; float:left;">
-                        <i class="material-icons md-48">person_add</i>
+                    <img src="<?php echo base_url();?>assets/img/finalizarperiodo.ico">
                     </div>
             </a>
           </div>

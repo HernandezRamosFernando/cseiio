@@ -20,8 +20,8 @@
                     <div class="valign-center" style="width : 10%; heigth: 100%; ">
                         <p style="font-size: 80px;  float: left">1</p>
                     </div>
-                    <div class="valign-center" style="width : 100%; heigth: 100%; float:left;">
-                        <p class="h3"><strong>Inscripción</strong></p> &nbsp;
+                    <div class="menubotones">
+                    &nbsp;&nbsp;<p class="h5"><strong>Inscripción</strong></p> &nbsp;
                     </div>
                     <div style="width : 45%; heigth: 100%; float:left;">
                         <i class="material-icons md-48">group_add </i>
@@ -35,8 +35,8 @@
                     <div class="valign-center" style="width : 10%; heigth: 100%;">
                         <p style="font-size: 80px;  float:left;">2</p>
                     </div>
-                    <div class="valign-center" style="width : 100%; heigth: 100%; float:left;">
-                        &nbsp;<p class="h3"><strong>Reinscripción</strong></p> &nbsp;
+                    <div class="menubotones">
+                    &nbsp;&nbsp;<p class="h5"><strong>Reinscripción</strong></p> &nbsp;
                     </div>
                     <div style="width : 45%; heigth: 100%; float:left;">
                         <i class="material-icons md-48">person </i>
@@ -49,8 +49,8 @@
                     <div class="valign-center" style="width : 10%; heigth: 100%;">
                         <p style="font-size: 80px;  float:left;">3</p>
                     </div>
-                    <div class="valign-center" style="width : 100%; heigth: 100%; float:left;">
-                        <p class="h3"><strong>Control de Alumnos</strong></p> &nbsp;
+                    <div class="menubotones">
+                    &nbsp;&nbsp;<p class="h5"><strong>Control de Alumnos</strong></p> &nbsp;
                     </div>
                     <div style="width : 45%; heigth: 100%; float:left;">
                         <i class="material-icons md-48">person </i>
@@ -63,8 +63,8 @@
                     <div class="valign-center" style="width : 10%; heigth: 100%;">
                         <p style="font-size: 80px;  float: left;">4</p>
                     </div>
-                    <div class="valign-center" style="width : 100%; heigth: 100%; float:left;">
-                        <p class="h3"><strong>Acreditación</strong></p> &nbsp;
+                    <div class="menubotones">
+                    &nbsp;&nbsp;<p class="h5"><strong>Acreditación</strong></p> &nbsp;
                     </div>
                     <div style="width : 45%; heigth: 100%; float:left;">
                         <i class="material-icons md-48">beenhere </i>
@@ -77,8 +77,8 @@
                     <div class="valign-center" style="width : 10%; heigth: 100%;">
                         <p style="font-size: 80px;  float: left;">5</p>
                     </div>
-                    <div class="valign-center" style="width : 100%; heigth: 100%; float:left;">
-                        <p class="h3"><strong>Reportes</strong></p> &nbsp;
+                    <div class="menubotones">
+                    &nbsp;&nbsp;<p class="h5"><strong>Reportes</strong></p> &nbsp;
                     </div>
                     <div style="width : 45%; heigth: 100%; float:left;">
                         <i class="material-icons md-48">assessment </i>
@@ -91,8 +91,8 @@
                     <div class="valign-center" style="width : 10%; heigth: 100%;">
                         <p style="font-size: 80px;  float: left;">6</p>
                     </div>
-                    <div class="valign-center" style="width : 100%; heigth: 100%; float:left;">
-                        <p class="h3"><strong>Formatos</strong></p> &nbsp;
+                    <div class="menubotones">
+                    &nbsp;&nbsp;<p class="h5"><strong>Formatos</strong></p> &nbsp;
                     </div>
                     <div style="width : 45%; heigth: 100%; float:left;">
                         <i class="material-icons md-48">description </i>
@@ -105,8 +105,8 @@
                     <div class="valign-center" style="width : 10%; heigth: 100%;">
                         <p style="font-size: 80px;  float: left;">7</p>
                     </div>
-                    <div class="valign-center" style="width : 100%; heigth: 100%; float:left;">
-                        <p class="h3"><strong>Acreditacion</strong></p> &nbsp;
+                    <div class="menubotones">
+                    &nbsp;&nbsp;<p class="h5"><strong>Acreditacion</strong></p> &nbsp;
                     </div>
                     <div style="width : 45%; heigth: 100%; float:left;">
                         <i class="material-icons md-48">assignment_turned_in</i>
@@ -119,8 +119,8 @@
                     <div class="valign-center" style="width : 10%; heigth: 100%;">
                         <p style="font-size: 80px;  float: left;">8</p>
                     </div>
-                    <div class="valign-center" style="width : 100%; heigth: 100%; float:left;">
-                        <p class="h3"><strong>Control de Documentos</strong></p> &nbsp;
+                    <div class="menubotones">
+                    &nbsp;&nbsp;<p class="h5"><strong>Control de Documentos</strong></p> &nbsp;
                     </div>
                     <div style="width : 45%; heigth: 100%; float:left;">
                         <i class="material-icons md-48">burst_mode</i>
@@ -133,8 +133,8 @@
                     <div class="valign-center" style="width : 10%; heigth: 100%;">
                         <p style="font-size: 80px;  float: left;">9</p>
                     </div>
-                    <div class="valign-center" style="width : 100%; heigth: 100%; float:left;">
-                        <p class="h3"><strong> Control y Permisos </strong></p> &nbsp;
+                    <div class="menubotones">
+                    &nbsp;&nbsp;<p class="h5"><strong> Control y Permisos </strong></p> &nbsp;
                     </div>
                     <div style="width : 45%; heigth: 100%; float:left;">
                         <i class="material-icons md-48">people_outline</i>

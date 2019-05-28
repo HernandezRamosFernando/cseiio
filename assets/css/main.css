@@ -189,3 +189,16 @@ btn-lista:hover{
 .btn-guardar{
     font-weight: bold;
 }
+
+.botonimagen{
+    background-image:url(../img/cartacompromiso.png);
+  }
+
+.menubotones{
+    width : 100%;
+    height: 100%;
+    text-align: left; 
+    display: inline-flex; 
+    align-items: center;
+    vertical-align: middle;
+  }

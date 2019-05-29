@@ -268,6 +268,27 @@ public function portabilidad(){
             redirect(base_url().'index.php/c_usuario');
         }
     }
+    public function cerrar_cal(){
+        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
+        $data= array('title'=>'Cerrar calificaciones');
+        $this->load->view("headers/cabecera", $data);
+        $this->load->view("headers/menuarriba");
+        $this->load->view("headers/menuizquierda");
+        $this->load->view("admin/cerrar_calificaciones");
+        $this->load->view("footers/footer");
+        }
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
+            $data= array('title'=>'Cerrar calificaciones');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierda");
+            $this->load->view("plantel/cerrar_calificaciones");
+            $this->load->view("footers/footer");
+            }
+        else{
+            redirect(base_url().'index.php/c_usuario');
+        }
+    }
 
     public function calificacion(){
         if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
@@ -335,6 +356,21 @@ public function portabilidad(){
             $this->load->view("headers/menuarriba");
             $this->load->view("headers/menuizquierda");
             $this->load->view("admin/permisos_calificacion", $datos);
+            $this->load->view("footers/footer");
+        }
+        else{
+            redirect(base_url().'index.php/c_usuario');
+        }
+    }
+    public function permisos_reg(){
+        $datos['planteles'] = $this->M_plantel->get_planteles();
+
+        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
+            $dato= array('title'=>'Permisos de Regularización');
+            $this->load->view("headers/cabecera",$dato);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierda");
+            $this->load->view("admin/permisos_regularizacion", $datos);
             $this->load->view("footers/footer");
         }
         else{

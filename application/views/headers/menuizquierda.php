@@ -16,12 +16,12 @@
       </a>
       <div id="submenu" class="<?php ($this->uri->segment(2)=='nuevo_ingreso'||$this->uri->segment(2)=='portabilidad'||$this->uri->segment(2)=='asignar_matricula'||$this->uri->segment(2)=='carta_compromiso' ||$this->uri->segment(2)=='resolucion_equivalencia') ? print 'null' : print 'collapse'; ?> sidebar-submenu">
         <a class="nav-link <?php ($this->uri->segment(2)=='nuevo_ingreso') ? print 'bg-info text-light' : print null; ?>" href="<?php echo base_url();?>index.php/c_vistas/nuevo_ingreso">
-        <i class="material-icons">person_add</i>
+        <i class="material-icons md-24">person_add</i>
           <span class="font-weight-light">Inscripción Nuevo Ingreso
           </span>
         </a>
         <a class="nav-link  <?php ($this->uri->segment(2)=='portabilidad') ? print 'bg-info text-light' : print null; ?>" href="<?php echo base_url();?>index.php/c_vistas/portabilidad">
-        <i class="material-icons">person_outline</i>
+        <img src="<?php echo base_url();?>assets/img/portabilidad.ico">
           <span class="font-weight-light">Inscripción Portabilidad
           </span>
         </a>

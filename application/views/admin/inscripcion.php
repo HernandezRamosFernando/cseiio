@@ -14,72 +14,81 @@
     <div class="row position-static" style="">
       <div class="col-md-4 col-lg-4">
         <a href="<?php echo base_url();?>index.php/c_vistas/nuevo_ingreso"
-          class="btn btn-primary btn-lg btn-block valign-center btn-responsive menu btn-1">
-          <div class="valign-center" style="width : 10%; heigth: 100%;">
-            <p style="font-size: 80px;  float: left;">1</p>
-          </div>
-          <div class="menubotones">
-            &nbsp;&nbsp;<p class="h5"><strong>Inscripción Nuevo Ingreso</strong></p> &nbsp;
-          </div>
-          <div style="width : 45%; heigth: 100%; float:left;">
-            <i class="material-icons md-48">person_add</i>
+          class="btn btn-primary btn-lg btn-block  btn-responsive menu  btn-1">
+          <div class="row">
+            <div class="col-2 valign-left">
+              <span style="font-size: 80px;  text-align: left">1</span>
+            </div>
+            <div class="col-4 valign-left" style="padding-left: 0px;">
+            &nbsp;<p class="h5"><strong>Inscripción Nuevo Ingreso</strong></p> &nbsp;
+            </div>
+            <div class="col-5 valign-right">
+              <i class="material-icons md-48">person_add</i>
+            </div>
           </div>
         </a>
-
       </div>
       <div class="col-md-4 col-lg-4">
         <a href="<?php echo base_url();?>index.php/c_vistas/portabilidad"
-          class="btn btn-primary btn-lg btn-block valign-center btn-responsive menu btn-2">
-          <div class="valign-center" style="width : 10%; heigth: 100%;">
-            <p style="font-size: 80px;  float: left;">2</p>
-          </div>
-          <div class="menubotones">
-            &nbsp;&nbsp;<p class="h5"><strong>Inscripción Portabilidad</strong></p> &nbsp;
-          </div>
-          <div style="width : 45%; heigth: 100%; float:left;">
-          <img src="<?php echo base_url();?>assets/img/portabilidad.ico">
+          class="btn btn-primary btn-lg btn-block  btn-responsive menu  btn-2">
+          <div class="row">
+            <div class="col-2 valign-left">
+              <span style="font-size: 80px;  text-align: left">2</span>
+            </div>
+            <div class="col-4 valign-left" style="padding-left: 0px;">
+            &nbsp;<p class="h5"><strong>Inscripción Portabilidad</strong></p> &nbsp;
+            </div>
+            <div class="col-5 valign-right">
+              <img src="<?php echo base_url();?>assets/img/portabilidad.ico">
+            </div>
           </div>
         </a>
       </div>
       <div class="col-md-4 col-lg-4">
         <a href="<?php echo base_url();?>index.php/c_vistas/asignar_matricula"
-          class="btn btn-primary btn-lg btn-block valign-center btn-responsive menu btn-3">
-          <div class="valign-center" style="width : 10%; heigth: 100%;">
-            <p style="font-size: 80px;  float: left;">3</p>
-          </div>
-          <div class="menubotones">
-            &nbsp;&nbsp;<p class="h5"><strong>Asignar Matrícula</strong></p>&nbsp;
-          </div>
-          <div style="width : 45%; heigth: 100%; float:left;">
-            <i class="material-icons md-48">assignment_turned_in</i>
+          class="btn btn-primary btn-lg btn-block  btn-responsive menu  btn-3">
+          <div class="row">
+            <div class="col-2 valign-left">
+              <span style="font-size: 80px;  text-align: left">3</span>
+            </div>
+            <div class="col-4 valign-left" style="padding-left: 0px;">
+            &nbsp;<p class="h5"><strong>Asignar Matrícula</strong></p> &nbsp;
+            </div>
+            <div class="col-5 valign-right">
+              <i class="material-icons md-48">assignment_turned_in</i>
+            </div>
           </div>
         </a>
       </div>
       <div class="col-md-4 col-lg-4">
         <a href="<?php echo base_url();?>index.php/c_vistas/carta_compromiso"
-          class="btn btn-primary btn-lg btn-block valign-center btn-responsive menu btn-4">
-          <div class="valign-center" style="width : 10%; heigth: 100%;">
-            <p style="font-size: 80px;  float: left;">4</p>
-          </div>
-          <div class="menubotones">
-            &nbsp;&nbsp;<p class="h5"><strong>Generación de Carta Compromiso</strong></p> &nbsp;
-          </div>
-          <div style="width : 45%; heigth: 100%; float:left;">
-           <img src="<?php echo base_url();?>assets/img/cartacompromiso.ico">
+          class="btn btn-primary btn-lg btn-block  btn-responsive menu  btn-4">
+          <div class="row">
+            <div class="col-2 valign-left">
+              <span style="font-size: 80px;  text-align: left">4</span>
+            </div>
+            <div class="col-4 valign-left" style="padding-left: 0px;">
+            &nbsp;<p class="h5"><strong>Generación de Carta Compromiso</strong></p> &nbsp;
+            </div>
+            <div class="col-5 valign-right">
+              <img src="<?php echo base_url();?>assets/img/cartacompromiso.ico">
+            </div>
           </div>
         </a>
       </div>
       <div class="col-md-4 col-lg-4">
         <a href="<?php echo base_url();?>index.php/c_vistas/resolucion_equivalencia"
-          class="btn btn-primary btn-lg btn-block valign-center btn-responsive menu btn-5">
-          <div class="valign-center" style="width : 10%; heigth: 100%;">
-            <p style="font-size: 80px;  float: left;">5</p>
-          </div>
-          <div class="menubotones">
-            &nbsp;&nbsp;<p class="h5"><strong>Generación de Resolución de Equivalencia</strong></p> &nbsp;
-          </div>
-          <div style="width : 45%; heigth: 100%; float:left;">
-          <img src="<?php echo base_url();?>assets/img/equivalencia.ico">
+          class="btn btn-primary btn-lg btn-block  btn-responsive menu  btn-5">
+          <div class="row">
+            <div class="col-2 valign-left">
+              <span style="font-size: 80px;  text-align: left">5</span>
+            </div>
+            <div class="col-5 valign-left" style="padding-left: 0px;">
+            &nbsp;<p class="h5"><strong>Generación de Resolución de Equivalencia</strong></p> &nbsp;
+            </div>
+            <div class="col-5 valign-right">
+              <img src="<?php echo base_url();?>assets/img/equivalencia.ico">
+            </div>
           </div>
         </a>
       </div>

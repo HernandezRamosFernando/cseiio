@@ -270,11 +270,12 @@ public function portabilidad(){
     }
     public function cerrar_cal(){
         if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
-        $data= array('title'=>'Cerrar calificaciones');
+            $datos['planteles'] = $this->M_plantel->get_planteles();
+            $data= array('title'=>'Cerrar calificaciones');
         $this->load->view("headers/cabecera", $data);
         $this->load->view("headers/menuarriba");
         $this->load->view("headers/menuizquierda");
-        $this->load->view("admin/cerrar_calificaciones");
+        $this->load->view("admin/cerrar_calificaciones", $datos);
         $this->load->view("footers/footer");
         }
         else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){

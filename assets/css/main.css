@@ -67,6 +67,13 @@ btn-lista:hover{
 .resultado.ok {
     background-color: green;
 }
+
+.icono_izquierda{
+    width: 24px !important; 
+    height: 24px !important; 
+    -webkit-filter: invert(100%);
+
+}
 .valign-center {
     display: inline-flex;
     align-items: center;

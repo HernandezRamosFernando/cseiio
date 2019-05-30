@@ -21,12 +21,12 @@
           </span>
         </a>
         <a class="nav-link  <?php ($this->uri->segment(2)=='portabilidad') ? print 'bg-info text-light' : print null; ?>" href="<?php echo base_url();?>index.php/c_vistas/portabilidad">
-        <img style="width: 24px; height: 24px; " src="<?php echo base_url();?>assets/img/portabilidad.ico">
+        <img class="icono_izquierda" src="<?php echo base_url();?>assets/img/portabilidad.png">
           <span class="font-weight-light">Inscripción Portabilidad
           </span>
         </a>
         <a class="nav-link  <?php ($this->uri->segment(2)=='resolucion_equivalencia') ? print 'bg-info text-light' : print null; ?>" href="<?php echo base_url();?>index.php/c_vistas/resolucion_equivalencia">
-        <i class="material-icons">person_outline</i>
+        <img class="icono_izquierda" src="<?php echo base_url();?>assets/img/equivalencia.ico">
           <span class="font-weight-light">Resolución equivalencia
           </span>
         </a>
@@ -35,7 +35,7 @@
           <span class="font-weight-light">Asignar Matrícula</span>
         </a>
         <a class="nav-link   <?php ($this->uri->segment(2)=='carta_compromiso') ? print 'bg-info text-light' : print null; ?>" href="<?php echo base_url();?>index.php/c_vistas/carta_compromiso">
-        <i class="material-icons">thumbs_up_down</i>
+        <img class="icono_izquierda"  src="<?php echo base_url();?>assets/img/cartacompromiso.ico">
           <span class="font-weight-light">Carta Compromiso</span>
         </a>
         <hr class="bg-info" style=" border: 3px solid ;">

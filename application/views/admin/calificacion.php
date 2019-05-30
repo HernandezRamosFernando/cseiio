@@ -321,19 +321,32 @@
 
 
         JSON.parse(xhr.response).forEach(function (valor, indice) {
-          var promedio = "";
-          if (valor.primer_parcial != null && valor.segundo_parcial != null && valor.tercer_parcial != null) {
+          var promedio =0;
+
+          /*if (valor.primer_parcial != null && valor.segundo_parcial != null && valor.tercer_parcial != null) {
             promedio = (parseInt(valor.primer_parcial) + parseInt(valor.segundo_parcial) + parseInt(valor.tercer_parcial)) / 3;
             console.log(promedio);
             promedio = redondeo(promedio);
-          }
+          }*/
+
+          var p1=0,p2=0,p3=0;
+
+           p1=(valor.primer_parcial === null || valor.primer_parcial ==="") ? 0 : valor.primer_parcial;
+          p2=(valor.segundo_parcial === null || valor.segundo_parcial ==="")? 0 : valor.segundo_parcial;
+          p3=(valor.tercer_parcial === null || valor.tercer_parcial =="")? 0 : valor.tercer_parcial;
+          ef=(valor.examen_final === null || valor.examen_final =="")? 0 : valor.examen_final;
+
+          
+          promedio=redondeo((parseInt(p1)+parseInt(p2)+parseInt(p3))/3);
+          
+
           var registro = "<tr>";
           registro += '<td>' + valor.nombre + ' ' + valor.primer_apellido + ' ' + valor.segundo_apellido + '</td>';
           registro += '<td>' + valor.no_control + '</td>';
           var primer_parcial = valor.primer_parcial !== null ? valor.primer_parcial : "";
 
           if (permisos_plantel.primer_parcial === "1") {
-            registro += '<td><input type="text" class="form-control" name="primer_parcial" value="' + (primer_parcial === "0" ? "/" : primer_parcial) + '" id="primer_parcial" onchange="calificaciones(this,\''+valor.tipo+'\',2,'+indice+');"></td>';
+            registro += '<td><input type="text" class="form-control" name="primer_parcial" value="' + (primer_parcial === "0" ? "/" : primer_parcial) + '" id="primer_parcial" onchange="calificaciones(this,\''+valor.tipo+'\',2,'+indice+','+permisos_plantel.examen_final+');"></td>';
           }
           else {
             registro += '<td><input type="text" class="form-control" name="primer_parcial" value="' + (primer_parcial === "0" ? "/" : primer_parcial) + '" id="primer_parcial" disabled></td>';
@@ -341,7 +354,7 @@
 
           var segundo_parcial = valor.segundo_parcial !== null ? valor.segundo_parcial : "";
           if (permisos_plantel.segundo_parcial === "1") {
-            registro += '<td><input type="text" class="form-control" name="segundo_parcial" value="' + (segundo_parcial === "0" ? "/" : segundo_parcial) + '" id="segundo_parcial"  onchange="calificaciones(this,\''+valor.tipo+'\',3,'+indice+');"></td>';
+            registro += '<td><input type="text" class="form-control" name="segundo_parcial" value="' + (segundo_parcial === "0" ? "/" : segundo_parcial) + '" id="segundo_parcial"  onchange="calificaciones(this,\''+valor.tipo+'\',3,'+indice+','+permisos_plantel.examen_final+');"></td>';
           }
 
           else {
@@ -351,30 +364,41 @@
 
           var tercer_parcial = valor.tercer_parcial !== null ? valor.tercer_parcial : "";
           if (permisos_plantel.tercer_parcial === "1") {
-            registro += '<td><input type="text" class="form-control" name="tercer_parcial" value="' + (tercer_parcial === "0" ? "/" : tercer_parcial) + '" id="tercer_parcial" onchange="calificaciones(this,\''+valor.tipo+'\',4,'+indice+');"></td>';
+            registro += '<td><input type="text" class="form-control" name="tercer_parcial" value="' + (tercer_parcial === "0" ? "/" : tercer_parcial) + '" id="tercer_parcial" onchange="calificaciones(this,\''+valor.tipo+'\',4,'+indice+','+permisos_plantel.examen_final+');"></td>';
           }
           else {
             registro += '<td><input type="text" class="form-control" name="tercer_parcial" value="' + (tercer_parcial === "0" ? "/" : tercer_parcial) + '" id="tercer_parcial" disabled></td>';
           }
 
           if (promedio >= 6) {
-            registro += '<td><input type="text" class="form-control" name="promedio_modular" value="' + promedio + '" id="promedio_modular" onchange="calificaciones(this,\''+valor.tipo+'\',5,'+indice+');" disabled></td>';
+            registro += '<td><input type="text" class="form-control" name="promedio_modular" value="' + promedio+'" id="promedio_modular" disabled style="background-color:#1F934C;color: white;font-weight:bold"></td>';
           } else {
-            registro += '<td><input type="text" class="form-control" name="promedio_modular" value="' + promedio + '" id="promedio_modular" onchange="calificaciones(this,\''+valor.tipo+'\',5,'+indice+');" disabled style="color: red"></td>';
+            registro += '<td><input type="text" class="form-control" name="promedio_modular" value="' + promedio + '" id="promedio_modular" disabled style="background-color:#C4131B;color: white; font-weight:bold"></td>';
           }
+
+          
 
           var examen_final = valor.examen_final !== null ? valor.examen_final : "";
           if (permisos_plantel.examen_final === "1" && promedio >= 6) {
-            registro += '<td><input type="text" class="form-control" name="examen_final" value="' + (examen_final === "0" ? "/" : examen_final) + '" id="examen_final" onchange="calificaciones(this,\''+valor.tipo+'\',6,'+indice+');"></td>';
+            registro += '<td><input type="text" class="form-control" name="examen_final" value="' + (examen_final === "0" ? "/" : examen_final) + '" id="examen_final" onchange="calificaciones(this,\''+valor.tipo+'\',6,'+indice+','+permisos_plantel.examen_final+');"></td>';
           } else if (permisos_plantel.examen_final === "1" && promedio < 6) {
-            registro += '<td><input type="text" class="form-control" name="examen_final" value="' + (examen_final === "0" ? "/" : examen_final) + '" id="examen_final" onchange="calificaciones(this,\''+valor.tipo+'\',6,'+indice+');" disabled></td>';
+            registro += '<td><input type="text" class="form-control" name="examen_final" value="' + (examen_final === "0" ? "/" : examen_final) + '" id="examen_final" onchange="calificaciones(this,\''+valor.tipo+'\',6,'+indice+','+permisos_plantel.examen_final+');" disabled></td>';
           } else {
-            registro += '<td><input type="text" class="form-control" name="examen_final" value="' + (examen_final === "0" ? "/" : examen_final) + '" id="examen_final" disabled></td>';
+            registro += '<td><input type="text" class="form-control" name="examen_final" value="' + (examen_final === "0" ? "/" : examen_final) + '" onchange="calificaciones(this,\''+valor.tipo+'\',6,'+indice+','+permisos_plantel.examen_final+');" id="examen_final" disabled></td>';
           }
           
-          var promedio_total= redondeo((parseInt(promedio)+parseInt(valor.examen_final))/2);
+          var promedio_total= redondeo((promedio+parseInt(ef))/2);
 
-          registro += '<td> <input type="text" class="form-control" name="promediot" value="' + ((promedio_total === "0" || promedio_total==='') ? "/" : promedio_total) + '" id="promediot" disabled> </td>';
+
+          if (promedio_total >= 6) {
+          	registro += '<td> <input type="text" class="form-control" name="promediot" value="' + ((promedio_total === "0" || promedio_total==='') ? "/" : promedio_total) + '" id="promediot" disabled style="background-color:#1F934C;color: white;font-weight:bold"> </td>';
+          }
+          else{
+          		registro += '<td> <input type="text" class="form-control" name="promediot" value="' + ((promedio_total === "0" || promedio_total==='') ? "/" : promedio_total) + '" id="promediot" disabled style="background-color:#C4131B;color: white; font-weight:bold"> </td>';
+          }
+          
+
+          
           registro += '</tr>';
 
           document.getElementById("tablagrupo").innerHTML += registro;
@@ -421,7 +445,7 @@
   }
 
 
-  function calificaciones(e,tipo,columna_activa,fila) {
+  function calificaciones(e,tipo,columna_activa,fila,activo_examen_final) {
     var string = e.value.toString();
     var tipo_materia=tipo;
 
@@ -474,22 +498,37 @@
     }
     //e.value=output;
     //-----------comienza validación de filas activas
-    validar_filas_input(columna_activa);
+    validar_vacios_input();
     //validacion para calcular promedio del semestre por alumno
-    promedio_semestral(fila)
+    promedio_semestral(fila,activo_examen_final)
 
   }
 
 
-function validar_filas_input(columna_activa) {
+function validar_vacios_input() {
   var validar_tabla = document.getElementById("tablagrupo");
   var contar_vacios=0;
   for (let i = 0; i < validar_tabla.childNodes.length; i++) {
-      if(validar_tabla.childNodes[i].childNodes[columna_activa].childNodes[0].value===""){
+      if(validar_tabla.childNodes[i].childNodes[2].childNodes[0].disabled===false && validar_tabla.childNodes[i].childNodes[2].childNodes[0].value===""){
         contar_vacios++;
       }
 
+      if(validar_tabla.childNodes[i].childNodes[3].childNodes[0].disabled===false && validar_tabla.childNodes[i].childNodes[3].childNodes[0].value===""){
+        contar_vacios++;
+      }
+
+      if(validar_tabla.childNodes[i].childNodes[4].childNodes[0].disabled===false && validar_tabla.childNodes[i].childNodes[4].childNodes[0].value===""){
+        contar_vacios++;
+      }
+
+      if(validar_tabla.childNodes[i].childNodes[6].childNodes[0].disabled===false && validar_tabla.childNodes[i].childNodes[6].childNodes[0].value===""){
+        contar_vacios++;
+      }
+
+      
+
     }
+    console.log('vacios: '+contar_vacios);
     if(contar_vacios>0){
         document.getElementById("boton_agregar").disabled=true;
     }
@@ -517,7 +556,7 @@ function validar_filas_input(columna_activa) {
 
 
 
-  function promedio_semestral(fila) {
+  function promedio_semestral(fila,activo_examen_final) {
     var tabla = document.getElementById("tablagrupo");
     var promedio=0;
     primer_parcial=(tabla.childNodes[fila].childNodes[2].childNodes[0].value === "" || tabla.childNodes[fila].childNodes[2].childNodes[0].value==='/') ? 0 : tabla.childNodes[fila].childNodes[2].childNodes[0].value;
@@ -525,12 +564,51 @@ function validar_filas_input(columna_activa) {
     tercer_parcial=(tabla.childNodes[fila].childNodes[4].childNodes[0].value === "" || tabla.childNodes[fila].childNodes[4].childNodes[0].value === "/") ? 0 : tabla.childNodes[fila].childNodes[4].childNodes[0].value;
     examen_final=(tabla.childNodes[fila].childNodes[6].childNodes[0].value === "" || tabla.childNodes[fila].childNodes[6].childNodes[0].value === "/") ? 0 : tabla.childNodes[fila].childNodes[6].childNodes[0].value;
 
-    promedio_modular=redondeo((parseInt(primer_parcial)+parseInt(segundo_parcial)+parseInt(tercer_parcial))/3);
+    
+promedio_modular=redondeo((parseInt(primer_parcial)+parseInt(segundo_parcial)+parseInt(tercer_parcial))/3);
+	
+
+	
+if(promedio_modular>=6){
+		tabla.childNodes[fila].childNodes[5].innerHTML='<input type="text" class="form-control" name="promedio_modular" value="' +promedio_modular+'" id="promedio_modular" disabled style="background-color:#1F934C;color: white;font-weight:bold">';
+   
+		 if(activo_examen_final===1){
+		 	tabla.childNodes[fila].childNodes[6].childNodes[0].disabled=false;
+
+		 	
+		 }
+	}
+
+	else{
+		tabla.childNodes[fila].childNodes[5].innerHTML='<input type="text" class="form-control" name="promedio_modular" value="' +promedio_modular+'" id="promedio_modular" disabled style="background-color:#C4131B;color: white;font-weight:bold">';
+		if(activo_examen_final===1){
+      
+		 	tabla.childNodes[fila].childNodes[6].childNodes[0].disabled=true;
+		 	tabla.childNodes[fila].childNodes[6].childNodes[0].value="/";
+		 	examen_final=0;
+		 }
+	}
+
+
+
+	
 
     promedio=redondeo((parseInt(promedio_modular)+parseInt(examen_final))/2);
-    
+    /*console.log('p1:'+primer_parcial+', p2:'+segundo_parcial+', p3:'+tercer_parcial+', ef:'+examen_final);
+    console.log('este es el promedio Modular: '+promedio_modular);
     console.log('este es el promedio: '+promedio);
-     tabla.childNodes[fila].childNodes[7].innerHTML='<input type="text" class="form-control" name="promediot" value="' + ((promedio === "0" || promedio==='') ? "/" : promedio) + '" id="promediot" disabled="disabled">';
+    console.log('este es la fila: '+fila);*/
+
+
+
+	if(promedio>=6){
+		tabla.childNodes[fila].childNodes[7].innerHTML='<input type="text" class="form-control" name="promediot" value="' + ((promedio === "0" || promedio==='') ? "/" : promedio) + '" id="promediot" disabled="disabled" style="background-color:#1F934C;color: white;font-weight:bold">';
+	}
+	else{
+		tabla.childNodes[fila].childNodes[7].innerHTML='<input type="text" class="form-control" name="promediot" value="' + ((promedio === "0" || promedio==='') ? "/" : promedio) + '" id="promediot" disabled="disabled" style="background-color:#C4131B;color: white; font-weight:bold">';
+	}
+
+     
 
   }
 </script>

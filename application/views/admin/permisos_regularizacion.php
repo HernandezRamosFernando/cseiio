@@ -57,7 +57,7 @@
 
      <br>
         <div class="col-md-12" id="agregar_oculto" style="display: ">
-        <button type="button" data-toggle="modal" data-target="#fechapermiso1" id="boton_agregar" class="btn btn-success btn-lg btn-block btn-guardar"  style="padding: 1rem"> Guardar cambios</button> 
+        <button type="button" data-toggle="modal" data-target="#fechapermiso1" id="boton_agregar" class="btn btn-success btn-lg btn-block btn-guardar"  style="padding: 1rem"> Guardar permiso</button> 
         </div>
    </form>
 
@@ -89,7 +89,7 @@
      </div>
      <br>
         <div class="col-md-12" id="agregar_oculto" style="display: ">
-        <button type="button" data-toggle="modal" data-target="#fechapermiso" id="boton_agregar" class="btn btn-success btn-lg btn-block btn-guardar"  style="padding: 1rem"> Guardar cambios</button> 
+        <button type="button" data-toggle="modal" data-target="#fechapermiso" id="boton_agregar" class="btn btn-success btn-lg btn-block btn-guardar"  style="padding: 1rem"> Guardar permisos</button> 
         </div>
                                  
    </form>
@@ -371,14 +371,40 @@ function guardar(){
 
   //enviar datos
   var xhr = new XMLHttpRequest();
-      xhr.open("POST", '/cseiio/c_permiso_regularizacion/agregar_permiso_todos_planteles', true);
+      xhr.open("POST", '<?php echo base_url();?>index.php/c_permiso_regularizacion/agregar_permiso_todos_planteles', true);
 
       //Send the proper header information along with the request
       xhr.setRequestHeader("Content-Type", "application/json");
-
-      xhr.onreadystatechange = function() { // Call a function when the state changes.
-          if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+      xhr.onloadstart = function () {
+      $('#div_carga').show();
+      }
+      xhr.error = function () {
+      console.log("error de conexion");
+      }
+      xhr.onreadystatechange = function () { // Call a function when the state changes.
+      if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+        $('#div_carga').hide();
               console.log(xhr.response);
+        if (xhr.responseText.trim() === "si") {
+          console.log(xhr.response);
+          swalWithBootstrapButtons.fire({
+            type: 'success',
+            text: 'Datos guardados correctamente',
+            confirmButtonText: 'Aceptar'
+          }).then((result) => {
+            if (result.value) {
+              //aqui va el aceptar
+              $(document).scrollTop(0);
+              location.reload(); 
+            }
+            //aqui va si cancela
+          });
+        } else {
+          Swal.fire({
+            type: 'error',
+            text: 'Datos no guardados'
+          });
+        }
           }
       }
       xhr.send(JSON.stringify(datos));
@@ -398,14 +424,41 @@ function guardarunplantel(){
 
 
   var xhr = new XMLHttpRequest();
-      xhr.open("POST", '/cseiio/c_permiso_regularizacion/agregar_permiso_plantel_materia', true);
+      xhr.open("POST", '<?php echo base_url();?>index.php/c_permiso_regularizacion/agregar_permiso_plantel_materia', true);
 
       //Send the proper header information along with the request
       xhr.setRequestHeader("Content-Type", "application/json");
-
-      xhr.onreadystatechange = function() { // Call a function when the state changes.
-          if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+      xhr.onloadstart = function () {
+      $('#div_carga').show();
+      }
+      xhr.error = function () {
+      console.log("error de conexion");
+      }
+      xhr.onreadystatechange = function () { // Call a function when the state changes.
+      if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+        $('#div_carga').hide();
               console.log(xhr.response);
+
+        if (xhr.responseText.trim() === "si") {
+          console.log(xhr.response);
+          swalWithBootstrapButtons.fire({
+            type: 'success',
+            text: 'Datos guardados correctamente',
+            confirmButtonText: 'Aceptar'
+          }).then((result) => {
+            if (result.value) {
+              //aqui va el aceptar
+              $(document).scrollTop(0);
+              location.reload(); 
+            }
+            //aqui va si cancela
+          });
+        } else {
+          Swal.fire({
+            type: 'error',
+            text: 'Datos no guardados'
+          });
+        }
           }
       }
       xhr.send(JSON.stringify(dato));

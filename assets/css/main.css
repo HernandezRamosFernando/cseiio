@@ -73,16 +73,41 @@ btn-lista:hover{
     height: 24px !important;
     -webkit-filter: invert(40%); 
 }
+
+.icono_izquierda_ancho{
+    width: 30px !important; 
+    height: 24px !important;
+    -webkit-filter: invert(40%); 
+}
+.icono_izquierda_alto{
+    width: 24px !important; 
+    height: 26px !important;
+    -webkit-filter: invert(40%); 
+}
+
 .icono_izquierda:hover {
     cursor: pointer;
     -webkit-filter: invert(10%); 
   }
+
+.icono_izquierda_ancho:hover {
+    cursor: pointer;
+    -webkit-filter: invert(10%); 
+}
+.icono_izquierda_alto:hover {
+    cursor: pointer;
+    -webkit-filter: invert(10%); 
+}
 .icono_izquierda_seleccionado{
     -webkit-filter: invert(5%); 
 }
 
 .icono_menu{
     width: 48px !important; 
+    height: 48px !important; 
+}
+.icono_menu_disparejo{
+    width: 60px !important; 
     height: 48px !important; 
 }
 

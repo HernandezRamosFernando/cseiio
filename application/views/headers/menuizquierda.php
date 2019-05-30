@@ -63,7 +63,7 @@
         <i class="material-icons">beenhere</i>
         <span>Acreditación</span>
       </a>
-      <div id="submenu1" class="<?php ($this->uri->segment(2)=='crear_grupo'||$this->uri->segment(2)=='terminar_ciclo'||$this->uri->segment(2)=='calificacion'||$this->uri->segment(2)=='cerrar_cal'||$this->uri->segment(2)=='buscar_grupo'||$this->uri->segment(2)=='asesor_grupo') ? print 'null' : print 'collapse'; ?> sidebar-submenu">
+      <div id="submenu1" class="<?php ($this->uri->segment(2)=='crear_grupo'||$this->uri->segment(2)=='terminar_ciclo'||$this->uri->segment(2)=='calificacion'||$this->uri->segment(2)=='cerrar_cal'||$this->uri->segment(2)=='regularizacion'||$this->uri->segment(2)=='buscar_grupo'||$this->uri->segment(2)=='asesor_grupo') ? print 'null' : print 'collapse'; ?> sidebar-submenu">
         <a class="nav-link <?php ($this->uri->segment(2)=='crear_grupo') ? print 'bg-info text-light ' : print null; ?>" href="<?php echo base_url();?>index.php/c_vistas/crear_grupo">
         <img class="icono_izquierda <?php ($this->uri->segment(2)=='crear_grupo') ? print 'icono_izquierda_seleccionado' : print null; ?>"  src="<?php echo base_url();?>assets/img/creargrupo.png">
           <span class="font-weight-light">Crear grupos
@@ -75,18 +75,18 @@
           </span>
         </a>
         <a class="nav-link <?php ($this->uri->segment(2)=='asesor_grupo') ? print 'bg-info text-light' : print null; ?>" href="<?php echo base_url();?>index.php/c_vistas/asesor_grupo">
-        <img class="icono_izquierda <?php ($this->uri->segment(2)=='asesor_grupo') ? print 'icono_izquierda_seleccionado' : print null; ?>" src="<?php echo base_url();?>assets/img/modificarasesor.png">
+        <img class="icono_izquierda_alto <?php ($this->uri->segment(2)=='asesor_grupo') ? print 'icono_izquierda_seleccionado' : print null; ?>" src="<?php echo base_url();?>assets/img/modificarasesor.png">
           <span class="font-weight-light">Modificar Asesor
           </span>
         </a>
         <a class="nav-link <?php ($this->uri->segment(2)=='calificacion') ? print 'bg-info text-light' : print null; ?>" href="<?php echo base_url();?>index.php/c_vistas/calificacion">
-        <img class="icono_izquierda <?php ($this->uri->segment(2)=='calificacion') ? print 'icono_izquierda_seleccionado' : print null; ?>" src="<?php echo base_url();?>assets/img/calificaciones.png">
+        <img class="icono_izquierda_ancho <?php ($this->uri->segment(2)=='calificacion') ? print 'icono_izquierda_seleccionado' : print null; ?>" src="<?php echo base_url();?>assets/img/calificaciones.png">
           <span class="font-weight-light">Calificaciones
           </span>
         </a>
         <a class="nav-link <?php ($this->uri->segment(2)=='cerrar_cal') ? print 'bg-info text-light' : print null; ?>" href="<?php echo base_url();?>index.php/c_vistas/cerrar_cal">
-        <img class="icono_izquierda <?php ($this->uri->segment(2)=='cerrar_cal') ? print 'icono_izquierda_seleccionado' : print null; ?>" src="<?php echo base_url();?>assets/img/calificaciones.png">
-          <span class="font-weight-light">Cerrar calificaiones
+        <img class="icono_izquierda_ancho <?php ($this->uri->segment(2)=='cerrar_cal') ? print 'icono_izquierda_seleccionado' : print null; ?>" src="<?php echo base_url();?>assets/img/calificaciones.png">
+          <span class="font-weight-light">Cerrar calificaciones
           </span>
         </a>
         <a class="nav-link <?php ($this->uri->segment(2)=='regularizacion') ? print 'bg-info text-light' : print null; ?>" href="<?php echo base_url();?>index.php/c_vistas/regularizacion">
@@ -133,12 +133,12 @@
       <div id="submenu2" class="<?php ($this->uri->segment(2)=='permisos_cal'||$this->uri->segment(2)=='permisos_reg'||$this->uri->segment(2)=='materias'||$this->uri->segment(2)=='componentes' ||$this->uri->segment(2)=='terminar_ciclo') ? print 'null' : print 'collapse'; ?> sidebar-submenu">
         <a class="nav-link <?php ($this->uri->segment(2)=='permisos_cal') ? print 'bg-info text-light' : print null; ?>" href="<?php echo base_url();?>index.php/c_vistas/permisos_cal">
         <img class="icono_izquierda <?php ($this->uri->segment(2)=='permisos_cal') ? print 'icono_izquierda_seleccionado' : print null; ?>" src="<?php echo base_url();?>assets/img/permisoscal.png">
-          <span class="font-weight-light">Permisos calificaciones
+          <span class="font-weight-light">Permisos Calificaciones
           </span>
         </a>
         <a class="nav-link <?php ($this->uri->segment(2)=='permisos_reg') ? print 'bg-info text-light' : print null; ?>" href="<?php echo base_url();?>index.php/c_vistas/permisos_reg">
         <img class="icono_izquierda <?php ($this->uri->segment(2)=='permisos_reg') ? print 'icono_izquierda_seleccionado' : print null; ?>" src="<?php echo base_url();?>assets/img/permisoscal.png">
-          <span class="font-weight-light">Permisos calificaciones
+          <span class="font-weight-light">Permisos Regularización
           </span>
         </a>
         <a class="nav-link <?php ($this->uri->segment(2)=='') ? print 'bg-info text-light' : print null; ?>" href="<?php echo base_url();?>index.php/c_vistas/">

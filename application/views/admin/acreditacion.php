@@ -71,7 +71,7 @@
                         &nbsp;<p class="h5"><strong>Calificaciones</strong></p> &nbsp;
                         </div>
                         <div class="col-5 valign-right">
-                            <img class="icono_menu" src="<?php echo base_url();?>assets/img/calificaciones.png">
+                            <img class="icono_menu_disparejo" src="<?php echo base_url();?>assets/img/calificaciones.png">
                         </div>
                     </div>
                 </a>

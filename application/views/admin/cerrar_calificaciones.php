@@ -17,7 +17,7 @@
             <div class="col-md-8">
               <label class="form-group has-float-label seltitulo">
                 <select class="form-control form-control-lg selcolor" id="plantel" name="plantel">
-                  <option value="">Seleccione el plantel donde buscar el grupo</option>
+                  <option value="">Seleccione un plantel </option>
 
                   <?php
                                         foreach ($planteles as $plantel)
@@ -36,64 +36,100 @@
         </div>
 
         <div class="form-group" id="boton_oculto" style="display: ">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="col-md-12" id="agregar_oculto" style="display: ">
-            <button type="button" onclick="cerrar_calificaciones()" value="nuevo" id="boton_cerrar"
-              class="btn btn-success btn-lg btn-block btn-cerrar" style="padding: 1rem"> Cerrar</button>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="col-md-12" id="agregar_oculto" style="display: ">
+                <button type="button" onclick="cerrar_calificaciones()" value="nuevo" id="boton_cerrar"
+                  class="btn btn-success btn-lg btn-block btn-cerrar" style="padding: 1rem"> Cerrar</button>
+              </div>
+            </div>
           </div>
         </div>
+
+
       </div>
-    </div>
-
-
   </div>
-</div>
-<!-- /.content-wrapper -->
+  <!-- /.content-wrapper -->
 </div>
 <!-- /#wrapper -->
-    <script>
-      window.onload = function () {
-        //funciones a ejecutar
+<script>
+  window.onload = function () {
+    //funciones a ejecutar
+    swalWithBootstrapButtons.fire({
+      type: 'warning',
+      text: 'Esta seguro que desea cerrar la captura de calificaciones?',
+      confirmButtonText: 'Aceptar',
+      showCancelButton: 'true',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.value) {
         swalWithBootstrapButtons.fire({
-          type: 'warning',
-          text: 'Esta seguro que desea cerrar la captura de calificaciones?',
-          confirmButtonText: 'Aceptar',
-          showCancelButton: 'true',
-          cancelButtonText: 'Cancelar'
+          type: 'info',
+          text: 'Calificaciones cerradas correctamente, estatus de los alumnos actualizados',
+          confirmButtonText: 'Aceptar'
         }).then((result) => {
           if (result.value) {
-            swalWithBootstrapButtons.fire({
-              type: 'info',
-              text: 'Calificaciones cerradas correctamente, estatus de los alumnos actualizados',
-              confirmButtonText: 'Aceptar'
-            }).then((result) => {
-              if (result.value) {
-                //window.location.replace("<?php echo base_url();?>index.php/c_vistas/acreditacion");
-              }
-            });
-          } else {
-            window.location.replace("<?php echo base_url();?>index.php/c_vistas/acreditacion");
-          }     //aqui va si cancela
-
-
-
-
+            //window.location.replace("<?php echo base_url();?>index.php/c_vistas/acreditacion");
+          }
         });
+      } else {
+        window.location.replace("<?php echo base_url();?>index.php/c_vistas/acreditacion");
+      }     //aqui va si cancela
+
+
+
+
+    });
+  }
+
+
+  function cerrar_calificaciones() {
+    if (document.getElementById("plantel").value != "") {
+      let plantel = document.getElementById("plantel").value;
+
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', '<?php echo base_url();?>index.php/c_reinscripcion/cerrar_calificaciones_plantel?plantel=' + plantel, true);
+      xhr.onloadstart = function () {
+        $('#div_carga').show();
       }
-
-
-      function cerrar_calificaciones(){
-        let plantel = document.getElementById("plantel").value;
-
-        var xhr = new XMLHttpRequest();
-            xhr.open('GET', '/cseiio/c_reinscripcion/cerrar_calificaciones_plantel?plantel='+plantel, true);
-
-            xhr.onload = function () {
-              console.log(xhr.response);
-            };
-
-            xhr.send(null);
+      xhr.error = function () {
+        console.log("error de conexion");
       }
+      xhr.onload = function () {
+        $('#div_carga').hide();
+        console.log(xhr.response);
 
-    </script>
+        if (xhr.responseText.trim() === "si") {
+          console.log(xhr.response);
+          swalWithBootstrapButtons.fire({
+            type: 'success',
+            text: 'Datos guardados correctamente',
+            confirmButtonText: 'Aceptar'
+          }).then((result) => {
+            if (result.value) {
+              //aqui va el aceptar
+              $(document).scrollTop(0);
+              location.reload();
+            }
+            //aqui va si cancela
+          });
+        } else {
+          Swal.fire({
+            type: 'error',
+            text: 'Datos no guardados'
+          });
+        }
+      };
+
+      xhr.send(null);
+
+    } else {
+      Swal.fire({
+        type: 'warning',
+        text: 'Seleccione un plantel'
+      });
+    }
+  }
+
+
+</script>

@@ -17,4 +17,15 @@ class C_permiso_regularizacion extends CI_Controller {
 
         echo json_encode($this->M_permiso_regularizacion->obtener_permiso_plantel_materia($plantel,$materia));
     }
+
+
+    public function agregar_permiso_todos_planteles(){
+        $datos = json_decode($this->input->raw_input_stream);
+        echo $this->M_permiso_regularizacion->agregar_permiso_todos_planteles($datos);
+    }
+
+    public function agregar_permiso_plantel_materia(){
+        $datos = json_decode($this->input->raw_input_stream);
+        echo $this->M_permiso_regularizacion->agregar_permiso_plantel_materia($datos);
+    }
 }

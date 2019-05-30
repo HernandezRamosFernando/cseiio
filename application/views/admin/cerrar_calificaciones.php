@@ -39,7 +39,7 @@
       <div class="row">
         <div class="col-md-12">
           <div class="col-md-12" id="agregar_oculto" style="display: ">
-            <button type="button" onclick="" value="nuevo" id="boton_cerrar"
+            <button type="button" onclick="cerrar_calificaciones()" value="nuevo" id="boton_cerrar"
               class="btn btn-success btn-lg btn-block btn-cerrar" style="padding: 1rem"> Cerrar</button>
           </div>
         </div>
@@ -83,80 +83,17 @@
       }
 
 
-      function fecha_sql(fecha) {
-        let fecha_separada = fecha.split("/").reverse();
-        return fecha_separada.join("-");
-      }
-
-      function validarcomponente() {
-        validafecha(document.getElementById("fecha_inicio"));
-        validafecha(document.getElementById("fecha_fin"));
-
-        if (document.getElementById("fecha_fin").value != '' && document.getElementById("fecha_inicio").value != '') {
-          agregar_ciclo()
-        } else {
-          Swal.fire({
-            type: 'warning',
-            text: 'La fecha ingresada es incorrecta'
-          });
-        }
-      }
-
-
-      function agregar_ciclo() {
-
-        let datos = {
-          nombre_ciclo: document.getElementById("nombre_ciclo").value,
-          fecha_matricula: document.getElementById("fecha_matricula").value,
-          periodo: document.getElementById("periodo").value,
-          fecha_inicio: fecha_sql(document.getElementById("fecha_inicio").value),
-          fecha_terminacion: fecha_sql(document.getElementById("fecha_fin").value)
-        };
-        console.log(datos);
-
+      function cerrar_calificaciones(){
+        let plantel = document.getElementById("plantel").value;
 
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", '<?php echo base_url();?>index.php/c_ciclo_escolar/agregar_ciclo_escolar', true);
+            xhr.open('GET', '/cseiio/c_reinscripcion/cerrar_calificaciones_plantel?plantel='+plantel, true);
 
-        //Send the proper header information along with the request
-        xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.onloadstart = function () {
-          $('#div_carga').show();
-        }
-        xhr.error = function () {
-          console.log("error de conexion");
-        }
-        xhr.onreadystatechange = function () { // Call a function when the state changes.
-          if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-            $('#div_carga').hide();
-            if (xhr.responseText.trim() === "si") {
-              swalWithBootstrapButtons.fire({
-                type: 'success',
-                text: 'Datos agregados correctamente',
-                confirmButtonText: 'Aceptar'
-              }).then((result) => {
-                if (result.value) {
-                  //aqui va el aceptar
-                  $(document).scrollTop(0);
-                  window.location.replace("<?php echo base_url();?>index.php/c_vistas/acreditacion");
-                }
-                //aqui va si cancela
-              });
+            xhr.onload = function () {
+              console.log(xhr.response);
+            };
 
-            } else {
-              Swal.fire({
-                type: 'error',
-                text: 'Datos no agregados'
-              });
-            }
-          }
-        }
-        xhr.send(JSON.stringify(datos));
-
-
-
-        //console.log(datos);
+            xhr.send(null);
       }
-
 
     </script>

@@ -36,4 +36,8 @@ class C_plantel extends CI_Controller
     public function get_planteles(){
         echo json_encode($this->M_plantel->get_planteles());
     }
+
+    function get_planteles_sin_cerrar_calificaciones(){
+        echo json_encode($this->M_plantel->get_planteles_sin_cerrar_calificaciones());
+     }
 }

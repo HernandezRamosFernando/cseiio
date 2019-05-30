@@ -151,17 +151,43 @@
   }
 
   function validarcomponente() {
-    validafecha(document.getElementById("fecha_inicio"));
-     validafecha(document.getElementById("fecha_fin"));
 
-    if (document.getElementById("fecha_fin").value != '' && document.getElementById("fecha_inicio").value != '') {
-      agregar_ciclo()
-    } else {
-      Swal.fire({
-        type: 'warning',
-        text: 'La fecha ingresada es incorrecta'
-      });
-    }
+    var xhr = new XMLHttpRequest();
+        xhr.open('GET', '/cseiio/c_plantel/get_planteles_sin_cerrar_calificaciones', true);
+
+        xhr.onload = function () {
+          if(JSON.parse(xhr.response).length>0){
+            var lista = "<ul>";
+            JSON.parse(xhr.response).forEach(function(valor){
+                lista+="<li>"+valor.nombre_plantel+"</li>"
+            });
+            lista += "</ul>";
+
+            console.log(lista);
+            
+            Swal.fire({
+                    type: 'warning',
+                    html: '<p>hay planteles pendientes por cerrar calificaciones<p>'+lista
+                  });
+          }
+
+          else{
+            validafecha(document.getElementById("fecha_inicio"));
+                validafecha(document.getElementById("fecha_fin"));
+
+                if (document.getElementById("fecha_fin").value != '' && document.getElementById("fecha_inicio").value != '') {
+                  agregar_ciclo()
+                } else {
+                  Swal.fire({
+                    type: 'warning',
+                    text: 'La fecha ingresada es incorrecta'
+                  });
+                }
+          }
+        };
+
+        xhr.send(null);
+    
   }
 
 

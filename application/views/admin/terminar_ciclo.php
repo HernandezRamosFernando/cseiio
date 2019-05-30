@@ -178,7 +178,7 @@ console.log(datos);
 
 
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", '<?php echo base_url();?>index.php/c_ciclo_escolar/agregar_ciclo_escolar', true);
+    xhr.open("POST", '<?php echo base_url();?>index.php/c_reinscripcion/cerrar_periodo', true);
 
     //Send the proper header information along with the request
     xhr.setRequestHeader("Content-Type", "application/json");

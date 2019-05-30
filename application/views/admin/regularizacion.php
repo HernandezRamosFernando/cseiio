@@ -186,6 +186,18 @@ if (document.getElementById("fecha_inicio").value != '' ) {
   }
 
   function buscar() {
+    var permiso = new XMLHttpRequest();
+    var plantel = document.getElementById("plantel").value;
+    var materia = document.getElementById("materias").value;
+    permiso.open('GET', '/cseiio/c_permiso_regularizacion/obtener_permiso_plantel_materia?plantel='+plantel+'&materia='+materia, true);
+
+    permiso.onload = function () {
+    var permiso_regularizacion = JSON.parse(permiso.response);
+    if(permiso_regularizacion.length>0 && permiso_regularizacion[0].estatus==="1"){
+      console.log(permiso_regularizacion);
+      document.getElementById("boton_agregar").style.display="";
+    
+    //rellena la tabla con los estudiantes que deben esa materia de ese plantel
     var xhr = new XMLHttpRequest();
     var plantel = document.getElementById("plantel").value;
     var materia = document.getElementById("materias").value;
@@ -226,6 +238,70 @@ if (document.getElementById("fecha_inicio").value != '' ) {
     document.getElementById('agregar_oculto').style.display = "";
     document.getElementById('alumnos_oculto').style.display = "";
     //limpiarbusqueda();
+    }//fin if si hay permiso
+
+
+    else if(permiso_regularizacion.length>0 && permiso_regularizacion[0].estatus==="0"){
+      console.log(permiso_regularizacion);
+    document.getElementById("boton_agregar").style.display="none";
+       //rellena la tabla con los estudiantes que deben esa materia de ese plantel
+    var xhr = new XMLHttpRequest();
+    var plantel = document.getElementById("plantel").value;
+    var materia = document.getElementById("materias").value;
+    document.getElementById("tabla").innerHTML = "";
+    xhr.open('GET', '<?php echo base_url();?>index.php/c_regularizacion/estudiantes_materia_registrada_activa?plantel=' + plantel + '&materia=' + materia, true);
+    xhr.onloadstart = function () {
+      $('#div_carga').show();
+    }
+    xhr.error = function () {
+      console.log("error de conexion");
+    }
+    xhr.onload = function () {
+      $('#div_carga').hide();
+      JSON.parse(xhr.response).forEach(function (valor, indice) {
+  
+
+
+
+        var fila = '<tr>';
+        fila += '<td>';
+        fila += valor.nombre + ' ' + valor.primer_apellido + ' ' + valor.segundo_apellido;
+        fila += '</td>';
+        fila += '<td>';
+        fila += valor.Estudiante_no_control;
+        fila += '</td>';
+        fila += '<td>';
+        fila += valor.semestre_en_curso;
+        fila += '</td>';
+        fila += '<td>';
+        fila += valor.semestre;
+        fila += '</td>';
+        fila += '<td class="">';
+        fila += '<input type="text" class="form-control" id="calificacion" onchange="calificaciones(this);" value="'+valor.calificacion+'" disabled></input>';
+        fila += '</td>';
+        fila += '</tr>';
+        document.getElementById("tabla").innerHTML += fila;
+
+     
+
+        ///qui termina un estudiante
+      });
+      console.log(JSON.parse(xhr.response));
+    };
+    xhr.send(null);
+    document.getElementById('agregar_oculto').style.display = "";
+    document.getElementById('alumnos_oculto').style.display = "";
+
+    }
+
+    else{
+      ///alerta de que no hay permiso
+
+      console.log("no hay permiso");
+      /////////////////////////////////
+    }
+  };//fin peticion permiso
+  permiso.send(null);
   }
 
   function calificaciones(e) {
@@ -262,11 +338,17 @@ if (document.getElementById("fecha_inicio").value != '' ) {
     var datos = new Array();
     for (let i = 0; i < tabla.childNodes.length; i++) {
       //console.log(tabla.childNodes[i].childNodes[1].innerText);
+      var calificacion =tabla.childNodes[i].childNodes[4].childNodes[0].value;
+      if(calificacion==="" || calificaciones==="/"){
+          calificacion="0";
+      }
+  
       var dato = {
         no_control:tabla.childNodes[i].childNodes[1].innerText,
         id_materia:document.getElementById("materias").value,
-        calificacion:tabla.childNodes[i].childNodes[4].childNodes[0].value == ""?"0":tabla.childNodes[i].childNodes[4].childNodes[0].value,
-        fecha_calificacion:document.getElementById("fecha_inicio").value
+        calificacion:calificacion,
+        fecha_calificacion:document.getElementById("fecha_inicio").value,
+        cct_plantel:document.getElementById("plantel").value
       };
       datos.push(dato);
    }

@@ -392,7 +392,7 @@ if (document.getElementById("fecha_inicio").value != '' ) {
             if (result.value) {
               //aqui va el aceptar
               $(document).scrollTop(0);
-              //location.reload(); 
+              location.reload(); 
             }
             //aqui va si cancela
           });

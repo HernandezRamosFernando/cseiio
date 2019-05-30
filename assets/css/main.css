@@ -70,16 +70,22 @@ btn-lista:hover{
 
 .icono_izquierda{
     width: 24px !important; 
-    height: 24px !important; 
-    -webkit-filter: invert(100%);
+    height: 24px !important;
+    -webkit-filter: invert(40%); 
+}
+.icono_izquierda:hover {
+    cursor: pointer;
+    -webkit-filter: invert(10%); 
+  }
+.icono_izquierda_seleccionado{
+    -webkit-filter: invert(5%); 
+}
 
-}
 .icono_menu{
-    width: 64px !important; 
-    height: 64px !important; 
-    -webkit-filter: invert(100%);
+    width: 48px !important; 
+    height: 48px !important; 
 }
-.val
+
 .valign-center {
     display: inline-flex;
     align-items: center;

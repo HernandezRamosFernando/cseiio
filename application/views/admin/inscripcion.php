@@ -39,7 +39,7 @@
             &nbsp;<p class="h5"><strong>Inscripción Portabilidad</strong></p> &nbsp;
             </div>
             <div class="col-5 valign-right">
-              <img src="<?php echo base_url();?>assets/img/portabilidad.png">
+              <img class="icono_menu" src="<?php echo base_url();?>assets/img/portabilidad.png">
             </div>
           </div>
         </a>
@@ -55,7 +55,7 @@
             &nbsp;<p class="h5"><strong>Generación de Resolución de Equivalencia</strong></p> &nbsp;
             </div>
             <div class="col-3 valign-right">
-              <img src="<?php echo base_url();?>assets/img/equivalencia.png">
+              <img class="icono_menu" src="<?php echo base_url();?>assets/img/equivalencia.png">
             </div>
           </div>
         </a>
@@ -87,7 +87,7 @@
             &nbsp;<p class="h5"><strong>Generación de Carta Compromiso</strong></p> &nbsp;
             </div>
             <div class="col-5 valign-right">
-              <img src="<?php echo base_url();?>assets/img/cartacompromiso.png">
+              <img class="icono_menu" src="<?php echo base_url();?>assets/img/cartacompromiso.png">
             </div>
           </div>
         </a>

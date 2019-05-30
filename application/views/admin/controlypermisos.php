@@ -23,7 +23,7 @@
             &nbsp;<p class="h5"><strong>Permisos de asignación de calificaciones</strong></p> &nbsp;
             </div>
             <div class="col-5 valign-right">
-              <img src="<?php echo base_url();?>assets/img/permisoscal.png">
+              <img class="icono_menu" src="<?php echo base_url();?>assets/img/permisoscal.png">
             </div>
           </div>
         </a>
@@ -39,7 +39,7 @@
             &nbsp;<p class="h5"><strong>Permisos de asignación de regularización</strong></p> &nbsp;
             </div>
             <div class="col-5 valign-right">
-              <img src="<?php echo base_url();?>assets/img/permisoscal.png">
+              <img class="icono_menu" src="<?php echo base_url();?>assets/img/permisoscal.png">
             </div>
           </div>
         </a>
@@ -71,7 +71,7 @@
             &nbsp;<p class="h5"><strong>Control de materias</strong></p> &nbsp;
             </div>
             <div class="col-5 valign-right">
-              <img src="<?php echo base_url();?>assets/img/controlmaterias.png">
+              <img class="icono_menu" src="<?php echo base_url();?>assets/img/controlmaterias.png">
             </div>
           </div>
         </a>
@@ -87,7 +87,7 @@
             &nbsp;<p class="h5"><strong>Control de componentes</strong></p> &nbsp;
             </div>
             <div class="col-5 valign-right">
-              <img src="<?php echo base_url();?>assets/img/controlcomponentes.png">
+              <img class="icono_menu" src="<?php echo base_url();?>assets/img/controlcomponentes.png">
             </div>
           </div>
         </a>
@@ -103,7 +103,7 @@
             &nbsp;<p class="h5"><strong>Terminar periodo de ciclo escolar</strong></p> &nbsp;
             </div>
             <div class="col-5 valign-right">
-              <img src="<?php echo base_url();?>assets/img/finalizarperiodo.png">
+              <img class="icono_menu" src="<?php echo base_url();?>assets/img/finalizarperiodo.png">
             </div>
           </div>
         </a>

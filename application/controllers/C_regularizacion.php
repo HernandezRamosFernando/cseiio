@@ -28,6 +28,13 @@ class C_regularizacion extends CI_Controller {
        
     }
 
+    public function estudiantes_materia_registrada_activa(){
+        $plantel = $this->input->get("plantel");
+        $materia = $this->input->get("materia");
+        echo json_encode($this->M_regularizacion->estudiantes_materia_registrada_activa($plantel,$materia)); 
+
+    }
+
 
     public function estudiantes_materia(){
         $plantel = $this->input->get("plantel");
@@ -48,4 +55,15 @@ class C_regularizacion extends CI_Controller {
         $no_control = $this->input->get("estudiante");
         echo $this->M_regularizacion->materias_debe_estudiante_actualmente($no_control);
     }
+
+    public function obtener_calificacion_regularizacion_estudiante_materia_reciente(){
+        $no_control = $this->input->get("no_control");
+        $materia = $this->input->get("materia");
+
+        echo json_encode($this->M_regularizacion->obtener_calificacion_regularizacion_estudiante_materia_reciente($no_control,$materia));
+    }
+
+
+
+    
 }

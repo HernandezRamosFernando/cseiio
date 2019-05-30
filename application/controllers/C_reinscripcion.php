@@ -25,7 +25,7 @@ class C_reinscripcion extends CI_Controller {
         echo $this->M_reinscripcion->cerrar_calificaciones_plantel($plantel);
     }
 
-    function cerrar_calificaciones(){//primera*-*-**-*-**-*-*-*-*-*-*-*-*-
+    function cerrar_calificaciones(){
         echo $this->M_reinscripcion->cerrar_calificaciones();
     }
 
@@ -38,5 +38,10 @@ class C_reinscripcion extends CI_Controller {
 
     function actualizar_tipo_ingreso_despues_calificar_estudiante(){//segundo*/*/*/*/*/*/*/*/*/*
             echo $this->M_reinscripcion->actualizar_tipo_ingreso_despues_calificar_estudiante();
+    }
+
+    public function cerrar_periodo(){
+        $datos = json_decode($this->input->raw_input_stream);
+        echo $this->M_reinscripcion->cerrar_periodo($datos);
     }
 }

@@ -114,6 +114,7 @@
                     <th scope="col" class="col-md-1">Parcial 3</th>
                     <th scope="col" class="col-md-1">Promedio Modular</th>
                     <th scope="col" class="col-md-1">Examen Final</th>
+                    <th scope="col" class="col-md-1">Promedio Semestral</th>
                   </tr>
                 </thead>
 
@@ -139,6 +140,8 @@
 <!-- /#wrapper -->
 
 <script>
+
+  document.getElementById("boton_agregar").disabled=true;
 
   function guardar() {
     var tabla = document.getElementById("tablagrupo");
@@ -202,7 +205,7 @@
     xhr.send(JSON.stringify(datos));
 
     console.log(datos);
-
+    document.getElementById("boton_agregar").disabled=true;
   }
 
   function recargar() {
@@ -295,7 +298,8 @@
           primer_parcial: "0",
           segundo_parcial: "0",
           tercer_parcial: "0",
-          examen_final: "0"
+          examen_final: "0",
+          promedio_total: "0"
         }
       }
 
@@ -329,7 +333,7 @@
           var primer_parcial = valor.primer_parcial !== null ? valor.primer_parcial : "";
 
           if (permisos_plantel.primer_parcial === "1") {
-            registro += '<td><input type="text" class="form-control" name="primer_parcial" value="' + (primer_parcial === "0" ? "/" : primer_parcial) + '" id="primer_parcial" onchange="calificaciones(this);"></td>';
+            registro += '<td><input type="text" class="form-control" name="primer_parcial" value="' + (primer_parcial === "0" ? "/" : primer_parcial) + '" id="primer_parcial" onchange="calificaciones(this,\''+valor.tipo+'\',2,'+indice+');"></td>';
           }
           else {
             registro += '<td><input type="text" class="form-control" name="primer_parcial" value="' + (primer_parcial === "0" ? "/" : primer_parcial) + '" id="primer_parcial" disabled></td>';
@@ -337,7 +341,7 @@
 
           var segundo_parcial = valor.segundo_parcial !== null ? valor.segundo_parcial : "";
           if (permisos_plantel.segundo_parcial === "1") {
-            registro += '<td><input type="text" class="form-control" name="segundo_parcial" value="' + (segundo_parcial === "0" ? "/" : segundo_parcial) + '" id="segundo_parcial"  onchange="calificaciones(this);"></td>';
+            registro += '<td><input type="text" class="form-control" name="segundo_parcial" value="' + (segundo_parcial === "0" ? "/" : segundo_parcial) + '" id="segundo_parcial"  onchange="calificaciones(this,\''+valor.tipo+'\',3,'+indice+');"></td>';
           }
 
           else {
@@ -347,27 +351,32 @@
 
           var tercer_parcial = valor.tercer_parcial !== null ? valor.tercer_parcial : "";
           if (permisos_plantel.tercer_parcial === "1") {
-            registro += '<td><input type="text" class="form-control" name="tercer_parcial" value="' + (tercer_parcial === "0" ? "/" : tercer_parcial) + '" id="tercer_parcial" onchange="calificaciones(this);"></td>';
+            registro += '<td><input type="text" class="form-control" name="tercer_parcial" value="' + (tercer_parcial === "0" ? "/" : tercer_parcial) + '" id="tercer_parcial" onchange="calificaciones(this,\''+valor.tipo+'\',4,'+indice+');"></td>';
           }
           else {
             registro += '<td><input type="text" class="form-control" name="tercer_parcial" value="' + (tercer_parcial === "0" ? "/" : tercer_parcial) + '" id="tercer_parcial" disabled></td>';
           }
 
           if (promedio >= 6) {
-            registro += '<td><input type="text" class="form-control" name="promedio_modular" value="' + promedio + '" id="promedio_modular" onchange="calificaciones(this);" disabled></td>';
+            registro += '<td><input type="text" class="form-control" name="promedio_modular" value="' + promedio + '" id="promedio_modular" onchange="calificaciones(this,\''+valor.tipo+'\',5,'+indice+');" disabled></td>';
           } else {
-            registro += '<td><input type="text" class="form-control" name="promedio_modular" value="' + promedio + '" id="promedio_modular" onchange="calificaciones(this);" disabled style="color: red"></td>';
+            registro += '<td><input type="text" class="form-control" name="promedio_modular" value="' + promedio + '" id="promedio_modular" onchange="calificaciones(this,\''+valor.tipo+'\',5,'+indice+');" disabled style="color: red"></td>';
           }
 
           var examen_final = valor.examen_final !== null ? valor.examen_final : "";
           if (permisos_plantel.examen_final === "1" && promedio >= 6) {
-            registro += '<td><input type="text" class="form-control" name="examen_final" value="' + (examen_final === "0" ? "/" : examen_final) + '" id="examen_final" onchange="calificaciones(this);"></td>';
+            registro += '<td><input type="text" class="form-control" name="examen_final" value="' + (examen_final === "0" ? "/" : examen_final) + '" id="examen_final" onchange="calificaciones(this,\''+valor.tipo+'\',6,'+indice+');"></td>';
           } else if (permisos_plantel.examen_final === "1" && promedio < 6) {
-            registro += '<td><input type="text" class="form-control" name="examen_final" value="' + (examen_final === "0" ? "/" : examen_final) + '" id="examen_final" onchange="calificaciones(this);" disabled></td>';
+            registro += '<td><input type="text" class="form-control" name="examen_final" value="' + (examen_final === "0" ? "/" : examen_final) + '" id="examen_final" onchange="calificaciones(this,\''+valor.tipo+'\',6,'+indice+');" disabled></td>';
           } else {
             registro += '<td><input type="text" class="form-control" name="examen_final" value="' + (examen_final === "0" ? "/" : examen_final) + '" id="examen_final" disabled></td>';
           }
+          
+          var promedio_total= redondeo((parseInt(promedio)+parseInt(valor.examen_final))/2);
+
+          registro += '<td> <input type="text" class="form-control" name="promediot" value="' + ((promedio_total === "0" || promedio_total==='') ? "/" : promedio_total) + '" id="promediot" disabled> </td>';
           registro += '</tr>';
+
           document.getElementById("tablagrupo").innerHTML += registro;
         });
       }
@@ -412,8 +421,9 @@
   }
 
 
-  function calificaciones(e) {
+  function calificaciones(e,tipo,columna_activa,fila) {
     var string = e.value.toString();
+    var tipo_materia=tipo;
 
     for (var i = 0, output = '', validos = "0123456789./"; i < string.length; i++) {
       if (validos.indexOf(string.charAt(i)) != -1)
@@ -421,26 +431,75 @@
     }
     console.log(output);
     if (output != "") {
-      if (output >= 6 && output <= 10) {
-        var valor = parseFloat(output);
-        valor = Math.round(valor);
-        console.log(valor)
-        e.value = valor;
-        e.style.color = "black";
-      } else if (output === "/") {
-        e.style.color = "black";
-      } else if (output >= 0 && output < 6) {
-        e.value = 5;
-        e.style.color = "red";
-      } else {
-        console.log("valor no valido")
-        e.value = "";
+
+
+      
+      if(tipo_materia==='EXTRAESCOLAR'){
+          if (output >= 6 && output <= 10) {
+              var valor = parseFloat(output);
+              valor = Math.round(valor);
+              console.log(valor)
+              e.value = valor;
+              e.style.color = "black";
+            }
+            else{
+                e.value =6;
+            }
       }
+
+      else{
+                if (output >= 6 && output <= 10) {
+              var valor = parseFloat(output);
+              valor = Math.round(valor);
+              console.log(valor)
+              e.value = valor;
+              e.style.color = "black";
+            } else if (output === "/") {
+              e.style.color = "black";
+            } else if (output >= 0 && output < 6) {
+              e.value = 5;
+              e.style.color = "red";
+            } else {
+              console.log("valor no valido")
+              e.value = "";
+            }
+
+      }
+
+      
+
+
     } else {
       e.value = "";
     }
     //e.value=output;
+    //-----------comienza validación de filas activas
+    validar_filas_input(columna_activa);
+    //validacion para calcular promedio del semestre por alumno
+    promedio_semestral(fila)
+
   }
+
+
+function validar_filas_input(columna_activa) {
+  var validar_tabla = document.getElementById("tablagrupo");
+  var contar_vacios=0;
+  for (let i = 0; i < validar_tabla.childNodes.length; i++) {
+      if(validar_tabla.childNodes[i].childNodes[columna_activa].childNodes[0].value===""){
+        contar_vacios++;
+      }
+
+    }
+    if(contar_vacios>0){
+        document.getElementById("boton_agregar").disabled=true;
+    }
+    else{
+        document.getElementById("boton_agregar").disabled=false;
+    }
+
+
+}
+
 
   function redondeo(e) {
     if (e >= 6 && e <= 10) {
@@ -454,5 +513,24 @@
     } else {
       return "";
     }
+  }
+
+
+
+  function promedio_semestral(fila) {
+    var tabla = document.getElementById("tablagrupo");
+    var promedio=0;
+    primer_parcial=(tabla.childNodes[fila].childNodes[2].childNodes[0].value === "" || tabla.childNodes[fila].childNodes[2].childNodes[0].value==='/') ? 0 : tabla.childNodes[fila].childNodes[2].childNodes[0].value;
+    segundo_parcial=(tabla.childNodes[fila].childNodes[3].childNodes[0].value === "" || tabla.childNodes[fila].childNodes[3].childNodes[0].value === "/") ? 0 : tabla.childNodes[fila].childNodes[3].childNodes[0].value;
+    tercer_parcial=(tabla.childNodes[fila].childNodes[4].childNodes[0].value === "" || tabla.childNodes[fila].childNodes[4].childNodes[0].value === "/") ? 0 : tabla.childNodes[fila].childNodes[4].childNodes[0].value;
+    examen_final=(tabla.childNodes[fila].childNodes[6].childNodes[0].value === "" || tabla.childNodes[fila].childNodes[6].childNodes[0].value === "/") ? 0 : tabla.childNodes[fila].childNodes[6].childNodes[0].value;
+
+    promedio_modular=redondeo((parseInt(primer_parcial)+parseInt(segundo_parcial)+parseInt(tercer_parcial))/3);
+
+    promedio=redondeo((parseInt(promedio_modular)+parseInt(examen_final))/2);
+    
+    console.log('este es el promedio: '+promedio);
+     tabla.childNodes[fila].childNodes[7].innerHTML='<input type="text" class="form-control" name="promediot" value="' + ((promedio === "0" || promedio==='') ? "/" : promedio) + '" id="promediot" disabled="disabled">';
+
   }
 </script>

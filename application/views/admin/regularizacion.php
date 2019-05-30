@@ -409,6 +409,8 @@ if (document.getElementById("fecha_inicio").value != '' ) {
             //aqui va si cancela
           });
   }
+
+  
 </script>
 
 </html>

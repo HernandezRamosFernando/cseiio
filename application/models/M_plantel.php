@@ -56,6 +56,10 @@ function get_nombre_localidad($plantel){
    return $this->db->query("SELECT nombre_localidad FROM Plantel p inner join Localidad l on p.id_localidad_plantel=l.id_localidad where p.cct_plantel='".$plantel."'")->result();
 }
 
+function get_planteles_sin_cerrar_calificaciones(){
+   return $this->db->query("select distinct cct_plantel,nombre_plantel from Grupo_Estudiante as ge inner join Grupo as g on ge.Grupo_id_grupo=g.id_grupo inner join Plantel as p on g.plantel=p.cct_plantel where ge.calificacion_final is null")->result();
+}
+
 
 
 

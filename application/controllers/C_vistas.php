@@ -270,7 +270,7 @@ public function portabilidad(){
     }
     public function cerrar_cal(){
         if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
-            $datos['planteles'] = $this->M_plantel->get_planteles();
+            $datos['planteles'] = $this->M_plantel->get_planteles_sin_cerrar_calificaciones();
             $data= array('title'=>'Cerrar calificaciones');
         $this->load->view("headers/cabecera", $data);
         $this->load->view("headers/menuarriba");

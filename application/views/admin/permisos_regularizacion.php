@@ -164,7 +164,7 @@
         <div class="row">
             <div class="col-md-6">
               <div class="form-label-group">
-                <input type="date"  class="form-control" id="fecha_inicio"  
+                <input type="date"  class="form-control" id="fecha_inicio_un_plantel"  
                   placeholder="Fecha de inicio" min=
                 <?php
                 echo date('Y-m-d');
@@ -176,7 +176,7 @@
 
             <div class="col-md-6">
               <div class="form-label-group">
-                <input type="date"  class="form-control" id="fecha_fin"  
+                <input type="date"  class="form-control" id="fecha_fin_un_plantel"  
                   placeholder="Fecha de finalización "min=
                 <?php
                 echo date('Y-m-d');
@@ -215,10 +215,10 @@ function validarcomponente() {
   }
 
   function validarcomponenteunplantel() {
-    validafecha(document.getElementById("fecha_inicio"));
-     validafecha(document.getElementById("fecha_fin"));
+    validafecha(document.getElementById("fecha_inicio_un_plantel"));
+     validafecha(document.getElementById("fecha_fin_un_plantel"));
 
-    if (document.getElementById("fecha_fin").value != '' && document.getElementById("fecha_inicio").value != '') {
+    if (document.getElementById("fecha_inicio_un_plantel").value != '' && document.getElementById("fecha_fin_un_plantel").value != '') {
       guardarunplantel();
     } else {
       Swal.fire({
@@ -348,9 +348,69 @@ function toggle(source) {
 
 function guardar(){
 
+  let tabla = document.getElementById("tablaplantel");
+  let renglones = tabla.childNodes;
+  var datos = new Array();
+
+  for(let i=2;i<renglones.length;i++){
+    //console.log(renglones[i].childNodes[1].innerText);//cct
+    //console.log(renglones[i].childNodes[3].childNodes[0].checked);//si se le otorgaron permisos
+    if(renglones[i].childNodes[3].childNodes[0].checked){
+    let dato = {
+      usuario:"<?php echo $this->session->userdata('user')['usuario'] ?>",
+      plantel:renglones[i].childNodes[1].innerText,
+      fecha_inicio:document.getElementById("fecha_inicio").value,
+      fecha_fin:document.getElementById("fecha_fin").value,
+    }
+
+    datos.push(dato);
+    }
+  }
+
+  console.log(datos);
+
+  //enviar datos
+  var xhr = new XMLHttpRequest();
+      xhr.open("POST", '/cseiio/c_permiso_regularizacion/agregar_permiso_todos_planteles', true);
+
+      //Send the proper header information along with the request
+      xhr.setRequestHeader("Content-Type", "application/json");
+
+      xhr.onreadystatechange = function() { // Call a function when the state changes.
+          if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+              console.log(xhr.response);
+          }
+      }
+      xhr.send(JSON.stringify(datos));
+  ////////////////////////////////////////////
+
 }
 
 function guardarunplantel(){
+
+  let dato = {
+    usuario:"<?php echo $this->session->userdata('user')['usuario'] ?>",
+    id_materia:document.getElementById("materias").value,
+    plantel:document.getElementById("plantel").value,
+    fecha_inicio:document.getElementById("fecha_inicio_un_plantel").value,
+    fecha_fin:document.getElementById("fecha_fin_un_plantel").value
+  }
+
+
+  var xhr = new XMLHttpRequest();
+      xhr.open("POST", '/cseiio/c_permiso_regularizacion/agregar_permiso_plantel_materia', true);
+
+      //Send the proper header information along with the request
+      xhr.setRequestHeader("Content-Type", "application/json");
+
+      xhr.onreadystatechange = function() { // Call a function when the state changes.
+          if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+              console.log(xhr.response);
+          }
+      }
+      xhr.send(JSON.stringify(dato));
+
+  console.log(dato);
     
 }
 

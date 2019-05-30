@@ -21,7 +21,7 @@
           </span>
         </a>
         <a class="nav-link  <?php ($this->uri->segment(2)=='portabilidad') ? print 'bg-info text-light' : print null; ?>" href="<?php echo base_url();?>index.php/c_vistas/portabilidad">
-        <img src="<?php echo base_url();?>assets/img/portabilidad.ico">
+        <img style="width: 24px; height: 24px; " src="<?php echo base_url();?>assets/img/portabilidad.ico">
           <span class="font-weight-light">Inscripción Portabilidad
           </span>
         </a>

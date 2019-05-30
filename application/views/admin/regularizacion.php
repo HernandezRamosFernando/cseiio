@@ -189,7 +189,7 @@ if (document.getElementById("fecha_inicio").value != '' ) {
     var permiso = new XMLHttpRequest();
     var plantel = document.getElementById("plantel").value;
     var materia = document.getElementById("materias").value;
-    permiso.open('GET', '/cseiio/c_permiso_regularizacion/obtener_permiso_plantel_materia?plantel='+plantel+'&materia='+materia, true);
+    permiso.open('GET', '<?php echo base_url();?>index.php/c_permiso_regularizacion/obtener_permiso_plantel_materia?plantel='+plantel+'&materia='+materia, true);
 
     permiso.onload = function () {
     var permiso_regularizacion = JSON.parse(permiso.response);
@@ -297,7 +297,10 @@ if (document.getElementById("fecha_inicio").value != '' ) {
     else{
       ///alerta de que no hay permiso
 
-      console.log("no hay permiso");
+      Swal.fire({
+            type: 'error',
+            html: '<p>No tiene permisos para calificar regularizacion.</p> <p>Contacte al jefe de Control Escolar</p>'
+          });
       /////////////////////////////////
     }
   };//fin peticion permiso

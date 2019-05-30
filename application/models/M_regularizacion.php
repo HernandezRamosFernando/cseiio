@@ -23,11 +23,11 @@ class M_regularizacion extends CI_Model {
       SELECT DISTINCT clave as id_materia,unidad_contenido from Materia as m inner join (SELECT DISTINCT
           distinct id_materia
       FROM
-          Grupo_Estudiante AS ge
+          Grupo_Estudiante AS ge inner join Estudiante as e on ge.Estudiante_no_control=e.no_control
       INNER JOIN Grupo AS g ON ge.Grupo_id_grupo = g.id_grupo
       WHERE
           plantel = '".$plantel."'
-              AND calificacion_final < 6 and concat(Estudiante_no_control,id_materia) not in (
+              AND calificacion_final < 6 and tipo_ingreso!='REPROBADO' and concat(Estudiante_no_control,id_materia) not in (
               SELECT 
                   concat (Estudiante_no_control, id_materia)
               FROM

@@ -74,6 +74,12 @@ btn-lista:hover{
     -webkit-filter: invert(100%);
 
 }
+.icono_menu{
+    width: 64px !important; 
+    height: 64px !important; 
+    -webkit-filter: invert(100%);
+}
+.val
 .valign-center {
     display: inline-flex;
     align-items: center;

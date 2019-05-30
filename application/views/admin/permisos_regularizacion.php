@@ -328,6 +328,14 @@ function cargarmaterias() {
 
 }
 
+function unplantel(){
+    document.getElementById("boton_agregar").value = "uno";
+    document.getElementById("todos_planteles").style.display = "none";
+   document.getElementById("formulariounplantel").style.display = "";
+   document.getElementById("un_plantel").disabled=true;
+
+  }
+
 
 function toggle(source) {
   checkboxes = document.getElementsByName('regularizacion');
@@ -345,6 +353,7 @@ function guardar(){
 function guardarunplantel(){
     
 }
+
 
 
 

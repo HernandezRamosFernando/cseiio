@@ -23,7 +23,7 @@
                         &nbsp;<p class="h5"><strong>Crear grupo</strong></p> &nbsp;
                         </div>
                         <div class="col-5 valign-right">
-                            <img src="<?php echo base_url();?>assets/img/creargrupo.ico">
+                            <img class="icono_menu" src="<?php echo base_url();?>assets/img/creargrupo.png">
                         </div>
                     </div>
                 </a>
@@ -39,7 +39,7 @@
                         &nbsp;<p class="h5"><strong>Modificar grupos</strong></p> &nbsp;
                         </div>
                         <div class="col-5 valign-right">
-                            <img src="<?php echo base_url();?>assets/img/modificargrupo.ico">
+                            <img class="icono_menu" src="<?php echo base_url();?>assets/img/modificargrupo.png">
                         </div>
                     </div>
                 </a>
@@ -55,7 +55,7 @@
                         &nbsp;<p class="h5"><strong>Modificar asesores de grupos</strong></p> &nbsp;
                         </div>
                         <div class="col-5 valign-right">
-                            <img src="<?php echo base_url();?>assets/img/modificarasesor.ico">
+                            <img class="icono_menu" src="<?php echo base_url();?>assets/img/modificarasesor.png">
                         </div>
                     </div>
                 </a>
@@ -71,7 +71,7 @@
                         &nbsp;<p class="h5"><strong>Calificaciones</strong></p> &nbsp;
                         </div>
                         <div class="col-5 valign-right">
-                            <img src="<?php echo base_url();?>assets/img/calificaciones.ico">
+                            <img class="icono_menu" src="<?php echo base_url();?>assets/img/calificaciones.png">
                         </div>
                     </div>
                 </a>

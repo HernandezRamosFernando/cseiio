@@ -238,6 +238,7 @@ btn-lista:hover{
 .cargador{
     display:block;
     margin:auto;
+    
     margin-top: 20%;
     position: relative;
 }

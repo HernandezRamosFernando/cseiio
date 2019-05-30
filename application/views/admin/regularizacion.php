@@ -190,8 +190,14 @@ if (document.getElementById("fecha_inicio").value != '' ) {
     var plantel = document.getElementById("plantel").value;
     var materia = document.getElementById("materias").value;
     permiso.open('GET', '<?php echo base_url();?>index.php/c_permiso_regularizacion/obtener_permiso_plantel_materia?plantel='+plantel+'&materia='+materia, true);
-
+    permiso.onloadstart = function () {
+      $('#div_carga').show();
+    }
+    permiso.error = function () {
+      console.log("error de conexion");
+    }
     permiso.onload = function () {
+      $('#div_carga').hide();
     var permiso_regularizacion = JSON.parse(permiso.response);
     if(permiso_regularizacion.length>0 && permiso_regularizacion[0].estatus==="1"){
       console.log(permiso_regularizacion);

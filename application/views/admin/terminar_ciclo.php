@@ -153,7 +153,7 @@
   function validarcomponente() {
 
     var xhr = new XMLHttpRequest();
-        xhr.open('GET', '/cseiio/c_plantel/get_planteles_sin_cerrar_calificaciones', true);
+        xhr.open('GET', '<?php echo base_url();?>index.php/c_plantel/get_planteles_sin_cerrar_calificaciones', true);
 
         xhr.onload = function () {
           if(JSON.parse(xhr.response).length>0){

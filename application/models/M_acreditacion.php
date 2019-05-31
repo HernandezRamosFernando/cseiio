@@ -9,7 +9,7 @@ class M_acreditacion extends CI_Model {
 
 
    function numero_estudiantes_semestre_plantel($datos){
-       return $this->db->query("select count(*) as total_estudiante from Estudiante where semestre_en_curso=".$datos['semestre']." and Plantel_cct_plantel='".$datos['cct']."'")->result();
+       return $this->db->query("select count(*) as total_estudiante from Estudiante where (tipo_ingreso = 'REINGRESO' or tipo_ingreso = 'REPETIDOR' or tipo_ingreso = 'INCORPORADO' or tipo_ingreso = 'TRASLADO' or tipo_ingreso = 'PORTABILIDAD' or tipo_ingreso = 'NUEVO INGRESO') and semestre_en_curso=".$datos['semestre']." and Plantel_cct_plantel='".$datos['cct']."'")->result();
    }
 
 
@@ -189,6 +189,6 @@ class M_acreditacion extends CI_Model {
 
 
    public function get_estudiantes_plantel_semestre($plantel,$semestre){
-       return $this->db->query("select * from Estudiante where semestre_en_curso=".$semestre." and Plantel_cct_plantel='".$plantel."' and (tipo_ingreso='NUEVO INGRESO' or tipo_ingreso='REINGRESO' or tipo_ingreso='INCORPORADO' or estatus='TRASLADO' or tipo_ingreso='PORTABILIDAD') and no_control not in (select distinct Estudiante_no_control from Grupo_Estudiante as ge inner join Grupo as g on ge.Grupo_id_grupo=g.id_grupo where semestre=".$semestre." and g.estatus=1)")->result(); 
+       return $this->db->query("select * from Estudiante where semestre_en_curso=".$semestre." and Plantel_cct_plantel='".$plantel."' and (tipo_ingreso='NUEVO INGRESO' or tipo_ingreso='REINGRESO' or tipo_ingreso='INCORPORADO' or estatus='TRASLADO' or tipo_ingreso='PORTABILIDAD' or tipo_ingreso='REPETIDOR') and no_control not in (select distinct Estudiante_no_control from Grupo_Estudiante as ge inner join Grupo as g on ge.Grupo_id_grupo=g.id_grupo where semestre=".$semestre." and g.estatus=1)")->result(); 
    }
 }

@@ -168,10 +168,6 @@ public function portabilidad(){
     }
 
     public function bajas(){
-        $datos['estados'] = $this->M_estado->get_estados();
-        //$datos['municipios'] = $this->M_municipio->get_municipios_estado(1);
-        //$datos['localidades'] = $this->M_localidad->get_localidades_municipio(1);
-        $datos['lenguas'] = $this->M_lengua->get_lenguas();
         
         //$datos['secundarias'] = $this->M_secundaria->get_secundarias();
         if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
@@ -181,6 +177,84 @@ public function portabilidad(){
             $this->load->view("headers/menuarriba");
             $this->load->view("headers/menuizquierda");
             $this->load->view("admin/bajas",$datos);
+            $this->load->view("footers/footer");
+        } 
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
+            $datos['planteles'] = $this->M_plantel->get_plantel($this->session->userdata('user')['plantel']);
+            $data= array('title'=>'Control de Alumnos');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierdaplantel");
+            $this->load->view("plantel/controlalumnos",$datos);
+            $this->load->view("footers/footer");
+        }
+        else{
+            redirect(base_url().'index.php/c_usuario');
+        }
+    }
+
+    public function repetidor(){
+        
+        //$datos['secundarias'] = $this->M_secundaria->get_secundarias();
+        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
+            $datos['planteles'] = $this->M_plantel->get_planteles();
+            $data= array('title'=>'Bajas');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierda");
+            $this->load->view("admin/repetidores",$datos);
+            $this->load->view("footers/footer");
+        } 
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
+            $datos['planteles'] = $this->M_plantel->get_plantel($this->session->userdata('user')['plantel']);
+            $data= array('title'=>'Control de Alumnos');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierdaplantel");
+            $this->load->view("plantel/controlalumnos",$datos);
+            $this->load->view("footers/footer");
+        }
+        else{
+            redirect(base_url().'index.php/c_usuario');
+        }
+    }
+
+    public function incorporado(){
+        
+        //$datos['secundarias'] = $this->M_secundaria->get_secundarias();
+        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
+            $datos['planteles'] = $this->M_plantel->get_planteles();
+            $data= array('title'=>'Bajas');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierda");
+            $this->load->view("admin/incorporados",$datos);
+            $this->load->view("footers/footer");
+        } 
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
+            $datos['planteles'] = $this->M_plantel->get_plantel($this->session->userdata('user')['plantel']);
+            $data= array('title'=>'Control de Alumnos');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierdaplantel");
+            $this->load->view("plantel/controlalumnos",$datos);
+            $this->load->view("footers/footer");
+        }
+        else{
+            redirect(base_url().'index.php/c_usuario');
+        }
+    }
+
+    public function desertor(){
+        
+        //$datos['secundarias'] = $this->M_secundaria->get_secundarias();
+        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
+            $datos['planteles'] = $this->M_plantel->get_planteles();
+            $data= array('title'=>'Bajas');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierda");
+            $this->load->view("admin/desertores",$datos);
             $this->load->view("footers/footer");
         } 
         else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){

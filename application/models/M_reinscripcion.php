@@ -94,6 +94,7 @@ class M_reinscripcion extends CI_Model {
   
 
     $this->db->query("update Permiso_calificacion set estatus=0 where Plantel_cct_plantel='".$plantel."'");
+    $this->db->query("update Permiso_regularizacion set estatus=0 where Plantel_cct_plantel='".$plantel."'");
     $this->db->trans_complete();
 
         if ($this->db->trans_status() === FALSE)
@@ -209,6 +210,7 @@ class M_reinscripcion extends CI_Model {
 
             $this->db->query("SET SQL_SAFE_UPDATES = 0");
             $this->db->query("update Regularizacion set estatus=0");
+            $this->db->query("update Permiso_regularizacion set estatus=0");
             $this->db->query("update Estudiante set semestre=semestre+1");
             $this->db->query("update Grupo set estatus=1");
 

@@ -117,7 +117,7 @@
                             <span style="font-size: 80px;  text-align: left">7</span>
                         </div>
                         <div class="col-4 valign-left" style="padding-left: 0px;">
-                        &nbsp;<p class="h5"><strong>Acreditacion</strong></p> &nbsp;
+                        &nbsp;<p class="h5"><strong>Certificación</strong></p> &nbsp;
                         </div>
                         <div class="col-5 valign-right">
                             <i class="material-icons md-48">assignment_turned_in</i>
@@ -149,7 +149,7 @@
                             <span style="font-size: 80px;  text-align: left">9</span>
                         </div>
                         <div class="col-4 valign-left" style="padding-left: 0px;">
-                        &nbsp;<p class="h5"><strong> Control y Permisos </strong></p> &nbsp;
+                        &nbsp;<p class="h5"><strong> Administración del sistema </strong></p> &nbsp;
                         </div>
                         <div class="col-5 valign-right">
                             <i class="material-icons md-48">people_outline</i>

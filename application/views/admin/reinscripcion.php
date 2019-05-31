@@ -14,31 +14,67 @@
   <!-- Botones-->
   <div class="row position-static" style="">
     <div class="col-md-4 col-lg-4">
-      <a href="<?php echo base_url();?>index.php/c_vistas/nuevo_ingreso"
-        class="btn btn-primary btn-lg btn-block menu valign-center btn-1 btn-responsive   align-content-between">
-        <i class="material-icons">person_add</i>&nbsp;
-        Reinscripción Reprobados
-      </a>
+      <a href="<?php echo base_url();?>index.php/c_vistas/repetidor"
+      class="btn btn-primary btn-lg btn-block  btn-responsive menu  btn-1">
+                    <div class="row">
+                        <div class="col-2 valign-left">
+                            <span style="font-size: 80px;  text-align: left">1</span>
+                        </div>
+                        <div class="col-5 valign-left" style="padding-left: 0px;">
+                        &nbsp;<p class="h5"><strong>Reinscripción Repetidores</strong></p> &nbsp;
+                        </div>
+                        <div class="col-5 valign-right">
+                        <i class="material-icons md-48">person_add</i>&nbsp;
+                        </div>
+                    </div>
+</a>
     </div>
     <div class="col-md-4 col-lg-4">
-      <a href="<?php echo base_url();?>index.php/c_vistas/portabilidad"
-        class="btn btn-primary btn-lg btn-block menu valign-center btn-2 btn-responsive">
-        <i class="material-icons">person_outline</i>&nbsp;
-        Reinscripción Desertores
-      </a>
-    </div>
-    <div class="col-md-4 col-lg-4">
-      <a href="<?php echo base_url();?>index.php/c_vistas/asignar_matricula"
-        class="btn btn-primary btn-lg btn-block menu valign-center btn-3 btn-responsive ">
-        <i class="material-icons">assignment_turned_in</i>&nbsp;
-        Reinscripción Sin Derecho
-      </a>
+      <a href="<?php echo base_url();?>index.php/c_vistas/incorporado"
+      class="btn btn-primary btn-lg btn-block  btn-responsive menu  btn-2">
+                    <div class="row">
+                        <div class="col-2 valign-left">
+                            <span style="font-size: 80px;  text-align: left">2</span>
+                        </div>
+                        <div class="col-5 valign-left" style="padding-left: 0px;">
+                        &nbsp;<p class="h5"><strong>Reinscripción Incorporados</strong></p> &nbsp;
+                        </div>
+                        <div class="col-5 valign-right">
+                        <i class="material-icons md-48">person_add</i>&nbsp;
+                        </div>
+                    </div>
+</a>
     </div>
     <div class="col-md-4 col-lg-4">
       <a href="<?php echo base_url();?>index.php/c_vistas/carta_compromiso"
-        class="btn btn-primary btn-lg btn-block menu valign-center btn-4 btn-responsive">
-        <i class="material-icons">thumbs_up_down</i>&nbsp;
-        Traslado
+      class="btn btn-primary btn-lg btn-block  btn-responsive menu  btn-3">
+                    <div class="row">
+                        <div class="col-2 valign-left">
+                            <span style="font-size: 80px;  text-align: left">3</span>
+                        </div>
+                        <div class="col-5 valign-left" style="padding-left: 0px;">
+                        &nbsp;<p class="h5"><strong>Traslado</strong></p> &nbsp;
+                        </div>
+                        <div class="col-5 valign-right">
+                        <i class="material-icons md-48">person_add</i>&nbsp;
+                        </div>
+                    </div>
+      </a>
+    </div>
+    <div class="col-md-4 col-lg-4">
+      <a href="<?php echo base_url();?>index.php/c_vistas/desertor"
+      class="btn btn-primary btn-lg btn-block  btn-responsive menu  btn-4">
+                    <div class="row">
+                        <div class="col-2 valign-left">
+                            <span style="font-size: 80px;  text-align: left">4</span>
+                        </div>
+                        <div class="col-5 valign-left" style="padding-left: 0px;">
+                        &nbsp;<p class="h5"><strong>Registrar Desertor</strong></p> &nbsp;
+                        </div>
+                        <div class="col-5 valign-right">
+                        <i class="material-icons md-48">person_add</i>&nbsp;
+                        </div>
+                    </div>
       </a>
     </div>
   </div>

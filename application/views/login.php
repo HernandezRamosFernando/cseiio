@@ -1,6 +1,10 @@
+
+<div class="div_carga"id="div_carga">
+<img class="cargador" id="cargador" src="<?php echo base_url();?>assets/img/loading-63.gif"/>
+</div>
 <!-- LOGOS DEL GOBIERNO DEL ESTADO -->
 <div style="text-align: center; clear:both;">
-  <img style="text-align: center; background-size: cover;"  src="<?php echo base_url(); ?>/assets/img/header.png">
+  <img style="text-align: center; background-size: cover; max-width:100%; " src="<?php echo base_url(); ?>/assets/img/header.png">
 </div>
 <div style="text-align:center">
   <h3>Sistema Web Integral de Servicios Escolares del CSEIIO (SISE)</h3>

@@ -198,7 +198,7 @@ public function portabilidad(){
         //$datos['secundarias'] = $this->M_secundaria->get_secundarias();
         if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
             $datos['planteles'] = $this->M_plantel->get_planteles();
-            $data= array('title'=>'Bajas');
+            $data= array('title'=>'Repetidores');
             $this->load->view("headers/cabecera", $data);
             $this->load->view("headers/menuarriba");
             $this->load->view("headers/menuizquierda");
@@ -224,7 +224,7 @@ public function portabilidad(){
         //$datos['secundarias'] = $this->M_secundaria->get_secundarias();
         if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
             $datos['planteles'] = $this->M_plantel->get_planteles();
-            $data= array('title'=>'Bajas');
+            $data= array('title'=>'Incorporados');
             $this->load->view("headers/cabecera", $data);
             $this->load->view("headers/menuarriba");
             $this->load->view("headers/menuizquierda");
@@ -250,7 +250,7 @@ public function portabilidad(){
         //$datos['secundarias'] = $this->M_secundaria->get_secundarias();
         if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
             $datos['planteles'] = $this->M_plantel->get_planteles();
-            $data= array('title'=>'Bajas');
+            $data= array('title'=>'Desertores');
             $this->load->view("headers/cabecera", $data);
             $this->load->view("headers/menuarriba");
             $this->load->view("headers/menuizquierda");

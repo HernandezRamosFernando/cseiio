@@ -53,34 +53,6 @@
 </div>
 <!-- /#wrapper -->
 <script>
-  window.onload = function () {
-    //funciones a ejecutar
-    swalWithBootstrapButtons.fire({
-      type: 'warning',
-      text: 'Esta seguro que desea cerrar la captura de calificaciones?',
-      confirmButtonText: 'Aceptar',
-      showCancelButton: 'true',
-      cancelButtonText: 'Cancelar'
-    }).then((result) => {
-      if (result.value) {
-        swalWithBootstrapButtons.fire({
-          type: 'info',
-          text: 'Calificaciones cerradas correctamente, estatus de los alumnos actualizados',
-          confirmButtonText: 'Aceptar'
-        }).then((result) => {
-          if (result.value) {
-            //window.location.replace("<?php echo base_url();?>index.php/c_vistas/acreditacion");
-          }
-        });
-      } else {
-        window.location.replace("<?php echo base_url();?>index.php/c_vistas/acreditacion");
-      }     //aqui va si cancela
-
-
-
-
-    });
-  }
 
 
   function cerrar_calificaciones() {
@@ -102,25 +74,23 @@
         if (xhr.responseText.trim() === "si") {
           console.log(xhr.response);
           swalWithBootstrapButtons.fire({
-            type: 'success',
-            text: 'Datos guardados correctamente',
+            type: 'info',
+            text: 'Calificaciones cerradas correctamente, estatus de los alumnos actualizados',
             confirmButtonText: 'Aceptar'
           }).then((result) => {
             if (result.value) {
-              //aqui va el aceptar
               $(document).scrollTop(0);
               location.reload();
+            } else {
+              Swal.fire({
+                type: 'error',
+                text: 'Datos no guardados'
+              });
             }
-            //aqui va si cancela
           });
-        } else {
-          Swal.fire({
-            type: 'error',
-            text: 'Datos no guardados'
-          });
+
         }
       };
-
       xhr.send(null);
 
     } else {

@@ -94,7 +94,7 @@
 
 <!-- Modal -->
 <div class="modal fade" id="fecha_baja_modal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<div class="modal-dialog modal-dialog-centered" style="max-width: 80% !important;" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Ingrese los datos</h5>
@@ -102,7 +102,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body ">
             <div class="form-group">
             <div class="row">
             <div class="col-md-8">
@@ -117,15 +117,36 @@
               </div>
                 </div>
                 </div>
+                <br>
                 
             <div class="row">
-            <div class="col-md-8">
-            <div class="form-label-group">
-            <input type="text" class="form-control" name="motivo_baja" id="motivo_baja" rows="3"></input>
-                  <label class="form-group has-float-label" for="motivo_baja">Motivo de baja</label>
-              </div>
-                  
-            </div>
+            <div class="col-md-12">
+            <label class="form-group has-float-label seltitulo">
+                <select class="form-control selcolor" id="motivo_baja" name="motivo_baja" >
+                  <option value="FALTA DINERO EN HOGAR PARA UTILES, PASAJES O INSCRIPCIÓN">FALTA DINERO EN HOGAR PARA UTILES, PASAJES O INSCRIPCIÓN</option>
+                  <option value="LE DISGUSTABA ESTUDIAR">LE DISGUSTABA ESTUDIAR</option>
+                  <option value="CONSIDERA TRABAJAR ES MAS IMPORTANTE QUE ESTUDIAR">CONSIDERA TRABAJAR ES MAS IMPORTANTE QUE ESTUDIAR</option>
+                  <option value="PROBLEMAS PARA ENTENDER A LOS MAESTROS">PROBLEMAS PARA ENTENDER A LOS MAESTROS</option>
+                  <option value="POR REPROBACIÓN DE MATERIAS">POR REPROBACIÓN DE MATERIAS</option>
+                  <option value="SE EMBARAZÓ, EMBARAZÓ A ALGUIEN O TUVO UN HIJO">SE EMBARAZÓ, EMBARAZÓ A ALGUIEN O TUVO UN HIJO</option>
+                  <option value="SE CASÓ/JUNTÓ">SE CASÓ/JUNTÓ</option>
+                  <option value="LA ESCUELA QUEDA LEJOS DE SU LOCALIDAD">LA ESCUELA QUEDA LEJOS DE SU LOCALIDAD</option>
+                  <option value="HABÍA REGLAS DE DISCIPLINA CON LAS QUE NO ESTABA DE ACUERDO">HABÍA REGLAS DE DISCIPLINA CON LAS QUE NO ESTABA DE ACUERDO</option>
+                  <option value="TENÍA PROBLEMAS PERSONALES CON MAMÁ, PAPÁ O PAREJA DE UNO DE ELLOS">TENÍA PROBLEMAS PERSONALES CON MAMÁ, PAPÁ O PAREJA DE UNO DE ELLOS</option>
+                  <option value="HABÍA COMPAÑEROS QUE LO MOLESTABAN">HABÍA COMPAÑEROS QUE LO MOLESTABAN</option>
+                  <option value="FALLECIÓ UN FAMILIAR O ALGUIEN DE LA FAMILIA SE ENFERMÓ GRAVEMENTE">FALLECIÓ UN FAMILIAR O ALGUIEN DE LA FAMILIA SE ENFERMÓ GRAVEMENTE</option>
+                  <option value="EXPULSADO POR INDISCIPLINA">EXPULSADO POR INDISCIPLINA</option>
+                  <option value="SE CAMBIÓ DE DOMICILIO">SE CAMBIÓ DE DOMICILIO</option>
+                  <option value="TENÍA BAJA AUTOESTIMA">TENÍA BAJA AUTOESTIMA</option>
+                  <option value="SE SENTÍA INSEGURO EN LA ESCUELA O EN EL CAMINO PARA LLEGAR A ESTA">SE SENTÍA INSEGURO EN LA ESCUELA O EN EL CAMINO PARA LLEGAR A ESTA</option>
+                  <option value="LE DISGUSTABAN LAS INSTALACIONES DE LA ESCUELA">LE DISGUSTABAN LAS INSTALACIONES DE LA ESCUELA</option>
+                  <option value="SE SENTIA DISCRIMINADO POR SU FORMA DE PENSAR O DE VESTIR">SE SENTIA DISCRIMINADO POR SU FORMA DE PENSAR O DE VESTIR</option>
+                  <option value="CONSIDERABA QUE ESTUDIAR ERA DE POCA UTILIDAD">CONSIDERABA QUE ESTUDIAR ERA DE POCA UTILIDAD</option>
+                  <option value="LA FAMILIA PREFERIA QUE ESTUDIARAN OTROS HERMANOS ">LA FAMILIA PREFERIA QUE ESTUDIARAN OTROS HERMANOS </option>
+                  <option value="OTRO">OTRO MOTIVO</option>
+                </select>
+                <span>Motivo de baja</span>
+              </label>
             </div>
 
                 </div>

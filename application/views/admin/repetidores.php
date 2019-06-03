@@ -94,7 +94,6 @@
 
 
 <script>
-  cargar_anio();
 
 
 

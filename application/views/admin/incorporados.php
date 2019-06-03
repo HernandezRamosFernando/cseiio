@@ -95,9 +95,6 @@
 
 
 <script>
-  cargar_anio();
-
-
 
   function buscar() {
     document.getElementById("aspirante_plantel_busqueda").disabled = true;

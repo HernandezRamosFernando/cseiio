@@ -370,7 +370,7 @@ function formato_tabla() {
       "sProcessing": "Procesando...",
       "sLengthMenu": "Mostrar _MENU_ ",
       "sZeroRecords": "No se encontraron resultados",
-      "sEmptyTable": "Ningún dato encontrado",
+      "sEmptyTable": "No se encontraron resultados",
       "sInfo": "Mostrando del _START_ al _END_ de un total de _TOTAL_ ",
       "sInfoEmpty": "Mostrando del 0 al 0 de un total de 0 ",
       "sInfoFiltered": "(filtrado de un total de _MAX_ )",
@@ -557,7 +557,7 @@ function cargar_anio_registro(){
       document.getElementById("aspirante_procedencia_municipio").required = false;
       document.getElementById("aspirante_procedencia_localidad").required = false;
   
-    }else if(document.getElementById("aspirante_procedencia_combo").value === "difer ente"){
+    }else if(document.getElementById("aspirante_procedencia_combo").value === "diferente"){
       document.getElementById("aspirante_procedencia_estado_oculto").style.display ="";
       document.getElementById("aspirante_procedencia_municipio_oculto").style.display ="";
       document.getElementById("aspirante_procedencia_localidad_oculto").style.display ="";

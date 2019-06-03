@@ -416,9 +416,15 @@
 
                 //Send the proper header information along with the request
                 xhr.setRequestHeader("Content-Type", "application/json");
-
-                xhr.onreadystatechange = function () { // Call a function when the state changes.
-                  if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                xhr.onloadstart = function () {
+              $('#div_carga').show();
+            }
+            xhr.error = function () {
+              console.log("error de conexion");
+            }
+            xhr.onreadystatechange = function () { // Call a function when the state changes.
+              if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                $('#div_carga').hide();
                     console.log(xhr.response);
                     swalWithBootstrapButtons.fire({
                       type: 'success',
@@ -469,13 +475,19 @@
                 if (xhr.responseText.trim() === "si") {
 
                   var friae = new XMLHttpRequest();
-                  friae.open("POST", '/cseiio/c_friae/quitar_estudiante', true);
+                  friae.open("POST", '<?php echo base_url();?>index.php/c_friae/quitar_estudiante', true);
 
                   //Send the proper header information along with the request
                   friae.setRequestHeader("Content-Type", "application/json");
-
-                  friae.onreadystatechange = function () { // Call a function when the state changes.
-                    if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                  friae.onloadstart = function () {
+              $('#div_carga').show();
+            }
+            friae.error = function () {
+              console.log("error de conexion");
+            }
+            friae.onreadystatechange = function () { // Call a function when the state changes.
+              if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                $('#div_carga').hide();
                       if (friae.responseText.trim() === "si") {
                         swalWithBootstrapButtons.fire({
                           type: 'success',
@@ -518,8 +530,8 @@
 
       for (let i = 0; i < filas.length; i++) {
         //console.log(filas[i].children[2].children.botoncambio.disabled);
-        if (filas[i].children[2].children.botoncambio.disabled === false) {
-          estudiantes.push(filas[i].children[2].children.botoncambio.value);
+        if (filas[i].children[3].children.botoncambio.disabled === false) {
+          estudiantes.push(filas[i].children[3].children.botoncambio.value);
         }
       }
 
@@ -545,13 +557,19 @@
           if (xhr.responseText.trim() === "si") {
 
             var friae = new XMLHttpRequest();
-            friae.open("POST", '/cseiio/c_friae/agregar_estudiantes_friae', true);
+            friae.open("POST", '<?php echo base_url();?>index.php/c_friae/agregar_estudiantes_friae', true);
 
             //Send the proper header information along with the request
             friae.setRequestHeader("Content-Type", "application/json");
-
+            friae.onloadstart = function () {
+              $('#div_carga').show();
+            }
+            friae.error = function () {
+              console.log("error de conexion");
+            }
             friae.onreadystatechange = function () { // Call a function when the state changes.
               if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                $('#div_carga').hide();
                 if (friae.responseText.trim() === "si") {
                   console.log(friae.response);
                   swalWithBootstrapButtons.fire({
@@ -575,7 +593,7 @@
           } else {
             Swal.fire({
               type: 'error',
-              text: 'Alumnos no no guardados'
+              text: 'Alumnos no guardados'
             });
           }
         }

@@ -215,7 +215,7 @@
       } else {
 
         var documentos_faltantes = new XMLHttpRequest();
-        documentos_faltantes.open('GET', '/cseiio/c_documentacion/get_documentacion_base_faltante_estudiante?no_control='+e.value, true);
+        documentos_faltantes.open('GET', '<?php echo base_url();?>index.php/c_documentacion/get_documentacion_base_faltante_estudiante?no_control='+e.value, true);
 
         documentos_faltantes.onload = function () {
             console.log(JSON.parse(documentos_faltantes.response));

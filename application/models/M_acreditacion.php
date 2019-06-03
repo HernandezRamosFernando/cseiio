@@ -9,7 +9,7 @@ class M_acreditacion extends CI_Model {
 
 
    function numero_estudiantes_semestre_plantel($datos){
-       return $this->db->query("select count(*) as total_estudiante from Estudiante where semestre_en_curso=".$datos['semestre']." and Plantel_cct_plantel='".$datos['cct']."'")->result();
+       return $this->db->query("select count(*) as total_estudiante from Estudiante where (tipo_ingreso = 'REINGRESO' or tipo_ingreso = 'REPETIDOR' or tipo_ingreso = 'INCORPORADO' or tipo_ingreso = 'TRASLADO' or tipo_ingreso = 'PORTABILIDAD' or tipo_ingreso = 'NUEVO INGRESO') and semestre_en_curso=".$datos['semestre']." and Plantel_cct_plantel='".$datos['cct']."'")->result();
    }
 
 

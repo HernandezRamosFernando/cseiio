@@ -49,6 +49,37 @@
         <i class="material-icons">redoperson</i>
         <span class="font-weight-light">Reinscripción<span>
       </a>
+
+      <li class="nav-item dropdown ">
+      <a class="nav-link nav-dropdown-toggle  <?php ($this->uri->segment(2)=='reinscripcion') ? print 'bg-info text-light' : print null; ?>"
+      aria-expanded="false" data-toggle="collapse" href="#submenu" role="button">
+        <i class="material-icons">group_add</i>
+        <span class="font-weight-light">Reinscripción<span>
+      </a>
+      <div id="submenu" class="<?php ($this->uri->segment(2)=='repetidor'||$this->uri->segment(2)=='incorporado'||$this->uri->segment(2)=='desertor'||$this->uri->segment(2)=='traslado' ||$this->uri->segment(2)=='') ? print 'null' : print 'collapse'; ?> sidebar-submenu">
+        <a class="nav-link <?php ($this->uri->segment(2)=='repetidor') ? print 'bg-info text-light' : print null; ?>" href="<?php echo base_url();?>index.php/c_vistas/repetidor">
+        <i class="material-icons md-24">person_add</i>
+          <span class="font-weight-light">Reinscripcion repetidor
+          </span>
+        </a>
+        <a class="nav-link  <?php ($this->uri->segment(2)=='incorporado') ? print 'bg-info text-light' : print null; ?>" href="<?php echo base_url();?>index.php/c_vistas/incorporado">
+        <img class="icono_izquierda <?php ($this->uri->segment(2)=='portabilidad') ? print 'icono_izquierda_seleccionado' : print null; ?>" src="<?php echo base_url();?>assets/img/portabilidad.png">
+          <span class="font-weight-light">Reinscripcion incorporado
+          </span>
+        </a>
+        <a class="nav-link  <?php ($this->uri->segment(2)=='traslado') ? print 'bg-info text-light' : print null; ?>" href="<?php echo base_url();?>index.php/c_vistas/traslado">
+        <img class="icono_izquierda <?php ($this->uri->segment(2)=='traslado') ? print 'icono_izquierda_seleccionado' : print null; ?>"  src="<?php echo base_url();?>assets/img/equivalencia.png">
+          <span class="font-weight-light">Traslado
+          </span>
+        </a>
+        <a class="nav-link  <?php ($this->uri->segment(2)=='desertor') ? print 'bg-info text-light' : print null; ?>" href="<?php echo base_url();?>index.php/c_vistas/desertor">
+        <i class="material-icons">assignment_turned_in</i>
+          <span class="font-weight-light">Registrar desertor</span>
+        </a>
+        <hr class="bg-info" style=" border: 3px solid ;">
+      </div>
+      
+    </li>
     </li>
     <li class="nav-item ">
       <a class="nav-link <?php ($this->uri->segment(2)=='control_alumnos') ? print 'bg-info text-light ' : print 'null'; ?>"

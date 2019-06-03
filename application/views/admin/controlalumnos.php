@@ -1071,13 +1071,14 @@
       }
       //fin datos lengua materna
       //secundaria
-      if(datos.estudiante[0].tipo_ingreso ==="NUEVO INGRESO"){
-        document.getElementById("aspirante_secundaria_cct").value = datos.escuela_procedencia[0].Escuela_procedencia_cct_escuela_procedencia;
-        document.getElementById("bachillerato_oculto").style.display ="none";
-      }else{
+      if(datos.estudiante[0].tipo_ingreso ==="PORTABILIDAD"){
         document.getElementById("aspirante_secundaria_cct").value = datos.escuela_procedencia[0].Escuela_procedencia_cct_escuela_procedencia;
         document.getElementById("bachillerato_oculto").style.display ="";
         document.getElementById("aspirante_bachillerato_cct").value = datos.escuela_procedencia[1].Escuela_procedencia_cct_escuela_procedencia;
+        
+      }else{
+        document.getElementById("aspirante_secundaria_cct").value = datos.escuela_procedencia[0].Escuela_procedencia_cct_escuela_procedencia;
+        document.getElementById("bachillerato_oculto").style.display ="none";
       }
       
       /*

@@ -42,21 +42,14 @@
       </div>
       
     </li>
-    
-    <li class="nav-item ">
-    <a class="nav-link nav-dropdown-toggle  <?php ($this->uri->segment(2)=='reinscripcion') ? print 'bg-info text-light' : print null; ?>"
-      aria-expanded="false" data-toggle="collapse" href="#submenu3" role="button">
-        <i class="material-icons">redoperson</i>
-        <span class="font-weight-light">Reinscripción<span>
-      </a>
 
       <li class="nav-item dropdown ">
       <a class="nav-link nav-dropdown-toggle  <?php ($this->uri->segment(2)=='reinscripcion') ? print 'bg-info text-light' : print null; ?>"
-      aria-expanded="false" data-toggle="collapse" href="#submenu" role="button">
+      aria-expanded="false" data-toggle="collapse" href="#submenu4" role="button">
         <i class="material-icons">group_add</i>
         <span class="font-weight-light">Reinscripción<span>
       </a>
-      <div id="submenu" class="<?php ($this->uri->segment(2)=='repetidor'||$this->uri->segment(2)=='incorporado'||$this->uri->segment(2)=='desertor'||$this->uri->segment(2)=='traslado' ||$this->uri->segment(2)=='') ? print 'null' : print 'collapse'; ?> sidebar-submenu">
+      <div id="submenu4" class="<?php ($this->uri->segment(2)=='repetidor'||$this->uri->segment(2)=='incorporado'||$this->uri->segment(2)=='desertor'||$this->uri->segment(2)=='traslado' ||$this->uri->segment(2)=='') ? print 'null' : print 'collapse'; ?> sidebar-submenu">
         <a class="nav-link <?php ($this->uri->segment(2)=='repetidor') ? print 'bg-info text-light' : print null; ?>" href="<?php echo base_url();?>index.php/c_vistas/repetidor">
         <i class="material-icons md-24">person_add</i>
           <span class="font-weight-light">Reinscripcion repetidor

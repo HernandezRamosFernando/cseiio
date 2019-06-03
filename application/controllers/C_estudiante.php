@@ -844,5 +844,41 @@ public function get_num_resolucion(){
     
 }
 
+public function get_estudiantes_porsibles_incorporados(){
+    $plantel = $this->input->get("plantel");
+    $curp = $this->input->get("curp");
+    echo json_encode($this->M_estudiante->get_estudiantes_porsibles_incorporados($plantel,$curp));
+}
+
+public function incorporar_estudiante(){
+    $datos = json_decode($this->input->raw_input_stream);
+    echo $this->M_estudiante->incorporar_estudiante($datos);
+}
+
+public function get_estudiantes_reprobados(){
+    $plantel = $this->input->get("plantel");
+    $curp = $this->input->get("curp");
+    echo json_encode($this->M_estudiante->get_estudiantes_reprobados($plantel,$curp));
+}
+
+public function reinscribir_reprobado(){
+    $datos = json_decode($this->input->raw_input_stream);
+    echo $this->M_estudiante->reinscribir_reprobado($datos);
+}
+
+
+function get_estudiantes_probables_desertores(){
+    $plantel = $this->input->get("plantel");
+    $curp = $this->input->get("curp");
+
+    echo json_encode($this->M_estudiante->get_estudiantes_probables_desertores($plantel,$curp));
+}
+
+
+function set_desertor(){
+    $datos = json_decode($this->input->raw_input_stream);
+    echo $this->M_estudiante->set_desertor($datos);
+}
+
 }
 ?>

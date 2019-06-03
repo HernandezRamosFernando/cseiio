@@ -23,8 +23,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
+<<<<<<< HEAD
 $config['base_url'] = 'http://192.168.1.99/cseiio/';
 //$config['base_url'] = 'http://localhost/cseiio/';
+=======
+//$config['base_url'] = 'http://192.168.1.82/cseiio/';
+$config['base_url'] = 'http://localhost/cseiio/';
+>>>>>>> 82c060305905e0615ec54fe81375eee4e692dae1
 
 /*
 |--------------------------------------------------------------------------

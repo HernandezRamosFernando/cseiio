@@ -107,7 +107,7 @@
     var curp = document.getElementById("aspirante_curp_busqueda").value;
     var plantel = document.getElementById("aspirante_plantel_busqueda").value;
     var query = 'curp=' + curp + '&cct_plantel=' + plantel;
-    xhr.open('GET', '<?php echo base_url();?>index.php/c_estudiante/get_estudiantes_curp_plantel?' + query, true);
+    xhr.open('GET', '<?php echo base_url();?>index.php/c_estudiante/get_estudiantes_porsibles_incorporados?' + query, true);
     xhr.onloadstart = function () {
       $('#div_carga').show();
     }
@@ -138,7 +138,7 @@
         fila += valor.fecha_registro;
         fila += '</td>';
         fila += '<td>';
-        fila += '<button class="btn btn-lg btn-block btn-info" type="button" value="' + valor.no_control + '" onclick="" data-toggle="modal" data-target="#">Incorporar</button>';
+        fila += '<button class="btn btn-lg btn-block btn-info" type="button" value="' + valor.no_control + '" onclick="incorporar(this)" data-toggle="modal" data-target="#">Incorporar</button>';
         fila += '</td>';
         fila += '</tr>';
         document.getElementById("tabla").innerHTML += fila;
@@ -151,6 +151,28 @@
     document.getElementById('btn_buscar').classList.remove('btn-success');
     document.getElementById('btn_buscar').classList.add('btn-info');
     document.getElementById('busqueda_oculto').style.display = "";
+  }
+
+
+  function incorporar(e){
+    let dato = {
+      no_control:e.value
+    };
+
+    var xhr = new XMLHttpRequest();
+        xhr.open("POST", '/cseiio/c_estudiante/incorporar_estudiante', true);
+
+        //Send the proper header information along with the request
+        xhr.setRequestHeader("Content-Type", "application/json");
+
+        xhr.onreadystatechange = function() { // Call a function when the state changes.
+            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                console.log(xhr.response);
+            }
+        }
+        xhr.send(JSON.stringify(dato));
+
+    console.log(e.value);
   }
 
 </script>

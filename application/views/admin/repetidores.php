@@ -106,7 +106,7 @@
     var curp = document.getElementById("aspirante_curp_busqueda").value;
     var plantel = document.getElementById("aspirante_plantel_busqueda").value;
     var query = 'curp=' + curp + '&cct_plantel=' + plantel;
-    xhr.open('GET', '<?php echo base_url();?>index.php/c_estudiante/get_estudiantes_curp_plantel?' + query, true);
+    xhr.open('GET', '<?php echo base_url();?>index.php/c_estudiante/get_estudiantes_reprobados?' + query, true);
     xhr.onloadstart = function () {
       $('#div_carga').show();
     }
@@ -137,7 +137,7 @@
         fila += valor.fecha_registro;
         fila += '</td>';
         fila += '<td>';
-        fila += '<button class="btn btn-lg btn-block btn-warning" type="button" value="' + valor.no_control + '" onclick="" data-toggle="modal" data-target="#">Reinscribir</button>';
+        fila += '<button class="btn btn-lg btn-block btn-warning" type="button" value="' + valor.no_control + '" onclick="reinscribir_reprobado(this)" data-toggle="modal" data-target="#">Reinscribir</button>';
         fila += '</td>';
         fila += '</tr>';
         document.getElementById("tabla").innerHTML += fila;
@@ -150,6 +150,21 @@
     document.getElementById('btn_buscar').classList.remove('btn-success');
     document.getElementById('btn_buscar').classList.add('btn-info');
     document.getElementById('busqueda_oculto').style.display = "";
+  }
+
+  function reinscribir_reprobado(e){
+    var xhr = new XMLHttpRequest();
+        xhr.open("POST", '/cseiio/c_estudiante/reinscribir_reprobado', true);
+
+        //Send the proper header information along with the request
+        xhr.setRequestHeader("Content-Type", "application/json");
+
+        xhr.onreadystatechange = function() { // Call a function when the state changes.
+            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                console.log(xhr.response);
+            }
+        }
+        xhr.send(JSON.stringify({no_control:e.value}));
   }
 
 </script>

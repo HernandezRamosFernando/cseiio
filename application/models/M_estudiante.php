@@ -316,5 +316,87 @@ public function obtener_fecha_inscripcion_semestre($no_control){
       return $this->db->query("select tipo_ingreso from Estudiante where no_control='".$no_control."'")->result()[0]->tipo_ingreso;
    }
 
+
+   public function get_estudiantes_porsibles_incorporados($plantel,$curp){
+      return $this->db->query("select * from Estudiante where (tipo_ingreso='PROBABLE REINCORPORADO' or tipo_ingreso='DESERTOR') and Plantel_cct_plantel like '".$plantel."%' and curp like '".$curp."%'")->result();
+
+   }
+
+
+
+
+   public function incorporar_estudiante($datos){
+      $this->db->trans_start();
+      $tipo_ingreso = $this->db->query("select tipo_ingreso from Estudiante where no_control='".$datos->no_control."'")->result()[0]->tipo_ingreso;
+
+      if($tipo_ingreso=='PROBABLE REINCORPORADO'){
+         $this->db->query("update Estudiante set tipo_ingreso='INCORPORADO',semestre_en_curso=semestre_en_curso+1 where no_control='".$datos->no_control."'");
+      }
+
+      else if($tipo_ingreso=='DESERTOR'){
+         $this->db->query("update Estudiante set tipo_ingreso='INCORPORADO' where no_control='".$datos->no_control."'");
+      }
+      
+      $this->db->trans_complete();
+   
+               if ($this->db->trans_status() === FALSE)
+               {
+                  return "no";
+                }
+                  
+               else{
+                  return "si";
+                 
+               }
+
+   }
+
+   public function get_estudiantes_reprobados($plantel,$curp){
+      return $this->db->query("select * from Estudiante where curp like '".$curp."%' and Plantel_cct_plantel like '".$plantel."%' and tipo_ingreso='REPROBADO'")->result();
+   }
+
+   public function reinscribir_reprobado($datos){
+      $this->db->trans_start();
+      $this->db->query("update Estudiante set tipo_ingreso='REPETIDOR' where no_control='".$datos->no_control."'");
+      $materias_anular = $this->db->query("select Grupo_id_grupo as grupo,id_materia from Grupo_Estudiante as ge inner join Grupo as g on ge.Grupo_id_grupo=g.id_grupo where Estudiante_no_control='".$datos->no_control."' and semestre=(select semestre_en_curso from Estudiante where no_control='".$datos->no_control."')")->result();
+      foreach($materias_anular as $materia){
+         $this->db->query("update Grupo_Estudiante set calificacion_final=null where Estudiante_no_control='".$datos->no_control."' and id_materia='".$materia->id_materia."' and Grupo_id_grupo='".$materia->grupo."'");
+      }
+      $this->db->trans_complete();
+   
+               if ($this->db->trans_status() === FALSE)
+               {
+                  return "no";
+                }
+                  
+               else{
+                  return "si";
+                 
+               }
+  }
+
+
+  function get_estudiantes_probables_desertores($plantel,$curp){
+     return $this->db->query("select * from Estudiante where tipo_ingreso = 'REINGRESO' and curp like '".$curp."%' and Plantel_cct_plantel like '".$plantel."%'")->result();
+  }
+
+  function set_desertor($datos){
+   $this->db->trans_start();
+
+   $this->db->query("update Estudiante set tipo_ingreso='DESERTOR' where no_control='".$datos->no_control."'");
+
+   $this->db->trans_complete();
+   
+   if ($this->db->trans_status() === FALSE)
+   {
+      return "no";
+    }
+      
+   else{
+      return "si";
+     
+   }
+  }
+
 }
 ?>

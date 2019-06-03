@@ -518,8 +518,8 @@
 
       for (let i = 0; i < filas.length; i++) {
         //console.log(filas[i].children[2].children.botoncambio.disabled);
-        if (filas[i].children[2].children.botoncambio.disabled === false) {
-          estudiantes.push(filas[i].children[2].children.botoncambio.value);
+        if (filas[i].children[3].children.botoncambio.disabled === false) {
+          estudiantes.push(filas[i].children[3].children.botoncambio.value);
         }
       }
 

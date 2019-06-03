@@ -880,5 +880,10 @@ function set_desertor(){
     echo $this->M_estudiante->set_desertor($datos);
 }
 
+function set_baja(){
+    $datos = json_decode($this->input->raw_input_stream);
+    echo $this->M_estudiante->set_baja($datos);
+}
+
 }
 ?>

@@ -111,7 +111,7 @@ class M_grupo extends CI_Model {
    }
 
    public function get_estudiantes_grupo_materia($id_grupo,$id_materia){
-    return $this->db->query("select * from Grupo_Estudiante as ge inner join Estudiante as e on ge.Estudiante_no_control=e.no_control inner join Materia m on ge.id_materia=m.clave  where ge.Grupo_id_grupo='".$id_grupo."' and ge.id_materia='".$id_materia."'")->result();
+    return $this->db->query("select * from Grupo_Estudiante as ge inner join Estudiante as e on ge.Estudiante_no_control=e.no_control inner join Materia m on ge.id_materia=m.clave  where ge.Grupo_id_grupo='".$id_grupo."' and ge.id_materia='".$id_materia."' and e.tipo_ingreso!='BAJA'")->result();
    }
 
    public function get_grupos_activos_plantel($plantel){

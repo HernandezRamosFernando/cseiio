@@ -12,7 +12,7 @@ class M_reinscripcion extends CI_Model {
    }
 
    public function estudiantes_en_grupo_plantel($plantel){
-        return  $this->db->query("select distinct Estudiante_no_control from Grupo_Estudiante as ge inner join Grupo as g on ge.Grupo_id_grupo=g.id_grupo and estatus=1 and plantel='".$plantel."'")->result();
+        return  $this->db->query("select distinct Estudiante_no_control,tipo_ingreso from Grupo_Estudiante as ge inner join Grupo as g on ge.Grupo_id_grupo=g.id_grupo and estatus=1 and plantel='".$plantel."'")->result();
    }
 
    public function get_materias_cursando_estudiante_actual($no_control){
@@ -27,6 +27,7 @@ class M_reinscripcion extends CI_Model {
     $this->db->query("update Regularizacion set estatus=0 where Plantel_cct_plantel='".$plantel."'");//desactiva las regularizaciones en ese plantel para poder abrir las segundas
 //estatus
     foreach($estudiantes_grupo as $estudiante){//de cada estudiante necesito sus materias
+        if($estudiante->tipo_ingreso!="BAJA"){//if de si es baja
         $folio = $this->db->query("select max(Friae_folio) as folio from Friae_Estudiante where Estudiante_no_control='".$estudiante->Estudiante_no_control."'")->result()[0]->folio;//folio del friae del estudiante del grupo actual
         $materias_debe = $this->M_regularizacion->materias_debe_estudiante_actualmente($estudiante->Estudiante_no_control);// materias que debe  incluyendo las del grupo actual porque ya se calificaron
         $materias_ids="";
@@ -84,6 +85,7 @@ class M_reinscripcion extends CI_Model {
                 $this->db->query("update Friae_Estudiante set tipo_ingreso_fin_semestre='REPROBADO', adeudos_fin_semestre=".sizeof($materias_debe).", id_materia_adeudos_fin_semestre='".$materias_ids."' where Estudiante_no_control='".$estudiante->Estudiante_no_control."' and Friae_folio=".$folio);
               
             }
+        }
     }
 
     //generar estatus
@@ -183,7 +185,8 @@ class M_reinscripcion extends CI_Model {
         //return json_encode($estudiantes_en_grupos);
 
         foreach($estudiantes_en_grupos as $estudiante){
-
+            
+            if($estudiante->tipo_ingreso!="BAJA"){
             $materias_debe = $this->M_regularizacion->materias_debe_estudiante_actualmente($estudiante->no_control);
     
             
@@ -204,7 +207,7 @@ class M_reinscripcion extends CI_Model {
             }
             
 
-        
+        }
 
         }
 

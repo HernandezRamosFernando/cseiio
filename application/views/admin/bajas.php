@@ -1,3 +1,4 @@
+
 <div id="content-wrapper">
 
   <div class="container-fluid ">
@@ -153,7 +154,7 @@
                 </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-success">Guardar</button>
+                <button type="button" id="boton_guardar" class="btn btn-success" onclick="baja(this)">Guardar</button>
             </div>
         </div>
     </div>
@@ -204,7 +205,7 @@
         fila += valor.fecha_registro;
         fila += '</td>';
         fila += '<td>';
-        fila += '<button class="btn btn-lg btn-block btn-danger" type="button" value="' + valor.no_control + '" onclick="" data-toggle="modal" data-target="#fecha_baja_modal">Dar de baja</button>';
+        fila += '<button class="btn btn-lg btn-block btn-danger" type="button" onclick="pasar_no_control(this)" value="' + valor.no_control + '" onclick="" data-toggle="modal" data-target="#fecha_baja_modal">Dar de baja</button>';
         fila += '</td>';
         fila += '</tr>';
         document.getElementById("tabla").innerHTML += fila;
@@ -217,6 +218,27 @@
     document.getElementById('btn_buscar').classList.remove('btn-success');
     document.getElementById('btn_buscar').classList.add('btn-info');
     document.getElementById('busqueda_oculto').style.display = "";
+  }
+
+
+  function pasar_no_control(e){
+    document.getElementById("boton_guardar").value=e.value;
+  }
+
+
+  function baja(e){
+    var xhr = new XMLHttpRequest();
+        xhr.open("POST", '<?php echo base_url();?>index.php/c_estudiante/set_baja', true);
+
+        //Send the proper header information along with the request
+        xhr.setRequestHeader("Content-Type", "application/json");
+
+        xhr.onreadystatechange = function() { // Call a function when the state changes.
+            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                console.log(xhr.response);
+            }
+        }
+        xhr.send(JSON.stringify({no_control:e.value,motivo:document.getElementById("motivo_baja").value}));
   }
 
 </script>

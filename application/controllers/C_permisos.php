@@ -30,4 +30,8 @@ class C_permisos extends CI_Controller {
 
         echo json_encode($this->M_permisos->get_permisos_plantel_grupo_materia($plantel,$grupo,$materia));
     }
+
+    public function permisos_calificaciones_activos(){
+        echo json_encode($this->M_permisos->permisos_calificaciones_activos());
+    }
 }

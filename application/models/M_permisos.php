@@ -47,4 +47,8 @@ class M_permisos extends CI_Model {
    public function get_permisos_plantel_grupo_materia($plantel,$grupo,$materia){
         return $this->db->query("select * from Permiso_calificacion where Plantel_cct_plantel='".$plantel."' and id_grupo='".$grupo."' and id_materia='".$materia."' and estatus=1 and curdate() between fecha_inicio and fecha_fin")->result();
     }
+
+    public function permisos_calificaciones_activos(){
+        return $this->db->query("select *,if(curdate() between fecha_inicio and fecha_fin,1,0) as fecha from Permiso_calificacion where estatus=1")->result();
+    }
 }

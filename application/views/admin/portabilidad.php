@@ -1481,9 +1481,14 @@ function envioform(form) {
           type: 'success',
           title: 'Registro exitoso',
           confirmButtonText: "Aceptar"
-        });
-        $(document).scrollTop(0);
-        location.reload(); 
+        }).then((result) => {
+            if (result.value) {
+              //aqui va el aceptar
+              $(document).scrollTop(0);
+              location.reload();
+            }
+            //aqui va si cancla
+          }); 
       }
 
       else {

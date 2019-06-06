@@ -107,4 +107,25 @@ class M_friae extends CI_Model {
         }
     }
 
+
+    function get_estudiantes_friae($grupo){
+        return $this->db->query("select id_grupo as grupo,Estudiante_no_control as no_control from Friae inner join Friae_Estudiante where id_grupo='".$grupo."'")->result();
+    }
+
+    function get_materias_estudiante_friae($grupo,$no_control){
+        return $this->db->query("select * from Grupo_Estudiante where Estudiante_no_control='".$no_control."' and Grupo_id_grupo='".$grupo."'")->result();
+    }
+
+    function get_datos_friae_estudiante($grupo,$no_control){
+        return $this->db->query("select * from Friae_Estudiante as fe inner join Friae as f on fe.Friae_folio=f.folio where id_grupo='".$grupo."' and Estudiante_no_control='".$no_control."'")->result();
+    }
+
+    function get_datos_estudiante($no_control){
+        return $this->db->query("select * from Estudiante where no_control='".$no_control."'")->result()[0];
+    }
+
+    function get_datos_friae($grupo){
+        return $this->db->query("select nombre_plantel,cct_plantel,nombre_localidad,nombre_municipio,semestre,nombre_ciclo_escolar,nombre_grupo from Grupo as g inner join Grupo_Estudiante as ge on g.id_grupo=ge.Grupo_id_grupo inner join Plantel as p on p.cct_plantel=g.plantel inner join Ciclo_escolar as ce on ce.id_ciclo_escolar=ge.Ciclo_escolar_id_ciclo_escolar inner join Localidad as l on l.id_localidad=p.id_localidad_plantel inner join Municipio as m on m.id_municipio=l.Municipio_id_municipio where g.id_grupo='".$grupo."' limit 1")->result()[0];
+    }
+
 }

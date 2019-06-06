@@ -82,7 +82,7 @@ function lenguas_evento(e) {
     document.getElementById("aspirante_lengua_oculto").value = '';
   }
 
-  if (e.value != "") {
+  if (e.value != "0") {
     document.getElementById("aspirante_lengua_lee").disabled = false;
     document.getElementById("aspirante_lengua_habla").disabled = false;
     document.getElementById("aspirante_lengua_escribe").disabled = false;
@@ -96,6 +96,12 @@ function lenguas_evento(e) {
     document.getElementById("aspirante_lengua_escribe").disabled = true;
     document.getElementById("aspirante_lengua_entiende").disabled = true;
     document.getElementById("aspirante_lengua_traduce").disabled = true;
+
+    document.getElementById("aspirante_lengua_lee").value = "0";
+    document.getElementById("aspirante_lengua_habla").value = "0";
+    document.getElementById("aspirante_lengua_escribe").value = "0";
+    document.getElementById("aspirante_lengua_entiende").value = "0";
+    document.getElementById("aspirante_lengua_traduce").value = "0";
   }
 }
 

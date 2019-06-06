@@ -34,4 +34,8 @@ class C_permisos extends CI_Controller {
     public function permisos_calificaciones_activos(){
         echo json_encode($this->M_permisos->permisos_calificaciones_activos());
     }
+
+    public function permisos_regularizaciones_activos(){
+        echo json_encode($this->M_permisos->permisos_regularizaciones_activos());
+    }
 }

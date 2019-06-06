@@ -27,10 +27,10 @@ class M_regularizacion extends CI_Model {
       INNER JOIN Grupo AS g ON ge.Grupo_id_grupo = g.id_grupo
       WHERE
           plantel = '".$plantel."'
-              AND calificacion_final < 6 and tipo_ingreso!='REPROBADO' and concat(Estudiante_no_control,id_materia) not in (
+              AND calificacion_final < 6 and tipo_ingreso!='REPROBADO' and tipo_ingreso!='BAJA' and concat(Estudiante_no_control,id_materia) not in (
               SELECT 
                   concat (Estudiante_no_control, id_materia)
-              FROM
+              FROM 
                   Regularizacion
               WHERE
                   Plantel_cct_plantel = '".$plantel."'
@@ -54,7 +54,7 @@ class M_regularizacion extends CI_Model {
                Regularizacion
            WHERE
                Plantel_cct_plantel = '".$plantel."'
-                   AND calificacion > 5 and id_materia='".$materia."')) as n on e.no_control=n.Estudiante_no_control where tipo_ingreso!='REPROBADO'")->result();
+                   AND calificacion > 5 and id_materia='".$materia."')) as n on e.no_control=n.Estudiante_no_control where tipo_ingreso!='REPROBADO' and tipo_ingreso!='BAJA'")->result();
 
    }
 
@@ -78,14 +78,21 @@ class M_regularizacion extends CI_Model {
       $materia = "";
       $plantel = "";
       foreach($datos as $regularizacion){// para cada estudiante que presento regularizacion de esa materia
+         $datos_estudiante = $this->db->query("select tipo_ingreso from Estudiante where no_control='".$regularizacion->no_control."'")->result()[0];
          $materia = $regularizacion->id_materia;
          $plantel = $regularizacion->cct_plantel;
          //selecciona el folio de el friae actual del estudiante
          $folio = $this->db->query("select max(Friae_folio) as folio from Friae_Estudiante where Estudiante_no_control='".$regularizacion->no_control."'")->result()[0]->folio;//folio del friae
          //antes de agregar una regularizacion, desactiva una regularizacion de la misma materia si es que llegara a estar activa
          $this->db->query("update Regularizacion set estatus=0 where id_materia='".$materia."' and Estudiante_no_control='".$regularizacion->no_control."' and estatus=1");
+
+
          //nos dice si el estudiante esta en grupo
-         $estudiante_en_grupo = $this->db->query("select IF(count(distinct Estudiante_no_control),'si','no') as respuesta from Grupo_Estudiante as ge inner join Grupo as g where estatus=1 and Estudiante_no_control='".$regularizacion->no_control."'")->result()[0]->respuesta;//saber si ese estudiante esta en un grupo activo
+         $estudiante_en_grupo = $this->db->query("select IF(count(distinct Estudiante_no_control),'si','no') as respuesta from Grupo_Estudiante as ge inner join Grupo as g on ge.Grupo_id_grupo=g.id_grupo where estatus=1 and Estudiante_no_control='".$regularizacion->no_control."'")->result()[0]->respuesta;//saber si ese estudiante esta en un grupo activo
+
+
+
+
          //inserta la regularizacion
          $this->db->query("insert into Regularizacion (Estudiante_no_control,id_materia,calificacion,fecha,fecha_calificacion,Plantel_cct_plantel,estatus) 
          values ('".$regularizacion->no_control."','".$regularizacion->id_materia."',".$regularizacion->calificacion.",'".date("Y-m-d")."','".$regularizacion->fecha_calificacion."','".$regularizacion->cct_plantel."',1)");
@@ -103,7 +110,7 @@ class M_regularizacion extends CI_Model {
 
             $materias_ids = substr($materias_ids,0,-1);
             //buscamos el tipo de ingreso del estudiante
-            $datos_estudiante = $this->db->query("select tipo_ingreso from Estudiante where no_control='".$regularizacion->no_control."'")->result()[0];
+            //$datos_estudiante = $this->db->query("select tipo_ingreso from Estudiante where no_control='".$regularizacion->no_control."'")->result()[0];
             if(sizeof($materias_debe)==0){
                
                if($datos_estudiante->tipo_ingreso=="SIN DERECHO"){
@@ -144,6 +151,7 @@ class M_regularizacion extends CI_Model {
          }
 
          else if(date("m",strtotime($regularizacion->fecha_calificacion))=="05" || date("m",strtotime($regularizacion->fecha_calificacion))=="10"){//if de si son regularizaciones intermedias
+            // $datos_estudiante$datos_estudiante = $this->db->query("select tipo_ingreso from Estudiante where no_control='".$regularizacion->no_control."'")->result()[0];
              //se sacan las materias que el estudiante debe
              $materias_debe = $this->materias_debe_estudiante_actualmente($regularizacion->no_control);
              $materias_ids="";
@@ -154,7 +162,7 @@ class M_regularizacion extends CI_Model {
  
              $materias_ids = substr($materias_ids,0,-1);
              //buscamos el tipo de ingreso del estudiante
-             $datos_estudiante = $this->db->query("select tipo_ingreso from Estudiante where no_control='".$regularizacion->no_control."'")->result()[0];
+             //$datos_estudiante$datos_estudiante = $this->db->query("select tipo_ingreso from Estudiante where no_control='".$regularizacion->no_control."'")->result()[0];
              if(sizeof($materias_debe)==0){
                 
                 if($datos_estudiante->tipo_ingreso=="SIN DERECHO"){

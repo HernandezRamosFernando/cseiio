@@ -22,7 +22,9 @@
                   <th scope="col" class="col-md-1">Plantel</th>
                   <th scope="col" class="col-md-1">CCT</th>
                   <th scope="col" class="col-md-1">Nombre Corto</th>
-                  <th scope="col" name="parcial1" class="col-md-1">Regularización</th>
+                  <th scope="col" name="parcial1" class="col-md-1">Fecha de inicio</th>
+                  <th scope="col" name="parcial1" class="col-md-1">Fecha de fin</th>
+                  <th scope="col" name="parcial1" class="col-md-1">Materia</th>
                 </tr>
               </thead>
 
@@ -42,3 +44,46 @@
 <!-- /.content-wrapper -->
 </div>
 <!-- /#wrapper -->
+
+
+<script>
+function cargar_permisos(){
+  var xhr = new XMLHttpRequest();
+    xhr.open('GET', '/cseiio/c_permisos/permisos_regularizaciones_activos', true);
+
+    xhr.onload = function () {
+      if(JSON.parse(xhr.response).length>0){
+        let tabla = document.getElementById("tablaplantel");
+        JSON.parse(xhr.response).forEach(function(valor,indice){
+          if(valor.fecha==="0"){//si tiene permiso pero ya vencio la fecha
+            var fila = '<tr class="table-warning">';
+            fila+='<td>'+valor.nombre_plantel+'</td>';
+            fila+='<td>'+valor.Plantel_cct_plantel+'</td>';
+            fila+='<td>'+valor.nombre_corto+'</td>';
+            fila+='<td>'+valor.fecha_inicio+'</td>';
+            fila+='<td>'+valor.fecha_fin+'</td>';
+            fila+='<td>'+valor.unidad_contenido+'</td>';
+            tabla.innerHTML+=fila;
+          }
+
+          else{//si tiene permiso y la fecha sigue vigente
+            var fila = '<tr class="table-success">';
+            fila+='<td>'+valor.nombre_plantel+'</td>';
+            fila+='<td>'+valor.Plantel_cct_plantel+'</td>';
+            fila+='<td>'+valor.nombre_corto+'</td>';
+            fila+='<td>'+valor.fecha_inicio+'</td>';
+            fila+='<td>'+valor.fecha_fin+'</td>';
+            fila+='<td>'+valor.unidad_contenido+'</td>';
+            tabla.innerHTML+=fila;
+          }
+        });
+      }
+    };
+
+    xhr.send(null);
+}
+
+
+cargar_permisos();
+
+</script>

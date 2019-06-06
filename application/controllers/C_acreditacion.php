@@ -87,6 +87,11 @@ public function agregar_estudiantes_grupo_editado(){
     echo $this->M_acreditacion->agregar_estudiantes_grupo_editado($datos);
 }
 
+public function cerrar_calificaciones_plantel(){
+    $plantel = $this->input->get("plantel");
+    echo $this->M_acreditacion->cerrar_calificaciones_plantel($plantel)->respuesta;
+}
+
 }
 
 

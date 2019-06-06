@@ -352,7 +352,7 @@ public function obtener_fecha_inscripcion_semestre($no_control){
    }
 
    public function get_estudiantes_reprobados($plantel,$curp){
-      return $this->db->query("select * from Estudiante where curp like '".$curp."%' and Plantel_cct_plantel like '".$plantel."%' and tipo_ingreso='REPROBADO'")->result();
+      return $this->db->query("select * from Estudiante where curp like '".$curp."%' and Plantel_cct_plantel like '".$plantel."%' and (tipo_ingreso='REPROBADO' or tipo_ingreso='BAJA')")->result();
    }
 
    public function reinscribir_reprobado($datos){
@@ -384,6 +384,29 @@ public function obtener_fecha_inscripcion_semestre($no_control){
    $this->db->trans_start();
 
    $this->db->query("update Estudiante set tipo_ingreso='DESERTOR' where no_control='".$datos->no_control."'");
+
+   $this->db->trans_complete();
+   
+   if ($this->db->trans_status() === FALSE)
+   {
+      return "no";
+    }
+      
+   else{
+      return "si";
+     
+   }
+  }
+
+
+
+  function set_baja($datos){
+   $this->db->trans_start();
+
+   $this->db->query("update Estudiante set tipo_ingreso='BAJA' where no_control='".$datos->no_control."'");
+   $this->db->query("insert into Baja (motivo,Estudiante_no_control) values ('".$datos->motivo."','".$datos->no_control."')");
+   $folio = $this->db->query("select max(Friae_folio) as folio from Friae_Estudiante as a where a.Estudiante_no_control='".$datos->no_control."'")->result()[0]->folio;
+   $this->db->query("update Friae_Estudiante set baja=curdate() where Estudiante_no_control='".$datos->no_control."' and Friae_folio=".$folio);
 
    $this->db->trans_complete();
    

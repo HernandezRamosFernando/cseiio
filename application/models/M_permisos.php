@@ -49,6 +49,10 @@ class M_permisos extends CI_Model {
     }
 
     public function permisos_calificaciones_activos(){
-        return $this->db->query("select *,if(curdate() between fecha_inicio and fecha_fin,1,0) as fecha from Permiso_calificacion where estatus=1")->result();
+        return $this->db->query("select *,if(curdate() between fecha_inicio and fecha_fin,1,0) as fecha from Permiso_calificacion as pc inner join Plantel as p on pc.Plantel_cct_plantel=p.cct_plantel inner join Materia as m on pc.id_materia=m.clave where estatus=1")->result();
+    }
+
+    public function permisos_regularizaciones_activos(){
+        return $this->db->query("select *,if(curdate() between fecha_inicio and fecha_fin,1,0) as fecha from Permiso_regularizacion as pg inner join Plantel as p on pg.Plantel_cct_plantel=p.cct_plantel inner join Materia as m on pg.id_materia=m.clave where estatus=1")->result();
     }
 }

@@ -194,6 +194,6 @@ class M_acreditacion extends CI_Model {
 
 
    public function cerrar_calificaciones_plantel($plantel){
-        return $this->db->query("select if(count(*)>0,'no','si') as respuesta from Grupo_Estudiante as ge inner join Estudiante as e on ge.Estudiante_no_control=e.no_control inner join Grupo as g on ge.Grupo_id_grupo=g.id_grupo where g.estatus=1 and examen_final is null and tipo_ingreso!='BAJA'")->result()[0];
+        return $this->db->query("select if(count(*)>0,'no','si') as respuesta from Grupo_Estudiante as ge inner join Estudiante as e on ge.Estudiante_no_control=e.no_control inner join Grupo as g on ge.Grupo_id_grupo=g.id_grupo where g.estatus=1 and examen_final is null and tipo_ingreso!='BAJA' and g.plantel='".$plantel."'")->result()[0];
    }
 }

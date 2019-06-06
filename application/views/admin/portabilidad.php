@@ -430,7 +430,7 @@
         <div class="col-md-4">
           <label class="form-group has-float-label seltitulo" >
             <select class="form-control form-control-lg selcolor"  name="aspirante_direccion_municipio" required
-              onclick="cambio_municipio(selector_municipio_aspirante,selector_localidad_aspirante)"
+            onChange="cambio_municipio(selector_municipio_aspirante,selector_localidad_aspirante)"
               id="selector_municipio_aspirante">
               <option value="">Seleccione un municipio</option>
 
@@ -545,7 +545,7 @@
           <div class="col-md-4" id="aspirante_procedencia_municipio_oculto" style="display:none">
             <label class="form-group has-float-label seltitulo" >
               <select class="form-control form-control-lg selcolor"  name="aspirante_procedencia_municipio" 
-                onclick="cambio_municipio(aspirante_procedencia_municipio,aspirante_procedencia_localidad)"
+              onChange="cambio_municipio(aspirante_procedencia_municipio,aspirante_procedencia_localidad)"
                 id="aspirante_procedencia_municipio">
                 <option value="">Seleccione un municipio</option>
 

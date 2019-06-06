@@ -57,7 +57,7 @@ function get_nombre_localidad($plantel){
 }
 
 function get_planteles_sin_cerrar_calificaciones(){
-   return $this->db->query("select distinct cct_plantel,nombre_plantel from Grupo_Estudiante as ge inner join Grupo as g on ge.Grupo_id_grupo=g.id_grupo inner join Plantel as p on g.plantel=p.cct_plantel where ge.calificacion_final is null")->result();
+   return $this->db->query("select distinct cct_plantel,nombre_plantel from Grupo_Estudiante as ge inner join (SELECT Estudiante_no_control as no_control,g.id_grupo FROM Friae_Estudiante as fe inner join Friae as f on fe.Friae_folio=f.folio inner join Grupo as g on f.id_grupo=g.id_grupo where estatus=1) as eg on ge.Estudiante_no_control=eg.no_control inner join Grupo as g on g.id_grupo=ge.Grupo_id_grupo inner join Plantel as p on p.cct_plantel=g.plantel where calificacion_final is null")->result();
 }
 
 

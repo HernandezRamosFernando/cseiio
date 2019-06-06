@@ -845,7 +845,7 @@ public function get_num_resolucion(){
 }
 
 public function get_estudiantes_porsibles_incorporados(){
-    $plantel = $this->input->get("plantel");
+    $plantel = $this->input->get("cct_plantel");
     $curp = $this->input->get("curp");
     echo json_encode($this->M_estudiante->get_estudiantes_porsibles_incorporados($plantel,$curp));
 }
@@ -856,7 +856,7 @@ public function incorporar_estudiante(){
 }
 
 public function get_estudiantes_reprobados(){
-    $plantel = $this->input->get("plantel");
+    $plantel = $this->input->get("cct_plantel");
     $curp = $this->input->get("curp");
     echo json_encode($this->M_estudiante->get_estudiantes_reprobados($plantel,$curp));
 }

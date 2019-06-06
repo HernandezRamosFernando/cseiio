@@ -57,6 +57,13 @@
 
   function cerrar_calificaciones() {
     if (document.getElementById("plantel").value != "") {
+      var cerrar = new XMLHttpRequest();
+          cerrar.open('GET', '<?php echo base_url();?>index.php/c_acreditacion/cerrar_calificaciones_plantel?plantel='+document.getElementById("plantel").value, true);
+
+          cerrar.onload = function () {
+            console.log(cerrar.response.trim());
+//respuesta de si puede cerrar
+      if(cerrar.response.trim()==="si"){//si si puede cerrar
       let plantel = document.getElementById("plantel").value;
 
       var xhr = new XMLHttpRequest();
@@ -92,8 +99,21 @@
         }
       };
       xhr.send(null);
+    }
 
-    } else {
+    else{// si no puede cerrar
+      Swal.fire({
+        type: 'warning',
+        text: 'Aun faltan las calificaciones del examen final'
+      });
+    }
+
+    };
+
+      cerrar.send(null);
+//-------------------------------------------------------------------------------------
+    } 
+    else {
       Swal.fire({
         type: 'warning',
         text: 'Seleccione un plantel'

@@ -382,7 +382,7 @@
           if (permisos_plantel.examen_final === "1" && promedio >= 6) {
             registro += '<td><input type="text" class="form-control" name="examen_final" value="' + (examen_final === "0" ? "/" : examen_final) + '" id="examen_final" onchange="calificaciones(this,\''+valor.tipo+'\',6,'+indice+','+permisos_plantel.examen_final+');"></td>';
           } else if (permisos_plantel.examen_final === "1" && promedio < 6) {
-            registro += '<td><input type="text" class="form-control" name="examen_final" value="' + (examen_final === "0" ? "/" : examen_final) + '" id="examen_final" onchange="calificaciones(this,\''+valor.tipo+'\',6,'+indice+','+permisos_plantel.examen_final+');" disabled></td>';
+            registro += '<td><input type="text" class="form-control" name="examen_final" value="/" id="examen_final" onchange="calificaciones(this,\''+valor.tipo+'\',6,'+indice+','+permisos_plantel.examen_final+');" disabled></td>';
           } else {
             registro += '<td><input type="text" class="form-control" name="examen_final" value="' + (examen_final === "0" ? "/" : examen_final) + '" onchange="calificaciones(this,\''+valor.tipo+'\',6,'+indice+','+permisos_plantel.examen_final+');" id="examen_final" disabled></td>';
           }

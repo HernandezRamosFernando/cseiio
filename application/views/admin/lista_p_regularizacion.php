@@ -62,7 +62,7 @@ function cargar_permisos(){
             fila+='<td>'+valor.nombre_corto+'</td>';
             fila+='<td>'+valor.fecha_inicio+'</td>';
             fila+='<td>'+valor.fecha_fin+'</td>';
-            fila+='<td>'+valor.materia+'</td>';
+            fila+='<td>'+valor.unidad_contenido+'</td>';
             tabla.innerHTML+=fila;
           }
 
@@ -73,7 +73,7 @@ function cargar_permisos(){
             fila+='<td>'+valor.nombre_corto+'</td>';
             fila+='<td>'+valor.fecha_inicio+'</td>';
             fila+='<td>'+valor.fecha_fin+'</td>';
-            fila+='<td>'+valor.materia+'</td>';
+            fila+='<td>'+valor.unidad_contenido+'</td>';
             tabla.innerHTML+=fila;
           }
         });

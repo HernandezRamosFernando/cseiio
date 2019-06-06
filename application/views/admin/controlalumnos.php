@@ -933,6 +933,7 @@
     }
     xhr.onload = function () {
       $('#div_carga').hide();
+      $('#modalaspirante').modal().show();
       let datos = JSON.parse(xhr.response);
       console.log(datos);
       document.getElementById("aspirante_no_control").value = datos.estudiante[0].no_control;
@@ -1071,16 +1072,16 @@
       }
       //fin datos lengua materna
       //secundaria
-      if(datos.estudiante[0].tipo_ingreso ==="PORTABILIDAD"){
+      if (datos.estudiante[0].tipo_ingreso === "PORTABILIDAD") {
         document.getElementById("aspirante_secundaria_cct").value = datos.escuela_procedencia[0].Escuela_procedencia_cct_escuela_procedencia;
-        document.getElementById("bachillerato_oculto").style.display ="";
+        document.getElementById("bachillerato_oculto").style.display = "";
         document.getElementById("aspirante_bachillerato_cct").value = datos.escuela_procedencia[1].Escuela_procedencia_cct_escuela_procedencia;
-        
-      }else{
+
+      } else {
         document.getElementById("aspirante_secundaria_cct").value = datos.escuela_procedencia[0].Escuela_procedencia_cct_escuela_procedencia;
-        document.getElementById("bachillerato_oculto").style.display ="none";
+        document.getElementById("bachillerato_oculto").style.display = "none";
       }
-      
+
       /*
       document.getElementById("aspirante_secundaria_nombre").value = datos.secundaria_aspirante[0].nombre_secundaria;
       document.getElementById("aspirante_secundaria_nombre").disabled = true;
@@ -1133,7 +1134,7 @@
         fila += valor.fecha_registro;
         fila += '</td>';
         fila += '<td>';
-        fila += '<button class="btn btn-lg btn-block btn-success" type="button" value="' + valor.no_control + '" onclick="cargar_datos_aspirante(this)" data-toggle="modal" data-target="#modalaspirante">Editar</button>';
+        fila += '<button class="btn btn-lg btn-block btn-success" type="button" value="' + valor.no_control + '" onclick="cargar_datos_aspirante(this)" data-toggle="modal" data-target="#">Editar</button>';
         fila += '</td>';
         fila += '<td>';
         fila += '<a href="<?php echo base_url();?>index.php/C_estudiante/generar_formato_inscripcion?no_control=' + valor.no_control + '" class="btn btn-lg btn-block btn-info btn btn-primary" target="_blank">Imprimir</a>';
@@ -1319,6 +1320,7 @@
 
 
   function envioform(form) {
+    $('#modalaspirante').modal('toggle');
     var formdata = new FormData(form);
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "<?php echo base_url();?>index.php/c_estudiante/update_estudiante", true);
@@ -1334,19 +1336,16 @@
         if (xhr.responseText === "si") {
           Swal.fire({
             type: 'success',
-            title: 'Actualizacion exitosa',
-            showConfirmButton: false,
-            timer: 2500
+            title: 'Actualizacion exitosa'
           });
-          $('#modalaspirante').modal('toggle');
+
         }
         else {
           Swal.fire({
             type: 'error',
-            title: 'Ocurrio un error al actualizar los datos',
-            showConfirmButton: false,
-            timer: 2500
+            text: 'Ocurrio un error al actualizar los datos'
           });
+          $('#modalaspirante').modal().show();
         }
       }
     }

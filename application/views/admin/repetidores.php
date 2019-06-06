@@ -71,6 +71,7 @@
               <th scope="col" class="col-md-1">CURP</th>
               <th scope="col" class="col-md-1">N° control</th>
               <th scope="col" class="col-md-1">Matrícula</th>
+              <th scope="col" class="col-md-1">Semestre</th>
               <th scope="col" class="col-md-1">Plantel CCT</th>
               <th scope="col" class="col-md-1">Fecha Ingreso</th>
               <th scope="col" class="col-md-1"></th>
@@ -130,6 +131,9 @@
         fila += valor.matricula === null ? "" : valor.matricula;
         fila += '</td>';
         fila += '<td>';
+        fila += valor.semestre_en_curso;
+        fila += '</td>';
+        fila += '<td>';
         fila += valor.Plantel_cct_plantel;
         fila += '</td>';
         fila += '<td>';
@@ -153,16 +157,42 @@
 
   function reinscribir_reprobado(e){
     var xhr = new XMLHttpRequest();
-        xhr.open("POST", '/cseiio/c_estudiante/reinscribir_reprobado', true);
+        xhr.open("POST", '<?php echo base_url();?>index.php/c_estudiante/reinscribir_reprobado', true);
+        xhr.onloadstart = function () {
+      $('#div_carga').show();
+    }
+    xhr.error = function () {
+      console.log("error de conexion");
+    }
+    //Send the proper header information along with the request
+    xhr.setRequestHeader("Content-Type", "application/json");
 
-        //Send the proper header information along with the request
-        xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onreadystatechange = function () { // Call a function when the state changes.
+      if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+        $('#div_carga').hide();
+        if (xhr.responseText.trim() === "si") {
+          console.log(xhr.response);
+          swalWithBootstrapButtons.fire({
+            type: 'success',
+            text: 'Estudiante repetidor inscrito correctamente',
+            allowOutsideClick: false,
+            confirmButtonText: 'Aceptar'
+          }).then((result) => {
+            if (result.value) {
+              //aqui va el acepta
 
-        xhr.onreadystatechange = function() { // Call a function when the state changes.
-            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-                console.log(xhr.response);
             }
+            //aqui va si cancela
+          });
+          $(e).parents('tr').detach();
+        } else {
+          Swal.fire({
+            type: 'error',
+            text: 'Datos no guardados'
+          });
         }
+      }
+    }
         xhr.send(JSON.stringify({no_control:e.value}));
   }
 

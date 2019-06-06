@@ -371,6 +371,7 @@ function guardar(){
 
   //enviar datos
   var xhr = new XMLHttpRequest();
+  $('#fechapermiso1').modal().show();
       xhr.open("POST", '<?php echo base_url();?>index.php/c_permiso_regularizacion/agregar_permiso_todos_planteles', true);
 
       //Send the proper header information along with the request
@@ -390,6 +391,7 @@ function guardar(){
           swalWithBootstrapButtons.fire({
             type: 'success',
             text: 'Datos guardados correctamente',
+            allowOutsideClick: false,
             confirmButtonText: 'Aceptar'
           }).then((result) => {
             if (result.value) {
@@ -404,6 +406,7 @@ function guardar(){
             type: 'error',
             text: 'Datos no guardados'
           });
+          $('#fechapermiso1').modal().hide();
         }
           }
       }
@@ -444,6 +447,7 @@ function guardarunplantel(){
           swalWithBootstrapButtons.fire({
             type: 'success',
             text: 'Datos guardados correctamente',
+            allowOutsideClick: false,
             confirmButtonText: 'Aceptar'
           }).then((result) => {
             if (result.value) {

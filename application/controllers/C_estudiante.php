@@ -868,7 +868,7 @@ public function reinscribir_reprobado(){
 
 
 function get_estudiantes_probables_desertores(){
-    $plantel = $this->input->get("plantel");
+    $plantel = $this->input->get("cct_plantel");
     $curp = $this->input->get("curp");
 
     echo json_encode($this->M_estudiante->get_estudiantes_probables_desertores($plantel,$curp));

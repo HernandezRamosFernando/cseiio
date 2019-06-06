@@ -1178,6 +1178,7 @@
         type: 'warning',
         text: 'Esta tratando de agregar un alumno sin Secundaria',
         showCancelButton: true,
+        allowOutsideClick: false,
         confirmButtonText: 'Registrar',
         cancelButtonText: 'Cancelar',
       }).then((result) => {
@@ -1218,6 +1219,7 @@
         if (xhr.responseText === "si") {
           Swal.fire({
             type: 'success',
+            allowOutsideClick: false,
             title: 'Registro exitoso',
             confirmButtonText: "Aceptar"
           }).then((result) => {

@@ -50,8 +50,15 @@
 function cargar_permisos(){
   var xhr = new XMLHttpRequest();
     xhr.open('GET', '<?php echo base_url();?>index.php/c_permisos/permisos_regularizaciones_activos', true);
+    xhr.onloadstart = function () {
+      $('#div_carga').show();
+    }
+    xhr.error = function () {
+      console.log("error de conexion");
+    }
 
     xhr.onload = function () {
+      $('#div_carga').hide();
       if(JSON.parse(xhr.response).length>0){
         let tabla = document.getElementById("tablaplantel");
         JSON.parse(xhr.response).forEach(function(valor,indice){

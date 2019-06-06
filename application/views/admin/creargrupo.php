@@ -519,8 +519,15 @@
         //cargar select de asesores de ese plantel
         var asesores = new XMLHttpRequest();
         asesores.open('GET', '<?php echo base_url();?>index.php/c_asesor/get_asesores_plantel?plantel=' + document.getElementById("plantel").value, true);
+        asesores.onloadstart = function () {
+      $('#div_carga').show();
+    }
+    asesores.error = function () {
+      console.log("error de conexion");
+    }
 
-        asesores.onload = function () {
+    asesores.onload = function () {
+      $('#div_carga').hide();
 
           //cargar las materias en la tabla-----------------------------------------------
           var semestre = parseInt(document.getElementById("semestre_grupo").value);
@@ -528,8 +535,15 @@
             //api que regrese esas materias
             var materias = new XMLHttpRequest();
             materias.open('GET', '<?php echo base_url();?>index.php/c_materias/materias_semestre?semestre=' + semestre, true);
+            materias.onloadstart = function () {
+      $('#div_carga').show();
+    }
+    materias.error = function () {
+      console.log("error de conexion");
+    }
 
-            materias.onload = function () {
+    materias.onload = function () {
+      $('#div_carga').hide();
               document.getElementById("tabla_asesor").innerHTML = "";
               var tabla = document.getElementById("tabla_asesor");
 
@@ -552,7 +566,15 @@
             var materias = new XMLHttpRequest();
             materias.open('GET', '<?php echo base_url();?>index.php/c_materias/get_materias_semestre_componente?semestre=' + semestre + "&componente=" + document.getElementById("seleccione_componente").value.split("-")[0], true);
 
-            materias.onload = function () {
+            materias.onloadstart = function () {
+      $('#div_carga').show();
+    }
+    materias.error = function () {
+      console.log("error de conexion");
+    }
+
+    materias.onload = function () {
+      $('#div_carga').hide();
               document.getElementById("tabla_asesor").innerHTML = "";
               var tabla = document.getElementById("tabla_asesor");
 
@@ -583,6 +605,7 @@
           text: 'El grupo ya existe y tiene ' + (35 - JSON.parse(xhr.response)[0].total_alumnos) + " lugares disponibles",
           confirmButtonText: 'Agregar estudiantes al grupo',
           showCancelButton: true,
+          allowOutsideClick: false,
           cancelButtonText: 'Cerrar'
         }).then(function (result) {
           if (result.value) {
@@ -689,6 +712,7 @@
                     swalWithBootstrapButtons.fire({
                       type: 'success',
                       text: 'Datos agregados correctamente',
+                      allowOutsideClick: false,
                       confirmButtonText: 'Aceptar'
                     }).then((result) => {
                       if (result.value) {
@@ -767,6 +791,7 @@
                     swalWithBootstrapButtons.fire({
                       type: 'success',
                       text: 'Datos agregados correctamente',
+                      allowOutsideClick: false,
                       confirmButtonText: 'Aceptar'
                     }).then((result) => {
                       if (result.value) {

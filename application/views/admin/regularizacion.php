@@ -81,7 +81,7 @@
     </form>
     <br>
     <div class="col-md-12" id="agregar_oculto" style="display: none">
-      <button type="button" data-toggle="modal" data-target="#fechacalificacion" value="nuevo"  id="boton_agregar"
+      <button type="button" data-toggle="modal" data-target="#fechacalificacion" value="nuevo" id="boton_agregar"
         class="btn btn-success btn-lg btn-block btn-guardar" style="padding: 1rem"> Guardar cambios</button>
     </div>
 
@@ -92,31 +92,29 @@
 </div>
 <!-- /#wrapper -->
 
-<div class="modal fade" id="fechacalificacion" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+<div class="modal fade" id="fechacalificacion" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+  aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" style="max-width: 50% !important;" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Agregar fecha de calificación de regularización</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
       <div class="modal-body">
-              <div class="form-label-group">
-                <input type="date"  class="form-control" id="fecha_inicio"  
-                  placeholder="Fecha de calificación" min=
-                <?php
+        <div class="form-label-group">
+          <input type="date" class="form-control" id="fecha_inicio" placeholder="Fecha de calificación" min=<?php
                 $fecha_actual = date("d-m-Y");
                 date("d-m-Y",strtotime($fecha_actual."- 60 days")); 
-                ?>
-                >
-                <label for="fecha_inicio">Fecha de calificación </label>
+                ?>>
+          <label for="fecha_inicio">Fecha de calificación </label>
 
         </div>
 
       </div>
       <div class="modal-footer">
-        <button type="button" value="nuevo"  class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" value="nuevo" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
         <button type="button" onclick="validarcomponentefecha()" class="btn btn-success">Guardar fecha</button>
       </div>
     </div>
@@ -126,15 +124,15 @@
 <script>
   function validarcomponentefecha() {
 
-if (document.getElementById("fecha_inicio").value != '' ) {
-  enviar_formulario();
-} else {
-  Swal.fire({
-    type: 'warning',
-    text: 'Agregue los datos faltantes'
-  });
-}
-}
+    if (document.getElementById("fecha_inicio").value != '') {
+      enviar_formulario();
+    } else {
+      Swal.fire({
+        type: 'warning',
+        text: 'Agregue los datos faltantes'
+      });
+    }
+  }
 
   function validarcomponente() {
 
@@ -189,7 +187,7 @@ if (document.getElementById("fecha_inicio").value != '' ) {
     var permiso = new XMLHttpRequest();
     var plantel = document.getElementById("plantel").value;
     var materia = document.getElementById("materias").value;
-    permiso.open('GET', '<?php echo base_url();?>index.php/c_permiso_regularizacion/obtener_permiso_plantel_materia?plantel='+plantel+'&materia='+materia, true);
+    permiso.open('GET', '<?php echo base_url();?>index.php/c_permiso_regularizacion/obtener_permiso_plantel_materia?plantel=' + plantel + '&materia=' + materia, true);
     permiso.onloadstart = function () {
       $('#div_carga').show();
     }
@@ -198,119 +196,119 @@ if (document.getElementById("fecha_inicio").value != '' ) {
     }
     permiso.onload = function () {
       $('#div_carga').hide();
-    var permiso_regularizacion = JSON.parse(permiso.response);
-    if(permiso_regularizacion.length>0 && permiso_regularizacion[0].estatus==="1"){
-      console.log(permiso_regularizacion);
-      document.getElementById("boton_agregar").style.display="";
-    
-    //rellena la tabla con los estudiantes que deben esa materia de ese plantel
-    var xhr = new XMLHttpRequest();
-    var plantel = document.getElementById("plantel").value;
-    var materia = document.getElementById("materias").value;
-    document.getElementById("tabla").innerHTML = "";
-    xhr.open('GET', '<?php echo base_url();?>index.php/c_regularizacion/estudiantes_materia?plantel=' + plantel + '&materia=' + materia, true);
-    xhr.onloadstart = function () {
-      $('#div_carga').show();
-    }
-    xhr.error = function () {
-      console.log("error de conexion");
-    }
-    xhr.onload = function () {
-      $('#div_carga').hide();
-      JSON.parse(xhr.response).forEach(function (valor, indice) {
-        //console.log(valor);
-        var fila = '<tr>';
-        fila += '<td>';
-        fila += valor.nombre + ' ' + valor.primer_apellido + ' ' + valor.segundo_apellido;
-        fila += '</td>';
-        fila += '<td>';
-        fila += valor.Estudiante_no_control;
-        fila += '</td>';
-        fila += '<td>';
-        fila += valor.semestre_en_curso;
-        fila += '</td>';
-        fila += '<td>';
-        fila += valor.semestre;
-        fila += '</td>';
-        fila += '<td class="">';
-        fila += '<input type="text" class="form-control" id="calificacion" onchange="calificaciones(this);" ></input>';
-        fila += '</td>';
-        fila += '</tr>';
-        document.getElementById("tabla").innerHTML += fila;
-      });
-      console.log(JSON.parse(xhr.response));
-    };
-    xhr.send(null);
-    document.getElementById('agregar_oculto').style.display = "";
-    document.getElementById('alumnos_oculto').style.display = "";
-    //limpiarbusqueda();
-    }//fin if si hay permiso
+      var permiso_regularizacion = JSON.parse(permiso.response);
+      if (permiso_regularizacion.length > 0 && permiso_regularizacion[0].estatus === "1") {
+        console.log(permiso_regularizacion);
+        document.getElementById("boton_agregar").style.display = "";
 
-
-    else if(permiso_regularizacion.length>0 && permiso_regularizacion[0].estatus==="0"){
-      console.log(permiso_regularizacion);
-    document.getElementById("boton_agregar").style.display="none";
-       //rellena la tabla con los estudiantes que deben esa materia de ese plantel
-    var xhr = new XMLHttpRequest();
-    var plantel = document.getElementById("plantel").value;
-    var materia = document.getElementById("materias").value;
-    document.getElementById("tabla").innerHTML = "";
-    xhr.open('GET', '<?php echo base_url();?>index.php/c_regularizacion/estudiantes_materia_registrada_activa?plantel=' + plantel + '&materia=' + materia, true);
-    xhr.onloadstart = function () {
-      $('#div_carga').show();
-    }
-    xhr.error = function () {
-      console.log("error de conexion");
-    }
-    xhr.onload = function () {
-      $('#div_carga').hide();
-      JSON.parse(xhr.response).forEach(function (valor, indice) {
-  
-
-
-
-        var fila = '<tr>';
-        fila += '<td>';
-        fila += valor.nombre + ' ' + valor.primer_apellido + ' ' + valor.segundo_apellido;
-        fila += '</td>';
-        fila += '<td>';
-        fila += valor.Estudiante_no_control;
-        fila += '</td>';
-        fila += '<td>';
-        fila += valor.semestre_en_curso;
-        fila += '</td>';
-        fila += '<td>';
-        fila += valor.semestre;
-        fila += '</td>';
-        fila += '<td class="">';
-        fila += '<input type="text" class="form-control" id="calificacion" onchange="calificaciones(this);" value="'+valor.calificacion+'" disabled></input>';
-        fila += '</td>';
-        fila += '</tr>';
-        document.getElementById("tabla").innerHTML += fila;
-
-     
-
-        ///qui termina un estudiante
-      });
-      console.log(JSON.parse(xhr.response));
-    };
-    xhr.send(null);
-    document.getElementById('agregar_oculto').style.display = "";
-    document.getElementById('alumnos_oculto').style.display = "";
-
-    }
-
-    else{
-      ///alerta de que no hay permiso
-
-      Swal.fire({
-            type: 'error',
-            html: '<p>No tiene permisos para calificar regularizacion.</p> <p>Contacte al jefe de Control Escolar</p>'
+        //rellena la tabla con los estudiantes que deben esa materia de ese plantel
+        var xhr = new XMLHttpRequest();
+        var plantel = document.getElementById("plantel").value;
+        var materia = document.getElementById("materias").value;
+        document.getElementById("tabla").innerHTML = "";
+        xhr.open('GET', '<?php echo base_url();?>index.php/c_regularizacion/estudiantes_materia?plantel=' + plantel + '&materia=' + materia, true);
+        xhr.onloadstart = function () {
+          $('#div_carga').show();
+        }
+        xhr.error = function () {
+          console.log("error de conexion");
+        }
+        xhr.onload = function () {
+          $('#div_carga').hide();
+          JSON.parse(xhr.response).forEach(function (valor, indice) {
+            //console.log(valor);
+            var fila = '<tr>';
+            fila += '<td>';
+            fila += valor.nombre + ' ' + valor.primer_apellido + ' ' + valor.segundo_apellido;
+            fila += '</td>';
+            fila += '<td>';
+            fila += valor.Estudiante_no_control;
+            fila += '</td>';
+            fila += '<td>';
+            fila += valor.semestre_en_curso;
+            fila += '</td>';
+            fila += '<td>';
+            fila += valor.semestre;
+            fila += '</td>';
+            fila += '<td class="">';
+            fila += '<input type="text" class="form-control" id="calificacion" onchange="calificaciones(this);" ></input>';
+            fila += '</td>';
+            fila += '</tr>';
+            document.getElementById("tabla").innerHTML += fila;
           });
-      /////////////////////////////////
-    }
-  };//fin peticion permiso
-  permiso.send(null);
+          console.log(JSON.parse(xhr.response));
+        };
+        xhr.send(null);
+        document.getElementById('agregar_oculto').style.display = "";
+        document.getElementById('alumnos_oculto').style.display = "";
+        //limpiarbusqueda();
+      }//fin if si hay permiso
+
+
+      else if (permiso_regularizacion.length > 0 && permiso_regularizacion[0].estatus === "0") {
+        console.log(permiso_regularizacion);
+        document.getElementById("boton_agregar").style.display = "none";
+        //rellena la tabla con los estudiantes que deben esa materia de ese plantel
+        var xhr = new XMLHttpRequest();
+        var plantel = document.getElementById("plantel").value;
+        var materia = document.getElementById("materias").value;
+        document.getElementById("tabla").innerHTML = "";
+        xhr.open('GET', '<?php echo base_url();?>index.php/c_regularizacion/estudiantes_materia_registrada_activa?plantel=' + plantel + '&materia=' + materia, true);
+        xhr.onloadstart = function () {
+          $('#div_carga').show();
+        }
+        xhr.error = function () {
+          console.log("error de conexion");
+        }
+        xhr.onload = function () {
+          $('#div_carga').hide();
+          JSON.parse(xhr.response).forEach(function (valor, indice) {
+
+
+
+
+            var fila = '<tr>';
+            fila += '<td>';
+            fila += valor.nombre + ' ' + valor.primer_apellido + ' ' + valor.segundo_apellido;
+            fila += '</td>';
+            fila += '<td>';
+            fila += valor.Estudiante_no_control;
+            fila += '</td>';
+            fila += '<td>';
+            fila += valor.semestre_en_curso;
+            fila += '</td>';
+            fila += '<td>';
+            fila += valor.semestre;
+            fila += '</td>';
+            fila += '<td class="">';
+            fila += '<input type="text" class="form-control" id="calificacion" onchange="calificaciones(this);" value="' + valor.calificacion + '" disabled></input>';
+            fila += '</td>';
+            fila += '</tr>';
+            document.getElementById("tabla").innerHTML += fila;
+
+
+
+            ///qui termina un estudiante
+          });
+          console.log(JSON.parse(xhr.response));
+        };
+        xhr.send(null);
+        document.getElementById('agregar_oculto').style.display = "";
+        document.getElementById('alumnos_oculto').style.display = "";
+
+      }
+
+      else {
+        ///alerta de que no hay permiso
+
+        Swal.fire({
+          type: 'error',
+          html: '<p>No tiene permisos para calificar regularizacion.</p> <p>Contacte al jefe de Control Escolar</p>'
+        });
+        /////////////////////////////////
+      }
+    };//fin peticion permiso
+    permiso.send(null);
   }
 
   function calificaciones(e) {
@@ -347,79 +345,83 @@ if (document.getElementById("fecha_inicio").value != '' ) {
     var datos = new Array();
     for (let i = 0; i < tabla.childNodes.length; i++) {
       //console.log(tabla.childNodes[i].childNodes[1].innerText);
-      var calificacion =tabla.childNodes[i].childNodes[4].childNodes[0].value;
-      if(calificacion==="" || calificaciones==="/"){
-          calificacion="0";
+      var calificacion = tabla.childNodes[i].childNodes[4].childNodes[0].value;
+      if (calificacion === "" || calificaciones === "/") {
+        calificacion = "0";
       }
-  
+
       var dato = {
-        no_control:tabla.childNodes[i].childNodes[1].innerText,
-        id_materia:document.getElementById("materias").value,
-        calificacion:calificacion,
-        fecha_calificacion:document.getElementById("fecha_inicio").value,
-        cct_plantel:document.getElementById("plantel").value
+        no_control: tabla.childNodes[i].childNodes[1].innerText,
+        id_materia: document.getElementById("materias").value,
+        calificacion: calificacion,
+        fecha_calificacion: document.getElementById("fecha_inicio").value,
+        cct_plantel: document.getElementById("plantel").value
       };
       datos.push(dato);
-   }
+    }
 
-   console.log(datos);
+    console.log(datos);
 
-   var xhr = new XMLHttpRequest();
-      xhr.open("POST", '<?php echo base_url();?>index.php/c_regularizacion/agregar_regularizacion', true);
-
-    swalWithBootstrapButtons.fire({
-            type: 'info',
-            text: 'Al aceptar no podrá realizar cambio alguno ¿Esta seguro?',
-            confirmButtonText: 'Aceptar',
-            showCancelButton: 'true',
-            cancelButtonText: 'Cancelar'
-          }).then((result) => {
-            if (result.value) {
-          
     var xhr = new XMLHttpRequest();
+    $('#fechacalificacion').modal().hide();
     xhr.open("POST", '<?php echo base_url();?>index.php/c_regularizacion/agregar_regularizacion', true);
 
-    //Send the proper header information along with the request
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.onloadstart = function () {
-      $('#div_carga').show();
-    }
-    xhr.error = function () {
-      console.log("error de conexion");
-    }
-    xhr.onreadystatechange = function () { // Call a function when the state changes.
-      if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-        $('#div_carga').hide();
-        console.log(xhr.response);
-        if (xhr.responseText.trim() === "si") {
-          console.log(xhr.response);
-          swalWithBootstrapButtons.fire({
-            type: 'success',
-            text: 'Datos guardados correctamente',
-            confirmButtonText: 'Aceptar'
-          }).then((result) => {
-            if (result.value) {
-              //aqui va el aceptar
-              $(document).scrollTop(0);
-              location.reload(); 
-            }
-            //aqui va si cancela
-          });
-        } else {
-          Swal.fire({
-            type: 'error',
-            text: 'Datos no guardados'
-          });
+    swalWithBootstrapButtons.fire({
+      type: 'info',
+      text: 'Al aceptar no podrá realizar cambio alguno ¿Esta seguro?',
+      confirmButtonText: 'Aceptar',
+      allowOutsideClick: false,
+      showCancelButton: 'true',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.value) {
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", '<?php echo base_url();?>index.php/c_regularizacion/agregar_regularizacion', true);
+
+        //Send the proper header information along with the request
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onloadstart = function () {
+          $('#div_carga').show();
         }
+        xhr.error = function () {
+          console.log("error de conexion");
+        }
+        xhr.onreadystatechange = function () { // Call a function when the state changes.
+          if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+            $('#div_carga').hide();
+            console.log(xhr.response);
+            if (xhr.responseText.trim() === "si") {
+              console.log(xhr.response);
+              swalWithBootstrapButtons.fire({
+                type: 'success',
+                text: 'Datos guardados correctamente',
+                allowOutsideClick: false,
+                confirmButtonText: 'Aceptar'
+              }).then((result) => {
+                if (result.value) {
+                  //aqui va el aceptar
+                  $(document).scrollTop(0);
+                  location.reload();
+                }
+                //aqui va si cancela
+              });
+            } else {
+              Swal.fire({
+                type: 'error',
+                text: 'Datos no guardados'
+              });
+              $('#fechacalificacion').modal().show();
+            }
+          }
+        }
+        xhr.send(JSON.stringify(datos));
       }
-    }
-    xhr.send(JSON.stringify(datos));
-  }
-            //aqui va si cancela
-          });
+      //aqui va si cancela
+    });
   }
 
-  
+
 </script>
 
 </html>

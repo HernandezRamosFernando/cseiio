@@ -23,6 +23,7 @@
       text: 'Esta seguro que desea cerrar la captura de calificaciones?',
       confirmButtonText: 'Aceptar',
       showCancelButton: 'true',
+      allowOutsideClick: false,
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.value) {
@@ -59,6 +60,7 @@
           swalWithBootstrapButtons.fire({
             type: 'info',
             text: 'Calificaciones cerradas correctamente, estatus de los alumnos actualizados',
+            allowOutsideClick: false,
             confirmButtonText: 'Aceptar'
           }).then((result) => {
             if (result.value) {

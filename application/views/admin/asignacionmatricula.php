@@ -216,8 +216,15 @@
 
         var documentos_faltantes = new XMLHttpRequest();
         documentos_faltantes.open('GET', '<?php echo base_url();?>index.php/c_documentacion/get_documentacion_base_faltante_estudiante?no_control='+e.value, true);
-
-        documentos_faltantes.onload = function () {
+        documentos_faltantes.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      documentos_faltantes.error = function (){
+        console.log("error de conexion");
+      }
+      documentos_faltantes.onload = function(){
+        //console.log(xhr.response);
+        $('#div_carga').hide();
             console.log(JSON.parse(documentos_faltantes.response));
             //console.log(e.value);
             //console.log(documentos_faltantes.response);
@@ -277,37 +284,5 @@
     };
 
     xhr.send(null);
-
-
-    /*
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', '<?php echo base_url();?>index.php/c_estudiante/generar_matricula?no_control=' + e.value, true);
-        xhr.onloadstart = function(){
-            $('#div_carga').show();
-          }
-          xhr.error = function (){
-            console.log("error de conexion");
-          }
-          xhr.onload = function(){
-            $('#div_carga').hide();
-          console.log(xhr.responseText);
-    
-          if (xhr.responseText.trim() !== "no") {
-            Swal.fire({
-              type: 'success',
-              title: 'Matrícula generada correctamente<br>' + xhr.responseText+'<br> asignada a:<br>'+e2
-            })
-            $(e).parents('tr').detach();
-          } else {
-            Swal.fire({
-              type: 'error',
-              title: 'Matrícula no generada',
-              confirmButtonText: 'Cerrar'
-            })
-          }
-        };
-    
-        xhr.send(null);
-    */
   }
 </script>

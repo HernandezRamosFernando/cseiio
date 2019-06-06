@@ -49,7 +49,7 @@
 <script>
 function cargar_permisos(){
   var xhr = new XMLHttpRequest();
-    xhr.open('GET', '/cseiio/c_permisos/permisos_regularizaciones_activos', true);
+    xhr.open('GET', '<?php echo base_url();?>index.php/c_permisos/permisos_regularizaciones_activos', true);
 
     xhr.onload = function () {
       if(JSON.parse(xhr.response).length>0){

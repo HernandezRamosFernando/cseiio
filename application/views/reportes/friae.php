@@ -81,59 +81,59 @@ class MYPDF extends TCPDF {
         <td style="width:28px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][1]->id_materia.'</td>
         <td style="width:28px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][2]->id_materia.'</td>
         <td style="width:28px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][3]->id_materia.'</td>
-        <td style="width:28px;background-color:#f8facb">'.$materias[0][4]->id_materia.'</td>
-        <td style="width:28px;background-color:#f8facb">'.$materias[0][5]->id_materia.'</td>
-        <td style="width:28px;background-color:#f8facb">'.$materias[0][6]->id_materia.'</td>
-        <td style="width:28px;background-color:#f8facb">'.$materias[0][7]->id_materia.'</td>
-        <td style="width:28px;background-color:#f8facb">'.$materias[0][8]->id_materia.'</td>
-        <td style="width:28px;background-color:#f8facb">'.$materias[0][9]->id_materia.'</td>
-        <td style="width:28px;background-color:#f8facb">'.$materias[0][10]->id_materia.'</td>
-        <td style="width:28px;background-color:#f8facb">'.$materias[0][11]->id_materia.'</td>
-        <td style="width:28px;background-color:#f8facb">'.$materias[0][12]->id_materia.'</td>
+        <td style="width:28px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][4]->id_materia.'</td>
+        <td style="width:28px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][5]->id_materia.'</td>
+        <td style="width:28px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][6]->id_materia.'</td>
+        <td style="width:28px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][7]->id_materia.'</td>
+        <td style="width:28px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][8]->id_materia.'</td>
+        <td style="width:28px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][9]->id_materia.'</td>
+        <td style="width:28px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][10]->id_materia.'</td>
+        <td style="width:28px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][11]->id_materia.'</td>
+        <td style="width:28px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][12]->id_materia.'</td>
         ';
     }
 
     if($numero_materias==12){
         return $html_doce_columnas='
-        <td style="width:31px;background-color:#f8facb">'.$materias[0][0]->id_materia.'</td>
-        <td style="width:31px;background-color:#f8facb">'.$materias[0][1]->id_materia.'</td>
-        <td style="width:31px;background-color:#f8facb">'.$materias[0][2]->id_materia.'</td>
-        <td style="width:31px;background-color:#f8facb">'.$materias[0][3]->id_materia.'</td>
-        <td style="width:31px;background-color:#f8facb">'.$materias[0][4]->id_materia.'</td>
-        <td style="width:31px;background-color:#f8facb">'.$materias[0][5]->id_materia.'</td>
-        <td style="width:31px;background-color:#f8facb">'.$materias[0][6]->id_materia.'</td>
-        <td style="width:31px;background-color:#f8facb">'.$materias[0][7]->id_materia.'</td>
-        <td style="width:31px;background-color:#f8facb">'.$materias[0][8]->id_materia.'</td>
-        <td style="width:31px;background-color:#f8facb">'.$materias[0][9]->id_materia.'</td>
-        <td style="width:31px;background-color:#f8facb">'.$materias[0][10]->id_materia.'</td>
-        <td style="width:31px;background-color:#f8facb">'.$materias[0][11]->id_materia.'</td>
+        <td style="width:31px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][0]->id_materia.'</td>
+        <td style="width:31px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][1]->id_materia.'</td>
+        <td style="width:31px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][2]->id_materia.'</td>
+        <td style="width:31px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][3]->id_materia.'</td>
+        <td style="width:31px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][4]->id_materia.'</td>
+        <td style="width:31px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][5]->id_materia.'</td>
+        <td style="width:31px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][6]->id_materia.'</td>
+        <td style="width:31px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][7]->id_materia.'</td>
+        <td style="width:31px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][8]->id_materia.'</td>
+        <td style="width:31px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][9]->id_materia.'</td>
+        <td style="width:31px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][10]->id_materia.'</td>
+        <td style="width:31px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][11]->id_materia.'</td>
         ';
     }
 
     if($numero_materias==9){
         return $html_nueve_columnas='
-        <td style="width:41px;background-color:#f8facb">'.$materias[0][0]->id_materia.'</td>
-        <td style="width:41px;background-color:#f8facb">'.$materias[0][1]->id_materia.'</td>
-        <td style="width:41px;background-color:#f8facb">'.$materias[0][2]->id_materia.'</td>
-        <td style="width:41px;background-color:#f8facb">'.$materias[0][3]->id_materia.'</td>
-        <td style="width:41px;background-color:#f8facb">'.$materias[0][4]->id_materia.'</td>
-        <td style="width:41px;background-color:#f8facb">'.$materias[0][5]->id_materia.'</td>
-        <td style="width:41px;background-color:#f8facb">'.$materias[0][6]->id_materia.'</td>
-        <td style="width:41px;background-color:#f8facb">'.$materias[0][7]->id_materia.'</td>
-        <td style="width:41px;background-color:#f8facb">'.$materias[0][8]->id_materia.'</td>
+        <td style="width:41px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][0]->id_materia.'</td>
+        <td style="width:41px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][1]->id_materia.'</td>
+        <td style="width:41px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][2]->id_materia.'</td>
+        <td style="width:41px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][3]->id_materia.'</td>
+        <td style="width:41px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][4]->id_materia.'</td>
+        <td style="width:41px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][5]->id_materia.'</td>
+        <td style="width:41px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][6]->id_materia.'</td>
+        <td style="width:41px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][7]->id_materia.'</td>
+        <td style="width:41px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][8]->id_materia.'</td>
         ';
     }
 
     if($numero_materias==8){
         return $html_ocho_columnas='
-        <td style="width:46px;background-color:#f8facb">'.$materias[0][0]->id_materia.'</td>
-        <td style="width:46px;background-color:#f8facb">'.$materias[0][1]->id_materia.'</td>
-        <td style="width:46px;background-color:#f8facb">'.$materias[0][2]->id_materia.'</td>
-        <td style="width:46px;background-color:#f8facb">'.$materias[0][3]->id_materia.'</td>
-        <td style="width:46px;background-color:#f8facb">'.$materias[0][4]->id_materia.'</td>
-        <td style="width:46px;background-color:#f8facb">'.$materias[0][5]->id_materia.'</td>
-        <td style="width:46px;background-color:#f8facb">'.$materias[0][6]->id_materia.'</td>
-        <td style="width:46px;background-color:#f8facb">'.$materias[0][7]->id_materia.'</td>
+        <td style="width:46px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][0]->id_materia.'</td>
+        <td style="width:46px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][1]->id_materia.'</td>
+        <td style="width:46px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][2]->id_materia.'</td>
+        <td style="width:46px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][3]->id_materia.'</td>
+        <td style="width:46px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][4]->id_materia.'</td>
+        <td style="width:46px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][5]->id_materia.'</td>
+        <td style="width:46px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][6]->id_materia.'</td>
+        <td style="width:46px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][7]->id_materia.'</td>
         ';
     }
 
@@ -151,7 +151,7 @@ $pdf = new MYPDF('L', 'mm',$medidas, true, 'UTF-8', false);
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('Control Escolar CSEIIO');
-$pdf->SetTitle('PDF Carta Compromiso');
+$pdf->SetTitle('FRIAE');
 $pdf->SetSubject('Carta Compromiso CSEIIO');
 $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
 // set default header data

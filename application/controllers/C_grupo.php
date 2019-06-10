@@ -52,6 +52,22 @@ class C_grupo extends CI_Controller
         //echo $id_materia;
         echo json_encode($this->M_grupo->get_estudiantes_grupo_materia($id_grupo,$id_materia));
     }
+
+
+    public function get_grupos_ciclo_escolar_plantel_inactivos(){
+        $plantel = $this->input->get("plantel");
+        $ciclo = $this->input->get("ciclo");
+
+        $grupos = $this->M_grupo->get_grupos_ciclo_escolar_plantel_inactivos($plantel,$ciclo);
+
+        $respuesta_html = "";
+
+        foreach($grupos as $grupo){
+            $respuesta_html.='<option value="'.$grupo->id_grupo.'">'.$grupo->semestre.' '.$grupo->nombre_grupo.'</option>';
+        }
+
+        echo $respuesta_html;
+    }
 }
 
 

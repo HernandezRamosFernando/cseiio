@@ -42,7 +42,7 @@
 
             <div class="col-md-4">
               <label class="form-group has-float-label seltitulo">
-                <select class="form-control form-control-lg selcolor" onchange="()" name="ciclo_escolar"
+                <select class="form-control form-control-lg selcolor" onchange="mostrar_grupos()" name="ciclo_escolar"
                   id="ciclo_escolar">
                   <option value="">Seleccione un ciclo escolar</option>
 
@@ -73,7 +73,7 @@
             </div>
 
             <div class="col-md-4 offset-md-3">
-              <button type="button" class="btn btn-success btn-lg btn-block" onclick="validarcomponente()"
+              <button type="button" class="btn btn-success btn-lg btn-block" onclick="imprimir_friae()"
                 style="padding: 1rem" id="crear_grupo">Mostrar friae</button>
             </div>
           </div>
@@ -555,6 +555,25 @@
     console.log(alumnos_json);
   }
 
+
+function mostrar_grupos(){
+  var xhr = new XMLHttpRequest();
+      xhr.open('GET', '<?php echo base_url();?>index.php/c_grupo/get_grupos_ciclo_escolar_plantel_inactivos?plantel='+document.getElementById("plantel").value+'&ciclo='+document.getElementById("ciclo_escolar").value, true);
+
+      xhr.onload = function () {
+        document.getElementById("grupos").innerHTML=xhr.response;
+      };
+
+      xhr.send(null);
+}
+
+
+
+function imprimir_friae(){
+
+window.open('<?php echo base_url();?>index.php/c_friae/generar_friae_grupo?grupo='+document.getElementById("grupos").value,'_blank');
+
+}
 
 </script>
 

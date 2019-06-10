@@ -885,5 +885,125 @@ function set_baja(){
     echo $this->M_estudiante->set_baja($datos);
 }
 
-}
-?>
+//-----------------------------------------------------------------------------
+public function get_estudiantes_derecho_a_traslado(){
+    $curp = $this->input->get('curp');
+     $plantel = $this->input->get('plantel');
+     echo json_encode($this->M_estudiante->get_estudiantes_derecho_a_traslado( 
+         $curp,
+         $plantel
+         ));
+ }
+ 
+ 
+ public function get_estudiante_traslado(){
+     $no_control = $this->input->get('no_control');
+     echo json_encode($this->M_estudiante->get_estudiante_traslado($no_control));
+ }
+ 
+ 
+ public function nuevo_traslado(){
+     $no_control = $this->input->post('num_control');
+     $cct_plantel_traslado = $this->input->post('plantel_para_traslado');
+     $cct_plantel_origen = $this->input->post('cct_plantel_origen');
+     $id_grupo = $this->input->post('id_grupo');
+     $id_grupo_traslado = $this->input->post('grupos');
+     
+ 
+      $id_friae_origen=(isset($this->M_friae->id_friae($id_grupo)[0]->folio)) ? $this->M_friae->id_friae($id_grupo)[0]->folio : "";
+      $id_friae_destino=(isset($this->M_friae->id_friae($id_grupo_traslado)[0]->folio)) ? $this->M_friae->id_friae($id_grupo_traslado)[0]->folio : "";
+ 
+     if($this->input->post('documento_presentacion_bic_bic')!=''){
+                 $datos_estudiante_documentos['documento_presentacion_bic_bic'] = array(
+                     'id_documento' => 9,
+                     'entregado' => true,
+                     'Estudiante_no_control' => $no_control,
+                     'id_plantel' => $cct_plantel_origen
+                 );
+             }
+             else{
+                 $datos_estudiante_documentos['documento_presentacion_bic_bic'] = array(
+                     'id_documento' => 9,
+                     'entregado' => 0,
+                     'Estudiante_no_control' => $no_control,
+                     'id_plantel' => $cct_plantel_origen
+                 );
+             }
+ 
+     if($this->input->post('documento_carta_buena_conducta')!=''){
+                 $datos_estudiante_documentos['documento_carta_buena_conducta'] = array(
+                     'id_documento' => 10,
+                     'entregado' => true,
+                     'Estudiante_no_control' => $no_control,
+                     'id_plantel' => $cct_plantel_origen
+                 );
+             }
+             else{
+                 $datos_estudiante_documentos['documento_carta_buena_conducta'] = array(
+                     'id_documento' => 10,
+                     'entregado' => 0,
+                     'Estudiante_no_control' => $no_control,
+                     'id_plantel' => $cct_plantel_origen
+                 );
+             }
+ 
+     if($this->input->post('documento_historial_academico')!=''){
+                 $datos_estudiante_documentos['documento_historial_academico'] = array(
+                     'id_documento' => 11,
+                     'entregado' => true,
+                     'Estudiante_no_control' => $no_control,
+                     'id_plantel' => $cct_plantel_origen
+                 );
+             }
+             else{
+                 $datos_estudiante_documentos['documento_historial_academico'] = array(
+                     'id_documento' =>11,
+                     'entregado' => 0,
+                     'Estudiante_no_control' => $no_control,
+                     'id_plantel' => $cct_plantel_origen
+                 );
+             }
+ 
+         if($this->input->post('documento_constancia_de_no_adeudo')!=''){
+                 $datos_estudiante_documentos['documento_constancia_de_no_adeudo'] = array(
+                     'id_documento' => 12,
+                     'entregado' => true,
+                     'Estudiante_no_control' => $no_control,
+                     'id_plantel' => $cct_plantel_origen
+                 );
+             }
+             else{
+                 $datos_estudiante_documentos['documento_constancia_de_no_adeudo'] = array(
+                     'id_documento' =>12,
+                     'entregado' => 0,
+                     'Estudiante_no_control' => $no_control,
+                     'id_plantel' => $cct_plantel_origen
+                 );
+             }
+ 
+ 
+             echo $this->M_estudiante->realizar_traslado_estudiante(
+             $no_control,
+             $cct_plantel_traslado,
+             $cct_plantel_origen,
+             $datos_estudiante_documentos,
+             $id_grupo,
+             $id_grupo_traslado,
+             $id_friae_origen,
+             $id_friae_destino
+             );
+ 
+        
+     
+ }
+ 
+ public function get_estudiante_datos_semestre_grupo(){
+     $no_control = $this->input->get('no_control');
+     echo json_encode($this->M_estudiante->get_estudiante_datos_semestre_grupo($no_control));
+ }
+ 
+ 
+ 
+ 
+ }
+ ?>

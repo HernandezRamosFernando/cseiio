@@ -46,7 +46,7 @@
 </a>
     </div>
     <div class="col-md-4 col-lg-4">
-      <a href="<?php echo base_url();?>index.php/c_vistas/carta_compromiso"
+      <a href="<?php echo base_url();?>index.php/c_vistas/traslado"
       class="btn btn-primary btn-lg btn-block  btn-responsive menu  btn-3">
                     <div class="row">
                         <div class="col-2 valign-left">

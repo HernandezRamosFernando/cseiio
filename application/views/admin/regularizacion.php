@@ -228,7 +228,7 @@
             fila += valor.semestre_en_curso;
             fila += '</td>';
             fila += '<td>';
-            fila += valor.semestre;
+            fila += valor.semestre ;
             fila += '</td>';
             fila += '<td class="">';
             fila += '<input type="text" class="form-control" id="calificacion" onchange="calificaciones(this);" ></input>';

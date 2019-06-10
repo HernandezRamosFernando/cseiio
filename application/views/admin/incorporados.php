@@ -71,9 +71,9 @@
               <th scope="col" class="col-md-1">CURP</th>
               <th scope="col" class="col-md-1">N° control</th>
               <th scope="col" class="col-md-1">Matrícula</th>
-              <th scope="col" class="col-md-1">Semestre</th>
+              <th scope="col" class="col-md-1">Contador de Semestre</th>
+              <th scope="col" class="col-md-1">Semestre anterior cursado</th>
               <th scope="col" class="col-md-1">Plantel CCT</th>
-              <th scope="col" class="col-md-1">Fecha Ingreso</th>
               <th scope="col" class="col-md-1"></th>
             </tr>
           </thead>
@@ -130,13 +130,13 @@
         fila += valor.matricula === null ? "" : valor.matricula;
         fila += '</td>';
         fila += '<td>';
+        fila += valor.semestre;
+        fila += '</td>';
+        fila += '<td>';
         fila += valor.semestre_en_curso;
         fila += '</td>';
         fila += '<td>';
         fila += valor.Plantel_cct_plantel;
-        fila += '</td>';
-        fila += '<td>';
-        fila += valor.fecha_registro;
         fila += '</td>';
         fila += '<td>';
         fila += '<button class="btn btn-lg btn-block btn-info" type="button" value="' + valor.no_control + '" onclick="incorporar(this)" data-toggle="modal" data-target="#">Incorporar</button>';

@@ -1,3 +1,4 @@
+
 <?php
 class M_regularizacion extends CI_Model { 
    public function __construct() {

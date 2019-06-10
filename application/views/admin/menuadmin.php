@@ -80,7 +80,8 @@
                 </a>
             </div>
             <div class="col-md-4 col-lg-4">
-                <a href="../views/reportes.html" class="btn btn-primary btn-lg btn-block btn-responsive menu btn-5">
+            <a href="<?php echo base_url();?>index.php/c_vistas/reportes"
+                class="btn btn-primary btn-lg btn-block btn-responsive menu btn-5">
                     <div class="row">
                         <div class="col-2 valign-left">
                             <span style="font-size: 80px;  text-align: left">5</span>

@@ -421,5 +421,145 @@ public function obtener_fecha_inscripcion_semestre($no_control){
    }
   }
 
+///----------------------------------------------------------------------------------
+
+public function get_estudiantes_derecho_a_traslado($curp, $plantel){
+
+   return $this->db->query("select *,sum(CASE
+                WHEN ge.primer_parcial>=0 THEN 1
+                ELSE 0
+            END) num_primer_parcial,sum(CASE
+                WHEN ge.segundo_parcial>=0 THEN 1
+                ELSE 0
+            END) num_segundo_parcial,sum(CASE
+                WHEN ge.tercer_parcial>=0 THEN 1
+                ELSE 0
+            END) num_tercer_parcial,sum(CASE
+                WHEN ge.examen_final>=0 THEN 1
+                ELSE 0
+            END) num_examen_final,sum(CASE
+                WHEN ge.calificacion_final>=0 THEN 1
+                ELSE 0
+            END) num_calificacion_final,(SELECT count(*)-SUM(CASE
+                WHEN d.entregado = 1 THEN 1
+                ELSE 0
+            END) from Documentacion d where d.Estudiante_no_control=e.no_control) as faltantes from Estudiante e inner join Plantel p on p.cct_plantel=e.Plantel_cct_plantel
+LEFT JOIN Grupo_estudiante ge on e.no_control=ge.Estudiante_no_control
+LEFT JOIN Grupo g on g.id_grupo=ge.Grupo_id_grupo 
+where e.Plantel_cct_plantel like'".$plantel."%' and e.curp like'".$curp."%' and g.estatus=1 or g.estatus is null and e.tipo_ingreso in ('NUEVO INGRESO','PORTABILIDAD','') and matricula is not null or length(matricula)=0 group by e.no_control having faltantes=0 and num_tercer_parcial=0;")->result();
+  }
+
+
+public function get_estudiante_traslado($no_control){
+
+  return $this->db->query("select * from Estudiante e
+LEFT JOIN Plantel p on p.cct_plantel=e.Plantel_cct_plantel
+LEFT JOIN Grupo_estudiante ge on e.no_control=ge.Estudiante_no_control
+LEFT JOIN Grupo g on g.id_grupo=ge.Grupo_id_grupo
+where e.no_control='".$no_control."' and g.estatus=1 or g.estatus is null group by e.no_control;")->result();
+
+}
+
+
+
+
+
+
+
+public function realizar_traslado_estudiante($no_control,
+           $cct_plantel_traslado,
+           $cct_plantel_origen,
+           $datos_estudiante_documentos,
+           $id_grupo,
+           $id_grupo_destino,
+           $id_friae_origen,
+           $id_friae_destino){
+
+           
+           
+           $this->db->trans_start();
+           
+           $this->db->set('Estudiante_no_control', $no_control);
+           $this->db->set('cct_plantel_origen', $cct_plantel_origen);
+           $this->db->set('id_grupo_origen', $id_grupo);
+           $this->db->set('cct_plantel_traslado', $cct_plantel_traslado);
+           $this->db->set('id_grupo_traslado', $id_grupo_destino);
+           $this->db->set('fecha_tramite',date('Y-m-d'));
+           $this->db->insert('Traslado');
+           
+           foreach($datos_estudiante_documentos as $documento){
+              $this->db->insert('Documentacion',$documento);
+           }
+
+            if($id_grupo_destino!=''){
+                 $this->db->set('Grupo_id_grupo',$id_grupo_destino);
+                 $this->db->where('Estudiante_no_control',$no_control);
+                 $this->db->where('Grupo_id_grupo',$id_grupo);
+                 $this->db->update('Grupo_estudiante');
+
+                 $materias_estudiante = $this->db->query("select distinct id_materia,id_asesor,Grupo_id_grupo from Grupo_estudiante where Grupo_id_grupo='".$id_grupo_destino."';")->result();
+
+                 foreach($materias_estudiante as $m){
+
+                        $this->db->set('id_asesor',$m->id_asesor);
+                        $this->db->where('Estudiante_no_control',$no_control);
+                        $this->db->where('id_materia',$m->id_materia);
+                         $this->db->where('Grupo_id_grupo',$m->Grupo_id_grupo);
+                         $this->db->update('Grupo_estudiante');
+                   }
+
+                    
+            }
+
+
+            if($id_friae_destino!=''){
+                 $this->db->set('Friae_folio',$id_friae_destino);
+                 $this->db->where('Estudiante_no_control',$no_control);
+                 $this->db->where('Friae_folio',$id_friae_origen);
+                 $this->db->update('Friae_estudiante');
+                    
+            }
+
+           $this->db->set('Plantel_cct_plantel',$cct_plantel_traslado);
+           $this->db->where('no_control',$no_control);
+           $this->db->update('Estudiante');
+
+           
+
+
+
+           $this->db->trans_complete();
+
+           if ($this->db->trans_status() === FALSE)
+           {
+              print_r($this->db->error());
+            
+           }
+              
+           else{
+              return "si";
+             
+           }
+
+
+           return "si";
+
+
+
+}
+
+
+
+public function get_estudiante_datos_semestre_grupo($no_control){
+
+  return $this->db->query("select * from Estudiante e
+LEFT JOIN Plantel p on p.cct_plantel=e.Plantel_cct_plantel
+LEFT JOIN Grupo_estudiante ge on e.no_control=ge.Estudiante_no_control
+LEFT JOIN Grupo g on g.id_grupo=ge.Grupo_id_grupo
+where e.no_control='".$no_control."' and g.estatus=1 or g.estatus is null group by e.no_control;")->result();
+
+}
+
+
 }
 ?>

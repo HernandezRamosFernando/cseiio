@@ -109,7 +109,7 @@ class M_friae extends CI_Model {
 
 
     function get_estudiantes_friae($grupo){
-        return $this->db->query("select id_grupo as grupo,Estudiante_no_control as no_control from Friae inner join Friae_Estudiante where id_grupo='".$grupo."'")->result();
+        return $this->db->query("select distinct Estudiante_no_control as no_control,id_grupo as grupo from Friae as f inner join Friae_Estudiante as fe on f.folio=fe.Friae_folio where id_grupo='".$grupo."'")->result();
     }
 
     function get_materias_estudiante_friae($grupo,$no_control){

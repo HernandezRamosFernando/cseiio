@@ -230,7 +230,7 @@ if (document.getElementById("fecha_inicio").value != '' ) {
         fila += valor.semestre_en_curso;
         fila += '</td>';
         fila += '<td>';
-        fila += valor.semestre;
+        fila += valor.semestre_materia;
         fila += '</td>';
         fila += '<td class="">';
         fila += '<input type="text" class="form-control" id="calificacion" onchange="calificaciones(this);" ></input>';

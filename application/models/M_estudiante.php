@@ -130,11 +130,12 @@ public function update_estudiante(
    $datos_estudiante_medicos,
    $no_control,
    $id_tutor,
-   $datos_escuela_procedencia){
+   $datos_escuela_procedencia
+   ){
 
       
 
-            $this->db->trans_start();
+            //$this->db->trans_start();
 
             //tabla estudiante
             $this->db->where('no_control', $no_control);
@@ -171,10 +172,15 @@ public function update_estudiante(
                $this->db->update('Datos_lengua_materna',$dato_lengua);
             }
 
-            $this->db->query("delete from Estudiante_Escuela_procedencia where Estudiante_no_control='".$no_control."'");
+            
+            $cct = $this->db->query("select cct_escuela_procedencia as cct from Escuela_procedencia as ep inner join Estudiante_Escuela_procedencia as eep on ep.cct_escuela_procedencia=eep.Escuela_procedencia_cct_escuela_procedencia where Estudiante_no_control='".$no_control."' and tipo_escuela_procedencia='SECUNDARIA'")->result()[0]->cct;
+            $this->db->query("delete from Estudiante_Escuela_procedencia where Estudiante_no_control='".$no_control."' and Escuela_procedencia_cct_escuela_procedencia='".$cct."'");
             foreach($datos_escuela_procedencia as $escuela){
                $this->db->insert("Estudiante_Escuela_procedencia",$escuela);
             }
+            
+
+            //print_r($datos_escuela_procedencia);
 
             
          
@@ -192,6 +198,7 @@ public function update_estudiante(
                return "si";
                //return "si";
             }
+            
 
    
 }

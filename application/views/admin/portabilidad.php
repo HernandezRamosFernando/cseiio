@@ -1,5 +1,5 @@
 
-          <div id="content-wrapper">
+<div id="content-wrapper">
 
 <div class="container-fluid">
 
@@ -1443,6 +1443,7 @@ form.onsubmit = function (e) {
       text: 'Esta tratando de agregar un alumno sin Secundaria',
       showCancelButton: true,
       confirmButtonText: 'Registrar',
+      allowOutsideClick: false,
       cancelButtonText: 'Cancelar',
     }).then((result) => {
       if (result.value) {
@@ -1480,10 +1481,16 @@ function envioform(form) {
         Swal.fire({
           type: 'success',
           title: 'Registro exitoso',
+          allowOutsideClick: false,
           confirmButtonText: "Aceptar"
-        });
-        $(document).scrollTop(0);
-        location.reload(); 
+        }).then((result) => {
+            if (result.value) {
+              //aqui va el aceptar
+              $(document).scrollTop(0);
+              location.reload();
+            }
+            //aqui va si cancla
+          }); 
       }
 
       else {

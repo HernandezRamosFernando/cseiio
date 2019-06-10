@@ -429,6 +429,7 @@
                     swalWithBootstrapButtons.fire({
                       type: 'success',
                       text: 'Datos guardados correctamente',
+                      allowOutsideClick: false,
                       confirmButtonText: 'Aceptar'
                     }).then((result) => {
                       if (result.value) {
@@ -575,6 +576,7 @@
                   swalWithBootstrapButtons.fire({
                     type: 'success',
                     text: 'Datos guardados correctamente',
+                    allowOutsideClick: false,
                     confirmButtonText: 'Aceptar'
                   }).then((result) => {
                     if (result.value) {

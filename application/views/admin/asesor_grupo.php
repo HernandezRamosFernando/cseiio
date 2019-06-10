@@ -178,7 +178,15 @@ function cargar_select_asesores(){
     //cargar select de asesores de ese plantel
     var asesores = new XMLHttpRequest();
     asesores.open('GET', '<?php echo base_url();?>index.php/c_asesor/get_asesores_plantel?plantel='+document.getElementById("plantel").value, true);
-    asesores.onload = function () {
+    asesores.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      asesores.error = function (){
+        console.log("error de conexion");
+      }
+      asesores.onload = function(){
+        //console.log(xhr.response);
+        $('#div_carga').hide();
       //cargar materia y asesores ya guardados
   document.getElementById("tabla_asesor").innerHTML= "";
   var xhr = new XMLHttpRequest();
@@ -270,6 +278,7 @@ function guardar(){
                     swalWithBootstrapButtons.fire({
                     type: 'success',
                     text: 'Datos guardados correctamente',
+                    allowOutsideClick: false,
                     confirmButtonText: 'Aceptar'
                     }).then((result) => {
                     if (result.value) {

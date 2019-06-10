@@ -1178,6 +1178,7 @@
         type: 'warning',
         text: 'Esta tratando de agregar un alumno sin Secundaria',
         showCancelButton: true,
+        allowOutsideClick: false,
         confirmButtonText: 'Registrar',
         cancelButtonText: 'Cancelar',
       }).then((result) => {
@@ -1218,11 +1219,17 @@
         if (xhr.responseText === "si") {
           Swal.fire({
             type: 'success',
+            allowOutsideClick: false,
             title: 'Registro exitoso',
             confirmButtonText: "Aceptar"
-          });
-          $(document).scrollTop(0);
-          location.reload(); 
+          }).then((result) => {
+            if (result.value) {
+              //aqui va el aceptar
+              $(document).scrollTop(0);
+              location.reload();
+            }
+            //aqui va si 
+          }); 
         }
 
         else {

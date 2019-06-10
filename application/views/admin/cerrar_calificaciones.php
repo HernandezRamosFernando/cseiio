@@ -59,8 +59,14 @@
     if (document.getElementById("plantel").value != "") {
       var cerrar = new XMLHttpRequest();
           cerrar.open('GET', '<?php echo base_url();?>index.php/c_acreditacion/cerrar_calificaciones_plantel?plantel='+document.getElementById("plantel").value, true);
-
-          cerrar.onload = function () {
+          cerrar.onloadstart = function () {
+        $('#div_carga').show();
+      }
+      cerrar.error = function () {
+        console.log("error de conexion");
+      }
+      cerrar.onload = function () {
+        $('#div_carga').hide();
             console.log(cerrar.response.trim());
 //respuesta de si puede cerrar
       if(cerrar.response.trim()==="si"){//si si puede cerrar
@@ -83,6 +89,7 @@
           swalWithBootstrapButtons.fire({
             type: 'info',
             text: 'Calificaciones cerradas correctamente, estatus de los alumnos actualizados',
+            allowOutsideClick: false,
             confirmButtonText: 'Aceptar'
           }).then((result) => {
             if (result.value) {
@@ -103,8 +110,8 @@
 
     else{// si no puede cerrar
       Swal.fire({
-        type: 'warning',
-        text: 'Aun faltan las calificaciones del examen final'
+        type: 'error',
+        text: 'No se puede cerrar calificaciones sin antes capturar las calificaciones del examen final de todos los grupos.'
       });
     }
 

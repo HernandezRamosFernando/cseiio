@@ -89,12 +89,14 @@
       text: 'Esta seguro que desea finalizar el periodo escolar',
       confirmButtonText: 'Aceptar',
       showCancelButton: 'true',
+      allowOutsideClick: false,
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.value) {
         swalWithBootstrapButtons.fire({
           type: 'info',
           text: 'Agregue los datos del nuevo periodo escolar',
+          allowOutsideClick: false,
           confirmButtonText: 'Aceptar'
         }).then((result) => {
           if (result.value) {
@@ -154,8 +156,14 @@
 
     var xhr = new XMLHttpRequest();
         xhr.open('GET', '<?php echo base_url();?>index.php/c_plantel/get_planteles_sin_cerrar_calificaciones', true);
-
+        xhr.onloadstart = function () {
+        $('#div_carga').show();
+        }
+       xhr.error = function () {
+       console.log("error de conexion");
+        }
         xhr.onload = function () {
+          $('#div_carga').hide();
           if(JSON.parse(xhr.response).length>0){
             var lista = "<ul>";
             JSON.parse(xhr.response).forEach(function(valor){
@@ -221,6 +229,7 @@ console.log(datos);
           swalWithBootstrapButtons.fire({
             type: 'success',
             text: 'Datos agregados correctamente',
+            allowOutsideClick: false,
             confirmButtonText: 'Aceptar'
           }).then((result) => {
             if (result.value) {

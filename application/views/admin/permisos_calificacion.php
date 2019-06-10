@@ -227,6 +227,7 @@
 
     //mandar json a controlador permisos
     var xhr = new XMLHttpRequest();
+    $('#fechapermiso').modal().show();
     xhr.open("POST", '<?php echo base_url();?>index.php/c_permisos/agregar_permisos', true);
 
     //Send the proper header information along with the request
@@ -245,6 +246,7 @@
           swalWithBootstrapButtons.fire({
             type: 'success',
             text: 'Datos guardados correctamente',
+            allowOutsideClick: false,
             confirmButtonText: 'Aceptar'
           }).then((result) => {
             if (result.value) {
@@ -259,6 +261,7 @@
             type: 'error',
             text: 'Datos no guardados'
           });
+          $('#fechapermiso').modal().hide();
         }
       }
     }

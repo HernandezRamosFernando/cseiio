@@ -28,6 +28,9 @@
 // Extend the TCPDF class to create custom Header and Footer
 class MYPDF extends TCPDF {
 
+
+    
+
 	//Page header
 	public function Header() {
 /*		
@@ -67,6 +70,80 @@ class MYPDF extends TCPDF {
 		$this->Cell(0, 10, 'Página '.$this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
 	}
 }
+
+
+ function celdas_materias($materias){
+    $numero_materias=sizeof($materias[0]);
+
+    if($numero_materias==13){
+        return $html_trece_columnas='
+        <td style="width:28px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][0]->id_materia.'</td>
+        <td style="width:28px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][1]->id_materia.'</td>
+        <td style="width:28px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][2]->id_materia.'</td>
+        <td style="width:28px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][3]->id_materia.'</td>
+        <td style="width:28px;background-color:#f8facb">'.$materias[0][4]->id_materia.'</td>
+        <td style="width:28px;background-color:#f8facb">'.$materias[0][5]->id_materia.'</td>
+        <td style="width:28px;background-color:#f8facb">'.$materias[0][6]->id_materia.'</td>
+        <td style="width:28px;background-color:#f8facb">'.$materias[0][7]->id_materia.'</td>
+        <td style="width:28px;background-color:#f8facb">'.$materias[0][8]->id_materia.'</td>
+        <td style="width:28px;background-color:#f8facb">'.$materias[0][9]->id_materia.'</td>
+        <td style="width:28px;background-color:#f8facb">'.$materias[0][10]->id_materia.'</td>
+        <td style="width:28px;background-color:#f8facb">'.$materias[0][11]->id_materia.'</td>
+        <td style="width:28px;background-color:#f8facb">'.$materias[0][12]->id_materia.'</td>
+        ';
+    }
+
+    if($numero_materias==12){
+        return $html_doce_columnas='
+        <td style="width:31px;background-color:#f8facb">'.$materias[0][0]->id_materia.'</td>
+        <td style="width:31px;background-color:#f8facb">'.$materias[0][1]->id_materia.'</td>
+        <td style="width:31px;background-color:#f8facb">'.$materias[0][2]->id_materia.'</td>
+        <td style="width:31px;background-color:#f8facb">'.$materias[0][3]->id_materia.'</td>
+        <td style="width:31px;background-color:#f8facb">'.$materias[0][4]->id_materia.'</td>
+        <td style="width:31px;background-color:#f8facb">'.$materias[0][5]->id_materia.'</td>
+        <td style="width:31px;background-color:#f8facb">'.$materias[0][6]->id_materia.'</td>
+        <td style="width:31px;background-color:#f8facb">'.$materias[0][7]->id_materia.'</td>
+        <td style="width:31px;background-color:#f8facb">'.$materias[0][8]->id_materia.'</td>
+        <td style="width:31px;background-color:#f8facb">'.$materias[0][9]->id_materia.'</td>
+        <td style="width:31px;background-color:#f8facb">'.$materias[0][10]->id_materia.'</td>
+        <td style="width:31px;background-color:#f8facb">'.$materias[0][11]->id_materia.'</td>
+        ';
+    }
+
+    if($numero_materias==9){
+        return $html_nueve_columnas='
+        <td style="width:41px;background-color:#f8facb">'.$materias[0][0]->id_materia.'</td>
+        <td style="width:41px;background-color:#f8facb">'.$materias[0][1]->id_materia.'</td>
+        <td style="width:41px;background-color:#f8facb">'.$materias[0][2]->id_materia.'</td>
+        <td style="width:41px;background-color:#f8facb">'.$materias[0][3]->id_materia.'</td>
+        <td style="width:41px;background-color:#f8facb">'.$materias[0][4]->id_materia.'</td>
+        <td style="width:41px;background-color:#f8facb">'.$materias[0][5]->id_materia.'</td>
+        <td style="width:41px;background-color:#f8facb">'.$materias[0][6]->id_materia.'</td>
+        <td style="width:41px;background-color:#f8facb">'.$materias[0][7]->id_materia.'</td>
+        <td style="width:41px;background-color:#f8facb">'.$materias[0][8]->id_materia.'</td>
+        ';
+    }
+
+    if($numero_materias==8){
+        return $html_ocho_columnas='
+        <td style="width:46px;background-color:#f8facb">'.$materias[0][0]->id_materia.'</td>
+        <td style="width:46px;background-color:#f8facb">'.$materias[0][1]->id_materia.'</td>
+        <td style="width:46px;background-color:#f8facb">'.$materias[0][2]->id_materia.'</td>
+        <td style="width:46px;background-color:#f8facb">'.$materias[0][3]->id_materia.'</td>
+        <td style="width:46px;background-color:#f8facb">'.$materias[0][4]->id_materia.'</td>
+        <td style="width:46px;background-color:#f8facb">'.$materias[0][5]->id_materia.'</td>
+        <td style="width:46px;background-color:#f8facb">'.$materias[0][6]->id_materia.'</td>
+        <td style="width:46px;background-color:#f8facb">'.$materias[0][7]->id_materia.'</td>
+        ';
+    }
+
+    else{
+        return "";
+    }
+}
+
+
+
 $medidas = array(279.4,431.8);
 // create new PDF document
 $pdf = new MYPDF('L', 'mm',$medidas, true, 'UTF-8', false);
@@ -112,8 +189,100 @@ $pdf->SetFont('helvetica','', 10);
 // add a page
 $pdf->AddPage();
 
-// set some text to print
-$html_1 ='
+
+//carga los datos de los renglones de la tabla
+$contador=0;
+
+$filas_faltantes = 35-sizeof($datos_estudiante);
+$filas_faltantes_html="";
+if($filas_faltantes>0){
+for($i=0;$i<$filas_faltantes;$i++){
+$filas_faltantes_html.='<tr>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+</tr>';
+}
+}
+
+else{
+    $filas_faltantes_html="";
+}
+
+
+$html_pos_materias='
+<td style="width:40px;background-color:#f8facb">SITUACION DEL ALUMNO AL FIN DEL SEMESTRE</td>
+<td style="width:25px;background-color:#f8facb">NUMERO ADEUDOS AL FIN DEL SEMESTRE</td>
+<td style="width:70px;background-color:#f8facb">CLAVE U.C. DE ADEUDOS FIN DE SEMESTRE</td>
+<td style="width:25px;background-color:#f8facb">NUMERO ADEUDOS DE TODOS LOS SEMESTRES CURSADOS</td>
+<td style="width:70px;background-color:#f8facb">CLAVE U.C. DE ADEUDOS DE TODOS LOS MODULOS CURSADOS</td>
+<td style="width:40px;background-color:#f8facb">SITUACION DEL ALUMNO DESPUES DEL PERIODO DE REGULARIZACION</td>
+<td style="width:40px;background-color:#f8facb">FECHA DE BAJA</td>
+<td style="width:40px;background-color:#f8facb">FECHA DE NACIMIENTO</td>
+';
+
+////////////////////////////////////////////////////////
+
+$registros_html='';
+foreach($datos_estudiante as $estudiante){
+$renglon ='<tr style="font-size:5 pt;text-align:center">';
+$renglon.='<td height="15">'.($contador+1).'</td>';//np
+$renglon.='<td>'.$estudiante->matricula.'</td>';//matricula estudiante
+$renglon.='<td>'.$estudiante->curp.'</td>';//curp estudiante
+$renglon.='<td>'.$estudiante->sexo.'</td>';//sexo
+$renglon.='<td>'.$estudiante->primer_apellido.'</td>';//primer apellido
+$renglon.='<td>'.$estudiante->segundo_apellido.'</td>';//segundo apellido
+$renglon.='<td>'.$estudiante->nombre.'</td>';//nombre estudiante
+
+//calculo de su edad
+$fecha_nacimiento = new DateTime($estudiante->fecha_nacimiento);
+$fecha_actual = new DateTime(date("Y-m-d"));
+$dias = $fecha_actual->diff($fecha_nacimiento);
+$edad = intval(($dias->days)/365);
+//////
+$renglon.='<td>'.$edad.'</td>';//edad estudiante
+$renglon.='<td>'.$datos_friae_estudiante[$contador][0]->tipo_ingreso_inscripcion.'</td>';//tipo ingreso estudiante
+$renglon.='<td>'.$datos_friae_estudiante[$contador][0]->estatus_inscripcion.'</td>';//tipo ingreso estudiante
+$renglon.='<td>'.$datos_friae_estudiante[$contador][0]->numero_adeudos_inscripcion.'</td>';//tipo ingreso estudiante
+$renglon.='<td>'.$datos_friae_estudiante[$contador][0]->id_materia_adeudos_inscripcion.'</td>';//tipo ingreso estudiante
+$renglon.='<td>'.$datos_friae_estudiante[$contador][0]->adeudos_primera_regularizacion.'</td>';//tipo ingreso estudiante
+$renglon.='<td>'.$datos_friae_estudiante[$contador][0]->id_materia_adeudos_primera_regularizacion.'</td>';//tipo ingreso estudiante
+///------------------aqui se van a cargar las materias del estudiante
+
+foreach($materias_estudiantes[$contador] as $materia){
+$renglon.='<td>'.$materia->calificacion_final.'</td>';
+}
+
+$renglon.='<td>'.$datos_friae_estudiante[$contador][0]->tipo_ingreso_fin_semestre.'</td>';//tipo ingreso estudiante
+$renglon.='<td>'.$datos_friae_estudiante[$contador][0]->adeudos_fin_semestre.'</td>';//tipo ingreso estudiante
+$renglon.='<td>'.$datos_friae_estudiante[$contador][0]->id_materia_adeudos_fin_semestre.'</td>';//tipo ingreso estudiante
+
+$renglon.='<td>'.$datos_friae_estudiante[$contador][0]->adeudos_segunda_regularizacion.'</td>';//tipo ingreso estudiante
+$renglon.='<td>'.$datos_friae_estudiante[$contador][0]->id_materia_adeudos_segunda_regularizacion.'</td>';//tipo ingreso estudiante
+$renglon.='<td>'.$datos_friae_estudiante[$contador][0]->tipo_ingreso_despues_regularizacion.'</td>';//tipo ingreso estudiante
+$renglon.='<td>'.$datos_friae_estudiante[$contador][0]->baja.'</td>';//tipo ingreso estudiante
+$renglon.='<td>'.$estudiante->fecha_nacimiento.'</td>';//matricula estudiante
+
+
+//
+$renglon.='</tr>';
+$registros_html.=$renglon;
+$contador+=1;
+}
+
+//carga los datos de encabezados
+$pre_materias ='
 <h5 style="text-align:center">COLEGIO SUPERIOR PARA LA EDUCACION INTEGRAL INTERCULTURAL DE OAXACA</h5>
 <p style="text-align:center">DEPARTAMENTO DE CONTROL ESCOLAR</p>
 <h5 style="text-align:center;background-color:#e9e9e9">FORMATO DE REGISTRO DE INSCRIPCION Y ACREDITACION ESCOLAR</h5>
@@ -121,18 +290,18 @@ $html_1 ='
 <table>
 <tbody>
 <tr>
-<td>Nombre del Plantel: aqui va el nombre</td>
-<td style="text-align:right">Ciclo escolar: aqui va el ciclo</td>
+<td>Nombre del Plantel:'.$datos_friae->nombre_plantel.'</td>
+<td style="text-align:right">Ciclo escolar:'.$datos_friae->nombre_ciclo_escolar.'</td>
 </tr>
 
 <tr>
-<td>Clave cct: aqui va el cct</td>
-<td style="text-align:right">Semestre: aqui va el semestre</td>
+<td>Clave cct:'.$datos_friae->cct_plantel.'</td>
+<td style="text-align:right">Semestre:'.$datos_friae->semestre.'</td>
 </tr>
 
 <tr>
-<td>Localidad y municipio: aqui va el localidad y municipio</td>
-<td style="text-align:right">Grupo: aqui va el grupo</td>
+<td>Localidad y municipio:'.$datos_friae->nombre_localidad.','.$datos_friae->nombre_municipio.'</td>
+<td style="text-align:right">Grupo:'.$datos_friae->nombre_grupo.'</td>
 </tr>
 
 <tr>
@@ -145,29 +314,32 @@ $html_1 ='
 
 <table border="1">
 <tbody>
-<tr style="font-size:6 pt;text-align:center">
-<td style="vertical-align: middle">N/P</td>
-<td>MATRICULA</td>
-<td>CURP</td>
-<td>SEXO</td>
-<td>PRIMER APELLIDO</td>
-<td>SEGUNDO APELLIDO</td>
-<td>NOMBRE(S)</td>
-<td>EDAD ACTUAL</td>
-<td>TIPO INGRESO</td>
-<td>ESTATUS INICIO DEL SEMESTRE</td>
-<td>NUMERO DE ADEUDOS INICIO DEL SEMESTRE</td>
-<td>CLAVE U.C. ADEUDOS SEMESTRES ANTERIORES</td>
-<td>NUMERO DE ADEUDOS DESPUES DE REGULARIZACION DE MAYO</td>
-<td>CLAVE U.C. ADEUDOS DESPUES DE LA REGULARIZACION DE MAYO</td>
-</tr>
+<tr style="font-size:4 pt;text-align:center">
+<td style="width:20px;background-color:#f8facb"><br><br><br><br><br>N/P</td>
+<td style="width:35px;background-color:#f8facb"><br><br><br><br><br>MATRICULA</td>
+<td style="width:75px;background-color:#f8facb"><br><br><br><br><br>CURP</td>
+<td style="width:20px;background-color:#f8facb"><br><br><br><br><br>SEXO</td>
+<td style="width:70px;background-color:#f8facb"><br><br><br><br><br>PRIMER APELLIDO</td>
+<td style="width:70px;background-color:#f8facb"><br><br><br><br><br>SEGUNDO APELLIDO</td>
+<td style="width:85px;background-color:#f8facb"><br><br><br><br><br>NOMBRE(S)</td>
+<td style="width:25px;background-color:#f8facb"><br><br><br><br>EDAD ACTUAL</td>
+<td style="width:50px;background-color:#f8facb"><br><br><br><br><br>TIPO INGRESO</td>
+<td style="width:40px;background-color:#f8facb"><br><br><br><br>ESTATUS INICIO DEL SEMESTRE</td>
+<td style="width:25px;background-color:#f8facb"><br>NUMERO DE ADEUDOS INICIO DEL SEMESTRE</td>
+<td style="width:70px;background-color:#f8facb"><br><br><br><br>CLAVE U.C. ADEUDOS SEMESTRES ANTERIORES</td>
+<td style="width:25px;background-color:#f8facb">NUMERO DE ADEUDOS DESPUES DE REGULARIZACION DE MAYO</td>
+<td style="width:70px;background-color:#f8facb"><br><br><br>CLAVE U.C. ADEUDOS DESPUES DE LA REGULARIZACION DE MAYO</td>'.celdas_materias($materias_estudiantes).$html_pos_materias.'
+</tr>'.$registros_html.$filas_faltantes_html.'
 </tbody>
 </table>
 ';
 
+
+
+
 // print a block of text using Write()
 // output the HTML content
-$pdf->writeHTML($html_1, true, 0, true, true);
+$pdf->writeHTML($pre_materias, true, 0, true, true);
 
 
 //Close and output PDF document

@@ -435,11 +435,6 @@ class C_estudiante extends CI_Controller {
                 'Estudiante_no_control'=>$no_control,
                 'Escuela_procedencia_cct_escuela_procedencia'=>$this->input->post('aspirante_secundaria_cct')
             );
-
-            $datos_escuela_procedencia['bachillerato']=array(
-                'Estudiante_no_control'=>$no_control,
-                'Escuela_procedencia_cct_escuela_procedencia'=>$this->input->post('aspirante_bachillerato_cct')
-            );
         }
 
        

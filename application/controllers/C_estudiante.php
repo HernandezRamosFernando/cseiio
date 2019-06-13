@@ -15,6 +15,7 @@ class C_estudiante extends CI_Controller {
         $this->load->model('M_lengua');
         $this->load->model('M_ciclo_escolar');
         $this->load->model('M_resolucion_equivalencia');
+        $this->load->model('M_friae');
 
     }
 
@@ -995,6 +996,12 @@ public function get_estudiantes_derecho_a_traslado(){
  public function get_estudiante_datos_semestre_grupo(){
      $no_control = $this->input->get('no_control');
      echo json_encode($this->M_estudiante->get_estudiante_datos_semestre_grupo($no_control));
+ }
+ 
+ 
+ public function get_estudiante_datos_semestre_grupo_calificacion(){
+     $no_control = $this->input->get('no_control');
+     echo json_encode($this->M_estudiante->get_estudiante_datos_semestre_grupo_calificacion($no_control));
  }
  
  

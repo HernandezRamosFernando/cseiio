@@ -73,7 +73,6 @@
           <thead class="thead-light">
             <tr>
               <th scope="col" class="col-md-1">Nombre completo</th>
-              <th scope="col" class="col-md-1">CURP</th>
               <th scope="col" class="col-md-1">N° control</th>
               <th scope="col" class="col-md-1">Matricula</th>
               <th scope="col" class="col-md-1">Plantel CCT</th>
@@ -289,66 +288,116 @@
 <script>
 
   function cargar_datos_traslado(id_estudiante){
+                     document.getElementById('nuevo_traslado').reset();
+                      
+                      var xhr = new XMLHttpRequest();
+                        var query = 'no_control=' +id_estudiante.value;
+                      xhr.open('GET', '<?php echo base_url();?>index.php/c_estudiante/get_estudiante_datos_semestre_grupo_calificacion?' + query, true);
+                      
+                      xhr.error = function () {
+                        console.log("error de conexion");
+                      }
+                      xhr.onload = function () {
+                      let estudiante = JSON.parse(xhr.response);
+                      var validacion_resultado="";
 
-    var xhr = new XMLHttpRequest();
-      var query = 'no_control=' +id_estudiante.value;
-    xhr.open('GET', '<?php echo base_url();?>index.php/c_estudiante/get_estudiante_datos_semestre_grupo?' + query, true);
-    
-    xhr.error = function () {
-      console.log("error de conexion");
-    }
-    xhr.onload = function () {
-    let estudiante = JSON.parse(xhr.response);
-    document.getElementById("nombre_completo").value =estudiante[0].nombre+" "+estudiante[0].primer_apellido+" "+estudiante[0].segundo_apellido;
-    document.getElementById("num_control").value =estudiante[0].no_control;
-    document.getElementById("matricula").value=estudiante[0].matricula;
-    document.getElementById("semestre_en_curso").value=estudiante[0].semestre_en_curso;
-    document.getElementById("plantel_actual").value=estudiante[0].nombre_plantel;
-    document.getElementById("cct_plantel_origen").value=estudiante[0].Plantel_cct_plantel;
-    document.getElementById("id_grupo").value=estudiante[0].id_grupo;
+                      if(estudiante[0].matricula===null){
+                            validacion_resultado+="<p style='text-align:left;margin-left:30%'> - El alumno no cuenta con matricula.</p>";
+                      }
 
-    var id_grupo = estudiante[0].nombre_grupo;
-    var componente = id_grupo.split("-")[1];
+                      if(estudiante[0].tipo_ingreso!=='REINGRESO' && estudiante[0].tipo_ingreso!=='INCORPORADO' && estudiante[0].tipo_ingreso!=='PROBABLE REINCORPORADO'){
+                            validacion_resultado+="<p style='text-align:left;margin-left:30%'> - El estatus del alumno es "+estudiante[0].tipo_ingreso+".</p>";
+                      }
 
-    var grupo="";
-    if(estudiante.nombre_grupo===null){
-            grupo="Sin grupo asignado";
-        }
-        else{
-            grupo=estudiante[0].nombre_grupo;
-        }
-    document.getElementById("grupo").value=grupo;
+                      if(estudiante[0].faltantes>0){
+                            validacion_resultado+="<p style='text-align:left;margin-left:30%'> - El alumno adeuda documentación base.</p>";
+                      }
 
-if(estudiante[0].semestre_en_curso>=5){
-    var xhr_plantel = new XMLHttpRequest();
-       var query = 'id_componente=' +componente;
-       xhr_plantel.open('GET', '<?php echo base_url();?>index.php/C_plantel/get_lista_planteles_especialidad_html?' + query, true);
-      
-          xhr_plantel.error = function () {
-            console.log("error de conexion");
-          }
-          xhr_plantel.onload = function () {
-          
-          if (xhr_plantel.response === "") {
-                 document.getElementById("plantel_para_traslado").innerHTML ="<option value=''>No existen planteles disponibles con el componente seleccionado del alumno</option>";
-                
-              } 
-              else {
-                
-                document.getElementById("plantel_para_traslado").innerHTML =xhr_plantel.responseText;
-              }
-          
-                  
-        };
 
-        xhr_plantel.send(null);
+                      if(validacion_resultado===""){
+                        $('#generar_traslado').modal('show');
+                                document.getElementById("nombre_completo").value =estudiante[0].nombre+" "+estudiante[0].primer_apellido+" "+estudiante[0].segundo_apellido;
+                            document.getElementById("num_control").value =estudiante[0].no_control;
+                            document.getElementById("matricula").value=estudiante[0].matricula;
+                            document.getElementById("semestre_en_curso").value=estudiante[0].semestre_en_curso;
+                            document.getElementById("plantel_actual").value=estudiante[0].nombre_plantel;
+                            document.getElementById("cct_plantel_origen").value=estudiante[0].Plantel_cct_plantel;
+                            
 
-  }
-     
-            
-  };
+                             if(typeof estudiante[0].id_grupo !== 'undefined'){
+                                    
+                                    document.getElementById("id_grupo").value=estudiante[0].id_grupo;
+                                }
+                                else{
+                                    document.getElementById("id_grupo").value="";
+                                }
 
-  xhr.send(null);
+                            var id_grupo = estudiante[0].nombre_grupo;
+                            var componente="";
+
+                            if(typeof id_grupo !== 'undefined'){
+                              var arreglo=id_grupo.split("-");
+                                  if(arreglo.length==1){
+                                    componente= id_grupo.split("-")[1];
+                                  }
+
+                            }
+
+                            
+
+                            var grupo="";
+                            if(typeof estudiante[0].nombre_grupo !== 'undefined'){
+                                    
+                                    grupo=estudiante[0].nombre_grupo;
+                                }
+                                else{
+                                    grupo="Sin grupo asignado";
+                                }
+                            document.getElementById("grupo").value=grupo;
+
+                        if(estudiante[0].semestre_en_curso>=5){
+                            var xhr_plantel = new XMLHttpRequest();
+                               var query = 'id_componente=' +componente;
+                               xhr_plantel.open('GET', '<?php echo base_url();?>index.php/C_plantel/get_lista_planteles_especialidad_html?' + query, true);
+                              
+                                  xhr_plantel.error = function () {
+                                    console.log("error de conexion");
+                                  }
+                                  xhr_plantel.onload = function () {
+                                  
+                                  if (xhr_plantel.response === "") {
+                                         document.getElementById("plantel_para_traslado").innerHTML ="<option value=''>No existen planteles disponibles con el componente seleccionado del alumno</option>";
+                                        
+                                      } 
+                                      else {
+                                        
+                                        document.getElementById("plantel_para_traslado").innerHTML =xhr_plantel.responseText;
+                                      }
+                                  
+                                          
+                                };
+
+                                xhr_plantel.send(null);
+
+                          }
+
+                      }
+
+                      else{
+
+                        Swal.fire({
+                            type: 'warning',
+                            title: 'Información!',
+                            html: "<p>No puede realizar el proceso de traslado, debido a:</p>"+validacion_resultado
+                          })
+                      }
+
+                      
+                       
+                              
+                    };
+
+                    xhr.send(null);
 
   }
 
@@ -384,16 +433,19 @@ if(estudiante[0].semestre_en_curso>=5){
         fila += valor.nombre + " " + valor.primer_apellido + " " + valor.segundo_apellido;
         fila += '</td>';
 
-        fila += '<td>';
-        fila += valor.curp;
-        fila += '</td>';
 
         fila += '<td>';
         fila += valor.no_control;
         fila += '</td>';
 
+        var num_matricula="";
+
+        if(valor.matricula !== null){
+        	num_matricula=valor.matricula;
+        }
+
         fila += '<td>';
-        fila += valor.matricula;
+        fila += num_matricula;
         fila += '</td>';
 
         fila += '<td>';
@@ -459,10 +511,10 @@ if(estudiante[0].semestre_en_curso>=5){
 
 
         fila += '<td>';
-        fila += '<button class="btn btn-success" type="button" value="' + valor.no_control + '" onclick="cargar_datos_traslado(this)" class="btn btn-primary" data-toggle="modal" data-target="#generar_traslado">Realizar traslado</button>';
+        fila += '<button class="btn btn-success" type="button" value="' + valor.no_control + '" onclick="cargar_datos_traslado(this)" class="btn btn-primary">Realizar traslado</button>';
         fila += '</td>';
 
-        
+      
         
 
         fila += '</tr>';
@@ -484,6 +536,9 @@ if(estudiante[0].semestre_en_curso>=5){
 }
 
 
+
+
+
 var form_nuevo_traslado = document.getElementById("nuevo_traslado");
   form_nuevo_traslado.onsubmit = function (e) {
     e.preventDefault();
@@ -493,17 +548,21 @@ var form_nuevo_traslado = document.getElementById("nuevo_traslado");
 		    xhr_2.open("POST", "<?php echo base_url();?>index.php/c_estudiante/nuevo_traslado", true);
 		    xhr_2.onreadystatechange = function () {
 		      if (xhr_2.responseText === "si") {
-		          Swal.fire({
-		            type: 'success',
-		            title: 'Traslado exitoso',
-		            showConfirmButton: false,
-		            timer: 2500
-		          })
-		          $('#generar_traslado').modal('hide');
+  		          Swal.fire({
+  		            type: 'success',
+                  scrollbarPadding:false,
+  		            title: 'Traslado exitoso',
+  		            showConfirmButton: false,
+  		            timer: 2500
+  		          })
+  		          
+                $('#generar_traslado').modal('toggle');
+                
 		          
 		        } else {
 		          Swal.fire({
 		            type: 'error',
+                scrollbarPadding:false,
 		            title: 'Ha ocurrido un error en el proceso de traslado',
 		            confirmButtonText: 'Cerrar'
 
@@ -512,6 +571,10 @@ var form_nuevo_traslado = document.getElementById("nuevo_traslado");
 		      
 		    }
 		    xhr_2.send(formdata);
+
+
+        borrar_formato_tabla();
+                buscar();
 
     }
 
@@ -559,10 +622,11 @@ var form_nuevo_traslado = document.getElementById("nuevo_traslado");
 
 
             $('#div_carga').hide();
+            var grupo_origen='';
+                  grupo_origen=document.getElementById("id_grupo").value;
             if (xhr.response === "") {
 
-              var grupo_origen='';
-                  grupo_origen=document.getElementById("id_grupo").value;
+              
 
                   var option = document.createElement("option");
                   option.text = "Ningun grupo creado";
@@ -644,4 +708,14 @@ console.log("num_alumnos: "+num_alumnos);
   }
 
 
+
+function refrescar_tabla(){
+  borrar_formato_tabla();
+  buscar();
+}
+
+ function borrar_formato_tabla(){
+      $("#tabla_completa").dataTable().fnDestroy();
+      
+    }
 </script>

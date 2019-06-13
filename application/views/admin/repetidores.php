@@ -140,7 +140,7 @@
         fila += valor.Plantel_cct_plantel;
         fila += '</td>';
         fila += '<td>';
-        fila += '<button class="btn btn-lg btn-block btn-warning" type="button" value="' + valor.no_control + '" onclick="reinscribir_reprobado(this)" data-toggle="modal" data-target="#">Reinscribir</button>';
+        fila += '<button class="btn btn-lg btn-block btn-warning" type="button" value="' + valor.no_control + "," + valor.semestre + "," + valor.semestre_en_curso + '" onclick="reinscribir_reprobado(this)" data-toggle="modal" data-target="#">Reinscribir</button>';
         fila += '</td>';
         fila += '</tr>';
         document.getElementById("tabla").innerHTML += fila;
@@ -156,6 +156,71 @@
   }
 
   function reinscribir_reprobado(e){
+    var separar = e.value.split(",")
+    var noControl = separar[0];
+    var semestre = separar[1];
+    var semestre_curso = separar[2];
+
+    var restantes = (6 - semestre_curso) + parseInt(semestre);
+    if(restantes <= 12){
+      var xhr = new XMLHttpRequest();
+        xhr.open("POST", '<?php echo base_url();?>index.php/c_estudiante/reinscribir_reprobado', true);
+        xhr.onloadstart = function () {
+      $('#div_carga').show();
+    }
+    xhr.error = function () {
+      console.log("error de conexion");
+    }
+    //Send the proper header information along with the request
+    xhr.setRequestHeader("Content-Type", "application/json");
+
+    xhr.onreadystatechange = function () { // Call a function when the state changes.
+      if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+        $('#div_carga').hide();
+        if (xhr.responseText.trim() === "si") {
+          console.log(xhr.response);
+          swalWithBootstrapButtons.fire({
+            type: 'success',
+            text: 'Estudiante repetidor inscrito correctamente',
+            allowOutsideClick: false,
+            confirmButtonText: 'Aceptar'
+          }).then((result) => {
+            if (result.value) {
+              //aqui va el acepta
+
+            }
+            //aqui va si cancela
+          });
+          $(e).parents('tr').detach();
+        } else {
+          Swal.fire({
+            type: 'error',
+            text: 'Datos no guardados'
+          });
+        }
+      }
+    }
+        xhr.send(JSON.stringify({no_control:noControl})); 
+    }else{
+      swalWithBootstrapButtons.fire({
+            type: 'error',
+            text: 'Los semestres restantes del alumno no son suficientes para terminar sus estudios de bachillerato en el tiempo establecido',
+            allowOutsideClick: false,
+            confirmButtonText: 'Aceptar'
+          }).then((result) => {
+            if (result.value) {
+              //aqui va el acepta
+            }
+            //aqui va si cancela
+          });
+    }
+
+
+
+    console.log(restantes);
+    console.log(semestre);
+    console.log(semestre_curso);
+/*
     var xhr = new XMLHttpRequest();
         xhr.open("POST", '<?php echo base_url();?>index.php/c_estudiante/reinscribir_reprobado', true);
         xhr.onloadstart = function () {
@@ -193,7 +258,7 @@
         }
       }
     }
-        xhr.send(JSON.stringify({no_control:e.value}));
+        xhr.send(JSON.stringify({no_control:e.value})); */
   }
 
 </script>

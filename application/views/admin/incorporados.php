@@ -139,7 +139,7 @@
         fila += valor.Plantel_cct_plantel;
         fila += '</td>';
         fila += '<td>';
-        fila += '<button class="btn btn-lg btn-block btn-info" type="button" value="' + valor.no_control + '" onclick="incorporar(this)" data-toggle="modal" data-target="#">Incorporar</button>';
+        fila += '<button class="btn btn-lg btn-block btn-info" type="button" value="'  + valor.no_control + "," + valor.semestre + "," + valor.semestre_en_curso + '"onclick="incorporar(this)" data-toggle="modal" data-target="#">Incorporar</button>';
         fila += '</td>';
         fila += '</tr>';
         document.getElementById("tabla").innerHTML += fila;
@@ -156,11 +156,14 @@
 
 
   function incorporar(e) {
-    let dato = {
-      no_control: e.value
-    };
+    var separar = e.value.split(",")
+    var noControl = separar[0];
+    var semestre = separar[1];
+    var semestre_curso = separar[2];
 
-    var xhr = new XMLHttpRequest();
+    var restantes = (6 - semestre_curso) + parseInt(semestre);
+    if(restantes <= 12){
+      var xhr = new XMLHttpRequest();
     xhr.open("POST", '<?php echo base_url();?>index.php/c_estudiante/incorporar_estudiante', true);
     xhr.onloadstart = function () {
       $('#div_carga').show();
@@ -184,7 +187,6 @@
           }).then((result) => {
             if (result.value) {
               //aqui va el acepta
-
             }
             //aqui va si cancela
           });
@@ -197,9 +199,21 @@
         }
       }
     }
-    xhr.send(JSON.stringify(dato));
-
-    console.log(e.value);
+    xhr.send(JSON.stringify({no_control:noControl})); 
+    }else{
+      swalWithBootstrapButtons.fire({
+            type: 'error',
+            text: 'Los semestres restantes del alumno no son suficientes para terminar sus estudios de bachillerato en el tiempo establecido',
+            allowOutsideClick: false,
+            confirmButtonText: 'Aceptar'
+          }).then((result) => {
+            if (result.value) {
+              //aqui va el acepta
+            }
+            //aqui va si cancela
+          });
+    }
+    
   }
 
 </script>

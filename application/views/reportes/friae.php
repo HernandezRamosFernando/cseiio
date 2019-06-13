@@ -71,9 +71,118 @@ class MYPDF extends TCPDF {
 	}
 }
 
+function filas_vacias_califiacion($materias){
+    $numero_materias=sizeof($materias[0]);
+
+    if($numero_materias==14){
+        return $html_catorce_columnas='
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        ';
+    }
+
+    if($numero_materias==13){
+        return $html_trece_columnas='
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        ';
+    }
+
+    if($numero_materias==12){
+        return $html_doce_columnas='
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        ';
+    }
+
+    if($numero_materias==9){
+        return $html_nueve_columnas='
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        ';
+    }
+
+    if($numero_materias==8){
+        return $html_ocho_columnas='
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        ';
+    }
+
+    else{
+        return "";
+    }
+
+}
 
  function celdas_materias($materias){
     $numero_materias=sizeof($materias[0]);
+
+    if($numero_materias==14){
+        return $html_catorce_columnas='
+        <td style="width:28px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][0]->id_materia.'</td>
+        <td style="width:28px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][1]->id_materia.'</td>
+        <td style="width:28px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][2]->id_materia.'</td>
+        <td style="width:28px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][3]->id_materia.'</td>
+        <td style="width:28px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][4]->id_materia.'</td>
+        <td style="width:28px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][5]->id_materia.'</td>
+        <td style="width:28px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][6]->id_materia.'</td>
+        <td style="width:28px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][7]->id_materia.'</td>
+        <td style="width:28px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][8]->id_materia.'</td>
+        <td style="width:28px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][9]->id_materia.'</td>
+        <td style="width:28px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][10]->id_materia.'</td>
+        <td style="width:28px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][11]->id_materia.'</td>
+        <td style="width:28px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][12]->id_materia.'</td>
+        <td style="width:28px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][13]->id_materia.'</td>
+        ';
+    }
+
 
     if($numero_materias==13){
         return $html_trece_columnas='
@@ -211,6 +320,14 @@ $filas_faltantes_html.='<tr>
 <td> </td>
 <td> </td>
 <td> </td>
+<td> </td>'.filas_vacias_califiacion($materias_estudiantes).'
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 <td> </td>
 </tr>';
 }
@@ -261,8 +378,19 @@ $renglon.='<td>'.$datos_friae_estudiante[$contador][0]->id_materia_adeudos_prime
 ///------------------aqui se van a cargar las materias del estudiante
 
 foreach($materias_estudiantes[$contador] as $materia){
-$renglon.='<td>'.$materia->calificacion_final.'</td>';
+    if($datos_friae_estudiante[$contador][0]->tipo_ingreso_fin_semestre!="BAJA" && $materia->calificacion_final==""){
+        $promedio_modular = (intval($materia->primer_parcial)+intval($materia->segundo_parcial)+intval($materia->tercer_parcial))/3;
+        $promedio_final = (intval($materia->examen_final)+$promedio_modular)/2;
+        $promedio_final = round($promedio_final,0,PHP_ROUND_HALF_UP);
+        $renglon.='<td>'.$promedio_final.'</td>';
+    }
+
+    else{
+        $renglon.='<td>'.$materia->calificacion_final.'</td>';
+    }
+
 }
+
 
 $renglon.='<td>'.$datos_friae_estudiante[$contador][0]->tipo_ingreso_fin_semestre.'</td>';//tipo ingreso estudiante
 $renglon.='<td>'.$datos_friae_estudiante[$contador][0]->adeudos_fin_semestre.'</td>';//tipo ingreso estudiante

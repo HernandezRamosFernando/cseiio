@@ -196,107 +196,6 @@
     }
     permiso.onload = function () {
       $('#div_carga').hide();
-<<<<<<< HEAD
-    var permiso_regularizacion = JSON.parse(permiso.response);
-    if(permiso_regularizacion.length>0 && permiso_regularizacion[0].estatus==="1"){
-      console.log(permiso_regularizacion);
-      document.getElementById("boton_agregar").style.display="";
-    
-    //rellena la tabla con los estudiantes que deben esa materia de ese plantel
-    var xhr = new XMLHttpRequest();
-    var plantel = document.getElementById("plantel").value;
-    var materia = document.getElementById("materias").value;
-    document.getElementById("tabla").innerHTML = "";
-    xhr.open('GET', '<?php echo base_url();?>index.php/c_regularizacion/estudiantes_materia?plantel=' + plantel + '&materia=' + materia, true);
-    xhr.onloadstart = function () {
-      $('#div_carga').show();
-    }
-    xhr.error = function () {
-      console.log("error de conexion");
-    }
-    xhr.onload = function () {
-      $('#div_carga').hide();
-      JSON.parse(xhr.response).forEach(function (valor, indice) {
-        //console.log(valor);
-        var fila = '<tr>';
-        fila += '<td>';
-        fila += valor.nombre + ' ' + valor.primer_apellido + ' ' + valor.segundo_apellido;
-        fila += '</td>';
-        fila += '<td>';
-        fila += valor.Estudiante_no_control;
-        fila += '</td>';
-        fila += '<td>';
-        fila += valor.semestre_en_curso;
-        fila += '</td>';
-        fila += '<td>';
-        fila += valor.semestre_materia;
-        fila += '</td>';
-        fila += '<td class="">';
-        fila += '<input type="text" class="form-control" id="calificacion" onchange="calificaciones(this);" ></input>';
-        fila += '</td>';
-        fila += '</tr>';
-        document.getElementById("tabla").innerHTML += fila;
-      });
-      console.log(JSON.parse(xhr.response));
-    };
-    xhr.send(null);
-    document.getElementById('agregar_oculto').style.display = "";
-    document.getElementById('alumnos_oculto').style.display = "";
-    //limpiarbusqueda();
-    }//fin if si hay permiso
-
-
-    else if(permiso_regularizacion.length>0 && permiso_regularizacion[0].estatus==="0"){
-      console.log(permiso_regularizacion);
-    document.getElementById("boton_agregar").style.display="none";
-       //rellena la tabla con los estudiantes que deben esa materia de ese plantel
-    var xhr = new XMLHttpRequest();
-    var plantel = document.getElementById("plantel").value;
-    var materia = document.getElementById("materias").value;
-    document.getElementById("tabla").innerHTML = "";
-    xhr.open('GET', '<?php echo base_url();?>index.php/c_regularizacion/estudiantes_materia_registrada_activa?plantel=' + plantel + '&materia=' + materia, true);
-    xhr.onloadstart = function () {
-      $('#div_carga').show();
-    }
-    xhr.error = function () {
-      console.log("error de conexion");
-    }
-    xhr.onload = function () {
-      $('#div_carga').hide();
-      JSON.parse(xhr.response).forEach(function (valor, indice) {
-  
-
-
-
-        var fila = '<tr>';
-        fila += '<td>';
-        fila += valor.nombre + ' ' + valor.primer_apellido + ' ' + valor.segundo_apellido;
-        fila += '</td>';
-        fila += '<td>';
-        fila += valor.Estudiante_no_control;
-        fila += '</td>';
-        fila += '<td>';
-        fila += valor.semestre_en_curso;
-        fila += '</td>';
-        fila += '<td>';
-        fila += valor.semestre;
-        fila += '</td>';
-        fila += '<td class="">';
-        fila += '<input type="text" class="form-control" id="calificacion" onchange="calificaciones(this);" value="'+valor.calificacion+'" disabled></input>';
-        fila += '</td>';
-        fila += '</tr>';
-        document.getElementById("tabla").innerHTML += fila;
-
-     
-
-        ///qui termina un estudiante
-      });
-      console.log(JSON.parse(xhr.response));
-    };
-    xhr.send(null);
-    document.getElementById('agregar_oculto').style.display = "";
-    document.getElementById('alumnos_oculto').style.display = "";
-=======
       var permiso_regularizacion = JSON.parse(permiso.response);
       if (permiso_regularizacion.length > 0 && permiso_regularizacion[0].estatus === "1") {
         console.log(permiso_regularizacion);
@@ -329,7 +228,7 @@
             fila += valor.semestre_en_curso;
             fila += '</td>';
             fila += '<td>';
-            fila += valor.semestre ;
+            fila += valor.semestre_materia;
             fila += '</td>';
             fila += '<td class="">';
             fila += '<input type="text" class="form-control" id="calificacion" onchange="calificaciones(this);" ></input>';
@@ -364,7 +263,6 @@
         xhr.onload = function () {
           $('#div_carga').hide();
           JSON.parse(xhr.response).forEach(function (valor, indice) {
->>>>>>> 6fce66ae4840946f5aa54f545e2e1ab6151c383d
 
 
 

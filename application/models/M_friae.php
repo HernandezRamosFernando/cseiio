@@ -53,8 +53,9 @@ class M_friae extends CI_Model {
         $materias_debiendo = $this->db->query("select id_materia from Grupo_Estudiante where calificacion_final<6 and Estudiante_no_control='".$estudiante_materia->no_control."' and id_materia not in (select id_materia from Regularizacion where calificacion>=6 and Estudiante_no_control='".$estudiante_materia->no_control."')")->result();
         $materias_id = "";
         foreach($materias_debiendo as $id_materia){
-            $materias_id.=$id_materia->id_materia;
+            $materias_id.=$id_materia->id_materia.',';
         }
+        $materias_ids = substr($materias_ids,0,-1);
         $this->db->query("insert into Friae_Estudiante (Friae_folio,Estudiante_no_control,tipo_ingreso_inscripcion,estatus_inscripcion,numero_adeudos_inscripcion,id_materia_adeudos_inscripcion)
                             values (".$insert_id.",'".$estudiante_materia->no_control."','".$estudiante_materia->tipo_ingreso."','".$estudiante_materia->estatus."',".sizeof($materias_debiendo).",'".$materias_id."')");
 
@@ -86,9 +87,9 @@ class M_friae extends CI_Model {
             $materias_debiendo = $this->db->query("select id_materia from Grupo_Estudiante where calificacion_final<6 and Estudiante_no_control='".$estudiante."' and id_materia not in (select id_materia from Regularizacion where calificacion>=6 and Estudiante_no_control='".$estudiante."')")->result();
             $materias_id = "";
             foreach($materias_debiendo as $id_materia){
-                $materias_id.=$id_materia->id_materia;
+                $materias_id.=$id_materia->id_materia.',';
             }
-
+            $materias_ids = substr($materias_ids,0,-1);
             $folio_friae = $this->db->query("select folio from Friae where id_grupo='".$datos->id_grupo."'")->result()[0]->folio;
             $this->db->query("insert into Friae_Estudiante (Friae_folio,Estudiante_no_control,tipo_ingreso_inscripcion,estatus_inscripcion,numero_adeudos_inscripcion,id_materia_adeudos_inscripcion)
                                 values (".$folio_friae.",'".$estudiante."','".$datos_estudiante[0]->tipo_ingreso."','".$datos_estudiante[0]->estatus."',".sizeof($materias_debiendo).",'".$materias_id."')");

@@ -55,7 +55,7 @@ class M_friae extends CI_Model {
         foreach($materias_debiendo as $id_materia){
             $materias_id.=$id_materia->id_materia.',';
         }
-        $materias_ids = substr($materias_ids,0,-1);
+        $materias_id = substr($materias_id,0,-1);
         $this->db->query("insert into Friae_Estudiante (Friae_folio,Estudiante_no_control,tipo_ingreso_inscripcion,estatus_inscripcion,numero_adeudos_inscripcion,id_materia_adeudos_inscripcion)
                             values (".$insert_id.",'".$estudiante_materia->no_control."','".$estudiante_materia->tipo_ingreso."','".$estudiante_materia->estatus."',".sizeof($materias_debiendo).",'".$materias_id."')");
 
@@ -89,7 +89,7 @@ class M_friae extends CI_Model {
             foreach($materias_debiendo as $id_materia){
                 $materias_id.=$id_materia->id_materia.',';
             }
-            $materias_ids = substr($materias_ids,0,-1);
+            $materias_id = substr($materias_id,0,-1);
             $folio_friae = $this->db->query("select folio from Friae where id_grupo='".$datos->id_grupo."'")->result()[0]->folio;
             $this->db->query("insert into Friae_Estudiante (Friae_folio,Estudiante_no_control,tipo_ingreso_inscripcion,estatus_inscripcion,numero_adeudos_inscripcion,id_materia_adeudos_inscripcion)
                                 values (".$folio_friae.",'".$estudiante."','".$datos_estudiante[0]->tipo_ingreso."','".$datos_estudiante[0]->estatus."',".sizeof($materias_debiendo).",'".$materias_id."')");
@@ -128,5 +128,13 @@ class M_friae extends CI_Model {
     function get_datos_friae($grupo){
         return $this->db->query("select nombre_plantel,cct_plantel,nombre_localidad,nombre_municipio,semestre,nombre_ciclo_escolar,nombre_grupo from Grupo as g inner join Grupo_Estudiante as ge on g.id_grupo=ge.Grupo_id_grupo inner join Plantel as p on p.cct_plantel=g.plantel inner join Ciclo_escolar as ce on ce.id_ciclo_escolar=ge.Ciclo_escolar_id_ciclo_escolar inner join Localidad as l on l.id_localidad=p.id_localidad_plantel inner join Municipio as m on m.id_municipio=l.Municipio_id_municipio where g.id_grupo='".$grupo."' limit 1")->result()[0];
     }
+
+    ///////////////////////// inicia operación panzer.......................................
+
+    public function id_friae($id_grupo){
+
+        return $this->db->query("SELECT * FROM Friae where id_grupo='".$id_grupo."';")->result();
+        
+     }
 
 }

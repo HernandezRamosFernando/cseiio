@@ -757,6 +757,8 @@
           id_componente: document.getElementById("seleccione_componente").value.split("-")[0]
         };
 
+        console.log(datos);
+
         var xhr = new XMLHttpRequest();
         xhr.open("POST", '<?php echo base_url();?>index.php/c_acreditacion/agregar_estudiantes_grupo', true);
         //Send the proper header information along with the request

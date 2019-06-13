@@ -29,7 +29,7 @@
         </a>
       </div>
       <div class="col-md-4 col-lg-4">
-        <a href="<?php echo base_url();?>index.php/c_vistas/portabilidad"
+        <a href="<?php echo base_url();?>index.php/c_vistas/frer"
           class="btn btn-primary btn-lg btn-block  btn-responsive menu  btn-2">
           <div class="row">
             <div class="col-2 valign-left">

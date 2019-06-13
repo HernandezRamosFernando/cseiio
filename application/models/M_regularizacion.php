@@ -71,6 +71,12 @@ class M_regularizacion extends CI_Model {
    }
 
 
+   public function regularizaciones_plantel_periodo_sin_grupo($plantel,$mes,$ano){
+      //echo $mes;
+      return $this->db->query("select * from (select *,(select IF(count(distinct Estudiante_no_control),'si','no') as respuesta from Grupo_Estudiante as ge inner join Grupo as g on ge.Grupo_id_grupo=g.id_grupo where estatus=1 and Estudiante_no_control=r.Estudiante_no_control) as grupo from Regularizacion as r where calificacion is not null and month(fecha_calificacion)=".$mes." and year(fecha_calificacion)=".$ano." and Plantel_cct_plantel='".$plantel."') as regularizacion where grupo='no'")->result();
+   }
+
+
 
 
    public function agregar_regularizacion($datos){
@@ -296,9 +302,7 @@ class M_regularizacion extends CI_Model {
    }
 
 
-   function regularizaciones_plantel_periodo(){
-      
-   }
+  
 
 
 

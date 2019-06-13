@@ -79,4 +79,13 @@ class C_regularizacion extends CI_Controller {
 
         echo $respuesta_html;
     }
+
+    ///debe mandar el periodo en formato 5-2021
+    public function regularizaciones_plantel_periodo(){
+        $plantel = $this->input->get('plantel');
+        $mes = $this->input->get('mes');
+        $ano = $this->input->get('ano');
+
+        echo json_encode($this->M_regularizacion->regularizaciones_plantel_periodo($plantel,$mes,$ano));
+    }
 }

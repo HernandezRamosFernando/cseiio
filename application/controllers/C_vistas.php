@@ -443,6 +443,28 @@ public function portabilidad(){
             redirect(base_url().'index.php/c_usuario');
         }
     }
+    public function cerrar_reg(){
+        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
+            $datos['planteles'] = $this->M_plantel->get_planteles();
+            $data= array('title'=>'Cerrar regularización intermedia');
+        $this->load->view("headers/cabecera", $data);
+        $this->load->view("headers/menuarriba");
+        $this->load->view("headers/menuizquierda");
+        $this->load->view("admin/cerrar_reg_intermedia", $datos);
+        $this->load->view("footers/footer");
+        }
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
+            $data= array('title'=>'Cerrar calificaciones');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierda");
+            $this->load->view("plantel/cerrar_calificaciones");
+            $this->load->view("footers/footer");
+            }
+        else{
+            redirect(base_url().'index.php/c_usuario');
+        }
+    }
 
     public function calificacion(){
         if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){

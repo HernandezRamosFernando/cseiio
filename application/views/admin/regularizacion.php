@@ -68,7 +68,7 @@
                   <th scope="col" class="col-md-1">N° control</th>
                   <th scope="col" class="col-md-1">Semestre actual</th>
                   <th scope="col" class="col-md-1">Semestre de adeudo</th>
-                  <th scope="col" class="col-md-1">Pago de regularización</th>
+                  <th scope="col" class="col-md-1">Solicitud de regularización</th>
                   <th scope="col" class="col-md-1">Calificacion</th>
                 </tr>
               </thead>
@@ -231,8 +231,11 @@
             fila += '<td>';
             fila += valor.semestre_materia;
             fila += '</td>';
+            fila += '<td>';
+            fila += "<input type='checkbox' class='form-check-input' id='solicitud' name='solicitud' onclick='checkregularizacion(this)'>"
+            fila += '</td>';
             fila += '<td class="">';
-            fila += '<input type="text" class="form-control" id="calificacion" onchange="calificaciones(this);" ></input>';
+            fila += '<input type="text" class="form-control" id="calificacion" onchange="calificaciones(this);" disabled ></input>';
             fila += '</td>';
             fila += '</tr>';
             document.getElementById("tabla").innerHTML += fila;
@@ -279,7 +282,10 @@
             fila += valor.semestre_en_curso;
             fila += '</td>';
             fila += '<td>';
-            fila += valor.semestre;
+            fila += valor.semestre_materia;
+            fila += '</td>';
+            fila += '<td>';
+            fila += "<input type='checkbox' class='form-check-input' id='solicitud' name='solicitud' disabled>"
             fila += '</td>';
             fila += '<td class="">';
             fila += '<input type="text" class="form-control" id="calificacion" onchange="calificaciones(this);" value="' + valor.calificacion + '" disabled></input>';
@@ -421,6 +427,18 @@
       //aqui va si cancela
     });
   }
+
+  function checkregularizacion(e) {
+    //$(e).parent().next().children().prop( "disabled", true );
+    //console.log($(e).parent().next().children());
+    
+  if (e.checked) {
+    $(e).parent().next().children().prop( "disabled", false );
+  } else {
+    $(e).parent().next().children().prop( "disabled", true );
+    $(e).parent().next().children().val("")
+  }
+}
 
 
 </script>

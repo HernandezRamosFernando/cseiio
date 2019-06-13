@@ -17,21 +17,63 @@ class C_vistas extends CI_Controller {
     
     //------------------------------------------vistas
 
+    //inscripcion.------------------------------------------
 
+    public function nuevo_ingreso(){
+        $datos['estados'] = $this->M_estado->get_estados();
+        $datos['lenguas'] = $this->M_lengua->get_lenguas();
+        $datos['ciclo_escolar'] = $this->M_ciclo_escolar->get_ciclo_escolar();
+        $datos['escuela_procedencia'] = $this->M_escuela_procedencia->get_secundarias();
+
+        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
+            $data= array('title'=>'Inscripcion Nuevo Ingreso');
+            $datos['planteles'] = $this->M_plantel->get_planteles();
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierda");
+            $this->load->view("admin/nuevoingreso",$datos);
+            $this->load->view("footers/footer");
+        }
+        elseif($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='CESCOLAR'){
+            $data= array('title'=>'Inscripcion Nuevo Ingreso');
+            $datos['planteles'] = $this->M_plantel->get_planteles();
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierda");
+            $this->load->view("admin/nuevoingreso",$datos);
+            $this->load->view("footers/footer");
+        }
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
+            $datos['planteles'] = $this->M_plantel->get_plantel($this->session->userdata('user')['plantel']);
+            $data= array('title'=>'Inscripcion Nuevo Ingreso');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierdaplantel");
+            $this->load->view("plantel/nuevoingreso",$datos);
+            $this->load->view("footers/footer");
+        }
+        else{
+            redirect(base_url().'index.php/c_usuario');
+        }
+    }
 
 public function portabilidad(){
     $datos['estados'] = $this->M_estado->get_estados();
-        //$datos['municipios'] = $this->M_municipio->get_municipios_estado(1);
-        //$datos['localidades'] = $this->M_localidad->get_localidades_municipio(1);
         $datos['ciclo_escolar'] = $this->M_ciclo_escolar->get_ciclo_escolar();
         $datos['lenguas'] = $this->M_lengua->get_lenguas();
         $datos['secundarias'] = $this->M_escuela_procedencia->get_secundarias();
         $datos['bachilleratos'] = $this->M_escuela_procedencia->get_bachilleratos();
         
-        
-
-
         if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
+            $data= array('title'=>'Inscripcion Portabilidad');
+            $datos['planteles'] = $this->M_plantel->get_planteles();
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierda");
+            $this->load->view("admin/portabilidad",$datos);
+            $this->load->view("footers/footer");
+        }
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='CESCOLAR'){
             $data= array('title'=>'Inscripcion Portabilidad');
             $datos['planteles'] = $this->M_plantel->get_planteles();
             $this->load->view("headers/cabecera", $data);
@@ -55,46 +97,33 @@ public function portabilidad(){
         }
 }
 
-    public function nuevo_ingreso(){
-
-        $datos['estados'] = $this->M_estado->get_estados();
-        //$datos['municipios'] = $this->M_municipio->get_municipios_estado(1);
-        //$datos['localidades'] = $this->M_localidad->get_localidades_municipio(1);
-        $datos['lenguas'] = $this->M_lengua->get_lenguas();
-        $datos['ciclo_escolar'] = $this->M_ciclo_escolar->get_ciclo_escolar();
-        $datos['escuela_procedencia'] = $this->M_escuela_procedencia->get_secundarias();
-
-       
-
-
-
-        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
-            $data= array('title'=>'Inscripcion Nuevo Ingreso');
-            $datos['planteles'] = $this->M_plantel->get_planteles();
-            $this->load->view("headers/cabecera", $data);
-            $this->load->view("headers/menuarriba");
-            $this->load->view("headers/menuizquierda");
-            $this->load->view("admin/nuevoingreso",$datos);
-            $this->load->view("footers/footer");
-        }
-
-        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
-            $datos['planteles'] = $this->M_plantel->get_plantel($this->session->userdata('user')['plantel']);
-            $data= array('title'=>'Inscripcion Nuevo Ingreso');
-            $this->load->view("headers/cabecera", $data);
-            $this->load->view("headers/menuarriba");
-            $this->load->view("headers/menuizquierdaplantel");
-            $this->load->view("plantel/nuevoingreso",$datos);
-            $this->load->view("footers/footer");
-        }
-        else{
-            redirect(base_url().'index.php/c_usuario');
-        }
+public function resolucion_equivalencia(){
+    if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
+    $datos['planteles'] = $this->M_plantel->get_planteles();
+    $datos['ciclo_escolar'] = $this->M_ciclo_escolar->lista_ciclo_escolar();
+    $data= array('title'=>'Resolución de Equivalencia');
+    $this->load->view("headers/cabecera", $data);
+    $this->load->view("headers/menuarriba");
+    $this->load->view("headers/menuizquierda");
+    $this->load->view("admin/resolucion_equivalencia", $datos);
+    $this->load->view("footers/footer");
     }
-    
-    public function asignar_matricula(){
-       
+    if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='CESCOLAR'){
+        $datos['planteles'] = $this->M_plantel->get_planteles();
+        $datos['ciclo_escolar'] = $this->M_ciclo_escolar->lista_ciclo_escolar();
+        $data= array('title'=>'Resolución de Equivalencia');
+        $this->load->view("headers/cabecera", $data);
+        $this->load->view("headers/menuarriba");
+        $this->load->view("headers/menuizquierda");
+        $this->load->view("admin/resolucion_equivalencia", $datos);
+        $this->load->view("footers/footer");
+        }
+    else{
+        redirect(base_url().'index.php/c_usuario');
+    }
+}
 
+    public function asignar_matricula(){
         if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
             $data= array('title'=>'Asignación de Matrícula');
             $datos['planteles'] = $this->M_plantel->get_planteles();
@@ -104,16 +133,33 @@ public function portabilidad(){
             $this->load->view("admin/asignacionmatricula",$datos);
             $this->load->view("footers/footer");
         }
-
-      
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='CESCOLAR'){
+            $data= array('title'=>'Asignación de Matrícula');
+            $datos['planteles'] = $this->M_plantel->get_planteles();
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierda");
+            $this->load->view("admin/asignacionmatricula",$datos);
+            $this->load->view("footers/footer");
+        }
         else{
             redirect(base_url().'index.php/c_usuario');
         }
         
     }
+
     public function carta_compromiso(){
         
         if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
+            $data= array('title'=>'Generación de Carta Compromiso');
+            $datos['planteles'] = $this->M_plantel->get_planteles();
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierda");
+            $this->load->view("admin/carta_compromiso",$datos);
+            $this->load->view("footers/footer");
+        }
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='CESCOLAR'){
             $data= array('title'=>'Generación de Carta Compromiso');
             $datos['planteles'] = $this->M_plantel->get_planteles();
             $this->load->view("headers/cabecera", $data);
@@ -136,21 +182,60 @@ public function portabilidad(){
             redirect(base_url().'index.php/c_usuario');
         }
     }
-    
-    public function control_alumnos(){
-        $datos['estados'] = $this->M_estado->get_estados();
-        //$datos['municipios'] = $this->M_municipio->get_municipios_estado(1);
-        //$datos['localidades'] = $this->M_localidad->get_localidades_municipio(1);
-        $datos['lenguas'] = $this->M_lengua->get_lenguas();
-        
-        //$datos['secundarias'] = $this->M_secundaria->get_secundarias();
+
+    //fin inscripcion ----------------------
+
+    //Reinscripcion --------------------------------
+
+    public function reinscripcion(){
         if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
-            $datos['planteles'] = $this->M_plantel->get_planteles();
-            $data= array('title'=>'Control de Alumnos');
+        $data= array('title'=>'Reinscripción');
+        $this->load->view("headers/cabecera", $data);
+        $this->load->view("headers/menuarriba");
+        $this->load->view("headers/menuizquierda");
+        $this->load->view("admin/reinscripcion");
+        $this->load->view("footers/footer");
+        }
+
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='CESCOLAR'){
+            $data= array('title'=>'Reinscripción');
             $this->load->view("headers/cabecera", $data);
             $this->load->view("headers/menuarriba");
             $this->load->view("headers/menuizquierda");
-            $this->load->view("admin/controlalumnos",$datos);
+            $this->load->view("admin/reinscripcion");
+            $this->load->view("footers/footer");
+            }
+
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
+            $data= array('title'=>'Reinscripción');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierdaplantel");
+            $this->load->view("plantel/acreditacionplantel");
+            $this->load->view("footers/footer");
+            }
+            else{
+            redirect(base_url().'index.php/c_usuario');
+            }
+    }
+
+    public function repetidor(){
+        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
+            $datos['planteles'] = $this->M_plantel->get_planteles();
+            $data= array('title'=>'Repetidores');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierda");
+            $this->load->view("admin/repetidores",$datos);
+            $this->load->view("footers/footer");
+        }
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='CESCOLAR'){
+            $datos['planteles'] = $this->M_plantel->get_planteles();
+            $data= array('title'=>'Repetidores');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierda");
+            $this->load->view("admin/repetidores",$datos);
             $this->load->view("footers/footer");
         } 
         else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
@@ -166,6 +251,152 @@ public function portabilidad(){
             redirect(base_url().'index.php/c_usuario');
         }
     }
+
+    public function incorporado(){
+        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
+            $datos['planteles'] = $this->M_plantel->get_planteles();
+            $data= array('title'=>'Incorporados');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierda");
+            $this->load->view("admin/incorporados",$datos);
+            $this->load->view("footers/footer");
+        }
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='CESCOLAR'){
+            $datos['planteles'] = $this->M_plantel->get_planteles();
+            $data= array('title'=>'Incorporados');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierda");
+            $this->load->view("admin/incorporados",$datos);
+            $this->load->view("footers/footer");
+        } 
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
+            $datos['planteles'] = $this->M_plantel->get_plantel($this->session->userdata('user')['plantel']);
+            $data= array('title'=>'Control de Alumnos');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierdaplantel");
+            $this->load->view("plantel/controlalumnos",$datos);
+            $this->load->view("footers/footer");
+        }
+        else{
+            redirect(base_url().'index.php/c_usuario');
+        }
+    }
+
+    public function traslado(){
+        
+        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
+            $datos['planteles'] = $this->M_plantel->get_planteles();
+            $data= array('title'=>'Traslado');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierda");
+            $this->load->view("admin/traslado",$datos);
+            $this->load->view("footers/footer");
+        }
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='CESCOLAR'){
+            $datos['planteles'] = $this->M_plantel->get_planteles();
+            $data= array('title'=>'Traslado');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierda");
+            $this->load->view("admin/traslado",$datos);
+            $this->load->view("footers/footer");
+        }  
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
+            $datos['planteles'] = $this->M_plantel->get_plantel($this->session->userdata('user')['plantel']);
+            $data= array('title'=>'Traslado');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierdaplantel");
+            $this->load->view("plantel/traslado",$datos);
+            $this->load->view("footers/footer");
+        }
+        else{
+            redirect(base_url().'index.php/c_usuario');
+        }
+    }
+
+    public function desertor(){
+        
+        //$datos['secundarias'] = $this->M_secundaria->get_secundarias();
+        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
+            $datos['planteles'] = $this->M_plantel->get_planteles();
+            $data= array('title'=>'Desertores');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierda");
+            $this->load->view("admin/desertores",$datos);
+            $this->load->view("footers/footer");
+        }
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='CESCOLAR'){
+            $datos['planteles'] = $this->M_plantel->get_planteles();
+            $data= array('title'=>'Desertores');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierda");
+            $this->load->view("admin/desertores",$datos);
+            $this->load->view("footers/footer");
+        }
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
+            $datos['planteles'] = $this->M_plantel->get_plantel($this->session->userdata('user')['plantel']);
+            $data= array('title'=>'Control de Alumnos');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierdaplantel");
+            $this->load->view("plantel/controlalumnos",$datos);
+            $this->load->view("footers/footer");
+        }
+        else{
+            redirect(base_url().'index.php/c_usuario');
+        }
+    }
+
+    // fin reinscripcion----------------------------------------------
+
+    //control alumnos ------------------------------------------------
+    
+    public function control_alumnos(){
+        $datos['estados'] = $this->M_estado->get_estados();
+        $datos['lenguas'] = $this->M_lengua->get_lenguas();
+        
+        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
+            $datos['planteles'] = $this->M_plantel->get_planteles();
+            $data= array('title'=>'Control de Alumnos');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierda");
+            $this->load->view("admin/controlalumnos",$datos);
+            $this->load->view("footers/footer");
+        }
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='CESCOLAR'){
+            $datos['planteles'] = $this->M_plantel->get_planteles();
+            $data= array('title'=>'Control de Alumnos');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierda");
+            $this->load->view("admin/controlalumnos",$datos);
+            $this->load->view("footers/footer");
+        }
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
+            $datos['planteles'] = $this->M_plantel->get_plantel($this->session->userdata('user')['plantel']);
+            $data= array('title'=>'Control de Alumnos');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierdaplantel");
+            $this->load->view("plantel/controlalumnos",$datos);
+            $this->load->view("footers/footer");
+        }
+        else{
+            redirect(base_url().'index.php/c_usuario');
+        }
+    }
+
+    //fin control alumnos ---------------------------------------------------
+
+    //Acreditacion------------------------------------------------------------
 
     public function bajas(){
         
@@ -193,109 +424,12 @@ public function portabilidad(){
         }
     }
 
-    public function repetidor(){
-        
-        //$datos['secundarias'] = $this->M_secundaria->get_secundarias();
-        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
-            $datos['planteles'] = $this->M_plantel->get_planteles();
-            $data= array('title'=>'Repetidores');
-            $this->load->view("headers/cabecera", $data);
-            $this->load->view("headers/menuarriba");
-            $this->load->view("headers/menuizquierda");
-            $this->load->view("admin/repetidores",$datos);
-            $this->load->view("footers/footer");
-        } 
-        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
-            $datos['planteles'] = $this->M_plantel->get_plantel($this->session->userdata('user')['plantel']);
-            $data= array('title'=>'Control de Alumnos');
-            $this->load->view("headers/cabecera", $data);
-            $this->load->view("headers/menuarriba");
-            $this->load->view("headers/menuizquierdaplantel");
-            $this->load->view("plantel/controlalumnos",$datos);
-            $this->load->view("footers/footer");
-        }
-        else{
-            redirect(base_url().'index.php/c_usuario');
-        }
-    }
+    
 
-    public function incorporado(){
-        
-        //$datos['secundarias'] = $this->M_secundaria->get_secundarias();
-        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
-            $datos['planteles'] = $this->M_plantel->get_planteles();
-            $data= array('title'=>'Incorporados');
-            $this->load->view("headers/cabecera", $data);
-            $this->load->view("headers/menuarriba");
-            $this->load->view("headers/menuizquierda");
-            $this->load->view("admin/incorporados",$datos);
-            $this->load->view("footers/footer");
-        } 
-        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
-            $datos['planteles'] = $this->M_plantel->get_plantel($this->session->userdata('user')['plantel']);
-            $data= array('title'=>'Control de Alumnos');
-            $this->load->view("headers/cabecera", $data);
-            $this->load->view("headers/menuarriba");
-            $this->load->view("headers/menuizquierdaplantel");
-            $this->load->view("plantel/controlalumnos",$datos);
-            $this->load->view("footers/footer");
-        }
-        else{
-            redirect(base_url().'index.php/c_usuario');
-        }
-    }
+    
 
-    public function desertor(){
-        
-        //$datos['secundarias'] = $this->M_secundaria->get_secundarias();
-        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
-            $datos['planteles'] = $this->M_plantel->get_planteles();
-            $data= array('title'=>'Desertores');
-            $this->load->view("headers/cabecera", $data);
-            $this->load->view("headers/menuarriba");
-            $this->load->view("headers/menuizquierda");
-            $this->load->view("admin/desertores",$datos);
-            $this->load->view("footers/footer");
-        } 
-        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
-            $datos['planteles'] = $this->M_plantel->get_plantel($this->session->userdata('user')['plantel']);
-            $data= array('title'=>'Control de Alumnos');
-            $this->load->view("headers/cabecera", $data);
-            $this->load->view("headers/menuarriba");
-            $this->load->view("headers/menuizquierdaplantel");
-            $this->load->view("plantel/controlalumnos",$datos);
-            $this->load->view("footers/footer");
-        }
-        else{
-            redirect(base_url().'index.php/c_usuario');
-        }
-    }
-
-    public function traslado(){
-        
-        //$datos['secundarias'] = $this->M_secundaria->get_secundarias();
-        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
-            $datos['planteles'] = $this->M_plantel->get_planteles();
-            $data= array('title'=>'Traslado');
-            $this->load->view("headers/cabecera", $data);
-            $this->load->view("headers/menuarriba");
-            $this->load->view("headers/menuizquierda");
-            $this->load->view("admin/traslado",$datos);
-            $this->load->view("footers/footer");
-        } 
-        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
-            $datos['planteles'] = $this->M_plantel->get_plantel($this->session->userdata('user')['plantel']);
-            $data= array('title'=>'Traslado');
-            $this->load->view("headers/cabecera", $data);
-            $this->load->view("headers/menuarriba");
-            $this->load->view("headers/menuizquierdaplantel");
-            $this->load->view("plantel/traslado",$datos);
-            $this->load->view("footers/footer");
-        }
-        else{
-            redirect(base_url().'index.php/c_usuario');
-        }
-    }
+    
+    
 
     public function acreditacion(){
         if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
@@ -554,42 +688,8 @@ public function portabilidad(){
         }
     }
 
-    public function resolucion_equivalencia(){
-        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
-        $datos['planteles'] = $this->M_plantel->get_planteles();
-        $datos['ciclo_escolar'] = $this->M_ciclo_escolar->lista_ciclo_escolar();
-        $data= array('title'=>'Resolución de Equivalencia');
-        $this->load->view("headers/cabecera", $data);
-        $this->load->view("headers/menuarriba");
-        $this->load->view("headers/menuizquierda");
-        $this->load->view("admin/resolucion_equivalencia", $datos);
-        $this->load->view("footers/footer");
-        }
-        else{
-            redirect(base_url().'index.php/c_usuario');
-        }
-    }
-    public function reinscripcion(){
-        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
-        $data= array('title'=>'Reinscripción');
-        $this->load->view("headers/cabecera", $data);
-        $this->load->view("headers/menuarriba");
-        $this->load->view("headers/menuizquierda");
-        $this->load->view("admin/reinscripcion");
-        $this->load->view("footers/footer");
-        }
-        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
-            $data= array('title'=>'Reinscripción');
-            $this->load->view("headers/cabecera", $data);
-            $this->load->view("headers/menuarriba");
-            $this->load->view("headers/menuizquierdaplantel");
-            $this->load->view("plantel/acreditacionplantel");
-            $this->load->view("footers/footer");
-            }
-            else{
-            redirect(base_url().'index.php/c_usuario');
-            }
-    }
+    
+    
     public function reportes(){
         if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
         $data= array('title'=>'Reinscripción');

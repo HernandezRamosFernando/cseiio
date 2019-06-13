@@ -65,5 +65,9 @@ class C_regularizacion extends CI_Controller {
 
 
 
-    
+    function periodos_regularizacion_plantel(){
+        $plantel = $this->input->get("plantel");
+
+        echo json_encode($this->M_regularizacion->periodos_regularizacion_plantel($plantel));
+    }
 }

@@ -23,7 +23,7 @@ class M_nulidad_semestre extends CI_Model {
 
         foreach($grupo_semestre_cursados as $grupo_semestre){
             if(intval($grupo_semestre->semestre) >= intval($semestre_hasta_el_que_anula)){
-                $this->db->query("update Grupo_Estudiante set calificacion_final=null where Grupo_id_grupo='".$grupo_semestre->grupo."'");
+                $this->db->query("update Grupo_Estudiante set calificacion_final=null where Grupo_id_grupo='".$grupo_semestre->grupo."' and Estudiante_no_control='".$no_control."'");
             }
         }
 

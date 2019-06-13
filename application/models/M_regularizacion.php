@@ -281,5 +281,26 @@ class M_regularizacion extends CI_Model {
 
 
 
+   function periodos_regularizacion_plantel($plantel){
+      return $this->db->query("SELECT distinct concat(
+         CASE
+             WHEN month(fecha_calificacion) =  1 THEN 'ENERO'
+             WHEN month(fecha_calificacion) =  5 THEN 'MAYO'
+             WHEN month(fecha_calificacion) =  7 THEN 'JULIO'
+             WHEN month(fecha_calificacion) =  10 THEN 'OCTUBRE'
+         END,
+         '-'
+         ,
+         year(fecha_calificacion)) as periodo
+          from Regularizacion as r inner join Ciclo_escolar as c on r.fecha_calificacion between c.fecha_inicio and c.fecha_terminacion where Plantel_cct_plantel='".$plantel."'")->result();
+   }
+
+
+   function regularizaciones_plantel_periodo(){
+      
+   }
+
+
+
    
 }

@@ -5,7 +5,7 @@
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a>Inscripción</a>
+                <a>Acreditación</a>
             </li>
             <li class="breadcrumb-item active">Seleccione un elemento de los mostrados</li>
         </ol>

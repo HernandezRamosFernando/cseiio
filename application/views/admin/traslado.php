@@ -292,7 +292,7 @@
 
     var xhr = new XMLHttpRequest();
       var query = 'no_control=' +id_estudiante.value;
-    xhr.open('GET', '<?php echo base_url();?>index.php/c_estudiante/get_estudiante_traslado?' + query, true);
+    xhr.open('GET', '<?php echo base_url();?>index.php/c_estudiante/get_estudiante_datos_semestre_grupo?' + query, true);
     
     xhr.error = function () {
       console.log("error de conexion");
@@ -405,7 +405,7 @@ if(estudiante[0].semestre_en_curso>=5){
         fila += valor.semestre_en_curso;
         fila += '</td>';
          var grupo="";
-        if(valor.Grupo_id_grupo===null){
+        if(valor.Grupo_id_grupo === undefined || valor.Grupo_id_grupo === null){
             grupo="Sin grupo asignado";
         }
         else{
@@ -448,8 +448,8 @@ if(estudiante[0].semestre_en_curso>=5){
         }
         
         
-        if(valor.primer_parcial==0 && valor.segundo_parcial==0){
-          parciales_presentados="Ninguna";
+        if(parciales_presentados===""){
+          parciales_presentados="Ningún parcial presentado";
         }
 
         
@@ -499,7 +499,7 @@ var form_nuevo_traslado = document.getElementById("nuevo_traslado");
 		            showConfirmButton: false,
 		            timer: 2500
 		          })
-		          
+		          $('#generar_traslado').modal('hide');
 		          
 		        } else {
 		          Swal.fire({

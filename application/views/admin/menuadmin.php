@@ -96,7 +96,8 @@
                 </a>
             </div>
             <div class="col-md-4 col-lg-4">
-                <a href="../views/formatos.html" class="btn btn-primary btn-lg btn-block  btn-responsive menu btn-6">
+            <a href="<?php echo base_url();?>index.php/c_vistas/formatos" 
+                class="btn btn-primary btn-lg btn-block  btn-responsive menu btn-6">
                     <div class="row">
                         <div class="col-2 valign-left">
                             <span style="font-size: 80px;  text-align: left">6</span>

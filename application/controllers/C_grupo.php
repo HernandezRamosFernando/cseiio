@@ -68,7 +68,22 @@ class C_grupo extends CI_Controller
 
         echo $respuesta_html;
     }
+
+    //---------------------------------------------------------------
+    public function get_num_estudiantes_grupo(){
+        $id_grupo = $this->input->get("id_grupo");
+        echo json_encode($this->M_grupo->get_num_alumnos_grupo($id_grupo));
+
+
 }
+
+
+
+
+
+}
+?>
+
 
 
 

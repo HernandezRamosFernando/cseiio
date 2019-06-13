@@ -71,6 +71,11 @@ class M_regularizacion extends CI_Model {
    }
 
 
+   public function regularizaciones_plantel_periodo($plantel,$mes,$ano){
+      return $this->db->query("select * from Regularizacion where calificacion is not null and month(fecha_calificacion)=".$mes." and year(fecha_calificacion)='.$ano.' and Plantel_cct_plantel='".$plantel."'")->result();
+   }
+
+
 
 
    public function agregar_regularizacion($datos){
@@ -297,7 +302,7 @@ class M_regularizacion extends CI_Model {
 
 
    function regularizaciones_plantel_periodo(){
-      
+
    }
 
 

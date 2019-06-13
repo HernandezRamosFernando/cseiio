@@ -11,8 +11,12 @@ class C_frer extends CI_Controller {
     }
 
 
-    function generar_frer_periodo(){
+    function generar_frer_plantel_periodo(){
         $this->load->library('pdf');
+        $plantel = $this->input->get('plantel');
+        $periodo = $this->input->get('periodo');
         $this->load->view('reportes/frer');
     }
+
+    
 }

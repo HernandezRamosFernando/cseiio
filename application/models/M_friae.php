@@ -81,6 +81,15 @@ class M_friae extends CI_Model {
 
         $this->db->trans_start();
 
+        if($datos->semestre<5){
+            $id_grupo=$datos->id_grupo;
+        }
+    
+        else{
+            //$materias = $this->M_materia->get_materias_semestre_componente($datos->semestre,$datos->id_componente);
+            $id_grupo=$datos->id_grupo.'-'.$datos->componente;
+        }
+
         foreach($datos->estudiantes as $estudiante){
             $datos_estudiante = $this->db->query("select * from Estudiante where no_control='".$estudiante."'")->result();
 
@@ -90,7 +99,7 @@ class M_friae extends CI_Model {
                 $materias_id.=$id_materia->id_materia.',';
             }
             $materias_ids = substr($materias_ids,0,-1);
-            $folio_friae = $this->db->query("select folio from Friae where id_grupo='".$datos->id_grupo."'")->result()[0]->folio;
+            $folio_friae = $this->db->query("select folio from Friae where id_grupo='".$id_grupo."'")->result()[0]->folio;
             $this->db->query("insert into Friae_Estudiante (Friae_folio,Estudiante_no_control,tipo_ingreso_inscripcion,estatus_inscripcion,numero_adeudos_inscripcion,id_materia_adeudos_inscripcion)
                                 values (".$folio_friae.",'".$estudiante."','".$datos_estudiante[0]->tipo_ingreso."','".$datos_estudiante[0]->estatus."',".sizeof($materias_debiendo).",'".$materias_id."')");
 

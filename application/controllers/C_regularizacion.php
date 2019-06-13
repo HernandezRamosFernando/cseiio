@@ -71,6 +71,7 @@ class C_regularizacion extends CI_Controller {
         echo json_encode($this->M_regularizacion->periodos_regularizacion_plantel($plantel));
     }
 
+    ///debe mandar el periodo en formato 5-2021
     public function regularizaciones_plantel_periodo(){
         $plantel = $this->input->get('plantel');
         $mes = $this->input->get('mes');

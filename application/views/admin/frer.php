@@ -72,13 +72,18 @@
 <script>
 
   var lista_alumnos = new Array();
+
+  
   function cargarregularizacion() {
     if (document.getElementById("plantel").value === "") {
       Swal.fire({
         type: 'info',
         text: 'Debe seleccionar un plantel'
       });
-    } else {
+    } 
+    
+    
+    else {
       var xhr = new XMLHttpRequest();
       var plantel = document.getElementById("plantel").value;
 
@@ -96,7 +101,8 @@
           option.text = "Ninguna regularizacion en este plantel";
           option.value = "";
           document.getElementById("regularizaciones").add(option);
-        } else {
+        } 
+        else {
           console.log(xhr.response);
           document.getElementById("regularizaciones").innerHTML=xhr.response;
         }
@@ -107,7 +113,41 @@
 
 function imprimir_frer(){
 
-window.open('<?php echo base_url();?>index.php/,'_blank');
+  console.log(document.getElementById("plantel").value);
+
+  let periodo_junto = document.getElementById("regularizaciones").value;
+
+  let periodo = periodo_junto.split("-");
+
+  switch(periodo[0]){
+    case "ENERO":
+    var mes = "1";
+    break;
+
+    case "MAYO":
+    var mes = "5";
+    break;
+
+    case "JULIO":
+    var mes = "7";
+    break;
+
+    case "OCTUBRE":
+    var mes = "10";
+    break;
+  }
+
+  let fecha = mes+"-"+periodo[1];
+
+
+
+
+
+  //console.log(fecha);
+
+
+
+location.href = "<?php echo base_url();?>index.php/c_frer/generar_frer_plantel_periodo?plantel=20EBD0001C&periodo="+fecha;
 
 }
 

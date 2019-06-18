@@ -9,11 +9,13 @@ class C_frer extends CI_Controller {
         parent::__construct();
         $this->load->model("M_frer");
         $this->load->model("M_regularizacion");
+        $this->load->model("M_friae");
     }
 
 
     function generar_frer_plantel_periodo(){
         $this->load->library('pdf');
+        
         $plantel = $this->input->get('plantel');
         $periodo = $this->input->get('periodo');
 
@@ -29,7 +31,7 @@ class C_frer extends CI_Controller {
         $datos['nombre_ciclo_escolar'] = $this->M_regularizacion->nombre_ciclo_periodo_plantel($plantel,$mes_ano[0],$mes_ano[1]);
 
         //datos plantel
-        //$datos['encabezado']
+        $datos['encabezado'] = $this->M_frer->datos_plantel_frer($plantel);
 
         //solo numero de control y semestre regresa
        $datos ['regularizaciones_sin_grupo'] = $this->M_regularizacion->regularizaciones_plantel_periodo_sin_grupo($plantel,$mes_ano[0],$mes_ano[1]);
@@ -43,24 +45,31 @@ class C_frer extends CI_Controller {
         $folio_frer = $this->M_frer->folio_frer_periodo_plantel($plantel,$mes_ano[0],$mes_ano[1]);
 
         foreach($datos ['regularizaciones_con_grupo'] as $regularizacion){
+            //regresa un arreglo con las materias que regularizo en ese periodo
             $datos ['materias_regularizadas_con_grupo'][$contador] = $this->M_regularizacion->regularizacion_estudiante_periodo($regularizacion->no_control,$mes_ano[0],$mes_ano[1]);
-            $datos ['datos_estudiantes_con_grupo'][$contador] =
-            $datos ['datos_frer_estudiante_con_grupo'][$contador] =
+            //datos completos del estudiante (select * from estyduante where no_control)
+            $datos ['datos_estudiantes_con_grupo'][$contador] = $this->M_frer->datos_estudiante($regularizacion->no_control);
+            //regresa los datos del ferer
+            $datos ['datos_frer_estudiante_con_grupo'][$contador] = $this->M_frer->datos_frer_estudiante($folio_frer,$regularizacion->no_control);
+            $datos ['materias_debe_estudiante_con_grupo'][$contador] = $this->M_regularizacion->materias_debe_estudiante_actualmente($regularizacion->no_control);
             $contador+=1;
         }
-
+        
         $contador=0;
 
         foreach($datos ['regularizaciones_sin_grupo'] as $regularizacion){
             $datos ['materias_regularizadas_sin_grupo'][$contador] = $this->M_regularizacion->regularizacion_estudiante_periodo($regularizacion->no_control,$mes_ano[0],$mes_ano[1]);
-            $datos ['datos_estudiantes_sin_grupo'][$contador] =
-            $datos ['datos_frer_estudiante_sin_grupo'][$contador] =
+            $datos ['datos_estudiantes_sin_grupo'][$contador] = $this->M_frer->datos_estudiante($regularizacion->no_control);
+            $datos ['datos_frer_estudiante_sin_grupo'][$contador] = $this->M_frer->datos_frer_estudiante($folio_frer,$regularizacion->no_control);
+            $datos ['materias_debe_estudiante_sin_grupo'][$contador] = $this->M_regularizacion->materias_debe_estudiante_actualmente($regularizacion->no_control);
             $contador+=1;
         }
         
+        
 
-       print_r($datos);
-        //$this->load->view('reportes/frer');
+        //$envio['saludo']="hola";
+       //echo json_encode($datos);
+        $this->load->view('reportes/frer',$datos);
     }
 
 

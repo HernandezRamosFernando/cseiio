@@ -651,7 +651,7 @@ public function buscar_aspirantesxplantel(){
 public function generar_formato_observaciones_expedientes(){
     $plantel = $this->input->post('plantel_busqueda');
     $datos['ciclo_escolar'] = $this->M_ciclo_escolar->get_ciclo_escolar();
-     $datos['dato_plantel']=$this->M_plantel->get_plantel($plantel);
+    $datos['dato_plantel']=$this->M_plantel->get_plantel($plantel);
     $datos['lista_doc']=$this->M_documentacion->lista_observaciones_en_documentacion($plantel);
     $this->load->library('pdf');
     $this->load->view('reportes/formatoobservacionesexpedientes',$datos);

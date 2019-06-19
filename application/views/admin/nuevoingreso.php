@@ -822,7 +822,7 @@
                 <?php
                               foreach ($lenguas as $lengua)
                               {
-                                      echo '<option value="'.$lengua->id_lengua.'">'.strtoupper($lengua->nombre_lengua).'</option>';
+                                      echo '<option value="'.strtoupper($lengua->nombre_lengua).'">'.strtoupper($lengua->nombre_lengua).'</option>';
                               }
                               ?>
                               <option value="otra">OTRA</option>

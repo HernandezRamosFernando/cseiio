@@ -144,6 +144,7 @@
   document.getElementById("boton_agregar").disabled=true;
 
   function guardar() {
+
     var tabla = document.getElementById("tablagrupo");
     var datos = new Array();
 
@@ -166,7 +167,15 @@
     var xhr = new XMLHttpRequest();
     xhr.open("POST", '<?php echo base_url();?>index.php/c_grupo_estudiante/agregar_calificaciones_materia_grupo', true);
 
-    //Send the proper header information along with the request
+    swalWithBootstrapButtons.fire({
+      type: 'info',
+      text: 'Al aceptar no podrá realizar cambio alguno ¿Esta seguro?',
+      confirmButtonText: 'Aceptar',
+      allowOutsideClick: false,
+      showCancelButton: 'true',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      //Send the proper header information along with the request
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.onloadstart = function () {
       $('#div_carga').show();
@@ -204,9 +213,12 @@
       }
     }
     xhr.send(JSON.stringify(datos));
-
     console.log(datos);
     document.getElementById("boton_agregar").disabled=true;
+    });
+
+    
+
   }
 
   function recargar() {

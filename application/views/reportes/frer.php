@@ -41,6 +41,8 @@ class MYPDF extends TCPDF {
         global $datos_plantel;
         global $nombre_ciclo;
         global $dias;
+        global $mes;
+        global $ano;
 
 
         $encabezado_tabla = '<tr style="font-size:5 pt;text-align:center">
@@ -74,7 +76,7 @@ class MYPDF extends TCPDF {
 
 <tr>
 <td style="text-align:left">Clave cct: '.$datos_plantel->cct_plantel.'</td>
-<td style="text-align:right">Periodo de Regularizacion:</td>
+<td style="text-align:right">Periodo de Regularizacion: DE '.$mes.' DEL '.$ano.'</td>
 </tr>
 
 <tr>
@@ -462,6 +464,8 @@ $html_materias_4='
 $GLOBALS['datos_plantel'] = $encabezado;
 $GLOBALS['nombre_ciclo'] = $nombre_ciclo_escolar;
 $GLOBALS['dias'] = $dias_periodo;
+$GLOBALS['mes']=$mes;
+$GLOBALS['ano']=$ano;
 
 //global $nombre_ciclo;
 //global $dias;

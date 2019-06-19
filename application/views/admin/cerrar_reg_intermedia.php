@@ -58,7 +58,7 @@
   function cerrar_regularizacion() {
     if (document.getElementById("plantel").value != "") {
       var cerrar = new XMLHttpRequest();
-          cerrar.open('GET', '<?php echo base_url();?>index.php/c_acreditacion/, true);
+          cerrar.open('GET', '<?php echo base_url();?>index.php/c_regularizacion/cerrar_regularizacion?plantel='+document.getElementById("plantel").value, true);
           cerrar.onloadstart = function () {
         $('#div_carga').show();
       }
@@ -70,12 +70,13 @@
             console.log(cerrar.response.trim());
 //respuesta de si puede cerrar
       if(cerrar.response.trim()==="si"){
+        console.log(cerrar.response);
     }
 
     else{// si no puede cerrar
       Swal.fire({
         type: 'error',
-        text: 'No se puede cerrar calificaciones sin antes capturar las calificaciones del examen final de todos los grupos.'
+        text: 'Algo salio mal.'
       });
     }
 

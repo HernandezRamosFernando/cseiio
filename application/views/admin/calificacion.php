@@ -436,7 +436,7 @@
   function cargar_materias() {
     if (document.getElementById("grupos").value != "") {
       var xhr = new XMLHttpRequest();
-      xhr.open('GET', '<?php echo base_url();?>index.php/c_grupo/get_materias_grupo?grupo=' + document.getElementById("grupos").value, true);
+      xhr.open('GET', '<?php echo base_url();?>index.php/c_grupo/get_materias_grupo_por_calificar?grupo=' + document.getElementById("grupos").value, true);
       xhr.onloadstart = function () {
         $('#div_carga').show();
       }

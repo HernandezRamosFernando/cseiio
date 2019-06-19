@@ -26,10 +26,23 @@
 
 // Include the main TCPDF library (search for installation path).
 // Extend the TCPDF class to create custom Header and Footer
+
+
+
+
 class MYPDF extends TCPDF {
+
+
+    
 
 	//Page header
 	public function Header() {
+
+        global $datos_plantel;
+        global $nombre_ciclo;
+        global $dias;
+
+
         $encabezado_tabla = '<tr style="font-size:5 pt;text-align:center">
         <td border="1" style="width:30px;background-color:#f8facb"><br><br><br>N/P</td>
         <td border="1" style="width:55px;background-color:#f8facb"><br><br>ULTIMO MOD/SEM CURSADO (GRUPO)</td>
@@ -55,18 +68,18 @@ class MYPDF extends TCPDF {
 <table>
 <tbody>
 <tr>
-<td style="text-align:left">Nombre del Plantel:xxxxxxxxx</td>
-<td style="text-align:right">Ciclo escolar:xxxxxxxxxx</td>
+<td style="text-align:left">Nombre del Plantel: '.$datos_plantel->nombre_plantel.'</td>
+<td style="text-align:right">Ciclo escolar: '.$nombre_ciclo.'</td>
 </tr>
 
 <tr>
-<td style="text-align:left">Clave cct:xxxxxxxxxxxxxx</td>
-<td style="text-align:right">Semestre:xxxxxxxxxxxxx</td>
+<td style="text-align:left">Clave cct: '.$datos_plantel->cct_plantel.'</td>
+<td style="text-align:right">Periodo de Regularizacion:</td>
 </tr>
 
 <tr>
-<td style="text-align:left">Localidad y municipio:xxxxxxxxxxxx</td>
-<td style="text-align:right">Grupo:xxxxxxxxxxx</td>
+<td style="text-align:left">Localidad y municipio: '.$datos_plantel->localidad_municipio.'</td>
+<td style="text-align:right"></td>
 </tr>
 <br>
 '.$encabezado_tabla.'
@@ -394,7 +407,7 @@ $html_materias_4='
 
         $this->writeHTMLCell($w = 70, $h = 50, $x = '347', $y = '117', $html_materias_3, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
 
-        $this->writeHTMLCell($w = 70, $h = 50, $x = '347', $y = '152', $html_materias_3, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+        $this->writeHTMLCell($w = 70, $h = 50, $x = '347', $y = '152', $html_materias_4, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
 		
 	}
 
@@ -437,8 +450,21 @@ $html_materias_4='
         $this->writeHTMLCell($w = 0, $h = 50, $x = '21', $y = '', $html, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
         $this->SetY(-15);
 		$this->Cell(0, 10, 'Página '.$this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
-	}
+    }
+    
+    
 }
+
+//aqui termina la clase----------------------------------------------------------------------------------------------------
+
+
+
+$GLOBALS['datos_plantel'] = $encabezado;
+$GLOBALS['nombre_ciclo'] = $nombre_ciclo_escolar;
+$GLOBALS['dias'] = $dias_periodo;
+
+//global $nombre_ciclo;
+//global $dias;
 
 // create new PDF document
 $medidas = array(279.4,431.8);
@@ -485,91 +511,181 @@ $pdf->SetFont('helvetica','', 10);
 // add a page
 $pdf->AddPage();
 
-// set some text to print
-$encabezado ='<h5 style="text-align:center">COLEGIO SUPERIOR PARA LA EDUCACION INTEGRAL INTERCULTURAL DE OAXACA</h5>
-<p style="text-align:center">DEPARTAMENTO DE CONTROL ESCOLAR</p>
-<h5 style="text-align:center;background-color:#e9e9e9">FORMATO DE REGISTRO DE INSCRIPCION Y ACREDITACION ESCOLAR</h5>
-<table>
-<tbody>
-<tr>
-<td>Nombre del Plantel:xxxxxxxxx</td>
-<td style="text-align:right">Ciclo escolar:xxxxxxxxxx</td>
-</tr>
-
-<tr>
-<td>Clave cct:xxxxxxxxxxxxxx</td>
-<td style="text-align:right">Semestre:xxxxxxxxxxxxx</td>
-</tr>
-
-<tr>
-<td>Localidad y municipio:xxxxxxxxxxxx</td>
-<td style="text-align:right">Grupo:xxxxxxxxxxx</td>
-</tr>
-
-<tr>
-<td> </td>
-<td> </td>
-</tr>
-
-</tbody>
-</table>
-';
 
 
-        //<td border="1" style="width:30px;background-color:#f8facb"><br><br><br>N/P</td>
-        //<td border="1" style="width:55px;background-color:#f8facb"><br><br>ULTIMO MOD/SEM CURSADO (GRUPO)</td>
-        //<td border="1" style="width:45px;background-color:#f8facb"><br><br><br>MATRICULA</td>
-        //<td border="1" style="width:70px;background-color:#f8facb"><br><br><br>PRIMER APELLIDO</td>
-        //<td border="1" style="width:70px;background-color:#f8facb"><br><br><br>SEGUNDO APELLIDO</td>
-        //<td border="1" style="width:85px;background-color:#f8facb"><br><br><br>NOMBRE(S)</td>
-        //<td border="1" style="width:30px;background-color:#f8facb"><br><br>NUM ADEUDOS</td>
-        //<td border="1" style="width:85px;background-color:#f8facb"><br><br><br>CLAVE</td>
-        //<td border="1" style="width:30px;background-color:#f8facb"><br><br>CALIFICACION</td>
-        //<td border="1" style="width:85px;background-color:#f8facb"><br><br><br>CLAVE</td>
-        //<td border="1" style="width:30px;background-color:#f8facb"><br><br>CALIFICACION</td>
-        //<td border="1" style="width:85px;background-color:#f8facb"><br><br><br>CLAVE</td>
-        //<td border="1" style="width:30px;background-color:#f8facb"><br><br>CALIFICACION</td>
-        //<td border="1" style="width:85px;background-color:#f8facb"><br><br><br>CLAVE</td>
-        //<td border="1" style="width:30px;background-color:#f8facb"><br><br>CALIFICACION</td>
-        //<td border="1" style="width:210px;background-color:#f8facb"><br><br><br>OBSERVACIONES</td>
-function rellenar(){
+//foliador de regularizaciones
+$contador=1;//se reinicia cada vez
+$foliador=1;
+
+/////////////////////////// datos de alumnos con grupo
     $html="";
-    for($i=0;$i<30;$i++){
+    foreach($regularizaciones_con_grupo as $estudiante){
+        $claves_califiaciones="";
+        $aprobadas_sumar = 0;
+        foreach($materias_regularizadas_con_grupo[$contador-1] as $materia){
+            $claves_califiaciones.='<td style="width:85px">'.$materia->id_materia.'</td>';
+            $claves_califiaciones.='<td style="width:50px">'.$materia->calificacion.'</td>';
+            if(intval($materia->calificacion)>=6){
+                $aprobadas_sumar+=1;
+            }
+        }
+
+        if(sizeof($materias_regularizadas_con_grupo[$contador-1])==1){
+            $claves_califiaciones.='<td style="width:85px"></td>';
+            $claves_califiaciones.='<td style="width:50px"></td>';
+
+            $claves_califiaciones.='<td style="width:85px"></td>';
+            $claves_califiaciones.='<td style="width:50px"></td>';
+
+            $claves_califiaciones.='<td style="width:85px"></td>';
+            $claves_califiaciones.='<td style="width:50px"></td>';
+        }
+
+        else if(sizeof($materias_regularizadas_con_grupo[$contador-1])==2){
+            $claves_califiaciones.='<td style="width:85px"></td>';
+            $claves_califiaciones.='<td style="width:50px"></td>';
+
+            $claves_califiaciones.='<td style="width:85px"></td>';
+            $claves_califiaciones.='<td style="width:50px"></td>';
+        }
+
+        else if(sizeof($materias_regularizadas_con_grupo[$contador-1])==3){
+            $claves_califiaciones.='<td style="width:85px"></td>';
+            $claves_califiaciones.='<td style="width:50px"></td>';
+        }
+
+        $claves="";
+        //echo sizeof($materias_debe_estudiante_sin_grupo[0]);
+        if(sizeof($materias_debe_estudiante_con_grupo[0])>1){
+            foreach($materias_debe_estudiante_con_grupo[0] as $materia){
+            $claves.=$materia->id_materia.",";
+            }
+        }
+
+
         $html.='<tr>
-        <td style="width:30px"></td>
-        <td style="width:55px"></td>
-        <td style="width:45px"></td>
-        <td style="width:70px"></td>
-        <td style="width:70px"></td>
-        <td style="width:85px"></td>
-        <td style="width:30px"></td>
-        <td style="width:85px"></td>
-        <td style="width:50px"></td>
-        <td style="width:85px"></td>
-        <td style="width:50px"></td>
-        <td style="width:85px"></td>
-        <td style="width:50px"></td>
-        <td style="width:85px"></td>
-        <td style="width:50px"></td>
-        <td style="width:210px"></td>
+        <td style="width:30px">'.$foliador.'</td>
+        <td style="width:55px">'.$datos_frer_estudiante_con_grupo[$contador-1]->ultimo_semestre_cursado.'</td>
+        <td style="width:45px">'.$datos_estudiantes_con_grupo[$contador-1]->matricula.'</td>
+        <td style="width:70px">'.$datos_estudiantes_con_grupo[$contador-1]->primer_apellido.'</td>
+        <td style="width:70px">'.$datos_estudiantes_con_grupo[$contador-1]->segundo_apellido.'</td>
+        <td style="width:85px">'.$datos_estudiantes_con_grupo[$contador-1]->nombre.'</td>
+        <td style="width:30px">'.(intval($datos_frer_estudiante_con_grupo[$contador-1]->numero_adeudos)+$aprobadas_sumar).'</td>
+        '.$claves_califiaciones.'
+        <td style="width:210px">'.$claves.'</td>
         </tr>';
+        $contador+=1;
+        $foliador+=1;
     }
 
-    return $html;
-}
+    ////////////////////////////fin de datos estudinates con grupos
 
 
-$encabezado_tabla = '
-<table border="1">
+
+    /////////////////////////// datos de alumnos sin grupo
+
+    $contador=1;//se reinicia cada vez
+    $html2="";
+    foreach($regularizaciones_sin_grupo as $estudiante){
+        $claves_califiaciones="";
+        $aprobadas_sumar=0;
+        foreach($materias_regularizadas_sin_grupo[$contador-1] as $materia){
+            $claves_califiaciones.='<td style="width:85px">'.$materia->id_materia.'</td>';
+            $claves_califiaciones.='<td style="width:50px">'.$materia->calificacion.'</td>';
+
+            if(intval($materia->calificacion)>=6){
+                $aprobadas_sumar+=1;
+            }
+        }
+        
+
+        if(sizeof($materias_regularizadas_sin_grupo[$contador-1])==1){
+            $claves_califiaciones.='<td style="width:85px"></td>';
+            $claves_califiaciones.='<td style="width:50px"></td>';
+
+            $claves_califiaciones.='<td style="width:85px"></td>';
+            $claves_califiaciones.='<td style="width:50px"></td>';
+
+            $claves_califiaciones.='<td style="width:85px"></td>';
+            $claves_califiaciones.='<td style="width:50px"></td>';
+        }
+
+        else if(sizeof($materias_regularizadas_sin_grupo[$contador-1])==2){
+            $claves_califiaciones.='<td style="width:85px"></td>';
+            $claves_califiaciones.='<td style="width:50px"></td>';
+
+            $claves_califiaciones.='<td style="width:85px"></td>';
+            $claves_califiaciones.='<td style="width:50px"></td>';
+        }
+
+        else if(sizeof($materias_regularizadas_sin_grupo[$contador-1])==3){
+            $claves_califiaciones.='<td style="width:85px"></td>';
+            $claves_califiaciones.='<td style="width:50px"></td>';
+        }
+
+        //materias que debe
+
+        $claves="";
+        //echo sizeof($materias_debe_estudiante_sin_grupo[0]);
+        if(sizeof($materias_debe_estudiante_sin_grupo[0])>1){
+            foreach($materias_debe_estudiante_sin_grupo[0] as $materia){
+            $claves.=$materia->id_materia.",";
+            }
+        }
+        
+            
+
+
+        $html2.='<tr>
+        <td style="width:30px">'.$foliador.'</td>
+        <td style="width:55px">'.$datos_frer_estudiante_sin_grupo[$contador-1]->ultimo_semestre_cursado.'</td>
+        <td style="width:45px">'.$datos_estudiantes_sin_grupo[$contador-1]->matricula.'</td>
+        <td style="width:70px">'.$datos_estudiantes_sin_grupo[$contador-1]->primer_apellido.'</td>
+        <td style="width:70px">'.$datos_estudiantes_sin_grupo[$contador-1]->segundo_apellido.'</td>
+        <td style="width:85px">'.$datos_estudiantes_sin_grupo[$contador-1]->nombre.'</td>
+        <td style="width:30px">'.(intval($datos_frer_estudiante_sin_grupo[$contador-1]->numero_adeudos)+$aprobadas_sumar).'</td>
+        '.$claves_califiaciones.'
+        <td style="width:210px">'.$claves.'</td>
+        </tr>';
+        $contador+=1;
+        $foliador+=1;
+    }
+
+    ////////////////////////////fin de datos estudinates con grupos
+
+
+
+$cintillo = '<tr><td style="background-color:gray"></td>
+<td style="background-color:gray"></td>
+<td style="background-color:gray"></td>
+<td style="background-color:gray"></td>
+<td style="background-color:gray"></td>
+<td style="background-color:gray"></td>
+<td style="background-color:gray"></td>
+<td style="background-color:gray"></td>
+<td style="background-color:gray"></td>
+<td style="background-color:gray"></td>
+<td style="background-color:gray"></td>
+<td style="background-color:gray"></td>
+<td style="background-color:gray"></td>
+<td style="background-color:gray"></td>
+<td style="background-color:gray"></td>
+<td style="background-color:gray"></td>
+</tr>';
+
+
+
+$cuerpo_tabla = '
+<table border="1" style="font-size:7pt">
 <tbody>
-'.rellenar().'
+'.$html.$html2.$cintillo.'
 </tbody>
 </table>
 ';
 
 // print a block of text using Write()
 // output the HTML content
-$pdf->writeHTML($encabezado_tabla, true, 0, true, true);
+$pdf->writeHTML($cuerpo_tabla, true, 0, true, true);
 
 
 //Close and output PDF document

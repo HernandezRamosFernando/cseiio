@@ -1,5 +1,6 @@
 <?php
 class M_reinscripcion extends CI_Model { 
+    
    public function __construct() {
       parent::__construct();
       $this->load->model('M_grupo_estudiante');
@@ -217,6 +218,15 @@ class M_reinscripcion extends CI_Model {
             
 
         }
+
+        }
+
+
+        $planteles = $this->db->query("select Plantel_cct_plantel from Regularizacion where estatus=1 group by Plantel_cct_plantel")->result();
+
+        foreach($planteles as $plantel){
+
+            $this->M_regularizacion->cerrar_regularizacion($plantel->Plantel_cct_plantel);
 
         }
 

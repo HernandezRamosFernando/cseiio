@@ -352,7 +352,7 @@
     var datos = new Array();
     for (let i = 0; i < tabla.childNodes.length; i++) {
       //console.log(tabla.childNodes[i].childNodes[1].innerText);
-      var calificacion = tabla.childNodes[i].childNodes[4].childNodes[0].value;
+      var calificacion = tabla.childNodes[i].childNodes[5].childNodes[0].value;
       if (calificacion === "" || calificaciones === "/") {
         calificacion = "0";
       }

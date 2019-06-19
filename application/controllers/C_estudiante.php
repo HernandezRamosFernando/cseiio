@@ -653,7 +653,7 @@ public function generar_formato_observaciones_expedientes(){
      $datos['dato_plantel']=$this->M_plantel->get_plantel($plantel);
     $datos['lista_doc']=$this->M_documentacion->lista_observaciones_en_documentacion($plantel);
     $this->load->library('pdf');
-    $this->load->view('contratos/formatoobservacionesexpedientes',$datos);
+    $this->load->view('reportes/formatoobservacionesexpedientes',$datos);
 }
 
 public function generar_matricula(){

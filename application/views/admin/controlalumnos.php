@@ -747,6 +747,41 @@
 
           <!--fin legua materna------------------------------------------------------>
 
+                  <!-- etnia ------------------------------------------------------------------>
+        <div class="form-group">
+        <div class="row">
+
+          <div class="col-md-4"  >
+            <label class="form-group has-float-label seltitulo">
+              <select class="form-control form-control-lg selcolor" onchange="etnias_evento(this)"  name="aspirante_etnia" 
+                id="aspirante_etnia">
+                <option value="">Seleccione la etnia de procedencia</option>
+                <?php
+                              foreach ($lenguas as $lengua)
+                              {
+                                      echo '<option value="'.$lengua->id_lengua.'">'.strtoupper($lengua->nombre_lengua).'</option>';
+                              }
+                              ?>
+                              <option value="otra">OTRA</option>
+
+              </select>
+              <span>Etnia</span>
+            </label>
+          </div>
+
+          <div class="col-md-2" id="etnia_oculto" style="display: none"  >
+              <div class="form-label-group">
+                <input type="text" class="form-control text-uppercase" id="aspirante_etnia_oculto"
+                  name="aspirante_etnia_oculto" placeholder="Agregue etnia" style="color: #237087 ">
+                <label for="aspirante_etnia_oculto">Agregue etnia</label>
+              </div>
+            </div>
+
+
+      </div>
+        <!-- fin etnia --------------------------------------------------------------->
+
+
 
 
           <!--datos secundaria------------------------------------------------------>

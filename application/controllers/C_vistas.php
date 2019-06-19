@@ -397,10 +397,280 @@ public function resolucion_equivalencia(){
     //fin control alumnos ---------------------------------------------------
 
     //Acreditacion------------------------------------------------------------
+    public function acreditacion(){
+        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
+        $data= array('title'=>'Acreditación');
+        $this->load->view("headers/cabecera", $data);
+        $this->load->view("headers/menuarriba");
+        $this->load->view("headers/menuizquierda");
+        $this->load->view("admin/acreditacion");
+        $this->load->view("footers/footer");
+        }
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='CESCOLAR'){
+            $data= array('title'=>'Acreditación');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierda");
+            $this->load->view("admin/acreditacion");
+            $this->load->view("footers/footer");
+            }
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
+            $data= array('title'=>'Acreditación');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierdaplantel");
+            $this->load->view("plantel/acreditacionplantel");
+            $this->load->view("footers/footer");
+            }
+            else{
+            redirect(base_url().'index.php/c_usuario');
+            }
+    }
+
+    public function crear_grupo(){
+        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
+        $datos['planteles'] = $this->M_plantel->get_planteles();
+        $datos['ciclo_escolar'] = $this->M_ciclo_escolar->get_ciclo_escolar();
+        
+        $data= array('title'=>'Creación de grupos');
+        $this->load->view("headers/cabecera", $data);
+        $this->load->view("headers/menuarriba");
+        $this->load->view("headers/menuizquierda");
+        $this->load->view("admin/creargrupo", $datos);
+        $this->load->view("footers/footer");
+        }
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='CESCOLAR'){
+            $datos['planteles'] = $this->M_plantel->get_planteles();
+            $datos['ciclo_escolar'] = $this->M_ciclo_escolar->get_ciclo_escolar();
+            
+            $data= array('title'=>'Creación de grupos');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierda");
+            $this->load->view("admin/creargrupo", $datos);
+            $this->load->view("footers/footer");
+            }
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
+            $datos['planteles'] = $this->M_plantel->get_planteles();
+            $datos['ciclo_escolar'] = $this->M_ciclo_escolar->get_ciclo_escolar();
+            
+            $data= array('title'=>'Creación de grupos');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierda");
+            $this->load->view("plantel/creargrupo", $datos);
+            $this->load->view("footers/footer");
+            }
+        else{
+            redirect(base_url().'index.php/c_usuario');
+        }
+    }
+
+    public function buscar_grupo(){
+        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
+        $datos['planteles'] = $this->M_plantel->get_planteles();
+        $datos['ciclo_escolar'] = $this->M_ciclo_escolar->get_ciclo_escolar();
+        
+        $data= array('title'=>'Buscador de grupos');
+        $this->load->view("headers/cabecera", $data);
+        $this->load->view("headers/menuarriba");
+        $this->load->view("headers/menuizquierda");
+        $this->load->view("admin/buscar_grupo", $datos);
+        $this->load->view("footers/footer");
+        }
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='CESCOLAR'){
+            $datos['planteles'] = $this->M_plantel->get_planteles();
+            $datos['ciclo_escolar'] = $this->M_ciclo_escolar->get_ciclo_escolar();
+            
+            $data= array('title'=>'Buscador de grupos');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierda");
+            $this->load->view("admin/buscar_grupo", $datos);
+            $this->load->view("footers/footer");
+            }
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
+            $datos['planteles'] = $this->M_plantel->get_planteles();
+            $datos['ciclo_escolar'] = $this->M_ciclo_escolar->get_ciclo_escolar();
+            
+            $data= array('title'=>'Buscador de grupos');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierda");
+            $this->load->view("plantel/buscar_grupo", $datos);
+            $this->load->view("footers/footer");
+            }
+        else{
+            redirect(base_url().'index.php/c_usuario');
+        }
+    }
+
+    public function asesor_grupo(){
+        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
+        $datos['planteles'] = $this->M_plantel->get_planteles();
+    
+        $data= array('title'=>'Asignación de Asesor');
+        $this->load->view("headers/cabecera", $data);
+        $this->load->view("headers/menuarriba");
+        $this->load->view("headers/menuizquierda");
+        $this->load->view("admin/asesor_grupo", $datos);
+        $this->load->view("footers/footer");
+        }
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='CESCOLAR'){
+            $datos['planteles'] = $this->M_plantel->get_planteles();
+        
+            $data= array('title'=>'Asignación de Asesor');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierda");
+            $this->load->view("admin/asesor_grupo", $datos);
+            $this->load->view("footers/footer");
+            }
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
+            $datos['planteles'] = $this->M_plantel->get_planteles();
+        
+            $data= array('title'=>'Asignación de Asesor');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierda");
+            $this->load->view("plantel/asesor_grupo", $datos);
+            $this->load->view("footers/footer");
+            }
+        else{
+            redirect(base_url().'index.php/c_usuario');
+        }
+    }
+
+    public function calificacion(){
+        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
+        $datos['planteles'] = $this->M_plantel->get_planteles();
+    
+        $data= array('title'=>'Calificaciones');
+        $this->load->view("headers/cabecera", $data);
+        $this->load->view("headers/menuarriba");
+        $this->load->view("headers/menuizquierda");
+        $this->load->view("admin/calificacion", $datos);
+        $this->load->view("footers/footer");
+        }
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='CESCOLAR'){
+            $datos['planteles'] = $this->M_plantel->get_planteles();
+        
+            $data= array('title'=>'Calificaciones');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierda");
+            $this->load->view("admin/calificacion", $datos);
+            $this->load->view("footers/footer");
+            }
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
+            $datos['planteles'] = $this->M_plantel->get_plantel($this->session->userdata('user')['plantel']);
+            $data= array('title'=>'Control de Alumnos');
+            $data= array('title'=>'Calificaciones');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierda");
+            $this->load->view("plantel/calificacion", $datos);
+            $this->load->view("footers/footer");
+        }
+        else{
+            redirect(base_url().'index.php/c_usuario');
+        }
+    }
+    public function cerrar_cal(){
+        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
+            $datos['planteles'] = $this->M_plantel->get_planteles_sin_cerrar_calificaciones();
+            $data= array('title'=>'Cerrar calificaciones');
+        $this->load->view("headers/cabecera", $data);
+        $this->load->view("headers/menuarriba");
+        $this->load->view("headers/menuizquierda");
+        $this->load->view("admin/cerrar_calificaciones", $datos);
+        $this->load->view("footers/footer");
+        }
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='CESCOLAR   '){
+            $datos['planteles'] = $this->M_plantel->get_planteles_sin_cerrar_calificaciones();
+            $data= array('title'=>'Cerrar calificaciones');
+        $this->load->view("headers/cabecera", $data);
+        $this->load->view("headers/menuarriba");
+        $this->load->view("headers/menuizquierda");
+        $this->load->view("admin/cerrar_calificaciones", $datos);
+        $this->load->view("footers/footer");
+        }
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
+            $data= array('title'=>'Cerrar calificaciones');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierda");
+            $this->load->view("plantel/cerrar_calificaciones");
+            $this->load->view("footers/footer");
+            }
+        else{
+            redirect(base_url().'index.php/c_usuario');
+        }
+    }
+    public function regularizacion(){
+        $datos['planteles'] = $this->M_plantel->get_planteles();
+
+        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
+        $data= array('title'=>'Regularización');
+        $this->load->view("headers/cabecera", $data);
+        $this->load->view("headers/menuarriba");
+        $this->load->view("headers/menuizquierda");
+        $this->load->view("admin/regularizacion" , $datos);
+        $this->load->view("footers/footer");
+        }
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='CESCOLAR'){
+            $data= array('title'=>'Regularización');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierda");
+            $this->load->view("admin/regularizacion" , $datos);
+            $this->load->view("footers/footer");
+            }
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
+            $data= array('title'=>'Regularización');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierdaplantel");
+            $this->load->view("plantel/acreditacionplantel", $datos);
+            $this->load->view("footers/footer");
+            }
+            else{
+            redirect(base_url().'index.php/c_usuario');
+            }
+    }
+    public function cerrar_reg(){
+        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
+            $datos['planteles'] = $this->M_plantel->get_planteles();
+            $data= array('title'=>'Cerrar regularización intermedia');
+        $this->load->view("headers/cabecera", $data);
+        $this->load->view("headers/menuarriba");
+        $this->load->view("headers/menuizquierda");
+        $this->load->view("admin/cerrar_reg_intermedia", $datos);
+        $this->load->view("footers/footer");
+        }
+        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='CESCOLAR'){
+            $datos['planteles'] = $this->M_plantel->get_planteles();
+            $data= array('title'=>'Cerrar regularización intermedia');
+        $this->load->view("headers/cabecera", $data);
+        $this->load->view("headers/menuarriba");
+        $this->load->view("headers/menuizquierda");
+        $this->load->view("admin/cerrar_reg_intermedia", $datos);
+        $this->load->view("footers/footer");
+        }
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
+            $data= array('title'=>'Cerrar calificaciones');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierda");
+            $this->load->view("plantel/cerrar_calificaciones");
+            $this->load->view("footers/footer");
+            }
+        else{
+            redirect(base_url().'index.php/c_usuario');
+        }
+    }
 
     public function bajas(){
-        
-        //$datos['secundarias'] = $this->M_secundaria->get_secundarias();
         if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
             $datos['planteles'] = $this->M_plantel->get_planteles();
             $data= array('title'=>'Bajas');
@@ -409,7 +679,16 @@ public function resolucion_equivalencia(){
             $this->load->view("headers/menuizquierda");
             $this->load->view("admin/bajas",$datos);
             $this->load->view("footers/footer");
-        } 
+        }
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='CESCOLAR'){
+            $datos['planteles'] = $this->M_plantel->get_planteles();
+            $data= array('title'=>'Bajas');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierda");
+            $this->load->view("admin/bajas",$datos);
+            $this->load->view("footers/footer");
+        }
         else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
             $datos['planteles'] = $this->M_plantel->get_plantel($this->session->userdata('user')['plantel']);
             $data= array('title'=>'Control de Alumnos');
@@ -424,24 +703,125 @@ public function resolucion_equivalencia(){
         }
     }
 
-    
 
-    
+    // fin acreditacion ------------------------------------------------------
 
-    
-    
-
-    public function acreditacion(){
+    // Reportes -----------------------------------------------------------------
+    public function reportes(){
         if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
-        $data= array('title'=>'Acreditación');
+        $data= array('title'=>'Reinscripción');
         $this->load->view("headers/cabecera", $data);
         $this->load->view("headers/menuarriba");
         $this->load->view("headers/menuizquierda");
-        $this->load->view("admin/acreditacion");
+        $this->load->view("admin/reportes");
         $this->load->view("footers/footer");
         }
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='CESCOLAR'){
+            $data= array('title'=>'Reinscripción');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierda");
+            $this->load->view("admin/reportes");
+            $this->load->view("footers/footer");
+            }
         else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
-            $data= array('title'=>'Acreditación');
+            $data= array('title'=>'Reinscripción');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierdaplantel");
+            $this->load->view("plantel/acreditacionplantel");
+            $this->load->view("footers/footer");
+            }
+            else{
+            redirect(base_url().'index.php/c_usuario');
+            }
+    }
+    public function friae(){
+        $datos['planteles'] = $this->M_plantel->get_planteles();
+        $datos['ciclo_escolar'] = $this->M_ciclo_escolar->lista_ciclo_escolar();
+
+        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
+        $data= array('title'=>'FRIAE');
+        $this->load->view("headers/cabecera", $data);
+        $this->load->view("headers/menuarriba");
+        $this->load->view("headers/menuizquierda");
+        $this->load->view("admin/friae", $datos);
+        $this->load->view("footers/footer");
+        }
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='CESCOLAR'){
+            $data= array('title'=>'FRIAE');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierda");
+            $this->load->view("admin/friae", $datos);
+            $this->load->view("footers/footer");
+            }
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
+            $data= array('title'=>'FRIAE');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierdaplantel");
+            $this->load->view("plantel/acreditacionplantel");
+            $this->load->view("footers/footer");
+            }
+            else{
+            redirect(base_url().'index.php/c_usuario');
+            }
+    }
+    public function frer(){
+        $datos['planteles'] = $this->M_plantel->get_planteles();
+        
+
+        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
+        $data= array('title'=>'FRER');
+        $this->load->view("headers/cabecera", $data);
+        $this->load->view("headers/menuarriba");
+        $this->load->view("headers/menuizquierda");
+        $this->load->view("admin/frer", $datos);
+        $this->load->view("footers/footer");
+        }
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='CESCOLAR'){
+            $data= array('title'=>'FRER');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierda");
+            $this->load->view("admin/frer", $datos);
+            $this->load->view("footers/footer");
+            }
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
+            $data= array('title'=>'FRIAE');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierdaplantel");
+            $this->load->view("plantel/acreditacionplantel");
+            $this->load->view("footers/footer");
+            }
+            else{
+            redirect(base_url().'index.php/c_usuario');
+            }
+    }
+    public function lista_grupo_sc(){
+        $datos['planteles'] = $this->M_plantel->get_planteles();
+        
+
+        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
+        $data= array('title'=>'Lista de grupo sin calificaciones');
+        $this->load->view("headers/cabecera", $data);
+        $this->load->view("headers/menuarriba");
+        $this->load->view("headers/menuizquierda");
+        $this->load->view("admin/lista_grupos_sc", $datos);
+        $this->load->view("footers/footer");
+        }
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='CESCOLAR'){
+            $data= array('title'=>'Lista de grupo sin calificaciones');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierda");
+            $this->load->view("admin/lista_grupos_sc", $datos);
+            $this->load->view("footers/footer");
+            }
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
+            $data= array('title'=>'FRIAE');
             $this->load->view("headers/cabecera", $data);
             $this->load->view("headers/menuarriba");
             $this->load->view("headers/menuizquierdaplantel");
@@ -453,6 +833,104 @@ public function resolucion_equivalencia(){
             }
     }
 
+    public function lista_grupo_cc(){
+        $datos['planteles'] = $this->M_plantel->get_planteles();
+        
+
+        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
+        $data= array('title'=>'Lista de grupo sin calificaciones');
+        $this->load->view("headers/cabecera", $data);
+        $this->load->view("headers/menuarriba");
+        $this->load->view("headers/menuizquierda");
+        $this->load->view("admin/lista_grupos_cc", $datos);
+        $this->load->view("footers/footer");
+        }
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='CESCOLAR'){
+            $data= array('title'=>'Lista de grupo sin calificaciones');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierda");
+            $this->load->view("admin/lista_grupos_cc", $datos);
+            $this->load->view("footers/footer");
+            }
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
+            $data= array('title'=>'FRIAE');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierdaplantel");
+            $this->load->view("plantel/acreditacionplantel");
+            $this->load->view("footers/footer");
+            }
+            else{
+            redirect(base_url().'index.php/c_usuario');
+            }
+    }
+
+    public function observaciones(){
+        $datos['planteles'] = $this->M_plantel->get_planteles();
+        
+        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
+        $data= array('title'=>'Formato de observaciones');
+        $this->load->view("headers/cabecera", $data);
+        $this->load->view("headers/menuarriba");
+        $this->load->view("headers/menuizquierda");
+        $this->load->view("admin/formato_observaciones", $datos);
+        $this->load->view("footers/footer");
+        }
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='CESCOLAR'){
+            $data= array('title'=>'Lista de grupo sin calificaciones');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierda");
+            $this->load->view("admin/lista_grupos_cc", $datos);
+            $this->load->view("footers/footer");
+            }
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
+            $data= array('title'=>'FRIAE');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierdaplantel");
+            $this->load->view("plantel/acreditacionplantel");
+            $this->load->view("footers/footer");
+            }
+            else{
+            redirect(base_url().'index.php/c_usuario');
+            }
+    }
+
+    // fin de reportes ---------------------------------------------------------------------
+
+    // Formatos -----------------------------------------------------------------------------
+    public function formatos(){
+
+        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
+        $data= array('title'=>'Formatos');
+        $this->load->view("headers/cabecera", $data);
+        $this->load->view("headers/menuarriba");
+        $this->load->view("headers/menuizquierda");
+        $this->load->view("admin/formatos" );
+        $this->load->view("footers/footer");
+        }
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
+            $data= array('title'=>'Regularización');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierdaplantel");
+            $this->load->view("plantel/formatos");
+            $this->load->view("footers/footer");
+            }
+            else{
+            redirect(base_url().'index.php/c_usuario');
+            }
+    }   
+
+    // fin formatos -------------------------------------------------------------------------
+
+    // control de documentos ----------------------------------------------------------------
+
+    // fin de control de documentos ----------------------------------------------------------
+
+    // administracion del sistema ------------------------------------------------------------
     public function control_permisos(){
         if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
         $data= array('title'=>'Control y Permisos');
@@ -466,6 +944,7 @@ public function resolucion_equivalencia(){
             redirect(base_url().'index.php/c_usuario');
         }
     }
+
     public function lista_permisos_calificaciones(){
         if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
         $data= array('title'=>'Lista de Permisos calificaciones');
@@ -493,55 +972,6 @@ public function resolucion_equivalencia(){
         }
     }
 
-    public function crear_grupo(){
-        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
-        $datos['planteles'] = $this->M_plantel->get_planteles();
-        $datos['ciclo_escolar'] = $this->M_ciclo_escolar->get_ciclo_escolar();
-        
-        $data= array('title'=>'Creación de grupos');
-        $this->load->view("headers/cabecera", $data);
-        $this->load->view("headers/menuarriba");
-        $this->load->view("headers/menuizquierda");
-        $this->load->view("admin/creargrupo", $datos);
-        $this->load->view("footers/footer");
-        }
-        else{
-            redirect(base_url().'index.php/c_usuario');
-        }
-    }
-
-    public function buscar_grupo(){
-        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
-        $datos['planteles'] = $this->M_plantel->get_planteles();
-        $datos['ciclo_escolar'] = $this->M_ciclo_escolar->get_ciclo_escolar();
-        
-        $data= array('title'=>'Buscador de grupos');
-        $this->load->view("headers/cabecera", $data);
-        $this->load->view("headers/menuarriba");
-        $this->load->view("headers/menuizquierda");
-        $this->load->view("admin/buscar_grupo", $datos);
-        $this->load->view("footers/footer");
-        }
-        else{
-            redirect(base_url().'index.php/c_usuario');
-        }
-    }
-    public function asesor_grupo(){
-        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
-        $datos['planteles'] = $this->M_plantel->get_planteles();
-    
-        $data= array('title'=>'Asignación de Asesor');
-        $this->load->view("headers/cabecera", $data);
-        $this->load->view("headers/menuarriba");
-        $this->load->view("headers/menuizquierda");
-        $this->load->view("admin/asesor_grupo", $datos);
-        $this->load->view("footers/footer");
-        }
-        else{
-            redirect(base_url().'index.php/c_usuario');
-        }
-    }
-
     public function terminar_ciclo(){
         if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
         $data= array('title'=>'Terminacion de ciclo escolar');
@@ -550,76 +980,6 @@ public function resolucion_equivalencia(){
         $this->load->view("headers/menuizquierda");
         $this->load->view("admin/terminar_ciclo");
         $this->load->view("footers/footer");
-        }
-        else{
-            redirect(base_url().'index.php/c_usuario');
-        }
-    }
-    public function cerrar_cal(){
-        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
-            $datos['planteles'] = $this->M_plantel->get_planteles_sin_cerrar_calificaciones();
-            $data= array('title'=>'Cerrar calificaciones');
-        $this->load->view("headers/cabecera", $data);
-        $this->load->view("headers/menuarriba");
-        $this->load->view("headers/menuizquierda");
-        $this->load->view("admin/cerrar_calificaciones", $datos);
-        $this->load->view("footers/footer");
-        }
-        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
-            $data= array('title'=>'Cerrar calificaciones');
-            $this->load->view("headers/cabecera", $data);
-            $this->load->view("headers/menuarriba");
-            $this->load->view("headers/menuizquierda");
-            $this->load->view("plantel/cerrar_calificaciones");
-            $this->load->view("footers/footer");
-            }
-        else{
-            redirect(base_url().'index.php/c_usuario');
-        }
-    }
-    public function cerrar_reg(){
-        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
-            $datos['planteles'] = $this->M_plantel->get_planteles();
-            $data= array('title'=>'Cerrar regularización intermedia');
-        $this->load->view("headers/cabecera", $data);
-        $this->load->view("headers/menuarriba");
-        $this->load->view("headers/menuizquierda");
-        $this->load->view("admin/cerrar_reg_intermedia", $datos);
-        $this->load->view("footers/footer");
-        }
-        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
-            $data= array('title'=>'Cerrar calificaciones');
-            $this->load->view("headers/cabecera", $data);
-            $this->load->view("headers/menuarriba");
-            $this->load->view("headers/menuizquierda");
-            $this->load->view("plantel/cerrar_calificaciones");
-            $this->load->view("footers/footer");
-            }
-        else{
-            redirect(base_url().'index.php/c_usuario');
-        }
-    }
-
-    public function calificacion(){
-        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
-        $datos['planteles'] = $this->M_plantel->get_planteles();
-    
-        $data= array('title'=>'Calificaciones');
-        $this->load->view("headers/cabecera", $data);
-        $this->load->view("headers/menuarriba");
-        $this->load->view("headers/menuizquierda");
-        $this->load->view("admin/calificacion", $datos);
-        $this->load->view("footers/footer");
-        }
-        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
-            $datos['planteles'] = $this->M_plantel->get_plantel($this->session->userdata('user')['plantel']);
-            $data= array('title'=>'Control de Alumnos');
-            $data= array('title'=>'Calificaciones');
-            $this->load->view("headers/cabecera", $data);
-            $this->load->view("headers/menuarriba");
-            $this->load->view("headers/menuizquierda");
-            $this->load->view("plantel/calificacion", $datos);
-            $this->load->view("footers/footer");
         }
         else{
             redirect(base_url().'index.php/c_usuario');
@@ -672,6 +1032,7 @@ public function resolucion_equivalencia(){
             redirect(base_url().'index.php/c_usuario');
         }
     }
+
     public function permisos_reg(){
         $datos['planteles'] = $this->M_plantel->get_planteles();
 
@@ -688,122 +1049,6 @@ public function resolucion_equivalencia(){
         }
     }
 
-    
-    
-    public function reportes(){
-        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
-        $data= array('title'=>'Reinscripción');
-        $this->load->view("headers/cabecera", $data);
-        $this->load->view("headers/menuarriba");
-        $this->load->view("headers/menuizquierda");
-        $this->load->view("admin/reportes");
-        $this->load->view("footers/footer");
-        }
-        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
-            $data= array('title'=>'Reinscripción');
-            $this->load->view("headers/cabecera", $data);
-            $this->load->view("headers/menuarriba");
-            $this->load->view("headers/menuizquierdaplantel");
-            $this->load->view("plantel/acreditacionplantel");
-            $this->load->view("footers/footer");
-            }
-            else{
-            redirect(base_url().'index.php/c_usuario');
-            }
-    }
-    public function friae(){
-        $datos['planteles'] = $this->M_plantel->get_planteles();
-        $datos['ciclo_escolar'] = $this->M_ciclo_escolar->lista_ciclo_escolar();
-
-        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
-        $data= array('title'=>'FRIAE');
-        $this->load->view("headers/cabecera", $data);
-        $this->load->view("headers/menuarriba");
-        $this->load->view("headers/menuizquierda");
-        $this->load->view("admin/friae", $datos);
-        $this->load->view("footers/footer");
-        }
-        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
-            $data= array('title'=>'FRIAE');
-            $this->load->view("headers/cabecera", $data);
-            $this->load->view("headers/menuarriba");
-            $this->load->view("headers/menuizquierdaplantel");
-            $this->load->view("plantel/acreditacionplantel");
-            $this->load->view("footers/footer");
-            }
-            else{
-            redirect(base_url().'index.php/c_usuario');
-            }
-    }
-    public function frer(){
-        $datos['planteles'] = $this->M_plantel->get_planteles();
-        
-
-        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
-        $data= array('title'=>'FRER');
-        $this->load->view("headers/cabecera", $data);
-        $this->load->view("headers/menuarriba");
-        $this->load->view("headers/menuizquierda");
-        $this->load->view("admin/frer", $datos);
-        $this->load->view("footers/footer");
-        }
-        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
-            $data= array('title'=>'FRIAE');
-            $this->load->view("headers/cabecera", $data);
-            $this->load->view("headers/menuarriba");
-            $this->load->view("headers/menuizquierdaplantel");
-            $this->load->view("plantel/acreditacionplantel");
-            $this->load->view("footers/footer");
-            }
-            else{
-            redirect(base_url().'index.php/c_usuario');
-            }
-    }
-    public function regularizacion(){
-        $datos['planteles'] = $this->M_plantel->get_planteles();
-
-        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
-        $data= array('title'=>'Regularización');
-        $this->load->view("headers/cabecera", $data);
-        $this->load->view("headers/menuarriba");
-        $this->load->view("headers/menuizquierda");
-        $this->load->view("admin/regularizacion" , $datos);
-        $this->load->view("footers/footer");
-        }
-        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
-            $data= array('title'=>'Regularización');
-            $this->load->view("headers/cabecera", $data);
-            $this->load->view("headers/menuarriba");
-            $this->load->view("headers/menuizquierdaplantel");
-            $this->load->view("plantel/acreditacionplantel", $datos);
-            $this->load->view("footers/footer");
-            }
-            else{
-            redirect(base_url().'index.php/c_usuario');
-            }
-    } 
-    public function formatos(){
-
-        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
-        $data= array('title'=>'Formatos');
-        $this->load->view("headers/cabecera", $data);
-        $this->load->view("headers/menuarriba");
-        $this->load->view("headers/menuizquierda");
-        $this->load->view("admin/formatos" );
-        $this->load->view("footers/footer");
-        }
-        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
-            $data= array('title'=>'Regularización');
-            $this->load->view("headers/cabecera", $data);
-            $this->load->view("headers/menuarriba");
-            $this->load->view("headers/menuizquierdaplantel");
-            $this->load->view("plantel/formatos");
-            $this->load->view("footers/footer");
-            }
-            else{
-            redirect(base_url().'index.php/c_usuario');
-            }
-    }   
     public function controlusuarios(){
         $datos['planteles'] = $this->M_plantel->get_planteles();
 
@@ -819,6 +1064,8 @@ public function resolucion_equivalencia(){
             redirect(base_url().'index.php/c_usuario');
             }
     } 
-        
+
+    // fin de administracion del sistema -----------------------------------------------------  
+    
     //-------------------------------------------------termina vistas
 }

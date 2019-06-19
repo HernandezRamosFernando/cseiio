@@ -105,6 +105,20 @@ function lenguas_evento(e) {
   }
 }
 
+function etnias_evento(e) {
+  if(document.getElementById("aspirante_etnia").value === "otra"){
+    $("#etnia_oculto").show()
+    document.getElementById("aspirante_etnia_oculto").name = 'aspirante_etnia';
+    document.getElementById("aspirante_etnia").name = '';
+    document.getElementById("aspirante_etnia_oculto").required = true;
+  }
+  else {
+    $("#etnia_oculto").hide()
+    document.getElementById("aspirante_etnia_oculto").required = false;
+    document.getElementById("aspirante_etnia_oculto").value = '';
+  }
+}
+
 
 function parentesco(e) {
   if (document.getElementById("aspirante_tutor_parentesco").value === "otro") {

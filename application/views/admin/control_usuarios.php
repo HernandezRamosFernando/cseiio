@@ -32,36 +32,6 @@
           </div>
         </div>
 
-        <div class="form-group">
-
-          <div class="row">
-
-            <div class="col-md-4">
-              <div class="form-label-group ">
-                <input type="text" pattern="[A-Za-z]+[ ]*[A-Za-z ]*" title="Introduzca solo letras validas"
-                  class="form-control text-uppercase" id="nombre_agregar" placeholder="Nombre de usuario">
-                <label for="nombre_agregar">Nombre </label>
-              </div>
-            </div>
-
-            <div class="col-md-4">
-              <div class="form-label-group ">
-                <input type="text" pattern="[A-Za-z]+[ ]*[A-Za-z ]*" title="Introduzca solo letras validas"
-                  class="form-control text-uppercase" id="primer_apellido_agregar" placeholder="Nombre de usuario">
-                <label for="primer_apellido_agregar">Primer apellido </label>
-              </div>
-            </div>
-
-            <div class="col-md-4">
-              <div class="form-label-group ">
-                <input type="text" pattern="[A-Za-z]+[ ]*[A-Za-z ]*" title="Introduzca solo letras validas"
-                  class="form-control text-uppercase" id="segundo_apellido_agregar" placeholder="Nombre de usuario">
-                <label for="segundo_apellido_agregar">Segundo apellido </label>
-              </div>
-            </div>
-
-          </div>
-        </div>
 
         <div class="form-group">
           <div class="row">
@@ -78,7 +48,7 @@
               <div class="form-label-group ">
                 <input type="text"  class="form-control text-uppercase" id="password_agregar"
                   placeholder="Contraseña">
-                <label for="contraseña_agregar">Contraseña</label>
+                <label for="password_agregar">Contraseña</label>
               </div>
             </div>
 

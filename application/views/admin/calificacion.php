@@ -80,7 +80,7 @@
 
             <div class="col-md-4">
               <label class="form-group has-float-label seltitulo">
-                <select class="form-control form-control-lg selcolor" name="materias" id="materias">
+                <select class="form-control form-control-lg selcolor" onchange="validarcomponente()" name="materias" id="materias">
                   <option value="">Seleccione uno</option>
                 </select>
                 <span>Lista de materias del grupo</span>
@@ -445,12 +445,20 @@
       }
       xhr.onload = function () {
         $('#div_carga').hide();
-        let opciones = "";
+        if(xhr.response.trim() === "[]"){
+          let opciones = "";
+          opciones += '<option value="">No existen materias con permisos para calificar</option>';
+          document.getElementById("materias").innerHTML = opciones;
+          
+        }else{
+          let opciones = "";
         JSON.parse(xhr.response).forEach(function (valor, indice) {
           opciones += '<option value="' + valor.clave + '">' + valor.unidad_contenido + '</option>';
         });
 
         document.getElementById("materias").innerHTML = opciones;
+        }
+        
       };
 
       xhr.send(null);

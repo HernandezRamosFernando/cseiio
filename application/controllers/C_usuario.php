@@ -71,7 +71,10 @@ class C_usuario extends CI_Controller {
  
 
 
-
+public function crear_usuario(){
+	$datos = json_decode($this->input->raw_input_stream);
+	echo $this->M_usuario->crear_usuario($datos);
+}
 
 
 

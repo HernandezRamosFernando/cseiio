@@ -23,6 +23,26 @@ class C_frer extends CI_Controller {
 
         //echo $mes_ano[0];
         //echo $mes_ano[1];
+        switch($mes_ano[0]){
+            case "01":
+            $datos['mes']="ENERO";
+            break;
+
+            case "05":
+            $datos['mes']="MAYO";
+            break;
+
+            case "07":
+            $datos['mes']="JULIO";
+            break;
+
+            case "10":
+            $datos['mes']="OCTUBRE";
+            break;
+        }
+
+
+        $datos['ano']=$mes_ano[1];
 
         //dias de periodo
         $datos['dias_periodo'] = $this->M_regularizacion->dias_regularizacion_periodio_plantel($plantel,$mes_ano[0],$mes_ano[1]);

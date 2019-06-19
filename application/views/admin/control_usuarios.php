@@ -16,7 +16,7 @@
         <div class="form-group">
           <div class="row">
             <div class="col-md-4 ">
-              <button type="button" class="btn btn-success btn-lg btn-block" onclick="" style="padding: 1rem"
+              <button type="button" class="btn btn-success btn-lg btn-block" onclick="agregar_usuario()" style="padding: 1rem"
                 id="agregar_usuario">Agregar usuario</button>
             </div>
 
@@ -68,7 +68,7 @@
 
             <div class="col-md-4">
               <div class="form-label-group ">
-                <input type="text" pattern="" class="form-control text-uppercase" id="usuario_agregar"
+                <input type="text" class="form-control text-uppercase" id="usuario_agregar"
                   placeholder="Nombre de usuario">
                 <label for="usuario_agregar">Usuario</label>
               </div>
@@ -76,7 +76,7 @@
 
             <div class="col-md-4">
               <div class="form-label-group ">
-                <input type="text" pattern="" class="form-control text-uppercase" id="contraseña_agregar"
+                <input type="text"  class="form-control text-uppercase" id="password_agregar"
                   placeholder="Contraseña">
                 <label for="contraseña_agregar">Contraseña</label>
               </div>
@@ -94,7 +94,7 @@
 
             <div class="col-md-4">
               <div class="form-label-group ">
-                <input type="mail" pattern="" class="form-control text-uppercase" id="correo_agregar"
+                <input type="mail"  class="form-control text-uppercase" id="correo_agregar"
                   placeholder="Contraseña">
                 <label for="correo_agregar">Correo</label>
               </div>
@@ -145,3 +145,34 @@
   <!-- /.content-wrapper -->
 </div>
 <!-- /#wrapper -->
+
+
+<script>
+function agregar_usuario(){
+
+let usuario = {
+  usuario:document.getElementById("usuario_agregar").value,
+  password:document.getElementById("password_agregar").value,
+  correo:document.getElementById("correo_agregar").value,
+  rol:document.getElementById("rol_agregar").value,
+  plantel:document.getElementById("plantel_agregar").value
+};
+
+
+var xhr = new XMLHttpRequest();
+    xhr.open("POST", '<?php echo base_url();?>index.php/c_usuario/crear_usuario', true);
+
+    //Send the proper header information along with the request
+    xhr.setRequestHeader("Content-Type", "application/json");
+
+    xhr.onreadystatechange = function() { // Call a function when the state changes.
+        if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+            console.log(xhr.response);
+        }
+    }
+    xhr.send(JSON.stringify(usuario));
+
+
+}
+
+</script>

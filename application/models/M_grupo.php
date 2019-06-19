@@ -69,9 +69,15 @@ class M_grupo extends CI_Model {
    }
 
 
+   function permiso_materia_grupo($materia,$grupo){
+        return sizeof($this->db->query("select * from Permiso_calificacion where id_grupo='".$grupo."' and id_materia='".$materia."' and estatus=1")->result());
+   }
+
+
 
    public function get_materias_grupo($id_grupo){
     $semestre = $this->db->query("select semestre from Grupo where id_grupo='".$id_grupo."'")->result()[0]->semestre;
+    $permisos = $this->db->query(" ");
     if($semestre<5){
         $materias = $this->M_materia->get_materias_semestre_completo($semestre);
     }
@@ -81,7 +87,21 @@ class M_grupo extends CI_Model {
         $id_componente = $this->M_componente->get_id_componente(explode('-',$id_grupo)[1]);
         $materias = $this->M_materia->get_materias_semestre_componente($semestre,$id_componente[0]->id_componente);
     }
-    return $materias;
+
+    $materias_mostrar = array();
+
+    $indice=0;
+    foreach($materias as $materia){
+
+        
+        if($this->permiso_materia_grupo($materia->clave,$id_grupo)>0){
+            $materias_mostrar[$indice]=$materia;
+            $indice+=1;
+        }
+        
+
+    }
+    return $materias_mostrar;
    }
 
 

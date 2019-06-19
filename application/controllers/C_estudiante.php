@@ -82,7 +82,8 @@ class C_estudiante extends CI_Controller {
             'Plantel_cct_plantel' => $this->input->post('aspirante_plantel'),
             'lugar_nacimiento' => mb_strtoupper($this->input->post('aspirante_lugar_nacimiento')),
             'nacionalidad' => $this->input->post('aspirante_nacionalidad'),
-            'localidad_origen' => $localidad_origen
+            'localidad_origen' => $localidad_origen,
+            'etnia'=>$this->input->post("aspirante_etnia")
         );
 
         if($tipo_estudiante=='nuevo_ingreso'){

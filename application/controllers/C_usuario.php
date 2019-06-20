@@ -77,5 +77,12 @@ public function crear_usuario(){
 }
 
 
+public function usuarios_registrados(){
+
+	echo json_encode($this->M_usuario->usuarios_registrados());
+
+}
+
+
 
 }

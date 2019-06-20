@@ -110,7 +110,7 @@ class M_grupo extends CI_Model {
     $indice=0;
     foreach($materias as $materia){
 
-        
+        //echo $this->permiso_materia_grupo($materia->clave,$id_grupo);
         if($this->permiso_materia_grupo($materia->clave,$id_grupo)>0){
             $materias_mostrar[$indice]=$materia;
             $indice+=1;

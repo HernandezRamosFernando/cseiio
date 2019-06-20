@@ -28,4 +28,10 @@ else{
    return "si";
 }
 }
+
+
+
+public function usuarios_registrados(){
+   return $this->db->query("select * from Usuario")->result();
+}
 }

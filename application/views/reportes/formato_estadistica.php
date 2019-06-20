@@ -94,15 +94,17 @@ $pdf->SetFont('helvetica','', 10);
 $pdf->AddPage();
 
 // set some text to print
-$titulo='<h4 style="text-align:center;width:100px">DEPARTAMENTO DE CONTROL ESCOLAR</h4><h6 style="text-align:center">CONCENTRADO DE DATOS ESTADISTICOS</h6>';
+$titulo='<h4 style="text-align:center;width:100px">COLEGIO SUPERIOR PARA LA EDUCACION INTEGRAL INTERCULTURAL DE OAXACA</h4><h6 style="text-align:center">DEPARTAMENTO DE CONTROL ESCOLAR</h6>
+<h4 style="background-color:gray">CONCENTRADO DE DATOS ESTADISTICOS</h4>';
 
 $encabezado='
+<div>
 <table style="font-size:7pt" border="1">
 
 <tbody>
 <tr>
-<td style="text-align:left">NOMBRE DEL PLANTEL:</td>
-<td>XXXXXXXXXX</td>
+<td style="text-align:left;width:130px">NOMBRE DEL PLANTEL:</td>
+<td style="text-align:left;width:480px">XXXXXXXXXX</td>
 </tr>
 
 <tr style="text-align:left">
@@ -122,12 +124,321 @@ $encabezado='
 </tbody>
 
 </table>
+</div>
 ';
 
-$total
+$total_grupos='
+<div>
+<table border="1" style="font-size:7pt">
+<tbody>
+
+<tr>
+<td style="width:252px" colspan="4">TOTAL DE GRUPOS POR SEMESTRE</td>
+</tr>
+
+
+<tr>
+<td style="width:63px;height:15px"  colspan="1"></td>
+<td style="width:63px"  colspan="1"></td>
+<td style="width:63px"  colspan="1"></td>
+<td style="width:63px"  colspan="1">TOTAL</td>
+</tr>
+
+
+<tr>
+<td style="width:63px;height:20px"  colspan="1"></td>
+<td style="width:63px"  colspan="1"></td>
+<td style="width:63px"  colspan="1"></td>
+<td style="width:63px"  colspan="1"></td>
+</tr>
+
+
+</tbody>
+</table>
+</div>
+';
+
+//----------------------------------
+
+
+$matricula_final_modulo_anterior='
+<div>
+<table border="1">
+<tbody>
+
+<tr>
+<td style="width:130px" rowspan="3"></td>
+<td style="width:159px" colspan="3"></td>
+<td style="width:159px" colspan="3"></td>
+<td style="width:159px" colspan="3"></td>
+</tr>
+
+<tr>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+</tr>
+
+
+<tr>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+</tr>
+
+
+</tbody>
+</table>
+</div>
+';
+
+$total_grupos_abajo='
+<div>
+<table border="1">
+<tbody>
+
+<tr>
+<td style="width:63px;height:30px"></td>
+<td style="width:63px"></td>
+<td style="width:63px"></td>
+<td style="width:63px"></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+</tbody>
+</table>
+</div>
+';
+
+
+
+
+$modulo ='
+<div>
+<table border="1">
+<tbody>
+
+<tr>
+<td style="width:130px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tbody>
+</table>
+</div>
+';
+
+
+$pdf->writeHTMLCell($w = 0, $h = 50, $x = '21', $y = '', $titulo, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+
+$pdf->writeHTMLCell($w = 0, $h = 50, $x = '21', $y = '30', $encabezado, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+
+$pdf->writeHTMLCell($w = 0, $h = 50, $x = '196', $y = '30', $total_grupos, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+
+//$pdf->writeHTMLCell($w = 0, $h = 50, $x = '21', $y = '35', $matricula_final_modulo_anterior, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+
+//$pdf->writeHTMLCell($w = 0, $h = 50, $x = '196', $y = '35', $total_grupos_abajo, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+
+//$pdf->writeHTMLCell($w = 0, $h = 50, $x = '21', $y = '50', $modulo, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+
 // print a block of text using Write()
 // output the HTML content
-$pdf->writeHTML($titulo.$encabezado, true, 0, true, true);
+//$pdf->writeHTML($titulo.$encabezado.$total_grupos, true, 0, true, true);
 
 
 //Close and output PDF document

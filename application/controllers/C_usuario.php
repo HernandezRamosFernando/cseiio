@@ -83,6 +83,12 @@ public function usuarios_registrados(){
 
 }
 
+public function usuarios_registrados_id(){
+	$usuario = $this->input->get("id_usuario");
+	echo json_encode($this->M_usuario->usuarios_registrados_id($usuario));
+
+}
+
 
 
 }

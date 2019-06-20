@@ -69,7 +69,7 @@ $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
 $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 
 // set margins
-$pdf->SetMargins(20, 7,19);
+$pdf->SetMargins(20, 7,26);
 $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
 $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 
@@ -99,7 +99,7 @@ $titulo='<h4 style="text-align:center;width:100px">COLEGIO SUPERIOR PARA LA EDUC
 
 $encabezado='
 <div>
-<table style="font-size:7pt" border="1">
+<table style="font-size:7pt">
 
 <tbody>
 <tr>
@@ -158,12 +158,687 @@ $total_grupos='
 </div>
 ';
 
-//----------------------------------
-
-
-$matricula_final_modulo_anterior='
+$inicio_modulo ='
 <div>
-<table border="1">
+<table border="1" style="font-size:7pt">
+<tbody>
+
+<tr>
+<td style="width:611px" colspan="10"></td>
+</tr>
+
+<tr>
+<td style="width:134px" rowspan="2"></td>
+<td style="width:159px" colspan="3"></td>
+<td style="width:159px" colspan="3"></td>
+<td style="width:159px" colspan="3"></td>
+</tr>
+
+<tr>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+</tr>
+
+<tr>
+<td style="width:134px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+</tr>
+
+<tr>
+<td style="width:134px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+</tr>
+
+
+<tr>
+<td style="width:134px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+</tr>
+
+<tr>
+<td style="width:134px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+</tr>
+
+<tr>
+<td style="width:134px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+</tr>
+
+<tr>
+<td style="width:134px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+</tr>
+
+<tr>
+<td style="width:134px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+</tr>
+
+<tr>
+<td style="width:134px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+</tr>
+
+<tr>
+<td style="width:134px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+</tr>
+
+<tr>
+<td style="width:134px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+</tr>
+
+<tr>
+<td style="width:134px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+</tr>
+
+
+
+<tbody>
+</table>
+</div>
+';
+
+$total_inicio_modulo='
+<div>
+<table border="1" style="font-size:7pt">
+<tbody>
+
+<tr>
+<td style="width:63px;height:44px"></td>
+<td style="width:63px"></td>
+<td style="width:63px"></td>
+<td style="width:63px"></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+</tbody>
+</table>
+</div>
+';
+
+
+$fin_modulo='
+<div>
+<table border="1" style="font-size:7pt">
+<tbody>
+
+<tr>
+<td style="width:612px" colspan="10">FIN DE MODULO/SEMESTRE</td>
+</tr>
+
+
+<tr>
+<td style="width:135px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td style="width:612px" colspan="10"></td>
+</tr>
+
+<tr>
+<td style="width:135px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+</tbody>
+</table>
+</div>
+';
+
+
+$fin_total_modulo='
+<div>
+<table border="1" style="font-size:7pt">
+<tbody>
+
+<tr>
+<td style="width:252px" colspan="4"></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+
+<tr>
+<td style="width:252px" colspan="4"></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+
+</tbody>
+</table>
+</div>
+';
+
+
+
+//---------------------------------- hasta aqui todo es generico--------------------------------
+
+//a
+$matricula_final_modulo_anterior_a='
+<div>
+<table border="1" style="font-size:7pt">
 <tbody>
 
 <tr>
@@ -204,13 +879,55 @@ $matricula_final_modulo_anterior='
 </div>
 ';
 
-$total_grupos_abajo='
+
+//b
+$matricula_final_modulo_anterior_b='
 <div>
-<table border="1">
+<table border="1" style="font-size:7pt">
 <tbody>
 
 <tr>
-<td style="width:63px;height:30px"></td>
+<td style="width:293px" rowspan="3"></td>
+<td style="width:159px" colspan="3"></td>
+<td style="width:159px" colspan="3"></td>
+</tr>
+
+<tr>
+
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+</tr>
+
+
+<tr>
+
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+</tr>
+
+
+</tbody>
+</table>
+</div>
+';
+
+
+//a
+$total_fin_mudulo_matricula_a='
+<div>
+<table border="1" style="font-size:7pt">
+<tbody>
+
+<tr>
+<td style="width:63px;height:22px"></td>
 <td style="width:63px"></td>
 <td style="width:63px"></td>
 <td style="width:63px"></td>
@@ -228,200 +945,218 @@ $total_grupos_abajo='
 </div>
 ';
 
-
-
-
-$modulo ='
+//b
+$total_fin_mudulo_matricula_b='
 <div>
-<table border="1">
+<table border="1" style="font-size:7pt">
 <tbody>
 
 <tr>
-<td style="width:130px"></td>
-<td style="width:53px"></td>
-<td style="width:53px"></td>
-<td style="width:53px"></td>
-<td style="width:53px"></td>
-<td style="width:53px"></td>
-<td style="width:53px"></td>
-<td style="width:53px"></td>
-<td style="width:53px"></td>
-<td style="width:53px"></td>
+<td style="width:63px;height:33px" rowspan="2"></td>
+<td style="width:63px"></td>
+<td style="width:63px"></td>
+<td style="width:63px"></td>
 </tr>
 
 <tr>
 <td></td>
 <td></td>
 <td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
 </tr>
 
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-
-<tbody>
+</tbody>
 </table>
 </div>
 ';
+
+
+//a
+$desercion_a='
+<div>
+<table border="1" style="font-size:7pt">
+<tbody>
+
+<tr>
+<td style="width:135px" rowspan="2">DESERTARON TOTAL</td>
+<td style="width:159px" colspan="3"></td>
+<td style="width:159px" colspan="3"></td>
+<td style="width:159px" colspan="3"></td>
+</tr>
+
+<tr>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+</tr>
+
+
+
+<tr>
+<td></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+</tr>
+
+<tr>
+<td></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+</tr>
+
+
+
+
+</tbody>
+</table>
+</div>
+';
+
+//b
+$desercion_b='
+<div>
+<table border="1" style="font-size:7pt">
+<tbody>
+
+<tr>
+<td style="width:135px" rowspan="2">DESERTARON TOTAL</td>
+<td style="width:159px" colspan="3" rowspan="4"></td>
+<td style="width:159px" colspan="3"></td>
+<td style="width:159px" colspan="3"></td>
+</tr>
+
+<tr>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+</tr>
+
+
+
+<tr>
+<td>HOMBRES</td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+</tr>
+
+<tr>
+<td>MUJERES</td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+<td style="width:53px"></td>
+</tr>
+
+
+
+
+</tbody>
+</table>
+</div>
+';
+
+$total_desertores_a='
+<div>
+<table border="1" style="font-size:7pt">
+<tbody>
+
+<tr>
+<td style="width:63px"></td>
+<td style="width:63px"></td>
+<td style="width:63px"></td>
+<td style="width:63px"></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+</tbody>
+</table>
+</div>
+';
+
+$total_desertores_b='
+<div>
+<table border="1" style="font-size:7pt">
+<tbody>
+
+<tr>
+<td style="width:63px" rowspan="4"></td>
+<td style="width:63px"></td>
+<td style="width:63px"></td>
+<td style="width:63px"></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+</tbody>
+</table>
+</div>
+';
+
+
 
 
 $pdf->writeHTMLCell($w = 0, $h = 50, $x = '21', $y = '', $titulo, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
@@ -430,11 +1165,22 @@ $pdf->writeHTMLCell($w = 0, $h = 50, $x = '21', $y = '30', $encabezado, $border 
 
 $pdf->writeHTMLCell($w = 0, $h = 50, $x = '196', $y = '30', $total_grupos, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
 
-//$pdf->writeHTMLCell($w = 0, $h = 50, $x = '21', $y = '35', $matricula_final_modulo_anterior, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+$pdf->writeHTMLCell($w = 0, $h = 50, $x = '21', $y = '45', $matricula_final_modulo_anterior_a, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
 
-//$pdf->writeHTMLCell($w = 0, $h = 50, $x = '196', $y = '35', $total_grupos_abajo, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+$pdf->writeHTMLCell($w = 0, $h = 50, $x = '196', $y = '45', $total_fin_mudulo_matricula_a, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
 
-//$pdf->writeHTMLCell($w = 0, $h = 50, $x = '21', $y = '50', $modulo, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+$pdf->writeHTMLCell($w = 0, $h = 50, $x = '21', $y = '57', $inicio_modulo, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+
+//$total_inicio_modulo
+$pdf->writeHTMLCell($w = 0, $h = 50, $x = '196', $y = '57', $total_inicio_modulo, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+
+$pdf->writeHTMLCell($w = 0, $h = 50, $x = '21', $y = '103', $desercion_b, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+
+$pdf->writeHTMLCell($w = 0, $h = 50, $x = '196', $y = '103', $total_desertores_b, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+
+$pdf->writeHTMLCell($w = 0, $h = 50, $x = '21', $y = '118', $fin_modulo, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+
+$pdf->writeHTMLCell($w = 0, $h = 50, $x = '196', $y = '118', $fin_total_modulo, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
 
 // print a block of text using Write()
 // output the HTML content

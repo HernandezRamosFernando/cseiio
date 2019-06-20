@@ -90,5 +90,16 @@ public function usuarios_registrados_id(){
 }
 
 
+public function editar_usuario(){
+	$datos = json_decode($this->input->raw_input_stream);
+  echo $this->M_usuario->editar_usuario($datos);
+}
+
+public function borrar_usuario(){
+	$datos = json_decode($this->input->raw_input_stream);
+	echo $this->M_usuario->borrar_usuario($datos);
+}
+
+
 
 }

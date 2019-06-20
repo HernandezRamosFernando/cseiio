@@ -216,7 +216,7 @@
           <div class="form-group">
             <div class="row">
               <div class="col-md-4">
-                <button type="button" class="btn btn-info btn-lg btn-block" onclick="()" style="padding: 1rem">Modificar usuario</button>
+                <button type="button" class="btn btn-info btn-lg btn-block" onclick="modificar_usuario()" style="padding: 1rem">Modificar usuario</button>
               </div>
             </div>
           </div>
@@ -249,7 +249,7 @@
           <div class="form-group">
             <div class="row">
               <div class="col-md-4">
-                <button type="button" class="btn btn-warning btn-lg btn-block" onclick="" style="padding: 1rem">Eliminar usuario</button>
+                <button type="button" class="btn btn-warning btn-lg btn-block" onclick="borrar_usuario()" style="padding: 1rem">Eliminar usuario</button>
               </div>
             </div>
           </div>
@@ -380,6 +380,67 @@
     }
     xhr.send(JSON.stringify(usuario));
 
+
+  }
+
+
+  function modificar_usuario(){
+    if(document.getElementById("rol_modificar").value!="PLANTEL"){
+      var datos = {
+      id_usuario:document.getElementById("lista_modificar").value,
+      usuario:document.getElementById("usuario_modificar").value,
+      correo:document.getElementById("correo_modificar").value,
+      rol:document.getElementById("rol_modificar").value,
+      password:document.getElementById("password_modificar").value
+    };
+    }
+
+    else{
+      var datos = {
+      id_usuario:document.getElementById("lista_modificar").value,
+      usuario:document.getElementById("usuario_modificar").value,
+      correo:document.getElementById("correo_modificar").value,
+      rol:document.getElementById("rol_modificar").value,
+      password:document.getElementById("password_modificar").value,
+      plantel:document.getElementById("plantel_modificar").value
+    };
+    }
+    
+
+    var xhr = new XMLHttpRequest();
+        xhr.open("POST", '<?php echo base_url();?>index.php/c_usuario/editar_usuario', true);
+
+        //Send the proper header information along with the request
+        xhr.setRequestHeader("Content-Type", "application/json");
+
+        xhr.onreadystatechange = function() { // Call a function when the state changes.
+            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                console.log(xhr.response);
+            }
+        }
+        xhr.send(JSON.stringify(datos));
+
+  }
+
+
+  function borrar_usuario(){
+
+    let datos={
+      id_usuario:document.getElementById("lista_eliminar").value
+    }
+
+    var xhr = new XMLHttpRequest();
+        xhr.open("POST", '<?php echo base_url();?>index.php/c_usuario/borrar_usuario', true);
+
+        //Send the proper header information along with the request
+        xhr.setRequestHeader("Content-Type", "application/json");
+
+        xhr.onreadystatechange = function() { // Call a function when the state changes.
+            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                console.log(xhr.response);
+            }
+        }
+        xhr.send(JSON.stringify(datos));
 
   }
 

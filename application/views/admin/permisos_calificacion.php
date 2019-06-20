@@ -227,7 +227,7 @@
 
     //mandar json a controlador permisos
     var xhr = new XMLHttpRequest();
-    $('#fechapermiso').modal().show();
+    $('#fechapermiso').modal().hide();
     xhr.open("POST", '<?php echo base_url();?>index.php/c_permisos/agregar_permisos', true);
 
     //Send the proper header information along with the request
@@ -261,7 +261,7 @@
             type: 'error',
             text: 'Datos no guardados'
           });
-          $('#fechapermiso').modal().hide();
+          $('#fechapermiso').modal().show();
         }
       }
     }

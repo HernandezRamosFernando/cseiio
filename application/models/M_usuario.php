@@ -34,4 +34,9 @@ else{
 public function usuarios_registrados(){
    return $this->db->query("select * from Usuario")->result();
 }
+
+public function usuarios_registrados_id($usuario){
+   return $this->db->query("select * from Usuario where id_usuario='".$usuario."' ")->result();
+}
+
 }

@@ -13,6 +13,7 @@ class C_vistas extends CI_Controller {
         $this->load->model('M_escuela_procedencia');
         $this->load->model('M_ciclo_escolar');
         $this->load->model('M_componente');
+        $this->load->model('M_usuario');
     }
     
     //------------------------------------------vistas
@@ -648,7 +649,7 @@ public function resolucion_equivalencia(){
         $this->load->view("admin/cerrar_reg_intermedia", $datos);
         $this->load->view("footers/footer");
         }
-        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='CESCOLAR'){
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='CESCOLAR'){
             $datos['planteles'] = $this->M_plantel->get_planteles();
             $data= array('title'=>'Cerrar regularización intermedia');
         $this->load->view("headers/cabecera", $data);
@@ -1051,6 +1052,7 @@ public function resolucion_equivalencia(){
 
     public function controlusuarios(){
         $datos['planteles'] = $this->M_plantel->get_planteles();
+        $datos['usuarios'] = $this->M_usuario->usuarios_registrados();
 
         if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
         $data= array('title'=>'Control Usuarios');

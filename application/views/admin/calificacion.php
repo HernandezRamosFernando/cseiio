@@ -80,19 +80,16 @@
 
             <div class="col-md-4">
               <label class="form-group has-float-label seltitulo">
-                <select class="form-control form-control-lg selcolor" name="materias" id="materias">
+                <select class="form-control form-control-lg selcolor" onchange="validarcomponente()" name="materias" id="materias">
                   <option value="">Seleccione uno</option>
                 </select>
                 <span>Lista de materias del grupo</span>
               </label>
             </div>
 
-            <div class="col-md-3 offset-md-2">
-              <button type="button" class="btn btn-success btn-lg btn-block" onclick="validarcomponente()"
-                style="padding: 1rem" id="crear_grupo">Mostrar materia</button>
-            </div>
-            <div class="col-md-3" id="limpiar_oculto" style="display: none">
-              <button type="button" class="btn btn-warning btn-lg btn-block" onclick="recargar();" style="padding: 1rem"
+
+            <div class="col-md-4 offset-md-2" id="limpiar_oculto" style="display: none">
+              <button type="button" class="btn btn-info btn-lg btn-block" onclick="recargar();" style="padding: 1rem"
                 id="limpiar">Limpiar búsqueda</button>
             </div>
           </div>
@@ -103,6 +100,9 @@
         <div class="row" id="alumnos_oculto" style="display: none">
           <div class="col-md-12" id="tabla_alumnos">
             <div class="card card-body">
+            <p class="h6" style="text-align: left; color: #237087; font-size: 12pt;">Criterios de calificación: <br> La calificación mínima aprobatoria es 6 <br> Toda calificación menor a 6 será 5 <br> La diagonal "/" significa que no presento </p>
+            <br>
+            <br>
               <table class="table table-hover" id="tabla_completa_grupo" style="width: 100%">
                 <caption>Lista de los alumnos del grupo</caption>
                 <thead class="thead-light">
@@ -190,7 +190,7 @@
           console.log(xhr.response);
           swalWithBootstrapButtons.fire({
             type: 'success',
-            text: 'Datos guardados correctamente',
+            text: 'Calificaciones guardadas correctamente',
             allowOutsideClick: false,
             confirmButtonText: 'Aceptar'
           }).then((result) => {
@@ -207,7 +207,7 @@
         } else {
           Swal.fire({
             type: 'error',
-            text: 'Datos no guardados'
+            text: 'Calificaciones no guardadas'
           });
         }
       }
@@ -279,10 +279,7 @@
   function cambiarbusqueda() {
     document.getElementById("grupos").disabled = true;
     document.getElementById("plantel").disabled = true;
-    document.getElementById("semestre_grupo").disabled = true;
-    document.getElementById('crear_grupo').classList.remove('btn-success');
-    document.getElementById('crear_grupo').classList.add('btn-info');
-    document.getElementById('crear_grupo').innerHTML = 'Buscar de nuevo';
+    document.getElementById("semestre_grupo").disabled = true;    
     document.getElementById('limpiar_oculto').style.display = "";
   }
 
@@ -442,12 +439,22 @@
       }
       xhr.onload = function () {
         $('#div_carga').hide();
-        let opciones = "";
+        console.log(xhr.response.trim());
+        if(xhr.response.trim() === "[]"){
+          let opciones = "";
+          opciones += '<option value="">No existen materias con permisos para calificar</option>';
+          document.getElementById("materias").innerHTML = opciones;
+          
+        }else{
+          let opciones = "";
+          opciones += '<option value="">Seleccione una materia</option>';
         JSON.parse(xhr.response).forEach(function (valor, indice) {
           opciones += '<option value="' + valor.clave + '">' + valor.unidad_contenido + '</option>';
         });
 
         document.getElementById("materias").innerHTML = opciones;
+        }
+        
       };
 
       xhr.send(null);

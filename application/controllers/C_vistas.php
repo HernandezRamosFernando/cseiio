@@ -648,7 +648,7 @@ public function resolucion_equivalencia(){
         $this->load->view("admin/cerrar_reg_intermedia", $datos);
         $this->load->view("footers/footer");
         }
-        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='CESCOLAR'){
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='CESCOLAR'){
             $datos['planteles'] = $this->M_plantel->get_planteles();
             $data= array('title'=>'Cerrar regularización intermedia');
         $this->load->view("headers/cabecera", $data);

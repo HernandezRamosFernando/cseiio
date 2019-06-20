@@ -87,12 +87,9 @@
               </label>
             </div>
 
-            <div class="col-md-3 offset-md-2">
-              <button type="button" class="btn btn-success btn-lg btn-block" onclick="validarcomponente()"
-                style="padding: 1rem" id="crear_grupo">Mostrar materia</button>
-            </div>
-            <div class="col-md-3" id="limpiar_oculto" style="display: none">
-              <button type="button" class="btn btn-warning btn-lg btn-block" onclick="recargar();" style="padding: 1rem"
+
+            <div class="col-md-4 offset-md-2" id="limpiar_oculto" style="display: none">
+              <button type="button" class="btn btn-info btn-lg btn-block" onclick="recargar();" style="padding: 1rem"
                 id="limpiar">Limpiar búsqueda</button>
             </div>
           </div>
@@ -193,7 +190,7 @@
           console.log(xhr.response);
           swalWithBootstrapButtons.fire({
             type: 'success',
-            text: 'Datos guardados correctamente',
+            text: 'Calificaciones guardadas correctamente',
             allowOutsideClick: false,
             confirmButtonText: 'Aceptar'
           }).then((result) => {
@@ -210,7 +207,7 @@
         } else {
           Swal.fire({
             type: 'error',
-            text: 'Datos no guardados'
+            text: 'Calificaciones no guardadas'
           });
         }
       }
@@ -282,10 +279,7 @@
   function cambiarbusqueda() {
     document.getElementById("grupos").disabled = true;
     document.getElementById("plantel").disabled = true;
-    document.getElementById("semestre_grupo").disabled = true;
-    document.getElementById('crear_grupo').classList.remove('btn-success');
-    document.getElementById('crear_grupo').classList.add('btn-info');
-    document.getElementById('crear_grupo').innerHTML = 'Buscar de nuevo';
+    document.getElementById("semestre_grupo").disabled = true;    
     document.getElementById('limpiar_oculto').style.display = "";
   }
 
@@ -445,6 +439,7 @@
       }
       xhr.onload = function () {
         $('#div_carga').hide();
+        console.log(xhr.response.trim());
         if(xhr.response.trim() === "[]"){
           let opciones = "";
           opciones += '<option value="">No existen materias con permisos para calificar</option>';
@@ -452,6 +447,7 @@
           
         }else{
           let opciones = "";
+          opciones += '<option value="">Seleccione una materia</option>';
         JSON.parse(xhr.response).forEach(function (valor, indice) {
           opciones += '<option value="' + valor.clave + '">' + valor.unidad_contenido + '</option>';
         });

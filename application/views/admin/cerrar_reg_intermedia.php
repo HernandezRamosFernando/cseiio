@@ -71,6 +71,20 @@
 //respuesta de si puede cerrar
       if(cerrar.response.trim()==="si"){
         console.log(cerrar.response);
+        swalWithBootstrapButtons.fire({
+            type: 'success',
+            text: 'FRER creado correctamente',
+            allowOutsideClick: false,
+            confirmButtonText: 'Aceptar'
+          }).then((result) => {
+            if (result.value) {
+              //aqui va el acepta
+              $(document).scrollTop(0);
+              location.reload();
+
+            }
+            //aqui va si cancela
+          });
     }
 
     else{// si no puede cerrar

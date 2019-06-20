@@ -116,7 +116,7 @@
                             <span style="font-size: 80px;  text-align: left">7</span>
                         </div>
                         <div class="col-5 valign-left" style="padding-left: 0px;">
-                        &nbsp;<p class="h5"><strong>Cerrar Regularizacion Intermedia</strong></p> &nbsp;
+                        &nbsp;<p class="h5"><strong>Crear FRER regularización intermedia</strong></p> &nbsp;
                         </div>
                         <div class="col-5 valign-right">
                             <i class="material-icons md-48">thumbs_up_down</i>

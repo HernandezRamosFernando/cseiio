@@ -15,4 +15,9 @@ class C_grupo_estudiante extends CI_Controller {
         $datos = json_decode($this->input->raw_input_stream);
         echo $this->M_grupo_estudiante->agregar_calificaciones_materia_grupo($datos);
     }
+
+
+    public function calificaciones_grupo_materia(){
+        
+    }
 }

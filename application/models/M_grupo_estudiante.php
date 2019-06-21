@@ -67,4 +67,9 @@ class M_grupo_estudiante extends CI_Model {
    public function get_materias_reprobadas_estudiante_semestres_pasados($no_control){
         return $this->db->query("SELECT id_materia,calificacion_final FROM Grupo as g inner join Grupo_Estudiante as ge on g.id_grupo=ge.Grupo_id_grupo where Estudiante_no_control='".$no_control."' estatus=0 and calificacion_final<6")->result();
    }
+
+
+   public function calificaciones_grupo_materia($grupo,$materia){
+        return $this->db->query();
+    }
 }

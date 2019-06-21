@@ -38,12 +38,6 @@ class C_grupo extends CI_Controller
         echo json_encode($this->M_grupo->get_materias_grupo_por_calificar($id_grupo));
     }
 
-    public function get_materias_grupo_por_calificar(){
-        $id_grupo = $this->input->get("grupo");
-        echo json_encode($this->M_grupo->get_materias_grupo_por_calificar($id_grupo));
-    }
-
-
     public function get_materias_grupo_asesor(){
         $id_grupo = $this->input->get("grupo");
         echo json_encode($this->M_grupo->get_materias_grupo_asesor($id_grupo));

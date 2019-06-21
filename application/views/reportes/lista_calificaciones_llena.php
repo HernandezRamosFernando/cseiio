@@ -193,18 +193,28 @@ function rellenar_lista($estudiantes){
     $contador=1;
 
     foreach($estudiantes as $estudiante){
+
+        $promedio = (intval($estudiante->primer_parcial)+intval($estudiante->segundo_parcial)+intval($estudiante->tercer_parcial))/3;
+        if($promedio>0 && $promedio<=5){
+            $promedio=5;
+        }
+        else{
+            $promedio = round($promedio,0,PHP_ROUND_HALF_UP);
+        }
+        
+
         $respuesta.='
         <tr>
         <td style="width:20px:">'.$contador.'</td>
         <td style="width:85px;height:20px">'.$estudiante->primer_apellido.'</td>
         <td style="width:85px;height:15px">'.$estudiante->segundo_apellido.'</td>
         <td style="width:110px;height:15px">'.$estudiante->nombre.'</td>
-        <td style="width:35px"></td>
-        <td style="width:35px"></td>
-        <td style="width:35px"></td>
-        <td style="width:35px"></td>
-        <td style="width:35px"></td>
-        <td style="width:35px"></td>
+        <td style="width:35px">'.$estudiante->primer_parcial.'</td>
+        <td style="width:35px">'.$estudiante->segundo_parcial.'</td>
+        <td style="width:35px">'.$estudiante->tercer_parcial.'</td>
+        <td style="width:35px">'.($promedio==0?'/':$promedio).'</td>
+        <td style="width:35px">'.$estudiante->examen_final.'</td>
+        <td style="width:35px">'.$estudiante->calificacion_final.'</td>
         <td style="width:90px"></td>
         </tr>
         ';

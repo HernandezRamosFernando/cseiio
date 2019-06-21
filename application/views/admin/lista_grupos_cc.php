@@ -113,7 +113,7 @@
   function validarcomponente() {
 
 if (document.getElementById("plantel").value != '' && document.getElementById("grupos").value != '' && document.getElementById("semestre_grupo").value != '' && document.getElementById("materias").value != '') {
-  //aqui va la función
+  location.href="<?php echo base_url();?>index.php/c_lista_calificaciones/lista_calificaciones_grupo_materia_llena?grupo="+document.getElementById("grupos").value+"&materia="+document.getElementById("materias").value;
 } else {
   Swal.fire({
     type: 'warning',

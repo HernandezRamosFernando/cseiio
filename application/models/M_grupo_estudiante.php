@@ -72,4 +72,20 @@ class M_grupo_estudiante extends CI_Model {
    public function calificaciones_grupo_materia($grupo,$materia){
         return $this->db->query();
     }
+
+    public function nombres_estudiantes_grupo_materia($grupo,$materia){
+        return $this->db->query("select nombre,primer_apellido,segundo_apellido from Grupo_Estudiante as ge inner join Estudiante as e on ge.Estudiante_no_control=e.no_control where Grupo_id_grupo='".$grupo."' and id_materia='".$materia."' order by primer_apellido")->result();
+    }
+
+    public function datos_estudiantes_grupo_materia($grupo,$materia){
+        return $this->db->query("select * from Grupo_Estudiante as ge inner join Estudiante as e on ge.Estudiante_no_control=e.no_control where Grupo_id_grupo='".$grupo."' and id_materia='".$materia."' order by primer_apellido")->result();
+    }
+
+    public function plantel_grupo($grupo){
+        return $this->db->query("select nombre_plantel,cct_plantel,concat(nombre_localidad,',',nombre_municipio) as localidad_municipio from Grupo as g inner join Plantel as p on g.plantel=p.cct_plantel inner join Localidad as l on p.id_localidad_plantel=l.id_localidad inner join Municipio as m on l.Municipio_id_municipio=m.id_municipio where id_grupo='".$grupo."'")->result()[0];
+    }
+
+    public function datos_materia_grupo($materia,$grupo){
+        return $this->db->query("select unidad_contenido,clave,nombre_grupo,g.semestre,periodo,nombre_ciclo_escolar,a.nombre,a.primer_apellido,a.segundo_apellido,if(periodo='AGOSTO-ENERO','B','A') as tipo_semestre from Grupo_Estudiante as ge inner join Ciclo_escolar as ce on ge.Ciclo_escolar_id_ciclo_escolar=ce.id_ciclo_escolar inner join Materia as m on m.clave=ge.id_materia inner join Asesor as a on a.id_asesor=ge.id_asesor inner join Grupo as g on g.id_grupo=ge.Grupo_id_grupo where ge.Grupo_id_grupo='".$grupo."' and id_materia='".$materia."' limit 1")->result()[0];
+    }
 }

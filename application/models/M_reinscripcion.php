@@ -49,8 +49,25 @@ class M_reinscripcion extends CI_Model {
                 $examen_final = $materia->examen_final==null?0:intval($materia->examen_final);//examen final 
     
                 $promedio_modular = ($primer_parcial+$segundo_parcial+$tercer_parcial)/3;
+
+                //$promedio = (intval($estudiante->primer_parcial)+intval($estudiante->segundo_parcial)+intval($estudiante->tercer_parcial))/3;
+            if($promedio_modular>0 && $promedio_modular<=5){
+                $promedio_modular=5;
+            }
+            else{
+                $promedio_modular = round($promedio_modular,0,PHP_ROUND_HALF_UP);
+            }
+
+
                 $promedio_final = ($promedio_modular+$examen_final)/2;
-                $promedio_final = round($promedio_final,0,PHP_ROUND_HALF_UP);
+
+                if($promedio_final>0 && $promedio_final<=5){
+                    $promedio_final=5;
+                }
+                else{
+                    $promedio_final = round($promedio_final,0,PHP_ROUND_HALF_UP);
+                }
+                //$promedio_final = round($promedio_final,0,PHP_ROUND_HALF_UP);
     
                 $this->db->query("update Grupo_Estudiante set calificacion_final=".$promedio_final." where id_materia='".$materia->id_materia."' and Estudiante_no_control='".$estudiante->Estudiante_no_control."'");//agrega las calificaciones finales a cada materia
             }

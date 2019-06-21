@@ -273,11 +273,19 @@ $firma_asesor='
 </div>
 ';
 
+
+if($materia->tipo_semestre=='A'){
+$encabezado_tabla = $encabezado_tabla_a;
+}
+
+else{
+    $encabezado_tabla = $encabezado_tabla_b;
+}
 $pdf->writeHTMLCell($w = 0, $h = 50, $x = '', $y = '5', $titulo, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
 
 $pdf->writeHTMLCell($w = 0, $h = 50, $x = '', $y = '19', $datos_cabecera, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
 
-$pdf->writeHTMLCell($w = 0, $h = 50, $x = '', $y = '37', $encabezado_tabla_a, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+$pdf->writeHTMLCell($w = 0, $h = 50, $x = '', $y = '37', $encabezado_tabla, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
 
 $pdf->writeHTMLCell($w = 0, $h = 50, $x = '', $y = '44', $datos_estudiantes, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
 

@@ -209,11 +209,11 @@ function rellenar_lista($estudiantes){
         <td style="width:85px;height:20px">'.$estudiante->primer_apellido.'</td>
         <td style="width:85px;height:15px">'.$estudiante->segundo_apellido.'</td>
         <td style="width:110px;height:15px">'.$estudiante->nombre.'</td>
-        <td style="width:35px">'.$estudiante->primer_parcial.'</td>
-        <td style="width:35px">'.$estudiante->segundo_parcial.'</td>
-        <td style="width:35px">'.$estudiante->tercer_parcial.'</td>
+        <td style="width:35px">'.(intval($estudiante->primer_parcial)==0?'/':$estudiante->primer_parcial).'</td>
+        <td style="width:35px">'.(intval($estudiante->segundo_parcial)==0?'/':$estudiante->segundo_parcial).'</td>
+        <td style="width:35px">'.(intval($estudiante->tercer_parcial)==0?'/':$estudiante->tercer_parcial).'</td>
         <td style="width:35px">'.($promedio==0?'/':$promedio).'</td>
-        <td style="width:35px">'.$estudiante->examen_final.'</td>
+        <td style="width:35px">'.(intval($estudiante->examen_final)==0?'/':$estudiante->examen_final).'</td>
         <td style="width:35px">'.$estudiante->calificacion_final.'</td>
         <td style="width:90px"></td>
         </tr>
@@ -283,11 +283,19 @@ $firma_asesor='
 </div>
 ';
 
+if($materia->tipo_semestre=='A'){
+    $encabezado_tabla = $encabezado_tabla_a;
+    }
+    
+    else{
+        $encabezado_tabla = $encabezado_tabla_b;
+    }
+
 $pdf->writeHTMLCell($w = 0, $h = 50, $x = '', $y = '5', $titulo, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
 
 $pdf->writeHTMLCell($w = 0, $h = 50, $x = '', $y = '19', $datos_cabecera, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
 
-$pdf->writeHTMLCell($w = 0, $h = 50, $x = '', $y = '37', $encabezado_tabla_a, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+$pdf->writeHTMLCell($w = 0, $h = 50, $x = '', $y = '37', $encabezado_tabla, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
 
 $pdf->writeHTMLCell($w = 0, $h = 50, $x = '', $y = '44', $datos_estudiantes, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
 

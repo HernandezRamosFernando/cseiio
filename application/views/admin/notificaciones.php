@@ -180,7 +180,7 @@
 
               <div class="col-md-6">
                 <label class="form-group has-float-label seltitulo">
-                  <select class="form-control form-control-lg selcolor" disabled id="rol_modificar" name="rol_modificar">
+                  <select class="form-control form-control-lg selcolor" id="rol_modificar" name="rol_modificar">
                     <option value="">Seleccione</option>
                     <option value="ADMINISTRADOR">ADMINISTRADOR</option>
                     <option value="CESCOLAR">CONTROL ESCOLAR OFICINAS CENTRALES</option>

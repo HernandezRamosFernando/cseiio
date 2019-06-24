@@ -216,7 +216,7 @@
       <div class="row">
         <div class="col-md-12">
           <div class="col-md-12" id="agregar_oculto" style="display: none">
-            <button type="button" onclick="enviar_formulario()" value="nuevo" id="boton_agregar"
+            <button type="button" onclick="select_formulario()" value="nuevo" id="boton_agregar"
               class="btn btn-success btn-lg btn-block btn-guardar" style="padding: 1rem"> Guardar</button>
           </div>
         </div>
@@ -231,6 +231,19 @@
 <!-- /#wrapper -->
 
 <script>
+
+var opcionselect=0;
+var cantidad_materias=0;
+
+function validarselect(e){
+  if(e.value != ""){
+    console.log(e.value);
+    optionselect = 1;
+  }else if(e.value === "" ){
+    console.log(e.value);
+    optionselect = 0;
+  }
+}
 
   function limpiarbusqueda() {
     document.getElementById('crear_grupo').classList.remove('btn-success');
@@ -546,12 +559,13 @@
       $('#div_carga').hide();
               document.getElementById("tabla_asesor").innerHTML = "";
               var tabla = document.getElementById("tabla_asesor");
+              cantidad_materias=JSON.parse(materias.response).length;
 
               JSON.parse(materias.response).forEach(function (valor, indice) {
                 var fila = "<tr>";
                 fila += "<td>" + valor.unidad_contenido.toUpperCase() + "</td>";
                 fila += "<td>" + valor.clave + "</td>";
-                fila += "<td><select class='form-control form-control-lg selcolor'>" + asesores.response + "</select><td>";
+                fila += "<td><select class='form-control form-control-lg selcolor' onclick='validarselect(this)'>" + asesores.response + "</select><td>";
                 fila += "</tr>";
                 tabla.innerHTML += fila;
               });
@@ -577,12 +591,13 @@
       $('#div_carga').hide();
               document.getElementById("tabla_asesor").innerHTML = "";
               var tabla = document.getElementById("tabla_asesor");
+              console.log("materias" + materias.response.length);
 
               JSON.parse(materias.response).forEach(function (valor, indice) {
                 var fila = "<tr>";
                 fila += "<td>" + valor.unidad_contenido.toUpperCase() + "</td>";
                 fila += "<td>" + valor.clave + "</td>";
-                fila += "<td><select class='form-control form-control-lg selcolor'>" + asesores.response + "</select><td>";
+                fila += "<td><select class='form-control form-control-lg selcolor' required>" + asesores.response + "</select><td>";
                 fila += "</tr>";
                 tabla.innerHTML += fila;
               });
@@ -632,6 +647,16 @@
       }
     };
     xhr.send(null);
+  }
+
+  function select_formulario(){
+    if(opcionselect === cantidad_materias){
+      console.log("igual");
+
+    }
+    else{
+      console.log("diferente");
+    }
   }
 
   function enviar_formulario() {

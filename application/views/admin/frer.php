@@ -7,7 +7,7 @@
       <li class="breadcrumb-item">
         <a>Buscar FRER</a>
       </li>
-      <li class="breadcrumb-item active">Ingrese los datos para buscar un FRIAE</li>
+      <li class="breadcrumb-item active">Ingrese los datos para buscar un FRER</li>
     </ol>
 
 

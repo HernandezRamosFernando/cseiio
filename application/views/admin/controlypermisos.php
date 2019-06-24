@@ -140,6 +140,22 @@
           </div>
         </a>
       </div>
+      <div class="col-md-4 col-lg-4">
+        <a href="<?php echo base_url();?>index.php/c_vistas/notificaciones"
+          class="btn btn-primary btn-lg btn-block  btn-responsive menu  btn-9">
+          <div class="row">
+            <div class="col-2 valign-left">
+              <span style="font-size: 80px;  text-align: left">9</span>
+            </div>
+            <div class="col-5 valign-left" style="padding-left: 0px;">
+            &nbsp;<p class="h5"><strong>Enviar notificaciones</strong></p> &nbsp;
+            </div>
+            <div class="col-5 valign-right">
+              <img class="icono_menu" src="<?php echo base_url();?>assets/img/finalizarperiodo.png">
+            </div>
+          </div>
+        </a>
+      </div>
 
     </div>
 

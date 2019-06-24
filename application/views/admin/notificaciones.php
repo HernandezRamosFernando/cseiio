@@ -143,8 +143,6 @@ function validarcomponentefecha() {
   }
 
 
-
-
   function mandar_notificacion(){
 
     let dato = {
@@ -161,9 +159,15 @@ function validarcomponentefecha() {
 
     //Send the proper header information along with the request
     xhr.setRequestHeader("Content-Type", "application/json");
-
-    xhr.onreadystatechange = function() { // Call a function when the state changes.
-        if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+    xhr.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      xhr.error = function (){
+        console.log("error de conexion");
+      }
+  xhr.onreadystatechange = function () {
+    if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+      $('#div_carga').hide();
             console.log(xhr.response);
         }
     }

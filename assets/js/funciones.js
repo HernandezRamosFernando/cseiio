@@ -1,5 +1,6 @@
 
 
+
 var selector_estado_aspirante = document.getElementById("selector_estado_aspirante");
 var selector_municipio_aspirante = document.getElementById("selector_municipio_aspirante");
 var selector_localidad_aspirante = document.getElementById("selector_localidad_aspirante");

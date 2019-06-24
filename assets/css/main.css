@@ -259,3 +259,8 @@ btn-lista:hover{
     background-image:url(../img/cartacompromiso.png);
   }
 
+.notificacion{
+    color:  #237087;
+    font-size: 12pt;
+}
+

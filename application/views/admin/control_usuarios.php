@@ -39,7 +39,7 @@
 
               <div class="col-md-4">
                 <div class="form-label-group ">
-                  <input type="text" class="form-control text-uppercase" id="usuario_agregar"
+                  <input type="text" class="form-control " id="usuario_agregar"
                     placeholder="Nombre de usuario">
                   <label for="usuario_agregar">Usuario</label>
                 </div>
@@ -65,7 +65,7 @@
 
               <div class="col-md-4">
                 <div class="form-label-group ">
-                  <input type="mail" class="form-control text-uppercase" id="correo_agregar" placeholder="Contraseña">
+                  <input type="mail" class="form-control " id="correo_agregar" placeholder="Contraseña">
                   <label for="correo_agregar">Correo</label>
                 </div>
               </div>
@@ -110,7 +110,7 @@
           <div class="form-group">
             <div class="row">
               <div class="col-md-4">
-                <button type="button" class="btn btn-success btn-lg btn-block" onclick="()" style="padding: 1rem">Guardar usuario</button>
+                <button type="button" class="btn btn-success btn-lg btn-block" onclick="agregar_usuario()" style="padding: 1rem">Guardar usuario</button>
               </div>
             </div>
           </div>
@@ -146,7 +146,7 @@
 
               <div class="col-md-4">
                 <div class="form-label-group ">
-                  <input type="text" class="form-control text-uppercase" id="usuario_modificar"
+                  <input type="text" class="form-control " id="usuario_modificar"
                     placeholder="Nombre de usuario">
                   <label for="usuario_modificar">Usuario</label>
                 </div>
@@ -173,7 +173,7 @@
 
               <div class="col-md-4">
                 <div class="form-label-group ">
-                  <input type="mail" class="form-control text-uppercase" id="correo_modificar" placeholder="Contraseña">
+                  <input type="mail" class="form-control " id="correo_modificar" placeholder="Contraseña">
                   <label for="correo_modificar">Correo</label>
                 </div>
               </div>
@@ -366,6 +366,7 @@
           }).then((result) => {
             if (result.value) {
               //aqui va el acepta
+              location.reload();
 
             }
             //aqui va si cancela
@@ -412,10 +413,36 @@
 
         //Send the proper header information along with the request
         xhr.setRequestHeader("Content-Type", "application/json");
-
-        xhr.onreadystatechange = function() { // Call a function when the state changes.
-            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+        xhr.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      xhr.error = function (){
+        console.log("error de conexion");
+      }
+  xhr.onreadystatechange = function () {
+    if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
                 console.log(xhr.response);
+                if (xhr.responseText.trim() === "si") {
+          console.log(xhr.response);
+          swalWithBootstrapButtons.fire({
+            type: 'success',
+            text: 'Usuario modificado correctamente',
+            allowOutsideClick: false,
+            confirmButtonText: 'Aceptar'
+          }).then((result) => {
+            if (result.value) {
+              //aqui va el acepta
+              location.reload();
+
+            }
+            //aqui va si cancela
+          });
+        } else {
+          Swal.fire({
+            type: 'error',
+            text: 'Datos no guardados'
+          });
+        }
             }
         }
         xhr.send(JSON.stringify(datos));
@@ -434,10 +461,36 @@
 
         //Send the proper header information along with the request
         xhr.setRequestHeader("Content-Type", "application/json");
-
-        xhr.onreadystatechange = function() { // Call a function when the state changes.
-            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+        xhr.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      xhr.error = function (){
+        console.log("error de conexion");
+      }
+  xhr.onreadystatechange = function () {
+    if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
                 console.log(xhr.response);
+                if (xhr.responseText.trim() === "si") {
+          console.log(xhr.response);
+          swalWithBootstrapButtons.fire({
+            type: 'success',
+            text: 'Usuario eliminado correctamente',
+            allowOutsideClick: false,
+            confirmButtonText: 'Aceptar'
+          }).then((result) => {
+            if (result.value) {
+              //aqui va el acepta
+              location.reload();
+
+            }
+            //aqui va si cancela
+          });
+        } else {
+          Swal.fire({
+            type: 'error',
+            text: 'Datos no guardados'
+          });
+        }
             }
         }
         xhr.send(JSON.stringify(datos));

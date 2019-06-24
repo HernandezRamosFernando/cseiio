@@ -507,39 +507,6 @@ function cargar_datos_materias(e) {
 }
 
 
-function formato_tabla() {
-      $('#tabla_completa').DataTable({
-        //"order": [[ 0, 'desc' ]],
-        "language": {
-          "sProcessing": "Procesando...",
-          "sLengthMenu": "Mostrar _MENU_ registros",
-          "sZeroRecords": "No se encontraron resultados",
-          "sEmptyTable": "Ningún dato disponible en esta tabla",
-          "sInfo": "Mostrando del _START_ al _END_ de un total de _TOTAL_ ",
-          "sInfoEmpty": "Mostrando del 0 al 0 de un total de 0 ",
-          "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-          "sInfoPostFix": "",
-          "sSearch": "Buscar específico:",
-          "sUrl": "",
-          "sInfoThousands": ",",
-          "sLoadingRecords": "Cargando...",
-          "oPaginate": {
-            "sFirst": "Primero",
-            "sLast": "Último",
-            "sNext": "Siguiente",
-            "sPrevious": "Anterior"
-          },
-          "oAria": {
-            "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
-            "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-          }
-        }
-      });
-    } 
-
-
-    
-
 var form = document.getElementById("nuevamateria");
 	form.onsubmit = function(e){
 		e.preventDefault();
@@ -554,7 +521,6 @@ var form = document.getElementById("nuevamateria");
       }
   xhr.onreadystatechange = function () {
     if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-      console.log(xhr.responseText);
       $('#div_carga').hide();
       if(xhr.responseText==="si"){
         Swal.fire({

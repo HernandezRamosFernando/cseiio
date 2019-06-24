@@ -133,13 +133,44 @@ function validarcomponentefecha() {
     validafecha(document.getElementById("fecha_fin"));
 
     if (document.getElementById("fecha_fin").value != '') {
-      guardar()
+      mandar_notificacion();
     } else {
       Swal.fire({
         type: 'warning',
         text: 'La fecha ingresada es incorrecta'
       });
     }
+  }
+
+
+
+
+  function mandar_notificacion(){
+
+    let dato = {
+      plantel:document.getElementById("plantel_notificacion").value,
+      titulo:document.getElementById("titulo_notificacion").value,
+      mensaje:document.getElementById("mensaje_notificacion").value,
+      autor:"<?php echo $this->session->userdata('user')['usuario'] ?>",
+      fecha_fin:document.getElementById("fecha_fin").value
+    }
+
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", '<?php echo base_url();?>index.php/c_notificacion/agregar_notificacion', true);
+
+    //Send the proper header information along with the request
+    xhr.setRequestHeader("Content-Type", "application/json");
+
+    xhr.onreadystatechange = function() { // Call a function when the state changes.
+        if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+            console.log(xhr.response);
+        }
+    }
+    xhr.send(JSON.stringify(dato));
+
+    //console.log(dato);
+
   }
 
 </script>

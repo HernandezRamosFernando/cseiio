@@ -71,6 +71,27 @@
       <!-- /#wrapper -->
     </div>
   
+
+
+
      
 
+<script>
 
+function cargar_notificaciones(){
+    var xhr = new XMLHttpRequest();
+        xhr.open('GET', '<?php echo base_url();?>index.php/c_notificacion/notificaciones_plantel?plantel=<?php echo $this->session->userdata('user')['plantel'] ?>', true);
+
+        xhr.onload = function () {
+        // aqui estan las notificaciones
+        console.log(JSON.parse(xhr.response));
+        };
+
+        xhr.send(null);
+}
+
+$( document ).ready(function() {
+    cargar_notificaciones();
+});
+
+</script>

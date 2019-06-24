@@ -109,7 +109,7 @@
         </a>
       </div>
       <div class="col-md-4 col-lg-4">
-        <a href="<?php echo base_url();?>index.php/c_vistas/carta_compromiso"
+        <a href="<?php echo base_url();?>index.php/c_vistas/lista_reg_sc"
           class="btn btn-primary btn-lg btn-block  btn-responsive menu  btn-7">
           <div class="row">
             <div class="col-2 valign-left">
@@ -125,7 +125,7 @@
         </a>
       </div>
       <div class="col-md-4 col-lg-4">
-        <a href="<?php echo base_url();?>index.php/c_vistas/carta_compromiso"
+        <a href="<?php echo base_url();?>index.php/c_vistas/lista_reg_cc"
           class="btn btn-primary btn-lg btn-block  btn-responsive menu  btn-8">
           <div class="row">
             <div class="col-2 valign-left">
@@ -156,6 +156,22 @@
           </div>
         </a>
       </div>
+      <div class="col-md-4 col-lg-4">
+        <a href="<?php echo base_url();?>index.php/c_vistas/lista_asistencia"
+          class="btn btn-primary btn-lg btn-block  btn-responsive menu  btn-1">
+          <div class="row">
+            <div class="col-3 valign-left">
+              <span style="font-size: 80px;  text-align: left">10</span>
+            </div>
+            <div class="col-3 valign-left" style="padding-left: 0px;">
+            &nbsp;<p class="h5"><strong>Lista de asistencia</strong></p> &nbsp;
+            </div>
+            <div class="col-5 valign-right">
+              <img class="icono_menu" src="<?php echo base_url();?>assets/img/cartacompromiso.png">
+            </div>
+          </div>
+        </a>
+      </div>
       
     </div>
 
@@ -163,5 +179,4 @@
   </div>
 </div>
 <!-- /.content-wrapper -->
-</div>
-<!-- /#wrapper -->
+

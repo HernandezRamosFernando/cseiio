@@ -20,17 +20,13 @@
       </li>
     </ul>
 
-
-
-    <!-- eventos de navbar -->
-    <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
       <ul class="navbar-nav ml-auto ml-md-0">
         <li class="nav-item dropdown no-arrow mx-1">
-          <a class="nav-link dropdown-toggle valign-center" href="#" id="alertsDropdown" role="button" data-toggle="dropdown"
+          <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
             <i class="material-icons"  id="ic_notificacion">notifications</i>
           </a>
-          <div class="dropdown-menu dropdown-menu-right" id="icononotificacion" aria-labelledby="alertsDropdown">
+          <div class="dropdown-menu dropdown-menu-right" style="width: 400px" id="icononotificacion" aria-labelledby="alertsDropdown">
           <span class="dropdown-item-text selcolor " style="font-weight: bold;";  >Notificaciones</a>
           <div class="dropdown-divider"></div>
         
@@ -38,13 +34,13 @@
         </li>
         
         <li class="nav-item ">
-          <a class="nav-link valign-center" href="#"  data-toggle="modal" data-target="#logoutModal" id="userDropdown" role="button" ">
+          <a class="nav-link " href="#"  data-toggle="modal" data-target="#logoutModal" id="userDropdown" role="button" ">
             <i style="color: #F83D3D;"class="material-icons">phonelink_erase</i>
             <i>Cerrar sesión</i>
           </a>
         </li>
       </ul>
-    </form>
+    
   </nav>
 
    <!-- Logout Modal-->

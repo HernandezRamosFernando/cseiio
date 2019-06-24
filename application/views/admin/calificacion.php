@@ -301,7 +301,7 @@
 
     permisos.onload = function () {
       $('#div_carga').hide();
-      //console.log(JSON.parse(xhr.response)[0];
+      console.log(JSON.parse(permisos.response)[0]);
       var permisos_plantel = JSON.parse(permisos.response)[0];
       if (permisos_plantel === undefined) {
         var permisos_plantel = {

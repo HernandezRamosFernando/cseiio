@@ -22,6 +22,22 @@
               <button type="button" class="btn btn-success btn-lg btn-block" onclick="mujeres_hombres()" style="padding: 1rem"
                 id="agregar_usuario"> Mujeres hombres</button>
             </div>
+            <div class="col-md-4 ">
+              <button type="button" class="btn btn-success btn-lg btn-block" onclick="()" style="padding: 1rem"
+                id="btn1"> Uno</button>
+            </div>
+            <div class="col-md-4 ">
+              <button type="button" class="btn btn-success btn-lg btn-block" onclick="()" style="padding: 1rem"
+                id="btn2"> Dos</button>
+            </div>
+            <div class="col-md-4 ">
+              <button type="button" class="btn btn-success btn-lg btn-block" onclick="()" style="padding: 1rem"
+                id="btn3"> Tres</button>
+            </div>
+            <div class="col-md-4 ">
+              <button type="button" class="btn btn-success btn-lg btn-block" onclick="()" style="padding: 1rem"
+                id="btn4"> Cuatro</button>
+            </div>
 
           </div>
         </div>

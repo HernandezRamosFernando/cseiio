@@ -216,7 +216,7 @@
       <div class="row">
         <div class="col-md-12">
           <div class="col-md-12" id="agregar_oculto" style="display: none">
-            <button type="button" onclick="select_formulario()" value="nuevo" id="boton_agregar"
+            <button type="button" onclick="enviar_formulario()" value="nuevo" id="boton_agregar"
               class="btn btn-success btn-lg btn-block btn-guardar" style="padding: 1rem"> Guardar</button>
           </div>
         </div>

@@ -76,6 +76,7 @@
     }
 
     $(document).ready(function () {
+      $("#alerta").css("display", "");
       cargar_notificaciones();
     });
   </script>

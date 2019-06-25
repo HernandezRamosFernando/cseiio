@@ -20,8 +20,8 @@
       </li>
     </ul>
 
-      <ul class="navbar-nav ml-auto ml-md-0">
-        <li class="nav-item dropdown no-arrow mx-1">
+      <ul class="navbar-nav ml-auto ml-md-0" >
+        <li class="nav-item dropdown no-arrow mx-1" >
           <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
             <i class="material-icons"  id="ic_notificacion">notifications</i>
@@ -58,3 +58,17 @@
                   </div>
                 </div>
               </div>
+
+<div class="alert alert-warning alert-dismissible fade show" role="alert" id="alerta" style="display:none">
+  Tiene permisos para calificar el <strong>--------- --------, </strong> 
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="alert alert-warning alert-dismissible fade show" role="alert" id="alerta_reg" style="display:none">
+  Tiene permisos para calificar el <strong>--------- --------, </strong> 
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>

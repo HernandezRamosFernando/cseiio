@@ -63,15 +63,45 @@
 
 
 
-      //peticion de permisos de parciales
-      var xhr = new XMLHttpRequest();
-      xhr.open('GET', '/server', true);
+      //peticion de permisos de parciales-------------------------------------
+      var permisos_parciales = new XMLHttpRequest();
+      permisos_parciales.open('GET', '<?php echo base_url();?>index.php/c_permisos/get_permiso_plantel?plantel=<?php echo $this->session->userdata('user')['plantel'] ?>', true);
 
-      xhr.onload = function () {
-        // Request finished. Do processing here.
+      permisos_parciales.onload = function () {
+        let permisos = JSON.parse(permisos_parciales.response)[0];
+
+        if(permisos.primer_parcial==="1" || permisos.segundo_parcial==="1" || permisos.tercer_parcial==="1"){
+            //aqui va la alerta que mostrara si tiene permisos de parciales
+            if(permisos.examen_final==="1"){
+              console.log("hay permisos de parciales y examen final y terminan el "+permisos.fecha_fin);
+            }
+
+            else{
+              console.log("hay permisos de parciales y terminan el "+permisos.fecha_fin);
+            }
+            
+        }
+
+        else{
+          console.log("hay permisos de examen final y terminan el "+permisos.fecha_fin);
+        }
       };
 
-      xhr.send(null);
+      permisos_parciales.send(null);
+
+
+      //permisos de regularizacion-------------------------------------
+      var permisos_regularizacion = new XMLHttpRequest();
+          permisos_regularizacion.open('GET', '<?php echo base_url();?>index.php/c_permisos/permisos_regularizacion_plantel?plantel=<?php echo $this->session->userdata('user')['plantel'] ?>', true);
+
+          permisos_regularizacion.onload = function () {
+            if(JSON.parse(permisos_regularizacion.response).length>0){
+              console.log("recuerde que hay periodo de regularizacion");
+            }
+          };
+
+          permisos_regularizacion.send(null);
+      
 
     }
 

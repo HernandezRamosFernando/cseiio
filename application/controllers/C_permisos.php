@@ -38,4 +38,11 @@ class C_permisos extends CI_Controller {
     public function permisos_regularizaciones_activos(){
         echo json_encode($this->M_permisos->permisos_regularizaciones_activos());
     }
+
+    public function permisos_regularizacion_plantel(){
+        $plantel = $this->input->get("plantel");
+        echo json_encode($this->M_permisos->permisos_regularizacion_plantel($plantel));
+    }
+
+    //select fecha_fin from Permiso_regularizacion where Plantel_cct_plantel='20EBD0001C' and curdate() between fecha_inicio and fecha_fin limit 1;
 }

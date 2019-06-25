@@ -42,7 +42,7 @@
           </div>
         </div>
  
-<div>
+<div id="div_grafica">
  <canvas id="myChart" width="600" height="400"></canvas>
 </div>
 
@@ -138,9 +138,16 @@ function numero_aleatorio(){
 
 //etiuetas y valores es un arreglo
 function grafica(etiquetas,valores,colores,tipo){
-   //grafica
 
-var ctx = document.getElementById('myChart').getContext('2d');
+  document.getElementById("div_grafica").innerHTML="";
+  document.getElementById("div_grafica").innerHTML='<canvas id="myChart" width="600" height="400"></canvas>';
+   //grafica
+var ctx = document.getElementById('myChart').getContext('2d'); 
+
+
+
+
+
 var myChart = new Chart(ctx, {
     type: tipo,
     data: {

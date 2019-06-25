@@ -109,7 +109,7 @@ public function resolucion_equivalencia(){
     $this->load->view("admin/resolucion_equivalencia", $datos);
     $this->load->view("footers/footer");
     }
-    if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='CESCOLAR'){
+    else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='CESCOLAR'){
         $datos['planteles'] = $this->M_plantel->get_planteles();
         $datos['ciclo_escolar'] = $this->M_ciclo_escolar->lista_ciclo_escolar();
         $data= array('title'=>'Resolución de Equivalencia');

@@ -60,6 +60,10 @@ function get_planteles_sin_cerrar_calificaciones(){
    return $this->db->query("select distinct cct_plantel,nombre_plantel from Grupo_Estudiante as ge inner join (SELECT Estudiante_no_control as no_control,g.id_grupo FROM Friae_Estudiante as fe inner join Friae as f on fe.Friae_folio=f.folio inner join Grupo as g on f.id_grupo=g.id_grupo where estatus=1) as eg on ge.Estudiante_no_control=eg.no_control inner join Grupo as g on g.id_grupo=ge.Grupo_id_grupo inner join Plantel as p on p.cct_plantel=g.plantel where calificacion_final is null")->result();
 }
 
+function get_planteles_sin_cerrar_calificaciones_vista(){
+   return $this->db->query("select distinct cct_plantel,nombre_plantel from Grupo_Estudiante as ge inner join (SELECT Estudiante_no_control as no_control,g.id_grupo FROM Friae_Estudiante as fe inner join Friae as f on fe.Friae_folio=f.folio inner join Grupo as g on f.id_grupo=g.id_grupo where estatus=1) as eg on ge.Estudiante_no_control=eg.no_control inner join Grupo as g on g.id_grupo=ge.Grupo_id_grupo inner join Plantel as p on p.cct_plantel=g.plantel where calificacion_final")->result();
+}
+
 /////---------------------------------------------------------------------------------------------------------
 function get_lista_planteles_especialidad_html($id_componente){
    if($id_componente!=""){

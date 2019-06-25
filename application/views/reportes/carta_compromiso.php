@@ -119,6 +119,8 @@ $html_1 ='
 <br>
 <br>
 <br>
+<span style="text-align:RIGTH;">FECHA DE CREACION: '.$fecha_carta[0]->fecha.'</span>
+<br>
 <span style="text-align:RIGTH;">ASUNTO: CARTA COMPROMISO</span>
 <br>
 <span style="text-align:LEFT;"><STRONG>LIC. HERIBERTO RÍOS COLIN</STRONG></span>
@@ -156,7 +158,7 @@ compromiso y para ello proporciono los siguientes datos:
 <tr>
 <td>Cct:'.$estudiante_plantel[0]->cct_plantel.'</td>
 <td>Fecha:'.$fecha_carta[0]->fecha.'</td>
-<td>Ciclo Escolar:</td>
+<td>Ciclo Escolar:'.$ciclo_escolar->nombre_ciclo_escolar.'</td>
 </tr>
 
 </tbody>
@@ -206,7 +208,7 @@ $html_3 = '</tbody>
 y cuando medie juicio civil por correcciones de nombre, apellido o algún dato del acta de nacimiento.<br>
 Estoy consiente del compromiso que suscribo, sabedor de una vez que entregue mi documentación completa, gozaré de matrícula y estaré oficialmente inscrito.
 Por lo tanto de no ser Alumno oficial del CSEIIO los semestres que haya cursado en el plantel no se reconocerán y ante de el incumplimiento y la falta 
-de estos requisitos, seré dado de baja del Bachillerato en el que obtuve mi alta. Firmo la presente a mi enterea satisfacción en a los '.$fecha_separada[2].' días del mes de '.$mes.' del año '.$fecha_separada[0].'.
+de estos requisitos, seré dado de baja del Bachillerato en el que obtuve mi alta. Firmo la presente a mi enterea satisfacción a los '.$fecha_separada[2].' días del mes de '.$mes.' del año '.$fecha_separada[0].'.
 </span>
 
 <br>
@@ -224,9 +226,9 @@ de estos requisitos, seré dado de baja del Bachillerato en el que obtuve mi alt
 <td style="text-align:center">Vo. Bo.<br><br><br><br><br>'.$estudiante_plantel[0]->director.'</td>
 </tr>
 <tr>
-<td style="text-align:center">Nombre y firma del aspirante</td>
-<td style="text-align:center">Nombre y firma del tutor o responsable</td>
-<td style="text-align:center">El director</td>
+<td style="text-align:center">NOMBRE Y FIRMA DEL ESTUDIANTE</td>
+<td style="text-align:center">NOMBRE Y FIRMA DEL TUTOR O RESPONSABLE</td>
+<td style="text-align:center">DIRECTOR DEL '.$estudiante_plantel[0]->nombre_plantel.'</td>
 </tr>
 </tbody>
 </table>

@@ -10,13 +10,21 @@ class C_graficas extends CI_Controller {
         $this->load->model("M_graficas");
     }
 
-    function count_estudiantes_hombres(){
-        echo json_encode($this->M_graficas->count_estudiantes_hombres());
+   function hombres_mujeres_total(){
 
-    }
-    function count_estudiantes_mujeres(){
-        echo json_encode($this->M_graficas->count_estudiantes_mujeres());
-    }
+    echo json_encode($this->M_graficas->hombres_mujeres_total());
+
+   }
+
+
+   function estudiantes_por_plantel(){
+       echo json_encode($this->M_graficas->estudiantes_por_plantel());
+   }
+
+
+   function estudiantes_hablan_lengua(){
+       echo json_encode($this->M_graficas->estudiantes_hablan_lengua());
+   }
 
 
 

@@ -117,7 +117,7 @@
             <div class="col-md-6">
               <div class="form-label-group">
                 <input type="date"  class="form-control" id="fecha_inicio"  
-                  placeholder="Fecha de inicio" min= <?phpecho date('Y-m-d');?> >
+                  placeholder="Fecha de inicio" min= <?php echo date('Y-m-d');?> >
                 <label for="fecha_inicio">Fecha de inicio de permiso </label>
               </div>
             </div>

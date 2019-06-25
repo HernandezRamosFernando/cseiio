@@ -246,7 +246,7 @@
           <div class="col-md-8">
             <label class="form-group has-float-label seltitulo">
               <select class="form-control form-control-lg selcolor" id="aspirante_plantel" required name="aspirante_plantel">
-                <option value="">Seleccione el plantel de ingreso</option>
+        
 
                 <?php
                                         foreach ($planteles as $plantel)

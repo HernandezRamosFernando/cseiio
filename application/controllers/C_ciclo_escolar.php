@@ -24,5 +24,12 @@ class C_ciclo_escolar extends CI_Controller {
         echo $this->M_ciclo_escolar->agregar_ciclo_escolar($datos);
     }
 
+
+///////////-----------------------------------------------------------------------------
+
+    public function get_ciclo_escolar_seleccionado(){
+        $id_ciclo = $this->input->get('ciclo');
+        echo json_encode($this->M_ciclo_escolar->obtener_nombre_ciclo_escolar($id_ciclo));
+    }
     
 }

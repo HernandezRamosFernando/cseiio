@@ -9,6 +9,7 @@ class M_permisos extends CI_Model {
 
    public function agregar_permisos($datos){
     $this->db->trans_start();
+    $this->db->query("update Permiso_calificacion set estatus=0");
     foreach($datos as $dato){
         $grupos = $this->M_grupo->get_grupos_activos_plantel($dato->cct_plantel);
 
@@ -25,6 +26,8 @@ class M_permisos extends CI_Model {
         }
         }
     }
+
+    
     $this->db->trans_complete();
     
     if ($this->db->trans_status() === FALSE)

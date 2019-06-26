@@ -463,6 +463,51 @@ $pre_materias ='
 ';
 
 
+function primer_semestre($semestre){        
+
+    if(semestre=='1'){
+
+        return '<tr style="font-size:4 pt;text-align:center">
+<td style="width:20px;background-color:#f8facb"><br><br><br><br><br>N/P</td>
+<td style="width:35px;background-color:#f8facb"><br><br><br><br><br>MATRICULA</td>
+<td style="width:75px;background-color:#f8facb"><br><br><br><br><br>CURP</td>
+<td style="width:20px;background-color:#f8facb"><br><br><br><br><br>SEXO</td>
+<td style="width:70px;background-color:#f8facb"><br><br><br><br><br>PRIMER APELLIDO</td>
+<td style="width:70px;background-color:#f8facb"><br><br><br><br><br>SEGUNDO APELLIDO</td>
+<td style="width:85px;background-color:#f8facb"><br><br><br><br><br>NOMBRE(S)</td>
+<td style="width:25px;background-color:#f8facb"><br><br><br><br>EDAD ACTUAL</td>
+<td style="width:50px;background-color:#f8facb"><br><br><br><br><br>TIPO INGRESO</td>
+<td style="width:40px;background-color:#f8facb"><br><br><br><br>ESTATUS INICIO DEL SEMESTRE</td>
+<td style="width:25px;background-color:#f8facb"><br>NUMERO DE ADEUDOS INICIO DEL SEMESTRE</td>
+<td style="width:70px;background-color:#f8facb"><br><br><br><br>CLAVE U.C. ADEUDOS SEMESTRES ANTERIORES</td>
+<td style="width:25px;background-color:#f8facb">NUMERO DE ADEUDOS DESPUES DE REGULARIZACION DE MAYO</td>
+<td style="width:70px;background-color:#f8facb"><br><br><br>CLAVE U.C. ADEUDOS DESPUES DE LA REGULARIZACION DE MAYO</td>'.celdas_materias($materias_estudiantes).$html_pos_materias.'
+</tr>';
+
+    }
+
+    else{
+        return '<tr style="font-size:4 pt;text-align:center">
+        <td style="width:20px;background-color:#f8facb"><br><br><br><br><br>N/P</td>
+        <td style="width:35px;background-color:#f8facb"><br><br><br><br><br>MATRICULA</td>
+        <td style="width:75px;background-color:#f8facb"><br><br><br><br><br>CURP</td>
+        <td style="width:20px;background-color:#f8facb"><br><br><br><br><br>SEXO</td>
+        <td style="width:70px;background-color:#f8facb"><br><br><br><br><br>PRIMER APELLIDO</td>
+        <td style="width:70px;background-color:#f8facb"><br><br><br><br><br>SEGUNDO APELLIDO</td>
+        <td style="width:85px;background-color:#f8facb"><br><br><br><br><br>NOMBRE(S)</td>
+        <td style="width:25px;background-color:#f8facb"><br><br><br><br>EDAD ACTUAL</td>
+        <td style="width:50px;background-color:#f8facb"><br><br><br><br><br>TIPO INGRESO</td>
+        <td style="width:40px;background-color:#f8facb"><br><br><br><br>ESTATUS INICIO DEL SEMESTRE</td>
+        <td style="width:25px;background-color:#f8facb"><br>NUMERO DE ADEUDOS INICIO DEL SEMESTRE</td>
+        <td style="width:70px;background-color:#f8facb"><br><br><br><br>CLAVE U.C. ADEUDOS SEMESTRES ANTERIORES</td>
+        <td style="width:25px;background-color:#f8facb">NUMERO DE ADEUDOS DESPUES DE REGULARIZACION DE MAYO</td>
+        <td style="width:70px;background-color:#f8facb"><br><br><br>CLAVE U.C. ADEUDOS DESPUES DE LA REGULARIZACION DE MAYO</td>'.celdas_materias($materias_estudiantes).$html_pos_materias.'
+        </tr>';
+    }
+
+}
+
+
 
 
 // print a block of text using Write()

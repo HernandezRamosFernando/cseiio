@@ -1292,9 +1292,9 @@
    }else{
     let secundaria = "";
     secundaria = {
-      "cct_escuela_procedencia": document.getElementById("aspirante_nuevasecundaria_cct").value,
-      "nombre_escuela_procedencia": document.getElementById("aspirante_nuevasecundaria_nombre").value,
-      "tipo_subsistema": document.getElementById("aspirante_nuevasecundaria_tipo_subsistema").value,
+      "cct_escuela_procedencia": document.getElementById("aspirante_nuevasecundaria_cct").value.toUpperCase(),
+      "nombre_escuela_procedencia": document.getElementById("aspirante_nuevasecundaria_nombre").value.toUpperCase(),
+      "tipo_subsistema": document.getElementById("aspirante_nuevasecundaria_tipo_subsistema").value.toUpperCase(),
       "id_localidad_escuela_procedencia": parseInt(document.getElementById("selector_localidad_secundaria").value),
       "tipo_escuela_procedencia": "SECUNDARIA"
     };

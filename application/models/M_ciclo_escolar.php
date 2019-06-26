@@ -48,4 +48,11 @@ class M_ciclo_escolar extends CI_Model {
 }
 
 
+public function ciclo_escolar_fecha($fecha){
+
+   return $this->db->query("select * from Ciclo_escolar where '".$fecha."' between fecha_inicio and fecha_terminacion")->result()[0];
+        
+}
+
+
 }

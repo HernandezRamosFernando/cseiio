@@ -23,4 +23,6 @@ class C_ciclo_escolar extends CI_Controller {
         $datos = json_decode($this->input->raw_input_stream);
         echo $this->M_ciclo_escolar->agregar_ciclo_escolar($datos);
     }
+
+    
 }

@@ -86,7 +86,7 @@
                             <span style="font-size: 80px;  text-align: left">5</span>
                         </div>
                         <div class="col-5 valign-left" style="padding-left: 0px;">
-                        &nbsp;<p class="h5"><strong>Registrar Desertor</strong></p> &nbsp;
+                        &nbsp;<p class="h5"><strong>Nulidad de Semestre</strong></p> &nbsp;
                         </div>
                         <div class="col-5 valign-right">
                         <i class="material-icons md-48">person_add</i>&nbsp;

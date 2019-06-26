@@ -1185,5 +1185,35 @@ public function resolucion_equivalencia(){
             }
         
     }
+
+
+     public function nulidad_semestre(){
+        
+
+        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
+            $datos['planteles'] = $this->M_plantel->get_planteles();
+            $datos['ciclo_escolar'] = $this->M_ciclo_escolar->lista_ciclo_escolar();
+            $data= array('title'=>'Autorizar Nulidad de Semestre');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierdaplantel");
+            $this->load->view("admin/autorizarnulidadsemestre", $datos);
+            $this->load->view("footers/footer");
+        }
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
+            $datos['planteles'] = $this->M_plantel->get_plantel($this->session->userdata('user')['plantel']);
+            $datos['ciclo_escolar'] = $this->M_ciclo_escolar->lista_ciclo_escolar();
+            $data= array('title'=>'Nulidad semestre');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierdaplantel");
+            $this->load->view("plantel/nulidadsemestre", $datos);
+            $this->load->view("footers/footer");
+            }
+            else{
+            redirect(base_url().'index.php/c_usuario');
+            }
+    } 
+
     
 }

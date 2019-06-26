@@ -47,4 +47,12 @@ class C_grupo_estudiante extends CI_Controller {
     $this->load->library('pdf');
     $this->load->view('reportes/formato_asistencia',$datos);
     }
+
+
+    public function existe_grupo_ciclo_escolar_estudiante(){
+        $id_ciclo = $this->input->get('id_ciclo_escolar');
+        $no_control = $this->input->get('no_control');
+        $semestre = $this->input->get('semestre_nulidad');
+        echo json_encode( $this->M_grupo_estudiante->existe_grupo_ciclo_escolar_estudiante($no_control,$id_ciclo,$semestre));
+    }
 }

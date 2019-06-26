@@ -22,6 +22,22 @@
               <button type="button" class="btn btn-success btn-lg btn-block" onclick="mujeres_hombres()" style="padding: 1rem"
                 id="agregar_usuario"> Mujeres hombres</button>
             </div>
+            <div class="col-md-4 ">
+              <button type="button" class="btn btn-success btn-lg btn-block" onclick="estudiantes_por_plantel()" style="padding: 1rem"
+                id="btn1"> Estudiantes por plantel</button>
+            </div>
+            <div class="col-md-4 ">
+              <button type="button" class="btn btn-success btn-lg btn-block" onclick="estudiantes_hablan_lengua()" style="padding: 1rem"
+                id="btn2"> Estudiantes que hablan lengua</button>
+            </div>
+            <div class="col-md-4 ">
+              <button type="button" class="btn btn-success btn-lg btn-block" onclick="()" style="padding: 1rem"
+                id="btn3"> Tres</button>
+            </div>
+            <div class="col-md-4 ">
+              <button type="button" class="btn btn-success btn-lg btn-block" onclick="()" style="padding: 1rem"
+                id="btn4"> Cuatro</button>
+            </div>
 
           </div>
         </div>
@@ -43,67 +59,96 @@
  <script>
 
  function mujeres_hombres(){
-     var hombres_valor ="";
-     var mujeres ="";
-    var hombres = new XMLHttpRequest();
-    hombres.open('GET', '<?php echo base_url();?>index.php/c_graficas/count_estudiantes_hombres' , true);
-    hombres.onloadstart = function () {
-      $('#div_carga').show();
-    }
-    hombres.error = function () {
-      console.log("error de conexion");
-    }
-    hombres.onload = function () {
-      $('#div_carga').hide();
-      JSON.parse(hombres.response).forEach(function (valor, indice) {
-      hombres_valor = valor.hombres;
-      });
-    }
-    hombres.send(null);
+     //peticion de datos
+     var xhr = new XMLHttpRequest();
+          xhr.open('GET', '<?php echo base_url();?>index.php/c_graficas/hombres_mujeres_total', true);
 
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', '<?php echo base_url();?>index.php/c_graficas/count_estudiantes_mujeres' , true);
-    xhr.onloadstart = function () {
-      $('#div_carga').show();
-    }
-    xhr.error = function () {
-      console.log("error de conexion");
-    }
-    xhr.onload = function () {
-      $('#div_carga').hide();
-      JSON.parse(xhr.response).forEach(function (valor, indice) {
-        mujeres = valor.mujeres;
-      });
-      
-    }
-    xhr.send(null);
+          xhr.onload = function () {
+            console.log(JSON.parse(xhr.response));
+            let datos = JSON.parse(xhr.response);
+            //etiquetas,valores,colores rgb
+            grafica(['Hombres','Mujeres'],[parseInt(datos[0].total),parseInt(datos[1].total)],['rgb(54, 162, 235)','rgb(255, 99, 132)'],'doughnut');
+          };
 
-    console.log(hombres_valor);
+          xhr.send(null);
+
+
+}
+
+
+function estudiantes_por_plantel(){
+
+  var xhr = new XMLHttpRequest();
+      xhr.open('GET', '<?php echo base_url();?>index.php/c_graficas/estudiantes_por_plantel', true);
+
+      xhr.onload = function () {
+        let datos = JSON.parse(xhr.response);
+
+        var etiquetas = new Array();
+        var valores = new Array();
+        var colores = new Array();
+
+        datos.forEach(function(valor,indice){
+
+          etiquetas.push(valor.nombre_plantel);
+          valores.push(parseInt(valor.total));
+          colores.push('rgb('+numero_aleatorio()+', '+numero_aleatorio()+', '+numero_aleatorio()+')');
+
+        });
+
+        grafica(etiquetas,valores,colores,'pie');
+      };
+
+      xhr.send(null);
+
+}
+
+
+
+function estudiantes_hablan_lengua(){
+  var xhr = new XMLHttpRequest();
+      xhr.open('GET', '<?php echo base_url();?>index.php/c_graficas/estudiantes_hablan_lengua', true);
+
+      var etiquetas = new Array();
+        var valores = new Array();
+        var colores = new Array();
+
+      xhr.onload = function () {
+        let datos = JSON.parse(xhr.response);
+        
+        datos.forEach(function(valor,indice){
+        etiquetas.push(valor.nombre_lengua);
+        valores.push(parseInt(valor.total));
+        colores.push('rgb('+numero_aleatorio()+', '+numero_aleatorio()+', '+numero_aleatorio()+')');
+        });
+
+        grafica(etiquetas,valores,colores,'pie');
+      };
+
+      xhr.send(null);
+}
+
+
+function numero_aleatorio(){
+  return parseInt(Math.random() * (256 - 0) + 0);
+}
+
+
+
+
+//etiuetas y valores es un arreglo
+function grafica(etiquetas,valores,colores,tipo){
+   //grafica
 
 var ctx = document.getElementById('myChart').getContext('2d');
 var myChart = new Chart(ctx, {
-    type: 'doughnut',
+    type: tipo,
     data: {
-        labels: ['Hombres', 'Mujeres', 'Yellow', 'Green', 'Purple', 'Orange'],
+        labels: etiquetas,
         datasets: [{
             label: '# of Votes',
-            data: [12, 16, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
+            data: valores,
+            backgroundColor: colores,
             borderWidth: 1
         }]
     },

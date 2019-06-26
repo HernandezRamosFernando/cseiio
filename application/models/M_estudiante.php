@@ -77,7 +77,10 @@ public function insertar_estudiante_nuevo_ingreso(
 
 
          foreach($datos_escuela_procedencia as $escuela){
+            if($escuela->Escuela_procedencia_cct_escuela_procedencia!=""){
                $this->db->insert('Estudiante_Escuela_procedencia',$escuela);
+            }
+               
          }
          
          

@@ -442,7 +442,7 @@ function buscar() {
 
         
           fila += '<td>';
-        fila += '<button class="'+clase_boton+'" type="button" value="' +valor.no_control+'" data-toggle="modal" data-target="#autorizar_nulidad_semestre" onclick="cargar_datos_solicitud_nulidad(this)">'+agregar_html_2+'</button>';
+        fila += '<button class="'+clase_boton+'" type="button" value="' +valor.no_control+'" data-toggle="modal" data-target="#autorizar_nulidad_semestre" onclick="cargar_datos_solicitud_nulidad(this)" '+agregar_html+'>'+agregar_html_2+'</button>';
         fila += '</td>';
 
       

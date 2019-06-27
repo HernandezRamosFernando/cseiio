@@ -769,9 +769,9 @@ public function descargar_resolucion_equivalencia(){
     $no_control=$this->input->get('no_control');
     $datos_resolucion=$this->M_resolucion_equivalencia->get_resolucion_equivalencia($no_control);
     $datos_estudiante=$this->M_estudiante->get_plantel_estudiante($no_control);
-    $datos_escuela_procedencia=$this->M_escuela_procedencia->get_escuela($datos_estudiante[0]->cct_escuela_procedencia);
+    $datos_escuela_procedencia=$this->M_escuela_procedencia->get_escuela_procedencia_repetidor($datos_estudiante[0]->no_control);
     $datos['escuela_procedencia'] = $datos_escuela_procedencia[0]->nombre_escuela_procedencia;
-    $datos['cct_procedencia'] = $datos_estudiante[0]->cct_escuela_procedencia;
+    $datos['cct_procedencia'] = $datos_escuela_procedencia[0]->cct_escuela_procedencia;
     $datos['nombre_completo']=$datos_estudiante[0]->nombre." ".$datos_estudiante[0]->primer_apellido." ".$datos_estudiante[0]->segundo_apellido;
     $datos['plantel_inscrito']=$datos_estudiante[0]->Plantel_cct_plantel;
     $datos['semestre_acreditado']=" a ".$this->nombre_del_semestre($datos_resolucion[0]->ultimo_semestre_acreditado);
@@ -796,6 +796,7 @@ public function descargar_resolucion_equivalencia(){
     $this->load->view('reportes/resolucion_equivalencia',$datos);
 
 }
+ 
 
 
 

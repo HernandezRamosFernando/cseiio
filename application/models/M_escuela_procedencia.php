@@ -31,5 +31,10 @@ class M_escuela_procedencia extends CI_Model {
 
    
 
+   public function get_escuela_procedencia_repetidor($no_control){
+  return $this->db->query("SELECT * FROM Estudiante_escuela_procedencia ep inner join Escuela_procedencia e on e.cct_escuela_procedencia=ep.Escuela_procedencia_cct_escuela_procedencia where Estudiante_no_control='".$no_control."' and tipo_escuela_procedencia='BACHILLERATO';")->result();
+
+}
+
 
 }

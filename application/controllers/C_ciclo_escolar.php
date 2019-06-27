@@ -31,5 +31,10 @@ class C_ciclo_escolar extends CI_Controller {
         $id_ciclo = $this->input->get('ciclo');
         echo json_encode($this->M_ciclo_escolar->obtener_nombre_ciclo_escolar($id_ciclo));
     }
+
+    public function ciclo_escolar_x_periodo(){
+        $periodo = $this->input->get('periodo');
+        echo json_encode($this->M_ciclo_escolar->ciclo_escolar_x_periodo($periodo));
+    }
     
 }

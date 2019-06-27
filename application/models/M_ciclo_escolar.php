@@ -54,5 +54,10 @@ public function ciclo_escolar_fecha($fecha){
         
 }
 
+public function ciclo_escolar_x_periodo($periodo){
+
+   return $this->db->query("SELECT * FROM Ciclo_escolar where periodo='".$periodo."';")->result();
+        
+}
 
 }

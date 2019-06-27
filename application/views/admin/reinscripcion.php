@@ -13,83 +13,68 @@
 
   <!-- Botones-->
   <div class="row position-static" style="">
-    <div class="col-md-4 col-lg-4">
+    <div class="col-md-4 col-lg-4"style="height: 9rem !important;">
       <a href="<?php echo base_url();?>index.php/c_vistas/repetidor"
-      class="btn btn-primary btn-lg btn-block  btn-responsive menu  btn-1">
-                    <div class="row">
-                        <div class="col-2 valign-left">
-                            <span style="font-size: 80px;  text-align: left">1</span>
+      class="btn btn-primary btn-lg btn-block  btn-responsive menu valign-center  btn-1">
+                    <div class="row col-12">
+                        <div class="col-8 valign-center" style="padding-left: 0px;">
+                        <p class="h5"><strong>Reinscripción Repetidores</strong></p> 
                         </div>
-                        <div class="col-5 valign-left" style="padding-left: 0px;">
-                        &nbsp;<p class="h5"><strong>Reinscripción Repetidores</strong></p> &nbsp;
-                        </div>
-                        <div class="col-5 valign-right">
-                        <i class="material-icons md-48">person_add</i>&nbsp;
+                        <div class="col-4 valign-right">
+                        <i class="material-icons md-48">person_add</i>
                         </div>
                     </div>
 </a>
     </div>
-    <div class="col-md-4 col-lg-4">
+    <div class="col-md-4 col-lg-4"style="height: 9rem !important;">
       <a href="<?php echo base_url();?>index.php/c_vistas/incorporado"
-      class="btn btn-primary btn-lg btn-block  btn-responsive menu  btn-2">
-                    <div class="row">
-                        <div class="col-2 valign-left">
-                            <span style="font-size: 80px;  text-align: left">2</span>
+      class="btn btn-primary btn-lg btn-block  btn-responsive menu valign-center  btn-2">
+                    <div class="row col-12">
+                        <div class="col-8 valign-center" style="padding-left: 0px;">
+                        <p class="h5"><strong>Reinscripción Incorporados</strong></p> 
                         </div>
-                        <div class="col-5 valign-left" style="padding-left: 0px;">
-                        &nbsp;<p class="h5"><strong>Reinscripción Incorporados</strong></p> &nbsp;
-                        </div>
-                        <div class="col-5 valign-right">
-                        <i class="material-icons md-48">person_add</i>&nbsp;
+                        <div class="col-4 valign-right">
+                        <i class="material-icons md-48">person_add</i>
                         </div>
                     </div>
 </a>
     </div>
-    <div class="col-md-4 col-lg-4">
+    <div class="col-md-4 col-lg-4"style="height: 9rem !important;">
       <a href="<?php echo base_url();?>index.php/c_vistas/traslado"
-      class="btn btn-primary btn-lg btn-block  btn-responsive menu  btn-3">
-                    <div class="row">
-                        <div class="col-2 valign-left">
-                            <span style="font-size: 80px;  text-align: left">3</span>
+      class="btn btn-primary btn-lg btn-block  btn-responsive menu valign-center  btn-3">
+                    <div class="row col-12">
+                        <div class="col-8 valign-center" style="padding-left: 0px;">
+                        <p class="h5"><strong>Traslado</strong></p> 
                         </div>
-                        <div class="col-5 valign-left" style="padding-left: 0px;">
-                        &nbsp;<p class="h5"><strong>Traslado</strong></p> &nbsp;
-                        </div>
-                        <div class="col-5 valign-right">
-                        <i class="material-icons md-48">person_add</i>&nbsp;
+                        <div class="col-4 valign-right">
+                        <i class="material-icons md-48">person_add</i>
                         </div>
                     </div>
       </a>
     </div>
-    <div class="col-md-4 col-lg-4">
+    <div class="col-md-4 col-lg-4"style="height: 9rem !important;">
       <a href="<?php echo base_url();?>index.php/c_vistas/desertor"
-      class="btn btn-primary btn-lg btn-block  btn-responsive menu  btn-4">
-                    <div class="row">
-                        <div class="col-2 valign-left">
-                            <span style="font-size: 80px;  text-align: left">4</span>
+      class="btn btn-primary btn-lg btn-block  btn-responsive menu valign-center  btn-4">
+                    <div class="row col-12">
+                        <div class="col-8 valign-center" style="padding-left: 0px;">
+                        <p class="h5"><strong>Registrar Desertor</strong></p> 
                         </div>
-                        <div class="col-5 valign-left" style="padding-left: 0px;">
-                        &nbsp;<p class="h5"><strong>Registrar Desertor</strong></p> &nbsp;
-                        </div>
-                        <div class="col-5 valign-right">
-                        <i class="material-icons md-48">person_add</i>&nbsp;
+                        <div class="col-4 valign-right">
+                        <i class="material-icons md-48">person_add</i>
                         </div>
                     </div>
       </a>
     </div>
 
-    <div class="col-md-4 col-lg-4">
+    <div class="col-md-4 col-lg-4"style="height: 9rem !important;">
       <a href="<?php echo base_url();?>index.php/c_vistas/nulidad_semestre"
-      class="btn btn-primary btn-lg btn-block  btn-responsive menu  btn-5">
-                    <div class="row">
-                        <div class="col-2 valign-left">
-                            <span style="font-size: 80px;  text-align: left">5</span>
+      class="btn btn-primary btn-lg btn-block  btn-responsive menu valign-center  btn-5">
+                    <div class="row col-12">
+                        <div class="col-8 valign-center" style="padding-left: 0px;">
+                        <p class="h5"><strong>Nulidad de Semestre</strong></p> 
                         </div>
-                        <div class="col-5 valign-left" style="padding-left: 0px;">
-                        &nbsp;<p class="h5"><strong>Nulidad de Semestre</strong></p> &nbsp;
-                        </div>
-                        <div class="col-5 valign-right">
-                        <i class="material-icons md-48">person_add</i>&nbsp;
+                        <div class="col-4 valign-right">
+                        <i class="material-icons md-48">person_add</i>
                         </div>
                     </div>
       </a>

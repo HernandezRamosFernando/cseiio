@@ -139,7 +139,7 @@
                 <div class="form-label-group">
                   <input type="text" class="form-control text-uppercase" id="escuela_procedencia"
                     name="escuela_procedencia" placeholder="Escuela de Procedencia" readonly>
-                  <label for="escuela_procedencia">Escuela de Procedencia</label>
+                  <label for="escuela_procedencia">Escuela de Educacion Media Superior de Procedencia</label>
                 </div>
               </div>
 
@@ -178,7 +178,7 @@
                 <div class="form-label-group">
                   <input type="text" class="form-control text-uppercase" id="num_folio" name="num_folio"
                     placeholder="Número de folio" required="required"
-                    pattern="([B|b]{1})([I|i]{1})([C|c]{1})([-]{1})([E|e]{1})([ ]{1})([0-9]{4})" readonly="">
+                    pattern="([B|b]{1})([I|i]{1})([C|c]{1})([-]{1})([E|e]{1})([ ]{1})([0-9]{4})">
                   <label for="num_folio">Num. Folio</label>
                 </div>
               </div>
@@ -186,14 +186,14 @@
               <div class="col-md-4">
                 <label class="form-group has-float-label">
                   <select class="form-control form-control-lg" required="required" id="semestre_acreditado"
-                    name="semestre_acreditado">
+                    name="semestre_acreditado" onchange="semestre_ciclo(this,'ciclo_escolar','')">
                     <option value="">Seleccione el semestre</option>
-                    <option value="1">1</option>
+                    
                     <option value="2">2</option>
                     <option value="3">3</option>
                     <option value="4">4</option>
                     <option value="5">5</option>
-                    <option value="6">6</option>
+                    
                   </select>
                   <span>Ultimo Semestre Acreditado</span>
                 </label>
@@ -218,12 +218,7 @@
                   <select class="form-control form-control-lg" required="required" id="ciclo_escolar"
                     name="ciclo_escolar">
                     <option value="">Seleccione el ciclo</option>
-                    <?php
-                    foreach ($ciclo_escolar as $ciclo)
-                    {
-                      echo '<option value="'.$ciclo->id_ciclo_escolar.'">'.$ciclo->nombre_ciclo_escolar.'----'.$ciclo->periodo.'</option>';
-                    }
-                    ?>
+                    
 
                   </select>
                   <span>Ciclo Escolar</span>
@@ -338,7 +333,7 @@
                 <div class="form-label-group">
                   <input type="text" class="form-control text-uppercase" id="mnum_folio" name="mnum_folio"
                     placeholder="Número de folio" required="required"
-                    pattern="([B|b]{1})([I|i]{1})([C|c]{1})([-]{1})([E|e]{1})([ ]{1})([0-9]{4})" readonly="">
+                    pattern="([B|b]{1})([I|i]{1})([C|c]{1})([-]{1})([E|e]{1})([ ]{1})([0-9]{4})">
                   <label for="mnum_folio">Num. Folio</label>
                 </div>
               </div>
@@ -346,14 +341,14 @@
               <div class="col-md-4">
                 <label class="form-group has-float-label">
                   <select class="form-control form-control-lg" required="required" id="msemestre_acreditado"
-                    name="msemestre_acreditado">
+                    name="msemestre_acreditado" onchange="semestre_ciclo(this,'mciclo_escolar','')">
                     <option value="">Seleccione el semestre</option>
-                    <option value="1">1</option>
+                    
                     <option value="2">2</option>
                     <option value="3">3</option>
                     <option value="4">4</option>
                     <option value="5">5</option>
-                    <option value="6">6</option>
+                    
                   </select>
                   <span>Ultimo Semestre Acreditado</span>
                 </label>
@@ -378,12 +373,6 @@
                   <select class="form-control form-control-lg" required="required" id="mciclo_escolar"
                     name="mciclo_escolar">
                     <option value="">Seleccione el ciclo</option>
-                    <?php
-                    foreach ($ciclo_escolar as $ciclo)
-                    {
-                      echo '<option value="'.$ciclo->id_ciclo_escolar.'">'.$ciclo->nombre_ciclo_escolar.'----'.$ciclo->periodo.'</option>';
-                    }
-                    ?>
 
                   </select>
                   <span>Ciclo Escolar</span>
@@ -450,7 +439,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cerrar_modal()">Cerrar</button>
-          <button type="input" class="btn btn-primary">Aceptar</button>
+          <button type="input" class="btn btn-primary" id="btn_num_equivalencia" disabled="disabled">Aceptar</button>
         </div>
 
       </form>
@@ -460,6 +449,58 @@
 
 <script>
 
+function semestre_ciclo(id_semestre,id_ciclo,valor_id_ciclo) {
+  semestre=id_semestre.value;
+  periodo='';
+
+  if(semestre % 2 == 0) {
+    periodo='FEBRERO-JULIO';
+  }
+  else {
+     periodo='AGOSTO-ENERO';
+  }
+
+  var xhr_escuela = new XMLHttpRequest();
+        xhr_escuela.open('GET', '<?php echo base_url();?>index.php/C_ciclo_escolar/ciclo_escolar_x_periodo?periodo='+periodo, true);
+        xhr_escuela.onloadstart = function () {
+          $('#div_carga').show();
+        }
+        xhr_escuela.error = function () {
+          console.log("error de conexion");
+        }
+
+        xhr_escuela.onload = function () {
+          $('#div_carga').hide();
+
+          let periodos_ciclo = JSON.parse(xhr_escuela.response);
+          document.getElementById(id_ciclo).innerHTML = "";
+          var option = document.createElement("option");
+          option.text = "Seleccione el ciclo escolar";
+          option.value = "";
+          document.getElementById(id_ciclo).add(option);
+
+            if (typeof periodos_ciclo !== 'undefined') {
+              
+                  periodos_ciclo.forEach(function (valor, indice) {
+                        var option = document.createElement("option");
+                        option.text = valor.nombre_ciclo_escolar+'-----'+valor.periodo;
+                        option.value = valor.id_ciclo_escolar;
+                        if(valor_id_ciclo===valor.id_ciclo_escolar){
+                          option.selected=true;
+                        }
+                        document.getElementById(id_ciclo).add(option);
+                    
+                  });
+      
+
+            }
+
+
+        };
+
+        xhr_escuela.send(null);
+
+  }
 
 
   function buscar() {
@@ -605,8 +646,9 @@
         let mresolucion = JSON.parse(xhr_resolucion.response);
         document.getElementById("mnum_folio").value = mresolucion[0].folio;
         document.getElementById("msemestre_acreditado").value = mresolucion[0].ultimo_semestre_acreditado;
+        semestre_ciclo(document.getElementById("msemestre_acreditado"),"mciclo_escolar",mresolucion[0].id_ciclo_escolar);
         document.getElementById("mfecha_expedicion").value = mresolucion[0].fecha_expedicion;
-        document.getElementById("mciclo_escolar").value = mresolucion[0].id_ciclo_escolar;
+        //document.getElementById("mciclo_escolar").value = mresolucion[0].id_ciclo_escolar;
         document.getElementById("mpromedio_acreditado").value = mresolucion[0].promedio_acreditado;
 
       };
@@ -616,12 +658,12 @@
 
 
 
-      if (mestudiante[0].cct_escuela_procedencia !== "") {
+      //if (mestudiante[0].cct_escuela_procedencia !== "") {
 
         document.getElementById('mbtn_enviar').disabled = false;
-        document.getElementById("mcct_procedencia").value = mestudiante[0].cct_escuela_procedencia;
+        
         var xhr_escuela = new XMLHttpRequest();
-        xhr_escuela.open('GET', '<?php echo base_url();?>index.php/c_escuela_procedencia/get_escuela?cct=' + mestudiante[0].cct_escuela_procedencia, true);
+        xhr_escuela.open('GET', '<?php echo base_url();?>index.php/c_escuela_procedencia/get_escuela_procedencia_repetidor?no_control=' + mestudiante[0].no_control, true);
         xhr_escuela.onloadstart = function () {
           $('#div_carga').show();
         }
@@ -633,22 +675,31 @@
           $('#div_carga').hide();
 
           let mprocedencia = JSON.parse(xhr_escuela.response);
-          document.getElementById("mescuela_procedencia").value = mprocedencia[0].nombre_escuela_procedencia;
+
+          if (typeof mprocedencia[0] !== 'undefined') {
+
+              document.getElementById("mcct_procedencia").value = mprocedencia[0].cct_escuela_procedencia;
+              document.getElementById("mescuela_procedencia").value = mprocedencia[0].nombre_escuela_procedencia;
+              document.getElementById("btn_num_equivalencia").disabled = false; 
+
+          }
+
+              else {
+            Swal.fire({
+              type: 'error',
+              title: 'Para realizar este procedimiento es necesario que ingrese la escuela de procedencia.',
+              showConfirmButton: true,
+              
+            });
+            document.getElementById('mbtn_enviar').disabled = true;
+            document.getElementById("btn_num_equivalencia").disabled = true;
+          }
 
         };
 
         xhr_escuela.send(null);
 
-      }
-      else {
-        Swal.fire({
-          type: 'error',
-          title: 'Para realizar este procedimiento es necesario que ingrese la escuela de procedencia.',
-          showConfirmButton: false,
-          timer: 2500
-        });
-        document.getElementById('mbtn_enviar').disabled = true;
-      }
+    
 
     };
 
@@ -681,6 +732,7 @@
       else {
 
         $('#modal_ingresar_numero').modal('show');
+        document.getElementById('form_numero_equivalencia').reset();
 
       }
 
@@ -711,12 +763,12 @@
       document.getElementById("plantel_inscrito").value = estudiante[0].Plantel_cct_plantel;
       document.getElementById("plantel_inscripcion").value = estudiante[0].nombre_plantel;
 
-      if (estudiante[0].cct_escuela_procedencia !== "") {
+      
 
         document.getElementById('btn_enviar').disabled = false;
-        document.getElementById("cct_procedencia").value = estudiante[0].cct_escuela_procedencia;
+        
         var xhr_escuela = new XMLHttpRequest();
-        xhr_escuela.open('GET', '<?php echo base_url();?>index.php/c_escuela_procedencia/get_escuela?cct=' + estudiante[0].cct_escuela_procedencia, true);
+        xhr_escuela.open('GET', '<?php echo base_url();?>index.php/c_escuela_procedencia/get_escuela_procedencia_repetidor?no_control=' + estudiante[0].no_control, true);
         xhr_escuela.onloadstart = function () {
           $('#div_carga').show();
         }
@@ -726,24 +778,30 @@
 
         xhr_escuela.onload = function () {
           $('#div_carga').hide();
-
           let procedencia = JSON.parse(xhr_escuela.response);
-          document.getElementById("escuela_procedencia").value = procedencia[0].nombre_escuela_procedencia;
+          if (typeof procedencia[0] !== 'undefined') {
+              document.getElementById("escuela_procedencia").value = procedencia[0].nombre_escuela_procedencia;
+              document.getElementById("cct_procedencia").value = procedencia[0].cct_escuela_procedencia;
+              document.getElementById("btn_num_equivalencia").disabled = false; 
+
+          }
+
+          else {
+            Swal.fire({
+              type: 'error',
+              title: 'Para realizar este procedimiento es necesario que ingrese la escuela de procedencia.',
+              showConfirmButton: true
+              
+            });
+            document.getElementById("btn_num_equivalencia").disabled = true;
+            document.getElementById('btn_enviar').disabled = true;
+        }
+
 
         };
 
         xhr_escuela.send(null);
 
-      }
-      else {
-        Swal.fire({
-          type: 'error',
-          title: 'Para realizar este procedimiento es necesario que ingrese la escuela de procedencia.',
-          showConfirmButton: false,
-          timer: 2500
-        });
-        document.getElementById('btn_enviar').disabled = true;
-      }
 
     };
 
@@ -839,7 +897,7 @@
     xhr.onreadystatechange = function () {
       if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
         //console.log();
-        $('#div_carga'.show();
+        $('#div_carga').show();
         if (xhr.responseText === "si") {
           Swal.fire({
             type: 'success',
@@ -905,6 +963,7 @@
   var form_3 = document.getElementById("form_numero_equivalencia");
   form_3.onsubmit = function (e) {
     e.preventDefault();
+
     numero = document.getElementById("numero_ingresar").value;
     formato = 'BIC-E ' + str_pad(numero, 4, "0", "STR_PAD_LEFT");
     document.getElementById("num_folio").value = formato;

@@ -119,9 +119,9 @@ $nombre = '
 <table border="1">
 <tbody>
 <tr>
-<td style="text-align:center;width:179px">'.$estudiante->primer_apellido.'</td>
-<td style="text-align:center;width:179px">'.$estudiante->segundo_apellido.'</td>
-<td style="text-align:center;width:179px">'.$estudiante->nombre.'</td>
+<td style="text-align:center;width:179px;font-size:8pt">'.$estudiante->primer_apellido.'</td>
+<td style="text-align:center;width:179px;font-size:8pt">'.$estudiante->segundo_apellido.'</td>
+<td style="text-align:center;width:179px;font-size:8pt">'.$estudiante->nombre.'</td>
 </tr>
 </tbody>
 </table>

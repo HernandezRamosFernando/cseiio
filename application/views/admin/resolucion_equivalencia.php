@@ -188,7 +188,7 @@
                   <select class="form-control form-control-lg" required="required" id="semestre_acreditado"
                     name="semestre_acreditado" onchange="semestre_ciclo(this,'ciclo_escolar','')">
                     <option value="">Seleccione el semestre</option>
-                    
+                    <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
                     <option value="4">4</option>
@@ -343,7 +343,7 @@
                   <select class="form-control form-control-lg" required="required" id="msemestre_acreditado"
                     name="msemestre_acreditado" onchange="semestre_ciclo(this,'mciclo_escolar','')">
                     <option value="">Seleccione el semestre</option>
-                    
+                    <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
                     <option value="4">4</option>

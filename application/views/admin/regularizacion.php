@@ -18,7 +18,7 @@
           <div class="col-md-8">
             <label class="form-group has-float-label seltitulo">
               <select class="form-control form-control-lg selcolor" id="plantel" name="plantel"
-                onchange="cargarmaterias();">
+                >
                 <option value="">Seleccione el plantel donde buscar la materia</option>
 
                 <?php
@@ -36,6 +36,22 @@
         </div>
 
       </div>
+
+      <div class="form-group">
+        <div class="row">
+      <div class="col-md-4">
+                <label class="form-group has-float-label">
+                  <select class="form-control form-control-lg" required="required" id="semestre_reg" onchange="cargarmaterias();"
+                    name="semestre_reg" >
+                    <option value="">Seleccione un semestre</option>
+                    
+                  </select>
+                  <span>Semestres</span>
+                </label>
+              </div>
+
+              </div>
+              </div>
 
       <div class="form-group">
         <div class="row">

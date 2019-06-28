@@ -68,7 +68,7 @@
 
     <div class="card" style="overflow:scroll; display:none" id="busqueda_oculto">
       <div class="card-body">
-        <table class="table table-hover" id="tabla_completa">
+        <table class="table table-hover"  id="tabla_completa">
           <caption>Lista de Alumnos que generan carta compromiso</caption>
           <thead class="thead-light">
             <tr>

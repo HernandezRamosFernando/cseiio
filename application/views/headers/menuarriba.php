@@ -5,10 +5,11 @@
 <img class="cargador" id="cargador" src="<?php echo base_url();?>assets/img/loading-63.gif"/>
 </div>
   <!-- Barra de arriba -->
-  <nav class="navbar navbar-expand navbar-dark static-top" style="background:#545555">
-    <a class="navbar-brand mr-1" href="<?php echo base_url();?>index.php/c_menu/principal">SISE</a>
+  <nav class="navbar navbar-expand navbar-dark static-top justify-content-between" style="background:#545555">
+    
     <button class="btn btn-link btn-sm valign-center text-white order-1 order-sm-0" id="sidebarToggle" href="#">
-      <i class="material-icons">menu</i>
+    <a class="navbar-brand mr-1" href="<?php echo base_url();?>index.php/c_menu/principal">SISE</a>
+      <i class="material-icons">menu</i> 
     </button>
     <ul class="nav justify-content-center">
       <li class="nav-item">
@@ -20,8 +21,8 @@
       </li>
     </ul>
 
-      <ul class="navbar-nav ml-auto ml-md-0">
-        <li class="nav-item dropdown no-arrow mx-1">
+      <ul class="navbar-nav ml-auto ml-md-0" >
+        <li class="nav-item dropdown no-arrow mx-1" >
           <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
             <i class="material-icons"  id="ic_notificacion">notifications</i>
@@ -58,3 +59,17 @@
                   </div>
                 </div>
               </div>
+
+<div class="alert alert-warning alert-dismissible fade show" role="alert" id="alerta" style="display:none; margin:0px;"> 
+  
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="alert alert-warning alert-dismissible fade show" role="alert" id="alerta_reg" style="display:none; margin:0px;">
+  
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>

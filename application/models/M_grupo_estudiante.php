@@ -94,4 +94,8 @@ class M_grupo_estudiante extends CI_Model {
     public function get_datos_grupo_estudiante_asesor($id_grupo,$id_materia){
         return $this->db->query("SELECT distinct g.id_grupo,g.nombre_grupo,a.nombre,a.primer_apellido,a.segundo_apellido,m.unidad_contenido FROM Grupo g inner join Grupo_Estudiante ge on g.id_grupo=ge.Grupo_id_grupo left join Asesor a on ge.id_asesor=a.id_asesor inner join Materia m on ge.id_materia=m.clave where g.id_grupo='".$id_grupo."' and m.clave='".$id_materia."';")->result();
     }
+
+    public function existe_grupo_ciclo_escolar_estudiante($no_control,$id_ciclo,$semestre){
+        return $this->db->query("SELECT count(*) resultado from Grupo_Estudiante ge inner join Grupo g on ge.Grupo_id_grupo=g.id_grupo where ge.Estudiante_no_control='".$no_control."' and ge.Ciclo_escolar_id_ciclo_escolar=".$id_ciclo." and g.semestre=".$semestre)->result();
+   }
 }

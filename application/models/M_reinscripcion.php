@@ -51,7 +51,7 @@ class M_reinscripcion extends CI_Model {
                 $promedio_modular = ($primer_parcial+$segundo_parcial+$tercer_parcial)/3;
 
                 //$promedio = (intval($estudiante->primer_parcial)+intval($estudiante->segundo_parcial)+intval($estudiante->tercer_parcial))/3;
-            if($promedio_modular>0 && $promedio_modular<=5){
+            if($promedio_modular>0 && $promedio_modular<6){
                 $promedio_modular=5;
             }
             else{
@@ -61,7 +61,7 @@ class M_reinscripcion extends CI_Model {
 
                 $promedio_final = ($promedio_modular+$examen_final)/2;
 
-                if($promedio_final>0 && $promedio_final<=5){
+                if($promedio_final>0 && $promedio_final<6){
                     $promedio_final=5;
                 }
                 else{

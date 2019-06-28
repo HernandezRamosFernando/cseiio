@@ -205,5 +205,17 @@ class M_documentacion extends CI_Model {
    }
 
 
+   function get_datos_documento($no_control,$iddocumento){
+
+      $this->db->select('*');
+      $this->db->from('Documentacion');
+      $this->db->where('id_documento',$iddocumento);
+      $this->db->where('Estudiante_no_control',$no_control);
+      $resultado = $this->db->get();
+      return $resultado->result();
+  
+     }
+
+
 }
 

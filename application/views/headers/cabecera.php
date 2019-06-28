@@ -45,7 +45,6 @@
       xhr.onload = function () {
         $('#div_carga').hide();
         // aqui estan las notificaciones
-        console.log(JSON.parse(xhr.response).length === 0);
         var a = "";
         if (JSON.parse(xhr.response).length != 0) {
           $("#ic_notificacion").text('notifications_active');
@@ -68,26 +67,33 @@
       permisos_parciales.open('GET', '<?php echo base_url();?>index.php/c_permisos/get_permiso_plantel?plantel=<?php echo $this->session->userdata('user')['plantel'] ?>', true);
 
       permisos_parciales.onload = function () {
+        if(permisos_parciales.response.length != 2){
         let permisos = JSON.parse(permisos_parciales.response)[0];
 
         if(permisos.primer_parcial==="1" || permisos.segundo_parcial==="1" || permisos.tercer_parcial==="1"){
             //aqui va la alerta que mostrara si tiene permisos de parciales
             if(permisos.examen_final==="1"){
-              console.log("hay permisos de parciales y examen final y terminan el "+permisos.fecha_fin);
+              $("#alerta").css("display", "");
+              $("#alerta").append('Hay permisos de parciales y examen final y terminan el <strong>'+permisos.fecha_fin+'</strong>')
             }
 
             else{
-              console.log("hay permisos de parciales y terminan el "+permisos.fecha_fin);
+              $("#alerta").css("display", "");
+              $("#alerta").append('Hay permisos de parciales y terminan el <strong>'+permisos.fecha_fin+'</strong>')
             }
-            
         }
-
+        else if(permisos.examen_final==="1"){
+          $("#alerta").css("display", "");
+          $("#alerta").append('Hay permisos de examen final y terminan el <strong>'+permisos.fecha_fin+'</strong>')
+        }
         else{
-          console.log("hay permisos de examen final y terminan el "+permisos.fecha_fin);
+          $("#alerta").css("display", "none");
         }
       };
+      }
 
       permisos_parciales.send(null);
+      
 
 
       //permisos de regularizacion-------------------------------------
@@ -96,13 +102,13 @@
 
           permisos_regularizacion.onload = function () {
             if(JSON.parse(permisos_regularizacion.response).length>0){
-              console.log("recuerde que hay periodo de regularizacion");
+              $("#alerta_reg").css("display", "");
+              $("#alerta_reg").append('Recuerde que hay periodo de regularizacion');
+            }else{
+              $("#alerta_reg").css("display", "none");
             }
           };
-
           permisos_regularizacion.send(null);
-      
-
     }
 
     $(document).ready(function () {

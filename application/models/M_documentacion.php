@@ -10,11 +10,14 @@ class M_documentacion extends CI_Model {
 
    }
 
-   function get_nombre_archivo_documentacion($no_control,$iddocumento){
+
+//-----------------modificado--------------------------------------
+   function get_nombre_archivo_documentacion($no_control,$iddocumento,$plantel){
 
       $this->db->select('*');
       $this->db->from('Documentacion');
       $this->db->where('id_documento',$iddocumento);
+      $this->db->where('id_plantel',$plantel);
       $this->db->where('Estudiante_no_control',$no_control);
       $resultado = $this->db->get()->row();
       return $resultado->ruta;
@@ -80,14 +83,13 @@ class M_documentacion extends CI_Model {
 
   
 
-
-   function update_aspirante_doc($iddocumentacion,$ruta,$num_control){
+ function update_aspirante_doc($iddocumentacion,$ruta,$num_control,$cct_plantel){
      $data = array(
     'ruta' =>$ruta,
     'fecha_entrega' =>date('Y-m-d'),
     'entregado' => true
       );
-
+   $this->db->where('id_plantel', $cct_plantel);
    $this->db->where('id_documento', $iddocumentacion);
    $this->db->where('Estudiante_no_control', $num_control);
   $resultado=$this->db->update('Documentacion', $data);
@@ -185,6 +187,7 @@ class M_documentacion extends CI_Model {
       $this->db->select('*');
       $this->db->from('Documentacion');
       $this->db->join('Documento', 'Documentacion.id_documento = Documento.id_documento');
+      $this->db->join('Plantel', 'Documentacion.id_plantel=Plantel.cct_plantel', 'left');
       $this->db->where('Documentacion.Estudiante_no_control',$no_control);
        $resultado = $this->db->get();
        return $resultado->result();

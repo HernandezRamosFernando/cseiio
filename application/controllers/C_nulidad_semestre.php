@@ -111,10 +111,11 @@ public function autorizar_nulidad(){
     ////////////////////////////////////////////////////////////////////////////////////////////
 
     public function get_alumno_datos_nulidad(){
-    $no_control = $this->input->get("no_control");
-    $datos_nulidad=$this->M_nulidad_semestre->get_alumno_datos_nulidad($no_control);
+    $id_nulidad = $this->input->get("id_nulidad");
+
+    $datos_nulidad=$this->M_nulidad_semestre->get_alumno_datos_nulidad($id_nulidad);
     $datos['datos_nulidad']=$datos_nulidad;
-    $datos['documento']=$this->M_documentacion->get_datos_documento($no_control,13);
+    $datos['documento']=$this->M_documentacion->get_datos_documento($datos_nulidad[0]->no_control,13);
   echo json_encode($datos);
     }
 }

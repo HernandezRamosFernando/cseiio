@@ -573,7 +573,7 @@ public function get_estudiante_datos_semestre_grupo_calificacion($no_control){
   return $this->db->query("select *,(SELECT count(*)-SUM(CASE
                 WHEN d.entregado = 1 THEN 1
                 ELSE 0
-            END) from Documentacion d where d.Estudiante_no_control=e.no_control) as faltantes from Estudiante e left join Plantel p on p.cct_plantel=e.Plantel_cct_plantel left join (select ge.Estudiante_no_control, sum(CASE
+            END) from Documentacion d inner join Documento doc on d.id_documento=doc.id_documento where d.Estudiante_no_control=e.no_control and doc.tipo='base' ) as faltantes from Estudiante e left join Plantel p on p.cct_plantel=e.Plantel_cct_plantel left join (select ge.Estudiante_no_control, sum(CASE
                 WHEN ge.primer_parcial>=0 THEN 1
                 ELSE 0
             END) num_primer_parcial,sum(CASE

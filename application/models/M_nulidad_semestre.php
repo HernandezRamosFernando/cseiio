@@ -12,7 +12,7 @@ class M_nulidad_semestre extends CI_Model {
 
 
 public function get_alumnos($id_plantel,$curp){
-    $query = $this->db->query("select * from Estudiante e left join Plantel p on p.cct_plantel=e.Plantel_cct_plantel left join (select distinct ge.Estudiante_no_control,ge.Grupo_id_grupo,ge.Ciclo_escolar_id_ciclo_escolar,g.semestre,g.id_grupo,g.nombre_grupo,g.estatus from Grupo_Estudiante ge LEFT JOIN Grupo g on g.id_grupo=ge.Grupo_id_grupo where g.estatus=1) datos_grupo on e.no_control=datos_grupo.Estudiante_no_control left join (SELECT distinct n.no_control as estudiante_no_control,count(*) por_autorizar FROM Nulidad_semestre n where n.autorizado=0) nulidad on e.no_control=nulidad.estudiante_no_control where e.Plantel_cct_plantel like '".$id_plantel."%' and e.curp like '".$curp."%'")->result();
+    $query = $this->db->query("select * from Estudiante e left join Plantel p on p.cct_plantel=e.Plantel_cct_plantel left join (select distinct ge.Estudiante_no_control,ge.Grupo_id_grupo,ge.Ciclo_escolar_id_ciclo_escolar,g.semestre,g.id_grupo,g.nombre_grupo,g.estatus from Grupo_Estudiante ge LEFT JOIN Grupo g on g.id_grupo=ge.Grupo_id_grupo where g.estatus=1) datos_grupo on e.no_control=datos_grupo.Estudiante_no_control left join (SELECT distinct n.no_control as estudiante_no_control,n.autorizado por_autorizar FROM Nulidad_semestre n where n.autorizado=0) nulidad on e.no_control=nulidad.estudiante_no_control where e.Plantel_cct_plantel like'".$id_plantel."%' and e.curp like'".$curp."%'")->result();
     return $query;
     
   }
@@ -113,7 +113,7 @@ function nulidad_semestre_estudiante($no_control,$semestre_hasta_el_que_anula,$d
             }
 
         if(intval($semestre_hasta_el_que_anula)==1){
-            $this->db->query("update Estudiante set semestre=1,tipo_ingreso='NUEVO INGRESO',matricula=null where no_control='".$no_control."'");
+            $this->db->query("update Estudiante set curp=null, tipo_ingreso='NULIDAD SEMESTRE' where no_control='".$no_control."'");
         }
 
         $this->db->trans_complete();

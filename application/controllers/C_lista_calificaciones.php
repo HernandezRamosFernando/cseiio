@@ -14,11 +14,11 @@ class C_lista_calificaciones extends CI_Controller {
 
 
     public function lista_calificaciones_grupo_materia(){
-        $this->load->library('pdf');
+        
         $grupo = $this->input->get("grupo");
         $materia = $this->input->get("materia");
 
-        $datos['estudiantes'] = $this->M_grupo_estudiante->nombres_estudiantes_grupo_materia($grupo,$materia);
+        $datos['estudiantes'] =$this->load->library('pdf'); $this->M_grupo_estudiante->nombres_estudiantes_grupo_materia($grupo,$materia);
         $datos['plantel'] = $this->M_grupo_estudiante->plantel_grupo($grupo);
         $datos['materia'] = $this->M_grupo_estudiante->datos_materia_grupo($materia,$grupo);
         $this->load->view("reportes/lista_calificaciones",$datos);

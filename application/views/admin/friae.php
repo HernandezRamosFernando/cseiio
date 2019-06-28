@@ -113,7 +113,7 @@ function mostrar_grupos(){
 
 function imprimir_friae(){
 
-window.open('<?php echo base_url();?>index.php/c_friae/generar_friae_grupo?grupo='+document.getElementById("grupos").value,'_blank');
+window.open('<?php echo base_url();?>index.php/c_friae/generar_friae_grupo?grupo='+document.getElementById("grupos").value, '_blank');
 
 }
 

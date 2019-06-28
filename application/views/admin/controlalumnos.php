@@ -595,7 +595,7 @@
 
                 <div class="col-md-3">
                   <div class="form-label-group">
-                    <input type="text" pattern="[0-9]{10}"
+                    <input type="text"
                       title="El numero de telefono debe de ser a 13 digitos con lada" class="form-control"
                       id="aspirante_tutor_telefono" name="aspirante_tutor_telefono" placeholder="Teléfono particular"
                       style="color: #237087">
@@ -604,7 +604,7 @@
                 </div>
                 <div class="col-md-3">
                   <div class="form-label-group">
-                    <input type="text" pattern="[0-9]{10}"
+                    <input type="text"
                       title="El numero de telefono debe de ser a 13 digitos con lada" class="form-control"
                       id="aspirante_tutor_telefono_comunidad" name="aspirante_tutor_telefono_comunidad"
                       placeholder="Teléfono de la comunidad" style="color: #237087">

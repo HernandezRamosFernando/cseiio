@@ -32,4 +32,10 @@ class C_escuela_procedencia extends CI_Controller {
     }
 
 
+     public function get_escuela_procedencia_repetidor(){
+        $no_control = $this->input->get('no_control');
+        echo json_encode($this->M_escuela_procedencia->get_escuela_procedencia_repetidor($no_control));
+    }
+
+
 }

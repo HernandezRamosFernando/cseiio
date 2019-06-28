@@ -36,14 +36,8 @@
     function cargar_notificaciones() {
       var xhr = new XMLHttpRequest();
       xhr.open('GET', '<?php echo base_url();?>index.php/c_notificacion/notificaciones_plantel?plantel=<?php echo $this->session->userdata('user')['plantel'] ?>', true);
-      xhr.onloadstart = function () {
-        $('#div_carga').show();
-      }
-      xhr.error = function () {
-        console.log("error de conexion");
-      }
+      
       xhr.onload = function () {
-        $('#div_carga').hide();
         // aqui estan las notificaciones
         var a = "";
         if (JSON.parse(xhr.response).length != 0) {

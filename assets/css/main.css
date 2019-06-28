@@ -136,6 +136,7 @@ btn-lista:hover{
     word-wrap: break-word;
 }
 .menu{
+    font-size: 14pt;
     height: 90%;
     font-weight: bold; 
     white-space: normal !important;

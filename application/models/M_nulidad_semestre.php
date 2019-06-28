@@ -50,8 +50,8 @@ public function get_solicitantes_nulidad($id_plantel,$curp){
 }
 
 
-public function get_alumno_datos_nulidad($no_control){
-  $query = $this->db->query("select * from Nulidad_semestre n left join Estudiante e on n.no_control=e.no_control where e.no_control='".$no_control."';")->result();
+public function get_alumno_datos_nulidad($id_nulidad){
+  $query = $this->db->query("select * from Nulidad_semestre n where n.idnulidad_semestre=".$id_nulidad.";")->result();
     return $query;
 }
 

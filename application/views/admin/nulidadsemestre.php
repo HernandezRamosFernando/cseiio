@@ -38,7 +38,7 @@
             <label class="form-group has-float-label">
               <select class="form-control form-control-lg" required="required" id="plantel_busqueda"
                 name="plantel_busqueda">
-
+                  <option value="">Buscar en todos los planteles</option>
                 <?php
                 foreach ($planteles as $plantel)
                 {

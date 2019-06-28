@@ -18,7 +18,7 @@
                 <a href="<?php echo base_url();?>index.php/c_menu/inscripcion"
                     class="btn btn-primary btn-lg btn-block btn-responsive menu valign-center btn-1">
                     <div class="row col-12">
-                        <div class="col-8 valign-center" style="padding-left: 0px;">
+                        <div class="col-8 valign-center " style="padding-left: 0px;">
                         <p class="h5"><strong>Inscripción</strong></p> 
                         </div>
                         <div class="col-4 valign-right">

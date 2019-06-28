@@ -381,7 +381,7 @@ function buscar() {
 
         
           fila += '<td>';
-        fila += '<button class="'+clase_boton+'" type="button" value="' +valor.no_control+'" data-toggle="modal" data-target="#autorizar_nulidad_semestre" onclick="cargar_datos_solicitud_nulidad(this)" '+agregar_html+'>'+agregar_html_2+'</button>';
+        fila += '<button class="'+clase_boton+'" type="button" value="' +valor.no_control+'" data-toggle="modal" data-target="#autorizar_nulidad_semestre" onclick="cargar_datos_solicitud_nulidad(this,'+valor.idnulidad_semestre+')" '+agregar_html+'>'+agregar_html_2+'</button>';
         fila += '</td>';
 
       
@@ -410,8 +410,9 @@ function buscar() {
 }
 
 
-function cargar_datos_solicitud_nulidad(no_control){
+function cargar_datos_solicitud_nulidad(no_control,id_nulidad){
   document.getElementById("autorizar_nulidad").reset();
+  
 
   var no_control=no_control.value;
   var xhr = new XMLHttpRequest();
@@ -444,7 +445,7 @@ function cargar_datos_solicitud_nulidad(no_control){
         document.getElementById("grupo").value=grupo;
 
               var xhr_nulidad = new XMLHttpRequest();
-              var query_2 = 'no_control=' +no_control;
+              var query_2 = 'id_nulidad=' +id_nulidad;
             xhr_nulidad.open('GET', '<?php echo base_url();?>index.php/C_nulidad_semestre/get_alumno_datos_nulidad?' + query_2, true);
             xhr_nulidad.onloadstart = function () {
               
@@ -453,8 +454,12 @@ function cargar_datos_solicitud_nulidad(no_control){
               console.log("error de conexion");
             }
               xhr_nulidad.onload = function () {
+
+              	
+
                 document.getElementById('enlace').innerHTML='';
                 let nulidad = JSON.parse(xhr_nulidad.response);
+                console.log(nulidad);
                 document.getElementById("id_nulidad").value=nulidad.datos_nulidad[0].idnulidad_semestre;
 
                 

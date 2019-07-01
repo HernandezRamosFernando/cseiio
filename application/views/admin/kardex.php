@@ -92,10 +92,6 @@
 
 
 <script>
-  cargar_anio();
-
- 
-
   function buscar() {
     document.getElementById("aspirante_plantel_busqueda").disabled = true;
     document.getElementById("aspirante_curp_busqueda").disabled = true;
@@ -132,7 +128,7 @@
         fila += valor.fecha_registro;
         fila += '</td>';
         fila += '<td>';
-        fila += '<button class="btn btn-lg btn-block btn-success" type="button" value="' + valor.no_control + '" onclick="" href="<?php echo base_url();?>index.php/c_kardex/kardex_estudiante?no_control='+valor.no_control+'">Imprimir Kardex</button>';
+        fila += '<button class="btn btn-lg btn-block btn-success" type="button" value="' + valor.no_control + '" onclick="abrirkardex(this)"); ">Imprimir Kardex</button>';
         fila += '</td>';
         fila += '</tr>';
         document.getElementById("tabla").innerHTML += fila;
@@ -145,6 +141,10 @@
     document.getElementById('btn_buscar').classList.remove('btn-success');
     document.getElementById('btn_buscar').classList.add('btn-info');
     document.getElementById('busqueda_oculto').style.display = "";
+  }
+
+  function abrirkardex(e){
+    window.open('<?php echo base_url();?>index.php/c_kardex/kardex_estudiante?no_control='+e.value, '_blank');
   }
 
 

@@ -52,21 +52,8 @@
         </a>
       </div>
       <div class="col-md-4 col-lg-4"style="height: 9rem !important;">
-        <a href="<?php echo base_url();?>index.php/c_vistas/asignar_matricula"
-          class="btn btn-primary btn-lg btn-block  btn-responsive menu valign-center  btn-4">
-          <div class="row col-12">
-            <div class="col-8 valign-center" style="padding-left: 0px;">
-            &nbsp;<p class="h5"><strong></strong></p> &nbsp;
-            </div>
-            <div class="col-4 valign-right">
-              <i class="material-icons md-48">assignment_turned_in</i>
-            </div>
-          </div>
-        </a>
-      </div>
-      <div class="col-md-4 col-lg-4"style="height: 9rem !important;">
         <a href="<?php echo base_url();?>index.php/c_vistas/lista_grupo_sc"
-          class="btn btn-primary btn-lg btn-block  btn-responsive menu valign-center  btn-5">
+          class="btn btn-primary btn-lg btn-block  btn-responsive menu valign-center  btn-4">
           <div class="row col-12">
             <div class="col-8 valign-center" style="padding-left: 0px;">
             &nbsp;<p class="h5"><strong>Lista de grupos sin calificaciones</strong></p> &nbsp;
@@ -91,34 +78,8 @@
         </a>
       </div>
       <div class="col-md-4 col-lg-4"style="height: 9rem !important;">
-        <a href="<?php echo base_url();?>index.php/c_vistas/lista_reg_sc"
-          class="btn btn-primary btn-lg btn-block  btn-responsive menu valign-center  btn-7">
-          <div class="row col-12">
-            <div class="col-8 valign-center" style="padding-left: 0px;">
-            &nbsp;<p class="h5"><strong>Lista de regularización sin calificaciones</strong></p> &nbsp;
-            </div>
-            <div class="col-4 valign-right">
-              <img class="icono_menu" src="<?php echo base_url();?>assets/img/cartacompromiso.png">
-            </div>
-          </div>
-        </a>
-      </div>
-      <div class="col-md-4 col-lg-4"style="height: 9rem !important;">
-        <a href="<?php echo base_url();?>index.php/c_vistas/lista_reg_cc"
-          class="btn btn-primary btn-lg btn-block  btn-responsive menu valign-center  btn-8">
-          <div class="row col-12">
-            <div class="col-8 valign-center" style="padding-left: 0px;">
-            &nbsp;<p class="h5"><strong>Lista de regularización con calificaciones</strong></p> &nbsp;
-            </div>
-            <div class="col-4 valign-right">
-              <img class="icono_menu" src="<?php echo base_url();?>assets/img/cartacompromiso.png">
-            </div>
-          </div>
-        </a>
-      </div>
-      <div class="col-md-4 col-lg-4"style="height: 9rem !important;">
         <a href="<?php echo base_url();?>index.php/c_vistas/observaciones"
-          class="btn btn-primary btn-lg btn-block  btn-responsive menu valign-center  btn-9">
+          class="btn btn-primary btn-lg btn-block  btn-responsive menu valign-center  btn-7">
           <div class="row col-12">
             <div class="col-8 valign-center" style="padding-left: 0px;">
             &nbsp;<p class="h5"><strong>Formato de observaciones en expediente</strong></p> &nbsp;
@@ -131,7 +92,7 @@
       </div>
       <div class="col-md-4 col-lg-4"style="height: 9rem !important;">
         <a href="<?php echo base_url();?>index.php/c_vistas/lista_asistencia"
-          class="btn btn-primary btn-lg btn-block  btn-responsive menu valign-center  btn-1">
+          class="btn btn-primary btn-lg btn-block  btn-responsive menu valign-center  btn-8">
           <div class="row col-12">
             <div class="col-8 valign-left" style="padding-left: 0px;">
             &nbsp;<p class="h5"><strong>Lista de asistencia</strong></p> &nbsp;

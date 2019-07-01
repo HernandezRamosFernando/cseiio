@@ -113,7 +113,7 @@
 
 function imprimir_frer(){
 
-  console.log(document.getElementById("plantel").value);
+  var plantel = document.getElementById("plantel").value;
 
   let periodo_junto = document.getElementById("regularizaciones").value;
 
@@ -147,7 +147,7 @@ function imprimir_frer(){
 
 
 
-location.href = "<?php echo base_url();?>index.php/c_frer/generar_frer_plantel_periodo?plantel=20EBD0001C&periodo="+fecha;
+window.open('<?php echo base_url();?>index.php/c_frer/generar_frer_plantel_periodo?plantel='+plantel+'&periodo='+fecha, '_blank');
 
 }
 

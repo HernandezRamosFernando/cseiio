@@ -14,7 +14,7 @@
     <div class="card">
       <div class="card-body">
 
-<form id="formato_observacion" action="<?php echo base_url();?>index.php/c_estudiante/generar_formato_observaciones_expedientes" method="post">
+<form id="formato_observacion" action="<?php echo base_url();?>index.php/c_estudiante/generar_formato_observaciones_expedientes" method="post" target="_blank">
 
             <div class="form-group">
               <div class="row">

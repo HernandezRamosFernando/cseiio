@@ -163,43 +163,17 @@
 
 		<div class="form-group">
             <div class="row">
-              <div class="col-md-6">
-                <label class="form-group has-float-label">
-                <select class="form-control form-control-lg" required="required" id="ciclo_escolar"
-                  name="ciclo_escolar" onchange="cambiar_semestre(this)">
-                  <option value="">Seleccione el ciclo</option>
-                  <?php
-                    foreach ($ciclo_escolar as $ciclo)
-                    {
-                      echo '<option value="'.$ciclo->id_ciclo_escolar.'">'.$ciclo->nombre_ciclo_escolar.'----'.$ciclo->periodo.'</option>';
-                    }
-                    ?>
-                  
-                </select>
-                <span>Ciclo Escolar</span>
-              </label>
-              </div>
-
 
               <div class="col-md-6">
                 <label class="form-group has-float-label">
                 <select class="form-control form-control-lg" required="required" id="semestre_nulidad"
-                  name="semestre_nulidad" onchange="validar_semestre(this)">
+                  name="semestre_nulidad">
                   <option value="">Seleccione el semestre</option>
                   
                 </select>
                 <span>Semestre a aplicar</span>
               </label>
               </div>
-
-
-            </div>
-          </div>
-
-
-
-          <div class="form-group">
-            <div class="row">
 
 
               <div class="col-md-6">
@@ -252,22 +226,7 @@
 
 <script>
 
- function validar_semestre(valor){
-  var semestre_nulidad=parseInt(valor.value);
-  var semestre_en_curso=parseInt(document.getElementById("semestre").value);
-    if(semestre_nulidad!=='' && (semestre_nulidad>semestre_en_curso)){
-    	document.getElementById("semestre_nulidad").value="";
-      Swal.fire({
-                type: 'error',
-                scrollbarPadding:false,
-                title: 'El semestre a aplicar nulidad no puede ser mayor al semestre en curso.',
-                confirmButtonText: 'Cerrar'
-
-              })
-         
-    }
-    
- }
+ 
 
 function cargar_datos_solicitud_nulidad(no_control){
   
@@ -313,7 +272,23 @@ function cargar_datos_solicitud_nulidad(no_control){
 
 
                if(validacion_resultado===""){
-               	$('#solicitar_nulidad_semestre').modal('show');
+
+
+			              semestre_nulidad.innerHTML = "";
+
+			              var option = document.createElement("option");
+			              option.text = "Seleccione el semestre";
+			              option.value = "";
+			              for(x=1;x<=estudiante[0].semestre_en_curso;x++){
+			              		var option = document.createElement("option");
+					            option.text =x;
+					            option.value = x;
+					            semestre_nulidad.add(option);
+			              }
+			              
+			              
+
+               			$('#solicitar_nulidad_semestre').modal('show');
                			var grupo="";
 							   document.getElementById("id_plantel").value=estudiante[0].Plantel_cct_plantel;
 					        document.getElementById("nombre_completo").value=estudiante[0].nombre+" "+estudiante[0].primer_apellido+" "+estudiante[0].segundo_apellido;
@@ -395,25 +370,12 @@ var form_solicitar_nulidad = document.getElementById("solicitar_nulidad");
   form_solicitar_nulidad.onsubmit = function (e) {
     e.preventDefault();
 
-    var id_ciclo_escolar=document.getElementById("ciclo_escolar").value;
-    var no_control_estudiante=document.getElementById("no_control_estudiante").value;
-    var id_semestre_nulidad=document.getElementById("semestre_nulidad").value;
+				id_semestre_nulidad=document.getElementById('semestre_nulidad').value;
 
-    var xhr_validacion = new XMLHttpRequest();
-          xhr_validacion.open('GET', '<?php echo base_url();?>index.php/C_grupo_estudiante/existe_grupo_ciclo_escolar_estudiante?id_ciclo_escolar=' + id_ciclo_escolar+'&no_control='+no_control_estudiante+'&semestre_nulidad='+id_semestre_nulidad, true);
-          
-          xhr_validacion.error = function () {
-            console.log("error de conexion");
-          }
-          xhr_validacion.onload = function () {
-
-            let validacion = JSON.parse(xhr_validacion.response);
-
-            if(validacion[0].resultado>0){
                  if(id_semestre_nulidad==1){
                         swalWithBootstrapButtons.fire({
                         type: 'warning',
-                        text: '¿Esta seguro de que desea solicitar el proceso de nulidad hasta primer semestre?, en caso de ser aprobado ocacionaría que los semestres cursados por el alumno hasta el momento quedarían invalidos.',
+                        text: '¿Esta seguro de que desea solicitar el proceso de nulidad hasta primer semestre?, En caso de ser aprobado ocacionaría que los semestres cursados por el alumno sean invalidos y tendrá que registrar al alumno como de nuevo ingreso.',
                         confirmButtonText: 'Aceptar',
                         scrollbarPadding:false,
                         showCancelButton: 'true',
@@ -431,107 +393,11 @@ var form_solicitar_nulidad = document.getElementById("solicitar_nulidad");
                       enviar_solicitud(form_solicitar_nulidad);
                  }
                   
-
-            }
-
-            else{
-                Swal.fire({
-                    type: 'error',
-                    scrollbarPadding:false,
-                    title: 'El semestre y ciclo escolar seleccionados para nulidad del semestre no existe registro en la base de datos del alumno, seleccione semestre y ciclo escolar validos.',
-                    confirmButtonText: 'Cerrar'
-
-                  })
-
-            }
-
-        
-
-              
-
-         };
-          xhr_validacion.send(null);   
+   
 
 
     }
 
-
-	function cambiar_semestre(periodo) {
-
-		var periodo=periodo.value;
-		if(periodo!==""){
-		
-		var xhr = new XMLHttpRequest();
-
-	      var query = 'ciclo=' + periodo;
-	    xhr.open('GET', '<?php echo base_url();?>index.php/C_ciclo_escolar/get_ciclo_escolar_seleccionado?' + query, true);
-	    xhr.onloadstart = function () {
-	      $('#div_carga').show();
-	    }
-	    xhr.error = function () {
-	      console.log("error de conexion");
-	    }
-		
-		xhr.onload = function () {
-		    $('#div_carga').hide();
-		    var option = document.createElement("option");
-              semestre_nulidad.innerHTML = "";
-              option.text = "Seleccione el semestre";
-              option.value = "";
-              semestre_nulidad.add(option);
-		    let ciclo_escolar = JSON.parse(xhr.response);
-
-
-		    if(ciclo_escolar[0].periodo=='FEBRERO-JULIO' && ciclo_escolar[0].periodo!=null){
-		      var option2 = document.createElement("option");
-		      option2.text = "2";
-              option2.value = "2";
-              semestre_nulidad.add(option2);
-
-              var option4 = document.createElement("option");
-              option4.text = "4";
-              option4.value = "4";
-              semestre_nulidad.add(option4);
-
-              var option6 = document.createElement("option");
-              option6.text = "6";
-              option6.value = "6";
-              semestre_nulidad.add(option6);
-
-		    }
-
-		    if(ciclo_escolar[0].periodo=='AGOSTO-ENERO' && ciclo_escolar[0].periodo!=null){
-		    	var option1 = document.createElement("option");
-		    	option1.text = "1";
-              option1.value = "1";
-              semestre_nulidad.add(option1);
-
-				var option3 = document.createElement("option");
-              option3.text = "3";
-              option3.value = "3";
-              semestre_nulidad.add(option3);
-
-              var option5 = document.createElement("option");
-              option5.text = "5";
-              option5.value = "5";
-              semestre_nulidad.add(option5);
-		    }
-		    
-
-		};
-
-		  xhr.send(null);
-
-		  }
-		  else{
-		  	var option = document.createElement("option");
-              semestre_nulidad.innerHTML = "";
-              option.text = "Seleccione el semestre";
-              option.value = "";
-              semestre_nulidad.add(option);
-
-		  }
-	}
 
 
   function buscar() {
@@ -595,7 +461,7 @@ var form_solicitar_nulidad = document.getElementById("solicitar_nulidad");
         fila += '</td>';
 
         var agregar_html='',agregar_html_2='Solicitar nulidad semestre',clase_boton='btn btn-success btn-block';
-        if(valor.por_autorizar){
+        if(valor.por_autorizar==0){
         		agregar_html='disabled="disabled"';
         		agregar_html_2='Por autorizar solicitud';
         		clase_boton='btn btn-warning btn-block';

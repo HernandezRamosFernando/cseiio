@@ -38,7 +38,7 @@ class C_nulidad_semestre extends CI_Controller {
         $id_plantel = $this->input->post("id_plantel");
         $semestre_en_curso = $this->input->post("semestre");
         $grupo_en_curso = $this->input->post("grupo");
-        $ciclo_escolar = $this->input->post("ciclo_escolar");
+        
         $semestre_nulidad = $this->input->post("semestre_nulidad");
         $motivo_nulidad = $this->input->post("motivo_nulidad");
         $no_control = $this->input->post("no_control_estudiante");
@@ -50,7 +50,7 @@ class C_nulidad_semestre extends CI_Controller {
             'grupo_en_curso' =>$grupo_en_curso,
             'semestre_nulidad' =>$semestre_nulidad,
             'fecha_solicitud' =>date('Y-m-d'),
-            'id_ciclo_escolar'=>$ciclo_escolar,
+           
             'motivo'=>$motivo_nulidad,
             'autorizado'=>0   
         );
@@ -79,14 +79,7 @@ class C_nulidad_semestre extends CI_Controller {
     }
 
 
-public function get_alumno_datos_nulidad(){
-    $no_control = $this->input->get("no_control");
-    $datos_nulidad=$this->M_nulidad_semestre->get_alumno_datos_nulidad($no_control);
-    $datos['datos_nulidad']=$datos_nulidad;
-    $datos['ciclo_escolar']=$this->M_ciclo_escolar->obtener_nombre_ciclo_escolar($datos_nulidad[0]->id_ciclo_escolar);
-    $datos['documento']=$this->M_documentacion->get_datos_documento($no_control,13);
-  echo json_encode($datos);
-}
+
 
 
 
@@ -106,12 +99,23 @@ public function autorizar_nulidad(){
             'semestre_en_curso' =>$semestre_en_curso,
             'grupo_en_curso' =>$grupo_en_curso,
             'semestre_nulidad' =>$semestre_nulidad,
-            'id_ciclo_escolar'=>$ciclo_escolar,
+            
             'motivo'=>$motivo_nulidad,
             'fecha_autorizacion'=>date('Y-m-d'),
             'autorizado'=>1   
         );
         echo $this->M_nulidad_semestre->nulidad_semestre_estudiante($no_control,$semestre_nulidad,$datos_nulidad,$id_nulidad);
 
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////
+
+    public function get_alumno_datos_nulidad(){
+    $id_nulidad = $this->input->get("id_nulidad");
+
+    $datos_nulidad=$this->M_nulidad_semestre->get_alumno_datos_nulidad($id_nulidad);
+    $datos['datos_nulidad']=$datos_nulidad;
+    $datos['documento']=$this->M_documentacion->get_datos_documento($datos_nulidad[0]->no_control,13);
+  echo json_encode($datos);
     }
 }

@@ -32,7 +32,7 @@ class C_subir_doc extends CI_Controller {
         }
 
         else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
-           $datos['planteles'] = $this->M_plantel->get_plantel('20EBD0002B');
+           //$datos['planteles'] = $this->M_plantel->get_plantel('20EBD0002B');
            $datos['planteles'] = $this->M_plantel->get_plantel($this->session->userdata('user')['plantel']);
             $data= array('title'=>'Control de Documentos');
             $this->load->view("headers/cabecera", $data);
@@ -58,41 +58,31 @@ class C_subir_doc extends CI_Controller {
         $this->load->library("upload",$config);
         $iddocumento=$this->input->post('iddocumento');
         $no_control=$this->input->post('numcontrol');
+        $cct_plantel=$this->input->post('cct_plantel');
+        if($cct_plantel==''){
+          $cct_plantel=NULL;
+        }
         
 
-        $existe_registro=$this->M_documentacion->existe_documentacion_de_aspirante($iddocumento,$no_control);
-
-        
 
                 if ($this->upload->do_upload('file1')) {
                 $data = array("upload_data" => $this->upload->data());
                 $nombrearchivo=$data['upload_data']['file_name'];
-                  if($existe_registro){
-                        $actualizo=$this->M_documentacion->update_aspirante_doc($iddocumento,$nombrearchivo,$no_control);
+                  
+                        $actualizo=$this->M_documentacion->update_aspirante_doc($iddocumento,$nombrearchivo,$no_control,$cct_plantel);
                         if($actualizo){
                             $datos['status']='Los datos se actualizaron correctamente';
                             $datos['ruta']=$nombrearchivo;
                             $datos['iddocumento']=$iddocumento;
                             $datos['no_control']=$no_control;
+                            $datos['cct_plantel']=$cct_plantel;
                         }
                         else{
                            $datos['status_error']="Ha ocurrido un error en la actualización.";
                         }
-                  }
+                  
 
 
-                   else{
-              $ingreso=$this->M_documentacion->ingresar_documentacion_aspirante($iddocumento,$nombrearchivo,$no_control);
-                      if($ingreso){
-                              $datos['status']='Los datos se actualizaron correctamente';
-                              $datos['ruta']=$nombrearchivo;
-                              $datos['iddocumento']=$iddocumento;
-                              $datos['no_control']=$no_control;
-                      }
-                      else{
-                          $datos['status_error']="Ha ocurrido un error en la actualización.";
-                      }
-                   }
                 
           }
 
@@ -110,8 +100,14 @@ class C_subir_doc extends CI_Controller {
   {
     $no_control = $this->uri->segment(3);
     $iddocumento = $this->uri->segment(4);
+    $cct_plantel = $this->uri->segment(5);
 
-     $nombredocumento=$this->M_documentacion->get_nombre_archivo_documentacion($no_control,$iddocumento);
+    if($cct_plantel==''){
+          $cct_plantel=NULL;
+        }
+
+
+     $nombredocumento=$this->M_documentacion->get_nombre_archivo_documentacion($no_control,$iddocumento,$cct_plantel);
     $data = file_get_contents($this->folder.$nombredocumento); 
     force_download($nombredocumento,$data); 
   }
@@ -123,8 +119,12 @@ class C_subir_doc extends CI_Controller {
 {
 $no_control = $this->uri->segment(3);
     $iddocumento = $this->uri->segment(4);
+    $cct_plantel = $this->uri->segment(5);
+    if($cct_plantel==''){
+          $cct_plantel=NULL;
+        }
 
-     $nombredocumento=$this->M_documentacion->get_nombre_archivo_documentacion($no_control,$iddocumento);
+     $nombredocumento=$this->M_documentacion->get_nombre_archivo_documentacion($no_control,$iddocumento,$cct_plantel);
 	$file=$this->folder.$nombredocumento;
     //get the file extension
     $info = new SplFileInfo($nombredocumento);

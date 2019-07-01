@@ -336,9 +336,103 @@ function crear_tabla_materias_semestre($grupos,$regularizaciones_aprobadas){
     return $tablas;
 }
 
-//tablas de datos de materias de estudiante
 
-$pdf->writeHTML(crear_tabla_materias_semestre($materias_grupo,$regularizaciones_aprobadas), true, 0, true, true);
+function renglones_materias_revalidadas($materias,$bachillerato_procedencia,$datos_resolucion){
+    $renglones = '';
+    $contador=0;
+    foreach($materias as $materia){
+        $renglones.='<tr>
+        <td style="width:50px;text-align:center">'.$materia->clave.'</td>
+        <td style="width:200px">'.$materia->unidad_contenido.'</td>';
+
+        if($contador==0){
+            $renglones .= '<td style="width:200px;text-align:left;font-size:6pt" rowspan="'.sizeof($materias).'">
+            <p>NOMBRE DE LA INSTITUCION:'.$bachillerato_procedencia->nombre_escuela_procedencia.'</p>
+            <p>CCT:'.$bachillerato_procedencia->cct_escuela_procedencia.'</p>
+            <p>'.$bachillerato_procedencia->lugar_escuela.'</p>
+            <p>CICLO ESCOLAR:</p>
+            <p>FOLIO DE EQUIVALENCIA:'.$datos_resolucion->folio.'</p>
+            <p>FECHA DE EXPEDICION DE EQUIVALENCIA:'.$datos_resolucion->fecha_expedicion.'</p>
+            </td>
+            <td style="width:40px;text-align:center" rowspan="'.sizeof($materias).'"><br><br><br><br><br><br><br>'.$datos_resolucion->promedio_acreditado.'</td>';
+
+        }
+
+        $renglones.='
+    
+        <td style="width:87px;text-align:center"></td>
+        <td style="width:40px;text-align:center"></td>
+    
+        </tr>';
+
+        $contador+=1;
+    }
+    
+       return $renglones;
+}
+
+
+function tabla_portabilidad($materias_semestre,$bachillerato_procedencia,$datos_resolucion){
+    $tabla = '';
+
+    foreach($materias_semestre as $semestre){
+        $tabla .= '<table border="1" style="font-size:7pt">
+        <tbody>
+        <tr>
+        <td style="width:50px;background-color:#cfcfcf;text-align:center" rowspan="3"> <br><br> CLAVE</td>
+        <td style="width:200px;background-color:#cfcfcf">CICLO ESCOLAR:</td>
+        <td style="width:120px;text-align:center;background-color:#cfcfcf" colspan="3">PARCIALES</td>
+        <td style="width:40px;text-align:center;background-color:#cfcfcf" rowspan="3">PROM. MOD.</td>
+        <td style="width:40px;text-align:center;background-color:#cfcfcf" rowspan="3">EXAM. MOD.</td>
+        <td style="width:40px;text-align:center;background-color:#cfcfcf" rowspan="3">CALIF. FINAL</td>
+        <td style="width:127px;text-align:center;background-color:#cfcfcf" colspan="2">REGULARIZACION</td>
+    
+        </tr>
+    
+        <tr>
+      
+        <td style="width:200px;background-color:#cfcfcf">'.nombre_modulo($semestre[0]->semestre).' MODULO</td>
+        <td style="width:40px;text-align:center;background-color:#cfcfcf" rowspan="2">1ER</td>
+        <td style="width:40px;text-align:center;background-color:#cfcfcf" rowspan="2">2DO</td>
+        <td style="width:40px;text-align:center;background-color:#cfcfcf" rowspan="2">3ER</td>
+    
+    
+        <td style="width:87px;background-color:#cfcfcf;text-align:center" rowspan="2">FECHA</td>
+        <td style="width:40px;background-color:#cfcfcf;text-align:center" rowspan="2">CALIF</td>
+        </tr>
+    
+        <tr>
+      
+        <td style="width:200px;background-color:#cfcfcf">UNIDAD DE CONTENIDO</td>
+    
+    
+        </tr>
+        
+        '.renglones_materias_revalidadas($semestre,$bachillerato_procedencia,$datos_resolucion).'
+        
+        </tbody>
+        </table>
+        <p></p>
+        ';
+    }
+    
+
+    return $tabla;
+}
+
+
+
+
+//tablas de datos de materias de estudiante
+if($portabilidad=="no"){
+    $pdf->writeHTML(crear_tabla_materias_semestre($materias_grupo,$regularizaciones_aprobadas), true, 0, true, true);
+}
+
+else{
+    $pdf->writeHTML(tabla_portabilidad($materias_revalidadas,$bachillerato_procedencia,$datos_resolucion), true, 0, true, true);
+    $pdf->writeHTML(crear_tabla_materias_semestre($materias_grupo,$regularizaciones_aprobadas), true, 0, true, true);
+}
+
 
 
 //Close and output PDF document

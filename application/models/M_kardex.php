@@ -24,4 +24,21 @@ class M_kardex extends CI_Model {
       return $this->db->query("select * from Regularizacion where Estudiante_no_control='".$no_control."' and id_materia='".$materia."' and calificacion>5")->result();
    }
 
+   function resolucion_equivalencia_estudiante($no_control){
+      return $this->db->query("SELECT * FROM Resolucion_equivalencia where id_estudiante='".$no_control."'")->result();
+   }
+
+   function materias_hasta_semestre_validado($semestre){
+      $materias = array();
+      for($i=1;$i<=$semestre;$i++){
+         $materias[$i-1] = $this->db->query("select * from Materia where semestre=".$i)->result();
+      }
+      return $materias;
+   }
+
+
+   function bachillerato_procedencia($no_control){
+      return $this->db->query("select *,concat(nombre_municipio,',',nombre_estado) as lugar_escuela from Estudiante_Escuela_procedencia as eep inner join Escuela_procedencia as ep on eep.Escuela_procedencia_cct_escuela_procedencia=ep.cct_escuela_procedencia inner join Localidad as l on ep.id_localidad_escuela_procedencia=l.id_localidad inner join Municipio as m on l.Municipio_id_municipio=m.id_municipio inner join Estado as e on m.Estado_id_estado=e.id_estado where Estudiante_no_control='".$no_control."' and tipo_escuela_procedencia='BACHILLERATO'")->result()[0];
+   }
+
 }

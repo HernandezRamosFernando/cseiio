@@ -40,8 +40,8 @@
       <div class="form-group">
         <div class="row">
       <div class="col-md-4">
-                <label class="form-group has-float-label">
-                  <select class="form-control form-control-lg" required="required" id="semestre_reg" onchange="cargarmaterias();"
+                <label class="form-group has-float-label seltitulo">
+                  <select class="form-control form-control-lg selcolor" required="required" id="semestre_reg" onchange="cargarmaterias();"
                     name="semestre_reg" >
                     <option value="">Seleccione un semestre</option>
                     

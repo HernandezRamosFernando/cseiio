@@ -102,12 +102,12 @@ function nulidad_semestre_estudiante($no_control,$semestre_hasta_el_que_anula,$d
         else if(sizeof($materias_debe)>0 && sizeof($materias_debe)<=3){
                 
                 if($estudiante->tipo_ingreso=="SIN DERECHO"){
-                   $this->db->query("update Estudiante set tipo_ingreso='REPETIDOR',estatus='IRREGULAR' where no_control='".$regularizacion->no_control."'");
+                   $this->db->query("update Estudiante set tipo_ingreso='REPETIDOR',estatus='IRREGULAR' where no_control='".$no_control."'");
                  
                 }
                 
                 else{
-                   $this->db->query("update Estudiante set tipo_ingreso='REPETIDOR',estatus='IRREGULAR' where no_control='".$regularizacion->no_control."'");
+                   $this->db->query("update Estudiante set tipo_ingreso='REPETIDOR',estatus='IRREGULAR' where no_control='".$no_control."'");
                    
                 }
             }

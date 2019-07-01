@@ -211,6 +211,8 @@ https://www.youtube.com/results?search_query=+AJAX+File+Upload+with+Progress
                var fila = '<tr>';
                estatusdoc='';
                estatusCheck='';
+               nombre_plantel='';
+               cct_plantel='';
                if (valor.entregado == true) {
                   estatusCheck='checked';
                   
@@ -221,21 +223,36 @@ https://www.youtube.com/results?search_query=+AJAX+File+Upload+with+Progress
                     estatusdoc='disabled';
                 }
 
+
+                if(valor.id_plantel!==null){
+
+                      nombre_plantel=valor.nombre_plantel;
+                      cct_plantel=valor.id_plantel;
+                }
+
+
+                else{
+                	cct_plantel='';
+                }
+
+
+
+
           fila += '<td>';
-          fila += '<div class="form-check"><label class="form-check-label"><input type="checkbox" class="form-check-input" name="documento' + cont2 + '" id="documento' + cont2 + '" value="' + valor.id_documento + '"  onclick="activarFile(this,\'file' + cont2 + '\')" '+estatusCheck+'>' + valor.nombre_documento;
+          fila += '<div class="form-check"><label class="form-check-label"><input type="checkbox" class="form-check-input" name="documento' + cont2 + '" id="documento' + cont2 + '" value="' + valor.id_documento + '"  onclick="activarFile(this,\'file' + cont2 + '\')" '+estatusCheck+'>' + valor.nombre_documento+' '+'<span class="badge badge-success">'+nombre_plantel+'</span>';
           fila += '</label></div></td>';
 
           fila += '<td>';
-          fila += '<input type="file" name="file' + cont2 + '" id="file' + cont2 + '" onchange="validarArchivo(this,\'status' + cont2 + '\',\'status_error' + cont2 + '\',\'boton' + cont2 + '\')" '+estatusdoc+' required/><br><span class="badge badge-danger">* El archivo debe estar en formato PDF, JPG o PNG y pesar menos de 2 MB.</span><progress id="progressBar' + cont2 + '" value="0" max="100"></progress><span id="status' + cont2 + '" class="status_upload"></span><span id="status_error' + cont2 + '" class="status_upload_error"></span> <input  id="boton' + cont2 + '" class="btn btn-success" type="button" value="Cargar archivo" onclick="uploadFile(\'file' + cont2 + '\',\'documento' + cont2 + '\',\'progressBar' + cont2 + '\',\'status' + cont2 + '\',\'status_error' + cont2 + '\',\'enlace' + cont2 + '\',\'enlaceview' + cont2 + '\',\'view' + cont2 + '\')" disabled>';
+          fila += '<input type="file" name="file' + cont2 + '" id="file' + cont2 + '" onchange="validarArchivo(this,\'status' + cont2 + '\',\'status_error' + cont2 + '\',\'boton' + cont2 + '\')" '+estatusdoc+' required/><br><span class="badge badge-danger">* El archivo debe estar en formato PDF, JPG o PNG y pesar menos de 2 MB.</span><progress id="progressBar' + cont2 + '" value="0" max="100"></progress><span id="status' + cont2 + '" class="status_upload"></span><span id="status_error' + cont2 + '" class="status_upload_error"></span> <input  id="boton' + cont2 + '" class="btn btn-success" type="button" value="Cargar archivo" onclick="uploadFile(\'file' + cont2 + '\',\'documento' + cont2 + '\',\'progressBar' + cont2 + '\',\'status' + cont2 + '\',\'status_error' + cont2 + '\',\'enlace' + cont2 + '\',\'enlaceview' + cont2 + '\',\'view' + cont2 + '\',\''+cct_plantel+'\')" disabled>';
           fila += '</td>';
 
           if (valor.ruta !== null && valor.ruta.length!==0) {
               fila += '<td>';
-              fila += '<center><a class="btn btn-info" id="enlace'+cont2 +'" href="<?php echo base_url();?>index.php/C_subir_doc/descargar/'+ valor.Estudiante_no_control +'/'+valor.id_documento+'" >Descargar <i class="fa fa-download" aria-hidden="true"></i></a> </center>';
+              fila += '<center><a class="btn btn-info" id="enlace'+cont2 +'" href="<?php echo base_url();?>index.php/C_subir_doc/descargar/'+ valor.Estudiante_no_control +'/'+valor.id_documento+'/'+cct_plantel+'" >Descargar <i class="fa fa-download" aria-hidden="true"></i></a> </center>';
               fila += '</td>';
 
               fila += '<td>';
-               fila += '<center><div id="view'+ cont2+'"><a class="btn btn-info enlace1" id="enlaceview' + cont2 + '" onClick="ventanaSecundaria(\'<?php echo base_url();?>index.php/C_subir_doc/visualizar/' + valor.Estudiante_no_control + '/' +valor.id_documento + '\');">Visualizar <i class="fa fa-search" aria-hidden="true"></i></a></div> </center>';
+               fila += '<center><div id="view'+ cont2+'"><a class="btn btn-info enlace1" id="enlaceview' + cont2 + '" onClick="ventanaSecundaria(\'<?php echo base_url();?>index.php/C_subir_doc/visualizar/' + valor.Estudiante_no_control + '/' +valor.id_documento +'/'+cct_plantel+'\');">Visualizar <i class="fa fa-search" aria-hidden="true"></i></a></div> </center>';
               fila += '</td>';
           }
 
@@ -284,7 +301,7 @@ https://www.youtube.com/results?search_query=+AJAX+File+Upload+with+Progress
 
 
 
-    function uploadFile(doc, iddoc, cargando, estado, estado_error, enlace, enlaceview, view) {
+    function uploadFile(doc, iddoc, cargando, estado, estado_error, enlace, enlaceview, view,plantel) {
       var file = elementoid(doc).files[0];
 
       console.log("archivo: " + doc);
@@ -294,6 +311,7 @@ https://www.youtube.com/results?search_query=+AJAX+File+Upload+with+Progress
 
       formdata.append("iddocumento", elementoid(iddoc).value);
       formdata.append("numcontrol", elementoid('numcontrol').value);
+      formdata.append("cct_plantel",plantel);
       formdata.append("file1", file);
       var ajax = new XMLHttpRequest();
       ajax.upload.addEventListener("progress", function progressHandler(event) {
@@ -337,11 +355,15 @@ https://www.youtube.com/results?search_query=+AJAX+File+Upload+with+Progress
           console.log('enlace: '+enlace);
           dx.className = "btn btn-primary";
           elementoid(estado).innerHTML = datos.status;
+          id_plantel='';
+          if(datos.cct_plantel!== null){
+          	id_plantel=datos.cct_plantel;
+          }
           elementoid(enlace).innerHTML = 'Descargar <i class="fa fa-download" aria-hidden="true"></i>';
-          elementoid(enlace).href = "<?php echo base_url();?>index.php/C_subir_doc/descargar/" + datos.no_control + "/" + datos.iddocumento;
+          elementoid(enlace).href = "<?php echo base_url();?>index.php/C_subir_doc/descargar/" + datos.no_control + "/" + datos.iddocumento+"/"+id_plantel;
 
           elementoid(view).innerHTML = '<a class="btn btn-primary enlace1" id="' + enlaceview + '" onClick="ventanaSecundaria(\'<?php echo base_url();?>index.php/C_subir_doc/visualizar/'
-            + datos.no_control + '/' + datos.iddocumento + '\');">Visualizar <i class="fa fa-search" aria-hidden="true"></i></a>';
+            + datos.no_control + '/' + datos.iddocumento +'/'+id_plantel+ '\');">Visualizar <i class="fa fa-search" aria-hidden="true"></i></a>';
 
         }
 

@@ -195,6 +195,33 @@ $pdf->writeHTMLCell($w = 145, $h = 5, $x = '50', $y = '85', '<p></p>', $border =
 $pdf->writeHTMLCell($w = 145, $h = 5, $x = '50', $y = '90', '<p></p>', $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
 ///////////////////encabezosooo---------------------------------------------
 
+function extraescolar($calificacion){
+    $regreso = "";
+    switch(intval($calificacion)){
+        case 10:
+        $regreso = "E";
+        break;
+
+        case 9:
+        $regreso = "MB";
+        break;
+
+        case 8:
+        $regreso = "B";
+        break;
+
+        case 7:
+        $regreso = "R";
+        break;
+
+        case 6:
+        $regreso = "S";
+        break;
+    }
+
+    return $regreso;
+}
+
 function renglones($materias,$regularizaciones_aprobadas){
     $renglones = '';
     foreach($materias as $materia){//materias de grupo
@@ -217,10 +244,17 @@ function renglones($materias,$regularizaciones_aprobadas){
    
    
        <td style="width:40px;text-align:center">'.($promedio_modular=="0"?"/":$promedio_modular).'</td>
-       <td style="width:40px;text-align:center">'.($materia->examen_final=="0"?"/":$materia->examen_final).'</td>
-       <td style="width:40px;text-align:center">'.($materia->calificacion_final).'</td>
+       <td style="width:40px;text-align:center">'.($materia->examen_final=="0"?"/":$materia->examen_final).'</td>';
+       if($materia->tipo=="EXTRAESCOLAR"){
+        $renglones.='<td style="width:40px;text-align:center">'.extraescolar($materia->calificacion_final).'</td>';
+       }
+
+       else{
+        $renglones.='<td style="width:40px;text-align:center">'.($materia->calificacion_final).'</td>';
+       }
+       
    
-       <td style="width:87px;text-align:center">'.materia_regularizada_fecha($materia->id_materia,$regularizaciones_aprobadas).'</td>
+       $renglones.='<td style="width:87px;text-align:center">'.materia_regularizada_fecha($materia->id_materia,$regularizaciones_aprobadas).'</td>
        <td style="width:40px;text-align:center">'.materia_regularizada_calificacion($materia->id_materia,$regularizaciones_aprobadas).'</td>
    
        </tr>

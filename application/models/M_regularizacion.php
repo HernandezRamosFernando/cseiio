@@ -19,7 +19,7 @@ class M_regularizacion extends CI_Model {
       $this->db->query("select * from Grupo_Estudiante where calificacion_final<6 and id_materia not in(select id_materia from Regularizacion where calificacion>=6 and Estudiante_no_control='".$no_control."')");
    }
 
-   public function materias_con_reprobados_html($plantel){
+   public function materias_con_reprobados_html($plantel,$semestre){
       return $this->db->query("
       SELECT DISTINCT clave as id_materia,unidad_contenido from Materia as m inner join (SELECT DISTINCT
           distinct id_materia
@@ -35,7 +35,25 @@ class M_regularizacion extends CI_Model {
                   Regularizacion
               WHERE
                   Plantel_cct_plantel = '".$plantel."'
-                      AND calificacion > 5 and estatus!=2)) as n on m.clave=n.id_materia")->result();
+                      AND calificacion > 5 and estatus!=2)) as n on m.clave=n.id_materia where semestre=".$semestre)->result();
+   }
+
+   public function semetres_con_reprobados_html($plantel){
+      return $this->db->query("SELECT semestre from Materia as m inner join (SELECT DISTINCT
+      distinct id_materia
+  FROM
+      Grupo_Estudiante AS ge inner join Estudiante as e on ge.Estudiante_no_control=e.no_control
+  INNER JOIN Grupo AS g ON ge.Grupo_id_grupo = g.id_grupo
+  WHERE
+      plantel = '".$plantel."'
+          AND calificacion_final < 6 and tipo_ingreso!='REPROBADO' and tipo_ingreso!='BAJA' and concat(Estudiante_no_control,id_materia) not in (
+          SELECT 
+              concat (Estudiante_no_control, id_materia)
+          FROM 
+              Regularizacion
+          WHERE
+              Plantel_cct_plantel = '".$plantel."'
+                  AND calificacion > 5 and estatus!=2)) as n on m.clave=n.id_materia group by semestre order by semestre asc")->result();
    }
 
 
@@ -130,8 +148,20 @@ class M_regularizacion extends CI_Model {
 
 
          //inserta la regularizacion
-         $this->db->query("insert into Regularizacion (Estudiante_no_control,id_materia,calificacion,fecha,fecha_calificacion,Plantel_cct_plantel,estatus) 
-         values ('".$regularizacion->no_control."','".$regularizacion->id_materia."',".$regularizacion->calificacion.",'".date("Y-m-d")."','".$regularizacion->fecha_calificacion."','".$regularizacion->cct_plantel."',1)");
+         if($regularizacion->calificacion!=""){
+            if($regularizacion->calificacion=="/"){
+                $this->db->query("insert into Regularizacion (Estudiante_no_control,id_materia,calificacion,fecha,fecha_calificacion,Plantel_cct_plantel,estatus) 
+            values ('".$regularizacion->no_control."','".$regularizacion->id_materia."',0,'".date("Y-m-d")."','".$regularizacion->fecha_calificacion."','".$regularizacion->cct_plantel."',1)");
+            }
+
+            else{
+                $this->db->query("insert into Regularizacion (Estudiante_no_control,id_materia,calificacion,fecha,fecha_calificacion,Plantel_cct_plantel,estatus) 
+            values ('".$regularizacion->no_control."','".$regularizacion->id_materia."',".$regularizacion->calificacion.",'".date("Y-m-d")."','".$regularizacion->fecha_calificacion."','".$regularizacion->cct_plantel."',1)");
+            }
+         }
+
+         
+         
 
          if($estudiante_en_grupo=="si"){//si el estudiante esta en grupo se debe actualizar su estatus y su friae
             //si la regularizacion es en julio o enero ,es la regularizacion terminando el semestre (segunda en el friae)

@@ -332,7 +332,8 @@ function validarselect(e){
     var xhr = new XMLHttpRequest();
     var semestre = document.getElementById("semestre_grupo").value;
     var plantel = document.getElementById("plantel").value;
-    var query = 'semestre=' + semestre + '&plantel=' + plantel;
+    var componente = document.getElementById("seleccione_componente").value;
+    var query = 'semestre=' + semestre + '&plantel=' + plantel+ '&componente='+componente;
     xhr.open('GET', '<?php echo base_url();?>index.php/c_acreditacion/get_estudiantes_plantel_semestre?' + query, true);
     xhr.onloadstart = function () {
       $('#div_carga').show();
@@ -341,6 +342,7 @@ function validarselect(e){
       console.log("error de conexion");
     }
     xhr.onload = function () {
+      //console.log(xhr.response);
       $('#div_carga').hide();
       JSON.parse(xhr.response).forEach(function (valor, indice) {
         //console.log(valor);

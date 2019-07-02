@@ -123,7 +123,7 @@ class M_friae extends CI_Model {
     }
 
     function get_materias_estudiante_friae($grupo,$no_control){
-        return $this->db->query("select * from Grupo_Estudiante where Estudiante_no_control='".$no_control."' and Grupo_id_grupo='".$grupo."'")->result();
+        return $this->db->query("select * from Grupo_Estudiante as ge inner join Materia as m on ge.id_materia=m.clave where Estudiante_no_control='".$no_control."' and Grupo_id_grupo='".$grupo."' group by id_materia")->result();
     }
 
     function get_datos_friae_estudiante($grupo,$no_control){

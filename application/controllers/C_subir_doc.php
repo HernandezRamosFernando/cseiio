@@ -30,7 +30,15 @@ class C_subir_doc extends CI_Controller {
             $this->load->view("subirdocumentos/buscar_aspirante",$datos);
             $this->load->view("footers/footer");
         }
-
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='CESCOLAR'){
+            $data= array('title'=>'Control de Documentos');
+            $datos['planteles'] = $this->M_plantel->get_planteles();
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierda");
+            $this->load->view("subirdocumentos/buscar_aspirante",$datos);
+            $this->load->view("footers/footer");
+        }
         else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
            //$datos['planteles'] = $this->M_plantel->get_plantel('20EBD0002B');
            $datos['planteles'] = $this->M_plantel->get_plantel($this->session->userdata('user')['plantel']);

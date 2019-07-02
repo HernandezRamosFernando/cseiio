@@ -89,8 +89,8 @@
 
     else{// si no puede cerrar
       Swal.fire({
-        type: 'error',
-        text: 'Algo salio mal.'
+        type: 'warning',
+        text: 'Error al cerrar regularizaciones o no hay regularizaciones que generar'
       });
     }
 

@@ -65,7 +65,7 @@ class MYPDF extends TCPDF {
 		$this->Image($image_file, 135,250, 65, '', 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
 		$this->SetY(-15);
 		// Set font
-		$this->SetFont('helvetica', 'I', 8);
+		$this->SetFont('helvetica', 'I', 7);
 		// Page number
 		$this->Cell(0, 10, 'Página '.$this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
 	}
@@ -74,6 +74,11 @@ class MYPDF extends TCPDF {
 
 
 }
+
+
+
+
+
 
 // create new PDF document
 $pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT,"LETTER", true, 'UTF-8', false);
@@ -114,7 +119,7 @@ if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
 // ---------------------------------------------------------
 
 // set font
-$pdf->SetFont('helvetica','', 9);
+$pdf->SetFont('helvetica','', 8);
 
 // add a page
 $pdf->AddPage();
@@ -286,7 +291,7 @@ $html_1 ='
 <table  border="1">
 <tbody>
 <tr>
-<td colspan="3" style="text-align: center; font-weight: bold;" >DIRECCIÓN FAMILIAR DEL ESTUDIANTE</td>
+<td colspan="3" style="text-align: center; font-weight: bold;" >DIRECCIÓN ACTUAL DEL ESTUDIANTE</td>
 </tr>
 
 <tr>
@@ -299,6 +304,16 @@ $html_1 ='
 <td ><strong>CALLE Y NÚMERO:</strong> '.strtoupper($estudiante['estudiante'][0]->calle).'</td>
 <td ><strong>COLONIA:</strong> '.strtoupper($estudiante['estudiante'][0]->colonia).'</td>
 <td ><strong>CÓDIGO POSTAL:</strong> '.$estudiante['estudiante'][0]->cp.'</td>
+</tr>
+
+<tr>
+<td style="font-weight:bold">
+	DIRECCIÓN DE PROCEDENCIA DEL ESTUDIANTE:
+</td>
+
+<td colspan="2">
+'.strtoupper($estudiante['estudiante'][0]->localidad_origen).'	
+</td>
 </tr>
 
 </tbody>
@@ -340,22 +355,29 @@ $html_1 ='
 <tbody>
 <tr>
 <td colspan="2" style="text-align: center; background-color:#58ACFA; font-weight: bold;" > IV.- ANTECEDENTE ESCOLAR Y SOCIAL</td>
+</tr>';
+
+
+
+ foreach ($escuela_procedencia as $escuela) {
+ 	$html_1.='<tr>
+<td colspan="2"><strong>ESCUELA DE PROCEDENCIA: </strong> '.((isset($escuela->nombre_escuela_procedencia)) ? strtoupper($escuela->nombre_escuela_procedencia) : "").'</td>
 </tr>
 
 <tr>
-<td colspan="2"><strong>ESCUELA DE PROCEDENCIA: </strong> '.((isset($escuela_procedencia[0]->nombre_escuela_procedencia)) ? strtoupper($escuela_procedencia[0]->nombre_escuela_procedencia) : "").'</td>
+<td colspan="2"><strong>C.C.T.: </strong> '.((isset($escuela->Escuela_procedencia_cct_escuela_procedencia)) ? strtoupper($escuela->Escuela_procedencia_cct_escuela_procedencia) : "").'</td>
 </tr>
 
 <tr>
-<td colspan="2"><strong>C.C.T.: </strong> '.((isset($estudiante['estudiante'][0]->cct_escuela_procedencia)) ? strtoupper($estudiante['estudiante'][0]->cct_escuela_procedencia) : "").'</td>
-</tr>
-
-<tr>
-<td colspan="2"><strong>TIPO DE SUBSISTEMA: </strong> '.((isset($escuela_procedencia[0]->tipo_subsistema)) ? strtoupper($escuela_procedencia[0]->tipo_subsistema) : "").'</td>
-</tr>
+<td colspan="2"><strong>TIPO DE SUBSISTEMA: </strong> '.((isset($escuela->tipo_subsistema)) ? strtoupper($escuela->tipo_subsistema) : "").'</td>
+</tr>';
+	
+} 
 
 
-</tbody>
+
+
+$html_1.='</tbody>
 </table>
 
 <table  border="1">
@@ -383,6 +405,11 @@ $html_1 ='
 <td style="text-align: center;">'.strtoupper($lengua_lee).'</td>
 <td style="text-align: center;">'.strtoupper($lengua_escribe).'</td>
 <td style="text-align: center;">'.strtoupper($lengua_traduce).'</td>
+</tr>
+
+
+<tr>
+<td colspan="5"><strong>ETNIA: </strong> '.strtoupper($estudiante['estudiante'][0]->etnia).'</td>
 </tr>
 
 </tbody>

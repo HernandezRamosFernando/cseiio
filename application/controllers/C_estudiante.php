@@ -614,7 +614,7 @@ public function buscar_aspirantesxplantel(){
      echo json_encode($this->M_estudiante->listar_aspirantes_xplantel($curp, $plantel));
  }
  
- public function generar_formato_inscripcion(){
+  public function generar_formato_inscripcion(){
     $this->load->library('pdf');
     $no_control = $this->input->get('no_control');
     $datos['estudiante'] = $this->M_estudiante->get_estudiante($no_control);
@@ -622,7 +622,10 @@ public function buscar_aspirantesxplantel(){
 
     $datos['domicilio_estudiante'] = $this->M_localidad->get_nombre_estado_municipio_localidad($datos['estudiante']['estudiante'][0]->id_localidad);
 
-    $datos['escuela_procedencia'] =$this->M_escuela_procedencia->get_escuela($datos['estudiante']['estudiante'][0]->cct_escuela_procedencia);
+
+
+    
+    $datos['escuela_procedencia']=$datos['estudiante']['escuela_procedencia'];
 
     if(isset($datos['estudiante']['lengua_materna'][0]->id_lengua)){
         $datos['nombre_lengua'] = $this->M_lengua->get_nombre_lengua($datos['estudiante']['lengua_materna'][0]->id_lengua)->nombre_lengua;

@@ -116,7 +116,7 @@ public function get_estudiante($no_control){
       'no_control' => $no_control
    ))->result();
 
-   $datos['escuela_procedencia'] = $this->db->query("select Escuela_procedencia_cct_escuela_procedencia,tipo_escuela_procedencia from Estudiante_Escuela_procedencia as ee inner join Escuela_procedencia as ep on ee.Escuela_procedencia_cct_escuela_procedencia=ep.cct_escuela_procedencia where Estudiante_no_control='".$no_control."' order by tipo_escuela_procedencia desc")->result();
+   $datos['escuela_procedencia'] = $this->db->query("select Escuela_procedencia_cct_escuela_procedencia,tipo_escuela_procedencia,nombre_escuela_procedencia,tipo_subsistema from Estudiante_Escuela_procedencia as ee inner join Escuela_procedencia as ep on ee.Escuela_procedencia_cct_escuela_procedencia=ep.cct_escuela_procedencia where Estudiante_no_control='".$no_control."' order by tipo_escuela_procedencia desc")->result();
 
    $datos['tutor'] =$this->db->query("SELECT * from Estudiante_Tutor as et inner join Tutor as t on et.Tutor_id_tutor=t.id_tutor  where Estudiante_no_control='".$no_control."'")->result();
 

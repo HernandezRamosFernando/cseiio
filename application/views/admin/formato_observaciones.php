@@ -14,7 +14,7 @@
     <div class="card">
       <div class="card-body">
 
-<form id="formato_observacion" action="<?php echo base_url();?>index.php/c_estudiante/generar_formato_observaciones_expedientes" method="post" target="_blank">
+<form id="formato_observacion" action="<?php echo base_url();?>index.php/c_estudiante/generar_formato_observaciones_expedientes" method="post">
 
             <div class="form-group">
               <div class="row">
@@ -62,6 +62,35 @@
 
 
 <script>
+var form = document.getElementById("formato_observacion");
+  form.onsubmit = function (e) {
+    e.preventDefault();
+    var formdata = new FormData(form);   
+          var observacion = new XMLHttpRequest();
+          observacion.open('POST', '<?php echo base_url();?>index.php/c_estudiante/generar_formato_observaciones_expedientes', true);
+          observacion.responseType = "arraybuffer";
+          observacion.onloadstart = function () {
+            $('#div_carga').show();
+          }
+          observacion.error = function () {
+            console.log("error de conexion");
+          }
 
+          observacion.onload = function () {
+            $('#div_carga').hide();
+            //console.log(carta_compromiso.responseText);
+            if (this.status === 200) {
+              var blob = new Blob([observacion.response], { type: "application/pdf" });
+              var objectUrl = URL.createObjectURL(blob);
+              window.open(objectUrl, "_blank");
+
+            }
+
+          };
+
+          observacion.send(formdata);
+
+        }
+ 
  
 </script>

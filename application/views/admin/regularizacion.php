@@ -17,7 +17,7 @@
         <div class="row">
           <div class="col-md-8">
             <label class="form-group has-float-label seltitulo">
-              <select class="form-control form-control-lg selcolor" id="plantel" name="plantel"
+              <select class="form-control form-control-lg selcolor" id="plantel" name="plantel" onchange="cargar_semestre()"
                 >
                 <option value="">Seleccione el plantel donde buscar la materia</option>
 
@@ -41,7 +41,7 @@
         <div class="row">
       <div class="col-md-4">
                 <label class="form-group has-float-label seltitulo">
-                  <select class="form-control form-control-lg selcolor" required="required" id="semestre_reg" onchange="cargarmaterias();"
+                  <select class="form-control form-control-lg selcolor" required="required" id="semestre_reg" onchange="cargarmaterias()"
                     name="semestre_reg" >
                     <option value="">Seleccione un semestre</option>
                     
@@ -174,10 +174,11 @@
     } else {
       var xhr = new XMLHttpRequest();
       var plantel = document.getElementById("plantel").value;
+      var semestre = document.getElementById("semestre_reg").value;
       console.log(plantel);
 
       materias.innerHTML = "";
-      xhr.open('GET', '<?php echo base_url();?>index.php/c_regularizacion/materias_con_reprobados_html?plantel=' + plantel, true);
+      xhr.open('GET', '<?php echo base_url();?>index.php/c_regularizacion/materias_con_reprobados_html?plantel=' + plantel+'&semestre='+semestre, true);
       xhr.onloadstart = function () {
         $('#div_carga').show();
       }
@@ -198,6 +199,33 @@
       };
       xhr.send(null);
     }
+  }
+
+
+  function cargar_semestre(){
+    var plantel = document.getElementById("plantel").value;
+    var xhr = new XMLHttpRequest();
+        xhr.open('GET', '<?php echo base_url();?>index.php/c_regularizacion/semetres_con_reprobados_html?plantel=' + plantel, true);
+        xhr.onloadstart = function () {
+        $('#div_carga').show();
+      }
+      xhr.error = function () {
+        console.log("error de conexion");
+      }
+      xhr.onload = function () {
+        $('#div_carga').hide();
+          console.log(xhr.response);
+
+          if(xhr.response != ""){
+            document.getElementById("semestre_reg").innerHTML=xhr.response;
+          }
+          else{
+            console.log("no hay regularizaciones");
+          }
+          
+        };
+
+        xhr.send(null);
   }
 
   function buscar() {

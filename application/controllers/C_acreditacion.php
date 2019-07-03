@@ -77,8 +77,10 @@ public function agregar_estudiantes_grupo(){
 public function get_estudiantes_plantel_semestre(){
     $plantel = $this->input->get('plantel');
     $semestre = $this->input->get('semestre');
-
-    echo json_encode($this->M_acreditacion->get_estudiantes_plantel_semestre($plantel,$semestre));
+    $id_componente = $this->input->get('componente');
+    $id_componente = explode("-", $id_componente)[0];
+    //echo $id_componente;
+    echo json_encode($this->M_acreditacion->get_estudiantes_plantel_semestre($plantel,$semestre,$id_componente));
 }
 
 

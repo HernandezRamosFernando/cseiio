@@ -274,7 +274,7 @@ $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
 $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 
 // set margins
-$pdf->SetMargins(20, PDF_MARGIN_TOP,19);
+$pdf->SetMargins(20, 5,19);
 $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
 $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 
@@ -297,6 +297,34 @@ $pdf->SetFont('helvetica','', 10);
 
 // add a page
 $pdf->AddPage();
+
+/////CONVIERTE LAS CALIFICACIONES A LETRAS
+function extraescolar($calificacion){
+    $regreso = "";
+    switch(intval($calificacion)){
+        case 10:
+        $regreso = "E";
+        break;
+
+        case 9:
+        $regreso = "MB";
+        break;
+
+        case 8:
+        $regreso = "B";
+        break;
+
+        case 7:
+        $regreso = "R";
+        break;
+
+        case 6:
+        $regreso = "S";
+        break;
+    }
+
+    return $regreso;
+}
 
 
 //carga los datos de los renglones de la tabla
@@ -339,12 +367,12 @@ else{
 
 
 $html_pos_materias='
-<td style="width:40px;background-color:#f8facb">SITUACION DEL ALUMNO AL FIN DEL SEMESTRE</td>
-<td style="width:25px;background-color:#f8facb">NUMERO ADEUDOS AL FIN DEL SEMESTRE</td>
-<td style="width:70px;background-color:#f8facb">CLAVE U.C. DE ADEUDOS FIN DE SEMESTRE</td>
-<td style="width:25px;background-color:#f8facb">NUMERO ADEUDOS DE TODOS LOS SEMESTRES CURSADOS</td>
-<td style="width:70px;background-color:#f8facb">CLAVE U.C. DE ADEUDOS DE TODOS LOS MODULOS CURSADOS</td>
-<td style="width:40px;background-color:#f8facb">SITUACION DEL ALUMNO DESPUES DEL PERIODO DE REGULARIZACION</td>
+<td style="width:40px;background-color:#f8facb">SIT. ALUM. FIN DEL MODULO</td>
+<td style="width:25px;background-color:#f8facb">NUMERO ADEUDOS AL FIN DEL MODULO(todos los modulos cursados y actual) antes de periodo de regularizacion</td>
+<td style="width:70px;background-color:#f8facb">CLAVE U.C. DE ADEUDOS FIN DEL MODULO(todos los modulos cursados y actual antes de periodo de regularizacion)</td>
+<td style="width:25px;background-color:#f8facb">NUMERO ADEUDOS DE TODOS LOS MODULOS CURSADOS (despues del periodo de regularizacion)</td>
+<td style="width:70px;background-color:#f8facb">CLAVE U.C. DE ADEUDOS EN TODOS LOS MODULOS CURSADOS (despues del periodo de regularizacion)</td>
+<td style="width:40px;background-color:#f8facb">SIT. ALUM. DESPUES DEL PERIODO DE REGULARIZACION</td>
 <td style="width:40px;background-color:#f8facb">FECHA DE BAJA</td>
 <td style="width:40px;background-color:#f8facb">FECHA DE NACIMIENTO</td>
 ';
@@ -369,12 +397,40 @@ $dias = $fecha_actual->diff($fecha_nacimiento);
 $edad = intval(($dias->days)/365);
 //////
 $renglon.='<td>'.$edad.'</td>';//edad estudiante
-$renglon.='<td>'.$datos_friae_estudiante[$contador][0]->tipo_ingreso_inscripcion.'</td>';//tipo ingreso estudiante
-$renglon.='<td>'.$datos_friae_estudiante[$contador][0]->estatus_inscripcion.'</td>';//tipo ingreso estudiante
-$renglon.='<td>'.$datos_friae_estudiante[$contador][0]->numero_adeudos_inscripcion.'</td>';//tipo ingreso estudiante
-$renglon.='<td>'.$datos_friae_estudiante[$contador][0]->id_materia_adeudos_inscripcion.'</td>';//tipo ingreso estudiante
-$renglon.='<td>'.$datos_friae_estudiante[$contador][0]->adeudos_primera_regularizacion.'</td>';//tipo ingreso estudiante
-$renglon.='<td>'.$datos_friae_estudiante[$contador][0]->id_materia_adeudos_primera_regularizacion.'</td>';//tipo ingreso estudiante
+
+if($datos_friae->semestre!='1'){
+    if($datos_friae_estudiante[$contador][0]->tipo_ingreso_inscripcion=="INCORPORADO"){
+        $renglon.='<td>I</td>';//tipo ingreso estudiante
+    }
+
+    else if($datos_friae_estudiante[$contador][0]->tipo_ingreso_inscripcion=="TRASLADO"){
+        $renglon.='<td>T</td>';//tipo ingreso estudiante
+    }
+
+    else if($datos_friae_estudiante[$contador][0]->tipo_ingreso_inscripcion=="PORTABILIDAD"){
+        $renglon.='<td>P.E.</td>';//tipo ingreso estudiante
+    }
+
+    else if($datos_friae_estudiante[$contador][0]->tipo_ingreso_inscripcion=="REPETIDOR"){
+        $renglon.='<td>R</td>';//tipo ingreso estudiante
+    }
+
+    else if($datos_friae_estudiante[$contador][0]->tipo_ingreso_inscripcion=="REINGRESO"){
+        $renglon.='<td></td>';//tipo ingreso estudiante
+    }
+    $renglon.='<td>'.$datos_friae_estudiante[$contador][0]->estatus_inscripcion.'</td>';//tipo ingreso estudiante
+    $renglon.='<td>'.$datos_friae_estudiante[$contador][0]->numero_adeudos_inscripcion.'</td>';//tipo ingreso estudiante
+    $renglon.='<td>'.$datos_friae_estudiante[$contador][0]->id_materia_adeudos_inscripcion.'</td>';//tipo ingreso estudiante
+    $renglon.='<td>'.$datos_friae_estudiante[$contador][0]->adeudos_primera_regularizacion.'</td>';//tipo ingreso estudiante
+    $renglon.='<td>'.$datos_friae_estudiante[$contador][0]->id_materia_adeudos_primera_regularizacion.'</td>';//tipo ingreso estudiante
+}
+
+else{
+    $renglon.='<td>'.($datos_friae_estudiante[$contador][0]->tipo_ingreso_inscripcion=="REPETIDOR"?"R":"").'</td>';//tipo ingreso estudiante
+}
+
+
+
 ///------------------aqui se van a cargar las materias del estudiante
 
 foreach($materias_estudiantes[$contador] as $materia){
@@ -382,23 +438,89 @@ foreach($materias_estudiantes[$contador] as $materia){
         $promedio_modular = (intval($materia->primer_parcial)+intval($materia->segundo_parcial)+intval($materia->tercer_parcial))/3;
         $promedio_final = (intval($materia->examen_final)+$promedio_modular)/2;
         $promedio_final = round($promedio_final,0,PHP_ROUND_HALF_UP);
-        $renglon.='<td>'.$promedio_final.'</td>';
+        if($materia->tipo=='EXTRAESCOLAR'){
+            $renglon.='<td>'.extraescolar($promedio_final).'</td>';
+        }
+
+        else{
+            $renglon.='<td>'.$promedio_final.'</td>';
+        }
+        
     }
 
     else{
-        $renglon.='<td>'.$materia->calificacion_final.'</td>';
+        if($materia->tipo=='EXTRAESCOLAR'){
+            $renglon.='<td>'.extraescolar($materia->calificacion_final).'</td>';
+        }
+
+        else{
+            $renglon.='<td>'.$materia->calificacion_final.'</td>';
+        }
     }
 
 }
 
 
-$renglon.='<td>'.$datos_friae_estudiante[$contador][0]->tipo_ingreso_fin_semestre.'</td>';//tipo ingreso estudiante
+if($datos_friae_estudiante[$contador][0]->tipo_ingreso_fin_semestre=='REINGRESO'){
+    if(intval($datos_friae_estudiante[$contador][0]->adeudos_fin_semestre)>0){
+        $renglon.='<td>2</td>';//tipo ingreso estudiante
+    }
+
+    else{
+        $renglon.='<td>1</td>';//tipo ingreso estudiante
+    }
+    
+}
+
+else if($datos_friae_estudiante[$contador][0]->tipo_ingreso_fin_semestre=='BAJA'){
+    $renglon.='<td>3</td>';//tipo ingreso estudiante
+}
+
+else if($datos_friae_estudiante[$contador][0]->tipo_ingreso_fin_semestre=='REPROBADO'){
+    $renglon.='<td>4</td>';//tipo ingreso estudiante
+}
+
+else if($datos_friae_estudiante[$contador][0]->tipo_ingreso_fin_semestre=='SIN DERECHO'){
+    $renglon.='<td></td>';//tipo ingreso estudiante
+}
+
+
+
+
+
 $renglon.='<td>'.$datos_friae_estudiante[$contador][0]->adeudos_fin_semestre.'</td>';//tipo ingreso estudiante
 $renglon.='<td>'.$datos_friae_estudiante[$contador][0]->id_materia_adeudos_fin_semestre.'</td>';//tipo ingreso estudiante
 
 $renglon.='<td>'.$datos_friae_estudiante[$contador][0]->adeudos_segunda_regularizacion.'</td>';//tipo ingreso estudiante
 $renglon.='<td>'.$datos_friae_estudiante[$contador][0]->id_materia_adeudos_segunda_regularizacion.'</td>';//tipo ingreso estudiante
-$renglon.='<td>'.$datos_friae_estudiante[$contador][0]->tipo_ingreso_despues_regularizacion.'</td>';//tipo ingreso estudiante
+
+if($datos_friae_estudiante[$contador][0]->tipo_ingreso_despues_regularizacion=="REINGRESO"){
+
+    if(intval($datos_friae_estudiante[$contador][0]->adeudos_segunda_regularizacion)>0){
+        $renglon.='<td>2</td>';//tipo ingreso estudiante
+    }
+    else{
+        $renglon.='<td>1</td>';//tipo ingreso estudiante
+    }
+    
+}
+
+else if($datos_friae_estudiante[$contador][0]->tipo_ingreso_despues_regularizacion=="SIN DERECHO"){
+    $renglon.='<td>S/D</td>';//tipo ingreso estudiante
+}
+
+else if($datos_friae_estudiante[$contador][0]->tipo_ingreso_despues_regularizacion=="REPROBADO"){
+    $renglon.='<td></td>';//tipo ingreso estudiante
+}
+
+
+else if($datos_friae_estudiante[$contador][0]->tipo_ingreso_despues_regularizacion=="BAJA"){
+    $renglon.='<td></td>';//tipo ingreso estudiante
+}
+
+
+
+
 $renglon.='<td>'.$datos_friae_estudiante[$contador][0]->baja.'</td>';//tipo ingreso estudiante
 $renglon.='<td>'.$estudiante->fecha_nacimiento.'</td>';//matricula estudiante
 
@@ -407,6 +529,64 @@ $renglon.='<td>'.$estudiante->fecha_nacimiento.'</td>';//matricula estudiante
 $renglon.='</tr>';
 $registros_html.=$renglon;
 $contador+=1;
+}
+
+/////////////////////////////////////
+
+function primer_semestre($semestre,$materias_estudiantes,$html_pos_materias){        
+
+    if($semestre=='1'){
+
+        return '<tr style="font-size:4 pt;text-align:center">
+<td style="width:20px;background-color:#f8facb"><br><br><br><br><br>N/P</td>
+<td style="width:35px;background-color:#f8facb"><br><br><br><br><br>MATRICULA</td>
+<td style="width:75px;background-color:#f8facb"><br><br><br><br><br>CURP</td>
+<td style="width:20px;background-color:#f8facb"><br><br><br><br><br>SEXO</td>
+<td style="width:70px;background-color:#f8facb"><br><br><br><br><br>PRIMER APELLIDO</td>
+<td style="width:70px;background-color:#f8facb"><br><br><br><br><br>SEGUNDO APELLIDO</td>
+<td style="width:85px;background-color:#f8facb"><br><br><br><br><br>NOMBRE(S)</td>
+<td style="width:25px;background-color:#f8facb"><br><br><br><br>EDAD ACTUAL</td>
+<td style="width:50px;background-color:#f8facb"><br><br><br><br><br>SITUACION ALUMNO</td>
+'.celdas_materias($materias_estudiantes).$html_pos_materias.'
+</tr>';
+
+    }
+
+    else{
+        
+        
+        $regreso = '<tr style="font-size:4 pt;text-align:center">
+        <td style="width:20px;background-color:#f8facb"><br><br><br><br><br>N/P</td>
+        <td style="width:35px;background-color:#f8facb"><br><br><br><br><br>MATRICULA</td>
+        <td style="width:75px;background-color:#f8facb"><br><br><br><br><br>CURP</td>
+        <td style="width:20px;background-color:#f8facb"><br><br><br><br><br>SEXO</td>
+        <td style="width:70px;background-color:#f8facb"><br><br><br><br><br>PRIMER APELLIDO</td>
+        <td style="width:70px;background-color:#f8facb"><br><br><br><br><br>SEGUNDO APELLIDO</td>
+        <td style="width:85px;background-color:#f8facb"><br><br><br><br><br>NOMBRE(S)</td>
+        <td style="width:25px;background-color:#f8facb"><br><br><br><br>EDAD ACTUAL</td>
+        <td style="width:50px;background-color:#f8facb"><br><br><br><br><br>TIPO INGRESO</td>
+        <td style="width:40px;background-color:#f8facb"><br><br><br><br>ESTATUS INICIO DEL SEMESTRE</td>
+        <td style="width:25px;background-color:#f8facb"><br>NUMERO DE ADEUDOS INICIO DEL SEMESTRE</td>
+        <td style="width:70px;background-color:#f8facb"><br><br><br><br>CLAVE U.C. ADEUDOS SEMESTRES ANTERIORES</td>';
+
+        if($semestre=="1" || $semestre=="3" || $semestre=="5"){
+            $regreso.='<td style="width:25px;background-color:#f8facb">NUMERO DE ADEUDOS DESPUES DE REGULARIZACION DE OCTUBRE</td>
+            <td style="width:70px;background-color:#f8facb"><br><br><br>CLAVE U.C. ADEUDOS DESPUES DE LA REGULARIZACION DE OCTUBRE</td>'.celdas_materias($materias_estudiantes).$html_pos_materias.'
+            </tr>';
+            
+        }
+
+        else{
+            $regreso.='<td style="width:25px;background-color:#f8facb">NUMERO DE ADEUDOS DESPUES DE REGULARIZACION DE MAYO</td>
+            <td style="width:70px;background-color:#f8facb"><br><br><br>CLAVE U.C. ADEUDOS DESPUES DE LA REGULARIZACION DE MAYO</td>'.celdas_materias($materias_estudiantes).$html_pos_materias.'
+            </tr>';
+        }
+
+        return $regreso;
+
+     
+    }
+
 }
 
 //carga los datos de encabezados
@@ -441,71 +621,13 @@ $pre_materias ='
 </table>
 
 <table border="1">
-<tbody>
-<tr style="font-size:4 pt;text-align:center">
-<td style="width:20px;background-color:#f8facb"><br><br><br><br><br>N/P</td>
-<td style="width:35px;background-color:#f8facb"><br><br><br><br><br>MATRICULA</td>
-<td style="width:75px;background-color:#f8facb"><br><br><br><br><br>CURP</td>
-<td style="width:20px;background-color:#f8facb"><br><br><br><br><br>SEXO</td>
-<td style="width:70px;background-color:#f8facb"><br><br><br><br><br>PRIMER APELLIDO</td>
-<td style="width:70px;background-color:#f8facb"><br><br><br><br><br>SEGUNDO APELLIDO</td>
-<td style="width:85px;background-color:#f8facb"><br><br><br><br><br>NOMBRE(S)</td>
-<td style="width:25px;background-color:#f8facb"><br><br><br><br>EDAD ACTUAL</td>
-<td style="width:50px;background-color:#f8facb"><br><br><br><br><br>TIPO INGRESO</td>
-<td style="width:40px;background-color:#f8facb"><br><br><br><br>ESTATUS INICIO DEL SEMESTRE</td>
-<td style="width:25px;background-color:#f8facb"><br>NUMERO DE ADEUDOS INICIO DEL SEMESTRE</td>
-<td style="width:70px;background-color:#f8facb"><br><br><br><br>CLAVE U.C. ADEUDOS SEMESTRES ANTERIORES</td>
-<td style="width:25px;background-color:#f8facb">NUMERO DE ADEUDOS DESPUES DE REGULARIZACION DE MAYO</td>
-<td style="width:70px;background-color:#f8facb"><br><br><br>CLAVE U.C. ADEUDOS DESPUES DE LA REGULARIZACION DE MAYO</td>'.celdas_materias($materias_estudiantes).$html_pos_materias.'
-</tr>'.$registros_html.$filas_faltantes_html.'
+<tbody>'.primer_semestre($datos_friae->semestre,$materias_estudiantes,$html_pos_materias).$registros_html.'
 </tbody>
 </table>
 ';
 
 
-function primer_semestre($semestre){        
 
-    if(semestre=='1'){
-
-        return '<tr style="font-size:4 pt;text-align:center">
-<td style="width:20px;background-color:#f8facb"><br><br><br><br><br>N/P</td>
-<td style="width:35px;background-color:#f8facb"><br><br><br><br><br>MATRICULA</td>
-<td style="width:75px;background-color:#f8facb"><br><br><br><br><br>CURP</td>
-<td style="width:20px;background-color:#f8facb"><br><br><br><br><br>SEXO</td>
-<td style="width:70px;background-color:#f8facb"><br><br><br><br><br>PRIMER APELLIDO</td>
-<td style="width:70px;background-color:#f8facb"><br><br><br><br><br>SEGUNDO APELLIDO</td>
-<td style="width:85px;background-color:#f8facb"><br><br><br><br><br>NOMBRE(S)</td>
-<td style="width:25px;background-color:#f8facb"><br><br><br><br>EDAD ACTUAL</td>
-<td style="width:50px;background-color:#f8facb"><br><br><br><br><br>TIPO INGRESO</td>
-<td style="width:40px;background-color:#f8facb"><br><br><br><br>ESTATUS INICIO DEL SEMESTRE</td>
-<td style="width:25px;background-color:#f8facb"><br>NUMERO DE ADEUDOS INICIO DEL SEMESTRE</td>
-<td style="width:70px;background-color:#f8facb"><br><br><br><br>CLAVE U.C. ADEUDOS SEMESTRES ANTERIORES</td>
-<td style="width:25px;background-color:#f8facb">NUMERO DE ADEUDOS DESPUES DE REGULARIZACION DE MAYO</td>
-<td style="width:70px;background-color:#f8facb"><br><br><br>CLAVE U.C. ADEUDOS DESPUES DE LA REGULARIZACION DE MAYO</td>'.celdas_materias($materias_estudiantes).$html_pos_materias.'
-</tr>';
-
-    }
-
-    else{
-        return '<tr style="font-size:4 pt;text-align:center">
-        <td style="width:20px;background-color:#f8facb"><br><br><br><br><br>N/P</td>
-        <td style="width:35px;background-color:#f8facb"><br><br><br><br><br>MATRICULA</td>
-        <td style="width:75px;background-color:#f8facb"><br><br><br><br><br>CURP</td>
-        <td style="width:20px;background-color:#f8facb"><br><br><br><br><br>SEXO</td>
-        <td style="width:70px;background-color:#f8facb"><br><br><br><br><br>PRIMER APELLIDO</td>
-        <td style="width:70px;background-color:#f8facb"><br><br><br><br><br>SEGUNDO APELLIDO</td>
-        <td style="width:85px;background-color:#f8facb"><br><br><br><br><br>NOMBRE(S)</td>
-        <td style="width:25px;background-color:#f8facb"><br><br><br><br>EDAD ACTUAL</td>
-        <td style="width:50px;background-color:#f8facb"><br><br><br><br><br>TIPO INGRESO</td>
-        <td style="width:40px;background-color:#f8facb"><br><br><br><br>ESTATUS INICIO DEL SEMESTRE</td>
-        <td style="width:25px;background-color:#f8facb"><br>NUMERO DE ADEUDOS INICIO DEL SEMESTRE</td>
-        <td style="width:70px;background-color:#f8facb"><br><br><br><br>CLAVE U.C. ADEUDOS SEMESTRES ANTERIORES</td>
-        <td style="width:25px;background-color:#f8facb">NUMERO DE ADEUDOS DESPUES DE REGULARIZACION DE MAYO</td>
-        <td style="width:70px;background-color:#f8facb"><br><br><br>CLAVE U.C. ADEUDOS DESPUES DE LA REGULARIZACION DE MAYO</td>'.celdas_materias($materias_estudiantes).$html_pos_materias.'
-        </tr>';
-    }
-
-}
 
 
 

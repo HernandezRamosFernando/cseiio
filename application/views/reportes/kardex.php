@@ -195,6 +195,33 @@ $pdf->writeHTMLCell($w = 145, $h = 5, $x = '50', $y = '85', '<p></p>', $border =
 $pdf->writeHTMLCell($w = 145, $h = 5, $x = '50', $y = '90', '<p></p>', $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
 ///////////////////encabezosooo---------------------------------------------
 
+function extraescolar($calificacion){
+    $regreso = "";
+    switch(intval($calificacion)){
+        case 10:
+        $regreso = "E";
+        break;
+
+        case 9:
+        $regreso = "MB";
+        break;
+
+        case 8:
+        $regreso = "B";
+        break;
+
+        case 7:
+        $regreso = "R";
+        break;
+
+        case 6:
+        $regreso = "S";
+        break;
+    }
+
+    return $regreso;
+}
+
 function renglones($materias,$regularizaciones_aprobadas){
     $renglones = '';
     foreach($materias as $materia){//materias de grupo
@@ -217,10 +244,17 @@ function renglones($materias,$regularizaciones_aprobadas){
    
    
        <td style="width:40px;text-align:center">'.($promedio_modular=="0"?"/":$promedio_modular).'</td>
-       <td style="width:40px;text-align:center">'.($materia->examen_final=="0"?"/":$materia->examen_final).'</td>
-       <td style="width:40px;text-align:center">'.($materia->calificacion_final).'</td>
+       <td style="width:40px;text-align:center">'.($materia->examen_final=="0"?"/":$materia->examen_final).'</td>';
+       if($materia->tipo=="EXTRAESCOLAR"){
+        $renglones.='<td style="width:40px;text-align:center">'.extraescolar($materia->calificacion_final).'</td>';
+       }
+
+       else{
+        $renglones.='<td style="width:40px;text-align:center">'.($materia->calificacion_final).'</td>';
+       }
+       
    
-       <td style="width:87px;text-align:center">'.materia_regularizada_fecha($materia->id_materia,$regularizaciones_aprobadas).'</td>
+       $renglones.='<td style="width:87px;text-align:center">'.materia_regularizada_fecha($materia->id_materia,$regularizaciones_aprobadas).'</td>
        <td style="width:40px;text-align:center">'.materia_regularizada_calificacion($materia->id_materia,$regularizaciones_aprobadas).'</td>
    
        </tr>
@@ -336,9 +370,103 @@ function crear_tabla_materias_semestre($grupos,$regularizaciones_aprobadas){
     return $tablas;
 }
 
-//tablas de datos de materias de estudiante
 
-$pdf->writeHTML(crear_tabla_materias_semestre($materias_grupo,$regularizaciones_aprobadas), true, 0, true, true);
+function renglones_materias_revalidadas($materias,$bachillerato_procedencia,$datos_resolucion){
+    $renglones = '';
+    $contador=0;
+    foreach($materias as $materia){
+        $renglones.='<tr>
+        <td style="width:50px;text-align:center">'.$materia->clave.'</td>
+        <td style="width:200px">'.$materia->unidad_contenido.'</td>';
+
+        if($contador==0){
+            $renglones .= '<td style="width:200px;text-align:left;font-size:6pt" rowspan="'.sizeof($materias).'">
+            <p>NOMBRE DE LA INSTITUCION:'.$bachillerato_procedencia->nombre_escuela_procedencia.'</p>
+            <p>CCT:'.$bachillerato_procedencia->cct_escuela_procedencia.'</p>
+            <p>'.$bachillerato_procedencia->lugar_escuela.'</p>
+            <p>CICLO ESCOLAR:</p>
+            <p>FOLIO DE EQUIVALENCIA:'.$datos_resolucion->folio.'</p>
+            <p>FECHA DE EXPEDICION DE EQUIVALENCIA:'.$datos_resolucion->fecha_expedicion.'</p>
+            </td>
+            <td style="width:40px;text-align:center" rowspan="'.sizeof($materias).'"><br><br><br><br><br><br><br>'.$datos_resolucion->promedio_acreditado.'</td>';
+
+        }
+
+        $renglones.='
+    
+        <td style="width:87px;text-align:center"></td>
+        <td style="width:40px;text-align:center"></td>
+    
+        </tr>';
+
+        $contador+=1;
+    }
+    
+       return $renglones;
+}
+
+
+function tabla_portabilidad($materias_semestre,$bachillerato_procedencia,$datos_resolucion){
+    $tabla = '';
+
+    foreach($materias_semestre as $semestre){
+        $tabla .= '<table border="1" style="font-size:7pt">
+        <tbody>
+        <tr>
+        <td style="width:50px;background-color:#cfcfcf;text-align:center" rowspan="3"> <br><br> CLAVE</td>
+        <td style="width:200px;background-color:#cfcfcf">CICLO ESCOLAR:</td>
+        <td style="width:120px;text-align:center;background-color:#cfcfcf" colspan="3">PARCIALES</td>
+        <td style="width:40px;text-align:center;background-color:#cfcfcf" rowspan="3">PROM. MOD.</td>
+        <td style="width:40px;text-align:center;background-color:#cfcfcf" rowspan="3">EXAM. MOD.</td>
+        <td style="width:40px;text-align:center;background-color:#cfcfcf" rowspan="3">CALIF. FINAL</td>
+        <td style="width:127px;text-align:center;background-color:#cfcfcf" colspan="2">REGULARIZACION</td>
+    
+        </tr>
+    
+        <tr>
+      
+        <td style="width:200px;background-color:#cfcfcf">'.nombre_modulo($semestre[0]->semestre).' MODULO</td>
+        <td style="width:40px;text-align:center;background-color:#cfcfcf" rowspan="2">1ER</td>
+        <td style="width:40px;text-align:center;background-color:#cfcfcf" rowspan="2">2DO</td>
+        <td style="width:40px;text-align:center;background-color:#cfcfcf" rowspan="2">3ER</td>
+    
+    
+        <td style="width:87px;background-color:#cfcfcf;text-align:center" rowspan="2">FECHA</td>
+        <td style="width:40px;background-color:#cfcfcf;text-align:center" rowspan="2">CALIF</td>
+        </tr>
+    
+        <tr>
+      
+        <td style="width:200px;background-color:#cfcfcf">UNIDAD DE CONTENIDO</td>
+    
+    
+        </tr>
+        
+        '.renglones_materias_revalidadas($semestre,$bachillerato_procedencia,$datos_resolucion).'
+        
+        </tbody>
+        </table>
+        <p></p>
+        ';
+    }
+    
+
+    return $tabla;
+}
+
+
+
+
+//tablas de datos de materias de estudiante
+if($portabilidad=="no"){
+    $pdf->writeHTML(crear_tabla_materias_semestre($materias_grupo,$regularizaciones_aprobadas), true, 0, true, true);
+}
+
+else{
+    $pdf->writeHTML(tabla_portabilidad($materias_revalidadas,$bachillerato_procedencia,$datos_resolucion), true, 0, true, true);
+    $pdf->writeHTML(crear_tabla_materias_semestre($materias_grupo,$regularizaciones_aprobadas), true, 0, true, true);
+}
+
 
 
 //Close and output PDF document

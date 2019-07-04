@@ -206,6 +206,7 @@
     var plantel = document.getElementById("plantel").value;
     var xhr = new XMLHttpRequest();
         xhr.open('GET', '<?php echo base_url();?>index.php/c_regularizacion/semetres_con_reprobados_html?plantel=' + plantel, true);
+
         xhr.onloadstart = function () {
         $('#div_carga').show();
       }
@@ -214,15 +215,12 @@
       }
       xhr.onload = function () {
         $('#div_carga').hide();
-          console.log(xhr.response);
-
-          if(xhr.response != ""){
+          if(xhr.response.trim() != ""){
             document.getElementById("semestre_reg").innerHTML=xhr.response;
           }
           else{
             console.log("no hay regularizaciones");
           }
-          
         };
 
         xhr.send(null);

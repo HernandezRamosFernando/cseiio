@@ -42,7 +42,7 @@ class M_notificacion extends CI_Model {
 
 
     function notificaciones_plantel($plantel){
-        return $this->db->query("select * from Notificacion where plantel = '".$plantel."'")->result();
+        return $this->db->query("select * from Notificacion where plantel = '".$plantel."' and curdate()<=fecha_fin")->result();
     }
 
 

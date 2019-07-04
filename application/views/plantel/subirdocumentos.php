@@ -12,16 +12,13 @@
 
         <div class="card">
           <div class="card-body">
-
-
-
             <div class="form-group">
 
               <div class="row">
                 <div class="col-md-4">
                   <div class="form-label-group">
                     <input type="text" pattern="[A-Za-zñ]+" title="Introduzca solo letras" class="form-control"
-                      id="aspirante_curp_busqueda" placeholder="CURP">
+                      id="aspirante_curp_busqueda" placeholder="CURP" style="color: #237087">
                     <label for="aspirante_curp_busqueda">CURP</label>
                   </div>
                 </div>
@@ -36,18 +33,18 @@
 
 
                 <div class="col-md-8">
-                  <label class="form-group has-float-label">
-                    <select class="form-control form-control-lg" required="required" id="aspirante_plantel_busqueda"
+                  <label class="form-group has-float-label seltitulo">
+                    <select class="form-control form-control-lg selcolor" required="required" id="aspirante_plantel_busqueda"
                       name="aspirante_plantel">
 
                       <?php
               foreach ($planteles as $plantel)
            {
-            echo '<option value="'.$plantel->cct.'">'.$plantel->nombre_plantel.' ----- CCT: '.$plantel->cct.'</option>';
+            echo '<option value="'.$plantel->cct_plantel.'">'.$plantel->nombre_plantel.' ----- CCT: '.$plantel->cct_plantel.'</option>';
           }
           ?>
-
                     </select>
+                    <span>Plantel</span>
                   </label>
 
                 </div>
@@ -61,7 +58,7 @@
             </div>
           </div>
         </div>
-        <div class="card" style="overflow:scroll">
+        <div class="card" style="overflow:scroll; display:none" id="busqueda_oculto"">
           <div class="card-body">
             <table class="table table-hover" id="tabla_completa" style="width: 100%; overflow:scroll">
               <caption>Lista de todos los alumnos</caption>
@@ -71,6 +68,7 @@
                 <th scope="col" class="col-md-1">Curp</th>
                 <th scope="col" class="col-md-1">N° control</th>
                 <th scope="col" class="col-md-1">Tipo de ingreso</th>
+                <th scope="col" class="col-md-1">Plantel CCT</th>
                 <th scope="col" class="col-md-1">Estatus de documentación</th>
                 <th scope="col" class="col-md-1">Control de documentación</th>
               </tr>
@@ -153,7 +151,7 @@ https://www.youtube.com/results?search_query=+AJAX+File+Upload+with+Progress
         </div>
         <div class="modal-footer">
 
-          <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="refrescar_tabla()">Cerrar y guardar</button>
+          <button type="button" class="btn btn-success" data-dismiss="modal" onclick="refrescar_tabla()">Cerrar y guardar</button>
         </div>
       </div>
     </div>
@@ -178,60 +176,38 @@ https://www.youtube.com/results?search_query=+AJAX+File+Upload+with+Progress
       }
 
     }
-    function formato_tabla() {
-      $('#tabla_completa').DataTable({
-        //"order": [[ 0, 'desc' ]],
-        "language": {
-          "sProcessing": "Procesando...",
-          "sLengthMenu": "Mostrar _MENU_ registros",
-          "sZeroRecords": "No se encontraron resultados",
-          "sEmptyTable": "Ningún dato disponible en esta tabla",
-          "sInfo": "Mostrando del _START_ al _END_ de un total de _TOTAL_ ",
-          "sInfoEmpty": "Mostrando del 0 al 0 de un total de 0 ",
-          "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-          "sInfoPostFix": "",
-          "sSearch": "Buscar específico:",
-          "sUrl": "",
-          "sInfoThousands": ",",
-          "sLoadingRecords": "Cargando...",
-          "oPaginate": {
-            "sFirst": "Primero",
-            "sLast": "Último",
-            "sNext": "Siguiente",
-            "sPrevious": "Anterior"
-          },
-          "oAria": {
-            "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
-            "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-          }
-        }
-      });
-    }
 
-
-function cargar_doc_aspirante(e, e2, e3, e4, e5) {
+    function cargar_doc_aspirante(e, e2, e3, e4, e5) {
       document.getElementById("tablaajax").innerHTML = "";
       //Asignar datos de documentación del aspirante.
 
 
         var xhr2 = new XMLHttpRequest();
-        xhr2.open('GET', '<?php echo base_url();?>index.php/c_aspirante/get_docxaspirante/' + e.value, true);
-
-        xhr2.onload = function () {
+        xhr2.open('GET', '<?php echo base_url();?>index.php/c_estudiante/get_docxaspirante/' + e.value, true);
+        xhr2.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      xhr2.error = function (){
+        console.log("error de conexion");
+      }
+      xhr2.onload = function(){
+        $('#div_carga').hide();
           console.log(JSON.parse(xhr2.response));
 
-          var aspirante = JSON.parse(xhr2.response);
+          var estudiante = JSON.parse(xhr2.response);
           //datos personales
-          document.getElementById("numcontrol").value = aspirante.numcontrol;
+          document.getElementById("numcontrol").value = estudiante.numcontrol;
           document.getElementById("nombrecompleto").innerHTML = e2 + " " + e3 + " " + e4;
           //documentos 1.
           var cont2 = 0;
 
-            aspirante.documentacion_aspirante.forEach(function (valor, indice2) {
+            estudiante.documentacion_aspirante.forEach(function (valor, indice2) {
               cont2++;
                var fila = '<tr>';
                estatusdoc='';
                estatusCheck='';
+               nombre_plantel='';
+               cct_plantel='';
                if (valor.entregado == true) {
                   estatusCheck='checked';
                   
@@ -242,21 +218,36 @@ function cargar_doc_aspirante(e, e2, e3, e4, e5) {
                     estatusdoc='disabled';
                 }
 
+
+                if(valor.id_plantel!==null){
+
+                      nombre_plantel=valor.nombre_plantel;
+                      cct_plantel=valor.id_plantel;
+                }
+
+
+                else{
+                	cct_plantel='';
+                }
+
+
+
+
           fila += '<td>';
-          fila += '<div class="form-check"><label class="form-check-label"><input type="checkbox" class="form-check-input" name="documento' + cont2 + '" id="documento' + cont2 + '" value="' + valor.id_documento + '"  onclick="activarFile(this,\'file' + cont2 + '\')" '+estatusCheck+'>' + valor.nombre_documento;
+          fila += '<div class="form-check"><label class="form-check-label"><input type="checkbox" class="form-check-input" name="documento' + cont2 + '" id="documento' + cont2 + '" value="' + valor.id_documento + '"  onclick="activarFile(this,\'file' + cont2 + '\')" '+estatusCheck+'>' + valor.nombre_documento+' '+'<span class="badge badge-success">'+nombre_plantel+'</span>';
           fila += '</label></div></td>';
 
           fila += '<td>';
-          fila += '<input type="file" name="file' + cont2 + '" id="file' + cont2 + '" onchange="validarArchivo(this,\'status' + cont2 + '\',\'status_error' + cont2 + '\',\'boton' + cont2 + '\')" '+estatusdoc+' required/><br><span class="badge badge-danger">* El archivo debe estar en formato PDF, JPG y PNG.</span><progress id="progressBar' + cont2 + '" value="0" max="100"></progress><span id="status' + cont2 + '" class="status_upload"></span><span id="status_error' + cont2 + '" class="status_upload_error"></span> <input  id="boton' + cont2 + '" class="btn btn-success" type="button" value="Cargar archivo" onclick="uploadFile(\'file' + cont2 + '\',\'documento' + cont2 + '\',\'progressBar' + cont2 + '\',\'status' + cont2 + '\',\'status_error' + cont2 + '\',\'enlace' + cont2 + '\',\'enlaceview' + cont2 + '\',\'view' + cont2 + '\')" disabled>';
+          fila += '<input type="file" name="file' + cont2 + '" id="file' + cont2 + '" onchange="validarArchivo(this,\'status' + cont2 + '\',\'status_error' + cont2 + '\',\'boton' + cont2 + '\')" '+estatusdoc+' required/><br><span class="badge badge-danger">* El archivo debe estar en formato PDF, JPG o PNG y pesar menos de 2 MB.</span><progress id="progressBar' + cont2 + '" value="0" max="100"></progress><span id="status' + cont2 + '" class="status_upload"></span><span id="status_error' + cont2 + '" class="status_upload_error"></span> <input  id="boton' + cont2 + '" class="btn btn-success" type="button" value="Cargar archivo" onclick="uploadFile(\'file' + cont2 + '\',\'documento' + cont2 + '\',\'progressBar' + cont2 + '\',\'status' + cont2 + '\',\'status_error' + cont2 + '\',\'enlace' + cont2 + '\',\'enlaceview' + cont2 + '\',\'view' + cont2 + '\',\''+cct_plantel+'\')" disabled>';
           fila += '</td>';
 
           if (valor.ruta !== null && valor.ruta.length!==0) {
               fila += '<td>';
-              fila += '<center><a class="btn btn-info" id="enlace'+cont2 +'" href="<?php echo base_url();?>index.php/C_subir_doc/descargar/'+ valor.Aspirante_no_control +'/'+valor.Documento_id_documento+'" >Descargar <i class="fa fa-download" aria-hidden="true"></i></a> </center>';
+              fila += '<center><a class="btn btn-info" id="enlace'+cont2 +'" href="<?php echo base_url();?>index.php/C_subir_doc/descargar/'+ valor.Estudiante_no_control +'/'+valor.id_documento+'/'+cct_plantel+'" >Descargar <i class="fa fa-download" aria-hidden="true"></i></a> </center>';
               fila += '</td>';
 
               fila += '<td>';
-               fila += '<center><div id="view'+ cont2+'"><a class="btn btn-info enlace1" id="enlaceview' + cont2 + '" onClick="ventanaSecundaria(\'<?php echo base_url();?>index.php/C_subir_doc/visualizar/' + valor.Aspirante_no_control + '/' +valor.Documento_id_documento + '\');">Visualizar <i class="fa fa-search" aria-hidden="true"></i></a></div> </center>';
+               fila += '<center><div id="view'+ cont2+'"><a class="btn btn-info enlace1" id="enlaceview' + cont2 + '" onClick="ventanaSecundaria(\'<?php echo base_url();?>index.php/C_subir_doc/visualizar/' + valor.Estudiante_no_control + '/' +valor.id_documento +'/'+cct_plantel+'\');">Visualizar <i class="fa fa-search" aria-hidden="true"></i></a></div> </center>';
               fila += '</td>';
           }
 
@@ -288,7 +279,7 @@ function cargar_doc_aspirante(e, e2, e3, e4, e5) {
 
 
     }
-    
+
 
 
     function borrar_formato_tabla() {
@@ -303,7 +294,9 @@ function cargar_doc_aspirante(e, e2, e3, e4, e5) {
 
 
 
-    function uploadFile(doc, iddoc, cargando, estado, estado_error, enlace, enlaceview, view) {
+
+
+    function uploadFile(doc, iddoc, cargando, estado, estado_error, enlace, enlaceview, view,plantel) {
       var file = elementoid(doc).files[0];
 
       console.log("archivo: " + doc);
@@ -313,6 +306,7 @@ function cargar_doc_aspirante(e, e2, e3, e4, e5) {
 
       formdata.append("iddocumento", elementoid(iddoc).value);
       formdata.append("numcontrol", elementoid('numcontrol').value);
+      formdata.append("cct_plantel",plantel);
       formdata.append("file1", file);
       var ajax = new XMLHttpRequest();
       ajax.upload.addEventListener("progress", function progressHandler(event) {
@@ -335,7 +329,14 @@ function cargar_doc_aspirante(e, e2, e3, e4, e5) {
       }, false);
       ajax.open("POST", "<?php echo base_url();?>index.php/C_subir_doc/subir_doc/");
       ajax.send(formdata);
-      ajax.onload = function () {
+      ajax.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      ajax.error = function (){
+        console.log("error de conexion");
+      }
+      ajax.onload = function(){
+        $('#div_carga').hide();
         console.log(JSON.parse(ajax.response));
 
         var datos = JSON.parse(ajax.response);
@@ -346,13 +347,18 @@ function cargar_doc_aspirante(e, e2, e3, e4, e5) {
 
         if (datos.status !== undefined) {
           var dx = document.getElementById(enlace);
+          console.log('enlace: '+enlace);
           dx.className = "btn btn-primary";
           elementoid(estado).innerHTML = datos.status;
+          id_plantel='';
+          if(datos.cct_plantel!== null){
+          	id_plantel=datos.cct_plantel;
+          }
           elementoid(enlace).innerHTML = 'Descargar <i class="fa fa-download" aria-hidden="true"></i>';
-          elementoid(enlace).href = "<?php echo base_url();?>index.php/C_subir_doc/descargar/" + datos.no_control + "/" + datos.iddocumento;
+          elementoid(enlace).href = "<?php echo base_url();?>index.php/C_subir_doc/descargar/" + datos.no_control + "/" + datos.iddocumento+"/"+id_plantel;
 
           elementoid(view).innerHTML = '<a class="btn btn-primary enlace1" id="' + enlaceview + '" onClick="ventanaSecundaria(\'<?php echo base_url();?>index.php/C_subir_doc/visualizar/'
-            + datos.no_control + '/' + datos.iddocumento + '\');">Visualizar <i class="fa fa-search" aria-hidden="true"></i></a>';
+            + datos.no_control + '/' + datos.iddocumento +'/'+id_plantel+ '\');">Visualizar <i class="fa fa-search" aria-hidden="true"></i></a>';
 
         }
 
@@ -402,7 +408,7 @@ function cargar_doc_aspirante(e, e2, e3, e4, e5) {
       window.open(URL, "Visor de Documentos", "width=700,height=700,scrollbars=yes")
     }
 
-    
+
 
     function buscar() {
       document.getElementById("aspirante_plantel_busqueda").disabled = true;
@@ -413,20 +419,25 @@ function cargar_doc_aspirante(e, e2, e3, e4, e5) {
       var plantel = document.getElementById("aspirante_plantel_busqueda").value;
       var query = 'curp=' + curp + '&plantel=' + plantel;
 
-      xhr.open('GET', '<?php echo base_url();?>index.php/c_aspirante/buscar_aspirantesxplantel?' + query, true);
-
-
-
-      xhr.onload = function () {
+      xhr.open('GET', '<?php echo base_url();?>index.php/c_estudiante/buscar_aspirantesxplantel?' + query, true);
+      xhr.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      xhr.error = function (){
+        console.log("error de conexion");
+      }
+      xhr.onload = function(){
+        $('#div_carga').hide();
         //console.log(JSON.parse(xhr.response));
         ////console.log(query);
 
 
         JSON.parse(xhr.response).forEach(function (valor, indice) {
+          var contador=0;
           var fila = '<tr>';
 
           fila += '<td>';
-          fila += valor.nombre + " " + valor.apellido_paterno + " " + valor.apellido_materno;
+          fila += valor.nombre + " " + valor.primer_apellido + " " + valor.segundo_apellido;
           fila += '</td>';
 
 
@@ -442,7 +453,9 @@ function cargar_doc_aspirante(e, e2, e3, e4, e5) {
           fila += valor.tipo_ingreso;
           fila += '</td>';
 
-
+          fila += '<td>';
+          fila += valor.Plantel_cct_plantel;
+          fila += '</td>';
 
           fila += '<td>';
           if(valor.no_entregado==0){
@@ -461,7 +474,7 @@ function cargar_doc_aspirante(e, e2, e3, e4, e5) {
           fila += '';
           fila += '</td>';
 
-          fila += '<td class="text-center"><button type="button" value="' + valor.no_control + '" onclick="cargar_doc_aspirante(this,\'' + valor.nombre + '\',\'' + valor.apellido_paterno + '\',\'' + valor.apellido_materno + '\',\'' + valor.tipo_ingreso + '\')" class="btn btn-success" data-toggle="modal" data-target="#modalsubirdocumentos" data-backdrop="static" data-keyboard="false">Subir documentos</button>';
+          fila += '<td class="text-center"><button type="button" value="' + valor.no_control + '" onclick="cargar_doc_aspirante(this,\'' + valor.nombre + '\',\'' + valor.primer_apellido + '\',\'' + valor.segundo_apellido + '\',\'' + valor.tipo_ingreso + '\')" class="btn btn-success" data-toggle="modal" data-target="#modalsubirdocumentos" data-backdrop="static" data-keyboard="false">Subir documentos</button>';
           fila += '';
           fila += '</td>';
 
@@ -478,7 +491,8 @@ function cargar_doc_aspirante(e, e2, e3, e4, e5) {
       xhr.send(null); document.getElementById('btn_buscar').setAttribute("onClick", "limpiar();");
       document.getElementById('btn_buscar').innerHTML = 'Limpiar Búsqueda';
       document.getElementById('btn_buscar').classList.remove('btn-success');
-      document.getElementById('btn_buscar').classList.add('btn-dark');
+      document.getElementById('btn_buscar').classList.add('btn-info');
+      document.getElementById('busqueda_oculto').style.display="";
     }
 
 function refrescar_tabla(){
@@ -486,15 +500,7 @@ function refrescar_tabla(){
   buscar();
 }
 
-
-
-    function limpiar() {
-      location.reload();
-
-    }
-
-
-    function borrar_formato_tabla(){
+ function borrar_formato_tabla(){
       $("#tabla_completa").dataTable().fnDestroy();
       
     }

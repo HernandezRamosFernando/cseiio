@@ -17,7 +17,7 @@ class M_permiso_regularizacion extends CI_Model {
       $this->db->query("update Permiso_regularizacion set estatus=0");
       $this->db->query("SET SQL_SAFE_UPDATES = 1");
       foreach($datos as $permiso_plantel){//para cada plante;
-         $materias = $this->M_regularizacion->materias_con_reprobados_html($permiso_plantel->plantel);
+         $materias = $this->M_regularizacion->materias_con_reprobados_html_regularizacion($permiso_plantel->plantel);
          foreach($materias as $materia){// para cada una de las materias que tienen que abrir
             $this->db->query("insert into Permiso_regularizacion (usuario,id_materia,Plantel_cct_plantel,fecha_inicio,fecha_fin,estatus)
             values ('".$permiso_plantel->usuario."','".$materia->id_materia."','".$permiso_plantel->plantel."','".$permiso_plantel->fecha_inicio."','".$permiso_plantel->fecha_fin."',1)");

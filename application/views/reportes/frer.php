@@ -560,8 +560,8 @@ $foliador=1;
 
         $claves="";
         //echo sizeof($materias_debe_estudiante_sin_grupo[0]);
-        if(sizeof($materias_debe_estudiante_con_grupo[0])>1){
-            foreach($materias_debe_estudiante_con_grupo[0] as $materia){
+        if(sizeof($materias_debe_estudiante_con_grupo[$contador-1])>0){
+            foreach($materias_debe_estudiante_con_grupo[$contador-1] as $materia){
             $claves.=$materia->id_materia.",";
             }
         }
@@ -631,8 +631,8 @@ $foliador=1;
 
         $claves="";
         //echo sizeof($materias_debe_estudiante_sin_grupo[0]);
-        if(sizeof($materias_debe_estudiante_sin_grupo[0])>1){
-            foreach($materias_debe_estudiante_sin_grupo[0] as $materia){
+        if(sizeof($materias_debe_estudiante_sin_grupo[$contador-1])>0){
+            foreach($materias_debe_estudiante_sin_grupo[$contador-1] as $materia){
             $claves.=$materia->id_materia.",";
             }
         }

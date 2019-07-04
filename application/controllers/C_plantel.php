@@ -46,4 +46,9 @@ class C_plantel extends CI_Controller
         $id_componente = $this->input->get("id_componente");
         echo $this->M_plantel->get_lista_planteles_especialidad_html($id_componente);
     }
+
+
+    function get_planteles_sin_examen_final(){
+        echo json_encode($this->M_plantel->get_planteles_sin_examen_final());
+     }
 }

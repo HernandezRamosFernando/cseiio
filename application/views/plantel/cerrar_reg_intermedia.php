@@ -17,7 +17,6 @@
             <div class="col-md-8">
               <label class="form-group has-float-label seltitulo">
                 <select class="form-control form-control-lg selcolor" id="plantel" name="plantel">
-                  <option value="">Seleccione un plantel </option>
 
                   <?php
                                         foreach ($planteles as $plantel)
@@ -79,8 +78,7 @@
           }).then((result) => {
             if (result.value) {
               //aqui va el acepta
-              $(document).scrollTop(0);
-              location.reload();
+              window.location.replace("<?php echo base_url();?>index.php/c_vistas/acreditacion");
 
             }
             //aqui va si cancela

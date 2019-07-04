@@ -38,6 +38,26 @@ class M_regularizacion extends CI_Model {
                       AND calificacion > 5 and estatus!=2)) as n on m.clave=n.id_materia where semestre=".$semestre)->result();
    }
 
+
+   public function materias_con_reprobados_html_regularizacion($plantel){
+    return $this->db->query("
+    SELECT DISTINCT clave as id_materia,unidad_contenido from Materia as m inner join (SELECT DISTINCT
+        distinct id_materia
+    FROM
+        Grupo_Estudiante AS ge inner join Estudiante as e on ge.Estudiante_no_control=e.no_control
+    INNER JOIN Grupo AS g ON ge.Grupo_id_grupo = g.id_grupo
+    WHERE
+        plantel = '".$plantel."'
+            AND calificacion_final < 6 and tipo_ingreso!='REPROBADO' and tipo_ingreso!='BAJA' and concat(Estudiante_no_control,id_materia) not in (
+            SELECT 
+                concat (Estudiante_no_control, id_materia)
+            FROM 
+                Regularizacion
+            WHERE
+                Plantel_cct_plantel = '".$plantel."'
+                    AND calificacion > 5 and estatus!=2)) as n on m.clave=n.id_materia")->result();
+ }
+
    public function semetres_con_reprobados_html($plantel){
       return $this->db->query("SELECT semestre from Materia as m inner join (SELECT DISTINCT
       distinct id_materia
@@ -91,19 +111,19 @@ class M_regularizacion extends CI_Model {
    //regresa solo no control y semestre
    public function regularizaciones_plantel_periodo_sin_grupo($plantel,$mes,$ano){
       //echo $mes;
-      return $this->db->query("select distinct no_control,semestre_en_curso from (select *,(select IF(count(distinct Estudiante_no_control),'si','no') as respuesta from Grupo_Estudiante as ge inner join Grupo as g on ge.Grupo_id_grupo=g.id_grupo where estatus=1 and Estudiante_no_control=r.Estudiante_no_control) as grupo from Regularizacion as r where calificacion is not null and month(fecha_calificacion)=".$mes." and year(fecha_calificacion)=".$ano." and Plantel_cct_plantel='".$plantel."') as regularizacion inner join Estudiante as e on regularizacion.Estudiante_no_control=e.no_control where grupo='no' order by e.semestre_en_curso asc")->result();
+      return $this->db->query("select datos.no_control,datos.semestre_en_curso,datos.ultimo_semestre_cursado from Estudiante as e inner join (select distinct no_control,semestre_en_curso,(select concat(semestre,nombre_grupo) from Grupo_Estudiante as ge inner join Grupo as g on ge.Grupo_id_grupo=g.id_grupo where Estudiante_no_control=no_control and semestre=(select max(semestre) as semestre from Grupo_Estudiante as ge inner join Grupo as g on ge.Grupo_id_grupo=g.id_grupo where ge.Estudiante_no_control=no_control and calificacion_final is not null) and calificacion_final is not null limit 1) as ultimo_semestre_cursado from (select *,(select IF(count(distinct Estudiante_no_control),'si','no') as respuesta from Grupo_Estudiante as ge inner join Grupo as g on ge.Grupo_id_grupo=g.id_grupo where estatus=1 and Estudiante_no_control=r.Estudiante_no_control) as grupo from Regularizacion as r where calificacion is not null and month(fecha_calificacion)=".$mes." and year(fecha_calificacion)=".$ano." and Plantel_cct_plantel='".$plantel."') as regularizacion inner join Estudiante as e on regularizacion.Estudiante_no_control=e.no_control where grupo='no' order by e.semestre_en_curso asc) as datos on e.no_control=datos.no_control order by datos.ultimo_semestre_cursado,e.primer_apellido,e.segundo_apellido")->result();
    }
 
 
    //regresa solo no control y semestre
    public function regularizaciones_plantel_periodo_con_grupo($plantel,$mes,$ano){
       //echo $mes;
-      return $this->db->query("select distinct no_control,semestre_en_curso from (select *,(select IF(count(distinct Estudiante_no_control),'si','no') as respuesta from Grupo_Estudiante as ge inner join Grupo as g on ge.Grupo_id_grupo=g.id_grupo where estatus=1 and Estudiante_no_control=r.Estudiante_no_control) as grupo from Regularizacion as r where calificacion is not null and month(fecha_calificacion)=".$mes." and year(fecha_calificacion)=".$ano." and Plantel_cct_plantel='".$plantel."') as regularizacion inner join Estudiante as e on regularizacion.Estudiante_no_control=e.no_control where grupo='si' order by e.semestre_en_curso asc")->result();
+      return $this->db->query("select datos.no_control,datos.semestre_en_curso,datos.ultimo_semestre_cursado from Estudiante as e inner join (select distinct no_control,semestre_en_curso,(select concat(semestre,nombre_grupo) from Grupo_Estudiante as ge inner join Grupo as g on ge.Grupo_id_grupo=g.id_grupo where Estudiante_no_control=no_control and semestre=(select max(semestre) as semestre from Grupo_Estudiante as ge inner join Grupo as g on ge.Grupo_id_grupo=g.id_grupo where ge.Estudiante_no_control=no_control and calificacion_final is not null) and calificacion_final is not null limit 1) as ultimo_semestre_cursado from (select *,(select IF(count(distinct Estudiante_no_control),'si','no') as respuesta from Grupo_Estudiante as ge inner join Grupo as g on ge.Grupo_id_grupo=g.id_grupo where estatus=1 and Estudiante_no_control=r.Estudiante_no_control) as grupo from Regularizacion as r where calificacion is not null and month(fecha_calificacion)=".$mes." and year(fecha_calificacion)=".$ano." and Plantel_cct_plantel='".$plantel."') as regularizacion inner join Estudiante as e on regularizacion.Estudiante_no_control=e.no_control where grupo='si' order by e.semestre_en_curso asc) as datos on e.no_control=datos.no_control order by datos.ultimo_semestre_cursado,e.primer_apellido,e.segundo_apellido")->result();
    }
 
 
    public function ultimo_grupo_cursado($no_control){
-      return $this->db->query("select semestre,nombre_grupo from Grupo_Estudiante as ge inner join Grupo as g where Estudiante_no_control='".$no_control."' and semestre=(select max(semestre) as semestre from Grupo_Estudiante as ge inner join Grupo as g on ge.Grupo_id_grupo=g.id_grupo where ge.Estudiante_no_control='".$no_control."' and calificacion_final is not null) and calificacion_final is not null limit 1")->result()[0];
+      return $this->db->query("select semestre,nombre_grupo from Grupo_Estudiante as ge inner join Grupo as g on ge.Grupo_id_grupo=g.id_grupo where Estudiante_no_control='".$no_control."' and semestre=(select max(semestre) as semestre from Grupo_Estudiante as ge inner join Grupo as g on ge.Grupo_id_grupo=g.id_grupo where ge.Estudiante_no_control='".$no_control."' and calificacion_final is not null) and calificacion_final is not null limit 1")->result()[0];
    }
 
 

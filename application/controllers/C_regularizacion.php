@@ -20,7 +20,7 @@ class C_regularizacion extends CI_Controller {
         }else{
             $respuesta.='<option value =""> Seleccione una materia </option>';
             foreach($materias as $materia){
-                $respuesta.='<option value="'.$materia->id_materia.'">'.$materia->unidad_contenido.'</option>';
+                $respuesta.='<option value="'.$materia->id_materia.'">'.$materia->unidad_contenido.'  Clave:'.$materia->id_materia.'</option>';
             }
         }
 

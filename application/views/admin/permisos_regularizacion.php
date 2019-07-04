@@ -201,7 +201,7 @@ function validarcomponente() {
      validafecha(document.getElementById("fecha_fin"));
 
     if (document.getElementById("fecha_fin").value != '' && document.getElementById("fecha_inicio").value != '') {
-      guardar()
+      guardar();
     } else {
       Swal.fire({
         type: 'warning',
@@ -369,7 +369,7 @@ function guardar(){
   var xhr = new XMLHttpRequest();
   
       xhr.open("POST", '<?php echo base_url();?>index.php/c_permiso_regularizacion/agregar_permiso_todos_planteles', true);
-      $('#fechapermiso1').modal().hide();
+      $('#fechapermiso').modal().hide();
       //Send the proper header information along with the request
       xhr.setRequestHeader("Content-Type", "application/json");
       xhr.onloadstart = function () {
@@ -402,7 +402,7 @@ function guardar(){
             type: 'error',
             text: 'Datos no guardados'
           });
-          $('#fechapermiso1').modal().show();
+          $('#fechapermiso').modal().show();
         }
           }
       }
@@ -424,7 +424,7 @@ function guardarunplantel(){
 
   var xhr = new XMLHttpRequest();
       xhr.open("POST", '<?php echo base_url();?>index.php/c_permiso_regularizacion/agregar_permiso_plantel_materia', true);
-
+      $('#fechapermiso1').modal().hide();
       //Send the proper header information along with the request
       xhr.setRequestHeader("Content-Type", "application/json");
       xhr.onloadstart = function () {
@@ -458,6 +458,7 @@ function guardarunplantel(){
             type: 'error',
             text: 'Datos no guardados'
           });
+          $('#fechapermiso').modal().show();
         }
           }
       }

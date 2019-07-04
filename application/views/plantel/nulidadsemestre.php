@@ -35,8 +35,8 @@
 
 
             <div class="col-md-8">
-            <label class="form-group has-float-label">
-              <select class="form-control form-control-lg" required="required" id="plantel_busqueda"
+            <label class="form-group has-float-label seltitulo">
+              <select class="form-control form-control-lg selcolor" required="required" id="plantel_busqueda"
                 name="plantel_busqueda">
 
                 <?php
@@ -67,7 +67,7 @@
 <div class="card" style="overflow:scroll; display:none" id="busqueda_oculto">
       <div class="card-body">
         <table class="table table-hover" id="tabla_completa">
-          <caption>Lista de alumnos con derecho a traslado</caption>
+          <caption>Lista de todos los alumnos del plantel</caption>
           <thead class="thead-light">
             <tr>
               <th scope="col" class="col-md-1">Nombre completo</th>

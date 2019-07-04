@@ -88,7 +88,9 @@ class C_frer extends CI_Controller {
         
 
         //$envio['saludo']="hola";
-       //echo json_encode($datos);
+       //echo json_encode($datos ['regularizaciones_con_grupo']);
+       //echo "<br>";
+       //echo json_encode($datos ['materias_debe_estudiante_con_grupo']);
         $this->load->view('reportes/frer',$datos);
     }
 

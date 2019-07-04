@@ -30,7 +30,7 @@ class C_menu extends CI_Controller{
                 $this->load->view("headers/cabecera", $data);
                 $this->load->view("headers/menuarriba");
                 $this->load->view("headers/menuizquierdaplantel");
-                $this->load->view('plantel/inscripcionplantel');
+                $this->load->view('plantel/inscripcion');
                 $this->load->view("footers/footer");
             }
     

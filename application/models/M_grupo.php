@@ -163,7 +163,7 @@ class M_grupo extends CI_Model {
     }
 
    public function get_num_alumnos_grupo($id_grupo){
-    return $this->db->query("select count(distinct ge.Estudiante_no_control) num_alumnos from Grupo g inner join Grupo_estudiante ge on ge.Grupo_id_grupo=g.id_grupo where g.id_grupo='".$id_grupo."'")->result();
+    return $this->db->query("select count(distinct ge.Estudiante_no_control) num_alumnos from Grupo g inner join Grupo_Estudiante ge on ge.Grupo_id_grupo=g.id_grupo where g.id_grupo='".$id_grupo."'")->result();
 }
 
 

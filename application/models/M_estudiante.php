@@ -470,10 +470,6 @@ where e.no_control='".$no_control."' and g.estatus=1 or g.estatus is null group 
 
 
 
-
-
-
-
 public function realizar_traslado_estudiante($no_control,
            $cct_plantel_traslado,
            $cct_plantel_origen,
@@ -503,9 +499,9 @@ public function realizar_traslado_estudiante($no_control,
                  $this->db->set('Grupo_id_grupo',$id_grupo_destino);
                  $this->db->where('Estudiante_no_control',$no_control);
                  $this->db->where('Grupo_id_grupo',$id_grupo);
-                 $this->db->update('Grupo_estudiante');
+                 $this->db->update('Grupo_Estudiante');
 
-                 $materias_estudiante = $this->db->query("select distinct id_materia,id_asesor,Grupo_id_grupo from Grupo_estudiante where Grupo_id_grupo='".$id_grupo_destino."';")->result();
+                 $materias_estudiante = $this->db->query("select distinct id_materia,id_asesor,Grupo_id_grupo from Grupo_Estudiante where Grupo_id_grupo='".$id_grupo_destino."';")->result();
 
                  foreach($materias_estudiante as $m){
 
@@ -513,7 +509,7 @@ public function realizar_traslado_estudiante($no_control,
                         $this->db->where('Estudiante_no_control',$no_control);
                         $this->db->where('id_materia',$m->id_materia);
                          $this->db->where('Grupo_id_grupo',$m->Grupo_id_grupo);
-                         $this->db->update('Grupo_estudiante');
+                         $this->db->update('Grupo_Estudiante');
                    }
 
                     
@@ -524,7 +520,7 @@ public function realizar_traslado_estudiante($no_control,
                  $this->db->set('Friae_folio',$id_friae_destino);
                  $this->db->where('Estudiante_no_control',$no_control);
                  $this->db->where('Friae_folio',$id_friae_origen);
-                 $this->db->update('Friae_estudiante');
+                 $this->db->update('Friae_Estudiante');
                     
             }
 
@@ -555,6 +551,11 @@ public function realizar_traslado_estudiante($no_control,
 
 
 }
+
+
+
+
+
 
 
 

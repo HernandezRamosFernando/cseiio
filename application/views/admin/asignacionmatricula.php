@@ -274,7 +274,9 @@
             };
 
             xhrmatricula.send(null);
+            
           }
+          refrescar_tabla();
         });
         
         //---------------------------------------------------------------------------------
@@ -285,4 +287,15 @@
 
     xhr.send(null);
   }
+
+
+  function refrescar_tabla(){
+  borrar_formato_tabla();
+  buscar();
+}
+
+ function borrar_formato_tabla(){
+      $("#tabla_completa").dataTable().fnDestroy();
+      
+    }
 </script>

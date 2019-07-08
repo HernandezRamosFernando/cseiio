@@ -69,12 +69,28 @@ function get_planteles_sin_cerrar_calificaciones_vista(){
 }
 
 /////---------------------------------------------------------------------------------------------------------
-function get_lista_planteles_especialidad_html($id_componente){
-   if($id_componente!=""){
-      $planteles = $this->db->query("SELECT * FROM Plantel p inner join Plantel_componente pc on p.cct_plantel=pc.Plantel_cct inner join Componente c on pc.Componente_id_componente=c.id_componente where c.nombre_corto='".$id_componente."';")->result();
+function get_lista_planteles_especialidad_traslado_html($no_control,$semestre,$id_componente){
+
+   if(intval($semestre)==5){ 
+            if($id_componente!=""){
+               $planteles = $this->db->query("SELECT * FROM Plantel p inner join Plantel_componente pc on p.cct_plantel=pc.Plantel_cct inner join Componente c on pc.Componente_id_componente=c.id_componente where c.nombre_corto='".$id_componente."';")->result();
+            }
+            else{
+               $planteles = $this->db->query("SELECT * FROM Plantel p")->result();
+            }
    }
-   else{
-      $planteles = $this->db->query("SELECT * FROM Plantel p")->result();
+
+   if(intval($semestre)==6){
+      if($id_componente!=""){
+         $planteles = $this->db->query("SELECT * FROM Plantel p inner join Plantel_componente pc on p.cct_plantel=pc.Plantel_cct inner join Componente c on pc.Componente_id_componente=c.id_componente where c.nombre_corto='".$id_componente."';")->result();
+      }
+      else{
+         $datos_quinto=$this->db->query("select distinct g.nombre_grupo from Grupo g inner join Grupo_Estudiante ge on g.id_grupo=ge.Grupo_id_grupo where ge.Estudiante_no_control='".$no_control."' and g.semestre=5;")->result()[0]->nombre_grupo;
+         $dividir = explode("-", $datos_quinto);
+         $id_componente=$dividir[1]; // porción1
+
+         $planteles = $this->db->query("SELECT * FROM Plantel p inner join Plantel_componente pc on p.cct_plantel=pc.Plantel_cct inner join Componente c on pc.Componente_id_componente=c.id_componente where c.nombre_corto='".$id_componente."';")->result();
+      }
    }
    
    $respuesta="";
@@ -86,6 +102,8 @@ function get_lista_planteles_especialidad_html($id_componente){
 
    return $respuesta;
 }
+
+
 
 
 

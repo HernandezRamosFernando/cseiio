@@ -212,7 +212,7 @@
           </div>
 
 
-          <div class="form-group">
+          <div class="form-group" style="display:none" id="div_grupo">
             <div class="row">
               <div class="col-md-12">
               <label class="form-group has-float-label seltitulo">
@@ -288,6 +288,7 @@
 <script>
 
   function cargar_datos_traslado(id_estudiante){
+    document.getElementById('div_grupo').style.display = "inline";
                      document.getElementById('nuevo_traslado').reset();
                       
                       var xhr = new XMLHttpRequest();
@@ -357,8 +358,8 @@
 
                         if(estudiante[0].semestre_en_curso>=5){
                             var xhr_plantel = new XMLHttpRequest();
-                               var query = 'id_componente=' +componente;
-                               xhr_plantel.open('GET', '<?php echo base_url();?>index.php/C_plantel/get_lista_planteles_especialidad_html?' + query, true);
+                               var query = 'no_control=' +estudiante[0].no_control+'&semestre='+estudiante[0].semestre_en_curso+'&id_componente='+componente;
+                               xhr_plantel.open('GET', '<?php echo base_url();?>index.php/C_plantel/get_lista_planteles_especialidad_traslado_html?' + query, true);
                               
                                   xhr_plantel.error = function () {
                                     console.log("error de conexion");
@@ -471,30 +472,30 @@
 
         var parciales_presentados="",p1="",p2="";
 
-        if(valor.primer_parcial>0){
+        if(valor.num_primer_parcial>0){
            parciales_presentados="Hasta primer parcial";
             
         }
 
-        if(valor.segundo_parcial>0){
+        if(valor.num_segundo_parcial>0){
            parciales_presentados="Hasta segundo parcial";
             
         }
 
 
-        if(valor.tercer_parcial>0){
+        if(valor.num_tercer_parcial>0){
            parciales_presentados="Hasta tercer parcial";
             
         }
 
 
-        if(valor.examen_final>0){
+        if(valor.num_examen_final>0){
            parciales_presentados="Hasta examen final";
             
         }
 
 
-        if(valor.calificacion_final>0){
+        if(valor.num_calificacion_final>0){
            parciales_presentados="Hasta calificacion final";
             
         }
@@ -609,6 +610,9 @@ var form_nuevo_traslado = document.getElementById("nuevo_traslado");
     }
 
      else{
+
+        if(document.getElementById('id_grupo').value!==''){
+          document.getElementById('div_grupo').style.display = "inline";
           var xhr = new XMLHttpRequest();
           grupos.innerHTML = "";
           xhr.open('GET', '<?php echo base_url();?>index.php/c_plantel/get_grupos_plantel_html?plantel=' + plantel + '&semestre=' + semestre, true);
@@ -653,6 +657,13 @@ var form_nuevo_traslado = document.getElementById("nuevo_traslado");
             }
           };
           xhr.send(null);
+     }
+
+        else{
+                    document.getElementById('grupos').removeAttribute('required');
+                    document.getElementById('btn_enviar').removeAttribute('disabled');
+        }
+
      }
       
     }

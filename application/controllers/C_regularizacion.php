@@ -30,6 +30,26 @@ class C_regularizacion extends CI_Controller {
     }
 
 
+    public function materias_con_reprobados_html_regularizacion(){
+        $respuesta = "";
+        $plantel = $this->input->get("plantel");
+        $semestre = $this->input->get("semestre");
+        $materias = $this->M_regularizacion->materias_con_reprobados_html_regularizacion($plantel);
+        if(sizeof($materias) == 0){
+            $respuesta ="";
+        }else{
+            $respuesta.='<option value =""> Seleccione una materia </option>';
+            foreach($materias as $materia){
+                $respuesta.='<option value="'.$materia->id_materia.'">'.$materia->unidad_contenido.'  Clave:'.$materia->id_materia.'</option>';
+            }
+        }
+
+        echo $respuesta;
+
+       
+    }
+
+
     public function semetres_con_reprobados_html(){
         $respuesta = "";
         $plantel = $this->input->get("plantel");

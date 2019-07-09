@@ -242,7 +242,7 @@ function cargarmaterias() {
       console.log(plantel);
 
       materias.innerHTML = "";
-      xhr.open('GET', '<?php echo base_url();?>index.php/c_regularizacion/materias_con_reprobados_html?plantel=' + plantel, true);
+      xhr.open('GET', '<?php echo base_url();?>index.php/c_regularizacion/materias_con_reprobados_html_regularizacion?plantel=' + plantel, true);
       xhr.onloadstart = function () {
         $('#div_carga').show();
       }

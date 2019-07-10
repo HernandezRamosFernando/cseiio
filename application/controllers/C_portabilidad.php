@@ -16,4 +16,9 @@ class C_portabilidad extends CI_Controller
 
         echo json_encode($this->M_portabilidad->estudiantes_de_portabilidad($curp,$plantel));
     }
+
+    function fecha_valida_agregar_materias(){
+        $no_control = $this->input->get("no_control");
+        echo $this->M_portabilidad->fecha_valida_agregar_materias($no_control);
+    }
 }

@@ -436,25 +436,25 @@ public function obtener_fecha_inscripcion_semestre($no_control){
 public function get_estudiantes_derecho_a_traslado($curp, $plantel){
 
    return $this->db->query("select *,(SELECT count(*)-SUM(CASE
-                WHEN d.entregado = 1 THEN 1
-                ELSE 0
-            END) from Documentacion d where d.Estudiante_no_control=e.no_control) as faltantes from Estudiante e left join Plantel p on p.cct_plantel=e.Plantel_cct_plantel left join (select ge.Estudiante_no_control, sum(CASE
-                WHEN ge.primer_parcial>=0 THEN 1
-                ELSE 0
-            END) num_primer_parcial,sum(CASE
-                WHEN ge.segundo_parcial>=0 THEN 1
-                ELSE 0
-            END) num_segundo_parcial,sum(CASE
-                WHEN ge.tercer_parcial>=0 THEN 1
-                ELSE 0
-            END) num_tercer_parcial,sum(CASE
-                WHEN ge.examen_final>=0 THEN 1
-                ELSE 0
-            END) num_examen_final,sum(CASE
-                WHEN ge.calificacion_final>=0 THEN 1
-                ELSE 0
-            END) num_calificacion_final from Grupo_Estudiante ge LEFT JOIN Grupo g on g.id_grupo=ge.Grupo_id_grupo where g.estatus=1 group by ge.Estudiante_no_control) otro on otro.Estudiante_no_control=e.no_control
-where e.Plantel_cct_plantel like'".$plantel."%' and e.curp like'".$curp."%' order by e.semestre_en_curso, concat(e.nombre,' ',e.primer_apellido,' ',e.segundo_apellido);")->result();
+   WHEN d.entregado = 1 THEN 1
+   ELSE 0
+END) from Documentacion d inner join Documento doc on d.id_documento=doc.id_documento where d.Estudiante_no_control=e.no_control and doc.tipo='base') as faltantes from Estudiante e left join Plantel p on p.cct_plantel=e.Plantel_cct_plantel left join (select ge.Estudiante_no_control, ge.Grupo_id_grupo,g.nombre_grupo,sum(CASE
+   WHEN ge.primer_parcial>=0 THEN 1
+   ELSE 0
+END) num_primer_parcial,sum(CASE
+   WHEN ge.segundo_parcial>=0 THEN 1
+   ELSE 0
+END) num_segundo_parcial,sum(CASE
+   WHEN ge.tercer_parcial>=0 THEN 1
+   ELSE 0
+END) num_tercer_parcial,sum(CASE
+   WHEN ge.examen_final>=0 THEN 1
+   ELSE 0
+END) num_examen_final,sum(CASE
+   WHEN ge.calificacion_final>=0 THEN 1
+   ELSE 0
+END) num_calificacion_final from Grupo_Estudiante ge LEFT JOIN Grupo g on g.id_grupo=ge.Grupo_id_grupo where g.estatus=1 group by ge.Estudiante_no_control) otro on otro.Estudiante_no_control=e.no_control
+where e.Plantel_cct_plantel like'".$plantel."%' and e.curp like'".$curp."%' and e.tipo_ingreso not in ('BAJA','DESERTOR') order by e.semestre_en_curso, concat(e.nombre,' ',e.primer_apellido,' ',e.segundo_apellido);")->result();
   }
 
 
@@ -467,10 +467,6 @@ LEFT JOIN Grupo g on g.id_grupo=ge.Grupo_id_grupo
 where e.no_control='".$no_control."' and g.estatus=1 or g.estatus is null group by e.no_control;")->result();
 
 }*/
-
-
-
-
 
 
 
@@ -503,9 +499,9 @@ public function realizar_traslado_estudiante($no_control,
                  $this->db->set('Grupo_id_grupo',$id_grupo_destino);
                  $this->db->where('Estudiante_no_control',$no_control);
                  $this->db->where('Grupo_id_grupo',$id_grupo);
-                 $this->db->update('Grupo_estudiante');
+                 $this->db->update('Grupo_Estudiante');
 
-                 $materias_estudiante = $this->db->query("select distinct id_materia,id_asesor,Grupo_id_grupo from Grupo_estudiante where Grupo_id_grupo='".$id_grupo_destino."';")->result();
+                 $materias_estudiante = $this->db->query("select distinct id_materia,id_asesor,Grupo_id_grupo from Grupo_Estudiante where Grupo_id_grupo='".$id_grupo_destino."';")->result();
 
                  foreach($materias_estudiante as $m){
 
@@ -513,7 +509,7 @@ public function realizar_traslado_estudiante($no_control,
                         $this->db->where('Estudiante_no_control',$no_control);
                         $this->db->where('id_materia',$m->id_materia);
                          $this->db->where('Grupo_id_grupo',$m->Grupo_id_grupo);
-                         $this->db->update('Grupo_estudiante');
+                         $this->db->update('Grupo_Estudiante');
                    }
 
                     
@@ -524,7 +520,7 @@ public function realizar_traslado_estudiante($no_control,
                  $this->db->set('Friae_folio',$id_friae_destino);
                  $this->db->where('Estudiante_no_control',$no_control);
                  $this->db->where('Friae_folio',$id_friae_origen);
-                 $this->db->update('Friae_estudiante');
+                 $this->db->update('Friae_Estudiante');
                     
             }
 
@@ -558,6 +554,11 @@ public function realizar_traslado_estudiante($no_control,
 
 
 
+
+
+
+
+
 public function get_estudiante_datos_semestre_grupo($no_control){
 
   return $this->db->query("select * from Estudiante e
@@ -571,24 +572,24 @@ where e.no_control='".$no_control."';")->result();
 public function get_estudiante_datos_semestre_grupo_calificacion($no_control){
 
   return $this->db->query("select *,(SELECT count(*)-SUM(CASE
-                WHEN d.entregado = 1 THEN 1
-                ELSE 0
-            END) from Documentacion d inner join Documento doc on d.id_documento=doc.id_documento where d.Estudiante_no_control=e.no_control and doc.tipo='base' ) as faltantes from Estudiante e left join Plantel p on p.cct_plantel=e.Plantel_cct_plantel left join (select ge.Estudiante_no_control, sum(CASE
-                WHEN ge.primer_parcial>=0 THEN 1
-                ELSE 0
-            END) num_primer_parcial,sum(CASE
-                WHEN ge.segundo_parcial>=0 THEN 1
-                ELSE 0
-            END) num_segundo_parcial,sum(CASE
-                WHEN ge.tercer_parcial>=0 THEN 1
-                ELSE 0
-            END) num_tercer_parcial,sum(CASE
-                WHEN ge.examen_final>=0 THEN 1
-                ELSE 0
-            END) num_examen_final,sum(CASE
-                WHEN ge.calificacion_final>=0 THEN 1
-                ELSE 0
-            END) num_calificacion_final from Grupo_Estudiante ge LEFT JOIN Grupo g on g.id_grupo=ge.Grupo_id_grupo where g.estatus=1 group by ge.Estudiante_no_control) otro on otro.Estudiante_no_control=e.no_control
+  WHEN d.entregado = 1 THEN 1
+  ELSE 0
+END) from Documentacion d inner join Documento doc on d.id_documento=doc.id_documento where d.Estudiante_no_control=e.no_control and doc.tipo='base' ) as faltantes from Estudiante e left join Plantel p on p.cct_plantel=e.Plantel_cct_plantel left join (select ge.Estudiante_no_control, g.id_grupo,g.nombre_grupo,sum(CASE
+  WHEN ge.primer_parcial>=0 THEN 1
+  ELSE 0
+END) num_primer_parcial,sum(CASE
+  WHEN ge.segundo_parcial>=0 THEN 1
+  ELSE 0
+END) num_segundo_parcial,sum(CASE
+  WHEN ge.tercer_parcial>=0 THEN 1
+  ELSE 0
+END) num_tercer_parcial,sum(CASE
+  WHEN ge.examen_final>=0 THEN 1
+  ELSE 0
+END) num_examen_final,sum(CASE
+  WHEN ge.calificacion_final>=0 THEN 1
+  ELSE 0
+END) num_calificacion_final from Grupo_Estudiante ge LEFT JOIN Grupo g on g.id_grupo=ge.Grupo_id_grupo where g.estatus=1 group by ge.Estudiante_no_control) otro on otro.Estudiante_no_control=e.no_control
 where e.no_control='".$no_control."';")->result();
 
 }

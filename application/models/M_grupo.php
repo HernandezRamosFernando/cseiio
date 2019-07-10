@@ -148,7 +148,7 @@ class M_grupo extends CI_Model {
    }
 
    public function get_estudiantes_grupo_materia($id_grupo,$id_materia){
-    return $this->db->query("select distinct ge.Estudiante_no_control as no_control,nombre,primer_apellido,segundo_apellido,primer_parcial,segundo_parcial,tercer_parcial,examen_final,tipo from Grupo_Estudiante as ge inner join Estudiante as e on ge.Estudiante_no_control=e.no_control inner join Materia m on ge.id_materia=m.clave  where ge.Grupo_id_grupo='".$id_grupo."' and ge.id_materia='".$id_materia."' and e.tipo_ingreso!='BAJA'")->result();
+    return $this->db->query("select distinct ge.Estudiante_no_control as no_control,nombre,primer_apellido,segundo_apellido,primer_parcial,segundo_parcial,tercer_parcial,examen_final,tipo from Grupo_Estudiante as ge inner join Estudiante as e on ge.Estudiante_no_control=e.no_control inner join Materia m on ge.id_materia=m.clave  where ge.Grupo_id_grupo='".$id_grupo."' and ge.id_materia='".$id_materia."' and e.tipo_ingreso!='BAJA' order by primer_apellido,segundo_apellido,nombre")->result();
    }
 
    public function get_grupos_activos_plantel($plantel){
@@ -163,7 +163,7 @@ class M_grupo extends CI_Model {
     }
 
    public function get_num_alumnos_grupo($id_grupo){
-    return $this->db->query("select count(distinct ge.Estudiante_no_control) num_alumnos from Grupo g inner join Grupo_estudiante ge on ge.Grupo_id_grupo=g.id_grupo where g.id_grupo='".$id_grupo."'")->result();
+    return $this->db->query("select count(distinct ge.Estudiante_no_control) num_alumnos from Grupo g inner join Grupo_Estudiante ge on ge.Grupo_id_grupo=g.id_grupo where g.id_grupo='".$id_grupo."'")->result();
 }
 
 

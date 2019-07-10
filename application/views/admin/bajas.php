@@ -281,7 +281,7 @@
 
     window.onload = function () {
       var xhr = new XMLHttpRequest();
-      xhr.open('GET', '<?php echo base_url();?>index.php/c_plantel/get_planteles_sin_cerrar_calificaciones', true);
+      xhr.open('GET', '<?php echo base_url();?>index.php/c_plantel/get_planteles_sin_examen_final', true);
       xhr.onloadstart = function () {
         $('#div_carga').show();
       }

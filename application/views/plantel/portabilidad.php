@@ -127,7 +127,6 @@
   <div class="col-md-4">
     <div class="form-label-group">
       <input type="email"
-        pattern="^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$"
         title="Introduzca un correo valido" class="form-control text-lowercase" id="aspirante_correo"
         name="aspirante_correo" placeholder="Correo Electrónico" style="color: #237087 ">
       <label for="aspirante_correo">Correo electrónico</label>
@@ -1521,7 +1520,7 @@ function envioform(form) {
             if (result.value) {
               //aqui va el aceptar
               $(document).scrollTop(0);
-              location.reload();
+              //location.reload();-----------------------------------------------------------------------------------------------
             }
             //aqui va si cancla
           }); 

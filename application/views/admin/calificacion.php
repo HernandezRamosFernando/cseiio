@@ -486,6 +486,10 @@
               e.value = valor;
               e.style.color = "black";
             }
+            else if(output==="/"){
+                e.value ="/";
+            }
+
             else{
                 e.value =6;
             }

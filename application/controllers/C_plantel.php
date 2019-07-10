@@ -42,8 +42,22 @@ class C_plantel extends CI_Controller
      }
 
      ////////////----------------------------------------------------------------------------------
-    public function get_lista_planteles_especialidad_html(){
+    /*public function get_lista_planteles_especialidad_html(){
         $id_componente = $this->input->get("id_componente");
         echo $this->M_plantel->get_lista_planteles_especialidad_html($id_componente);
     }
+ */
+
+public function get_lista_planteles_especialidad_traslado_html(){
+    $no_control = $this->input->get("no_control");
+    $semestre = $this->input->get("semestre");
+    $id_componente = $this->input->get("id_componente");
+    echo $this->M_plantel->get_lista_planteles_especialidad_traslado_html($no_control,$semestre,$id_componente);
+}
+
+    function get_planteles_sin_examen_final(){
+        echo json_encode($this->M_plantel->get_planteles_sin_examen_final());
+     }
+
+     
 }

@@ -10,6 +10,28 @@
       <li class="breadcrumb-item active">Agregue los datos solicitados</li>
     </ol>
 
+    <div class="form-group" style="display: none"> 
+
+<div class="row">
+  <div class="col-md-8">
+    <label class="form-group has-float-label seltitulo">
+      <select class="form-control form-control-lg selcolor" id="plantel" name="plantel">
+        <?php
+                              foreach ($planteles as $plantel)
+                              {
+                                echo '<option value="'.$plantel->cct_plantel.'">'.$plantel->nombre_plantel.' ----- CCT: '.$plantel->cct_plantel.'</option>';
+                              }
+                              ?>
+
+      </select>
+      <span>Plantel</span>
+    </label>
+  </div>
+
+</div>
+
+</div>
+
       
   </div>
   <!-- /.content-wrapper -->
@@ -34,13 +56,24 @@
 
 
 
-
     });
   }
 
-
   function cerrar_calificaciones() {
     if (document.getElementById("plantel").value != "") {
+      var cerrar = new XMLHttpRequest();
+          cerrar.open('GET', '<?php echo base_url();?>index.php/c_acreditacion/cerrar_calificaciones_plantel?plantel='+document.getElementById("plantel").value, true);
+          cerrar.onloadstart = function () {
+        $('#div_carga').show();
+      }
+      cerrar.error = function () {
+        console.log("error de conexion");
+      }
+      cerrar.onload = function () {
+        $('#div_carga').hide();
+            console.log(cerrar.response.trim());
+//respuesta de si puede cerrar
+      if(cerrar.response.trim()==="si"){//si si puede cerrar
       let plantel = document.getElementById("plantel").value;
 
       var xhr = new XMLHttpRequest();
@@ -64,21 +97,33 @@
             confirmButtonText: 'Aceptar'
           }).then((result) => {
             if (result.value) {
-                window.location.replace("<?php echo base_url();?>index.php/c_vistas/acreditacion");
+              window.location.replace("<?php echo base_url();?>index.php/c_vistas/acreditacion");
+            } else {
+              Swal.fire({
+                type: 'error',
+                text: 'Datos no guardados'
+              });
             }
-            //aqui va si cancela
           });
-        } else {
-          Swal.fire({
-            type: 'error',
-            text: 'Datos no guardados'
-          });
+
         }
       };
-
       xhr.send(null);
+    }
 
-    } else {
+    else{// si no puede cerrar
+      Swal.fire({
+        type: 'error',
+        text: 'No se puede cerrar calificaciones sin antes capturar las calificaciones del examen final de todos los grupos.'
+      });
+    }
+
+    };
+
+      cerrar.send(null);
+//-------------------------------------------------------------------------------------
+    } 
+    else {
       Swal.fire({
         type: 'warning',
         text: 'Seleccione un plantel'

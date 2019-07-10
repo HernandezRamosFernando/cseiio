@@ -397,7 +397,9 @@
     for (let i = 0; i < tabla.childNodes.length; i++) {
       //console.log(tabla.childNodes[i].childNodes[1].innerText);
       var calificacion = tabla.childNodes[i].childNodes[5].childNodes[0].value;
-      if (calificacion === "" || calificaciones === "/") {
+      if(calificacion !== ""){
+        
+      if (calificaciones === "/") {
         calificacion = "0";
       }
 
@@ -409,6 +411,8 @@
         cct_plantel: document.getElementById("plantel").value
       };
       datos.push(dato);
+      }
+      
     }
 
     console.log(datos);

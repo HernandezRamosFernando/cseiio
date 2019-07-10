@@ -314,6 +314,7 @@ public function resolucion_equivalencia(){
         
         if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
             $datos['planteles'] = $this->M_plantel->get_planteles();
+            $datos['lista_planteles'] = $this->M_plantel->get_planteles();
             $data= array('title'=>'Traslado');
             $this->load->view("headers/cabecera", $data);
             $this->load->view("headers/menuarriba");
@@ -323,6 +324,7 @@ public function resolucion_equivalencia(){
         }
         else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='CESCOLAR'){
             $datos['planteles'] = $this->M_plantel->get_planteles();
+            $datos['lista_planteles'] = $this->M_plantel->get_planteles();
             $data= array('title'=>'Traslado');
             $this->load->view("headers/cabecera", $data);
             $this->load->view("headers/menuarriba");
@@ -332,6 +334,7 @@ public function resolucion_equivalencia(){
         }  
         else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
             $datos['planteles'] = $this->M_plantel->get_plantel($this->session->userdata('user')['plantel']);
+            $datos['lista_planteles'] = $this->M_plantel->get_planteles();
             $data= array('title'=>'Traslado');
             $this->load->view("headers/cabecera", $data);
             $this->load->view("headers/menuarriba");
@@ -371,7 +374,7 @@ public function resolucion_equivalencia(){
             $this->load->view("headers/cabecera", $data);
             $this->load->view("headers/menuarriba");
             $this->load->view("headers/menuizquierdaplantel");
-            $this->load->view("plantel/controlalumnos",$datos);
+            $this->load->view("plantel/desertores",$datos);
             $this->load->view("footers/footer");
         }
         else{
@@ -786,7 +789,7 @@ public function resolucion_equivalencia(){
             $this->load->view("headers/cabecera", $data);
             $this->load->view("headers/menuarriba");
             $this->load->view("headers/menuizquierdaplantel");
-            $this->load->view("plantel/friae");
+            $this->load->view("plantel/friae", $datos);
             $this->load->view("footers/footer");
             }
             else{
@@ -818,7 +821,7 @@ public function resolucion_equivalencia(){
             $this->load->view("headers/cabecera", $data);
             $this->load->view("headers/menuarriba");
             $this->load->view("headers/menuizquierdaplantel");
-            $this->load->view("plantel/frer");
+            $this->load->view("plantel/frer",$datos);
             $this->load->view("footers/footer");
             }
             else{
@@ -850,7 +853,7 @@ public function resolucion_equivalencia(){
             $this->load->view("headers/cabecera", $data);
             $this->load->view("headers/menuarriba");
             $this->load->view("headers/menuizquierdaplantel");
-            $this->load->view("plantel/kardex");
+            $this->load->view("plantel/kardex", $datos);
             $this->load->view("footers/footer");
             }
             else{
@@ -878,11 +881,11 @@ public function resolucion_equivalencia(){
             }
         else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
             $datos['planteles'] = $this->M_plantel->get_plantel($this->session->userdata('user')['plantel']);
-            $data= array('title'=>'FRIAE');
+            $data= array('title'=>'lista grupos sc');
             $this->load->view("headers/cabecera", $data);
             $this->load->view("headers/menuarriba");
             $this->load->view("headers/menuizquierdaplantel");
-            $this->load->view("plantel/lista_grupos_sc");
+            $this->load->view("plantel/lista_grupos_sc",$datos);
             $this->load->view("footers/footer");
             }
             else{
@@ -911,11 +914,11 @@ public function resolucion_equivalencia(){
             }
         else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
             $datos['planteles'] = $this->M_plantel->get_plantel($this->session->userdata('user')['plantel']);
-            $data= array('title'=>'FRIAE');
+            $data= array('title'=>'Lista de grupo sin calificaciones');
             $this->load->view("headers/cabecera", $data);
             $this->load->view("headers/menuarriba");
             $this->load->view("headers/menuizquierdaplantel");
-            $this->load->view("plantel/lista_grupos_cc");
+            $this->load->view("plantel/lista_grupos_cc",$datos);
             $this->load->view("footers/footer");
             }
             else{
@@ -1010,16 +1013,54 @@ public function resolucion_equivalencia(){
             }
         else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
             $datos['planteles'] = $this->M_plantel->get_plantel($this->session->userdata('user')['plantel']);
-            $data= array('title'=>'FRIAE');
+            $data= array('title'=>'lista');
             $this->load->view("headers/cabecera", $data);
             $this->load->view("headers/menuarriba");
             $this->load->view("headers/menuizquierdaplantel");
-            $this->load->view("plantel/formato_observaciones");
+            $this->load->view("plantel/formato_observaciones",$datos);
             $this->load->view("footers/footer");
             }
             else{
             redirect(base_url().'index.php/c_usuario');
             }
+    }
+
+    public function lista_asistencia(){
+        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
+        $datos['planteles'] = $this->M_plantel->get_planteles();
+    
+        $data= array('title'=>'Lista de Asistencia');
+        $this->load->view("headers/cabecera", $data);
+        $this->load->view("headers/menuarriba");
+        $this->load->view("headers/menuizquierda");
+        $this->load->view("admin/generar_lista_asistencia", $datos);
+        $this->load->view("footers/footer");
+        }
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='CESCOLAR'){
+            $datos['planteles'] = $this->M_plantel->get_planteles();
+        
+            $data= array('title'=>'Lista de Asistencia');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierda");
+            $this->load->view("admin/generar_lista_asistencia", $datos);
+            $this->load->view("footers/footer");
+            }
+
+            else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
+                $datos['planteles'] = $this->M_plantel->get_plantel($this->session->userdata('user')['plantel']);
+                $data= array('title'=>'Lista de Asistencia');
+                $this->load->view("headers/cabecera", $data);
+                $this->load->view("headers/menuarriba");
+                $this->load->view("headers/menuizquierda");
+                $this->load->view("plantel/generar_lista_asistencia", $datos);
+                $this->load->view("footers/footer");
+                }
+
+         else{
+            redirect(base_url().'index.php/c_usuario');
+            }
+        
     }
 
     // fin de reportes ---------------------------------------------------------------------
@@ -1236,23 +1277,7 @@ public function resolucion_equivalencia(){
 //-------------------------------------------------termina vistas
 
 
-    public function lista_asistencia(){
-        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
-        $datos['planteles'] = $this->M_plantel->get_planteles();
-    
-        $data= array('title'=>'Lista de Asistencia');
-        $this->load->view("headers/cabecera", $data);
-        $this->load->view("headers/menuarriba");
-        $this->load->view("headers/menuizquierda");
-        $this->load->view("admin/generar_lista_asistencia", $datos);
-        $this->load->view("footers/footer");
-        }
 
-         else{
-            redirect(base_url().'index.php/c_usuario');
-            }
-        
-    }
 
 
      public function nulidad_semestre(){

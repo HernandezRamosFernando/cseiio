@@ -78,8 +78,7 @@
           }).then((result) => {
             if (result.value) {
               //aqui va el acepta
-              $(document).scrollTop(0);
-              location.reload();
+              window.location.replace("<?php echo base_url();?>index.php/c_vistas/acreditacion");
 
             }
             //aqui va si cancela

@@ -74,11 +74,11 @@ class M_grupo_estudiante extends CI_Model {
     }
 
     public function nombres_estudiantes_grupo_materia($grupo,$materia){
-        return $this->db->query("select nombre,primer_apellido,segundo_apellido from Grupo_Estudiante as ge inner join Estudiante as e on ge.Estudiante_no_control=e.no_control where Grupo_id_grupo='".$grupo."' and id_materia='".$materia."' order by primer_apellido")->result();
+        return $this->db->query("select nombre,primer_apellido,segundo_apellido from Grupo_Estudiante as ge inner join Estudiante as e on ge.Estudiante_no_control=e.no_control where Grupo_id_grupo='".$grupo."' and id_materia='".$materia."' order by primer_apellido,segundo_apellido,nombre")->result();
     }
 
     public function datos_estudiantes_grupo_materia($grupo,$materia){
-        return $this->db->query("select * from Grupo_Estudiante as ge inner join Estudiante as e on ge.Estudiante_no_control=e.no_control where Grupo_id_grupo='".$grupo."' and id_materia='".$materia."' order by primer_apellido")->result();
+        return $this->db->query("select * from Grupo_Estudiante as ge inner join Estudiante as e on ge.Estudiante_no_control=e.no_control where Grupo_id_grupo='".$grupo."' and id_materia='".$materia."' order by primer_apellido,segundo_apellido,nombre")->result();
     }
 
     public function plantel_grupo($grupo){

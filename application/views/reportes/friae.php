@@ -472,7 +472,7 @@ if($datos_friae_estudiante[$contador][0]->tipo_ingreso_fin_semestre=='REINGRESO'
     
 }
 
-else if($datos_friae_estudiante[$contador][0]->tipo_ingreso_fin_semestre=='BAJA'){
+else if($datos_friae_estudiante[$contador][0]->tipo_ingreso_fin_semestre=='BAJA' || $datos_friae_estudiante[$contador][0]->tipo_ingreso_fin_semestre==''){
     $renglon.='<td>3</td>';//tipo ingreso estudiante
 }
 
@@ -514,7 +514,7 @@ else if($datos_friae_estudiante[$contador][0]->tipo_ingreso_despues_regularizaci
 }
 
 
-else if($datos_friae_estudiante[$contador][0]->tipo_ingreso_despues_regularizacion=="BAJA"){
+else if($datos_friae_estudiante[$contador][0]->tipo_ingreso_despues_regularizacion=="BAJA" || $datos_friae_estudiante[$contador][0]->tipo_ingreso_despues_regularizacion==""){
     $renglon.='<td></td>';//tipo ingreso estudiante
 }
 

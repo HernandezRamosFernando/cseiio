@@ -195,7 +195,7 @@ function rellenar_lista($estudiantes){
     foreach($estudiantes as $estudiante){
 
         $promedio = (intval($estudiante->primer_parcial)+intval($estudiante->segundo_parcial)+intval($estudiante->tercer_parcial))/3;
-        if($promedio>0 && $promedio<=5){
+        if($promedio>0 && $promedio<6){
             $promedio=5;
         }
         else{
@@ -221,28 +221,7 @@ function rellenar_lista($estudiantes){
         $contador+=1;
     }
 
-    if($contador<35){
-        $faltantes=35-$contador;
-
-        for($i=0;$i<=$faltantes;$i++){
-            $respuesta.='
-                <tr>
-                <td style="width:20px:">'.$contador.'</td>
-                <td style="width:85px;height:20px"></td>
-                <td style="width:85px;height:15px"></td>
-                <td style="width:110px;height:15px"></td>
-                <td style="width:35px"></td>
-                <td style="width:35px"></td>
-                <td style="width:35px"></td>
-                <td style="width:35px"></td>
-                <td style="width:35px"></td>
-                <td style="width:35px"></td>
-                <td style="width:90px"></td>
-                </tr>
-                ';
-                $contador+=1;
-        }
-    }
+    
 
     return $respuesta;
 

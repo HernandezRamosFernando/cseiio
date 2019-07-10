@@ -117,7 +117,7 @@
             <div class="row">
               <div class="col-md-4">
                 <div class="form-label-group">
-                  <input type="text" pattern="[A-Za-z]+[ ]*[A-Za-z ]*" required title="Introduzca solo letras validas"
+                  <input type="text" pattern="[A-ZÑña-z]+[ ]*[A-ZÑña-z ]*" required title="Introduzca solo letras validas"
                     class="form-control text-uppercase" id="aspirante_nombre" name="aspirante_nombre"
                     onchange="valida(this)" placeholder="Nombre(s)" style="color: #237087">
                   <label for="aspirante_nombre">Nombre(s)</label>
@@ -126,7 +126,7 @@
 
               <div class="col-md-4">
                 <div class="form-label-group">
-                  <input type="text" pattern="[A-Za-z]+[ ]*[A-Za-z ]*" required title="Introduzca solo letras"
+                  <input type="text" pattern="[A-ZÑña-z]+[ ]*[A-ZÑña-z ]*" required title="Introduzca solo letras"
                     class="form-control text-uppercase" id="aspirante_apellido_paterno" onchange="valida(this)"
                     name="aspirante_apellido_paterno" placeholder="Apellido Paterno" style="color: #237087">
                   <label for="aspirante_apellido_paterno">Primer Apellido</label>
@@ -135,7 +135,7 @@
 
               <div class="col-md-4">
                 <div class="form-label-group">
-                  <input type="text" pattern="[A-Za-z]+[ ]*[A-Za-z ]*" title="Introduzca solo letras"
+                  <input type="text" pattern="[A-ZÑña-z]+[ ]*[A-ZÑña-z ]*" title="Introduzca solo letras"
                     class="form-control text-uppercase" id="aspirante_apellido_materno" onchange="valida(this)"
                     name="aspirante_apellido_materno" placeholder="Apellido Materno" style="color: #237087">
                   <label for="aspirante_apellido_materno">Segundo Apellido</label>
@@ -520,7 +520,7 @@
             <div class="row">
               <div class="col-md-4">
                 <div class="form-label-group">
-                  <input type="text" pattern="[A-Za-z]+[ ]*[A-Za-z ]*" onchange="valida(this)" required
+                  <input type="text" pattern="[A-ZÑña-z]+[ ]*[A-ZÑña-z ]*" onchange="valida(this)" required
                     title="Introduzca solo letras" class="form-control text-uppercase" id="aspirante_tutor_nombre"
                     onchange="valida(this)" name="aspirante_tutor_nombre" placeholder="Nombre Completo"
                     style="color: #237087">
@@ -529,7 +529,7 @@
               </div>
               <div class="col-md-4">
                 <div class="form-label-group">
-                  <input type="text" pattern="[A-Za-z]+[ ]*[A-Za-z ]*" onchange="valida(this)" required
+                  <input type="text" pattern="[A-ZÑña-z]+[ ]*[A-ZÑña-z ]*" onchange="valida(this)" required
                     title="Introduzca solo letras" class="form-control text-uppercase" id="aspirante_tutor_apellido"
                     onchange="valida(this)" name="aspirante_tutor_apellido" placeholder="Primer Apellido"
                     style="color: #237087">
@@ -572,7 +572,7 @@
 
               <div class="col-md-4" id="parentescootro" style="display:none;">
                 <div class="form-label-group">
-                  <input type="text" pattern="[A-Za-z]+[ ]*[A-Za-z ]*" onchange="valida(this)"
+                  <input type="text" pattern="[A-ZÑña-z]+[ ]*[A-ZÑña-z ]*" onchange="valida(this)"
                     class="form-control text-uppercase" id="aspirante_tutor_otro" name="aspirante_tutor_otro"
                     onchange="valida(this)" placeholder="Escriba el parentesco" style="color: #237087">
                   <label for="aspirante_tutor_otro">Escriba el parentesco</label>
@@ -662,6 +662,7 @@
                       <option value="0">Nada 0%</option>
                       <option value="25">Poco 25%</option>
                       <option value="50">Regular 50%</option>
+                      <option value="75">Bien 75%</option>
                       <option value="100">Bien 100%</option>
                     </select>
                     <span>Lee</span>

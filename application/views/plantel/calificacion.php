@@ -101,7 +101,7 @@
             <p class="h6" style="text-align: left; color: #237087; font-size: 12pt;">Criterios de calificación: <br> La calificación mínima aprobatoria es 6 <br> Toda calificación menor a 6 será 5 <br> La diagonal "/" significa que no presento </p>
             <br>
             <br>
-              <table class="table table-hover" id="tabla_completa_grupo" style="width: 100%">
+              <table class="table table-hover" id="tabla_completa_grupo" style="width: 100%;  overflow: scroll;">
                 <caption>Lista de los alumnos del grupo</caption>
                 <thead class="thead-light">
                   <tr>
@@ -629,4 +629,11 @@ if(promedio_modular>=6){
      
 
   }
+  var bPreguntar = true;
+window.onbeforeunload = preguntarAntesDeSalir;
+function preguntarAntesDeSalir()
+{
+  if (bPreguntar)
+    return "¿Seguro que quieres salir?";
+}
 </script>

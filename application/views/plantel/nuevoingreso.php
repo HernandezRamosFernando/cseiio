@@ -31,7 +31,7 @@
         <div class="row">
           <div class="col-md-4">
             <div class="form-label-group">
-              <input type="text" pattern="[A-Za-z]+[ ]*[A-Za-z ]*" required title="Introduzca solo letras validas"
+              <input type="text" pattern="[A-ZÑña-z]+[ ]*[A-ZÑña-z ]*" required title="Introduzca solo letras validas"
                 class="form-control text-uppercase" id="aspirante_nombre" name="aspirante_nombre"
                 onchange="valida(this);" placeholder="Nombre(s)" style="color: #237087 ">
               <label for="aspirante_nombre">Nombre(s)</label>
@@ -40,7 +40,7 @@
 
           <div class="col-md-4">
             <div class="form-label-group">
-              <input type="text" pattern="[A-Za-z]+[ ]*[A-Za-z ]*" required title="Introduzca solo letras"
+              <input type="text" pattern="[A-ZÑña-z]+[ ]*[A-ZÑña-z ]*" required title="Introduzca solo letras"
                 class="form-control text-uppercase" id="aspirante_apellido_paterno" name="aspirante_apellido_paterno"
                 onchange="valida(this);" placeholder="Apellido Paterno" style="color: #237087 ">
               <label for="aspirante_apellido_paterno">Primer Apellido</label>
@@ -49,7 +49,7 @@
 
           <div class="col-md-4">
             <div class="form-label-group">
-              <input type="text" pattern="[A-Za-z]+[ ]*[A-Za-z ]*" title="Introduzca solo letras"
+              <input type="text" pattern="[A-ZÑña-z]+[ ]*[A-ZÑña-z ]*" title="Introduzca solo letras"
                 class="form-control text-uppercase" id="aspirante_apellido_materno" name="aspirante_apellido_materno"
                 onchange="valida(this);" placeholder="Apellido Materno" style="color: #237087 ">
               <label for="aspirante_apellido_materno">Segundo Apellido</label>

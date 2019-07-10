@@ -225,7 +225,6 @@ function valida(e) {
   texto = texto.replace(/í/gi, "i");
   texto = texto.replace(/ó/gi, "o");
   texto = texto.replace(/ú/gi, "u");
-  texto = texto.replace(/ñ/gi, "n");
   e.value = texto;
 }
 

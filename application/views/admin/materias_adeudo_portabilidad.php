@@ -99,48 +99,7 @@
 
 <script>
 
-function semestre_ciclo(id_semestre,id_ciclo,valor_id_ciclo) {
-  semestre=id_semestre.value;
-  periodo='';
 
-  if(semestre % 2 == 0) {
-    periodo='FEBRERO-JULIO';
-  }
-  else {
-     periodo='AGOSTO-ENERO';
-  }
-
-  var xhr_escuela = new XMLHttpRequest();
-        xhr_escuela.open('GET', '<?php echo base_url();?>index.php/C_ciclo_escolar/ciclo_escolar_x_periodo?periodo='+periodo, true);
-        xhr_escuela.onloadstart = function () {
-          $('#div_carga').show();
-        }
-        xhr_escuela.error = function () {
-          console.log("error de conexion");
-        }
-        xhr_escuela.onload = function () {
-          $('#div_carga').hide();
-          let periodos_ciclo = JSON.parse(xhr_escuela.response);
-          document.getElementById(id_ciclo).innerHTML = "";
-          var option = document.createElement("option");
-          option.text = "Seleccione el ciclo escolar";
-          option.value = "";
-          document.getElementById(id_ciclo).add(option);
-
-            if (typeof periodos_ciclo !== 'undefined') {   
-                  periodos_ciclo.forEach(function (valor, indice) {
-                        var option = document.createElement("option");
-                        option.text = valor.nombre_ciclo_escolar+'-----'+valor.periodo;
-                        option.value = valor.id_ciclo_escolar;
-                        if(valor_id_ciclo===valor.id_ciclo_escolar){
-                          option.selected=true;
-                        }
-                        document.getElementById(id_ciclo).add(option);
-                  });
-            }
-        };
-        xhr_escuela.send(null);
-  }
 
 
   function buscar() {
@@ -151,7 +110,7 @@ function semestre_ciclo(id_semestre,id_ciclo,valor_id_ciclo) {
     var curp = document.getElementById("aspirante_curp_busqueda").value;
     var plantel = document.getElementById("aspirante_plantel_busqueda").value;
     var query = 'curp=' + curp + '&plantel=' + plantel;
-    xhr.open('GET', '<?php echo base_url();?>index.php/c_estudiante/estudiantes_portabilidad?' + query, true);
+    xhr.open('GET', '<?php echo base_url();?>index.php/c_portabilidad/estudiantes_de_portabilidad?' + query, true);
     xhr.onloadstart = function () {
       $('#div_carga').show();
     }

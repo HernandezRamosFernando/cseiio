@@ -194,7 +194,7 @@ public function resolucion_equivalencia(){
             $this->load->view("footers/footer");
         }
         else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='CESCOLAR'){
-            $data= array('title'=>'Asignación de Matrícula');
+            $data= array('title'=>'Asignación de materias de adeudo portabilidad');
             $datos['planteles'] = $this->M_plantel->get_planteles();
             $this->load->view("headers/cabecera", $data);
             $this->load->view("headers/menuarriba");
@@ -265,7 +265,7 @@ public function resolucion_equivalencia(){
         } 
         else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
             $datos['planteles'] = $this->M_plantel->get_plantel($this->session->userdata('user')['plantel']);
-            $data= array('title'=>'Control de Alumnos');
+            $data= array('title'=>'Repetidores');
             $this->load->view("headers/cabecera", $data);
             $this->load->view("headers/menuarriba");
             $this->load->view("headers/menuizquierdaplantel");
@@ -298,7 +298,7 @@ public function resolucion_equivalencia(){
         } 
         else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
             $datos['planteles'] = $this->M_plantel->get_plantel($this->session->userdata('user')['plantel']);
-            $data= array('title'=>'Control de Alumnos');
+            $data= array('title'=>'Incorporados');
             $this->load->view("headers/cabecera", $data);
             $this->load->view("headers/menuarriba");
             $this->load->view("headers/menuizquierdaplantel");
@@ -370,7 +370,7 @@ public function resolucion_equivalencia(){
         }
         else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
             $datos['planteles'] = $this->M_plantel->get_plantel($this->session->userdata('user')['plantel']);
-            $data= array('title'=>'Control de Alumnos');
+            $data= array('title'=>'Desertores');
             $this->load->view("headers/cabecera", $data);
             $this->load->view("headers/menuarriba");
             $this->load->view("headers/menuizquierdaplantel");
@@ -535,7 +535,7 @@ public function resolucion_equivalencia(){
         if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
         $datos['planteles'] = $this->M_plantel->get_planteles();
     
-        $data= array('title'=>'Asignación de Asesor');
+        $data= array('title'=>'Cambio de Asesor');
         $this->load->view("headers/cabecera", $data);
         $this->load->view("headers/menuarriba");
         $this->load->view("headers/menuizquierda");
@@ -545,7 +545,7 @@ public function resolucion_equivalencia(){
         else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='CESCOLAR'){
             $datos['planteles'] = $this->M_plantel->get_planteles();
         
-            $data= array('title'=>'Asignación de Asesor');
+            $data= array('title'=>'Cambio de Asesor');
             $this->load->view("headers/cabecera", $data);
             $this->load->view("headers/menuarriba");
             $this->load->view("headers/menuizquierda");
@@ -554,7 +554,7 @@ public function resolucion_equivalencia(){
             }
         else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
             $datos['planteles'] = $this->M_plantel->get_plantel($this->session->userdata('user')['plantel']);
-            $data= array('title'=>'Asignación de Asesor');
+            $data= array('title'=>'Cambio de Asesor');
             $this->load->view("headers/cabecera", $data);
             $this->load->view("headers/menuarriba");
             $this->load->view("headers/menuizquierda");
@@ -716,7 +716,7 @@ public function resolucion_equivalencia(){
         }
         else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
             $datos['planteles'] = $this->M_plantel->get_plantel($this->session->userdata('user')['plantel']);
-            $data= array('title'=>'Control de Alumnos');
+            $data= array('title'=>'Bajas');
             $this->load->view("headers/cabecera", $data);
             $this->load->view("headers/menuarriba");
             $this->load->view("headers/menuizquierdaplantel");
@@ -817,7 +817,7 @@ public function resolucion_equivalencia(){
             }
         else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
             $datos['planteles'] = $this->M_plantel->get_plantel($this->session->userdata('user')['plantel']);
-            $data= array('title'=>'FRIAE');
+            $data= array('title'=>'FRER');
             $this->load->view("headers/cabecera", $data);
             $this->load->view("headers/menuarriba");
             $this->load->view("headers/menuizquierdaplantel");
@@ -881,7 +881,7 @@ public function resolucion_equivalencia(){
             }
         else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
             $datos['planteles'] = $this->M_plantel->get_plantel($this->session->userdata('user')['plantel']);
-            $data= array('title'=>'lista grupos sc');
+            $data= array('title'=>'Lista de grupo sin calificaciones');
             $this->load->view("headers/cabecera", $data);
             $this->load->view("headers/menuarriba");
             $this->load->view("headers/menuizquierdaplantel");
@@ -896,7 +896,7 @@ public function resolucion_equivalencia(){
     public function lista_grupo_cc(){
         if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
         $datos['planteles'] = $this->M_plantel->get_planteles();
-        $data= array('title'=>'Lista de grupo sin calificaciones');
+        $data= array('title'=>'Lista de grupo con calificaciones');
         $this->load->view("headers/cabecera", $data);
         $this->load->view("headers/menuarriba");
         $this->load->view("headers/menuizquierda");
@@ -905,7 +905,7 @@ public function resolucion_equivalencia(){
         }
         else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='CESCOLAR'){
             $datos['planteles'] = $this->M_plantel->get_planteles();
-            $data= array('title'=>'Lista de grupo sin calificaciones');
+            $data= array('title'=>'Lista de grupo con calificaciones');
             $this->load->view("headers/cabecera", $data);
             $this->load->view("headers/menuarriba");
             $this->load->view("headers/menuizquierda");
@@ -914,7 +914,7 @@ public function resolucion_equivalencia(){
             }
         else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
             $datos['planteles'] = $this->M_plantel->get_plantel($this->session->userdata('user')['plantel']);
-            $data= array('title'=>'Lista de grupo sin calificaciones');
+            $data= array('title'=>'Lista de grupo con calificaciones');
             $this->load->view("headers/cabecera", $data);
             $this->load->view("headers/menuarriba");
             $this->load->view("headers/menuizquierdaplantel");
@@ -1004,7 +1004,7 @@ public function resolucion_equivalencia(){
         }
         else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='CESCOLAR'){
             $datos['planteles'] = $this->M_plantel->get_planteles();
-            $data= array('title'=>'Lista de grupo sin calificaciones');
+            $data= array('title'=>'Formato de observaciones');
             $this->load->view("headers/cabecera", $data);
             $this->load->view("headers/menuarriba");
             $this->load->view("headers/menuizquierda");
@@ -1013,7 +1013,7 @@ public function resolucion_equivalencia(){
             }
         else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
             $datos['planteles'] = $this->M_plantel->get_plantel($this->session->userdata('user')['plantel']);
-            $data= array('title'=>'lista');
+            $data= array('title'=>'Formato de observaciones');
             $this->load->view("headers/cabecera", $data);
             $this->load->view("headers/menuarriba");
             $this->load->view("headers/menuizquierdaplantel");
@@ -1085,7 +1085,7 @@ public function resolucion_equivalencia(){
             $this->load->view("footers/footer");
             }
         else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
-            $data= array('title'=>'Regularización');
+            $data= array('title'=>'Formatos');
             $this->load->view("headers/cabecera", $data);
             $this->load->view("headers/menuarriba");
             $this->load->view("headers/menuizquierdaplantel");

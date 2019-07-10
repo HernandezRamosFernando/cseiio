@@ -488,6 +488,7 @@
             }
             else if(output==="/"){
                 e.value ="/";
+                e.style.color = "red";
             }
 
             else{
@@ -503,7 +504,7 @@
               e.value = valor;
               e.style.color = "black";
             } else if (output === "/") {
-              e.style.color = "black";
+              e.style.color = "red";
             } else if (output >= 0 && output < 6) {
               e.value = 5;
               e.style.color = "red";

@@ -201,7 +201,8 @@
               type: 'success',
               title: 'Matrícula generada correctamente<br>' + xhrmatricula.responseText + '<br> asignada a:<br>' + e2
             })
-            $(e).parents('tr').detach();
+            //$(e).parents('tr').detach();
+            refrescar_tabla();
           } else {
             Swal.fire({
               type: 'error',
@@ -212,6 +213,7 @@
         };
 
         xhrmatricula.send(null);
+        
       } else {
 
         var documentos_faltantes = new XMLHttpRequest();
@@ -263,7 +265,8 @@
                   type: 'success',
                   title: 'Matrícula generada correctamente<br>' + xhrmatricula.responseText + '<br> asignada a:<br>' + e2
                 })
-                $(e).parents('tr').detach();
+                //$(e).parents('tr').detach();
+                refrescar_tabla();
               } else {
                 Swal.fire({
                   type: 'error',
@@ -272,20 +275,26 @@
                 })
               }
             };
-
+            
             xhrmatricula.send(null);
+           
             
           }
-          refrescar_tabla();
+          
         });
         
         //---------------------------------------------------------------------------------
       };
         documentos_faltantes.send(null);
+        
+        
       }
     };
-
+    
     xhr.send(null);
+    
+    
+    
   }
 
 

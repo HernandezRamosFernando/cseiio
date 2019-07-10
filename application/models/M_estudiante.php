@@ -245,9 +245,7 @@ function listar_aspirantes_xplantel($curp, $plantel){
   public function estudiantes_sin_matricula($curp, $plantel){
 
    return $this->db->query(
-    "select * 
-    from Estudiante
-    where Plantel_cct_plantel like'".$plantel."%' and curp like'".$curp."%' and matricula is null")->result();
+    "select * from Estudiante where Plantel_cct_plantel like'".$plantel."%' and curp like'".$curp."%' and matricula is null and tipo_ingreso not in('BAJA','NULIDAD SEMESTRE','DESERTOR');")->result();
 
 }
 

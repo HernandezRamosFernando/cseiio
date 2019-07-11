@@ -344,8 +344,8 @@
 
                             if(typeof id_grupo !== 'undefined' && id_grupo !== null){
                               var arreglo=id_grupo.split("-");
-                                  if(arreglo.length==1){
-                                    componente= id_grupo.split("-")[1];
+                                  if(arreglo.length>0){
+                                    componente= arreglo[1];
                                   }
 
                             }
@@ -363,6 +363,7 @@
                             document.getElementById("grupo").value=grupo;
 
                         if(estudiante[0].semestre_en_curso>=5){
+                          
                             var xhr_plantel = new XMLHttpRequest();
                                var query = 'no_control=' +estudiante[0].no_control+'&semestre='+estudiante[0].semestre_en_curso+'&id_componente='+componente;
                                xhr_plantel.open('GET', '<?php echo base_url();?>index.php/C_plantel/get_lista_planteles_especialidad_traslado_html?' + query, true);

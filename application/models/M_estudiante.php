@@ -494,12 +494,15 @@ public function realizar_traslado_estudiante($no_control,
            }
 
             if($id_grupo_destino!=''){
+
+               $materias_estudiante = $this->db->query("select id_materia,id_asesor,Grupo_id_grupo from Grupo_Estudiante where Grupo_id_grupo='".$id_grupo_destino."' group by id_materia;")->result();
+               
                  $this->db->set('Grupo_id_grupo',$id_grupo_destino);
                  $this->db->where('Estudiante_no_control',$no_control);
                  $this->db->where('Grupo_id_grupo',$id_grupo);
                  $this->db->update('Grupo_Estudiante');
 
-                 $materias_estudiante = $this->db->query("select distinct id_materia,id_asesor,Grupo_id_grupo from Grupo_Estudiante where Grupo_id_grupo='".$id_grupo_destino."';")->result();
+                 
 
                  foreach($materias_estudiante as $m){
 

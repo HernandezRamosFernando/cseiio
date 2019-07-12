@@ -288,7 +288,13 @@
 <script>
 
   function cargar_datos_traslado(id_estudiante){
-    document.getElementById('div_grupo').style.display = "inline";
+              document.getElementById('div_grupo').style.display = "none";
+              var option = document.createElement("option");
+              grupos.innerHTML = "";
+              option.text = "Seleccione uno";
+              option.value = "";
+              grupos.add(option);
+              document.getElementById('grupos').removeAttribute('required');
                      document.getElementById('nuevo_traslado').reset();
                       
                       var xhr = new XMLHttpRequest();
@@ -336,10 +342,10 @@
                             var id_grupo = estudiante[0].nombre_grupo;
                             var componente="";
 
-                            if(typeof id_grupo !== 'undefined'){
+                            if(typeof id_grupo !== 'undefined' && id_grupo !== null){
                               var arreglo=id_grupo.split("-");
-                                  if(arreglo.length==1){
-                                    componente= id_grupo.split("-")[1];
+                                  if(arreglo.length>0){
+                                    componente= arreglo[1];
                                   }
 
                             }
@@ -347,7 +353,7 @@
                             
 
                             var grupo="";
-                            if(typeof estudiante[0].nombre_grupo !== 'undefined'){
+                            if(typeof estudiante[0].nombre_grupo !== 'undefined' && estudiante[0].nombre_grupo !== null){
                                     
                                     grupo=estudiante[0].nombre_grupo;
                                 }
@@ -357,6 +363,7 @@
                             document.getElementById("grupo").value=grupo;
 
                         if(estudiante[0].semestre_en_curso>=5){
+                          
                             var xhr_plantel = new XMLHttpRequest();
                                var query = 'no_control=' +estudiante[0].no_control+'&semestre='+estudiante[0].semestre_en_curso+'&id_componente='+componente;
                                xhr_plantel.open('GET', '<?php echo base_url();?>index.php/C_plantel/get_lista_planteles_especialidad_traslado_html?' + query, true);

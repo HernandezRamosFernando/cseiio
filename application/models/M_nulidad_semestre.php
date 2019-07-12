@@ -5,7 +5,21 @@ class M_nulidad_semestre extends CI_Model {
    }
 
    public function materias_debe_estudiante_actualmente($no_control){
-    return $this->db->query("select id_materia from Grupo_Estudiante where calificacion_final<6 and Estudiante_no_control='".$no_control."' and id_materia not in (select id_materia from Regularizacion where calificacion>=6 and Estudiante_no_control='".$no_control."')")->result();
+    return $this->db->query("select * from (select Estudiante_no_control,id_materia from Grupo_Estudiante as ge 
+    inner join 
+    Grupo as g on ge.Grupo_id_grupo=g.id_grupo
+    inner join Estudiante as e on ge.Estudiante_no_control=e.no_control
+    where calificacion_final<6 and no_control='".$no_control."'
+    union
+    select Estudiante_no_control,Materia_id_materia as id_materia from Portabilidad_adeudos as pa 
+    inner join 
+    Estudiante as e on pa.Estudiante_no_control=e.no_control
+    where calificacion<6 and no_control='".$no_control."') 
+    as a where concat(a.Estudiante_no_control,a.id_materia) 
+    not in 
+    (select concat(Estudiante_no_control,id_materia) 
+    from Regularizacion 
+    where calificacion>=6 and estatus!=2)")->result();
 }
 
 

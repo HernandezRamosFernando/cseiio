@@ -105,6 +105,8 @@
                     </button>
             </div>
             <div class="modal-body">
+
+            <input type="text" id="no_control" style="display:none" />
             <form id="agregar_materias">
           <!--datos personales------------------------------------------------------>
           <input type="hidden" id="num_control_estudiante" name="num_control_estudiante" />
@@ -229,7 +231,7 @@
 
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-            <button type="submit" id="btn_enviar" class="btn btn-success">Aceptar</button>
+            <button type="button" id="btn_enviar" class="btn btn-success" onclick="guardar_cambios()">Aceptar</button>
           </div>
 
 
@@ -244,6 +246,69 @@
 
 
 <script>
+
+
+  function guardar_cambios(){
+    let materia1 = document.getElementById("materia_1").value;
+    let materia2 = document.getElementById("materia_2").value;
+    let materia3 = document.getElementById("materia_3").value;
+
+    var materias = new Array();
+    var calificaciones = new Array();
+
+   if(materia1!==""){
+    materias.push(materia1);
+    if(document.getElementById("calificacion_materia_1").value!==""){
+      calificaciones.push(document.getElementById("calificacion_materia_1").value);
+    }
+   }
+
+   if(materia2!==""){
+    materias.push(materia2);
+    if(document.getElementById("calificacion_materia_2").value!==""){
+      calificaciones.push(document.getElementById("calificacion_materia_2").value);
+    }
+   }
+
+   if(materia3!==""){
+    materias.push(materia3);
+    if(document.getElementById("calificacion_materia_3").value!==""){
+      calificaciones.push(document.getElementById("calificacion_materia_3").value);
+    }
+   }
+
+   let datos = {
+
+     materias:materias,
+     calificaciones:calificaciones,
+     no_control:document.getElementById("no_control").value,
+     materias_pasadas: calificaciones.length===0?"no":"si"
+
+   };
+
+   console.log(datos);
+
+   //////////////////// mandar los datos
+   var xhr = new XMLHttpRequest();
+        xhr.open("POST", '<?php echo base_url();?>index.php/c_portabilidad/agregar_materias', true);
+
+        //Send the proper header information along with the request
+        xhr.setRequestHeader("Content-Type", "application/json");
+
+        xhr.onreadystatechange = function() {
+            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                console.log(xhr.response);
+            }
+        }
+        xhr.send(JSON.stringify(datos));
+
+ 
+
+  }
+
+
+
+
   function buscar() {
     document.getElementById("aspirante_plantel_busqueda").disabled = true;
     document.getElementById("aspirante_curp_busqueda").disabled = true;
@@ -298,6 +363,42 @@
   }
 
   function saber_tiempo(e){
+
+
+    //api para jalar los datos
+        var informacion_estudiante = new XMLHttpRequest();
+        informacion_estudiante.open('GET', '<?php echo base_url();?>index.php/c_portabilidad/datos_cargar_materias_estudiante?no_control='+e.value, true);
+
+        informacion_estudiante.onload = function () {
+          console.log(informacion_estudiante.response);
+          let informacion = JSON.parse(informacion_estudiante.response);
+          document.getElementById("nombre_completo").value=informacion.nombre+" "+informacion.primer_apellido+" "+informacion.segundo_apellido;
+          document.getElementById("escuela_procedencia").value=informacion.nombre_escuela_procedencia;
+          document.getElementById("cct_procedencia").value=informacion.cct_escuela_procedencia;
+          document.getElementById("plantel_inscripcion").value=informacion.nombre_plantel;
+          document.getElementById("no_control").value = informacion.no_control;
+        };
+
+        informacion_estudiante.send(null);
+        //-------------------
+
+
+        //cargar materias en los selects
+        var materias = new XMLHttpRequest();
+            materias.open('GET', '<?php echo base_url();?>index.php/c_portabilidad/materias_html', true);
+
+            materias.onload = function () {
+              //console.log(materias.response);
+              document.getElementById("materia_1").innerHTML=materias.response;
+              document.getElementById("materia_2").innerHTML=materias.response;
+              document.getElementById("materia_3").innerHTML=materias.response;
+            };
+
+            materias.send(null);
+        //------------------------------
+
+
+
     var xhr = new XMLHttpRequest();
     xhr.open('GET', '<?php echo base_url();?>index.php/c_portabilidad/fecha_valida_agregar_materias?no_control=' + e.value, true);
     xhr.onloadstart = function () {
@@ -309,16 +410,14 @@
     xhr.onload = function () {
       $('#div_carga').hide();
       console.log(xhr.response);
-      if(xhr.response==="si"){
+      if(xhr.response==="no"){
         $('#modalmaterias').modal('show');
 
-      }else if (xhr.response==="no"){
+      }else if (xhr.response==="si"){
         document.getElementById('calificacionoculta1').style.display = "";
         document.getElementById('calificacionoculta2').style.display = "";
         document.getElementById('calificacionoculta3').style.display = "";
         $('#modalmaterias').modal('show');
-
-      }else{
 
       }
     };

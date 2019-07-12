@@ -254,8 +254,9 @@ function cargar_datos_solicitud_nulidad(no_control){
 
 		    var validacion_resultado="";
 
-                      if(estudiante[0].tipo_ingreso==='BAJA' && estudiante[0].tipo_ingreso==='REPROBADO' && estudiante[0].tipo_ingreso==='NUEVO INGRESO' && estudiante[0].tipo_ingreso==='PORTABILIDAD'){
+                      if(estudiante[0].tipo_ingreso==='BAJA' || estudiante[0].tipo_ingreso==='REPROBADO' || estudiante[0].tipo_ingreso==='NUEVO INGRESO' || estudiante[0].tipo_ingreso==='PORTABILIDAD'){
                             validacion_resultado+="<p style='text-align:left;margin-left:20%'> - El estatus del alumno es "+estudiante[0].tipo_ingreso+".</p>";
+                      
                       }
 
 

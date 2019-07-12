@@ -24,6 +24,12 @@ class M_nulidad_semestre extends CI_Model {
 
 
 
+public function materias_debe_estudiante_actualmente_nulidad($no_control){
+   return $this->db->query("select id_materia from Grupo_Estudiante where calificacion_final<6 and Estudiante_no_control='".$no_control."' and id_materia not in (select id_materia from Regularizacion where calificacion>=6 and Estudiante_no_control='".$no_control."')")->result();
+}
+
+
+
 
 public function get_alumnos($id_plantel,$curp){
     $query = $this->db->query("select * from Estudiante e left join Plantel p on p.cct_plantel=e.Plantel_cct_plantel left join (select distinct ge.Estudiante_no_control,ge.Grupo_id_grupo,ge.Ciclo_escolar_id_ciclo_escolar,g.semestre,g.id_grupo,g.nombre_grupo,g.estatus from Grupo_Estudiante ge LEFT JOIN Grupo g on g.id_grupo=ge.Grupo_id_grupo where g.estatus=1) datos_grupo on e.no_control=datos_grupo.Estudiante_no_control left join (SELECT distinct n.no_control as estudiante_no_control,n.autorizado por_autorizar FROM Nulidad_semestre n where n.autorizado=0) nulidad on e.no_control=nulidad.estudiante_no_control where e.Plantel_cct_plantel like'".$id_plantel."%' and e.curp like'".$curp."%'")->result();
@@ -101,6 +107,7 @@ function nulidad_semestre_estudiante($no_control,$semestre_hasta_el_que_anula,$d
         }
 
 
+        //$materias_debe = $this->materias_debe_estudiante_actualmente_nulidad($no_control);
         $materias_debe = $this->materias_debe_estudiante_actualmente($no_control);
 
         if(sizeof($materias_debe)==0){

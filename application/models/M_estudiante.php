@@ -316,7 +316,7 @@ public function obtener_fecha_inscripcion_semestre($no_control){
      
      public function estudiantes_portabilidad($curp, $plantel){
 
-      return $this->db->query("select *,(select count(*) from Resolucion_equivalencia r where r.id_estudiante=e.no_control) as entregado from Estudiante e where e.Plantel_cct_plantel like'".$plantel."%' and e.curp like'".$curp."%' and e.tipo_ingreso='PORTABILIDAD'")->result();
+      return $this->db->query("select *,(select count(*) from Resolucion_equivalencia r where r.id_estudiante=e.no_control) as entregado from Estudiante e where e.Plantel_cct_plantel like'".$plantel."%' and e.curp like'".$curp."%' and semestre_ingreso>1")->result();
       
    }
 

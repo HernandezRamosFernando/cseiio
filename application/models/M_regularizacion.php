@@ -20,80 +20,86 @@ class M_regularizacion extends CI_Model {
    }
 
    public function materias_con_reprobados_html($plantel,$semestre){
-      return $this->db->query("
-      SELECT DISTINCT clave as id_materia,unidad_contenido from Materia as m inner join (SELECT DISTINCT
-          distinct id_materia
-      FROM
-          Grupo_Estudiante AS ge inner join Estudiante as e on ge.Estudiante_no_control=e.no_control
-      INNER JOIN Grupo AS g ON ge.Grupo_id_grupo = g.id_grupo
-      WHERE
-          plantel = '".$plantel."'
-              AND calificacion_final < 6 and tipo_ingreso!='REPROBADO' and tipo_ingreso!='BAJA' and concat(Estudiante_no_control,id_materia) not in (
-              SELECT 
-                  concat (Estudiante_no_control, id_materia)
-              FROM 
-                  Regularizacion
-              WHERE
-                  Plantel_cct_plantel = '".$plantel."'
-                      AND calificacion > 5 and estatus!=2)) as n on m.clave=n.id_materia where semestre=".$semestre)->result();
+      return $this->db->query("select distinct clave as id_materia,unidad_contenido from Materia as m inner join (select distinct id_materia from (select Estudiante_no_control,id_materia from Grupo_Estudiante as ge 
+      inner join 
+      Grupo as g on ge.Grupo_id_grupo=g.id_grupo
+      inner join Estudiante as e on ge.Estudiante_no_control=e.no_control
+      where Plantel_cct_plantel='".$plantel."' and calificacion_final<6 and (tipo_ingreso!='REPROBADO' and tipo_ingreso!='BAJA')
+      union
+      select Estudiante_no_control,Materia_id_materia as id_materia from Portabilidad_adeudos as pa 
+      inner join 
+      Estudiante as e on pa.Estudiante_no_control=e.no_control
+      where e.Plantel_cct_plantel='".$plantel."' and calificacion<6 and (tipo_ingreso!='REPROBADO' and tipo_ingreso!='BAJA')) 
+      as a where concat(a.Estudiante_no_control,a.id_materia) 
+      not in 
+      (select concat(Estudiante_no_control,id_materia) 
+      from Regularizacion 
+      where calificacion>=6 and Plantel_cct_plantel='".$plantel."' and estatus!=2)) as reprobadas 
+      on m.clave=reprobadas.id_materia where m.semestre=".$semestre)->result();
    }
 
 
    public function materias_con_reprobados_html_regularizacion($plantel){
-    return $this->db->query("
-    SELECT DISTINCT clave as id_materia,unidad_contenido from Materia as m inner join (SELECT DISTINCT
-        distinct id_materia
-    FROM
-        Grupo_Estudiante AS ge inner join Estudiante as e on ge.Estudiante_no_control=e.no_control
-    INNER JOIN Grupo AS g ON ge.Grupo_id_grupo = g.id_grupo
-    WHERE
-        plantel = '".$plantel."'
-            AND calificacion_final < 6 and tipo_ingreso!='REPROBADO' and tipo_ingreso!='BAJA' and concat(Estudiante_no_control,id_materia) not in (
-            SELECT 
-                concat (Estudiante_no_control, id_materia)
-            FROM 
-                Regularizacion
-            WHERE
-                Plantel_cct_plantel = '".$plantel."'
-                    AND calificacion > 5 and estatus!=2)) as n on m.clave=n.id_materia")->result();
+    return $this->db->query("select distinct clave as id_materia,unidad_contenido from Materia as m inner join (select distinct id_materia from (select Estudiante_no_control,id_materia from Grupo_Estudiante as ge 
+    inner join 
+    Grupo as g on ge.Grupo_id_grupo=g.id_grupo
+    inner join Estudiante as e on ge.Estudiante_no_control=e.no_control
+    where Plantel_cct_plantel='".$plantel."' and calificacion_final<6 and (tipo_ingreso!='REPROBADO' and tipo_ingreso!='BAJA')
+    union
+    select Estudiante_no_control,Materia_id_materia as id_materia from Portabilidad_adeudos as pa 
+    inner join 
+    Estudiante as e on pa.Estudiante_no_control=e.no_control
+    where e.Plantel_cct_plantel='".$plantel."' and calificacion<6 and (tipo_ingreso!='REPROBADO' and tipo_ingreso!='BAJA')) 
+    as a where concat(a.Estudiante_no_control,a.id_materia) 
+    not in 
+    (select concat(Estudiante_no_control,id_materia) 
+    from Regularizacion 
+    where calificacion>=6 and Plantel_cct_plantel='".$plantel."' and estatus!=2)) as reprobadas 
+    on m.clave=reprobadas.id_materia")->result();
  }
 
    public function semetres_con_reprobados_html($plantel){
-      return $this->db->query("SELECT semestre from Materia as m inner join (SELECT DISTINCT
-      distinct id_materia
-  FROM
-      Grupo_Estudiante AS ge inner join Estudiante as e on ge.Estudiante_no_control=e.no_control
-  INNER JOIN Grupo AS g ON ge.Grupo_id_grupo = g.id_grupo
-  WHERE
-      plantel = '".$plantel."'
-          AND calificacion_final < 6 and tipo_ingreso!='REPROBADO' and tipo_ingreso!='BAJA' and concat(Estudiante_no_control,id_materia) not in (
-          SELECT 
-              concat (Estudiante_no_control, id_materia)
-          FROM 
-              Regularizacion
-          WHERE
-              Plantel_cct_plantel = '".$plantel."'
-                  AND calificacion > 5 and estatus!=2)) as n on m.clave=n.id_materia group by semestre order by semestre asc")->result();
+      return $this->db->query("select distinct semestre from Materia as m inner join (select distinct id_materia from (select Estudiante_no_control,id_materia from Grupo_Estudiante as ge 
+      inner join 
+      Grupo as g on ge.Grupo_id_grupo=g.id_grupo
+      inner join Estudiante as e on ge.Estudiante_no_control=e.no_control
+      where Plantel_cct_plantel='".$plantel."' and calificacion_final<6 and (tipo_ingreso!='REPROBADO' and tipo_ingreso!='BAJA')
+      union
+      select Estudiante_no_control,Materia_id_materia as id_materia from Portabilidad_adeudos as pa 
+      inner join 
+      Estudiante as e on pa.Estudiante_no_control=e.no_control
+      where e.Plantel_cct_plantel='".$plantel."' and calificacion<6 and (tipo_ingreso!='REPROBADO' and tipo_ingreso!='BAJA')) 
+      as a where concat(a.Estudiante_no_control,a.id_materia) 
+      not in 
+      (select concat(Estudiante_no_control,id_materia) 
+      from Regularizacion 
+      where calificacion>=6 and Plantel_cct_plantel='".$plantel." and estatus!=2')) as reprobadas 
+      on m.clave=reprobadas.id_materia")->result();
    }
 
 
    public function estudiantes_materia($plantel,$materia){
 
-      return $this->db->query("select * from Estudiante as e inner join (SELECT 
-      Estudiante_no_control,m.semestre as semestre_materia
-   FROM
-       Grupo_Estudiante AS ge
-   INNER JOIN Grupo AS g ON ge.Grupo_id_grupo = g.id_grupo inner join Materia as m on m.clave=ge.id_materia
-   WHERE
-       plantel = '".$plantel."'
-           AND calificacion_final < 6 and ge.id_materia='".$materia."' and Estudiante_no_control not in (
-           SELECT 
-               Estudiante_no_control
-           FROM
-               Regularizacion
-           WHERE
-               Plantel_cct_plantel = '".$plantel."'
-                   AND calificacion > 5 and id_materia='".$materia."' and estatus!=2)) as n on e.no_control=n.Estudiante_no_control where tipo_ingreso!='REPROBADO' and tipo_ingreso!='BAJA'")->result();
+      return $this->db->query("select distinct id_materia,Estudiante_no_control as no_control,m.semestre as semestre_materia,nombre,primer_apellido,segundo_apellido,matricula,semestre_en_curso from (select * from (select Estudiante_no_control,id_materia from Grupo_Estudiante as ge 
+      inner join 
+      Grupo as g on ge.Grupo_id_grupo=g.id_grupo
+      inner join Estudiante as e on ge.Estudiante_no_control=e.no_control
+      where Plantel_cct_plantel='".$plantel."' and calificacion_final<6 and (tipo_ingreso!='REPROBADO' and tipo_ingreso!='BAJA')
+      union
+      select Estudiante_no_control,Materia_id_materia as id_materia from Portabilidad_adeudos as pa 
+      inner join 
+      Estudiante as e on pa.Estudiante_no_control=e.no_control
+      where e.Plantel_cct_plantel='".$plantel."' and calificacion<6 and (tipo_ingreso!='REPROBADO' and tipo_ingreso!='BAJA')) 
+      as a where concat(a.Estudiante_no_control,a.id_materia) 
+      not in 
+      (select concat(Estudiante_no_control,id_materia) 
+      from Regularizacion 
+      where calificacion>=6 and Plantel_cct_plantel='".$plantel."' and estatus!=2)) 
+      as estudiante_materia 
+      inner join Materia as m on estudiante_materia.id_materia=m.clave
+      inner join Estudiante as e on estudiante_materia.Estudiante_no_control=e.no_control
+      where id_materia='".$materia."'
+      ")->result();
 
    }
 
@@ -356,7 +362,21 @@ class M_regularizacion extends CI_Model {
 
 
    public function materias_debe_estudiante_actualmente($no_control){
-        return $this->db->query("select id_materia from Grupo_Estudiante where calificacion_final<6 and Estudiante_no_control='".$no_control."' and id_materia not in (select id_materia from Regularizacion where calificacion>=6 and Estudiante_no_control='".$no_control."' and estatus!=2)")->result();
+        return $this->db->query("select * from (select Estudiante_no_control,id_materia from Grupo_Estudiante as ge 
+        inner join 
+        Grupo as g on ge.Grupo_id_grupo=g.id_grupo
+        inner join Estudiante as e on ge.Estudiante_no_control=e.no_control
+        where calificacion_final<6 and no_control='".$no_control."'
+        union
+        select Estudiante_no_control,Materia_id_materia as id_materia from Portabilidad_adeudos as pa 
+        inner join 
+        Estudiante as e on pa.Estudiante_no_control=e.no_control
+        where calificacion<6 and no_control='".$no_control."') 
+        as a where concat(a.Estudiante_no_control,a.id_materia) 
+        not in 
+        (select concat(Estudiante_no_control,id_materia) 
+        from Regularizacion 
+        where calificacion>=6 and estatus!=2)")->result();
    }
 
 

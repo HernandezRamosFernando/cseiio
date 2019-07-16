@@ -574,8 +574,11 @@ public function valor_Lengua($valor){
         case 50:
             $resultado= "Regular 50%";
             break;
+        case 75:
+            $resultado= "Bien 75%";
+        break;
          case 100:
-            $resultado= "Bien 100%";
+            $resultado= "Muy bien 100%";
             break;
     }
 

@@ -78,6 +78,21 @@ class C_grupo extends CI_Controller
         echo $respuesta_html;
     }
 
+    public function get_grupos_ciclo_escolar_plantel_friae(){
+        $plantel = $this->input->get("plantel");
+        $ciclo = $this->input->get("ciclo");
+
+        $grupos = $this->M_grupo->get_grupos_ciclo_escolar_plantel_friae($plantel,$ciclo);
+
+        $respuesta_html = "";
+
+        foreach($grupos as $grupo){
+            $respuesta_html.='<option value="'.$grupo->id_grupo.'">'.$grupo->semestre.' '.$grupo->nombre_grupo.'</option>';
+        }
+
+        echo $respuesta_html;
+    }
+
 //---------------------------------------------------------------
 public function get_num_estudiantes_grupo(){
     $id_grupo = $this->input->get("id_grupo");

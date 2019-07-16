@@ -21,7 +21,7 @@
                 <select class="form-control form-control-lg selcolor" id="plantel_notificacion"
                   name="plantel_notificacion">
                   <option value="">Seleccione uno</option>
-                  <option value="todos">TODOS LOS USUARIOS DEL SISTEMA</option>
+                  <option value="todos">TODOS LOS PLANTELES DEL SISTEMA</option>
 
                   <?php
                                         foreach ($planteles as $plantel)

@@ -45,6 +45,7 @@ class C_estudiante extends CI_Controller {
     public function registrar_datos_estudiante(){
         $no_control=$this->generar_numcontrol(1);
         $tipo_estudiante = $this->input->post('formulario');
+        $fecha_inscripcion_del_ciclo = $this->M_ciclo_escolar->fecha_inscripcion();
 
         if($this->input->post("aspirante_procedencia_combo")=="igual"){
             $localidad_origen = $this->M_localidad->get_nombre_localidad($this->input->post('aspirante_direccion_localidad'))->nombre_localidad.'-'.$this->M_localidad->get_nombre_localidad($this->input->post('aspirante_direccion_localidad'))->nombre_municipio;
@@ -77,7 +78,7 @@ class C_estudiante extends CI_Controller {
             'colonia' => mb_strtoupper($this->input->post('aspirante_direccion_colonia')),
             'cp' => $this->input->post('aspirante_direccion_cp'),
             'id_localidad' => $this->input->post('aspirante_direccion_localidad'),
-            'fecha_inscripcion' => date("Y-m-d"),
+            'fecha_inscripcion' => $fecha_inscripcion_del_ciclo,
             'telefono' => $this->input->post('aspirante_telefono'),
             'Plantel_cct_plantel' => $this->input->post('aspirante_plantel'),
             'lugar_nacimiento' => mb_strtoupper($this->input->post('aspirante_lugar_nacimiento')),
@@ -403,7 +404,6 @@ class C_estudiante extends CI_Controller {
             'fecha_nacimiento' => $this->input->post('aspirante_anio_nacimiento').'-'.$this->input->post('aspirante_mes_nacimiento').'-'.$this->input->post('aspirante_dia_nacimiento'),
             'sexo' => $this->input->post('aspirante_sexo'),
             'curp' => $this->input->post('aspirante_curp'),
-            'fecha_registro' => mb_strtoupper(date("Y-m-d")),
             //'tipo_ingreso' => 'NUEVO INGRESO',
             //'semestre' => 1,
             'folio_programa_social' => $this->input->post('aspirante_programa_social'),
@@ -415,7 +415,6 @@ class C_estudiante extends CI_Controller {
             'cp' => $this->input->post('aspirante_direccion_cp'),
             'id_localidad' => $this->input->post('aspirante_direccion_localidad'),
             'semestre_en_curso' => $this->input->post('aspirante_semestre'),
-            'fecha_inscripcion' => date("Y-m-d"),
             'telefono' => $this->input->post('aspirante_telefono'),
             'Plantel_cct_plantel' => $this->input->post('aspirante_plantel'),
             //'nacinalidad' => $this->input->post('/d'),

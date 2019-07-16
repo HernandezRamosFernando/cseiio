@@ -20,8 +20,12 @@ class M_notificacion extends CI_Model {
 
     else{
 
-        $this->db->query("insert into Notificacion (autor,mensaje,titulo,plantel,fecha_fin) values 
-        ('".$datos->autor."','".$datos->mensaje."','".$datos->titulo."','".$datos->plantel."','".$datos->fecha_fin."')");
+        foreach($datos->plantel as $plantel){
+            $this->db->query("insert into Notificacion (autor,mensaje,titulo,plantel,fecha_fin) values 
+            ('".$datos->autor."','".$datos->mensaje."','".$datos->titulo."','".$plantel."','".$datos->fecha_fin."')");
+        }
+
+        
 
     }
 

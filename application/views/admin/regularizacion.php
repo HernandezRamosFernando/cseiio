@@ -267,7 +267,7 @@
             fila += valor.nombre + ' ' + valor.primer_apellido + ' ' + valor.segundo_apellido;
             fila += '</td>';
             fila += '<td>';
-            fila += valor.matricula===null?"":valor.matricula;
+            fila += valor.no_control;
             fila += '</td>';
             fila += '<td>';
             fila += valor.semestre_en_curso;

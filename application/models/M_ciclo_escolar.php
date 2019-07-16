@@ -60,4 +60,14 @@ public function ciclo_escolar_x_periodo($periodo){
         
 }
 
+
+public function fecha_inscripcion(){
+   return $this->db->query("select max(fecha_inicio) as fecha from Ciclo_escolar")->result()[0]->fecha;
+}
+
+
+public function fecha_fin_ciclo(){
+   return $this->db->query("select max(fecha_terminacion) as fecha from Ciclo_escolar")->result()[0]->fecha;
+}
+
 }

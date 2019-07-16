@@ -35,6 +35,19 @@
               </label>
             </div>
 
+            <div class="col-md-2">
+             <button type="button" name="btn_añadir" id="btn-añadir" class="btn btn-primary btn-lg btn-block" onclick="agregar_plantel(this);">Añadir +</button>
+            </div>
+            <div class="col-md-2">
+             <button type="button" name="btn_eliminar" id="btn-eliminar" class="btn btn-danger btn-lg btn-block" onclick="eliminar_plantel(this);">Eliminar -</button>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="row" id="nuevosplanteles">
+
           </div>
         </div>
 
@@ -147,13 +160,39 @@
 
   function mandar_notificacion() {
 
-    let dato = {
+    if(document.getElementById("plantel_notificacion").value=="todos"){
+      var dato = {
       plantel: document.getElementById("plantel_notificacion").value,
       titulo: document.getElementById("titulo_notificacion").value,
       mensaje: document.getElementById("mensaje_notificacion").value,
       autor: "<?php echo $this->session->userdata('user')['usuario'] ?>",
       fecha_fin: document.getElementById("fecha_fin").value
     }
+    }
+
+    else{
+
+      //console.log(document.getElementById("nuevosplanteles").childNodes);
+      var planteles = new Array();
+      for(let i=1;i<document.getElementById("nuevosplanteles").childNodes.length;i++){
+        planteles.push(document.getElementById("nuevosplanteles").childNodes[i].id);
+      }
+
+      //console.log(planteles);
+
+      var dato = {
+      plantel: planteles,
+      titulo: document.getElementById("titulo_notificacion").value,
+      mensaje: document.getElementById("mensaje_notificacion").value,
+      autor: "<?php echo $this->session->userdata('user')['usuario'] ?>",
+      fecha_fin: document.getElementById("fecha_fin").value
+    }
+
+    }
+
+    console.log(dato);
+
+    
 
 
     var xhr = new XMLHttpRequest();
@@ -197,7 +236,38 @@
     xhr.send(JSON.stringify(dato));
 
     //console.log(dato);
+    
 
   }
+function agregar_plantel(plantel) {
+  var contador_plantel = 0;
+  if (document.getElementById("plantel_notificacion").value === "" || document.getElementById("plantel_notificacion").value === "todos") {
+      Swal.fire({
+        type: 'info',
+        text: 'Debe seleccionar un plantel'
+      });
+    } else {
+      var contenedor =  document.getElementById("nuevosplanteles");
+      var plantel = document.getElementById("plantel_notificacion").value;
+      lbl = document.createElement('label');
+      lbl.innerHTML = document.getElementById("plantel_notificacion").value;
+      lbl.className += "btn btn-outline-success";
+      lbl.setAttribute("id", document.getElementById("plantel_notificacion").value );
+      contenedor.appendChild(lbl);
+  }
+}
+
+function eliminar_plantel(plantel) {
+  var contador_plantel = 0;
+  if (document.getElementById("plantel_notificacion").value === "" || document.getElementById("plantel_notificacion").value === "todos") {
+      Swal.fire({
+        type: 'info',
+        text: 'Debe seleccionar un plantel'
+      });
+    } else {
+      var plantel = document.getElementById("plantel_notificacion").value;
+      $("#"+plantel+"").remove();
+  }
+}
 
 </script>

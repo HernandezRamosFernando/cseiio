@@ -31,7 +31,7 @@ class M_portabilidad extends CI_Model {
    }
 
    function agregar_materias($datos){
-      $this->db->trans_start();
+     // $this->db->trans_start();
       if($datos->materias_pasadas=="no"){//se agregan como materias que debe con calificion 5
          foreach($datos->materias as $materia){
             $this->db->query("insert into Portabilidad_adeudos (Estudiante_no_control,Materia_id_materia,calificacion)
@@ -58,10 +58,14 @@ class M_portabilidad extends CI_Model {
          }
 
          $folio = $this->M_frer->folio_frer_periodo_plantel($plantel,intval($mes),intval($ano_entro));
+         $folio_friae = $this->db->query("select min(Friae_folio) as folio from Friae_Estudiante where Estudiante_no_control='CSEIIO1910080'")->result()[0]->folio;
          foreach($datos->materias as $materia){
             $claves.= $materia.',';
          }
-         $this->db->query("update Friae_Estudiante set estatus_inscripcion='IRREGULAR',numero_adeudos_inscripcion=".sizeof($datos->materias).",id_materia_adeudos_inscripcion='".$claves."' where Estudiante_no_control='".$datos->no_control."' and Friae_folio=".$folio);
+         //echo "update Friae_Estudiante set estatus_inscripcion='IRREGULAR',numero_adeudos_inscripcion=".sizeof($datos->materias).",id_materia_adeudos_inscripcion='".$claves."' where Estudiante_no_control='".$datos->no_control."' and Friae_folio=".$folio;
+
+         
+         $this->db->query("update Friae_Estudiante set estatus_inscripcion='IRREGULAR',numero_adeudos_inscripcion=".sizeof($datos->materias).",id_materia_adeudos_inscripcion='".$claves."' where Estudiante_no_control='".$datos->no_control."' and Friae_folio=".$folio_friae);
 
          
          
@@ -78,8 +82,10 @@ class M_portabilidad extends CI_Model {
             $contador+=1;
          }
          
+         
       }
 
+         
       
       $this->db->trans_complete();
       if ($this->db->trans_status() === FALSE)
@@ -90,5 +96,7 @@ class M_portabilidad extends CI_Model {
          else{
             return "si";
          }
+
+         
    }
 }

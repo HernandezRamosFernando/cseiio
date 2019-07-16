@@ -8,6 +8,7 @@ class C_friae extends CI_Controller {
     public function __construct(){
         parent::__construct();
         $this->load->model("M_friae");
+        $this->load->model('M_grupo');
     }
 
     public function crear_friae(){
@@ -29,6 +30,7 @@ class C_friae extends CI_Controller {
     public function generar_friae_grupo(){
         $this->load->library('pdf');
         $grupo = $this->input->get('grupo');
+        $director_plantel_grupo = $this->M_grupo->director_plantel($grupo);
         $datos['datos_friae']=$this->M_friae->get_datos_friae($grupo);
         $contador=0;
         $materias_estudiantes;
@@ -43,6 +45,7 @@ class C_friae extends CI_Controller {
         $datos['datos_friae_estudiante']=$datos_friae_estudiante;
         $datos['materias_estudiantes']=$materias_estudiantes;
         $datos['datos_estudiante']=$datos_estudiante;
+        $datos['director'] = $director_plantel_grupo;
 
         //print_r($datos['materias_estudiantes'][0]);
         //$datos['documentos'] = $this->M_documentacion->get_documentos_base_faltantes_estudiante($no_control);

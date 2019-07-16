@@ -67,7 +67,7 @@ class MYPDF extends TCPDF {
 		// Set font
 		$this->SetFont('helvetica', 'I', 8);
 		// Page number
-		$this->Cell(0, 10, 'Página '.$this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
+		//$this->Cell(0, 10, 'Página '.$this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
 	}
 }
 
@@ -279,7 +279,7 @@ $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
 $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 
 // set auto page breaks
-$pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+$pdf->SetAutoPageBreak(TRUE, 5);
 
 // set image scale factor
 $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
@@ -381,7 +381,8 @@ $html_pos_materias='
 
 $registros_html='';
 foreach($datos_estudiante as $estudiante){
-$renglon ='<tr style="font-size:5 pt;text-align:center">';
+//$renglon ='<tr style="font-size:5 pt;text-align:center">';
+$renglon = '';
 $renglon.='<td height="15">'.($contador+1).'</td>';//np
 $renglon.='<td>'.$estudiante->matricula.'</td>';//matricula estudiante
 $renglon.='<td>'.$estudiante->curp.'</td>';//curp estudiante
@@ -418,7 +419,21 @@ if($datos_friae->semestre!='1'){
     else if($datos_friae_estudiante[$contador][0]->tipo_ingreso_inscripcion=="REINGRESO"){
         $renglon.='<td></td>';//tipo ingreso estudiante
     }
-    $renglon.='<td>'.$datos_friae_estudiante[$contador][0]->estatus_inscripcion.'</td>';//tipo ingreso estudiante
+    
+    if($datos_friae_estudiante[$contador][0]->estatus_inscripcion=="REGULAR"){
+        $renglon.='<td>1</td>';//tipo ingreso estudiante
+    }
+
+    else if($datos_friae_estudiante[$contador][0]->estatus_inscripcion=="IRREGULAR"){
+        $renglon.='<td>2</td>';//tipo ingreso estudiante
+    }
+
+    else{
+        $renglon.='<td></td>';//tipo ingreso estudiante
+    }
+
+    
+
     $renglon.='<td>'.$datos_friae_estudiante[$contador][0]->numero_adeudos_inscripcion.'</td>';//tipo ingreso estudiante
     $renglon.='<td>'.$datos_friae_estudiante[$contador][0]->id_materia_adeudos_inscripcion.'</td>';//tipo ingreso estudiante
     $renglon.='<td>'.$datos_friae_estudiante[$contador][0]->adeudos_primera_regularizacion.'</td>';//tipo ingreso estudiante
@@ -474,6 +489,7 @@ if($datos_friae_estudiante[$contador][0]->tipo_ingreso_fin_semestre=='REINGRESO'
 
 else if($datos_friae_estudiante[$contador][0]->tipo_ingreso_fin_semestre=='BAJA' || $datos_friae_estudiante[$contador][0]->tipo_ingreso_fin_semestre==''){
     $renglon.='<td>3</td>';//tipo ingreso estudiante
+    //$renglon ='<tr style="font-size:5 pt;text-align:center";background-color:gray>'.$renglon;
 }
 
 else if($datos_friae_estudiante[$contador][0]->tipo_ingreso_fin_semestre=='REPROBADO'){
@@ -481,12 +497,24 @@ else if($datos_friae_estudiante[$contador][0]->tipo_ingreso_fin_semestre=='REPRO
 }
 
 else if($datos_friae_estudiante[$contador][0]->tipo_ingreso_fin_semestre=='SIN DERECHO'){
-    $renglon.='<td></td>';//tipo ingreso estudiante
+    $renglon.='<td>2</td>';//tipo ingreso estudiante
 }
 
 
 
 
+
+
+
+if($datos_friae_estudiante[$contador][0]->tipo_ingreso_fin_semestre=='REPROBADO'){
+    $renglon.='<td></td>';//tipo ingreso estudiante
+    $renglon.='<td></td>';//tipo ingreso estudiante
+    $renglon.='<td></td>';//tipo ingreso estudiante
+    $renglon.='<td></td>';//tipo ingreso estudiante
+    $renglon.='<td></td>';//tipo ingreso estudiante
+}
+
+else{
 
 $renglon.='<td>'.$datos_friae_estudiante[$contador][0]->adeudos_fin_semestre.'</td>';//tipo ingreso estudiante
 $renglon.='<td>'.$datos_friae_estudiante[$contador][0]->id_materia_adeudos_fin_semestre.'</td>';//tipo ingreso estudiante
@@ -505,6 +533,8 @@ if($datos_friae_estudiante[$contador][0]->tipo_ingreso_despues_regularizacion=="
     
 }
 
+
+
 else if($datos_friae_estudiante[$contador][0]->tipo_ingreso_despues_regularizacion=="SIN DERECHO"){
     $renglon.='<td>S/D</td>';//tipo ingreso estudiante
 }
@@ -519,7 +549,7 @@ else if($datos_friae_estudiante[$contador][0]->tipo_ingreso_despues_regularizaci
 }
 
 
-
+}
 
 $renglon.='<td>'.$datos_friae_estudiante[$contador][0]->baja.'</td>';//tipo ingreso estudiante
 $renglon.='<td>'.$estudiante->fecha_nacimiento.'</td>';//matricula estudiante
@@ -527,6 +557,15 @@ $renglon.='<td>'.$estudiante->fecha_nacimiento.'</td>';//matricula estudiante
 
 //
 $renglon.='</tr>';
+
+//<tr style="font-size:5 pt;text-align:center">
+if($datos_friae_estudiante[$contador][0]->tipo_ingreso_fin_semestre=='BAJA'){
+$renglon = '<tr style="font-size:5 pt;text-align:center;background-color:#ececec">'.$renglon;
+}
+
+else{
+    $renglon = '<tr style="font-size:5 pt;text-align:center">'.$renglon;
+}
 $registros_html.=$renglon;
 $contador+=1;
 }
@@ -627,7 +666,19 @@ $pre_materias ='
 ';
 
 
-
+$firmas = '
+<table style="font-size:6pt">
+<tbody>
+<tr>
+<td><p>'.$director.'</p><p>_________________________</p><p>NOMBRE Y FIRMA DEL DIRETOR(A)</p><p>DEL PLANTEL</p></td>
+<td><p></p><p>_________________________</p><p>SELLO DEL PLANTEL</p></td>
+<td><p>HERIBERTO RIOS COLIN</p><p>_________________________</p><p>JEFE DEL DEPARTAMENTO DE</p><p>CONTROL ESCOLAR</p></td>
+<td><p></p><p>_________________________</p><p>SELLO CONTROL ESCOLAR</p></td>
+<td><p></p><p>_________________________</p><p>REVISO Y VALIDO</p></td>
+</tr>
+</tbody>
+</table>
+';
 
 
 
@@ -635,6 +686,7 @@ $pre_materias ='
 // print a block of text using Write()
 // output the HTML content
 $pdf->writeHTML($pre_materias, true, 0, true, true);
+$pdf->writeHTMLCell($w = 0, $h = 20, $x = '20', $y = '250', $firmas, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
 
 
 //Close and output PDF document

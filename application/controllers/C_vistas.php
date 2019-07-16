@@ -600,7 +600,7 @@ public function resolucion_equivalencia(){
     }
     public function cerrar_cal(){
         if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
-            $datos['planteles'] = $this->M_plantel->get_planteles_sin_cerrar_calificaciones_vista();
+            $datos['planteles'] = $this->M_plantel->get_planteles();
             $data= array('title'=>'Cerrar calificaciones');
         $this->load->view("headers/cabecera", $data);
         $this->load->view("headers/menuarriba");
@@ -609,7 +609,7 @@ public function resolucion_equivalencia(){
         $this->load->view("footers/footer");
         }
         else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='CESCOLAR   '){
-            $datos['planteles'] = $this->M_plantel->get_planteles_sin_cerrar_calificaciones();
+            $datos['planteles'] = $this->M_plantel->get_planteles();
             $data= array('title'=>'Cerrar calificaciones');
         $this->load->view("headers/cabecera", $data);
         $this->load->view("headers/menuarriba");

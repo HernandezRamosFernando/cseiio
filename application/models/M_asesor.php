@@ -15,4 +15,9 @@ class M_asesor extends CI_Model {
 
        return $respuesta;
    }
+
+
+   public function asesor_materia_grupo($grupo,$materia){
+      return $this->db->query("select nombre,primer_apellido,segundo_apellido from Grupo_Estudiante as ge inner join Asesor as a on ge.id_asesor=a.id_asesor where Grupo_id_grupo='".$grupo."' and id_materia='".$materia."' limit 1")->result();
+   }
 }

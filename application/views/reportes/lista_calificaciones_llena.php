@@ -45,7 +45,7 @@ class MYPDF extends TCPDF {
 		// Set font
 		$this->SetFont('helvetica', 'I', 8);
 		// Page number
-		$this->Cell(0, 10, 'Página '.$this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
+		//$this->Cell(0, 10, 'Página '.$this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
 	}
 }
 
@@ -188,7 +188,7 @@ $encabezado_tabla_b='
 <div>
 ';
 
-function rellenar_lista($estudiantes){
+function rellenar_lista($estudiantes,$bajas){
     $respuesta='';
     $contador=1;
 
@@ -201,10 +201,18 @@ function rellenar_lista($estudiantes){
         else{
             $promedio = round($promedio,0,PHP_ROUND_HALF_UP);
         }
+
+
+        if(sizeof($bajas[$contador-1])>0){
+            $respuesta.='<tr style="background-color:#ececec">';
+        }
+
+        else{
+            $respuesta.='<tr>';
+        }
         
 
         $respuesta.='
-        <tr>
         <td style="width:20px:">'.$contador.'</td>
         <td style="width:85px;height:20px">'.$estudiante->primer_apellido.'</td>
         <td style="width:85px;height:15px">'.$estudiante->segundo_apellido.'</td>
@@ -214,10 +222,15 @@ function rellenar_lista($estudiantes){
         <td style="width:35px">'.(intval($estudiante->tercer_parcial)==0?'/':$estudiante->tercer_parcial).'</td>
         <td style="width:35px">'.($promedio==0?'/':$promedio).'</td>
         <td style="width:35px">'.(intval($estudiante->examen_final)==0?'/':$estudiante->examen_final).'</td>
-        <td style="width:35px">'.$estudiante->calificacion_final.'</td>
-        <td style="width:90px"></td>
-        </tr>
-        ';
+        <td style="width:35px">'.$estudiante->calificacion_final.'</td>';
+        if(sizeof($bajas[$contador-1])>0){
+            $respuesta.='<td style="width:90px">'.$bajas[$contador-1][0]->fecha.'</td></tr>';
+        }
+
+        else{
+            $respuesta.='<td style="width:90px"></td></tr>';
+        }
+        
         $contador+=1;
     }
 
@@ -231,7 +244,7 @@ $datos_estudiantes='
 <div>
 <table border="1" style="font-size:6pt">
 <tbody>
-'.rellenar_lista($estudiantes).'
+'.rellenar_lista($estudiantes,$bajas).'
 </tbody>
 </table>
 <div>
@@ -270,13 +283,32 @@ if($materia->tipo_semestre=='A'){
         $encabezado_tabla = $encabezado_tabla_b;
     }
 
-$pdf->writeHTMLCell($w = 0, $h = 50, $x = '', $y = '5', $titulo, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+    $asesor_nombre = sizeof($asesor)==0?"":($asesor[0]->nombre.' '.$asesor[0]->primer_apellido.' '.$asesor[0]->segundo_apellido);
 
-$pdf->writeHTMLCell($w = 0, $h = 50, $x = '', $y = '19', $datos_cabecera, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+$firmas ='
+<table style="font-size:7pt">
+<tbody>
+<tr>
+<td><p>'.$asesor_nombre.'</p><p>___________________________</p><p>NOMBRE Y FIRMA DEL ASESOR</p></td>
+<td><p></p><p>___________________________</p><p>SELLO</p></td>
+<td><p>'.$plantel->director.'</p><p>___________________________</p><p>NOMBRE Y FIRMA DEL DIRECTOR(A)</p></td>
+</tr>
+</tbody>
+</table>
+';
 
-$pdf->writeHTMLCell($w = 0, $h = 50, $x = '', $y = '37', $encabezado_tabla, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
 
-$pdf->writeHTMLCell($w = 0, $h = 50, $x = '', $y = '44', $datos_estudiantes, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+$pdf->writeHTMLCell($w = 0, $h = 0, $x = '40', $y = '260', '<p style="text-align:left;font-size:7pt">FECHA:'.$fecha_fin.'</p>', $border = 0, $ln = 0, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+
+$pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = '270', $firmas, $border = 0, $ln = 0, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+
+$pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = '5', $titulo, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+
+$pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = '19', $datos_cabecera, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+
+$pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = '37', $encabezado_tabla, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+
+$pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = '44', $datos_estudiantes, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
 
 //$pdf->writeHTMLCell($w = 0, $h = 50, $x = '', $y = '75', $firma_asesor, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
 

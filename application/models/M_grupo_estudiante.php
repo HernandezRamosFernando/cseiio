@@ -82,7 +82,7 @@ class M_grupo_estudiante extends CI_Model {
     }
 
     public function plantel_grupo($grupo){
-        return $this->db->query("select nombre_plantel,cct_plantel,concat(nombre_localidad,',',nombre_municipio) as localidad_municipio from Grupo as g inner join Plantel as p on g.plantel=p.cct_plantel inner join Localidad as l on p.id_localidad_plantel=l.id_localidad inner join Municipio as m on l.Municipio_id_municipio=m.id_municipio where id_grupo='".$grupo."'")->result()[0];
+        return $this->db->query("select director,nombre_plantel,cct_plantel,concat(nombre_localidad,',',nombre_municipio) as localidad_municipio from Grupo as g inner join Plantel as p on g.plantel=p.cct_plantel inner join Localidad as l on p.id_localidad_plantel=l.id_localidad inner join Municipio as m on l.Municipio_id_municipio=m.id_municipio where id_grupo='".$grupo."'")->result()[0];
     }
 
     public function datos_materia_grupo($materia,$grupo){

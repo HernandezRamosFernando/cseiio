@@ -92,7 +92,7 @@
 
 function mostrar_grupos(){
   var xhr = new XMLHttpRequest();
-      xhr.open('GET', '<?php echo base_url();?>index.php/c_grupo/get_grupos_ciclo_escolar_plantel_inactivos?plantel='+document.getElementById("plantel").value+'&ciclo='+document.getElementById("ciclo_escolar").value, true);
+      xhr.open('GET', '<?php echo base_url();?>index.php/c_grupo/get_grupos_ciclo_escolar_plantel_friae?plantel='+document.getElementById("plantel").value+'&ciclo='+document.getElementById("ciclo_escolar").value, true);
       xhr.onloadstart = function () {
         $('#div_carga').show();
       }

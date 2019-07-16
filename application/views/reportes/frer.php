@@ -61,7 +61,8 @@ class MYPDF extends TCPDF {
         <td border="1" style="width:50px;background-color:#f8facb"><br><br><br>CALIFICACION</td>
         <td border="1" style="width:85px;background-color:#f8facb"><br><br><br>CLAVE</td>
         <td border="1" style="width:50px;background-color:#f8facb"><br><br><br>CALIFICACION</td>
-        <td border="1" style="width:210px;background-color:#f8facb"><br><br><br>OBSERVACIONES</td>
+        <td border="1" style="width:50px;background-color:#f8facb"><br><br><br>SITUACION ALUMNO</td>
+        <td border="1" style="width:160px;background-color:#f8facb"><br><br><br>OBSERVACIONES</td>
         </tr>';
 
         $encabezado ='<h5 style="text-align:center">COLEGIO SUPERIOR PARA LA EDUCACION INTEGRAL INTERCULTURAL DE OAXACA</h5>
@@ -416,19 +417,17 @@ $html_materias_4='
 
 	// Page footer
 	public function Footer() {
+        global $datos_plantel;
 
         $html ='
         <table>
         <tbody>
         <tr>
-        <td>hola</td>
-        <td>hola</td>
-        <td>hola</td>
-        <td>hola</td>
+        <td><p>'.$datos_plantel->director.'</p><p>_________________________________</p><p>NOMBRE Y FIRMA DEL DIRECTOR</p><p>DEL PLANTEL</p></td>
+        <td><p></p><p>_________________________________</p><p>SELLO DEL PLANTEL</p></td>
+        <td><p>HERIBERTO RIOS COLIN</p><p>_________________________________</p><p>JEFE DEL DEPARTAMENTO</p><p>DE CONTROL ESCOLAR</p></td>
+        <td><p></p><p>_________________________________</p><p>SELLO CONTROL ESCOLAR</p></td>
         </tr>
-        <br>
-        <br>
-        <br>
         <br>
         <br>
         <br>
@@ -436,7 +435,7 @@ $html_materias_4='
         <td></td>
         <td></td>
         <td></td>
-        <td>hola</td>
+        <td><p>_________________________________</p><p>REVISO Y CONFRONTO</p></td>
         </tr>
         </tbody>
         </table>
@@ -559,10 +558,12 @@ $foliador=1;
         }
 
         $claves="";
+        $adeudos = 0;
         //echo sizeof($materias_debe_estudiante_sin_grupo[0]);
         if(sizeof($materias_debe_estudiante_con_grupo[$contador-1])>0){
             foreach($materias_debe_estudiante_con_grupo[$contador-1] as $materia){
             $claves.=$materia->id_materia.",";
+            $adeudos+=1;
             }
         }
 
@@ -576,7 +577,8 @@ $foliador=1;
         <td style="width:85px">'.$datos_estudiantes_con_grupo[$contador-1]->nombre.'</td>
         <td style="width:30px">'.(intval($datos_frer_estudiante_con_grupo[$contador-1]->numero_adeudos)+$aprobadas_sumar).'</td>
         '.$claves_califiaciones.'
-        <td style="width:210px">'.$claves.'</td>
+        <td style="width:50px">'.($adeudos>0?'2':'1').'</td>
+        <td style="width:160px">'.$claves.'</td>
         </tr>';
         $contador+=1;
         $foliador+=1;
@@ -630,10 +632,12 @@ $foliador=1;
         //materias que debe
 
         $claves="";
+        $adeudos = 0;
         //echo sizeof($materias_debe_estudiante_sin_grupo[0]);
         if(sizeof($materias_debe_estudiante_sin_grupo[$contador-1])>0){
             foreach($materias_debe_estudiante_sin_grupo[$contador-1] as $materia){
             $claves.=$materia->id_materia.",";
+            $adeudos+=1;
             }
         }
         
@@ -649,7 +653,8 @@ $foliador=1;
         <td style="width:85px">'.$datos_estudiantes_sin_grupo[$contador-1]->nombre.'</td>
         <td style="width:30px">'.(intval($datos_frer_estudiante_sin_grupo[$contador-1]->numero_adeudos)+$aprobadas_sumar).'</td>
         '.$claves_califiaciones.'
-        <td style="width:210px">'.$claves.'</td>
+        <td style="width:50px">'.($adeudos>0?'2':'1').'</td>
+        <td style="width:160px">'.$claves.'</td>
         </tr>';
         $contador+=1;
         $foliador+=1;
@@ -660,6 +665,7 @@ $foliador=1;
 
 
 $cintillo = '<tr><td style="background-color:gray"></td>
+<td style="background-color:gray"></td>
 <td style="background-color:gray"></td>
 <td style="background-color:gray"></td>
 <td style="background-color:gray"></td>

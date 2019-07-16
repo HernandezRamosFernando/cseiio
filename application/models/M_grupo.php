@@ -162,8 +162,16 @@ class M_grupo extends CI_Model {
         return $this->db->query("SELECT distinct id_grupo,semestre,nombre_grupo FROM Grupo as g inner join Grupo_Estudiante as ge on g.id_grupo=ge.Grupo_id_grupo where plantel='".$plantel."' and Ciclo_escolar_id_ciclo_escolar=".$ciclo." and g.estatus=0")->result();
     }
 
+    public function get_grupos_ciclo_escolar_plantel_friae($plantel,$ciclo){
+        return $this->db->query("SELECT distinct id_grupo,semestre,nombre_grupo FROM Grupo as g inner join Grupo_Estudiante as ge on g.id_grupo=ge.Grupo_id_grupo where plantel='".$plantel."' and Ciclo_escolar_id_ciclo_escolar=".$ciclo)->result();
+    }
+
    public function get_num_alumnos_grupo($id_grupo){
     return $this->db->query("select count(distinct ge.Estudiante_no_control) num_alumnos from Grupo g inner join Grupo_Estudiante ge on ge.Grupo_id_grupo=g.id_grupo where g.id_grupo='".$id_grupo."'")->result();
+}
+
+public function director_plantel($grupo){
+    return $this->db->query("select director from Grupo as g inner join Plantel as p on g.plantel=p.cct_plantel where g.id_grupo='20EBD0001C11BA'")->result()[0]->director;
 }
 
 

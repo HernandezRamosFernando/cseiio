@@ -275,7 +275,7 @@
           }
         }
       }
-      xhr.send(JSON.stringify({ no_control: e.value, motivo: document.getElementById("motivo_baja").value }));
+      xhr.send(JSON.stringify({ no_control: e.value, motivo: document.getElementById("motivo_baja").value ,fecha: document.getElementById("fecha_inicio").value}));
     }
 
     window.onload = function () {

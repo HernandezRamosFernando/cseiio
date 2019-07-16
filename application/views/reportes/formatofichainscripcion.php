@@ -206,7 +206,7 @@ $html_1 ='
 </tr>
 
 <tr>
-<td colspan="2"><strong>NOMBRE DEL BACHILLERATO: </strong>'.$nombre_plantel.'</td>
+<td colspan="2"><strong>NOMBRE DEL BACHILLERATO: </strong>'.$plantel[0]->nombre_plantel.'</td>
 </tr>
 
 <tr>
@@ -466,17 +466,24 @@ if($columna!=0 ){
 
 $html_3='
 </tbody>
+</table>';
+
+
+$html_3.='<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+<table>
+<tr><td WIDTH="33.33%"><span style="font-weight: bold;text-align: center;text-decoration: underline;font-size: 8px">'.strtoupper($estudiante['estudiante'][0]->nombre).' '.strtoupper($estudiante['estudiante'][0]->primer_apellido).' '.strtoupper($estudiante['estudiante'][0]->segundo_apellido).'</span></td><td WIDTH="33.33%"><span style="font-weight: bold;text-align: center;text-decoration: underline;font-size: 8px">'.((isset($estudiante['tutor'][0]->primer_apellido_tutor))? strtoupper($estudiante['tutor'][0]->primer_apellido_tutor) : "").' '.
+((isset($estudiante['tutor'][0]->segundo_apellido_tutor))? strtoupper($estudiante['tutor'][0]->segundo_apellido_tutor) : "").' '.
+((isset($estudiante['tutor'][0]->nombre_tutor))? strtoupper($estudiante['tutor'][0]->nombre_tutor) : "").'</span></td><td WIDTH="33.33%"><span style="font-weight: bold;text-align: center;text-decoration: underline;font-size: 8px">'.$plantel[0]->director.'</span></td></tr>
+<tr><td><span style="text-align: center;font-size: 8px">NOMBRE Y FIRMA<br> DEL ESTUDIANTE</span></td><td><span style="text-align: center;font-size: 8px">NOMBRE Y FIRMA<br> DEL TUTOR(A)</span></td><td><span style="text-align: center;font-size: 8px">NOMBRE Y FIRMA <br> DEL DIRECTOR DE PLANTEL</span></td></tr>
 </table>
-
-
-
-<br>
-<br>
-<br>
-<br>
-<span style="text-align:center; font-weight:bold;text-decoration: underline">'.strtoupper($estudiante['estudiante'][0]->nombre).' '.strtoupper($estudiante['estudiante'][0]->primer_apellido).' '.strtoupper($estudiante['estudiante'][0]->segundo_apellido).'</span><br>
-<span style="text-align:center; font-weight:bold">
-FIRMA DEL ASPIRANTE</span>
 
 ';
 

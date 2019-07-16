@@ -621,7 +621,7 @@ public function buscar_aspirantesxplantel(){
     $this->load->library('pdf');
     $no_control = $this->input->get('no_control');
     $datos['estudiante'] = $this->M_estudiante->get_estudiante($no_control);
-    $datos['nombre_plantel']= $this->M_plantel->get_plantel($datos['estudiante']['estudiante'][0]->Plantel_cct_plantel)[0]->nombre_plantel;
+    $datos['plantel']= $this->M_plantel->get_plantel($datos['estudiante']['estudiante'][0]->Plantel_cct_plantel);
 
     $datos['domicilio_estudiante'] = $this->M_localidad->get_nombre_estado_municipio_localidad($datos['estudiante']['estudiante'][0]->id_localidad);
 

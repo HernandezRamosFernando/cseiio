@@ -108,11 +108,11 @@
           <div class="row">
             <div class="col-md-8">
               <div class="form-label-group">
-                <input class="form-control" placeholder="Fecha de inicio de periodo" type="date" name="fecha_inicio"
+                <input class="form-control" placeholder="Fecha de baja" type="date" name="fecha_inicio"
                   id="fecha_inicio" style="color: #237087" min=<?php
                 echo date('Y-m-d');
                 ?>>
-                <label for="fecha_inicio">Fecha de inicio de periodo</label>
+                <label for="fecha_inicio">Fecha de baja</label>
               </div>
             </div>
           </div>

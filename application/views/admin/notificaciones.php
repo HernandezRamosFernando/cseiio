@@ -160,13 +160,39 @@
 
   function mandar_notificacion() {
 
-    let dato = {
+    if(document.getElementById("plantel_notificacion").value=="todos"){
+      var dato = {
       plantel: document.getElementById("plantel_notificacion").value,
       titulo: document.getElementById("titulo_notificacion").value,
       mensaje: document.getElementById("mensaje_notificacion").value,
       autor: "<?php echo $this->session->userdata('user')['usuario'] ?>",
       fecha_fin: document.getElementById("fecha_fin").value
     }
+    }
+
+    else{
+
+      //console.log(document.getElementById("nuevosplanteles").childNodes);
+      var planteles = new Array();
+      for(let i=1;i<document.getElementById("nuevosplanteles").childNodes.length;i++){
+        planteles.push(document.getElementById("nuevosplanteles").childNodes[i].id);
+      }
+
+      //console.log(planteles);
+
+      var dato = {
+      plantel: planteles,
+      titulo: document.getElementById("titulo_notificacion").value,
+      mensaje: document.getElementById("mensaje_notificacion").value,
+      autor: "<?php echo $this->session->userdata('user')['usuario'] ?>",
+      fecha_fin: document.getElementById("fecha_fin").value
+    }
+
+    }
+
+    console.log(dato);
+
+    
 
 
     var xhr = new XMLHttpRequest();
@@ -210,6 +236,7 @@
     xhr.send(JSON.stringify(dato));
 
     //console.log(dato);
+    
 
   }
 function agregar_plantel(plantel) {

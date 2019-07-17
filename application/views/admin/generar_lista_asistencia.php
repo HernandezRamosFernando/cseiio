@@ -107,6 +107,24 @@
 
         <div class="form-group">
           <div class="row">
+          <div class="col-md-6">
+              <label class="form-group has-float-label seltitulo">
+                <select class="form-control form-control-lg selcolor" name="tipo_formato"
+                  id="tipo_formato" required="required">
+                  <option value="">Seleccione el formato que desea para imprimir</option>
+                  <option value="OFICIO">OFICIO</option>
+                  <option value="CARTA">CARTA</option>
+                </select>
+                <span>Tamaño de hoja para imprimir</span>
+              </label>
+            </div>
+        
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <div class="row">
 <div class="col-md-12">
 
 <button type="submit" class="btn btn-success btn-lg btn-block" style="padding: 1rem"

@@ -30,22 +30,33 @@ class C_grupo_estudiante extends CI_Controller {
     $cct_plantel = $this->input->post('plantel');
     $nombre_plantel=$this->M_plantel->get_plantel($cct_plantel)[0]->nombre_plantel;
     $semestre_grupo = $this->input->post('semestre_grupo');
+
     $datos_grupo=$this->M_grupo_estudiante->get_datos_grupo_estudiante_asesor($id_grupo,$id_materia);
+
+    $tipo_formato = $this->input->post('tipo_formato');
 
     $anio=date("Y");
 
     //$nombre_grupo=$this->input->post('');
 
-     $datos['lista_alumnos']=$this->M_grupo_estudiante->nombres_estudiantes_grupo_materia($id_grupo,$id_materia);
+     $datos['lista_alumnos']=$this->M_grupo_estudiante->lista_asistencia_x_grupo($id_grupo,$id_materia);
      $datos['datos_grupo']=$datos_grupo;
      $datos['mes']=$mes;
      $datos['anio']=$anio;
      $datos['cct_plantel']=$cct_plantel;
      $datos['nombre_plantel']=$nombre_plantel;
      $datos['semestre']=$semestre_grupo;
+     
 
     $this->load->library('pdf');
-    $this->load->view('reportes/formato_asistencia',$datos);
+    if($tipo_formato=='CARTA'){
+        $this->load->view('reportes/formato_asistencia',$datos);
+    }
+
+    if($tipo_formato=='OFICIO'){
+        $this->load->view('reportes/formato_asistencia_oficio',$datos);
+    }
+    
     }
 
 

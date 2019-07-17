@@ -98,4 +98,8 @@ class M_grupo_estudiante extends CI_Model {
     public function existe_grupo_ciclo_escolar_estudiante($no_control,$id_ciclo,$semestre){
         return $this->db->query("SELECT count(*) resultado from Grupo_Estudiante ge inner join Grupo g on ge.Grupo_id_grupo=g.id_grupo where ge.Estudiante_no_control='".$no_control."' and ge.Ciclo_escolar_id_ciclo_escolar=".$id_ciclo." and g.semestre=".$semestre)->result();
    }
+
+   public function lista_asistencia_x_grupo($grupo,$materia){
+    return $this->db->query("select nombre,primer_apellido,segundo_apellido from Grupo_Estudiante as ge inner join Estudiante as e on ge.Estudiante_no_control=e.no_control where Grupo_id_grupo='".$grupo."' and id_materia='".$materia."' order by nombre,primer_apellido,segundo_apellido")->result();
+}
 }

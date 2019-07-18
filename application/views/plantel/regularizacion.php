@@ -98,7 +98,7 @@
     </form>
     <br>
     <div class="col-md-12" id="agregar_oculto" style="display: none">
-      <button type="button" data-toggle="modal" data-target="#fechacalificacion" value="nuevo" id="boton_agregar"
+      <button type="button" data-toggle="modal" data-target="#fechacalificacion" value="nuevo" id="boton_agregar" onclick="cargar_asesor();"
         class="btn btn-success btn-lg btn-block btn-guardar" style="padding: 1rem"> Guardar cambios</button>
     </div>
 
@@ -119,14 +119,27 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        <div class="form-label-group">
+      <div class="modal-body card">
+        <div class="form-group form-label-group row">
           <input type="date" class="form-control" id="fecha_inicio" placeholder="Fecha de calificación" min=<?php
                 $fecha_actual = date("d-m-Y");
                 date("d-m-Y",strtotime($fecha_actual."- 60 days")); 
                 ?>>
           <label for="fecha_inicio">Fecha de calificación </label>
 
+          </div>
+
+          <div class="form-group form-label-group row">
+          <input type="time" class="form-control" id="hora_inicio" placeholder="Hora de aplicación" >
+          <label for="hora_inicio">Hora de aplicación </label>
+        </div>
+
+        <div class="form-group row">
+        <label class="form-group has-float-label seltitulo">
+              <select class="form-control form-control-lg selcolor" id="asesor"  name="asesor">
+              </select>
+              <span>Seleccione Asesor</span>
+            </label>
         </div>
 
       </div>
@@ -484,6 +497,23 @@
     $(e).parent().next().children().prop( "disabled", true );
     $(e).parent().next().children().val("")
   }
+}
+
+function cargar_asesor(){
+  var asesores = new XMLHttpRequest();
+        asesores.open('GET', '<?php echo base_url();?>index.php/c_asesor/get_asesores_plantel?plantel=' + document.getElementById("plantel").value, true);
+        asesores.onloadstart = function () {
+          $('#div_carga').show();
+        }
+        asesores.error = function () {
+          console.log("error de conexion");
+        }
+
+        asesores.onload = function () {
+          $('#div_carga').hide();
+          document.getElementById("asesor").innerHTML = asesores.response;
+            };
+            asesores.send(null);
 }
 
 

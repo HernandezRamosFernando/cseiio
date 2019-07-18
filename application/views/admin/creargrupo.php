@@ -146,7 +146,7 @@
         <div class="row" id="alumnos_oculto" style="display:none">
           <div class=" col-md-6">
             <div class="card card-body" style="width: 100%; overflow: scroll">
-            <p class="h5" id="">Alumnos registrados en este plantel</p>
+              <p class="h5" id="">Alumnos registrados en este plantel</p>
               <p class="h5" id="contador_alumnos_restantes">Restantes para agregar: 0</p>
               <table class="table table-hover" id="tabla_completa" style="width: 100%; overflow: scroll">
                 <caption>Lista de todos los alumnos de este semestre sin grupo</caption>
@@ -166,7 +166,7 @@
 
           <div class="col-md-6">
             <div class="card card-body" style="width: 100%; overflow: scroll">
-            <p class="h5" id="">Alumnos en el grupo</p>
+              <p class="h5" id="">Alumnos en el grupo</p>
               <p class="h5" id="contador_alumnos_agregados">Agregados: 0</p>
               <table class="table table-hover" id="tabla_completa_grupo" style="width: 100%; overflow: scroll">
                 <caption>Lista del Grupo creado</caption>
@@ -232,18 +232,18 @@
 
 <script>
 
-var opcionselect=0;
-var cantidad_materias=0;
+  var opcionselect = 0;
+  var cantidad_materias = 0;
 
-function validarselect(e){
-  if(e.value != ""){
-    console.log(e.value);
-    optionselect = 1;
-  }else if(e.value === "" ){
-    console.log(e.value);
-    optionselect = 0;
+  function validarselect(e) {
+    if (e.value != "") {
+      console.log(e.value);
+      optionselect = 1;
+    } else if (e.value === "") {
+      console.log(e.value);
+      optionselect = 0;
+    }
   }
-}
 
   function limpiarbusqueda() {
     document.getElementById('crear_grupo').classList.remove('btn-success');
@@ -333,7 +333,7 @@ function validarselect(e){
     var semestre = document.getElementById("semestre_grupo").value;
     var plantel = document.getElementById("plantel").value;
     var componente = document.getElementById("seleccione_componente").value;
-    var query = 'semestre=' + semestre + '&plantel=' + plantel+ '&componente='+componente;
+    var query = 'semestre=' + semestre + '&plantel=' + plantel + '&componente=' + componente;
     xhr.open('GET', '<?php echo base_url();?>index.php/c_acreditacion/get_estudiantes_plantel_semestre?' + query, true);
     xhr.onloadstart = function () {
       $('#div_carga').show();
@@ -371,7 +371,7 @@ function validarselect(e){
     document.getElementById('crear_grupo').disabled = true;
     document.getElementById('agregar_oculto').style.display = "";
     document.getElementById('alumnos_oculto').style.display = "";
-    
+
   }
 
   function buscar_estudiantes_grupo(idgrupo) {
@@ -453,35 +453,94 @@ function validarselect(e){
           var cGrupos = parseInt(cAlumnos / 35);
           cGrupos = cGrupos + 1;
           document.getElementById("cantidad_alumnos").innerHTML = "La cantidad de Alumnos registrados en este semestre es: " + cAlumnos + " se recomienda crear " + cGrupos + " grupos";
-          var select = document.getElementById("grupo_nombre");
-          var option = document.createElement("option");
-          option.text = "Seleccione uno";
-          option.value = "";
-          select.add(option);
-          var option = document.createElement("option");
-          option.text = "A";
-          option.value = "A";
-          select.add(option);
-          var option = document.createElement("option");
-          option.text = "B";
-          option.value = "B";
-          select.add(option);
-          var option = document.createElement("option");
-          option.text = "C";
-          option.value = "C";
-          select.add(option);
-          var option = document.createElement("option");
-          option.text = "D";
-          option.value = "D";
-          select.add(option);
-          var option = document.createElement("option");
-          option.text = "E";
-          option.value = "E";
-          select.add(option);
-          var option = document.createElement("option");
-          option.text = "F";
-          option.value = "F";
-          select.add(option);
+          if (cGrupos = 2) {
+            var select = document.getElementById("grupo_nombre");
+            var option = document.createElement("option");
+            option.text = "Seleccione uno";
+            option.value = "";
+            select.add(option);
+            var option = document.createElement("option");
+            option.text = "A";
+            option.value = "A";
+            select.add(option);
+            var option = document.createElement("option");
+            option.text = "B";
+            option.value = "B";
+            select.add(option);
+          } else if (cGrupos = 3) {
+            var select = document.getElementById("grupo_nombre");
+            var option = document.createElement("option");
+            option.text = "Seleccione uno";
+            option.value = "";
+            select.add(option);
+            var option = document.createElement("option");
+            option.text = "A";
+            option.value = "A";
+            select.add(option);
+            var option = document.createElement("option");
+            option.text = "B";
+            option.value = "B";
+            select.add(option);
+            var option = document.createElement("option");
+            option.text = "C";
+            option.value = "C";
+            select.add(option);
+          } else if (cGrupos = 4) {
+            var select = document.getElementById("grupo_nombre");
+            var option = document.createElement("option");
+            option.text = "Seleccione uno";
+            option.value = "";
+            select.add(option);
+            var option = document.createElement("option");
+            option.text = "A";
+            option.value = "A";
+            select.add(option);
+            var option = document.createElement("option");
+            option.text = "B";
+            option.value = "B";
+            select.add(option);
+            var option = document.createElement("option");
+            option.text = "C";
+            option.value = "C";
+            select.add(option);
+            var option = document.createElement("option");
+            option.text = "D";
+            option.value = "D";
+            select.add(option);
+
+          } else {
+            var select = document.getElementById("grupo_nombre");
+            var option = document.createElement("option");
+            option.text = "Seleccione uno";
+            option.value = "";
+            select.add(option);
+            var option = document.createElement("option");
+            option.text = "A";
+            option.value = "A";
+            select.add(option);
+            var option = document.createElement("option");
+            option.text = "B";
+            option.value = "B";
+            select.add(option);
+            var option = document.createElement("option");
+            option.text = "C";
+            option.value = "C";
+            select.add(option);
+            var option = document.createElement("option");
+            option.text = "D";
+            option.value = "D";
+            select.add(option);
+            var option = document.createElement("option");
+            option.text = "E";
+            option.value = "E";
+            select.add(option);
+            var option = document.createElement("option");
+            option.text = "F";
+            option.value = "F";
+            select.add(option);
+          }
+
+
 
         }
       };
@@ -535,14 +594,14 @@ function validarselect(e){
         var asesores = new XMLHttpRequest();
         asesores.open('GET', '<?php echo base_url();?>index.php/c_asesor/get_asesores_plantel?plantel=' + document.getElementById("plantel").value, true);
         asesores.onloadstart = function () {
-      $('#div_carga').show();
-    }
-    asesores.error = function () {
-      console.log("error de conexion");
-    }
+          $('#div_carga').show();
+        }
+        asesores.error = function () {
+          console.log("error de conexion");
+        }
 
-    asesores.onload = function () {
-      $('#div_carga').hide();
+        asesores.onload = function () {
+          $('#div_carga').hide();
 
           //cargar las materias en la tabla-----------------------------------------------
           var semestre = parseInt(document.getElementById("semestre_grupo").value);
@@ -551,17 +610,17 @@ function validarselect(e){
             var materias = new XMLHttpRequest();
             materias.open('GET', '<?php echo base_url();?>index.php/c_materias/materias_semestre?semestre=' + semestre, true);
             materias.onloadstart = function () {
-      $('#div_carga').show();
-    }
-    materias.error = function () {
-      console.log("error de conexion");
-    }
+              $('#div_carga').show();
+            }
+            materias.error = function () {
+              console.log("error de conexion");
+            }
 
-    materias.onload = function () {
-      $('#div_carga').hide();
+            materias.onload = function () {
+              $('#div_carga').hide();
               document.getElementById("tabla_asesor").innerHTML = "";
               var tabla = document.getElementById("tabla_asesor");
-              cantidad_materias=JSON.parse(materias.response).length;
+              cantidad_materias = JSON.parse(materias.response).length;
 
               JSON.parse(materias.response).forEach(function (valor, indice) {
                 var fila = "<tr>";
@@ -583,14 +642,14 @@ function validarselect(e){
             materias.open('GET', '<?php echo base_url();?>index.php/c_materias/get_materias_semestre_componente?semestre=' + semestre + "&componente=" + document.getElementById("seleccione_componente").value.split("-")[0], true);
 
             materias.onloadstart = function () {
-      $('#div_carga').show();
-    }
-    materias.error = function () {
-      console.log("error de conexion");
-    }
+              $('#div_carga').show();
+            }
+            materias.error = function () {
+              console.log("error de conexion");
+            }
 
-    materias.onload = function () {
-      $('#div_carga').hide();
+            materias.onload = function () {
+              $('#div_carga').hide();
               document.getElementById("tabla_asesor").innerHTML = "";
               var tabla = document.getElementById("tabla_asesor");
               console.log("materias" + materias.response.length);
@@ -651,12 +710,12 @@ function validarselect(e){
     xhr.send(null);
   }
 
-  function select_formulario(){
-    if(opcionselect === cantidad_materias){
+  function select_formulario() {
+    if (opcionselect === cantidad_materias) {
       console.log("igual");
 
     }
-    else{
+    else {
       console.log("diferente");
     }
   }

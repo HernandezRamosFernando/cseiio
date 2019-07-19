@@ -388,10 +388,17 @@ public function obtener_fecha_inscripcion_semestre($no_control){
      return $this->db->query("select * from Estudiante where tipo_ingreso = 'REINGRESO' and curp like '".$curp."%' and Plantel_cct_plantel like '".$plantel."%'")->result();
   }
 
-  function set_desertor($datos){
+  function set_desertor($no_control,$motivo_desercion,$fecha_desercion){
    $this->db->trans_start();
 
-   $this->db->query("update Estudiante set tipo_ingreso='DESERTOR' where no_control='".$datos->no_control."'");
+   $this->db->query("update Estudiante set tipo_ingreso='DESERTOR' where no_control='".$no_control."'");
+   $data = array(
+      'Estudiante_no_control' =>$no_control,
+      'motivo' => $motivo_desercion,
+      'fecha' => $fecha_desercion
+);
+
+$this->db->insert('Desertor', $data);
 
    $this->db->trans_complete();
    
@@ -592,6 +599,12 @@ END) num_examen_final,sum(CASE
   ELSE 0
 END) num_calificacion_final from Grupo_Estudiante ge LEFT JOIN Grupo g on g.id_grupo=ge.Grupo_id_grupo where g.estatus=1 group by ge.Estudiante_no_control) otro on otro.Estudiante_no_control=e.no_control
 where e.no_control='".$no_control."';")->result();
+
+}
+
+
+public function get_estudiantes_porsibles_traslados($matricula,$curp){
+   return $this->db->query("select * from Estudiante where tipo_ingreso='DESERTOR' and curp='".$curp."' or matricula='".$matricula."';")->result();
 
 }
 

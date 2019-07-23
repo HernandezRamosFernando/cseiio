@@ -7,24 +7,19 @@
         <span>Menú</span>
       </a>
     </li>
-
-    <li class="nav-item dropdown ">
-      <a class="nav-link nav-dropdown-toggle  <?php ($this->uri->segment(2)=='inscripcion'||$this->uri->segment(2)=='nuevo_ingreso'||$this->uri->segment(2)=='portabilidad'||$this->uri->segment(2)=='asignar_matricula'||$this->uri->segment(2)=='carta_compromiso' ||$this->uri->segment(2)=='resolucion_equivalencia'||$this->uri->segment(2)=='materias_adeudo_portabilidad') ? print 'bg-info text-light' : print null; ?>"
+    <li class="nav-item ">
+      <a class="nav-link <?php ($this->uri->segment(2)=='inscripcion'||$this->uri->segment(2)=='nuevo_ingreso'||$this->uri->segment(2)=='portabilidad'||$this->uri->segment(2)=='asignar_matricula'||$this->uri->segment(2)=='carta_compromiso' ||$this->uri->segment(2)=='resolucion_equivalencia'||$this->uri->segment(2)=='materias_adeudo_portabilidad') ? print 'bg-info text-light' : print null; ?>"
       href="<?php echo base_url();?>index.php/c_menu/inscripcion">
         <i class="material-icons">group_add</i>
         <span class="font-weight-light">Inscripción<span>
       </a>
-    
     </li>
-
-      <li class="nav-item dropdown ">
-      <a class="nav-link nav-dropdown-toggle  <?php ($this->uri->segment(2)=='reinscripcion' || $this->uri->segment(2)=='repetidor'||$this->uri->segment(2)=='incorporado'||$this->uri->segment(2)=='desertor'||$this->uri->segment(2)=='traslado' ||$this->uri->segment(2)=='') ? print 'bg-info text-light' : print null; ?>"
+    <li class="nav-item ">
+      <a class="nav-link <?php ($this->uri->segment(2)=='reinscripcion' || $this->uri->segment(2)=='repetidor'||$this->uri->segment(2)=='incorporado'||$this->uri->segment(2)=='desertor'||$this->uri->segment(2)=='traslado' ||$this->uri->segment(2)=='nulidad_semestre') ? print 'bg-info text-light' : print null; ?>"
       href="<?php echo base_url();?>index.php/c_vistas/reinscripcion">
         <i class="material-icons">group_add</i>
         <span class="font-weight-light">Reinscripción<span>
       </a>
-      
-    </li>
     </li>
     <li class="nav-item ">
       <a class="nav-link <?php ($this->uri->segment(2)=='control_alumnos') ? print 'bg-info text-light ' : print 'null'; ?>"
@@ -34,54 +29,22 @@
       </a>
     </li>
     <li class="nav-item ">
-      <a class="nav-link <?php ($this->uri->segment(2)=='acreditacion') ? print 'bg-info text-light ' : print 'null'; ?>"
-      aria-expanded="false" data-toggle="collapse" href="#submenu1" role="button">
+      <a class="nav-link <?php ($this->uri->segment(2)=='acreditacion'||$this->uri->segment(2)=='crear_grupo'||$this->uri->segment(2)=='terminar_ciclo'||$this->uri->segment(2)=='calificacion'||$this->uri->segment(2)=='cerrar_cal'||$this->uri->segment(2)=='regularizacion'||$this->uri->segment(2)=='buscar_grupo'||$this->uri->segment(2)=='asesor_grupo'||$this->uri->segment(2)=='cerrar_reg'||$this->uri->segment(2)=='bajas') ? print 'bg-info text-light ' : print 'null'; ?>"
+      href="<?php echo base_url();?>index.php/c_vistas/acreditacion">
         <i class="material-icons">beenhere</i>
         <span>Acreditación</span>
       </a>
-      <div id="submenu1" class="<?php ($this->uri->segment(2)=='crear_grupo'||$this->uri->segment(2)=='terminar_ciclo'||$this->uri->segment(2)=='calificacion'||$this->uri->segment(2)=='cerrar_cal'||$this->uri->segment(2)=='regularizacion'||$this->uri->segment(2)=='buscar_grupo'||$this->uri->segment(2)=='asesor_grupo') ? print 'null' : print 'collapse'; ?> sidebar-submenu">
-        <a class="nav-link <?php ($this->uri->segment(2)=='crear_grupo') ? print 'bg-info text-light ' : print null; ?>" href="<?php echo base_url();?>index.php/c_vistas/crear_grupo">
-        <img class="icono_izquierda <?php ($this->uri->segment(2)=='crear_grupo') ? print 'icono_izquierda_seleccionado' : print null; ?>"  src="<?php echo base_url();?>assets/img/creargrupo.png">
-          <span class="font-weight-light">Crear grupos
-          </span>
-        </a>
-        <a class="nav-link <?php ($this->uri->segment(2)=='buscar_grupo') ? print 'bg-info text-light' : print null; ?>" href="<?php echo base_url();?>index.php/c_vistas/buscar_grupo">
-        <img class="icono_izquierda <?php ($this->uri->segment(2)=='buscar_grupo') ? print 'icono_izquierda_seleccionado' : print null; ?>" src="<?php echo base_url();?>assets/img/modificargrupo.png">
-          <span class="font-weight-light">Modificar grupos
-          </span>
-        </a>
-        <a class="nav-link <?php ($this->uri->segment(2)=='asesor_grupo') ? print 'bg-info text-light' : print null; ?>" href="<?php echo base_url();?>index.php/c_vistas/asesor_grupo">
-        <img class="icono_izquierda_alto <?php ($this->uri->segment(2)=='asesor_grupo') ? print 'icono_izquierda_seleccionado' : print null; ?>" src="<?php echo base_url();?>assets/img/modificarasesor.png">
-          <span class="font-weight-light">Modificar Asesor
-          </span>
-        </a>
-        <a class="nav-link <?php ($this->uri->segment(2)=='calificacion') ? print 'bg-info text-light' : print null; ?>" href="<?php echo base_url();?>index.php/c_vistas/calificacion">
-        <img class="icono_izquierda_ancho <?php ($this->uri->segment(2)=='calificacion') ? print 'icono_izquierda_seleccionado' : print null; ?>" src="<?php echo base_url();?>assets/img/calificaciones.png">
-          <span class="font-weight-light">Calificaciones
-          </span>
-        </a>
-        <a class="nav-link <?php ($this->uri->segment(2)=='cerrar_cal') ? print 'bg-info text-light' : print null; ?>" href="<?php echo base_url();?>index.php/c_vistas/cerrar_cal">
-        <img class="icono_izquierda_ancho <?php ($this->uri->segment(2)=='cerrar_cal') ? print 'icono_izquierda_seleccionado' : print null; ?>" src="<?php echo base_url();?>assets/img/calificaciones.png">
-          <span class="font-weight-light">Cerrar calificaciones
-          </span>
-        </a>
-        <a class="nav-link <?php ($this->uri->segment(2)=='regularizacion') ? print 'bg-info text-light' : print null; ?>" href="<?php echo base_url();?>index.php/c_vistas/regularizacion">
-        <i class="material-icons">group_add</i>
-          <span class="font-weight-light">Regularización
-          </span>
-        </a>
-        
-        <hr class="bg-info" style=" border: 3px solid ;">
-      </div>
     </li>
     <li class="nav-item ">
-      <a class="nav-link" href="<?php echo base_url();?>index.php/c_menu/principal">
+      <a class="nav-link <?php ($this->uri->segment(2)=='reportes'||$this->uri->segment(2)=='friae'||$this->uri->segment(2)=='frer'||$this->uri->segment(2)=='kardex'||$this->uri->segment(2)=='lista_grupo_sc'||$this->uri->segment(2)=='lista_grupo_cc'||$this->uri->segment(2)=='observaciones'||$this->uri->segment(2)=='lista_asistencia'||$this->uri->segment(2)=='actas_regu') ? print 'bg-info text-light ' : print 'null'; ?>"
+      href="<?php echo base_url();?>index.php/c_vistas/reportes">
         <i class="material-icons">assessment</i>
         <span>Reportes</span>
       </a>
     </li>
     <li class="nav-item ">
-      <a class="nav-link" href="<?php echo base_url();?>index.php/c_menu/principal">
+      <a class="nav-link <?php ($this->uri->segment(2)=='formatos') ? print 'bg-info text-light ' : print 'null'; ?>"
+      href="<?php echo base_url();?>index.php/c_vistas/formatos">
         <i class="material-icons">description</i>
         <span>Formatos</span>
       </a>
@@ -100,47 +63,11 @@
         <span>Carga de documentos</span>
       </a>
     </li>
-    <li class="nav-item dropdown ">
-      <a class="nav-link nav-dropdown-toggle  <?php ($this->uri->segment(2)=='control_permisos') ? print 'bg-info text-light' : print null; ?>"
-      aria-expanded="false" data-toggle="collapse" href="#submenu2" role="button">
+    <li class="nav-item ">
+      <a class="nav-link <?php ($this->uri->segment(2)=='control_permisos'||$this->uri->segment(2)=='permisos_cal'||$this->uri->segment(2)=='permisos_reg'||$this->uri->segment(2)=='materias'||$this->uri->segment(2)=='componentes' ||$this->uri->segment(2)=='terminar_ciclo') ? print 'bg-info text-light' : print null; ?>"
+      href="<?php echo base_url();?>index.php/c_subir_doc/control_permisos">
         <i class="material-icons">people_outline</i>
         <span>Control Y Permisos</span>
       </a>
-      <div id="submenu2" class="<?php ($this->uri->segment(2)=='permisos_cal'||$this->uri->segment(2)=='permisos_reg'||$this->uri->segment(2)=='materias'||$this->uri->segment(2)=='componentes' ||$this->uri->segment(2)=='terminar_ciclo') ? print 'null' : print 'collapse'; ?> sidebar-submenu">
-        <a class="nav-link <?php ($this->uri->segment(2)=='permisos_cal') ? print 'bg-info text-light' : print null; ?>" href="<?php echo base_url();?>index.php/c_vistas/permisos_cal">
-        <img class="icono_izquierda <?php ($this->uri->segment(2)=='permisos_cal') ? print 'icono_izquierda_seleccionado' : print null; ?>" src="<?php echo base_url();?>assets/img/permisoscal.png">
-          <span class="font-weight-light">Permisos Calificaciones
-          </span>
-        </a>
-        <a class="nav-link <?php ($this->uri->segment(2)=='permisos_reg') ? print 'bg-info text-light' : print null; ?>" href="<?php echo base_url();?>index.php/c_vistas/permisos_reg">
-        <img class="icono_izquierda <?php ($this->uri->segment(2)=='permisos_reg') ? print 'icono_izquierda_seleccionado' : print null; ?>" src="<?php echo base_url();?>assets/img/permisoscal.png">
-          <span class="font-weight-light">Permisos Regularización
-          </span>
-        </a>
-        <a class="nav-link <?php ($this->uri->segment(2)=='') ? print 'bg-info text-light' : print null; ?>" href="<?php echo base_url();?>index.php/c_vistas/">
-        <i class="material-icons">person_add</i>
-          <span class="font-weight-light">Control Usuarios
-          </span>
-        </a>
-        <a class="nav-link <?php ($this->uri->segment(2)=='materias') ? print 'bg-info text-light' : print null; ?>" href="<?php echo base_url();?>index.php/c_vistas/materias">
-        <img class="icono_izquierda <?php ($this->uri->segment(2)=='materias') ? print 'icono_izquierda_seleccionado' : print null; ?>" src="<?php echo base_url();?>assets/img/controlmaterias.png">
-          <span class="font-weight-light">Control Materias
-          </span>
-        </a>
-        <a class="nav-link <?php ($this->uri->segment(2)=='componentes') ? print 'bg-info text-light' : print null; ?>" href="<?php echo base_url();?>index.php/c_vistas/componentes">
-        <img class="icono_izquierda <?php ($this->uri->segment(2)=='componentes') ? print 'icono_izquierda_seleccionado' : print null; ?>" src="<?php echo base_url();?>assets/img/controlcomponentes.png">
-          <span class="font-weight-light">Control Componentes
-          </span>
-        </a>
-        <a class="nav-link <?php ($this->uri->segment(2)=='terminar_ciclo') ? print 'bg-info text-light' : print null; ?>" href="<?php echo base_url();?>index.php/c_vistas/terminar_ciclo">
-        <img class="icono_izquierda <?php ($this->uri->segment(2)=='terminar_ciclo') ? print 'icono_izquierda_seleccionado' : print null; ?>" src="<?php echo base_url();?>assets/img/finalizarperiodo.png">
-          <span class="font-weight-light">Finalizar periodo
-          </span>
-        </a>
-        <hr class="bg-info" style=" border: 3px solid ;">
-      </div>
-      
     </li>
-
-
   </ul>

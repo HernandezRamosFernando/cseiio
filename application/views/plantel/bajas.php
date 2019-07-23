@@ -159,6 +159,15 @@
             </div>
 
           </div>
+          <div class="row">
+            <div class="col-md-8">
+              <div class="form-label-group">
+                <input class="form-control" placeholder="Observacion" type="input" name="observacion"
+                  id="observacion" style="color: #237087" >
+                <label for="observacion">Observacion</label>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -275,7 +284,7 @@
           }
         }
       }
-      xhr.send(JSON.stringify({ no_control: e.value, motivo: document.getElementById("motivo_baja").value ,fecha: document.getElementById("fecha_inicio").value}));
+      xhr.send(JSON.stringify({ no_control: e.value, motivo: document.getElementById("motivo_baja").value ,fecha: document.getElementById("fecha_inicio").value,  observacion: document.getElementById("observacion").value}));
     }
 
     window.onload = function () {

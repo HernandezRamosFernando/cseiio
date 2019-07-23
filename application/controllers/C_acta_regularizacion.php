@@ -45,13 +45,17 @@ class C_acta_regularizacion extends CI_Controller {
 
         if($mes==5 || $mes==10){// muestra el grupo anterior
 
+            $datos['estudiantes_con_grupo'] = $this->M_acta_regularizacion->estudiantes_con_grupo_regularizacion_intermedia($mes,$ano,$plantel,$materia);
+            $datos['estudiantes_sin_grupo'] = $this->M_acta_regularizacion->estudiantes_sin_grupo_regularizacion_intermedia($mes,$ano,$plantel,$materia);
+
         }
 
         else{// muestra el grupo actual
-           
+            $datos['estudiantes_con_grupo'] = $this->M_acta_regularizacion->estudiantes_con_grupo_regularizacion_intermedia($mes,$ano,$plantel,$materia);
+            $datos['estudiantes_sin_grupo'] = $this->M_acta_regularizacion->estudiantes_sin_grupo_regularizacion_intermedia($mes,$ano,$plantel,$materia);
         }
 
-        //print_r($datos);
+       //print_r($datos['estudiantes_con_grupo']);
         $this->load->view('reportes/acta_regularizacion',$datos);
     }
 }

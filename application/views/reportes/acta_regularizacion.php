@@ -193,12 +193,72 @@ $pdf->SetFont('helvetica','', 10);
 $pdf->AddPage();
 
 
-function rellenar(){
+function numero_a_letra($numero){
+
+    $respuesta = "";
+
+    switch($numero){
+
+        case 0:
+        $respuesta="/";
+        break;
+
+        case 5:
+        $respuesta="CINCO";
+        break;
+
+        case 6:
+        $respuesta="SEIS";
+        break;
+
+        case 7:
+        $respuesta="SIETE";
+        break;
+
+        case 8:
+        $respuesta="OCHO";
+        break;
+
+        case 9:
+        $respuesta="NUEVE";
+        break;
+
+        case 10:
+        $respuesta="DIEZ";
+        break;
+
+    }
+
+    return $respuesta;
+}
+
+
+function rellenar($con_grupo,$sin_grupo){
+    $foliador = 1;
     $respuesta='';
-    for($i=0;$i<16;$i++){
+
+    foreach($con_grupo as $estudiante){
+
         $respuesta.='
         <tr>
-        <td style="width:30px;height:20px">'.($i+1).'</td>
+        <td style="width:30px;height:20px">'.$foliador.'</td>
+        <td style="width:50px">'.($estudiante->ultimo_grupo[0]).'</td>
+        <td style="width:40px">'.($estudiante->ultimo_grupo[1]).'</td>
+        <td style="width:75px">'.$estudiante->matricula.'</td>
+        <td style="width:110px">'.$estudiante->primer_apellido.'</td>
+        <td style="width:110px">'.$estudiante->segundo_apellido.'</td>
+        <td style="width:120px">'.$estudiante->nombre.'</td>
+        <td style="width:42.5px">'.$estudiante->calificacion.'</td>
+        <td style="width:42.5px">'.numero_a_letra(intval($estudiante->calificacion)).'</td>
+        </tr>';
+
+        $foliador+=1;
+
+    }
+
+    $respuesta.='
+        <tr style="background-color:gray">
+        <td style="width:30px;height:20px"></td>
         <td style="width:50px"></td>
         <td style="width:40px"></td>
         <td style="width:75px"></td>
@@ -208,7 +268,27 @@ function rellenar(){
         <td style="width:42.5px"></td>
         <td style="width:42.5px"></td>
         </tr>';
-    }
+
+        foreach($sin_grupo as $estudiante){
+
+            $respuesta.='
+            <tr>
+            <td style="width:30px;height:20px">'.$foliador.'</td>
+            <td style="width:50px">'.($estudiante->ultimo_grupo[0]).'</td>
+            <td style="width:40px">'.($estudiante->ultimo_grupo[1]).'</td>
+            <td style="width:75px">'.$estudiante->matricula.'</td>
+            <td style="width:110px">'.$estudiante->primer_apellido.'</td>
+            <td style="width:110px">'.$estudiante->segundo_apellido.'</td>
+            <td style="width:120px">'.$estudiante->nombre.'</td>
+            <td style="width:42.5px">'.$estudiante->calificacion.'</td>
+            <td style="width:42.5px">'.numero_a_letra(intval($estudiante->calificacion)).'</td>
+            </tr>';
+    
+            $foliador+=1;
+    
+        }
+
+
 
     return $respuesta;
 }
@@ -235,7 +315,7 @@ $tabla = '
 <td style="width:42.5px;font-weight: bold">LETRA</td>
 </tr>
 
-'.rellenar().'
+'.rellenar($estudiantes_con_grupo,$estudiantes_sin_grupo).'
 
 </tbody>
 </table>

@@ -138,15 +138,16 @@ class MYPDF extends TCPDF {
 $pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
 //------------------------------pasar variables
-$pdf->mes = "MAYO";
-$pdf->nombre_bic = "BIC 01 DE GUELATAO DE JUAREZ";
-$pdf->cct = "xxxxxxxxxxxxx";
+
+$pdf->mes = $mes;
+$pdf->nombre_bic = $plantel->nombre_plantel;
+$pdf->cct = $plantel->cct_plantel;
 $pdf->ciclo_escolar = "2019-2020";
-$pdf->fecha_hora = "12-12-12 10:00 HRS";
-$pdf->clave = "xxxxxxxxxxxxx";
-$pdf->unidad_contenido = "xxxxxxxxxxxxx";
-$pdf->asesor = "xxxxxxxxxxxxx";
-$pdf->director = "xxxxxxxxxxxxx";
+$pdf->fecha_hora = $fecha_hora->fecha_calificacion." ".$fecha_hora->hora." HRS";
+$pdf->clave = $materia->clave;
+$pdf->unidad_contenido = $materia->unidad_contenido;
+$pdf->asesor = $asesor->nombre." ".$asesor->primer_apellido." ".$asesor->segundo_apellido;
+$pdf->director = $plantel->director;
 
 //--------------------------------------------
 
@@ -167,12 +168,12 @@ $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
 $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 
 // set margins
-$pdf->SetMargins(20, PDF_MARGIN_TOP,19);
-$pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
+$pdf->SetMargins(15,60,19);
+$pdf->SetHeaderMargin(60);
 $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 
 // set auto page breaks
-$pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+$pdf->SetAutoPageBreak(TRUE, 146);
 
 // set image scale factor
 $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
@@ -194,10 +195,10 @@ $pdf->AddPage();
 
 function rellenar(){
     $respuesta='';
-    for($i=0;$i<15;$i++){
+    for($i=0;$i<16;$i++){
         $respuesta.='
         <tr>
-        <td style="width:30px;height:20px"></td>
+        <td style="width:30px;height:20px">'.($i+1).'</td>
         <td style="width:50px"></td>
         <td style="width:40px"></td>
         <td style="width:75px"></td>
@@ -240,7 +241,8 @@ $tabla = '
 </table>
 ';
 
-$pdf->writeHTMLCell($w = 0, $h = 0, $x = '15', $y = '60', $tabla, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);//MES
+//$pdf->writeHTMLCell($w = 0, $h = 0, $x = '15', $y = '0', $tabla, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);//MES
+$pdf->writeHTML($tabla, true, false, true, false, '');
 //------------------------------------------------------------------
 
 //Close and output PDF document

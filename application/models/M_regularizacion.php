@@ -173,18 +173,39 @@ class M_regularizacion extends CI_Model {
 
 
 
-         //inserta la regularizacion
+         //primero revisar si ya existe una regularizacion de ese periodo y de esa materia
+         $existe = $this->db->query("select * from Regularizacion where Estudiante_no_control='".$regularizacion->no_control."' and month(fecha_calificacion)=month('".$regularizacion->fecha_calificacion."') and year(fecha_calificacion)=year('".$regularizacion->fecha_calificacion."') and id_materia='".$regularizacion->id_materia."'")->result();
+
+         if(sizeof($existe)==0){// si no existe la regularizacion la agrega
+            //inserta la regularizacion
          if($regularizacion->calificacion!=""){
             if($regularizacion->calificacion=="/"){
-                $this->db->query("insert into Regularizacion (Estudiante_no_control,id_materia,calificacion,fecha,fecha_calificacion,Plantel_cct_plantel,estatus) 
-            values ('".$regularizacion->no_control."','".$regularizacion->id_materia."',0,'".date("Y-m-d")."','".$regularizacion->fecha_calificacion."','".$regularizacion->cct_plantel."',1)");
+                $this->db->query("insert into Regularizacion (Estudiante_no_control,id_materia,calificacion,fecha,fecha_calificacion,Plantel_cct_plantel,estatus,hora,id_asesor) 
+            values ('".$regularizacion->no_control."','".$regularizacion->id_materia."',0,'".date("Y-m-d")."','".$regularizacion->fecha_calificacion."','".$regularizacion->cct_plantel."',1,'".$regularizacion->hora."',".$regularizacion->asesor.")");
             }
 
             else{
-                $this->db->query("insert into Regularizacion (Estudiante_no_control,id_materia,calificacion,fecha,fecha_calificacion,Plantel_cct_plantel,estatus) 
-            values ('".$regularizacion->no_control."','".$regularizacion->id_materia."',".$regularizacion->calificacion.",'".date("Y-m-d")."','".$regularizacion->fecha_calificacion."','".$regularizacion->cct_plantel."',1)");
+                $this->db->query("insert into Regularizacion (Estudiante_no_control,id_materia,calificacion,fecha,fecha_calificacion,Plantel_cct_plantel,estatus,hora,id_asesor) 
+            values ('".$regularizacion->no_control."','".$regularizacion->id_materia."',".$regularizacion->calificacion.",'".date("Y-m-d")."','".$regularizacion->fecha_calificacion."','".$regularizacion->cct_plantel."',1,'".$regularizacion->hora."',".$regularizacion->asesor.")");
             }
          }
+
+         }
+
+         else{// si no solo la actualiza
+
+            if($regularizacion->calificacion!=""){
+               if($regularizacion->calificacion=="/"){
+                   $this->db->query("update Regularizacion set calificacion=0 where Estudiante_no_control='".$regularizacion->no_control."' and fecha_calificacion='".$regularizacion->fecha_calificacion."'");
+               }
+   
+               else{
+                  $this->db->query("update Regularizacion set calificacion=".$regularizacion->calificacion." where Estudiante_no_control='".$regularizacion->no_control."' and fecha_calificacion='".$regularizacion->fecha_calificacion."'");
+               }
+            }
+
+         }
+         
 
          
          
@@ -518,6 +539,12 @@ public function cerrar_regularizacion($plantel){
    }
 
 
+}
+
+
+
+function materias_regularizadas_periodo($mes,$ano){
+   return $this->db->query("select clave,unidad_contenido from Materia as m inner join (select id_materia from Regularizacion where month(fecha_calificacion)=".$mes." and year(fecha_calificacion)=".$ano." group by id_materia) as ma on m.clave=ma.id_materia group by clave")->result();
 }
 
    

@@ -421,7 +421,9 @@
         id_materia: document.getElementById("materias").value,
         calificacion: calificacion,
         fecha_calificacion: document.getElementById("fecha_inicio").value,
-        cct_plantel: document.getElementById("plantel").value
+        cct_plantel: document.getElementById("plantel").value,
+        hora:document.getElementById("hora_inicio").value,
+        asesor:document.getElementById("asesor").value
       };
       datos.push(dato);
       }
@@ -429,6 +431,7 @@
     }
 
     console.log(datos);
+    
 
     var xhr = new XMLHttpRequest();
     $('#fechacalificacion').modal().hide();
@@ -443,6 +446,7 @@
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.value) {
+        
 
         var xhr = new XMLHttpRequest();
         xhr.open("POST", '<?php echo base_url();?>index.php/c_regularizacion/agregar_regularizacion', true);
@@ -484,6 +488,8 @@
           }
         }
         xhr.send(JSON.stringify(datos));
+
+      
       }
       //aqui va si cancela
     });

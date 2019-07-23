@@ -419,7 +419,9 @@
         id_materia: document.getElementById("materias").value,
         calificacion: calificacion,
         fecha_calificacion: document.getElementById("fecha_inicio").value,
-        cct_plantel: document.getElementById("plantel").value
+        cct_plantel: document.getElementById("plantel").value,
+        hora:document.getElementById("hora_inicio").value,
+        asesor:document.getElementById("asesor").value
       };
       datos.push(dato);
       }

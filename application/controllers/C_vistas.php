@@ -485,7 +485,7 @@ public function resolucion_equivalencia(){
             $data= array('title'=>'Creación de grupos');
             $this->load->view("headers/cabecera", $data);
             $this->load->view("headers/menuarriba");
-            $this->load->view("headers/menuizquierda");
+            $this->load->view("headers/menuizquierdaplantel");
             $this->load->view("plantel/creargrupo", $datos);
             $this->load->view("footers/footer");
             }
@@ -522,7 +522,7 @@ public function resolucion_equivalencia(){
             $data= array('title'=>'Buscador de grupos');
             $this->load->view("headers/cabecera", $data);
             $this->load->view("headers/menuarriba");
-            $this->load->view("headers/menuizquierda");
+            $this->load->view("headers/menuizquierdaplantel");
             $this->load->view("plantel/buscar_grupo", $datos);
             $this->load->view("footers/footer");
             }
@@ -557,7 +557,7 @@ public function resolucion_equivalencia(){
             $data= array('title'=>'Cambio de Asesor');
             $this->load->view("headers/cabecera", $data);
             $this->load->view("headers/menuarriba");
-            $this->load->view("headers/menuizquierda");
+            $this->load->view("headers/menuizquierdaplantel");
             $this->load->view("plantel/asesor_grupo", $datos);
             $this->load->view("footers/footer");
             }
@@ -590,7 +590,7 @@ public function resolucion_equivalencia(){
             $data= array('title'=>'Calificaciones');
             $this->load->view("headers/cabecera", $data);
             $this->load->view("headers/menuarriba");
-            $this->load->view("headers/menuizquierda");
+            $this->load->view("headers/menuizquierdaplantel");
             $this->load->view("plantel/calificacion", $datos);
             $this->load->view("footers/footer");
         }
@@ -622,7 +622,7 @@ public function resolucion_equivalencia(){
             $data= array('title'=>'Cerrar calificaciones');
             $this->load->view("headers/cabecera", $data);
             $this->load->view("headers/menuarriba");
-            $this->load->view("headers/menuizquierda");
+            $this->load->view("headers/menuizquierdaplantel");
             $this->load->view("plantel/cerrar_calificaciones", $datos);
             $this->load->view("footers/footer");
             }
@@ -686,7 +686,7 @@ public function resolucion_equivalencia(){
             $data= array('title'=>'Cerrar regularización intermedia');
             $this->load->view("headers/cabecera", $data);
             $this->load->view("headers/menuarriba");
-            $this->load->view("headers/menuizquierda");
+            $this->load->view("headers/menuizquierdaplantel");
             $this->load->view("plantel/cerrar_reg_intermedia", $datos);
             $this->load->view("footers/footer");
             }
@@ -1052,7 +1052,7 @@ public function resolucion_equivalencia(){
                 $data= array('title'=>'Lista de Asistencia');
                 $this->load->view("headers/cabecera", $data);
                 $this->load->view("headers/menuarriba");
-                $this->load->view("headers/menuizquierda");
+                $this->load->view("headers/menuizquierdaplantel");
                 $this->load->view("plantel/generar_lista_asistencia", $datos);
                 $this->load->view("footers/footer");
                 }
@@ -1090,7 +1090,7 @@ public function resolucion_equivalencia(){
                 $data= array('title'=>'Actas de Regularización');
                 $this->load->view("headers/cabecera", $data);
                 $this->load->view("headers/menuarriba");
-                $this->load->view("headers/menuizquierda");
+                $this->load->view("headers/menuizquierdaplantel");
                 $this->load->view("plantel/actas_regu", $datos);
                 $this->load->view("footers/footer");
             }
@@ -1129,7 +1129,7 @@ public function resolucion_equivalencia(){
                 $data= array('title'=>'Lista de Asistencia');
                 $this->load->view("headers/cabecera", $data);
                 $this->load->view("headers/menuarriba");
-                $this->load->view("headers/menuizquierda");
+                $this->load->view("headers/menuizquierdaplantel");
                 $this->load->view("plantel/generar_lista_desercion", $datos);
                 $this->load->view("footers/footer");
                 }

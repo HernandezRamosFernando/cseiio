@@ -7,7 +7,7 @@
       <li class="breadcrumb-item">
         <a>Realizar traslado</a>
       </li>
-      <li class="breadcrumb-item active">Busque al alumno que desea realizar traslado</li>
+      <li class="breadcrumb-item active">Busque al alumno que desea trasladar al plantel</li>
     </ol>
 
 
@@ -17,11 +17,19 @@
         <div class="form-group">
 
           <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-6">
               <div class="form-label-group ">
                 <input type="text" pattern="[A-Za-z0-9]{18}" title="Faltan datos" class="form-control text-uppercase"
                   id="aspirante_curp_busqueda" placeholder="CURP" style="color: #237087">
                 <label for="aspirante_curp_busqueda">CURP</label>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+            <div class="form-label-group ">
+                <input type="text" title="Faltan datos" class="form-control text-uppercase"
+                  id="matricula_busqueda" placeholder="CURP" style="color: #237087">
+                <label for="matricula_busqueda">Matricula</label>
               </div>
             </div>
 
@@ -31,33 +39,11 @@
         </div>
 
         <div class="form-group">
-          <div class="row">
-
-
-            <div class="col-md-8">
-              <label class="form-group has-float-label seltitulo">
-                <select class="form-control form-control-lg selcolor" required="required"
-                  id="aspirante_plantel_busqueda" name="aspirante_plantel">
-                  
-
-                  <?php
-                      foreach ($planteles as $plantel)
-                      {
-                      echo '<option value="'.$plantel->cct_plantel.'">'.$plantel->nombre_plantel.' ----- CCT: '.$plantel->cct_plantel.'</option>';
-                      }
-                      ?>
-
-                </select>
-                <span>Plantel</span>
-              </label>
-
-            </div>
-
-            <div class="col-md-4">
+          <div class="row">    
+            <div class="col-md-12">
               <button type='button' class="btn btn-success btn-lg btn-block" id="btn_buscar"
                 onclick='buscar()'>Buscar</button>
             </div>
-
           </div>
         </div>
       </div>
@@ -77,8 +63,6 @@
               <th scope="col" class="col-md-1">Matricula</th>
               <th scope="col" class="col-md-1">Plantel CCT</th>
               <th scope="col" class="col-md-1">Semestre en curso</th>
-              <th scope="col" class="col-md-1">Grupo</th>
-              <th scope="col" class="col-md-1">Parciales presentados</th>
               <th scope="col" class="col-md-1"></th>
               
 
@@ -100,8 +84,6 @@
 <!-- /.content-wrapper -->
 </div>
 <!-- /#wrapper -->
-
-
 
 
 <!-- Modal generar traslado--------------------------------------------------->
@@ -194,10 +176,9 @@
               <label class="form-group has-float-label seltitulo">
                 <select class="form-control form-control-lg selcolor" required="required"
                   id="plantel_para_traslado" name="plantel_para_traslado" onchange="cargargrupos()">
-                  <option value="">Seleccione el plantel a trasladar</option>
-
+                  
                   <?php
-                      foreach ($lista_planteles as $plantel)
+                      foreach ($planteles as $plantel)
                       {
                       echo '<option value="'.$plantel->cct_plantel.'">'.$plantel->nombre_plantel.' ----- CCT: '.$plantel->cct_plantel.'</option>';
                       }
@@ -312,9 +293,7 @@
                             validacion_resultado+="<p style='text-align:left;margin-left:30%'> - El alumno no cuenta con matricula.</p>";
                       }
 
-                      if(estudiante[0].tipo_ingreso!=='REINGRESO' && estudiante[0].tipo_ingreso!=='INCORPORADO' && estudiante[0].tipo_ingreso!=='PROBABLE REINCORPORADO'){
-                            validacion_resultado+="<p style='text-align:left;margin-left:30%'> - El estatus del alumno es "+estudiante[0].tipo_ingreso+".</p>";
-                      }
+                      
 
                       if(estudiante[0].faltantes>0){
                             validacion_resultado+="<p style='text-align:left;margin-left:30%'> - El alumno adeuda documentación base.</p>";
@@ -334,9 +313,13 @@
                              if(typeof estudiante[0].id_grupo !== 'undefined'){
                                     
                                     document.getElementById("id_grupo").value=estudiante[0].id_grupo;
+                                    cargargrupos();
                                 }
                                 else{
                                     document.getElementById("id_grupo").value="";
+                                    
+                                    
+
                                 }
 
                             var id_grupo = estudiante[0].nombre_grupo;
@@ -411,7 +394,7 @@
 
 
 	function buscar() {
-		document.getElementById("aspirante_plantel_busqueda").disabled = true;
+		document.getElementById("matricula_busqueda").disabled = true;
 	    document.getElementById("aspirante_curp_busqueda").disabled = true;
 	    document.getElementById("tabla").innerHTML = "";
 
@@ -419,9 +402,9 @@
 
 	    var xhr = new XMLHttpRequest();
 	    var curp = document.getElementById("aspirante_curp_busqueda").value;
-	    var plantel = document.getElementById("aspirante_plantel_busqueda").value;
-      var query = 'curp=' + curp + '&plantel=' + plantel;
-    xhr.open('GET', '<?php echo base_url();?>index.php/c_estudiante/get_estudiantes_derecho_a_traslado?' + query, true);
+	    var matricula = document.getElementById("matricula_busqueda").value;
+      var query = 'curp=' + curp + '&matricula=' + matricula;
+    xhr.open('GET', '<?php echo base_url();?>index.php/c_estudiante/get_estudiantes_porsibles_traslados?' + query, true);
     xhr.onloadstart = function () {
       $('#div_carga').show();
     }
@@ -464,62 +447,9 @@
         fila += '<td>';
         fila += valor.semestre_en_curso;
         fila += '</td>';
-         var grupo="";
-        if(valor.Grupo_id_grupo === undefined || valor.Grupo_id_grupo === null){
-            grupo="Sin grupo asignado";
-        }
-        else{
-            grupo=valor.nombre_grupo;
-        }
 
         fila += '<td>';
-        fila += grupo;
-        fila += '</td>';
-
-
-        var parciales_presentados="",p1="",p2="";
-
-        if(valor.num_primer_parcial>0){
-           parciales_presentados="Hasta primer parcial";
-            
-        }
-
-        if(valor.num_segundo_parcial>0){
-           parciales_presentados="Hasta segundo parcial";
-            
-        }
-
-
-        if(valor.num_tercer_parcial>0){
-           parciales_presentados="Hasta tercer parcial";
-            
-        }
-
-
-        if(valor.num_examen_final>0){
-           parciales_presentados="Hasta examen final";
-            
-        }
-
-
-        if(valor.num_calificacion_final>0){
-           parciales_presentados="Hasta calificacion final";
-            
-        }
-        
-        
-        if(parciales_presentados===""){
-          parciales_presentados="Ningún parcial presentado";
-        }
-
-        
-        fila += '<td>';
-        fila += parciales_presentados;
-        fila += '</td>';
-
-
-        fila += '<td>';
-        fila += '<button class="btn btn-success" type="button" value="' + valor.no_control + '" onclick="cargar_datos_traslado(this)" class="btn btn-primary">Realizar traslado</button>';
+        fila += '<button class="btn btn-success" type="button" value="' + valor.no_control + '" onclick="cargar_datos_traslado(this)" class="btn btn-lg btn-block btn-info btn btn-primary">Cargar datos</button>';
         fila += '</td>';
 
       
@@ -535,7 +465,7 @@
 	};
 
   xhr.send(null);
-    document.getElementById('btn_buscar').setAttribute("onClick", "limpiar();");
+    document.getElementById('btn_buscar').setAttribute("onClick", "limpiar()limp;");
     document.getElementById('btn_buscar').innerHTML = 'Limpiar Búsqueda';
     document.getElementById('btn_buscar').classList.remove('btn-success');
     document.getElementById('btn_buscar').classList.add('btn-dark');
@@ -582,7 +512,8 @@ var form_nuevo_traslado = document.getElementById("nuevo_traslado");
 
 
         borrar_formato_tabla();
-                buscar();
+        document.getElementById("tabla").innerHTML = "";
+        
 
     }
 
@@ -729,7 +660,7 @@ console.log("num_alumnos: "+num_alumnos);
 
 function refrescar_tabla(){
   borrar_formato_tabla();
-  buscar();
+  
 }
 
  function borrar_formato_tabla(){

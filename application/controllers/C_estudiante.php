@@ -881,8 +881,10 @@ function get_estudiantes_probables_desertores(){
 
 
 function set_desertor(){
-    $datos = json_decode($this->input->raw_input_stream);
-    echo $this->M_estudiante->set_desertor($datos);
+    $no_control = $this->input->post('no_control');
+    $motivo_desercion = $this->input->post('motivo_desercion');
+    $fecha_desercion = $this->input->post('fecha_desercion');
+    echo $this->M_estudiante->set_desertor($no_control,$motivo_desercion,$fecha_desercion);
 }
 
 function set_baja(){
@@ -1014,6 +1016,11 @@ public function get_estudiantes_derecho_a_traslado(){
  }
  
  
+ public function get_estudiantes_porsibles_traslados(){
+    $matricula = $this->input->get("matricula");
+    $curp = $this->input->get("curp");
+    echo json_encode($this->M_estudiante->get_estudiantes_porsibles_traslados($matricula,$curp));
+}
  
  
  }

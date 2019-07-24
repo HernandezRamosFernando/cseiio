@@ -138,4 +138,42 @@ class C_regularizacion extends CI_Controller {
 
         echo $this->M_regularizacion->cerrar_regularizacion($plantel);
     }
+
+
+    function materias_regularizadas_periodo(){
+        $datos = $this->input->get('periodo');
+
+        $separados = explode('-',$datos);
+
+        switch($separados[0]){
+
+            case 'ENERO':
+            $mes = 1;
+            break;
+
+            case 'MAYO':
+            $mes = 5;
+            break;
+
+            case 'JULIO':
+            $mes = 7;
+            break;
+
+            case 'OCTUBRE':
+            $mes = 10;
+            break;
+        }
+
+        $ano = intval($separados[1]);
+
+        $materias = $this->M_regularizacion->materias_regularizadas_periodo($mes,$ano);
+
+        $respuesta = '<option value="">Seleccione materia</option>';
+
+        foreach($materias as $materia){
+            $respuesta.='<option value="'.$materia->clave.'">'.$materia->unidad_contenido.'->'.$materia->clave.'</option>';
+        }
+
+        echo $respuesta;
+     }
 }

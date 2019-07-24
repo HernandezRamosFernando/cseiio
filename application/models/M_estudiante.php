@@ -421,7 +421,7 @@ $this->db->insert('Desertor', $data);
    $this->db->trans_start();
 
    $this->db->query("update Estudiante set tipo_ingreso='BAJA' where no_control='".$datos->no_control."'");
-   $this->db->query("insert into Baja (motivo,Estudiante_no_control,fecha) values ('".$datos->motivo."','".$datos->no_control."','".$datos->fecha."')");
+   $this->db->query("insert into Baja (motivo,Estudiante_no_control,fecha,observacion) values ('".$datos->motivo."','".$datos->no_control."','".$datos->fecha."','".$datos->observacion."')");
    $folio = $this->db->query("select max(Friae_folio) as folio from Friae_Estudiante as a where a.Estudiante_no_control='".$datos->no_control."'")->result()[0]->folio;
    $this->db->query("update Friae_Estudiante set baja='".$datos->fecha."' where Estudiante_no_control='".$datos->no_control."' and Friae_folio=".$folio);
 

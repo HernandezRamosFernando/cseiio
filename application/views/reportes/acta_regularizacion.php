@@ -138,15 +138,16 @@ class MYPDF extends TCPDF {
 $pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
 //------------------------------pasar variables
-$pdf->mes = "MAYO";
-$pdf->nombre_bic = "BIC 01 DE GUELATAO DE JUAREZ";
-$pdf->cct = "xxxxxxxxxxxxx";
+
+$pdf->mes = $mes;
+$pdf->nombre_bic = $plantel->nombre_plantel;
+$pdf->cct = $plantel->cct_plantel;
 $pdf->ciclo_escolar = "2019-2020";
-$pdf->fecha_hora = "12-12-12 10:00 HRS";
-$pdf->clave = "xxxxxxxxxxxxx";
-$pdf->unidad_contenido = "xxxxxxxxxxxxx";
-$pdf->asesor = "xxxxxxxxxxxxx";
-$pdf->director = "xxxxxxxxxxxxx";
+$pdf->fecha_hora = $fecha_hora->fecha_calificacion." ".$fecha_hora->hora." HRS";
+$pdf->clave = $materia->clave;
+$pdf->unidad_contenido = $materia->unidad_contenido;
+$pdf->asesor = $asesor->nombre." ".$asesor->primer_apellido." ".$asesor->segundo_apellido;
+$pdf->director = $plantel->director;
 
 //--------------------------------------------
 
@@ -167,12 +168,12 @@ $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
 $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 
 // set margins
-$pdf->SetMargins(20, PDF_MARGIN_TOP,19);
-$pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
+$pdf->SetMargins(15,60,19);
+$pdf->SetHeaderMargin(60);
 $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 
 // set auto page breaks
-$pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+$pdf->SetAutoPageBreak(TRUE, 146);
 
 // set image scale factor
 $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
@@ -192,11 +193,71 @@ $pdf->SetFont('helvetica','', 10);
 $pdf->AddPage();
 
 
-function rellenar(){
+function numero_a_letra($numero){
+
+    $respuesta = "";
+
+    switch($numero){
+
+        case 0:
+        $respuesta="/";
+        break;
+
+        case 5:
+        $respuesta="CINCO";
+        break;
+
+        case 6:
+        $respuesta="SEIS";
+        break;
+
+        case 7:
+        $respuesta="SIETE";
+        break;
+
+        case 8:
+        $respuesta="OCHO";
+        break;
+
+        case 9:
+        $respuesta="NUEVE";
+        break;
+
+        case 10:
+        $respuesta="DIEZ";
+        break;
+
+    }
+
+    return $respuesta;
+}
+
+
+function rellenar($con_grupo,$sin_grupo){
+    $foliador = 1;
     $respuesta='';
-    for($i=0;$i<15;$i++){
+
+    foreach($con_grupo as $estudiante){
+
         $respuesta.='
         <tr>
+        <td style="width:30px;height:20px">'.$foliador.'</td>
+        <td style="width:50px">'.($estudiante->ultimo_grupo[0]).'</td>
+        <td style="width:40px">'.($estudiante->ultimo_grupo[1]).'</td>
+        <td style="width:75px">'.$estudiante->matricula.'</td>
+        <td style="width:110px">'.$estudiante->primer_apellido.'</td>
+        <td style="width:110px">'.$estudiante->segundo_apellido.'</td>
+        <td style="width:120px">'.$estudiante->nombre.'</td>
+        <td style="width:42.5px">'.$estudiante->calificacion.'</td>
+        <td style="width:42.5px">'.numero_a_letra(intval($estudiante->calificacion)).'</td>
+        </tr>';
+
+        $foliador+=1;
+
+    }
+
+    $respuesta.='
+        <tr style="background-color:gray">
         <td style="width:30px;height:20px"></td>
         <td style="width:50px"></td>
         <td style="width:40px"></td>
@@ -207,7 +268,27 @@ function rellenar(){
         <td style="width:42.5px"></td>
         <td style="width:42.5px"></td>
         </tr>';
-    }
+
+        foreach($sin_grupo as $estudiante){
+
+            $respuesta.='
+            <tr>
+            <td style="width:30px;height:20px">'.$foliador.'</td>
+            <td style="width:50px">'.($estudiante->ultimo_grupo[0]).'</td>
+            <td style="width:40px">'.($estudiante->ultimo_grupo[1]).'</td>
+            <td style="width:75px">'.$estudiante->matricula.'</td>
+            <td style="width:110px">'.$estudiante->primer_apellido.'</td>
+            <td style="width:110px">'.$estudiante->segundo_apellido.'</td>
+            <td style="width:120px">'.$estudiante->nombre.'</td>
+            <td style="width:42.5px">'.$estudiante->calificacion.'</td>
+            <td style="width:42.5px">'.numero_a_letra(intval($estudiante->calificacion)).'</td>
+            </tr>';
+    
+            $foliador+=1;
+    
+        }
+
+
 
     return $respuesta;
 }
@@ -234,13 +315,14 @@ $tabla = '
 <td style="width:42.5px;font-weight: bold">LETRA</td>
 </tr>
 
-'.rellenar().'
+'.rellenar($estudiantes_con_grupo,$estudiantes_sin_grupo).'
 
 </tbody>
 </table>
 ';
 
-$pdf->writeHTMLCell($w = 0, $h = 0, $x = '15', $y = '60', $tabla, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);//MES
+//$pdf->writeHTMLCell($w = 0, $h = 0, $x = '15', $y = '0', $tabla, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);//MES
+$pdf->writeHTML($tabla, true, false, true, false, '');
 //------------------------------------------------------------------
 
 //Close and output PDF document

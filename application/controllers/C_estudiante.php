@@ -16,6 +16,7 @@ class C_estudiante extends CI_Controller {
         $this->load->model('M_ciclo_escolar');
         $this->load->model('M_resolucion_equivalencia');
         $this->load->model('M_friae');
+        $this->load->model('M_regularizacion');
 
     }
 
@@ -884,7 +885,9 @@ function set_desertor(){
     $no_control = $this->input->post('no_control');
     $motivo_desercion = $this->input->post('motivo_desercion');
     $fecha_desercion = $this->input->post('fecha_desercion');
-    echo $this->M_estudiante->set_desertor($no_control,$motivo_desercion,$fecha_desercion);
+    $semestre=$this->input->post('semestre_en_curso');
+    $grupo=$this->M_regularizacion->ultimo_grupo_cursado($no_control)->nombre_grupo;
+    echo $this->M_estudiante->set_desertor($no_control,$motivo_desercion,$fecha_desercion,$semestre,$grupo);
 }
 
 function set_baja(){
@@ -915,6 +918,10 @@ public function get_estudiantes_derecho_a_traslado(){
      $cct_plantel_origen = $this->input->post('cct_plantel_origen');
      $id_grupo = $this->input->post('id_grupo');
      $id_grupo_traslado = $this->input->post('grupos');
+     $tipo_ingreso = $this->input->post('tipo_ingreso');
+     $semestre_en_curso = $this->input->post('semestre_en_curso');
+     $grupo=$this->M_regularizacion->ultimo_grupo_cursado($no_control)->nombre_grupo;
+     
      
  
       $id_friae_origen=(isset($this->M_friae->id_friae($id_grupo)[0]->folio)) ? $this->M_friae->id_friae($id_grupo)[0]->folio : "";
@@ -997,7 +1004,10 @@ public function get_estudiantes_derecho_a_traslado(){
              $id_grupo,
              $id_grupo_traslado,
              $id_friae_origen,
-             $id_friae_destino
+             $id_friae_destino,
+             $tipo_ingreso,
+             $grupo,
+             $semestre_en_curso
              );
  
         
@@ -1021,7 +1031,23 @@ public function get_estudiantes_derecho_a_traslado(){
     $curp = $this->input->get("curp");
     echo json_encode($this->M_estudiante->get_estudiantes_porsibles_traslados($matricula,$curp));
 }
- 
+
+
+public function generar_lista_desercion(){
+    $cct_plantel = $this->input->post("plantel");
+    $id_ciclo_escolar = $this->input->post("ciclo_escolar");
+    $ciclo_escolar=$this->M_ciclo_escolar->obtener_nombre_ciclo_escolar($id_ciclo_escolar);
+    $lista=$this->M_estudiante->generar_lista_desercion($cct_plantel,$ciclo_escolar[0]->fecha_inicio,$ciclo_escolar[0]->fecha_terminacion);
+    
+    
+    $datos['cct_plantel']=$cct_plantel;
+    $datos['ciclo_escolar']=$ciclo_escolar;
+    $datos['lista']=$lista;
+
+    echo $ciclo_escolar[0]->fecha_inicio;
+    $this->load->library('pdf');
+    $this->load->view('reportes/reporte_desertor',$datos);
+}
  
  }
  ?>

@@ -388,14 +388,16 @@ public function obtener_fecha_inscripcion_semestre($no_control){
      return $this->db->query("select * from Estudiante where tipo_ingreso = 'REINGRESO' and curp like '".$curp."%' and Plantel_cct_plantel like '".$plantel."%'")->result();
   }
 
-  function set_desertor($no_control,$motivo_desercion,$fecha_desercion){
+  function set_desertor($no_control,$motivo_desercion,$fecha_desercion,$semestre,$grupo){
    $this->db->trans_start();
 
    $this->db->query("update Estudiante set tipo_ingreso='DESERTOR' where no_control='".$no_control."'");
    $data = array(
       'Estudiante_no_control' =>$no_control,
       'motivo' => $motivo_desercion,
-      'fecha' => $fecha_desercion
+      'fecha' => $fecha_desercion,
+      'semestre' => $semestre,
+      'grupo' => $grupo
 );
 
 $this->db->insert('Desertor', $data);
@@ -482,11 +484,28 @@ public function realizar_traslado_estudiante($no_control,
            $id_grupo,
            $id_grupo_destino,
            $id_friae_origen,
-           $id_friae_destino){
+           $id_friae_destino,
+           $tipo_ingreso,
+           $grupo,
+           $semestre_en_curso){
 
            
            
            $this->db->trans_start();
+
+           if($tipo_ingreso!='DESERTOR'){
+                  
+                  $data = array(
+                     'Estudiante_no_control' =>$no_control,
+                     'motivo' => "SE CAMBIO A OTRO PLANTEL",
+                     'fecha' =>date('Y-m-d'),
+                     'semestre' => $semestre_en_curso,
+                     'grupo' => $grupo
+               );
+               
+               $this->db->insert('Desertor', $data);
+
+           }
            
            $this->db->set('Estudiante_no_control', $no_control);
            $this->db->set('cct_plantel_origen', $cct_plantel_origen);
@@ -526,6 +545,8 @@ public function realizar_traslado_estudiante($no_control,
 
             if($id_friae_destino!=''){
                  $this->db->set('Friae_folio',$id_friae_destino);
+                 $this->db->set('tipo_ingreso_inscripcion','TRASLADO');
+                 
                  $this->db->where('Estudiante_no_control',$no_control);
                  $this->db->where('Friae_folio',$id_friae_origen);
                  $this->db->update('Friae_Estudiante');
@@ -533,6 +554,7 @@ public function realizar_traslado_estudiante($no_control,
             }
 
            $this->db->set('Plantel_cct_plantel',$cct_plantel_traslado);
+           $this->db->set('tipo_ingreso',"TRASLADO");
            $this->db->where('no_control',$no_control);
            $this->db->update('Estudiante');
 
@@ -604,7 +626,13 @@ where e.no_control='".$no_control."';")->result();
 
 
 public function get_estudiantes_porsibles_traslados($matricula,$curp){
-   return $this->db->query("select * from Estudiante where tipo_ingreso='DESERTOR' and curp='".$curp."' or matricula='".$matricula."';")->result();
+   return $this->db->query("select * from Estudiante where tipo_ingreso in ('DESERTOR','REINGRESO') and curp='".$curp."' or matricula='".$matricula."';")->result();
+
+}
+
+
+public function generar_lista_desercion($plantel,$fecha_inicio,$fecha_fin){
+   return $this->db->query("SELECT e.nombre,e.primer_apellido,e.segundo_apellido,d.semestre,d.grupo,d.motivo FROM Desertor d inner join Estudiante e on d.Estudiante_no_control=e.no_control where e.Plantel_cct_plantel='".$plantel."' and d.fecha between '".$fecha_inicio."' and '".$fecha_fin."' order by d.semestre,d.grupo, e.primer_apellido,e.segundo_apellido,e.nombre")->result();
 
 }
 

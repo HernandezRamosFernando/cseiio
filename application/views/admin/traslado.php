@@ -7,7 +7,7 @@
       <li class="breadcrumb-item">
         <a>Realizar traslado</a>
       </li>
-      <li class="breadcrumb-item active">Busque al alumno que desea realizar traslado</li>
+      <li class="breadcrumb-item active">Busque al alumno que desea trasladar al plantel</li>
     </ol>
 
 
@@ -17,11 +17,19 @@
         <div class="form-group">
 
           <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-6">
               <div class="form-label-group ">
                 <input type="text" pattern="[A-Za-z0-9]{18}" title="Faltan datos" class="form-control text-uppercase"
                   id="aspirante_curp_busqueda" placeholder="CURP" style="color: #237087">
                 <label for="aspirante_curp_busqueda">CURP</label>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+            <div class="form-label-group ">
+                <input type="text" title="Faltan datos" class="form-control text-uppercase"
+                  id="matricula_busqueda" placeholder="CURP" style="color: #237087">
+                <label for="matricula_busqueda">Matricula</label>
               </div>
             </div>
 
@@ -31,33 +39,11 @@
         </div>
 
         <div class="form-group">
-          <div class="row">
-
-
-            <div class="col-md-8">
-              <label class="form-group has-float-label seltitulo">
-                <select class="form-control form-control-lg selcolor" required="required"
-                  id="aspirante_plantel_busqueda" name="aspirante_plantel">
-                  <option value="">Buscar en todos los planteles</option>
-
-                  <?php
-                      foreach ($planteles as $plantel)
-                      {
-                      echo '<option value="'.$plantel->cct_plantel.'">'.$plantel->nombre_plantel.' ----- CCT: '.$plantel->cct_plantel.'</option>';
-                      }
-                      ?>
-
-                </select>
-                <span>Plantel</span>
-              </label>
-
-            </div>
-
-            <div class="col-md-4">
+          <div class="row">    
+            <div class="col-md-12">
               <button type='button' class="btn btn-success btn-lg btn-block" id="btn_buscar"
                 onclick='buscar()'>Buscar</button>
             </div>
-
           </div>
         </div>
       </div>
@@ -77,8 +63,6 @@
               <th scope="col" class="col-md-1">Matricula</th>
               <th scope="col" class="col-md-1">Plantel CCT</th>
               <th scope="col" class="col-md-1">Semestre en curso</th>
-              <th scope="col" class="col-md-1">Grupo</th>
-              <th scope="col" class="col-md-1">Parciales presentados</th>
               <th scope="col" class="col-md-1"></th>
               
 
@@ -102,8 +86,6 @@
 <!-- /#wrapper -->
 
 
-
-
 <!-- Modal generar traslado--------------------------------------------------->
   <div class="modal fade" id="generar_traslado" tabindex="-1" role="dialog" aria-labelledby="modaleliminarTitle">
     <div class="modal-dialog modal-dialog-centered" style="max-width: 80% !important;"  role="document">
@@ -114,6 +96,7 @@
             <!--datos personales------------------------------------------------------>
            <input type="hidden" name="cct_plantel_origen" id="cct_plantel_origen">
            <input type="hidden" name="id_grupo" id="id_grupo">
+           <input type="hidden" name="tipo_ingreso" id="tipo_ingreso">
 
           <p class="text-center text-white rounded titulo-form h4">
             Datos Personales de Aspirante
@@ -171,7 +154,13 @@
 
           <div class="form-group">
             <div class="row">
-              <div class="col-md-12">
+            <div class="col-md-4">
+                <div class="form-label-group">
+                  <input type="text" class="form-control text-uppercase" id="parcial_presentado" name="parcial_presentado" placeholder="parcial presentado" readonly>
+                  <label for="parcial_presentado">Parciales presentados</label>
+                </div>
+              </div>
+              <div class="col-md-8">
                 <div class="form-label-group">
                   <input type="text" class="form-control text-uppercase" id="plantel_actual" name="plantel_actual" placeholder="Plantel donde se encuentra inscrito" readonly>
                   <label for="plantel_actual">  Plantel donde se encuentra inscrito actualmente</label>
@@ -190,14 +179,13 @@
 
          <div class="form-group">
             <div class="row">
-              <div class="col-md-12">
+            <div class="col-md-12">
               <label class="form-group has-float-label seltitulo">
                 <select class="form-control form-control-lg selcolor" required="required"
                   id="plantel_para_traslado" name="plantel_para_traslado" onchange="cargargrupos()">
-                  <option value="">Seleccione el plantel a trasladar</option>
-
+                  <option value="">Seleccione un plantel</option>
                   <?php
-                      foreach ($lista_planteles as $plantel)
+                      foreach ($planteles as $plantel)
                       {
                       echo '<option value="'.$plantel->cct_plantel.'">'.$plantel->nombre_plantel.' ----- CCT: '.$plantel->cct_plantel.'</option>';
                       }
@@ -299,7 +287,7 @@
                       
                       var xhr = new XMLHttpRequest();
                         var query = 'no_control=' +id_estudiante.value;
-                      xhr.open('GET', '<?php echo base_url();?>index.php/c_estudiante/get_estudiante_datos_semestre_grupo_calificacion?' + query, true);
+                      xhr.open('GET', '<?php echo base_url();?>c_estudiante/get_estudiante_datos_semestre_grupo_calificacion?' + query, true);
                       
                       xhr.error = function () {
                         console.log("error de conexion");
@@ -308,13 +296,19 @@
                       let estudiante = JSON.parse(xhr.response);
                       var validacion_resultado="";
 
+                      var semestre = estudiante[0].semestre;
+                      var semestre_curso = estudiante[0].semestre_en_curso;
+
+                      var restantes = (6 - semestre_curso) + parseInt(semestre);
+                      if(restantes> 12){
+                        validacion_resultado+="<p style='text-align:left;margin-left:30%'> - No puede realizar el proceso porque el alumno ha rebasado el límite de 12 semestres permitido por el Depto. de Control Escolar.</p>";
+                      }
+
                       if(estudiante[0].matricula===null){
                             validacion_resultado+="<p style='text-align:left;margin-left:30%'> - El alumno no cuenta con matricula.</p>";
                       }
 
-                      if(estudiante[0].tipo_ingreso!=='REINGRESO' && estudiante[0].tipo_ingreso!=='INCORPORADO' && estudiante[0].tipo_ingreso!=='PROBABLE REINCORPORADO'){
-                            validacion_resultado+="<p style='text-align:left;margin-left:30%'> - El estatus del alumno es "+estudiante[0].tipo_ingreso+".</p>";
-                      }
+                      
 
                       if(estudiante[0].faltantes>0){
                             validacion_resultado+="<p style='text-align:left;margin-left:30%'> - El alumno adeuda documentación base.</p>";
@@ -329,14 +323,58 @@
                             document.getElementById("semestre_en_curso").value=estudiante[0].semestre_en_curso;
                             document.getElementById("plantel_actual").value=estudiante[0].nombre_plantel;
                             document.getElementById("cct_plantel_origen").value=estudiante[0].Plantel_cct_plantel;
+
+                            document.getElementById("tipo_ingreso").value=estudiante[0].tipo_ingreso;
+
+                            
+                                var parciales_presentados="",p1="",p2="";
+
+                                if(estudiante[0].num_primer_parcial>0){
+                                  parciales_presentados="Hasta primer parcial";
+                                    
+                                }
+
+                                if(estudiante[0].num_segundo_parcial>0){
+                                  parciales_presentados="Hasta segundo parcial";
+                                    
+                                }
+
+
+                                if(estudiante[0].num_tercer_parcial>0){
+                                  parciales_presentados="Hasta tercer parcial";
+                                    
+                                }
+
+
+                                if(estudiante[0].num_examen_final>0){
+                                  parciales_presentados="Hasta examen final";
+                                    
+                                }
+
+
+                                if(estudiante[0].num_calificacion_final>0){
+                                  parciales_presentados="Hasta calificacion final";
+                                    
+                                }
+
+
+                                if(parciales_presentados===""){
+                                  parciales_presentados="Ningún parcial presentado";
+                                }
+
+                                document.getElementById("parcial_presentado").value=parciales_presentados;
                             
 
                              if(typeof estudiante[0].id_grupo !== 'undefined'){
                                     
                                     document.getElementById("id_grupo").value=estudiante[0].id_grupo;
+                                    cargargrupos();
                                 }
                                 else{
                                     document.getElementById("id_grupo").value="";
+                                    
+                                    
+
                                 }
 
                             var id_grupo = estudiante[0].nombre_grupo;
@@ -411,7 +449,7 @@
 
 
 	function buscar() {
-		document.getElementById("aspirante_plantel_busqueda").disabled = true;
+		document.getElementById("matricula_busqueda").disabled = true;
 	    document.getElementById("aspirante_curp_busqueda").disabled = true;
 	    document.getElementById("tabla").innerHTML = "";
 
@@ -419,9 +457,9 @@
 
 	    var xhr = new XMLHttpRequest();
 	    var curp = document.getElementById("aspirante_curp_busqueda").value;
-	    var plantel = document.getElementById("aspirante_plantel_busqueda").value;
-      var query = 'curp=' + curp + '&plantel=' + plantel;
-    xhr.open('GET', '<?php echo base_url();?>index.php/c_estudiante/get_estudiantes_derecho_a_traslado?' + query, true);
+	    var matricula = document.getElementById("matricula_busqueda").value;
+      var query = 'curp=' + curp + '&matricula=' + matricula;
+    xhr.open('GET', '<?php echo base_url();?>index.php/c_estudiante/get_estudiantes_porsibles_traslados?' + query, true);
     xhr.onloadstart = function () {
       $('#div_carga').show();
     }
@@ -430,7 +468,7 @@
     }
     xhr.onload = function () {
       $('#div_carga').hide();
-      console.log(JSON.parse(xhr.response));
+      //console.log(JSON.parse(xhr.response));
       ////console.log(query);
 
 
@@ -464,62 +502,9 @@
         fila += '<td>';
         fila += valor.semestre_en_curso;
         fila += '</td>';
-         var grupo="";
-        if(valor.Grupo_id_grupo === undefined || valor.Grupo_id_grupo === null){
-            grupo="Sin grupo asignado";
-        }
-        else{
-            grupo=valor.nombre_grupo;
-        }
 
         fila += '<td>';
-        fila += grupo;
-        fila += '</td>';
-
-
-        var parciales_presentados="",p1="",p2="";
-
-        if(valor.num_primer_parcial>0){
-           parciales_presentados="Hasta primer parcial";
-            
-        }
-
-        if(valor.num_segundo_parcial>0){
-           parciales_presentados="Hasta segundo parcial";
-            
-        }
-
-
-        if(valor.num_tercer_parcial>0){
-           parciales_presentados="Hasta tercer parcial";
-            
-        }
-
-
-        if(valor.num_examen_final>0){
-           parciales_presentados="Hasta examen final";
-            
-        }
-
-
-        if(valor.num_calificacion_final>0){
-           parciales_presentados="Hasta calificacion final";
-            
-        }
-        
-        
-        if(parciales_presentados===""){
-          parciales_presentados="Ningún parcial presentado";
-        }
-
-        
-        fila += '<td>';
-        fila += parciales_presentados;
-        fila += '</td>';
-
-
-        fila += '<td>';
-        fila += '<button class="btn btn-success" type="button" value="' + valor.no_control + '" onclick="cargar_datos_traslado(this)" class="btn btn-primary">Realizar traslado</button>';
+        fila += '<button class="btn btn-success" type="button" value="' + valor.no_control + '" onclick="cargar_datos_traslado(this)" class="btn btn-lg btn-block btn-info btn btn-primary">Cargar datos</button>';
         fila += '</td>';
 
       
@@ -555,7 +540,9 @@ var form_nuevo_traslado = document.getElementById("nuevo_traslado");
 		    var xhr_2 = new XMLHttpRequest();
 		    xhr_2.open("POST", "<?php echo base_url();?>index.php/c_estudiante/nuevo_traslado", true);
 		    xhr_2.onreadystatechange = function () {
-		      if (xhr_2.responseText === "si") {
+		      if (xhr_2.responseText.trim() == "si") {
+            
+                //document.getElementById("tabla").innerHTML = "";
   		          Swal.fire({
   		            type: 'success',
                   scrollbarPadding:false,
@@ -565,6 +552,7 @@ var form_nuevo_traslado = document.getElementById("nuevo_traslado");
   		          })
   		          
                 $('#generar_traslado').modal('toggle');
+                
                 
 		          
 		        } else {
@@ -576,13 +564,17 @@ var form_nuevo_traslado = document.getElementById("nuevo_traslado");
 
 		          })
 		        }
+
+                
 		      
 		    }
 		    xhr_2.send(formdata);
 
-
         borrar_formato_tabla();
-                buscar();
+          buscar();
+        
+        
+        
 
     }
 
@@ -729,7 +721,7 @@ console.log("num_alumnos: "+num_alumnos);
 
 function refrescar_tabla(){
   borrar_formato_tabla();
-  buscar();
+  
 }
 
  function borrar_formato_tabla(){

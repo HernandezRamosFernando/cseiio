@@ -105,7 +105,7 @@
       <div class="modal-body ">
 
       <form id="marcar_desertor">
-
+      <input type="hidden" name="semestre_en_curso" id="semestre_en_curso">
       <input type="hidden" name="no_control" id="no_control">
         <div class="form-group">
           <div class="row">
@@ -222,7 +222,7 @@
           fila += valor.fecha_registro;
           fila += '</td>';
           fila += '<td>';
-          fila += '<button class="btn btn-lg btn-block btn-danger" type="button" onclick="pasar_no_control(this)" value="' + valor.no_control + '" data-toggle="modal" data-target="#desercion_modal">Marcar como desertor</button>';
+          fila += '<button class="btn btn-lg btn-block btn-danger" type="button" onclick="pasar_no_control(this,'+valor.semestre_en_curso+')" value="' + valor.no_control + '" data-toggle="modal" data-target="#desercion_modal">Marcar como desertor</button>';
           fila += '</td>';
           fila += '</tr>';
           document.getElementById("tabla").innerHTML += fila;
@@ -238,10 +238,12 @@
     }
 
 
-    function pasar_no_control(e) {
+    function pasar_no_control(e,semestre) {
       document.getElementById("marcar_desertor").reset();
       document.getElementById("no_control").value="";
+      document.getElementById("semestre_en_curso").value="";
       document.getElementById("no_control").value = e.value;
+      document.getElementById("semestre_en_curso").value = semestre;
     }
 
     var form = document.getElementById("marcar_desertor");
@@ -259,7 +261,7 @@
   xhr.onreadystatechange = function () {
     if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
       $('#div_carga').hide();
-      if(xhr.responseText==="si"){
+      if(xhr.responseText.trim()==="si"){
         Swal.fire({
             type: 'success',
             scrollbarPadding:false,

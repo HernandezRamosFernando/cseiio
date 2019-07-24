@@ -1102,6 +1102,7 @@ public function resolucion_equivalencia(){
 
 
     public function lista_desercion_escolar(){
+        $datos['ciclo_escolar'] = $this->M_ciclo_escolar->lista_ciclo_escolar();
         if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
         $datos['planteles'] = $this->M_plantel->get_planteles();
     

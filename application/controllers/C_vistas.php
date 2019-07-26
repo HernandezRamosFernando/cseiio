@@ -1138,6 +1138,45 @@ public function resolucion_equivalencia(){
          else{
             redirect(base_url().'index.php/c_usuario');
             }
+        }
+
+        public function lista_bajas_escolar(){
+                $datos['ciclo_escolar'] = $this->M_ciclo_escolar->lista_ciclo_escolar();
+                if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
+                $datos['planteles'] = $this->M_plantel->get_planteles();
+            
+                $data= array('title'=>'Lista de Bajas');
+                $this->load->view("headers/cabecera", $data);
+                $this->load->view("headers/menuarriba");
+                $this->load->view("headers/menuizquierda");
+                $this->load->view("admin/generar_lista_bajas", $datos);
+                $this->load->view("footers/footer");
+                }
+                else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='CESCOLAR'){
+                    $datos['planteles'] = $this->M_plantel->get_planteles();
+                
+                    $data= array('title'=>'Lista de Bajas');
+                    $this->load->view("headers/cabecera", $data);
+                    $this->load->view("headers/menuarriba");
+                    $this->load->view("headers/menuizquierdacescolar");
+                    $this->load->view("admin/generar_lista_bajas", $datos);
+                    $this->load->view("footers/footer");
+                    }
+        
+                    else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
+                        $datos['planteles'] = $this->M_plantel->get_plantel($this->session->userdata('user')['plantel']);
+                        
+                        $data= array('title'=>'Lista de Bajas');
+                        $this->load->view("headers/cabecera", $data);
+                        $this->load->view("headers/menuarriba");
+                        $this->load->view("headers/menuizquierdaplantel");
+                        $this->load->view("plantel/generar_lista_bajas", $datos);
+                        $this->load->view("footers/footer");
+                        }
+        
+                 else{
+                    redirect(base_url().'index.php/c_usuario');
+                    }
         
     }
 

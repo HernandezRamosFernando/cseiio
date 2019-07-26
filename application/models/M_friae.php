@@ -2,6 +2,7 @@
 class M_friae extends CI_Model { 
    public function __construct() {
       parent::__construct();
+      $this->load->model("M_regularizacion");
    }
 
 
@@ -50,7 +51,9 @@ class M_friae extends CI_Model {
 
     foreach($estudiantes_grupo as $estudiante_materia){
 
-        $materias_debiendo = $this->db->query("select id_materia from Grupo_Estudiante where calificacion_final<6 and Estudiante_no_control='".$estudiante_materia->no_control."' and id_materia not in (select id_materia from Regularizacion where calificacion>=6 and Estudiante_no_control='".$estudiante_materia->no_control."')")->result();
+        //$materias_debiendo = $this->db->query("select id_materia from Grupo_Estudiante where calificacion_final<6 and Estudiante_no_control='".$estudiante_materia->no_control."' and id_materia not in (select id_materia from Regularizacion where calificacion>=6 and Estudiante_no_control='".$estudiante_materia->no_control."')")->result();//------------------------------------------------------------------------------------
+        $materias_debiendo = $this->M_regularizacion->materias_debe_estudiante_actualmente($estudiante_materia->no_control);
+
         $materias_id = "";
         foreach($materias_debiendo as $id_materia){
             $materias_id.=$id_materia->id_materia.',';
@@ -93,7 +96,9 @@ class M_friae extends CI_Model {
         foreach($datos->estudiantes as $estudiante){
             $datos_estudiante = $this->db->query("select * from Estudiante where no_control='".$estudiante."'")->result();
 
-            $materias_debiendo = $this->db->query("select id_materia from Grupo_Estudiante where calificacion_final<6 and Estudiante_no_control='".$estudiante."' and id_materia not in (select id_materia from Regularizacion where calificacion>=6 and Estudiante_no_control='".$estudiante."')")->result();
+            $materias_debiendo = $this->M_regularizacion->materias_debe_estudiante_actualmente($estudiante_materia->no_control);
+
+
             $materias_id = "";
             foreach($materias_debiendo as $id_materia){
                 $materias_id.=$id_materia->id_materia.',';

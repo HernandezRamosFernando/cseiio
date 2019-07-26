@@ -253,8 +253,8 @@ class M_reinscripcion extends CI_Model {
             $this->db->query("update Estudiante set semestre=semestre+1");
             $this->db->query("update Grupo set estatus=0");
             $this->db->query("SET SQL_SAFE_UPDATES = 0");
-            $this->db->query("insert into Ciclo_escolar (fecha_matricula,nombre_ciclo_escolar,fecha_inicio,fecha_terminacion,periodo)
-            values (".$datos->fecha_matricula.",'".$datos->nombre_ciclo."','".$datos->fecha_inicio."','".$datos->fecha_terminacion."','".$datos->periodo."')");
+            $this->db->query("insert into Ciclo_escolar (fecha_matricula,nombre_ciclo_escolar,fecha_inicio,fecha_terminacion,periodo,fecha_inicio_inscripcion)
+            values (".$datos->fecha_matricula.",'".$datos->nombre_ciclo."','".$datos->fecha_inicio."','".$datos->fecha_terminacion."','".$datos->periodo."','".$datos->fecha_inicio_inscripcion."')");
             
 
             $this->db->trans_complete();

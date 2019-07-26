@@ -410,10 +410,10 @@
     xhr.onload = function () {
       $('#div_carga').hide();
       console.log(xhr.response);
-      if(xhr.response==="no"){
+      if(xhr.response==="si"){
         $('#modalmaterias').modal('show');
 
-      }else if (xhr.response==="si"){
+      }else if (xhr.response==="no"){
         document.getElementById('calificacionoculta1').style.display = "";
         document.getElementById('calificacionoculta2').style.display = "";
         document.getElementById('calificacionoculta3').style.display = "";

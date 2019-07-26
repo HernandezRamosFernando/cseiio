@@ -725,7 +725,7 @@ function semestre_ciclo(id_semestre,id_ciclo,valor_id_ciclo) {
     xhr_num_resolucion.onload = function () {
       $('#div_carga').hide();
 
-      if (xhr_num_resolucion.responseText !== '') {
+      if (xhr_num_resolucion.responseText.trim() !== '') {
 
         document.getElementById('num_folio').value = xhr_num_resolucion.responseText;
       }
@@ -829,7 +829,7 @@ function semestre_ciclo(id_semestre,id_ciclo,valor_id_ciclo) {
       if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
         //console.log();
         $('#div_carga').hide();
-        if (xhr.responseText === "si") {
+        if (xhr.responseText.trim() === "si") {
           Swal.fire({
             type: 'success',
             title: 'Resolución de equivalencia ingresada exitosamente',
@@ -898,7 +898,7 @@ function semestre_ciclo(id_semestre,id_ciclo,valor_id_ciclo) {
       if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
         //console.log();
         $('#div_carga').show();
-        if (xhr.responseText === "si") {
+        if (xhr.responseText.trim() === "si") {
           Swal.fire({
             type: 'success',
             title: 'Resolución de equivalencia modificada exitosamente',

@@ -120,6 +120,12 @@ class M_regularizacion extends CI_Model {
       return $this->db->query("select datos.no_control,datos.semestre_en_curso,datos.ultimo_semestre_cursado from Estudiante as e inner join (select distinct no_control,semestre_en_curso,(select concat(semestre,nombre_grupo) from Grupo_Estudiante as ge inner join Grupo as g on ge.Grupo_id_grupo=g.id_grupo where Estudiante_no_control=no_control and semestre=(select max(semestre) as semestre from Grupo_Estudiante as ge inner join Grupo as g on ge.Grupo_id_grupo=g.id_grupo where ge.Estudiante_no_control=no_control and calificacion_final is not null) and calificacion_final is not null limit 1) as ultimo_semestre_cursado from (select *,(select IF(count(distinct Estudiante_no_control),'si','no') as respuesta from Grupo_Estudiante as ge inner join Grupo as g on ge.Grupo_id_grupo=g.id_grupo where estatus=1 and Estudiante_no_control=r.Estudiante_no_control) as grupo from Regularizacion as r where calificacion is not null and month(fecha_calificacion)=".$mes." and year(fecha_calificacion)=".$ano." and Plantel_cct_plantel='".$plantel."') as regularizacion inner join Estudiante as e on regularizacion.Estudiante_no_control=e.no_control where grupo='no' order by e.semestre_en_curso asc) as datos on e.no_control=datos.no_control order by datos.ultimo_semestre_cursado,e.primer_apellido,e.segundo_apellido")->result();
    }
 
+   //alumnos que no presentaron regularizacion y se actualiza el friae
+
+   function estudiantes_sin_regularizacion_friae_en_grupos_activos($plantel){
+      return $this->db->query("select no_control,e.tipo_ingreso,e.estatus,ge.Grupo_id_grupo from Estudiante as e inner join Grupo_Estudiante as ge on e.no_control=ge.Estudiante_no_control inner join Grupo as g on ge.Grupo_id_grupo=g.id_grupo where g.estatus=1 and e.Plantel_cct_plantel='".$plantel."' group by e.no_control")->result();
+   }
+
 
    //regresa solo no control y semestre
    public function regularizaciones_plantel_periodo_con_grupo($plantel,$mes,$ano){
@@ -145,7 +151,7 @@ class M_regularizacion extends CI_Model {
    }
 
    public function nombre_ciclo_periodo_plantel($plantel,$mes,$ano){
-      return $this->db->query("select nombre_ciclo_escolar from Ciclo_escolar where (select max(fecha_calificacion) as fecha from Regularizacion where Plantel_cct_plantel='".$plantel."' and month(fecha_calificacion)=".$mes." and year(fecha_calificacion)=".$ano.") between fecha_inicio and fecha_terminacion")->result()[0]->nombre_ciclo_escolar;
+      return $this->db->query("select nombre_ciclo_escolar from Ciclo_escolar where (select max(fecha_calificacion) as fecha from Regularizacion where Plantel_cct_plantel='".$plantel."' and month(fecha_calificacion)=".$mes." and year(fecha_calificacion)=".$ano.") between fecha_inicio and date_add(fecha_terminacion,interval 20 day)")->result()[0]->nombre_ciclo_escolar;
    }
 
    public function plantel_con_municipio_localidad($plantel){
@@ -422,7 +428,7 @@ class M_regularizacion extends CI_Model {
          '-'
          ,
          year(fecha_calificacion)) as periodo
-          from Regularizacion as r inner join Ciclo_escolar as c on r.fecha_calificacion between c.fecha_inicio and c.fecha_terminacion where Plantel_cct_plantel='".$plantel."'")->result();
+          from Regularizacion as r inner join Ciclo_escolar as c on r.fecha_calificacion between c.fecha_inicio and date_add(c.fecha_terminacion,interval 20 day) where Plantel_cct_plantel='".$plantel."'")->result();
    }
 
 
@@ -443,6 +449,8 @@ public function cerrar_regularizacion($plantel){
     $datos ['regularizaciones_sin_grupo'] = $this->regularizaciones_plantel_periodo_sin_grupo($plantel,$periodo[0]->mes,$periodo[0]->ano);
     //solo numero de control y semestre regresa
     $datos ['regularizaciones_con_grupo'] = $this->regularizaciones_plantel_periodo_con_grupo($plantel,$periodo[0]->mes,$periodo[0]->ano);
+
+    $datos['estudiantes_sin_regularizacion'] = $this->estudiantes_sin_regularizacion_friae_en_grupos_activos($plantel);
 
     //$contador=0;
 
@@ -521,6 +529,24 @@ public function cerrar_regularizacion($plantel){
 
       //$contador+=1;
   }
+
+
+
+
+  if(intval($periodo[0]->mes)==1 || intval($periodo[0]->mes)==7){
+   foreach($datos['estudiantes_sin_regularizacion'] as $estudiante){
+
+      $folio_friae = $this->db->query("select folio from Friae where id_grupo='".$estudiante->Grupo_id_grupo."'")->result()[0]->folio;
+
+      $this->db->query("update Friae_Estudiante set tipo_ingreso_despues_regularizacion='".$estudiante->tipo_ingreso."' where Friae_folio=".$folio_friae." and Estudiante_no_control='".$estudiante->no_control."'");
+
+      
+   }
+  }
+  
+
+
+  
 
 
   //insertar estudiantes sin grupo

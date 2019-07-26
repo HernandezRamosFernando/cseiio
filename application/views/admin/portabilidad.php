@@ -1511,7 +1511,7 @@ function envioform(form) {
     if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
       console.log(xhr.responseText);
       $('#div_carga').hide();
-      if (xhr.responseText === "si") {
+      if (xhr.responseText.trim() === "si") {
         Swal.fire({
           type: 'success',
           title: 'Registro exitoso',
@@ -1575,7 +1575,7 @@ function insertar_bachillerato() {
   xhr.onreadystatechange = function () {
     if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
       $('#div_carga').hide();
-      if (xhr.responseText === "si") {
+      if (xhr.responseText.trim() === "si") {
         Swal.fire({
           type: 'success',
           title: 'Bachillerato agregado correctamente',
@@ -1634,7 +1634,7 @@ function insertar_secundaria() {
     xhr.onreadystatechange = function () {
       if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
         $('#div_carga').hide();
-        if (xhr.responseText === "si") {
+        if (xhr.responseText.trim() === "si") {
           Swal.fire({
             type: 'success',
             title: 'Secundaria agregada correctamente',

@@ -221,8 +221,8 @@
       nombre_ciclo: document.getElementById("nombre_ciclo").value,
       fecha_matricula: document.getElementById("fecha_matricula").value,
       periodo: document.getElementById("periodo").value,
-      fecha_inicio_oficial: fecha_sql(document.getElementById("fecha_inicio_oficial").value),
-      fecha_inicio: fecha_sql(document.getElementById("fecha_inicio").value),
+      fecha_inicio: fecha_sql(document.getElementById("fecha_inicio_oficial").value),
+      fecha_inicio_inscripcion: fecha_sql(document.getElementById("fecha_inicio").value),
       fecha_terminacion: fecha_sql(document.getElementById("fecha_fin").value)
     };
 console.log(datos);

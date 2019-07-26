@@ -60,7 +60,7 @@ class MYPDF extends TCPDF {
         <br>
         <table border="1" cellpadding="3">
             <tr>
-            <td style="text-align: center;font-weight: bold">REPORTE DE DESERCIÓN ESCOLAR</td>
+            <td style="text-align: center;font-weight: bold">REPORTE DE BAJAS</td>
             </tr>
         </table>
         
@@ -70,13 +70,13 @@ class MYPDF extends TCPDF {
 
         <table border="0">
             <tr>
-                <td style="font-weight: bold"  WIDTH="16%">NOMBRE DEL PLANTEL:</td><td colspan="3"></td>
+                <td style="font-weight: bold"  WIDTH="16%">NOMBRE DEL PLANTEL:</td><td colspan="3">'.$this->plantel[0]->nombre_plantel.'</td>
             </tr>
             <tr>
-                <td style="font-weight: bold"  WIDTH="16%">CLAVE C.C.T.:</td><td colspan="3"></td>
+                <td style="font-weight: bold"  WIDTH="16%">CLAVE C.C.T.:</td><td colspan="3">'.$this->plantel[0]->cct_plantel.'</td>
             </tr>
             <tr>
-                <td style="font-weight: bold"  WIDTH="16%">CICLO ESCOLAR:</td><td WIDTH="69%"></td><td WIDTH="10%">PERIODO:</td><td WIDTH="5%"></td>
+                <td style="font-weight: bold"  WIDTH="16%">CICLO ESCOLAR:</td><td WIDTH="69%">'.$this->ciclo[0]->nombre_ciclo_escolar.'</td><td WIDTH="10%">PERIODO:</td><td WIDTH="5%">"'.$this->periodo($this->ciclo[0]->periodo).'"</td>
             </tr>
         </table>
 
@@ -111,7 +111,7 @@ $this->SetFont('helvetica', 'B',8);
 	// Page footer
 	public function Footer() {
 		$html = '<br><br><br><br><br><br><br><br><table>
-		<tr><td WIDTH="33.33%"><span style="font-weight: bold;text-align: center;text-decoration: underline;font-size: 8px"></span></td><td WIDTH="33.33%"><span style="font-weight: bold;text-align: center;text-decoration: underline;font-size: 8px"></span></td><td WIDTH="33.33%"><span style="font-weight: bold;text-align: center;text-decoration: underline;font-size: 8px"></span></td></tr>
+		<tr><td WIDTH="33.33%"><span style="font-weight: bold;text-align: center;text-decoration: underline;font-size: 8px">'.$this->plantel[0]->director.'</span></td><td WIDTH="33.33%"><span style="font-weight: bold;text-align: center;text-decoration: underline;font-size: 8px"></span></td><td WIDTH="33.33%"><span style="font-weight: bold;text-align: center;text-decoration: underline;font-size: 8px">HERIBERTO RIOS COLIN</span></td></tr>
 		<tr><td><span style="text-align: center;font-size: 8px">NOMBRE Y FIRMA<br> DEL DIRECTOR DE PLANTEL</span></td><td><span style="text-align: center;font-size: 8px">REVISÓ Y VALIDÓ</span></td><td><span style="text-align: center;font-size: 8px">JEFE(A) DEL DEPTO.<BR>DE CONTROL ESCOLAR</span></td></tr>
 		</table>';
 		// Position at 15 mm from bottom

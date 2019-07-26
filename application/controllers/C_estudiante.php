@@ -1040,7 +1040,7 @@ public function generar_lista_desercion(){
     $lista=$this->M_estudiante->generar_lista_desercion($cct_plantel,$ciclo_escolar[0]->fecha_inicio,$ciclo_escolar[0]->fecha_terminacion,$id_ciclo_escolar);
     
     $datos['ciclo_escolar']=$this->M_ciclo_escolar->obtener_nombre_ciclo_escolar($id_ciclo_escolar);
-    $datos['plantel']=$this->M_Plantel->get_plantel($plantel);
+    $datos['plantel']=$this->M_plantel->get_plantel($cct_plantel);
    
     $datos['lista']=$lista;
 

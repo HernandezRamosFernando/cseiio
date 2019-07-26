@@ -15,4 +15,11 @@ class M_baja extends CI_Model {
       (select fecha_terminacion from Ciclo_escolar where id_ciclo_escolar=(select max(id_ciclo_escolar) from Ciclo_escolar))
       and Estudiante_no_control='".$no_control."'")->result();
    }
+
+
+   function lista_baja_estudiante_x_plantel_ciclo($plantel,$id_ciclo){
+      return $this->db->query("SELECT distinct ge.Estudiante_no_control,g.semestre,g.nombre_grupo,e.nombre,e.primer_apellido,e.segundo_apellido,b.motivo,b.fecha,b.observacion FROM Grupo_Estudiante ge inner join Grupo g on ge.Grupo_id_grupo=g.id_grupo inner join Baja b on b.Estudiante_no_control=ge.Estudiante_no_control inner join Estudiante e on e.no_control=ge.Estudiante_no_control where g.plantel='".$plantel."' and ge.Ciclo_escolar_id_ciclo_escolar=".$id_ciclo." order by g.semestre,g.nombre_grupo,e.primer_apellido,e.segundo_apellido,e.nombre;")->result();
+   }
+
+   
 }

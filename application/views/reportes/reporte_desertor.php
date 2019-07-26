@@ -28,22 +28,28 @@
 // Extend the TCPDF class to create custom Header and Footer
 class MYPDF extends TCPDF {
 
-	public $num_dias_mes;
-	public $cadena_dias_html;
-	public $cadena_columnas_html;
-	public $mes_seleccionado='';
-	public $anio_seleccionado='';
-	public $cct='';
-	public $semestre='';
-	public $plantel='';
-	public $datos_grupo='';
-	public $nombre_dias_cadena_html='';
-
-	
-
+	public $plantel;
+	public $ciclo;
 	public function set_plantel($plantel){
 	$this->plantel=$plantel;
-}
+	}
+		
+	public function set_ciclo($ciclo){
+			$this->ciclo=$ciclo;
+	}
+		
+	public function periodo($periodo){
+						$resultado='';
+						if($periodo=='AGOSTO-ENERO'){
+								$resultado='B';
+						}
+		
+						if($periodo=='FEBRERO-JULIO'){
+								$resultado='A';
+								
+						}
+						return $resultado;
+				}
 
 
 	//Page header
@@ -155,8 +161,9 @@ return $resultado;
 
 $pdf = new MYPDF('L', PDF_UNIT,"LETTER", true, 'UTF-8', false);
 
+$pdf->set_plantel($plantel);
+$pdf->set_ciclo($ciclo_escolar);
 
-//$pdf->set_mes($mes);
 
 
 // set document information

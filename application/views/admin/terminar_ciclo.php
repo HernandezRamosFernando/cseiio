@@ -46,13 +46,13 @@
 
           <div class="col-md-4">
               <div class="form-label-group">
-              <input class="form-control" placeholder="Fecha de inicio de periodo" type="date" name="fecha_inicio" 
-                id="fecha_inicio"  style="color: #237087" min=
+              <input class="form-control" placeholder="Fecha de inicio de periodo" type="date" name="fecha_inicio_oficial" 
+                id="fecha_inicio_oficial"  style="color: #237087" min=
                 <?php
                 echo date('Y-m-d');
                 ?>
                 >
-              <label for="fecha_inicio">Fecha de inicio de periodo</label>
+              <label for="fecha_inicio_oficial">Fecha de inicio de periodo</label>
               </div>
             </div>
 
@@ -65,6 +65,22 @@
                 ?>
                 >
               <label for="fecha_fin">Fecha de finalización de periodo</label>
+              </div>
+            </div>
+  </div>
+</div>
+<div class="form-group">
+          <div class="row">
+
+          <div class="col-md-4">
+              <div class="form-label-group">
+              <input class="form-control" placeholder="Fecha de inicio de periodo de inscripción" type="date" name="fecha_inicio" 
+                id="fecha_inicio"  style="color: #237087" min=
+                <?php
+                echo date('Y-m-d');
+                ?>
+                >
+              <label for="fecha_inicio">Fecha de inicio de periodo de inscripción</label>
               </div>
             </div>
   </div>
@@ -183,7 +199,7 @@
             validafecha(document.getElementById("fecha_inicio"));
                 validafecha(document.getElementById("fecha_fin"));
 
-                if (document.getElementById("fecha_fin").value != '' && document.getElementById("fecha_inicio").value != '') {
+                if (document.getElementById("fecha_fin").value != '' && document.getElementById("fecha_inicio").value != ''  && document.getElementById("fecha_inicio_oficial").value != '') {
                   agregar_ciclo()
                 } else {
                   Swal.fire({
@@ -205,6 +221,7 @@
       nombre_ciclo: document.getElementById("nombre_ciclo").value,
       fecha_matricula: document.getElementById("fecha_matricula").value,
       periodo: document.getElementById("periodo").value,
+      fecha_inicio_oficial: fecha_sql(document.getElementById("fecha_inicio_oficial").value),
       fecha_inicio: fecha_sql(document.getElementById("fecha_inicio").value),
       fecha_terminacion: fecha_sql(document.getElementById("fecha_fin").value)
     };

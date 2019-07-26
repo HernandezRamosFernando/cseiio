@@ -264,7 +264,7 @@ public function obtener_fecha_inscripcion_semestre($no_control){
       //SELECT fecha_matricula FROM ciclo_escolar where fecha_inicio<='2018-08-13' and fecha_termino>='2018-08-13'; 
       $this->db->select('fecha_matricula');
       $this->db->from('Ciclo_escolar c');
-      $this->db->where('fecha_inicio<=\''.$fecha.'\' and fecha_terminacion>=\''.$fecha.'\'');
+      $this->db->where('fecha_inicio_inscripcion<=\''.$fecha.'\' and fecha_terminacion>=\''.$fecha.'\'');
       $consulta = $this->db->get()->row();
       $resultado=0;
       if($consulta!=null)

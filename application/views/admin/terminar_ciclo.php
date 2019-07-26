@@ -47,7 +47,7 @@
           <div class="col-md-4">
               <div class="form-label-group">
               <input class="form-control" placeholder="Fecha de inicio de periodo" type="date" name="fecha_inicio_oficial" 
-                id="fecha_inicio_oficial"  style="color: #237087" min=
+                id="fecha_inicio_oficial"  style="color: #237087" onchange="fecha_minima(this)" min=
                 <?php
                 echo date('Y-m-d');
                 ?>
@@ -75,10 +75,7 @@
           <div class="col-md-4">
               <div class="form-label-group">
               <input class="form-control" placeholder="Fecha de inicio de periodo de inscripción" type="date" name="fecha_inicio" 
-                id="fecha_inicio"  style="color: #237087" min=
-                <?php
-                echo date('Y-m-d');
-                ?>
+                id="fecha_inicio"  style="color: #237087"
                 >
               <label for="fecha_inicio">Fecha de inicio de periodo de inscripción</label>
               </div>
@@ -270,6 +267,11 @@ console.log(datos);
 
 
     //console.log(datos);
+  }
+
+  function fecha_minima(e) {+
+    $("#fecha_inicio").val(e.value);
+    $("#fecha_inicio").attr({ "max" : e.value });
   }
 
 

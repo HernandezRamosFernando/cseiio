@@ -631,9 +631,9 @@ public function get_estudiantes_porsibles_traslados($matricula,$curp){
 }
 
 
-public function generar_lista_desercion($plantel,$fecha_inicio,$fecha_fin){
+public function generar_lista_desercion($plantel,$fecha_inicio,$fecha_fin,$id_ciclo){
    //return $this->db->query("SELECT e.nombre,e.primer_apellido,e.segundo_apellido,d.semestre,d.grupo,d.motivo FROM Desertor d inner join Estudiante e on d.Estudiante_no_control=e.no_control where e.Plantel_cct_plantel='".$plantel."' and d.fecha between '".$fecha_inicio."' and '".$fecha_fin."' order by d.semestre,d.grupo, e.primer_apellido,e.segundo_apellido,e.nombre")->result();
-   return $this->db->query("SELECT e.nombre,e.primer_apellido,e.segundo_apellido,d.semestre,d.grupo,d.motivo FROM Desertor d inner join Estudiante e on d.Estudiante_no_control=e.no_control inner join (SELECT distinct ge.Estudiante_no_control FROM Grupo_Estudiante ge inner join Grupo g on ge.Grupo_id_grupo=g.id_grupo where ge.Ciclo_escolar_id_ciclo_escolar=1 and g.plantel='') grupo_anterior on grupo_anterior.Estudiante_no_control=d.Estudiante_no_control where e.Plantel_cct_plantel='".$plantel."' and d.fecha between '".$fecha_inicio."' and '".$fecha_fin."' order by d.semestre,d.grupo, e.primer_apellido,e.segundo_apellido,e.nombre")->result();
+   return $this->db->query("SELECT e.nombre,e.primer_apellido,e.segundo_apellido,d.semestre,d.grupo,d.motivo FROM Desertor d inner join Estudiante e on d.Estudiante_no_control=e.no_control inner join (SELECT distinct ge.Estudiante_no_control FROM Grupo_Estudiante ge inner join Grupo g on ge.Grupo_id_grupo=g.id_grupo where ge.Ciclo_escolar_id_ciclo_escolar=".$id_ciclo." and g.plantel='".$plantel."') grupo_anterior on grupo_anterior.Estudiante_no_control=d.Estudiante_no_control where e.Plantel_cct_plantel='".$plantel."' and d.fecha between '".$fecha_inicio."' and '".$fecha_fin."' order by d.semestre,d.grupo, e.primer_apellido,e.segundo_apellido,e.nombre")->result();
 
 }
 

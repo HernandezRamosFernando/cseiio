@@ -95,13 +95,13 @@
 
 
 
-        <div class="row" id="alumnos_oculto" style="display: none">
+        <div class="row" id="alumnos_oculto" style="overflow: scroll; display: none">
           <div class="col-md-12" id="tabla_alumnos">
-            <div class="card card-body">
+            <div class="card card-body" style="overflow: scroll;">
             <p class="h6" style="text-align: left; color: #237087; font-size: 12pt;">Criterios de calificación: <br> La calificación mínima aprobatoria es 6 <br> Toda calificación menor a 6 será 5 <br> La diagonal "/" significa que no presento </p>
             <br>
             <br>
-              <table class="table table-hover" id="tabla_completa_grupo" style="width: 100%;  overflow: scroll;">
+              <table class="table table-hover" id="tabla_completa_grupo" style="width: 100%; ">
                 <caption>Lista de los alumnos del grupo</caption>
                 <thead class="thead-light">
                   <tr>

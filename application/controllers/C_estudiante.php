@@ -383,6 +383,11 @@ class C_estudiante extends CI_Controller {
             $datos_estudiante_medicos,
             $datos_escuela_procedencia
         );
+
+        
+        
+
+        //print_r($datos_estudiante);
         
     
         //print_r($datos_estudiante_documentos['aspirante_documento_carta_extemporaneo']);

@@ -592,7 +592,7 @@
       <div class="row">
         <div class="col-md-4">
           <div class="form-label-group">
-            <input type="text" pattern="[A-ZÁÉÍÓÚáéíóúa-z]+[ ]*[A-ZÁÉÍÓÚáéíóúa-z ]*" required
+            <input type="text" pattern="[A-ZÑña-z]+[ ]*[A-ZÑña-z ]*" required
               title="Introduzca solo letras" class="form-control text-uppercase" id="aspirante_tutor_nombre"
               name="aspirante_tutor_nombre" placeholder="Nombre Completo" style="color: #237087">
             <label for="aspirante_tutor_nombre">Nombre de Tutor</label>
@@ -600,7 +600,7 @@
         </div>
         <div class="col-md-4">
           <div class="form-label-group">
-            <input type="text" pattern="[A-ZÁÉÍÓÚáéíóúa-z]+[ ]*[A-ZÁÉÍÓÚáéíóúa-z ]*" required
+            <input type="text" pattern="[A-ZÑña-z]+[ ]*[A-ZÑña-z ]*" required
               title="Introduzca solo letras" class="form-control text-uppercase" id="aspirante_tutor_apellido"
               name="aspirante_tutor_apellido" placeholder="Primer Apellido" style="color: #237087">
             <label for="aspirante_tutor_apellido">Primer Apellido</label>
@@ -608,7 +608,7 @@
         </div>
         <div class="col-md-4">
           <div class="form-label-group">
-            <input type="text" pattern="[A-ZÁÉÍÓÚáéíóúa-z]+[ ]*[A-ZÁÉÍÓÚáéíóúa-z ]*" title="Introduzca solo letras"
+            <input type="text" pattern="[A-ZÑña-z]+[ ]*[A-ZÑña-z ]*" title="Introduzca solo letras"
               class="form-control text-uppercase" id="aspirante_tutor_apellidodos" name="aspirante_tutor_apellidodos"
               placeholder="Segundo Apellido" style="color: #237087">
             <label for="aspirante_tutor_apellidodos">Segundo Apellido</label>

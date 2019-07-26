@@ -42,7 +42,7 @@
 
             <div class="col-md-4">
               <label class="form-group has-float-label seltitulo">
-                <select class="form-control form-control-lg selcolor"  name="regularizaciones"
+                <select class="form-control form-control-lg selcolor"  name="regularizaciones" onclick="cargar_materias()"
                   id="regularizaciones">
                   <option value="">Seleccione un periodo de regularización</option>
 
@@ -67,8 +67,8 @@
             </div>
 
             <div class="col-md-4 offset-md-3">
-              <button type="button" class="btn btn-success btn-lg btn-block" onclick=""
-                style="padding: 1rem" id="crear_grupo">Mostrar Acta</button>
+              <button type="button" class="btn btn-success btn-lg btn-block"
+                style="padding: 1rem" id="crear_grupo" onclick="mostrar_acta()">Mostrar Acta</button>
             </div>
 
           </div>
@@ -127,6 +127,54 @@
   }
 
 
+
+function cargar_materias(){
+
+  let periodo = document.getElementById("regularizaciones").value;
+
+  var xhr = new XMLHttpRequest();
+      xhr.open('GET', '<?php echo base_url();?>index.php/c_regularizacion/materias_regularizadas_periodo?periodo='+periodo, true);
+
+      xhr.onload = function () {
+        document.getElementById("materias").innerHTML=xhr.response;
+      };
+
+      xhr.send(null);
+
+}
+
+
+function mostrar_acta(){
+  let plantel = document.getElementById("plantel").value;
+  let periodo = document.getElementById("regularizaciones").value;
+  let materia = document.getElementById("materias").value;
+
+  let mes_letra = periodo.split("-")[0];
+  var mes = 0;
+
+  switch(mes_letra){
+      case "ENERO":
+      mes = 1;
+      break;
+
+      case "MAYO":
+      mes = 5;
+      break;
+
+      case "JULIO":
+      mes = 7;
+      break;
+
+      case "OCTUBRE":
+      mes = 10;
+      break;
+  }
+
+  let ano = parseInt(periodo.split("-")[1]);
+
+  console.log(plantel,mes,ano,materia);
+  window.open('<?php echo base_url();?>index.php/c_acta_regularizacion/generar_acta?plantel='+plantel+'&mes='+mes+'&ano='+ano+'&materia='+materia, '_blank');
+}
 
 </script>
 

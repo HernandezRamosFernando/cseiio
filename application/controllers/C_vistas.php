@@ -608,7 +608,7 @@ public function resolucion_equivalencia(){
         $this->load->view("admin/cerrar_calificaciones", $datos);
         $this->load->view("footers/footer");
         }
-        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='CESCOLAR   '){
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='CESCOLAR'){
             $datos['planteles'] = $this->M_plantel->get_planteles();
             $data= array('title'=>'Cerrar calificaciones');
         $this->load->view("headers/cabecera", $data);

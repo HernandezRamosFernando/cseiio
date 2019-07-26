@@ -45,6 +45,7 @@ public function insertar_estudiante_nuevo_ingreso(
             $this->db->trans_start();
 
             $this->db->insert('Estudiante',$datos_estudiante);
+
             
             $this->db->insert('Tutor',$datos_estudiante_tutor);
             $id_tutor = $this->db->insert_id();

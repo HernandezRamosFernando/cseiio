@@ -43,11 +43,13 @@ class M_portabilidad extends CI_Model {
             values ('".$datos->no_control."','".$materia."',5)");
          }
 
+         $this->db->query("update Estudiante set estatus='IRREGULAR' where no_control='".$datos->no_control."'");
+
          $folio = $this->db->query("select min(folio) as folio from Friae as f inner join Friae_Estudiante as fe on f.folio=fe.Friae_folio where Estudiante_no_control='".$datos->no_control."'")->result();//-------------------------------------------------------------------------------------------------------------------------------------------
       
          if(sizeof($folio)>0){//si ya tiene grupo
             
-            $this->db->query("update Estudiante_Friae set estatus_inscripcion='IRREGULAR',numero_adeudos_inscripcion=".sizeof($datos)." where Friae_folio=".$folio[0]->folio." and Estudiante_no_control='".$datos->no_control."'");
+            $this->db->query("update Friae_Estudiante set estatus_inscripcion='IRREGULAR',numero_adeudos_inscripcion=".sizeof($datos).",id_materia_adeudos_inscripcion='".$claves_materias."' where Friae_folio=".$folio[0]->folio." and Estudiante_no_control='".$datos->no_control."'");
          }
       }
 

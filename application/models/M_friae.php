@@ -96,7 +96,7 @@ class M_friae extends CI_Model {
         foreach($datos->estudiantes as $estudiante){
             $datos_estudiante = $this->db->query("select * from Estudiante where no_control='".$estudiante."'")->result();
 
-            $materias_debiendo = $this->M_regularizacion->materias_debe_estudiante_actualmente($estudiante_materia->no_control);
+            $materias_debiendo = $this->M_regularizacion->materias_debe_estudiante_actualmente($estudiante);
 
 
             $materias_id = "";
@@ -104,6 +104,8 @@ class M_friae extends CI_Model {
                 $materias_id.=$id_materia->id_materia.',';
             }
             $materias_id = substr($materias_id,0,-1);
+
+            
             $folio_friae = $this->db->query("select folio from Friae where id_grupo='".$id_grupo."'")->result()[0]->folio;
             $this->db->query("insert into Friae_Estudiante (Friae_folio,Estudiante_no_control,tipo_ingreso_inscripcion,estatus_inscripcion,numero_adeudos_inscripcion,id_materia_adeudos_inscripcion)
                                 values (".$folio_friae.",'".$estudiante."','".$datos_estudiante[0]->tipo_ingreso."','".$datos_estudiante[0]->estatus."',".sizeof($materias_debiendo).",'".$materias_id."')");

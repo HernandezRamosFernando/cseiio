@@ -496,7 +496,7 @@ public function resolucion_equivalencia(){
 
     public function buscar_grupo(){
         if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
-        $datos['planteles'] = $this->M_plantel->get_plantel($this->session->userdata('user')['plantel']);
+        $datos['planteles'] = $this->M_plantel->get_planteles();
         $datos['ciclo_escolar'] = $this->M_ciclo_escolar->get_ciclo_escolar();
         
         $data= array('title'=>'Buscador de grupos');

@@ -271,7 +271,7 @@ class M_regularizacion extends CI_Model {
 
          else if(date("m",strtotime($regularizacion->fecha_calificacion))=="05" || date("m",strtotime($regularizacion->fecha_calificacion))=="10"){//if de si son regularizaciones intermedias
             // $datos_estudiante$datos_estudiante = $this->db->query("select tipo_ingreso from Estudiante where no_control='".$regularizacion->no_control."'")->result()[0];
-             //se sacan las materias que el estudiante debe
+             //se sacan las materias que el estudiante debeagreg
              $materias_debe = $this->materias_debe_estudiante_actualmente($regularizacion->no_control);
              $materias_ids="";
              //se saca la cadena de claves de materias que debe
@@ -537,8 +537,17 @@ public function cerrar_regularizacion($plantel){
    foreach($datos['estudiantes_sin_regularizacion'] as $estudiante){
 
       $folio_friae = $this->db->query("select folio from Friae where id_grupo='".$estudiante->Grupo_id_grupo."'")->result()[0]->folio;
+      $materias_debe = $this->materias_debe_estudiante_actualmente($estudiante->no_control);
 
-      $this->db->query("update Friae_Estudiante set tipo_ingreso_despues_regularizacion='".$estudiante->tipo_ingreso."' where Friae_folio=".$folio_friae." and Estudiante_no_control='".$estudiante->no_control."'");
+      $materias_ids="";
+            //se saca la cadena de claves de materias que debe
+            foreach($materias_debe as $id){
+                $materias_ids.=$id->id_materia.",";
+            }
+
+
+      $this->db->query("update Friae_Estudiante set tipo_ingreso_despues_regularizacion='".$estudiante->tipo_ingreso."' where Friae_folio=".$folio_friae." and Estudiante_no_control='".$estudiante->no_control."'");//-----------------------------------------------------------------------------------------------------------------------------------------------------------
+      $this->db->query("update Friae_Estudiante set adeudos_segunda_regularizacion=".(sizeof($materias_debe)).",id_materia_adeudos_segunda_regularizacion='".$materias_ids."' where Friae_folio=".$folio_friae." and Estudiante_no_control='".$estudiante->no_control."'");
 
       
    }

@@ -173,6 +173,7 @@
       showCancelButton: 'true',
       cancelButtonText: 'Cancelar'
     }).then((result) => {
+      if (result.value) {
       //Send the proper header information along with the request
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.onloadstart = function () {
@@ -213,6 +214,7 @@
     xhr.send(JSON.stringify(datos));
     console.log(datos);
     document.getElementById("boton_agregar").disabled=true;
+    }
     });
 
     

@@ -264,7 +264,7 @@
 
     //console.log(json_observaciones);
 
-
+    $("#generarobservacion").modal("toggle");
 
 
     //insertar observaciones en la base de datos
@@ -303,7 +303,7 @@
               window.open(objectUrl);
 
               //alerta de que si se genero la carta comprimiso
-              $("#generarobservacion").modal("toggle");
+              //$("#generarobservacion").modal("toggle");
               Swal.fire({
                 type: 'success',
                 title: 'Carta compromiso generada exitosamente',

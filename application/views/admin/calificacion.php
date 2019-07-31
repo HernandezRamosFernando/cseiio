@@ -80,7 +80,8 @@
 
             <div class="col-md-4">
               <label class="form-group has-float-label seltitulo">
-                <select class="form-control form-control-lg selcolor" onchange="validarcomponente()" name="materias" id="materias">
+                <select class="form-control form-control-lg selcolor" onchange="validarcomponente()" name="materias"
+                  id="materias">
                   <option value="">Seleccione uno</option>
                 </select>
                 <span>Lista de materias del grupo</span>
@@ -100,9 +101,11 @@
         <div class="row" id="alumnos_oculto" style="display: none">
           <div class="col-md-12" id="tabla_alumnos">
             <div class="card card-body">
-            <p class="h6" style="text-align: left; color: #237087; font-size: 12pt;">Criterios de calificación: <br> La calificación mínima aprobatoria es 6 <br> Toda calificación menor a 6 será 5 <br> La diagonal "/" significa que no presento </p>
-            <br>
-            <br>
+              <p class="h6" style="text-align: left; color: #237087; font-size: 12pt;">Criterios de calificación: <br>
+                La calificación mínima aprobatoria es 6 <br> Toda calificación menor a 6 será 5 <br> La diagonal "/"
+                significa que no presento </p>
+              <br>
+              <br>
               <table class="table table-hover" id="tabla_completa_grupo" style="width: 100%;  overflow: scroll">
                 <caption>Lista de los alumnos del grupo</caption>
                 <thead class="thead-light">
@@ -141,7 +144,7 @@
 
 <script>
 
-  document.getElementById("boton_agregar").disabled=true;
+  document.getElementById("boton_agregar").disabled = true;
 
   function guardar() {
 
@@ -175,49 +178,51 @@
       showCancelButton: 'true',
       cancelButtonText: 'Cancelar'
     }).then((result) => {
+      if (result.value) {
       //Send the proper header information along with the request
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.onloadstart = function () {
-      $('#div_carga').show();
-    }
-    xhr.error = function () {
-      console.log("error de conexion");
-    }
-    xhr.onreadystatechange = function () { // Call a function when the state changes.
-      if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-        $('#div_carga').hide();
-        if (xhr.responseText.trim() === "si") {
-          console.log(xhr.response);
-          swalWithBootstrapButtons.fire({
-            type: 'success',
-            text: 'Calificaciones guardadas correctamente',
-            allowOutsideClick: false,
-            confirmButtonText: 'Aceptar'
-          }).then((result) => {
-            if (result.value) {
-              //aqui va el aceptar
-              $(document).scrollTop(0);
-              //location.reload(); 
-              document.getElementById("alumnos_oculto").style.display = "none";
-              document.getElementById("agregar_oculto").style.display = "none";
-              
-            }
-            //aqui va si cancela
-          });
-        } else {
-          Swal.fire({
-            type: 'error',
-            text: 'Calificaciones no guardadas'
-          });
+      xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.onloadstart = function () {
+        $('#div_carga').show();
+      }
+      xhr.error = function () {
+        console.log("error de conexion");
+      }
+      xhr.onreadystatechange = function () { // Call a function when the state changes.
+        if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+          $('#div_carga').hide();
+          if (xhr.responseText.trim() === "si") {
+            console.log(xhr.response);
+            swalWithBootstrapButtons.fire({
+              type: 'success',
+              text: 'Calificaciones guardadas correctamente',
+              allowOutsideClick: false,
+              confirmButtonText: 'Aceptar'
+            }).then((result) => {
+              if (result.value) {
+                //aqui va el aceptar
+                $(document).scrollTop(0);
+                //location.reload(); 
+                document.getElementById("alumnos_oculto").style.display = "none";
+                document.getElementById("agregar_oculto").style.display = "none";
+
+              }
+              //aqui va si cancela
+            });
+          } else {
+            Swal.fire({
+              type: 'error',
+              text: 'Calificaciones no guardadas'
+            });
+          }
         }
       }
+      xhr.send(JSON.stringify(datos));
+      console.log(datos);
+      document.getElementById("boton_agregar").disabled = true;
     }
-    xhr.send(JSON.stringify(datos));
-    console.log(datos);
-    document.getElementById("boton_agregar").disabled=true;
-    });
+  });
 
-    
+
 
   }
 
@@ -279,7 +284,7 @@
   function cambiarbusqueda() {
     document.getElementById("grupos").disabled = true;
     document.getElementById("plantel").disabled = true;
-    document.getElementById("semestre_grupo").disabled = true;    
+    document.getElementById("semestre_grupo").disabled = true;
     document.getElementById('limpiar_oculto').style.display = "";
   }
 
@@ -291,7 +296,7 @@
     document.getElementById("alumnos_oculto").style.display = "";
     document.getElementById("agregar_oculto").style.display = "";
     var permisos = new XMLHttpRequest();
-    permisos.open('GET', '<?php echo base_url();?>index.php/c_permisos/get_permisos_plantel_grupo_materia?plantel=' + document.getElementById("plantel").value+'&grupo='+document.getElementById("grupos").value+'&materia='+document.getElementById("materias").value, true);
+    permisos.open('GET', '<?php echo base_url();?>index.php/c_permisos/get_permisos_plantel_grupo_materia?plantel=' + document.getElementById("plantel").value + '&grupo=' + document.getElementById("grupos").value + '&materia=' + document.getElementById("materias").value, true);
     permisos.onloadstart = function () {
       $('#div_carga').show();
     }
@@ -331,7 +336,7 @@
 
 
         JSON.parse(xhr.response).forEach(function (valor, indice) {
-          var promedio =0;
+          var promedio = 0;
 
           /*if (valor.primer_parcial != null && valor.segundo_parcial != null && valor.tercer_parcial != null) {
             promedio = (parseInt(valor.primer_parcial) + parseInt(valor.segundo_parcial) + parseInt(valor.tercer_parcial)) / 3;
@@ -339,16 +344,16 @@
             promedio = redondeo(promedio);
           }*/
 
-          var p1=0,p2=0,p3=0;
+          var p1 = 0, p2 = 0, p3 = 0;
 
-           p1=(valor.primer_parcial === null || valor.primer_parcial ==="") ? 0 : valor.primer_parcial;
-          p2=(valor.segundo_parcial === null || valor.segundo_parcial ==="")? 0 : valor.segundo_parcial;
-          p3=(valor.tercer_parcial === null || valor.tercer_parcial =="")? 0 : valor.tercer_parcial;
-          ef=(valor.examen_final === null || valor.examen_final =="")? 0 : valor.examen_final;
+          p1 = (valor.primer_parcial === null || valor.primer_parcial === "") ? 0 : valor.primer_parcial;
+          p2 = (valor.segundo_parcial === null || valor.segundo_parcial === "") ? 0 : valor.segundo_parcial;
+          p3 = (valor.tercer_parcial === null || valor.tercer_parcial == "") ? 0 : valor.tercer_parcial;
+          ef = (valor.examen_final === null || valor.examen_final == "") ? 0 : valor.examen_final;
 
-          
-          promedio=redondeo((parseInt(p1)+parseInt(p2)+parseInt(p3))/3);
-          
+
+          promedio = redondeo((parseInt(p1) + parseInt(p2) + parseInt(p3)) / 3);
+
 
           var registro = "<tr>";
           registro += '<td>' + valor.nombre + ' ' + valor.primer_apellido + ' ' + valor.segundo_apellido + '</td>';
@@ -356,7 +361,7 @@
           var primer_parcial = valor.primer_parcial !== null ? valor.primer_parcial : "";
 
           if (permisos_plantel.primer_parcial === "1") {
-            registro += '<td><input type="text" class="form-control" name="primer_parcial" value="' + (primer_parcial === "0" ? "/" : primer_parcial) + '" id="primer_parcial" onchange="calificaciones(this,\''+valor.tipo+'\',2,'+indice+','+permisos_plantel.examen_final+');"></td>';
+            registro += '<td><input type="text" class="form-control" name="primer_parcial" value="' + (primer_parcial === "0" ? "/" : primer_parcial) + '" id="primer_parcial" onchange="calificaciones(this,\'' + valor.tipo + '\',2,' + indice + ',' + permisos_plantel.examen_final + ');"></td>';
           }
           else {
             registro += '<td><input type="text" class="form-control" name="primer_parcial" value="' + (primer_parcial === "0" ? "/" : primer_parcial) + '" id="primer_parcial" disabled></td>';
@@ -364,7 +369,7 @@
 
           var segundo_parcial = valor.segundo_parcial !== null ? valor.segundo_parcial : "";
           if (permisos_plantel.segundo_parcial === "1") {
-            registro += '<td><input type="text" class="form-control" name="segundo_parcial" value="' + (segundo_parcial === "0" ? "/" : segundo_parcial) + '" id="segundo_parcial"  onchange="calificaciones(this,\''+valor.tipo+'\',3,'+indice+','+permisos_plantel.examen_final+');"></td>';
+            registro += '<td><input type="text" class="form-control" name="segundo_parcial" value="' + (segundo_parcial === "0" ? "/" : segundo_parcial) + '" id="segundo_parcial"  onchange="calificaciones(this,\'' + valor.tipo + '\',3,' + indice + ',' + permisos_plantel.examen_final + ');"></td>';
           }
 
           else {
@@ -374,41 +379,41 @@
 
           var tercer_parcial = valor.tercer_parcial !== null ? valor.tercer_parcial : "";
           if (permisos_plantel.tercer_parcial === "1") {
-            registro += '<td><input type="text" class="form-control" name="tercer_parcial" value="' + (tercer_parcial === "0" ? "/" : tercer_parcial) + '" id="tercer_parcial" onchange="calificaciones(this,\''+valor.tipo+'\',4,'+indice+','+permisos_plantel.examen_final+');"></td>';
+            registro += '<td><input type="text" class="form-control" name="tercer_parcial" value="' + (tercer_parcial === "0" ? "/" : tercer_parcial) + '" id="tercer_parcial" onchange="calificaciones(this,\'' + valor.tipo + '\',4,' + indice + ',' + permisos_plantel.examen_final + ');"></td>';
           }
           else {
             registro += '<td><input type="text" class="form-control" name="tercer_parcial" value="' + (tercer_parcial === "0" ? "/" : tercer_parcial) + '" id="tercer_parcial" disabled></td>';
           }
 
           if (promedio >= 6) {
-            registro += '<td><input type="text" class="form-control" name="promedio_modular" value="' + promedio+'" id="promedio_modular" disabled style="background-color:#1F934C;color: white;font-weight:bold"></td>';
+            registro += '<td><input type="text" class="form-control" name="promedio_modular" value="' + promedio + '" id="promedio_modular" disabled style="background-color:#1F934C;color: white;font-weight:bold"></td>';
           } else {
             registro += '<td><input type="text" class="form-control" name="promedio_modular" value="' + promedio + '" id="promedio_modular" disabled style="background-color:#C4131B;color: white; font-weight:bold"></td>';
           }
 
-          
+
 
           var examen_final = valor.examen_final !== null ? valor.examen_final : "";
           if (permisos_plantel.examen_final === "1" && promedio >= 6) {
-            registro += '<td><input type="text" class="form-control" name="examen_final" value="' + (examen_final === "0" ? "/" : examen_final) + '" id="examen_final" onchange="calificaciones(this,\''+valor.tipo+'\',6,'+indice+','+permisos_plantel.examen_final+');"></td>';
+            registro += '<td><input type="text" class="form-control" name="examen_final" value="' + (examen_final === "0" ? "/" : examen_final) + '" id="examen_final" onchange="calificaciones(this,\'' + valor.tipo + '\',6,' + indice + ',' + permisos_plantel.examen_final + ');"></td>';
           } else if (permisos_plantel.examen_final === "1" && promedio < 6) {
-            registro += '<td><input type="text" class="form-control" name="examen_final" value="/" id="examen_final" onchange="calificaciones(this,\''+valor.tipo+'\',6,'+indice+','+permisos_plantel.examen_final+');" disabled></td>';
+            registro += '<td><input type="text" class="form-control" name="examen_final" value="/" id="examen_final" onchange="calificaciones(this,\'' + valor.tipo + '\',6,' + indice + ',' + permisos_plantel.examen_final + ');" disabled></td>';
           } else {
-            registro += '<td><input type="text" class="form-control" name="examen_final" value="' + (examen_final === "0" ? "/" : examen_final) + '" onchange="calificaciones(this,\''+valor.tipo+'\',6,'+indice+','+permisos_plantel.examen_final+');" id="examen_final" disabled></td>';
+            registro += '<td><input type="text" class="form-control" name="examen_final" value="' + (examen_final === "0" ? "/" : examen_final) + '" onchange="calificaciones(this,\'' + valor.tipo + '\',6,' + indice + ',' + permisos_plantel.examen_final + ');" id="examen_final" disabled></td>';
           }
-          
-          var promedio_total= redondeo((promedio+parseInt(ef))/2);
+
+          var promedio_total = redondeo((promedio + parseInt(ef)) / 2);
 
 
           if (promedio_total >= 6) {
-          	registro += '<td> <input type="text" class="form-control" name="promediot" value="' + ((promedio_total === "0" || promedio_total==='') ? "/" : promedio_total) + '" id="promediot" disabled style="background-color:#1F934C;color: white;font-weight:bold"> </td>';
+            registro += '<td> <input type="text" class="form-control" name="promediot" value="' + ((promedio_total === "0" || promedio_total === '') ? "/" : promedio_total) + '" id="promediot" disabled style="background-color:#1F934C;color: white;font-weight:bold"> </td>';
           }
-          else{
-          		registro += '<td> <input type="text" class="form-control" name="promediot" value="' + ((promedio_total === "0" || promedio_total==='') ? "/" : promedio_total) + '" id="promediot" disabled style="background-color:#C4131B;color: white; font-weight:bold"> </td>';
+          else {
+            registro += '<td> <input type="text" class="form-control" name="promediot" value="' + ((promedio_total === "0" || promedio_total === '') ? "/" : promedio_total) + '" id="promediot" disabled style="background-color:#C4131B;color: white; font-weight:bold"> </td>';
           }
-          
 
-          
+
+
           registro += '</tr>';
 
           document.getElementById("tablagrupo").innerHTML += registro;
@@ -440,21 +445,21 @@
       xhr.onload = function () {
         $('#div_carga').hide();
         console.log(xhr.response.trim());
-        if(xhr.response.trim() === "[]"){
+        if (xhr.response.trim() === "[]") {
           let opciones = "";
           opciones += '<option value="">No existen materias con permisos para calificar</option>';
           document.getElementById("materias").innerHTML = opciones;
-          
-        }else{
+
+        } else {
           let opciones = "";
           opciones += '<option value="">Seleccione una materia</option>';
-        JSON.parse(xhr.response).forEach(function (valor, indice) {
-          opciones += '<option value="' + valor.clave + '">' + valor.unidad_contenido + '</option>';
-        });
+          JSON.parse(xhr.response).forEach(function (valor, indice) {
+            opciones += '<option value="' + valor.clave + '">' + valor.unidad_contenido + '</option>';
+          });
 
-        document.getElementById("materias").innerHTML = opciones;
+          document.getElementById("materias").innerHTML = opciones;
         }
-        
+
       };
 
       xhr.send(null);
@@ -465,9 +470,9 @@
   }
 
 
-  function calificaciones(e,tipo,columna_activa,fila,activo_examen_final) {
+  function calificaciones(e, tipo, columna_activa, fila, activo_examen_final) {
     var string = e.value.toString();
-    var tipo_materia=tipo;
+    var tipo_materia = tipo;
 
     for (var i = 0, output = '', validos = "0123456789./"; i < string.length; i++) {
       if (validos.indexOf(string.charAt(i)) != -1)
@@ -477,45 +482,45 @@
     if (output != "") {
 
 
-      
-      if(tipo_materia==='EXTRAESCOLAR'){
-          if (output >= 6 && output <= 10) {
-              var valor = parseFloat(output);
-              valor = Math.round(valor);
-              console.log(valor)
-              e.value = valor;
-              e.style.color = "black";
-            }
-            else if(output==="/"){
-                e.value ="/";
-                e.style.color = "red";
-            }
 
-            else{
-                e.value =6;
-            }
+      if (tipo_materia === 'EXTRAESCOLAR') {
+        if (output >= 6 && output <= 10) {
+          var valor = parseFloat(output);
+          valor = Math.round(valor);
+          console.log(valor)
+          e.value = valor;
+          e.style.color = "black";
+        }
+        else if (output === "/") {
+          e.value = "/";
+          e.style.color = "red";
+        }
+
+        else {
+          e.value = 6;
+        }
       }
 
-      else{
-                if (output >= 6 && output <= 10) {
-              var valor = parseFloat(output);
-              valor = Math.round(valor);
-              console.log(valor)
-              e.value = valor;
-              e.style.color = "black";
-            } else if (output === "/") {
-              e.style.color = "red";
-            } else if (output >= 0 && output < 6) {
-              e.value = 5;
-              e.style.color = "red";
-            } else {
-              console.log("valor no valido")
-              e.value = "";
-            }
+      else {
+        if (output >= 6 && output <= 10) {
+          var valor = parseFloat(output);
+          valor = Math.round(valor);
+          console.log(valor)
+          e.value = valor;
+          e.style.color = "black";
+        } else if (output === "/") {
+          e.style.color = "red";
+        } else if (output >= 0 && output < 6) {
+          e.value = 5;
+          e.style.color = "red";
+        } else {
+          console.log("valor no valido")
+          e.value = "";
+        }
 
       }
 
-      
+
 
 
     } else {
@@ -525,44 +530,44 @@
     //-----------comienza validación de filas activas
     validar_vacios_input();
     //validacion para calcular promedio del semestre por alumno
-    promedio_semestral(fila,activo_examen_final)
+    promedio_semestral(fila, activo_examen_final)
 
   }
 
 
-function validar_vacios_input() {
-  var validar_tabla = document.getElementById("tablagrupo");
-  var contar_vacios=0;
-  for (let i = 0; i < validar_tabla.childNodes.length; i++) {
-      if(validar_tabla.childNodes[i].childNodes[2].childNodes[0].disabled===false && validar_tabla.childNodes[i].childNodes[2].childNodes[0].value===""){
+  function validar_vacios_input() {
+    var validar_tabla = document.getElementById("tablagrupo");
+    var contar_vacios = 0;
+    for (let i = 0; i < validar_tabla.childNodes.length; i++) {
+      if (validar_tabla.childNodes[i].childNodes[2].childNodes[0].disabled === false && validar_tabla.childNodes[i].childNodes[2].childNodes[0].value === "") {
         contar_vacios++;
       }
 
-      if(validar_tabla.childNodes[i].childNodes[3].childNodes[0].disabled===false && validar_tabla.childNodes[i].childNodes[3].childNodes[0].value===""){
+      if (validar_tabla.childNodes[i].childNodes[3].childNodes[0].disabled === false && validar_tabla.childNodes[i].childNodes[3].childNodes[0].value === "") {
         contar_vacios++;
       }
 
-      if(validar_tabla.childNodes[i].childNodes[4].childNodes[0].disabled===false && validar_tabla.childNodes[i].childNodes[4].childNodes[0].value===""){
+      if (validar_tabla.childNodes[i].childNodes[4].childNodes[0].disabled === false && validar_tabla.childNodes[i].childNodes[4].childNodes[0].value === "") {
         contar_vacios++;
       }
 
-      if(validar_tabla.childNodes[i].childNodes[6].childNodes[0].disabled===false && validar_tabla.childNodes[i].childNodes[6].childNodes[0].value===""){
+      if (validar_tabla.childNodes[i].childNodes[6].childNodes[0].disabled === false && validar_tabla.childNodes[i].childNodes[6].childNodes[0].value === "") {
         contar_vacios++;
       }
 
-      
+
 
     }
-    console.log('vacios: '+contar_vacios);
-    if(contar_vacios>0){
-        document.getElementById("boton_agregar").disabled=true;
+    console.log('vacios: ' + contar_vacios);
+    if (contar_vacios > 0) {
+      document.getElementById("boton_agregar").disabled = true;
     }
-    else{
-        document.getElementById("boton_agregar").disabled=false;
+    else {
+      document.getElementById("boton_agregar").disabled = false;
     }
 
 
-}
+  }
 
 
   function redondeo(e) {
@@ -581,44 +586,44 @@ function validar_vacios_input() {
 
 
 
-  function promedio_semestral(fila,activo_examen_final) {
+  function promedio_semestral(fila, activo_examen_final) {
     var tabla = document.getElementById("tablagrupo");
-    var promedio=0;
-    primer_parcial=(tabla.childNodes[fila].childNodes[2].childNodes[0].value === "" || tabla.childNodes[fila].childNodes[2].childNodes[0].value==='/') ? 0 : tabla.childNodes[fila].childNodes[2].childNodes[0].value;
-    segundo_parcial=(tabla.childNodes[fila].childNodes[3].childNodes[0].value === "" || tabla.childNodes[fila].childNodes[3].childNodes[0].value === "/") ? 0 : tabla.childNodes[fila].childNodes[3].childNodes[0].value;
-    tercer_parcial=(tabla.childNodes[fila].childNodes[4].childNodes[0].value === "" || tabla.childNodes[fila].childNodes[4].childNodes[0].value === "/") ? 0 : tabla.childNodes[fila].childNodes[4].childNodes[0].value;
-    examen_final=(tabla.childNodes[fila].childNodes[6].childNodes[0].value === "" || tabla.childNodes[fila].childNodes[6].childNodes[0].value === "/") ? 0 : tabla.childNodes[fila].childNodes[6].childNodes[0].value;
+    var promedio = 0;
+    primer_parcial = (tabla.childNodes[fila].childNodes[2].childNodes[0].value === "" || tabla.childNodes[fila].childNodes[2].childNodes[0].value === '/') ? 0 : tabla.childNodes[fila].childNodes[2].childNodes[0].value;
+    segundo_parcial = (tabla.childNodes[fila].childNodes[3].childNodes[0].value === "" || tabla.childNodes[fila].childNodes[3].childNodes[0].value === "/") ? 0 : tabla.childNodes[fila].childNodes[3].childNodes[0].value;
+    tercer_parcial = (tabla.childNodes[fila].childNodes[4].childNodes[0].value === "" || tabla.childNodes[fila].childNodes[4].childNodes[0].value === "/") ? 0 : tabla.childNodes[fila].childNodes[4].childNodes[0].value;
+    examen_final = (tabla.childNodes[fila].childNodes[6].childNodes[0].value === "" || tabla.childNodes[fila].childNodes[6].childNodes[0].value === "/") ? 0 : tabla.childNodes[fila].childNodes[6].childNodes[0].value;
 
-    
-promedio_modular=redondeo((parseInt(primer_parcial)+parseInt(segundo_parcial)+parseInt(tercer_parcial))/3);
-	
 
-	
-if(promedio_modular>=6){
-		tabla.childNodes[fila].childNodes[5].innerHTML='<input type="text" class="form-control" name="promedio_modular" value="' +promedio_modular+'" id="promedio_modular" disabled style="background-color:#1F934C;color: white;font-weight:bold">';
-   
-		 if(activo_examen_final===1){
-		 	tabla.childNodes[fila].childNodes[6].childNodes[0].disabled=false;
-
-		 	
-		 }
-	}
-
-	else{
-		tabla.childNodes[fila].childNodes[5].innerHTML='<input type="text" class="form-control" name="promedio_modular" value="' +promedio_modular+'" id="promedio_modular" disabled style="background-color:#C4131B;color: white;font-weight:bold">';
-		if(activo_examen_final===1){
-      
-		 	tabla.childNodes[fila].childNodes[6].childNodes[0].disabled=true;
-		 	tabla.childNodes[fila].childNodes[6].childNodes[0].value="/";
-		 	examen_final=0;
-		 }
-	}
+    promedio_modular = redondeo((parseInt(primer_parcial) + parseInt(segundo_parcial) + parseInt(tercer_parcial)) / 3);
 
 
 
-	
+    if (promedio_modular >= 6) {
+      tabla.childNodes[fila].childNodes[5].innerHTML = '<input type="text" class="form-control" name="promedio_modular" value="' + promedio_modular + '" id="promedio_modular" disabled style="background-color:#1F934C;color: white;font-weight:bold">';
 
-    promedio=redondeo((parseInt(promedio_modular)+parseInt(examen_final))/2);
+      if (activo_examen_final === 1) {
+        tabla.childNodes[fila].childNodes[6].childNodes[0].disabled = false;
+
+
+      }
+    }
+
+    else {
+      tabla.childNodes[fila].childNodes[5].innerHTML = '<input type="text" class="form-control" name="promedio_modular" value="' + promedio_modular + '" id="promedio_modular" disabled style="background-color:#C4131B;color: white;font-weight:bold">';
+      if (activo_examen_final === 1) {
+
+        tabla.childNodes[fila].childNodes[6].childNodes[0].disabled = true;
+        tabla.childNodes[fila].childNodes[6].childNodes[0].value = "/";
+        examen_final = 0;
+      }
+    }
+
+
+
+
+
+    promedio = redondeo((parseInt(promedio_modular) + parseInt(examen_final)) / 2);
     /*console.log('p1:'+primer_parcial+', p2:'+segundo_parcial+', p3:'+tercer_parcial+', ef:'+examen_final);
     console.log('este es el promedio Modular: '+promedio_modular);
     console.log('este es el promedio: '+promedio);
@@ -626,22 +631,21 @@ if(promedio_modular>=6){
 
 
 
-	if(promedio>=6){
-		tabla.childNodes[fila].childNodes[7].innerHTML='<input type="text" class="form-control" name="promediot" value="' + ((promedio === "0" || promedio==='') ? "/" : promedio) + '" id="promediot" disabled="disabled" style="background-color:#1F934C;color: white;font-weight:bold">';
-	}
-	else{
-		tabla.childNodes[fila].childNodes[7].innerHTML='<input type="text" class="form-control" name="promediot" value="' + ((promedio === "0" || promedio==='') ? "/" : promedio) + '" id="promediot" disabled="disabled" style="background-color:#C4131B;color: white; font-weight:bold">';
-	}
+    if (promedio >= 6) {
+      tabla.childNodes[fila].childNodes[7].innerHTML = '<input type="text" class="form-control" name="promediot" value="' + ((promedio === "0" || promedio === '') ? "/" : promedio) + '" id="promediot" disabled="disabled" style="background-color:#1F934C;color: white;font-weight:bold">';
+    }
+    else {
+      tabla.childNodes[fila].childNodes[7].innerHTML = '<input type="text" class="form-control" name="promediot" value="' + ((promedio === "0" || promedio === '') ? "/" : promedio) + '" id="promediot" disabled="disabled" style="background-color:#C4131B;color: white; font-weight:bold">';
+    }
 
-     
+
 
   }
 
   var bPreguntar = true;
-window.onbeforeunload = preguntarAntesDeSalir;
-function preguntarAntesDeSalir()
-{
-  if (bPreguntar)
-    return "¿Seguro que quieres salir?";
-}
+  window.onbeforeunload = preguntarAntesDeSalir;
+  function preguntarAntesDeSalir() {
+    if (bPreguntar)
+      return "¿Seguro que quieres salir?";
+  }
 </script>

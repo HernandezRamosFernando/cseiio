@@ -65,7 +65,7 @@
     </li>
     <li class="nav-item ">
       <a class="nav-link <?php ($this->uri->segment(2)=='control_permisos'||$this->uri->segment(2)=='permisos_cal'||$this->uri->segment(2)=='permisos_reg'||$this->uri->segment(2)=='materias'||$this->uri->segment(2)=='componentes' ||$this->uri->segment(2)=='terminar_ciclo') ? print 'bg-info text-light' : print null; ?>"
-      href="<?php echo base_url();?>index.php/c_subir_doc/control_permisos">
+      href="<?php echo base_url();?>index.php/c_vistas/control_permisos">
         <i class="material-icons">people_outline</i>
         <span>Control Y Permisos</span>
       </a>

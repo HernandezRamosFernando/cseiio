@@ -195,6 +195,58 @@ $fecha_separada = explode("-",$fecha_carta[0]->fecha);
 
 $dateObj   = DateTime::createFromFormat('!m', intval($fecha_separada[1]));
 $mes = strftime('%B', $dateObj->getTimestamp());
+
+switch($mes){
+
+case 'January':
+$mes = 'enero';
+break;
+
+case 'February':
+$mes = 'febrero';
+break;
+
+case 'March':
+$mes = 'marzo';
+break;
+
+case 'April':
+$mes = 'abril';
+break;
+
+case 'May':
+$mes = 'mayo';
+break;
+
+case 'June':
+$mes = 'junio';
+break;
+
+case 'July':
+$mes = 'julio';
+break;
+
+case 'August':
+$mes = 'agosto';
+break;
+
+case 'September':
+$mes = 'septiembre';
+break;
+
+case 'October':
+$mes = 'octubre';
+break;
+
+case 'November':
+$mes = 'noviembre';
+break;
+
+case 'December':
+$mes = 'diciembre';
+break;
+
+}
 //echo $monthName;
 
 $html_3 = '</tbody>

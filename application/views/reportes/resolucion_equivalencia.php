@@ -149,7 +149,7 @@ Expediente: <span style="font-weight:bold">'.$num_folio.'</span>
 <br>
 <br>
 <br>
-<span style="text-align:RIGTH;"><STRONG>Heriberto Ríos Colin</STRONG></span>
+<span style="text-align:RIGTH;"><STRONG>DAVID ERNESTO HERNANDEZ AVENDAÑO</STRONG></span>
 <br>
 <span style="text-align:RIGTH;"><STRONG>Jefe del Departamento de Control Escolar</STRONG></span>
 <br>

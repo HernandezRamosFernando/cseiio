@@ -676,7 +676,7 @@ $firmas = '
 <tr>
 <td><p>'.$director.'</p><p>_________________________</p><p>NOMBRE Y FIRMA DEL DIRETOR(A)</p><p>DEL PLANTEL</p></td>
 <td><p></p><p>_________________________</p><p>SELLO DEL PLANTEL</p></td>
-<td><p>HERIBERTO RIOS COLIN</p><p>_________________________</p><p>JEFE DEL DEPARTAMENTO DE</p><p>CONTROL ESCOLAR</p></td>
+<td><p>DAVID ERNESTO HERNANDEZ AVENDAÑO</p><p>_________________________</p><p>JEFE DEL DEPARTAMENTO DE</p><p>CONTROL ESCOLAR</p></td>
 <td><p></p><p>_________________________</p><p>SELLO CONTROL ESCOLAR</p></td>
 <td><p></p><p>_________________________</p><p>REVISO Y VALIDO</p></td>
 </tr>

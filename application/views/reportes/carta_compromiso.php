@@ -123,7 +123,7 @@ $html_1 ='
 <br>
 <span style="text-align:RIGTH;">ASUNTO: CARTA COMPROMISO</span>
 <br>
-<span style="text-align:LEFT;"><STRONG>LIC. HERIBERTO RÍOS COLIN</STRONG></span>
+<span style="text-align:LEFT;"><STRONG>ING. DAVID ERNESTO HERNANDEZ AVENDAÑO</STRONG></span>
 <br>
 <span style="text-align:LEFT;"><STRONG>JEFE DEL DEPARTAMENTO DE CONTROL ESCOLAR</STRONG></span>
 <br>

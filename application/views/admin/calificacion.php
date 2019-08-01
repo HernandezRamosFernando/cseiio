@@ -648,4 +648,23 @@
     if (bPreguntar)
       return "¿Seguro que quieres salir?";
   }
+
+  $(document).ready(function(){   
+        var inputs = $("form :text"),
+        length = inputs.length,
+        i = 0;
+        console.log("funciona");
+ 
+        // El resto del código
+
+        inputs.on("keypress", function(event){
+    var code = event.keyCode || event.which;    
+    if (code == 13){
+        event.preventDefault();
+        i = i == length - 1 ? 0 : ++i;
+        inputs[i].focus();
+    }
+      });
+
+    });
 </script>

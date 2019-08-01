@@ -19,7 +19,7 @@
 
           <div class="form-group">
             <div class="form-label-group">
-              <input type="text" id="inputUsuario" pattern="[A-Za-z0-9]+[ ]*[A-Za-z0-9 ]*" onchange="valida(this);" 
+              <input type="text" id="inputUsuario" pattern="[A-Za-z0-9_]+[ ]*[A-Za-z0-9_ ]*" onchange="valida(this);" 
               name="usuario" class="form-control" placeholder="Ingrese su usuario" required="required" autofocus="autofocus">
               <label for="inputUsuario">Ingrese su Usuario</label>
             </div>
@@ -52,9 +52,9 @@
           <div class="modal-content card">
               <div class="modal-body">
                   <div class="container-fluid">
-                      Favor de llamar al numero siguiente:
+                      Favor de llamar al numero siguiente: (951) 5203924/5203925 EXT: 4
                       <br>
-                      O enviar mensaje al siguiente correo:
+                      O enviar mensaje al siguiente correo: controlescolarcseiio@oaxaca.gob.mx
                   </div>
               </div>
               <div class="modal-footer">

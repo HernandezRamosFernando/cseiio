@@ -217,11 +217,11 @@ function rellenar_lista($estudiantes,$bajas){
         <td style="width:85px;height:20px">'.$estudiante->primer_apellido.'</td>
         <td style="width:85px;height:15px">'.$estudiante->segundo_apellido.'</td>
         <td style="width:110px;height:15px">'.$estudiante->nombre.'</td>
-        <td style="width:35px">'.(intval($estudiante->primer_parcial)==0?'/':$estudiante->primer_parcial).'</td>
-        <td style="width:35px">'.(intval($estudiante->segundo_parcial)==0?'/':$estudiante->segundo_parcial).'</td>
-        <td style="width:35px">'.(intval($estudiante->tercer_parcial)==0?'/':$estudiante->tercer_parcial).'</td>
+        <td style="width:35px">'.(($estudiante->primer_parcial)=='0'?'/':$estudiante->primer_parcial).'</td>
+        <td style="width:35px">'.(($estudiante->segundo_parcial)=='0'?'/':$estudiante->segundo_parcial).'</td>
+        <td style="width:35px">'.(($estudiante->tercer_parcial)=='0'?'/':$estudiante->tercer_parcial).'</td>
         <td style="width:35px">'.($promedio==0?'/':$promedio).'</td>
-        <td style="width:35px">'.(intval($estudiante->examen_final)==0?'/':$estudiante->examen_final).'</td>
+        <td style="width:35px">'.(($estudiante->examen_final)=='0'?'/':$estudiante->examen_final).'</td>
         <td style="width:35px">'.$estudiante->calificacion_final.'</td>';
         if(sizeof($bajas[$contador-1])>0){
             $respuesta.='<td style="width:90px">'.$bajas[$contador-1][0]->fecha.'</td></tr>';

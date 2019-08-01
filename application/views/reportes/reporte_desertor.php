@@ -111,7 +111,7 @@ $this->SetFont('helvetica', 'B',8);
 	// Page footer
 	public function Footer() {
 		$html = '<br><br><br><br><br><br><br><br><table>
-		<tr><td WIDTH="33.33%"><span style="font-weight: bold;text-align: center;text-decoration: underline;font-size: 8px">'.$this->plantel[0]->director.'</span></td><td WIDTH="33.33%"><span style="font-weight: bold;text-align: center;text-decoration: underline;font-size: 8px"></span></td><td WIDTH="33.33%"><span style="font-weight: bold;text-align: center;text-decoration: underline;font-size: 8px">HERIBERTO RIOS COLIN</span></td></tr>
+		<tr><td WIDTH="33.33%"><span style="font-weight: bold;text-align: center;text-decoration: underline;font-size: 8px">'.$this->plantel[0]->director.'</span></td><td WIDTH="33.33%"><span style="font-weight: bold;text-align: center;text-decoration: underline;font-size: 8px"></span></td><td WIDTH="33.33%"><span style="font-weight: bold;text-align: center;text-decoration: underline;font-size: 8px">DAVID ERNESTO HERNANDEZ AVENDAÑO</span></td></tr>
 		<tr><td><span style="text-align: center;font-size: 8px">NOMBRE Y FIRMA<br> DEL DIRECTOR DE PLANTEL</span></td><td><span style="text-align: center;font-size: 8px">REVISÓ Y VALIDÓ</span></td><td><span style="text-align: center;font-size: 8px">JEFE(A) DEL DEPTO.<BR>DE CONTROL ESCOLAR</span></td></tr>
 		</table>';
 		// Position at 15 mm from bottom

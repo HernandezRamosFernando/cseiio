@@ -604,6 +604,20 @@ function cargar_anio_registro(){
     return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
   }
 
+  function enter2tab(e) {
+    if (e.keyCode == 13) {
+        cb = parseInt($(this).attr('tabindex'));
+ 
+        if ($(':input[tabindex=\'' + (cb + 1) + '\']') != null) {
+            $(':input[tabindex=\'' + (cb + 1) + '\']').focus();
+            $(':input[tabindex=\'' + (cb + 1) + '\']').select();
+            e.preventDefault();
+ 
+            return false;
+        }
+    }
+}
+
 
 
 

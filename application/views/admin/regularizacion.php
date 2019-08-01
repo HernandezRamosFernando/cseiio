@@ -422,7 +422,7 @@
         calificacion: calificacion,
         fecha_calificacion: document.getElementById("fecha_inicio").value,
         cct_plantel: document.getElementById("plantel").value,
-        hora:document.getElementById("hora_inicio").value,
+        hora:document.getElementById("hora_inicio").value.trim(),
         asesor:document.getElementById("asesor").value
       };
       datos.push(dato);

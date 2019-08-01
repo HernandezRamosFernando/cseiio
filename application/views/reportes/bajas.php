@@ -133,7 +133,7 @@ $this->SetFont('helvetica', 'B',8);
                 </td>
         
                 <td>
-                <p>HERIBERTO RIOS COLIN</p>
+                <p>DAVID ERNESTO HERNANDEZ AVENDAÑO</p>
                 <p>____________________________</p>
                 <p>JEFA DE DEPARTAMENTO</p>
                 <p>DE CONTROL ESCOLAR</p>

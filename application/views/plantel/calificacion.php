@@ -642,4 +642,17 @@ function preguntarAntesDeSalir()
   if (bPreguntar)
     return "¿Seguro que quieres salir?";
 }
+
+$(document).ready(function() {
+   /* Aquí podría filtrar que controles necesitará manejar,
+    * en el caso de incluir un dropbox $('input, select');
+    */
+   tb = $('input');
+    
+   if ($.browser.mozilla) {
+       $(tb).keypress(enter2tab);
+   } else {
+       $(tb).keydown(enter2tab);
+   }
+   });
 </script>

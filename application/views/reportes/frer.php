@@ -425,7 +425,7 @@ $html_materias_4='
         <tr>
         <td><p>'.$datos_plantel->director.'</p><p>_________________________________</p><p>NOMBRE Y FIRMA DEL DIRECTOR</p><p>DEL PLANTEL</p></td>
         <td><p></p><p>_________________________________</p><p>SELLO DEL PLANTEL</p></td>
-        <td><p>HERIBERTO RIOS COLIN</p><p>_________________________________</p><p>JEFE DEL DEPARTAMENTO</p><p>DE CONTROL ESCOLAR</p></td>
+        <td><p>DAVID ERNESTO HERNANDEZ AVENDAÑO</p><p>_________________________________</p><p>JEFE DEL DEPARTAMENTO</p><p>DE CONTROL ESCOLAR</p></td>
         <td><p></p><p>_________________________________</p><p>SELLO CONTROL ESCOLAR</p></td>
         </tr>
         <br>

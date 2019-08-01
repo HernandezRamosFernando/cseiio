@@ -642,4 +642,26 @@ function preguntarAntesDeSalir()
   if (bPreguntar)
     return "¿Seguro que quieres salir?";
 }
+
+
+
+
+
+
+function evento_teclado(){
+let input = document.getElementById("tabla_alumnos");
+
+
+// Execute a function when the user releases a key on the keyboard
+input.addEventListener("keyup", function(event) {
+  // Number 13 is the "Enter" key on the keyboard
+  if (event.keyCode === 13) {
+    console.log("si sirve");
+
+  }
+}); 
+}
+
+evento_teclado();
+
 </script>

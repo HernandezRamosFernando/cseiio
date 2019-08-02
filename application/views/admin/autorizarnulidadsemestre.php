@@ -493,7 +493,7 @@ function cargar_datos_solicitud_nulidad(no_control,id_nulidad){
                       newlink.setAttribute('title', 'Solicitud nulidad semestre');
                       newlink.className += "btn btn-primary";
                       newlink.setAttribute("style", "color:white");
-                      newlink.setAttribute('onclick','ventanaSecundaria(\'<?php echo base_url();?>C_subir_doc/visualizar/' + estudiante[0].no_control+ '/' +nulidad.documento[0].id_documento+ '\');');
+                      newlink.setAttribute('onclick','ventanaSecundaria(\'<?php echo base_url();?>C_subir_doc/visualizar/' + estudiante[0].no_control+ '/' +nulidad.documento[0].id_documentacion+ '\');');
                       newlink.setAttribute('target', '_blank');
                       div = document.getElementById('enlace');
                       div.appendChild(newlink);

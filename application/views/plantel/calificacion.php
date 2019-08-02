@@ -643,16 +643,24 @@ function preguntarAntesDeSalir()
     return "¿Seguro que quieres salir?";
 }
 
-$(document).ready(function() {
-   /* Aquí podría filtrar que controles necesitará manejar,
-    * en el caso de incluir un dropbox $('input, select');
-    */
-   tb = $('input');
-    
-   if ($.browser.mozilla) {
-       $(tb).keypress(enter2tab);
-   } else {
-       $(tb).keydown(enter2tab);
-   }
-   });
+
+$("body").on("keydown", "input, select, textarea", function(e) {
+  var self = $(this),
+    form = self.parents("form:eq(0)"),
+    focusable,
+    next;
+  
+  // si presiono el enter
+  if (e.keyCode == 13) {
+    // busco el siguiente elemento
+    focusable = form.find("input").filter(":enabled");
+    next = focusable.eq(focusable.index(this) + 1);
+    // si existe siguiente elemento, hago foco
+    if (next.length) {
+      next.focus();
+    }
+    return false;
+  }
+});
+
 </script>

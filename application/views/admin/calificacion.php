@@ -649,38 +649,23 @@
       return "¿Seguro que quieres salir?";
   }
 
-  $(document).ready(function () {
-                tb = $('input');
-                if ($.browser.mozilla) {
-                    $(tb).keypress(enter2tab);
-                } else {
-                    $(tb).keydown(enter2tab);
-                }
-            });
-
-  function enter2tab() {
-    let input=document.getElemenById("tabla_alumnos");
-    input.addEventListener("keyup",function(event) {
-    console.log(e);
-
-alert('se presionola tecla ' + e.keyCode);
-
-           if (e.keyCode == 13) {
-
-               alert('se presiono enter');
-
-               cb = parseInt($(this).attr('tabindex'));
-               if ($(':input[tabindex=\'' + (cb + 1) + '\']') != null) {
-                   $(':input[tabindex=\'' + (cb + 1) + '\']').focus();
-                   $(':input[tabindex=\'' + (cb + 1) + '\']').select();
-                   e.preventDefault();
-
-                   return false;
-               }
-           }
-          });
-        }
-
-
+  $("body").on("keydown", "input, select, textarea", function(e) {
+  var self = $(this),
+    form = self.parents("form:eq(0)"),
+    focusable,
+    next;
+  
+  // si presiono el enter
+  if (e.keyCode == 13) {
+    // busco el siguiente elemento
+    focusable = form.find("input").filter(":enabled");
+    next = focusable.eq(focusable.index(this) + 1);
+    // si existe siguiente elemento, hago foco
+    if (next.length) {
+      next.focus();
+    }
+    return false;
+  }
+});
 
 </script>

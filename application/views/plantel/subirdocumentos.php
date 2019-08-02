@@ -234,7 +234,7 @@ https://www.youtube.com/results?search_query=+AJAX+File+Upload+with+Progress
 
 
           fila += '<td>';
-          fila += '<div class="form-check"><label class="form-check-label"><input type="checkbox" class="form-check-input" name="documento' + cont2 + '" id="documento' + cont2 + '" value="' + valor.id_documento + '"  onclick="activarFile(this,\'file' + cont2 + '\')" '+estatusCheck+'>' + valor.nombre_documento+' '+'<span class="badge badge-success">'+nombre_plantel+'</span>';
+          fila += '<div class="form-check"><label class="form-check-label"><input type="checkbox" class="form-check-input" name="documento' + cont2 + '" id="documento' + cont2 + '" value="' + valor.id_documentacion + '"  onclick="activarFile(this,\'file' + cont2 + '\')" '+estatusCheck+'>' + valor.nombre_documento+' '+'<span class="badge badge-success">'+nombre_plantel+'</span>';
           fila += '</label></div></td>';
 
           fila += '<td>';
@@ -243,11 +243,11 @@ https://www.youtube.com/results?search_query=+AJAX+File+Upload+with+Progress
 
           if (valor.ruta !== null && valor.ruta.length!==0) {
               fila += '<td>';
-              fila += '<center><a class="btn btn-info" id="enlace'+cont2 +'" href="<?php echo base_url();?>index.php/C_subir_doc/descargar/'+ valor.Estudiante_no_control +'/'+valor.id_documento+'/'+cct_plantel+'" >Descargar <i class="fa fa-download" aria-hidden="true"></i></a> </center>';
+              fila += '<center><a class="btn btn-info" id="enlace'+cont2 +'" href="<?php echo base_url();?>index.php/C_subir_doc/descargar/'+ valor.Estudiante_no_control +'/'+valor.id_documentacion+'/'+cct_plantel+'" >Descargar <i class="fa fa-download" aria-hidden="true"></i></a> </center>';
               fila += '</td>';
 
               fila += '<td>';
-               fila += '<center><div id="view'+ cont2+'"><a class="btn btn-info enlace1" id="enlaceview' + cont2 + '" onClick="ventanaSecundaria(\'<?php echo base_url();?>index.php/C_subir_doc/visualizar/' + valor.Estudiante_no_control + '/' +valor.id_documento +'/'+cct_plantel+'\');">Visualizar <i class="fa fa-search" aria-hidden="true"></i></a></div> </center>';
+               fila += '<center><div id="view'+ cont2+'"><a class="btn btn-info enlace1" id="enlaceview' + cont2 + '" onClick="ventanaSecundaria(\'<?php echo base_url();?>index.php/C_subir_doc/visualizar/' + valor.Estudiante_no_control + '/' +valor.id_documentacion +'/'+cct_plantel+'\');">Visualizar <i class="fa fa-search" aria-hidden="true"></i></a></div> </center>';
               fila += '</td>';
           }
 

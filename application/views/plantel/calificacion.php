@@ -650,13 +650,14 @@ function preguntarAntesDeSalir()
 
 function evento_teclado(){
 let input = document.getElementById("tabla_alumnos");
+let tabla = document.getElementById("tablagrupo");
 
 
 // Execute a function when the user releases a key on the keyboard
 input.addEventListener("keyup", function(event) {
   // Number 13 is the "Enter" key on the keyboard
   if (event.keyCode === 13) {
-    console.log("si sirve");
+    
 
   }
 }); 

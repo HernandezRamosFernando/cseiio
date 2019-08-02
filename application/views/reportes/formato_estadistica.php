@@ -55,7 +55,7 @@ $pdf = new MYPDF("L", PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('Control Escolar CSEIIO');
-$pdf->SetTitle('PDF Carta Compromiso');
+$pdf->SetTitle('Formato Estadistica');
 $pdf->SetSubject('Carta Compromiso CSEIIO');
 $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
 // set default header data

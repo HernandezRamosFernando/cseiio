@@ -578,8 +578,8 @@ public function cerrar_regularizacion($plantel){
 
 
 
-function materias_regularizadas_periodo($mes,$ano){
-   return $this->db->query("select clave,unidad_contenido from Materia as m inner join (select id_materia from Regularizacion where month(fecha_calificacion)=".$mes." and year(fecha_calificacion)=".$ano." group by id_materia) as ma on m.clave=ma.id_materia group by clave")->result();
+function materias_regularizadas_periodo($mes,$ano,$plantel){
+   return $this->db->query("select clave,unidad_contenido from Materia as m inner join (select id_materia from Regularizacion where month(fecha_calificacion)=".$mes." and year(fecha_calificacion)=".$ano." group by id_materia and Plantel_cct_plantel='".$plantel."') as ma on m.clave=ma.id_materia group by clave")->result();
 }
 
    

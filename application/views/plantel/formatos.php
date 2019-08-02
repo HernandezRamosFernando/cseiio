@@ -16,7 +16,7 @@
       <a class="list-group-item list-group-item-action" href="formatos/carta_renuncia_semestre.docx" download="Carta de renuncia de semestre.docx">Carta de renuncia de semestre cursado</a>
       <a class="list-group-item list-group-item-action" href="formatos/constancia_inscripcion.docx" download="Constancia de inscripción.docx">Constancia de inscripción</a>
       <a class="list-group-item list-group-item-action" href="formatos/credenciales.docx" download="Credenciales.docx">Credenciales</a>
-      <a class="list-group-item list-group-item-action" href="formatos/ficha_inscripccion.xls" download="Ficha de Inscripcion.docx">Ficha de inscripción</a>
+      <a class="list-group-item list-group-item-action" href="formatos/ficha_inscripcion.pdf" download="Ficha de Inscripcion.pdf">Ficha de inscripción</a>
       <a class="list-group-item list-group-item-action" href="formatos/examen_regularizacion.docx" download="Formato de examen de regularización.docx">Formato de éxamen de regularización</a>
       </div>
       </div>

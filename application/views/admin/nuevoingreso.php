@@ -81,18 +81,18 @@
           <div class="col-md-4">
           <label class="form-group has-float-label seltitulo">
               <select class="form-control form-control-lg selcolor" id="aspirante_mes_nacimiento" required name="aspirante_mes_nacimiento" onclick="get_dias()">
-              <option value="01">Enero</option>
-            <option value="02">Febrero</option>
-            <option value="03">Marzo</option>
-            <option value="04">Abril</option>
-            <option value="05">Mayo</option>
-            <option value="06">Junio</option>
-            <option value="07">Julio</option>
-            <option value="08">Agosto</option>
-            <option value="09">Septiembre</option>
-            <option value="10">Octubre</option>
-            <option value="11">Noviembre</option>
-            <option value="12">Diciembre</option>
+              <option value="01">Enero 01</option>
+            <option value="02">Febrero 02</option>
+            <option value="03">Marzo 03</option>
+            <option value="04">Abril 04</option>
+            <option value="05">Mayo 05</option>
+            <option value="06">Junio 06</option>
+            <option value="07">Julio 07</option>
+            <option value="08">Agosto 08</option>
+            <option value="09">Septiembre 09</option>
+            <option value="10">Octubre 10</option>
+            <option value="11">Noviembre 11</option>
+            <option value="12">Diciembre 12</option>
               </select>
               <span>Mes</span>
             </label>
@@ -1268,7 +1268,7 @@
         else {
           Swal.fire({
             type: 'error',
-            title: 'Ya existe un alumno registrado con ese curp',
+            title: 'Ya existe un alumno registrado con ese curp o no selecciono la secundaria de procedencia',
             showConfirmButton: false,
             timer: 2500
           });

@@ -67,7 +67,7 @@ class MYPDF extends TCPDF {
 
         $encabezado ='<h5 style="text-align:center">COLEGIO SUPERIOR PARA LA EDUCACION INTEGRAL INTERCULTURAL DE OAXACA</h5>
 <p style="text-align:center">DEPARTAMENTO DE CONTROL ESCOLAR</p>
-<h5 style="text-align:center;background-color:#e9e9e9">FORMATO DE REGISTRO DE INSCRIPCION Y ACREDITACION ESCOLAR</h5>
+<h5 style="text-align:center;background-color:#e9e9e9">FORMATO DE REGISTRO DE EXÁMENES DE REGULARIZACIÓN</h5>
 <table>
 <tbody>
 <tr>
@@ -476,7 +476,7 @@ $pdf = new MYPDF('L', 'mm',$medidas, true, 'UTF-8', false);
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('Control Escolar CSEIIO');
-$pdf->SetTitle('PDF Carta Compromiso');
+$pdf->SetTitle('FRER');
 $pdf->SetSubject('Carta Compromiso CSEIIO');
 $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
 // set default header data

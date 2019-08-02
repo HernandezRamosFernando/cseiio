@@ -369,7 +369,7 @@
 
           var segundo_parcial = valor.segundo_parcial !== null ? valor.segundo_parcial : "";
           if (permisos_plantel.segundo_parcial === "1") {
-            registro += '<td><input type="text" class="form-control" name="segundo_parcial" value="' + (segundo_parcial === "0" ? "/" : segundo_parcial) + '" id="segundo_parcial"  onchange="calificaciones(this,\'' + valor.tipo + '\',3,' + indice + ',' + permisos_plantel.examen_final + ');"></td>';
+            registro += '<td><input type="text" class="form-control" name="segundo_parcial" value="' + (segundo_parcial === "0" ? "/" : segundo_parcial) + '" id="segundo_parcial" onchange="calificaciones(this,\'' + valor.tipo + '\',3,' + indice + ',' + permisos_plantel.examen_final + ');"></td>';
           }
 
           else {
@@ -649,22 +649,38 @@
       return "¿Seguro que quieres salir?";
   }
 
-  $(document).ready(function(){   
-        var inputs = $("form :text"),
-        length = inputs.length,
-        i = 0;
-        console.log("funciona");
- 
-        // El resto del código
+  $(document).ready(function () {
+                tb = $('input');
+                if ($.browser.mozilla) {
+                    $(tb).keypress(enter2tab);
+                } else {
+                    $(tb).keydown(enter2tab);
+                }
+            });
 
-        inputs.on("keypress", function(event){
-    var code = event.keyCode || event.which;    
-    if (code == 13){
-        event.preventDefault();
-        i = i == length - 1 ? 0 : ++i;
-        inputs[i].focus();
-    }
-      });
+  function enter2tab() {
+    let input=document.getElemenById("tabla_alumnos");
+    input.addEventListener("keyup",function(event) {
+    console.log(e);
 
-    });
+alert('se presionola tecla ' + e.keyCode);
+
+           if (e.keyCode == 13) {
+
+               alert('se presiono enter');
+
+               cb = parseInt($(this).attr('tabindex'));
+               if ($(':input[tabindex=\'' + (cb + 1) + '\']') != null) {
+                   $(':input[tabindex=\'' + (cb + 1) + '\']').focus();
+                   $(':input[tabindex=\'' + (cb + 1) + '\']').select();
+                   e.preventDefault();
+
+                   return false;
+               }
+           }
+          });
+        }
+
+
+
 </script>

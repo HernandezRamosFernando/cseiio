@@ -142,6 +142,7 @@ class C_regularizacion extends CI_Controller {
 
     function materias_regularizadas_periodo(){
         $datos = $this->input->get('periodo');
+        $plantel = $this->input->get('plantel');
 
         $separados = explode('-',$datos);
 
@@ -166,7 +167,7 @@ class C_regularizacion extends CI_Controller {
 
         $ano = intval($separados[1]);
 
-        $materias = $this->M_regularizacion->materias_regularizadas_periodo($mes,$ano);
+        $materias = $this->M_regularizacion->materias_regularizadas_periodo($mes,$ano,$plantel);
 
         $respuesta = '<option value="">Seleccione materia</option>';
 

@@ -131,9 +131,10 @@
 function cargar_materias(){
 
   let periodo = document.getElementById("regularizaciones").value;
+  let plantel = document.getElementById("plantel").value;
 
   var xhr = new XMLHttpRequest();
-      xhr.open('GET', '<?php echo base_url();?>index.php/c_regularizacion/materias_regularizadas_periodo?periodo='+periodo, true);
+      xhr.open('GET', '<?php echo base_url();?>index.php/c_regularizacion/materias_regularizadas_periodo?periodo='+periodo+'&plantel='+plantel, true);
 
       xhr.onload = function () {
         document.getElementById("materias").innerHTML=xhr.response;

@@ -333,7 +333,7 @@ public function resolucion_equivalencia(){
             $this->load->view("footers/footer");
         }  
         else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
-            $datos['planteles'] = $this->M_plantel->get_plantel($this->session->userdata('user')['plantel']);
+            $datos['planteles'] = $this->M_plantel->get_planteles();
             $datos['lista_planteles'] = $this->M_plantel->get_planteles();
             $data= array('title'=>'Traslado');
             $this->load->view("headers/cabecera", $data);

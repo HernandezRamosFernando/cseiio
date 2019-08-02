@@ -12,17 +12,17 @@ class M_documentacion extends CI_Model {
 
 
 //-----------------modificado--------------------------------------
-   function get_nombre_archivo_documentacion($no_control,$iddocumento,$plantel){
+function get_nombre_archivo_documentacion($no_control,$iddocumento,$plantel){
 
-      $this->db->select('*');
-      $this->db->from('Documentacion');
-      $this->db->where('id_documento',$iddocumento);
-      $this->db->where('id_plantel',$plantel);
-      $this->db->where('Estudiante_no_control',$no_control);
-      $resultado = $this->db->get()->row();
-      return $resultado->ruta;
-  
-     }
+   $this->db->select('*');
+   $this->db->from('Documentacion');
+   $this->db->where('id_documentacion',$iddocumento);
+  // $this->db->where('id_plantel',$plantel);
+   //$this->db->where('Estudiante_no_control',$no_control);
+   $resultado = $this->db->get()->row();
+   return $resultado->ruta;
+
+  }
   
   
   function get_documentacion_x_tipoingreso($tipo_ingreso){
@@ -83,18 +83,18 @@ class M_documentacion extends CI_Model {
 
   
 
- function update_aspirante_doc($iddocumentacion,$ruta,$num_control,$cct_plantel){
-     $data = array(
-    'ruta' =>$ruta,
-    'fecha_entrega' =>date('Y-m-d'),
-    'entregado' => true
-      );
-   $this->db->where('id_plantel', $cct_plantel);
-   $this->db->where('id_documento', $iddocumentacion);
-   $this->db->where('Estudiante_no_control', $num_control);
-  $resultado=$this->db->update('Documentacion', $data);
-  return $resultado;
-   }
+   function update_aspirante_doc($iddocumentacion,$ruta,$num_control){
+      $data = array(
+     'ruta' =>$ruta,
+     'fecha_entrega' =>date('Y-m-d'),
+     'entregado' => true
+       );
+    //$this->db->where('id_plantel', $cct_plantel);
+    $this->db->where('id_documentacion', $iddocumentacion);
+    //$this->db->where('Estudiante_no_control', $num_control);
+   $resultado=$this->db->update('Documentacion', $data);
+   return $resultado;
+    }
 
    function documentos_base_faltantes_aspirante($no_control){
       return $this->db->query("SELECT Documento.id_documento,Documento.nombre_documento FROM Documentacion inner join Documento 

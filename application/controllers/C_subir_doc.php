@@ -77,7 +77,7 @@ class C_subir_doc extends CI_Controller {
                 $data = array("upload_data" => $this->upload->data());
                 $nombrearchivo=$data['upload_data']['file_name'];
                   
-                        $actualizo=$this->M_documentacion->update_aspirante_doc($iddocumento,$nombrearchivo,$no_control,$cct_plantel);
+                        $actualizo=$this->M_documentacion->update_aspirante_doc($iddocumento,$nombrearchivo,$no_control);
                         if($actualizo){
                             $datos['status']='Los datos se actualizaron correctamente';
                             $datos['ruta']=$nombrearchivo;

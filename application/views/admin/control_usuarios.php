@@ -129,7 +129,11 @@
                     <?php
                                         foreach ($usuarios as $usuario)
                                         {
-                                          echo '<option value="'.$usuario->id_usuario.'">'.$usuario->usuario.'</option>';
+                                          if($usuario->usuario!='depto_tecnologia'){
+                                            echo '<option value="'.$usuario->id_usuario.'">'.$usuario->usuario.'</option>';
+
+                                          }
+                                          
                                         }
                                         ?>
 
@@ -235,7 +239,9 @@
                     <?php
                                         foreach ($usuarios as $usuario)
                                         {
+                                          if($usuario->usuario!='depto_tecnologia'){
                                           echo '<option value="'.$usuario->id_usuario.'">Usuario: '.$usuario->usuario.' || Rol:  '.$usuario->rol.'</option>';
+                                          }
                                         }
                                         ?>
 

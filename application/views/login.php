@@ -19,14 +19,14 @@
 
           <div class="form-group">
             <div class="form-label-group">
-              <input type="text" id="inputUsuario" pattern="[A-Za-z0-9_]+[ ]*[A-Za-z0-9_ ]*" onchange="valida(this);" 
+              <input type="text" id="inputUsuario" 
               name="usuario" class="form-control" placeholder="Ingrese su usuario" required="required" autofocus="autofocus">
               <label for="inputUsuario">Ingrese su Usuario</label>
             </div>
           </div>
           <div class="form-group">
             <div class="form-label-group">
-              <input type="password" name="password" pattern="[A-Za-z0-9]+[ ]*[A-Za-z0-9 ]*" onchange="valida(this);"
+              <input type="password" name="password"
               id="inputPassword" class="form-control" placeholder="Password" required="required">
               <label for="inputPassword">Contraseña</label>
             </div>

@@ -85,16 +85,4 @@
  }
 
 
-function numero_aleatorio(){
-  return parseInt(Math.random() * (256 - 0) + 0);
-}
-
-
-
-
-//etiuetas y valores es un arreglo
-function grafica(){
-  
-}
-
 </script>

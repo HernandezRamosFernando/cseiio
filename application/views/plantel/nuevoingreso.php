@@ -180,8 +180,8 @@
                   <option value="B-">B-</option>
                   <option value="AB+">AB+</option>
                   <option value="AB-">AB-</option>
-                  <option value="A+">O+</option>
-                  <option value="A-">O-</option>
+                  <option value="O+">O+</option>
+                  <option value="O-">O-</option>
                 </select>
                 <span>Tipo de sangre</span>
               </label>
@@ -1267,9 +1267,11 @@
         else {
           Swal.fire({
             type: 'error',
-            title: 'Ya existe un alumno registrado con ese curp o no selecciono la secundaria de procedencia',
-            showConfirmButton: false,
-            timer: 2500
+            title: 'Error al ingresar datos del aspirante',
+            html:'<p style="text-align:left;margin-left:5%;font-weight: bold;">Verifique lo siguiente:</p><p style="text-align:left;margin-left:20%">- Pueda ser que La CURP se haya dado de alta con anterioridad.</p><p style="text-align:left;margin-left:20%">- Ha ingresado el CCT de la secundaria de procedencia, pero no ha presionado el botón "Buscar Secundaria."</p><p style="text-align:left;margin-left:20%">- No ha rellenado los campos obligatorios.</p>',
+            confirmButtonText: "Aceptar",
+            showConfirmButton: true,
+            
           });
         }
       }

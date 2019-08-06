@@ -18,26 +18,24 @@
       <div class="card-body">
       <div class="form-group">
           <div class="row">
-            <div class="col-md-4 ">
-              <button type="button" class="btn btn-success btn-lg btn-block" onclick="mujeres_hombres()" style="padding: 1rem"
-                id="agregar_usuario"> Mujeres hombres</button>
+            <div class="col-md-8 ">
+            <label class="form-group has-float-label seltitulo">
+            <!-- aqui va el selecct de las graficas hasta ahora --> 
+            <select class="form-control form-control-lg selcolor" id="graficas" required name="graficas" onchange="selectgraficas()">
+            <option value="">Seleeccione una grafica a crear</option>  
+            <option value="1">Cantidad de alumnos en cada plantel</option>
+              <option value="2">Cantidad de hombres y mujeres en los planteles</option>
+              <option value="3">Diferentes tipos de ingreso de alumnos en los planteles</option>
+              <option value="4">Estatus de los alumnos en los planteles</option>
+              <option value="5">Alumnos inscritos en este periodo y anteriores</option>
+              <option value="6">Procedencia de alumnos inscritos por distrito</option>
+              <option value="7">Estudiantes hablantes de lengua materna</option>
+              <option value="8">Materias reprobadas de los alumnos por plantel</option>
+              </select>
+              <span>Graficas</span>
+            </label>
             </div>
-            <div class="col-md-4 ">
-              <button type="button" class="btn btn-success btn-lg btn-block" onclick="estudiantes_por_plantel()" style="padding: 1rem"
-                id="btn1"> Estudiantes por plantel</button>
-            </div>
-            <div class="col-md-4 ">
-              <button type="button" class="btn btn-success btn-lg btn-block" onclick="estudiantes_hablan_lengua()" style="padding: 1rem"
-                id="btn2"> Estudiantes que hablan lengua</button>
-            </div>
-            <div class="col-md-4 ">
-              <button type="button" class="btn btn-success btn-lg btn-block" onclick="()" style="padding: 1rem"
-                id="btn3"> Tres</button>
-            </div>
-            <div class="col-md-4 ">
-              <button type="button" class="btn btn-success btn-lg btn-block" onclick="()" style="padding: 1rem"
-                id="btn4"> Cuatro</button>
-            </div>
+            
 
           </div>
         </div>
@@ -57,6 +55,43 @@
 <!-- /.content-wrapper -->
 
  <script>
+
+ function selectgraficas (e){
+  switch (e.value) {
+  case '1':
+
+    break;
+  case '2':
+
+    break;
+  case '3':
+
+    break;
+  case '4':
+
+  break;
+  case '5':
+
+  break;
+  case '6':
+
+  break;
+  case '7':
+  
+  break;
+  case '8':
+  
+  break;
+  default:
+  
+    Swal.fire({
+            type: 'info',
+            title: 'Seleccione un elemento',
+            confirmButtonText: 'Cerrar'
+          });
+    break;
+}
+ }
 
  function mujeres_hombres(){
      //peticion de datos

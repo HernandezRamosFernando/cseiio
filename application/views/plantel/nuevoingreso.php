@@ -870,7 +870,7 @@
               </div>
               <br>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
               <div class="form-label-group">
                 <button type="button" class="btn btn-outline-success btn-lg"
                   onclick="obtener_secundaria(document.getElementById('aspirante_secundaria_cct').value)">
@@ -881,6 +881,21 @@
               </div>
               <br>
             </div>
+
+
+            <div class="col-md-4">
+            <div class="form-label-group">
+              <input type="number" step="any" class="form-control text-uppercase" id="promedio_procedencia_secundaria"
+                name="promedio_procedencia_secundaria" placeholder="Promedio procedencia de Secundaria" style="color: #237087 " disabled>
+              <label for="promedio_procedencia_secundaria">Promedio de Secundaria</label>
+            </div>
+          </div>
+
+
+
+
+
+
           </div>
 
           <div class="row">
@@ -1175,6 +1190,8 @@
         //aspirante_secundaria_tipo_subsistema
         document.getElementById("aspirante_secundaria_tipo_subsistema").value = secundaria[0].tipo_subsistema;
         document.getElementById("aspirante_secundaria_tipo_subsistema").disabled = true;
+        document.getElementById("promedio_procedencia_secundaria").disabled = false;
+
       }
 
       else {

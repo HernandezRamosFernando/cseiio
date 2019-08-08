@@ -97,7 +97,8 @@ class C_estudiante extends CI_Controller {
             
             $datos_escuela_procedencia['secundaria']=array(
                 'Estudiante_no_control'=>$no_control,
-                'Escuela_procedencia_cct_escuela_procedencia'=>$this->input->post('aspirante_secundaria_cct')
+                'Escuela_procedencia_cct_escuela_procedencia'=>$this->input->post('aspirante_secundaria_cct'),
+                'promedio_procedencia'=>$this->input->post('promedio_procedencia_secundaria')
             );
         }
 

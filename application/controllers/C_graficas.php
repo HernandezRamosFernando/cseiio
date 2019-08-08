@@ -10,25 +10,35 @@ class C_graficas extends CI_Controller {
         $this->load->model("M_graficas");
     }
 
-   function hombres_mujeres_total(){
+   function numero_estudiantes_hombres_mujeres_por_plantel(){
 
-    echo json_encode($this->M_graficas->hombres_mujeres_total());
+    echo json_encode($this->M_graficas->numero_estudiantes_hombres_mujeres_por_plantel());
 
    }
 
+   function total_estudiantes_por_plantel(){
+       echo json_encode($this->M_graficas->total_estudiantes_por_plantel());
+   }
 
-   function estudiantes_por_plantel(){
-       echo json_encode($this->M_graficas->estudiantes_por_plantel());
+   function estatus_estudiantes_por_plantel(){
+       echo json_encode($this->M_graficas->estatus_estudiantes_por_plantel());
+   }
+
+   function estudiantes_por_distrito(){
+       echo json_encode($this->M_graficas->estudiantes_por_distrito());
+   }
+
+   function estudiantes_lengua(){
+       echo json_encode($this->M_graficas->estudiantes_lengua());
+   }
+
+   function materias_con_reprobados(){
+       echo json_encode($this->M_graficas->materias_con_reprobados());
    }
 
 
-   function estudiantes_hablan_lengua(){
-       echo json_encode($this->M_graficas->estudiantes_hablan_lengua());
+   function estudiantes_tipo_ingreso(){
+       echo json_encode($this->M_graficas->estudiantes_tipo_ingreso());
    }
-
-
-
-    
-
 
 }

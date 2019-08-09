@@ -108,6 +108,8 @@
         </button>
       </div>
       <div class="modal-body">
+
+      <form id="formulario_carta_compromiso">
         <div class="card" style="overflow:scroll">
           <div class="card-body">
             <table class="table table-hover" id="tabla_documentos" style="width: 100%">
@@ -125,11 +127,13 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-            <button type="button" class="btn btn-warning" onclick="generar_carta_compromiso(this)">Generar carta
+            <button type="submit" class="btn btn-warning">Generar carta
               compromiso</button>
           </div>
 
         </div>
+        </form>
+
       </div>
 
     </div>
@@ -182,7 +186,7 @@
           console.log(JSON.parse(xhr.response));
           document.getElementById('tabla_observacion').innerHTML = "";
           JSON.parse(xhr.response).forEach(function (valor, indice) {
-            document.getElementById('tabla_observacion').innerHTML += "<tr><td>" + valor.no_control + "</td><td>" + valor.nombre_documento + '</td><td><input style="width: 300px;" id="' + valor.id_documento + '" type="text" class="form-control"></td></tr>';
+            document.getElementById('tabla_observacion').innerHTML += "<tr><td>" + valor.no_control + "</td><td>" + valor.nombre_documento + '</td><td><input style="width: 300px;" id="' + valor.id_documento + '" type="text" class="form-control" required="required"></td></tr>';
           });
 
         }
@@ -242,7 +246,7 @@
     carta_compromiso.send(null);
   }
 
-  function generar_carta_compromiso(e) {
+  function generar_carta_compromiso() {
     //console.log(e.value);
 
     var tabla = document.getElementById('tabla_observacion');
@@ -376,6 +380,19 @@
     document.getElementById('btn_buscar').classList.add('btn-info');
     document.getElementById('busqueda_oculto').style.display = "";
   }
+
+
+
+
+  var form_carta_compromiso = document.getElementById("formulario_carta_compromiso");
+  form_carta_compromiso.onsubmit = function (e) {
+    e.preventDefault();
+
+    generar_carta_compromiso();
+                  
+
+    }
+
 
 
 </script>

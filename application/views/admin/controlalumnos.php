@@ -263,7 +263,7 @@
                   <label class="form-group has-float-label seltitulo">
                     <select class="form-control form-control-lg selcolor" name="tipo_sangre" required id="tipo_sangre">
                       <option value="">Seleccione una opción</option>
-                      <option value="No conoce">No conoce su tipo de sangre</option>
+                      <option value="NO CONOCE">No conoce su tipo de sangre</option>
                       <option value="A+">A+</option>
                       <option value="A-">A-</option>
                       <option value="B+">B+</option>
@@ -663,7 +663,7 @@
                       <option value="25">Poco 25%</option>
                       <option value="50">Regular 50%</option>
                       <option value="75">Bien 75%</option>
-                      <option value="100">Bien 100%</option>
+                      <option value="100">Muy Bien 100%</option>
                     </select>
                     <span>Lee</span>
                   </label>
@@ -954,6 +954,7 @@
   cargar_anio();
 
   function cargar_datos_aspirante(e) {
+    document.getElementById("formulario").reset();
     document.getElementById("selector_municipio_aspirante").innerHTML = "";
     document.getElementById("selector_localidad_aspirante").innerHTML = "";
     document.getElementById("aspirante_no_control").value = e.value;
@@ -1106,6 +1107,8 @@
         document.getElementById("aspirante_lengua_traduce").disabled = false;
         document.getElementById("aspirante_lengua_traduce").value = datos.lengua_materna[4].porcentaje;
       }
+
+      document.getElementById("aspirante_etnia").value=datos.estudiante[0].etnia;
       //fin datos lengua materna
       //secundaria
       if (datos.estudiante[0].tipo_ingreso === "PORTABILIDAD") {
@@ -1369,7 +1372,7 @@
     xhr.onreadystatechange = function () {
       if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
         $('#div_carga').hide();
-        if (xhr.responseText === "si") {
+        if (xhr.responseText.trim() === "si") {
           Swal.fire({
             type: 'success',
             title: 'Actualizacion exitosa'

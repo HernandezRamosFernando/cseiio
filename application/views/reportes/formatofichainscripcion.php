@@ -369,7 +369,7 @@ $html_1 ='
 </tr>
 
 <tr>
-<td colspan="2"><strong>TIPO DE SUBSISTEMA: </strong> '.((isset($escuela->tipo_subsistema)) ? strtoupper($escuela->tipo_subsistema) : "").'</td>
+<td ><strong>TIPO DE SUBSISTEMA: </strong> '.((isset($escuela->tipo_subsistema)) ? strtoupper($escuela->tipo_subsistema) : "").'</td> <td> <strong>PROMEDIO: '.$escuela->promedio_procedencia.'</strong></td>
 </tr>';
 	
 } 

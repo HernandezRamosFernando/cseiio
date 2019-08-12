@@ -61,6 +61,14 @@ class C_estudiante extends CI_Controller {
             $localidad_origen = $this->input->post("aspirante_procedencia_extranjero");
         }
 
+        $fecha_registro_nacimiento=NULL;
+
+        if($this->input->post('aspirante_anio_nacimiento_registro')!='' && $this->input->post('aspirante_mes_nacimiento_registro')!='' && $this->input->post('aspirante_dia_nacimiento_registro')!=''){
+            $fecha_registro_nacimiento= $this->input->post('aspirante_anio_nacimiento_registro').'-'.$this->input->post('aspirante_mes_nacimiento_registro').'-'.(strlen($this->input->post('aspirante_dia_nacimiento_registro'))==1?('0'.$this->input->post('aspirante_dia_nacimiento_registro')):$this->input->post('aspirante_dia_nacimiento_registro'));
+
+        }
+        
+
         //inicio estudiante
         $datos_estudiante = array(
             'no_control' => $no_control,
@@ -85,7 +93,11 @@ class C_estudiante extends CI_Controller {
             'lugar_nacimiento' => mb_strtoupper($this->input->post('aspirante_lugar_nacimiento')),
             'nacionalidad' => $this->input->post('aspirante_nacionalidad'),
             'localidad_origen' => $localidad_origen,
-            'etnia'=>$this->input->post("aspirante_etnia")
+            'etnia'=>$this->input->post("aspirante_etnia"),
+            'fecha_registro_nacimiento' =>$fecha_registro_nacimiento
+
+            
+            
         );
 
         if($tipo_estudiante=='nuevo_ingreso'){

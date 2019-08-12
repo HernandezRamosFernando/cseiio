@@ -359,7 +359,7 @@
           </div>
           <div class="col-md-2">
           <label class="form-group has-float-label seltitulo">
-              <select class="form-control form-control-lg selcolor" id="aspirante_mes_nacimiento_registro"  name="aspirante_anio_nacimiento_registro" onclick="get_dias_registro()">
+              <select class="form-control form-control-lg selcolor" id="aspirante_mes_nacimiento_registro"  name="aspirante_mes_nacimiento_registro" onclick="get_dias_registro()">
               <option value="">Seleccione uno</option>
               <option value="01">Enero</option>
             <option value="02">Febrero</option>
@@ -871,7 +871,7 @@
               </div>
               <br>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
               <div class="form-label-group">
                 <button type="button" class="btn btn-outline-success btn-lg"
                   onclick="obtener_secundaria(document.getElementById('aspirante_secundaria_cct').value)">
@@ -882,6 +882,15 @@
               </div>
               <br>
             </div>
+
+            <div class="col-md-4">
+            <div class="form-label-group">
+              <input type="number" step="any" class="form-control text-uppercase" id="promedio_procedencia_secundaria"
+                name="promedio_procedencia_secundaria" placeholder="Promedio procedencia de Secundaria" style="color: #237087 " disabled>
+              <label for="promedio_procedencia_secundaria">Promedio de Secundaria</label>
+            </div>
+          </div>
+            
           </div>
 
           <div class="row">
@@ -1176,6 +1185,7 @@
         //aspirante_secundaria_tipo_subsistema
         document.getElementById("aspirante_secundaria_tipo_subsistema").value = secundaria[0].tipo_subsistema;
         document.getElementById("aspirante_secundaria_tipo_subsistema").disabled = true;
+        document.getElementById("promedio_procedencia_secundaria").disabled = false;
       }
 
       else {
@@ -1268,9 +1278,10 @@
         else {
           Swal.fire({
             type: 'error',
-            title: 'Ya existe un alumno registrado con ese curp o no selecciono la secundaria de procedencia',
-            showConfirmButton: false,
-            timer: 2500
+            title: 'Error al ingresar datos del aspirante',
+            html:'<p style="text-align:left;margin-left:5%;font-weight: bold;">Verifique lo siguiente:</p><p style="text-align:left;margin-left:20%">- Pueda ser que La CURP se haya dado de alta con anterioridad.</p><p style="text-align:left;margin-left:20%">- Ha ingresado el CCT de la secundaria de procedencia, pero no ha presionado el botón "Buscar Secundaria."</p><p style="text-align:left;margin-left:20%">- No ha rellenado los campos obligatorios.</p>',
+            confirmButtonText: "Aceptar",
+            showConfirmButton: true,
           });
         }
       }

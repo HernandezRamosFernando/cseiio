@@ -6,6 +6,8 @@ class M_plantel extends CI_Model {
 
 
 
+
+
    function get_planteles(){
         return $this->db->get('Plantel')->result();
    }

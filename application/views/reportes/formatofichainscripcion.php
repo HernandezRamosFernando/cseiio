@@ -369,7 +369,7 @@ $html_1 ='
 </tr>
 
 <tr>
-<td ><strong>TIPO DE SUBSISTEMA: </strong> '.((isset($escuela->tipo_subsistema)) ? strtoupper($escuela->tipo_subsistema) : "").'</td> <td> <strong>PROMEDIO: '.$escuela->promedio_procedencia.'</strong></td>
+<td ><strong>TIPO DE SUBSISTEMA: </strong> '.((isset($escuela->tipo_subsistema)) ? strtoupper($escuela->tipo_subsistema) : "").'</td> <td> <strong>PROMEDIO: '.((isset($escuela->promedio_procedencia)) ? strtoupper($escuela->promedio_procedencia) : "").'</strong></td>
 </tr>';
 	
 } 
@@ -479,9 +479,9 @@ $html_3.='<br>
 
 
 <table>
-<tr><td WIDTH="33.33%"><span style="font-weight: bold;text-align: center;text-decoration: underline;font-size: 8px">'.strtoupper($estudiante['estudiante'][0]->nombre).' '.strtoupper($estudiante['estudiante'][0]->primer_apellido).' '.strtoupper($estudiante['estudiante'][0]->segundo_apellido).'</span></td><td WIDTH="33.33%"><span style="font-weight: bold;text-align: center;text-decoration: underline;font-size: 8px">'.((isset($estudiante['tutor'][0]->primer_apellido_tutor))? strtoupper($estudiante['tutor'][0]->primer_apellido_tutor) : "").' '.
-((isset($estudiante['tutor'][0]->segundo_apellido_tutor))? strtoupper($estudiante['tutor'][0]->segundo_apellido_tutor) : "").' '.
-((isset($estudiante['tutor'][0]->nombre_tutor))? strtoupper($estudiante['tutor'][0]->nombre_tutor) : "").'</span></td><td WIDTH="33.33%"><span style="font-weight: bold;text-align: center;text-decoration: underline;font-size: 8px">'.$plantel[0]->director.'</span></td></tr>
+<tr><td WIDTH="33.33%"><span style="font-weight: bold;text-align: center;text-decoration: underline;font-size: 8px">'.strtoupper($estudiante['estudiante'][0]->nombre).' '.strtoupper($estudiante['estudiante'][0]->primer_apellido).' '.strtoupper($estudiante['estudiante'][0]->segundo_apellido).'</span></td><td WIDTH="33.33%"><span style="font-weight: bold;text-align: center;text-decoration: underline;font-size: 8px">'.
+((isset($estudiante['tutor'][0]->nombre_tutor))? strtoupper($estudiante['tutor'][0]->nombre_tutor) : "").' '.((isset($estudiante['tutor'][0]->primer_apellido_tutor))? strtoupper($estudiante['tutor'][0]->primer_apellido_tutor) : "").' '.
+((isset($estudiante['tutor'][0]->segundo_apellido_tutor))? strtoupper($estudiante['tutor'][0]->segundo_apellido_tutor) : "").'</span></td><td WIDTH="33.33%"><span style="font-weight: bold;text-align: center;text-decoration: underline;font-size: 8px">'.$plantel[0]->director.'</span></td></tr>
 <tr><td><span style="text-align: center;font-size: 8px">NOMBRE Y FIRMA<br> DEL ESTUDIANTE</span></td><td><span style="text-align: center;font-size: 8px">NOMBRE Y FIRMA<br> DEL TUTOR(A)</span></td><td><span style="text-align: center;font-size: 8px">NOMBRE Y FIRMA <br> DEL DIRECTOR DE PLANTEL</span></td></tr>
 </table>
 

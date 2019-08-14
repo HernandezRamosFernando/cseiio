@@ -13,11 +13,11 @@
     <div class="card">
       <div class="card-body">
       <div id="" class="list-group">
-      <a class="list-group-item list-group-item-action" href="../formatos/carta_renuncia_semestre.docx" download="Carta de renuncia de semestre.docx">Carta de renuncia de semestre cursado</a>
-      <a class="list-group-item list-group-item-action" href="../formatos/constancia_inscripcion.docx" download="Constancia de inscripción.docx">Constancia de inscripción</a>
-      <a class="list-group-item list-group-item-action" href="../formatos/credenciales.docx" download="Credenciales.docx">Credenciales</a>
-      <a class="list-group-item list-group-item-action" href="../formatos/ficha_inscripcion.pdf" download="ficha de inscripcion.pdf">Ficha de inscripción</a>
-      <a class="list-group-item list-group-item-action" href="../formatos/examen_regularizacion.docx" download="Formato de examen de regularización.docx">Formato de éxamen de regularización</a>
+      <a class="list-group-item list-group-item-action" href="<?php echo base_url();?>formatos/carta_renuncia_semestre.docx" download="Carta de renuncia de semestre.docx">Carta de renuncia de semestre cursado</a>
+      <a class="list-group-item list-group-item-action" href="<?php echo base_url();?>formatos/constancia_inscripcion.docx" download="Constancia de inscripción.docx">Constancia de inscripción</a>
+      <a class="list-group-item list-group-item-action" href="<?php echo base_url();?>formatos/credenciales.docx" download="Credenciales.docx">Credenciales</a>
+      <a class="list-group-item list-group-item-action" href="<?php echo base_url();?>formatos/ficha_inscripcion.pdf" download="ficha de inscripcion.pdf">Ficha de inscripción</a>
+      <a class="list-group-item list-group-item-action" href="<?php echo base_url();?>formatos/examen_regularizacion.docx" download="Formato de examen de regularización.docx">Formato de éxamen de regularización</a>
       </div>
       </div>
     </div>

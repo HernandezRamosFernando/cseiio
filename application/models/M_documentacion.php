@@ -179,7 +179,7 @@ function get_nombre_archivo_documentacion($no_control,$iddocumento,$plantel){
 
    public function get_fecha_ultima_carta_compromiso_estudiante($no_control){
       return $this->db->query("SELECT max(fecha_entrega) as fecha 
-      FROM control_escolar_ito.Documentacion 
+      FROM Documentacion 
       where id_documento=5 and Estudiante_no_control='".$no_control."'")->result();
    }
 

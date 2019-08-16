@@ -70,4 +70,11 @@ public function fecha_fin_ciclo(){
    return $this->db->query("select max(fecha_terminacion) as fecha from Ciclo_escolar")->result()[0]->fecha;
 }
 
+
+public function ciclo_escolar_fecha_carta_compromiso($fecha){
+
+   return $this->db->query("select * from Ciclo_escolar where '".$fecha."' between fecha_inicio_inscripcion and fecha_terminacion")->result()[0];
+        
+}
+
 }

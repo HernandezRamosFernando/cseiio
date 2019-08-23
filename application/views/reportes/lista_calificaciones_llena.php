@@ -107,7 +107,7 @@ $datos_cabecera='
 <tbody>
 <tr>
 <td style="text-align:left">NOMBRE DEL PLANTEL:</td>
-<td style="text-align:left">'.$plantel->nombre_plantel.'</td>
+<td style="text-align:left">'.$plantel->nombre_largo.' DE '.$plantel->nombre_plantel.'</td>
 <td style="text-align:right">GRUPO:</td>
 <td style="text-align:right">'.$materia->semestre.'-'.$materia->nombre_grupo.'</td>
 </tr>

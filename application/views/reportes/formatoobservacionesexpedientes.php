@@ -59,7 +59,7 @@ class MYPDF extends TCPDF {
 
 <tr>
 <td style="background-color:#E6E6E6; font-weight: bold;" >PLANTEL:</td>
-<td>'.$this->dato_plantel->nombre_plantel.'</td>
+<td>'.$this->dato_plantel->nombre_largo.' DE '.$this->dato_plantel->nombre_plantel.'</td>
 <td style="background-color:#E6E6E6; font-weight: bold;" >CICLO ESCOLAR:</td>
 <td>'.$this->dato_ciclo_escolar->nombre_ciclo_escolar.'</td>
 </tr>

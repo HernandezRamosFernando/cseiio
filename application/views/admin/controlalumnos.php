@@ -42,7 +42,7 @@
                   <?php
                       foreach ($planteles as $plantel)
                       {
-                      echo '<option value="'.$plantel->cct_plantel.'">'.$plantel->nombre_plantel.' ----- CCT: '.$plantel->cct_plantel.'</option>';
+                        echo '<option value="'.$plantel->cct_plantel.'">'.$plantel->nombre_corto.' DE '.$plantel->nombre_plantel.' ----- CCT: '.$plantel->cct_plantel.'</option>';
                       }
                       ?>
 
@@ -760,7 +760,7 @@
                 <?php
                               foreach ($lenguas as $lengua)
                               {
-                                      echo '<option value="'.$lengua->id_lengua.'">'.strtoupper($lengua->nombre_lengua).'</option>';
+                                      echo '<option value="'.strtoupper($lengua->nombre_lengua).'">'.strtoupper($lengua->nombre_lengua).'</option>';
                               }
                               ?>
                               <option value="otra">OTRA</option>

@@ -64,4 +64,20 @@ class C_documentacion extends CI_Controller {
         //echo $no_control;
         echo json_encode($this->M_documentacion->documentos_base_faltantes_aspirante($no_control));
     }
+
+
+    public function cambiar_estatus_documentacion(){
+        $id_documentacion = $this->input->post("iddocumentacion");
+        $casilla = $this->input->post("casilla");
+        if($casilla===true){
+            $casilla=1;
+        }
+        else{
+            $casilla=0;
+        }
+
+        
+        echo $this->M_documentacion->cambiar_estatus_documentacion($id_documentacion,$casilla);
+        
+    }
 }

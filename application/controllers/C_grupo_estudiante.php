@@ -28,7 +28,7 @@ class C_grupo_estudiante extends CI_Controller {
     $id_grupo = $this->input->post('grupos');
     $mes = $this->input->post('mes');
     $cct_plantel = $this->input->post('plantel');
-    $nombre_plantel=$this->M_plantel->get_plantel($cct_plantel)[0]->nombre_plantel;
+    $nombre_plantel=$this->M_plantel->get_plantel($cct_plantel)[0]->nombre_largo.' DE '.$this->M_plantel->get_plantel($cct_plantel)[0]->nombre_plantel;
     $semestre_grupo = $this->input->post('semestre_grupo');
 
     $datos_grupo=$this->M_grupo_estudiante->get_datos_grupo_estudiante_asesor($id_grupo,$id_materia);

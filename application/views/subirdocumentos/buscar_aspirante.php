@@ -167,7 +167,7 @@ https://www.youtube.com/results?search_query=+AJAX+File+Upload+with+Progress
 
   <script>
 
-    function activarFile(campo, campoArchivo) {
+    function activarFile(campo, campoArchivo,cajaVerificacion) {
       var checkBox = document.getElementById(campo.name);
       var archivo = document.getElementById(campoArchivo);
       if (checkBox.checked == true) {
@@ -175,6 +175,32 @@ https://www.youtube.com/results?search_query=+AJAX+File+Upload+with+Progress
       }
       else {
         archivo.disabled = true;
+
+        if(cajaVerificacion){
+          
+          swalWithBootstrapButtons.fire({
+                        type: 'warning',
+                        html: '<p style="font-weight: bold;">¿Esta seguro de que desea cambiar estatus de la documentación seleccionada?</p> <p>- El estatus cambia a documentación no entregada o valida</p>.',
+                        confirmButtonText: 'Aceptar',
+                        scrollbarPadding:false,
+                        showCancelButton: 'true',
+                        cancelButtonText: 'Cancelar'
+                      }).then((result) => {
+                        if (result.value) {
+                          checkBox.checked=false;
+                             cambiar_estatus_documentacion(campo.value,checkBox.checked);
+                             
+                        } 
+                        else{
+                          checkBox.checked=true;
+                          
+                        }
+
+                      });
+
+        }
+        
+
       }
 
     }
@@ -236,7 +262,7 @@ https://www.youtube.com/results?search_query=+AJAX+File+Upload+with+Progress
 
 
           fila += '<td>';
-          fila += '<div class="form-check"><label class="form-check-label"><input type="checkbox" class="form-check-input" name="documento' + cont2 + '" id="documento' + cont2 + '" value="' + valor.id_documentacion + '"  onclick="activarFile(this,\'file' + cont2 + '\')" '+estatusCheck+'>' + valor.nombre_documento+' '+'<span class="badge badge-success">'+nombre_plantel+'</span>';
+          fila += '<div class="form-check"><label class="form-check-label"><input type="checkbox" class="form-check-input" name="documento' + cont2 + '" id="documento' + cont2 + '" value="' + valor.id_documentacion + '"  onclick="activarFile(this,\'file' + cont2 + '\','+valor.entregado+' )" '+estatusCheck+'>' + valor.nombre_documento+' '+'<span class="badge badge-success">'+nombre_plantel+'</span>';
           fila += '</label></div></td>';
 
           fila += '<td>';
@@ -506,6 +532,44 @@ function refrescar_tabla(){
       $("#tabla_completa").dataTable().fnDestroy();
       
     }
+
+
+
+
+    function cambiar_estatus_documentacion(id_documentacion,estadodeCasilla){
+
+var formdata = new FormData();
+formdata.append("iddocumentacion",id_documentacion);
+formdata.append("casilla",estadodeCasilla);
+            var xhr_2 = new XMLHttpRequest();
+            xhr_2.open("POST", "<?php echo base_url();?>index.php/C_documentacion/cambiar_estatus_documentacion", true);
+            xhr_2.onreadystatechange = function () {
+              if (xhr_2.responseText.trim() === "si") {
+                  Swal.fire({
+                    type: 'success',
+                    scrollbarPadding:false,
+                    title: 'Cambio de estatus de documentación registrada exitosamente.',
+                    showConfirmButton: false,
+                    timer: 2500
+                  })
+                  
+                  
+                } else {
+                  Swal.fire({
+                    type: 'error',
+                    scrollbarPadding:false,
+                    title: 'Ha ocurrido un error.',
+                    confirmButtonText: 'Cerrar'
+
+                  })
+                }
+              
+            }
+            xhr_2.send(formdata);
+
+            refrescar_tabla();
+
+}
 
   </script>
 

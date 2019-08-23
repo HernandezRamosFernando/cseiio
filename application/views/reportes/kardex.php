@@ -96,7 +96,7 @@ $pdf->AddPage();
 $encabezado ='<h6 style="text-align:center">COLEGIO SUPERIOR PARA LA EDUCACION INTEGRAL INTERCULTURAL DE OAXACA</h6>
 <h6 style="text-align:center">DEPARTAMENTO DE CONTROL ESCOLAR</h6>
 <h5 style="text-align:center">K A R D E X</h5>
-<p style="text-align:center;font-weight: bold;font-size:5pt">'.$estudiante->nombre_plantel.'</p>';
+<p style="text-align:center;font-weight: bold;font-size:5pt">'.$estudiante->nombre_largo.' DE '.$estudiante->nombre_plantel.'</p>';
 
 
 // print a block of text using Write()

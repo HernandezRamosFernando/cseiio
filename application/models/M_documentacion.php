@@ -220,5 +220,26 @@ function get_nombre_archivo_documentacion($no_control,$iddocumento,$plantel){
      }
 
 
+
+     public function cambiar_estatus_documentacion($id_documentacion,$casilla){
+      $this->db->trans_start();
+   
+      $this->db->query("update Documentacion set entregado=".$casilla." where id_documentacion=".$id_documentacion);
+
+      
+   
+      $this->db->trans_complete();
+   
+   if ($this->db->trans_status() === FALSE)
+   {
+          return "no";
+   }
+   
+   else{
+      return "si";
+   }
+
+   }
+
 }
 

@@ -71,7 +71,7 @@ class MYPDF extends TCPDF {
 <table>
 <tbody>
 <tr>
-<td style="text-align:left">Nombre del Plantel: '.$datos_plantel->nombre_plantel.'</td>
+<td style="text-align:left">Nombre del Plantel: '.$datos_plantel->nombre_largo.' DE '.$datos_plantel->nombre_plantel.'</td>
 <td style="text-align:right">Ciclo escolar: '.$nombre_ciclo.'</td>
 </tr>
 

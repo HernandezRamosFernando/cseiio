@@ -206,7 +206,7 @@ $html_1 ='
 </tr>
 
 <tr>
-<td colspan="2"><strong>NOMBRE DEL BACHILLERATO: </strong>'.$plantel[0]->nombre_plantel.'</td>
+<td colspan="2"><strong>NOMBRE DEL BACHILLERATO: </strong>'.$plantel[0]->nombre_largo.' DE '.$plantel[0]->nombre_plantel.'</td>
 </tr>
 
 <tr>

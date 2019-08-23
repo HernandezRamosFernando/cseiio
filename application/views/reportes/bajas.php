@@ -74,7 +74,7 @@ class MYPDF extends TCPDF {
 
         <table border="0">
             <tr>
-                <td style="font-weight: bold"  WIDTH="16%">NOMBRE DEL PLANTEL:</td><td colspan="3">'.$this->plantel[0]->nombre_plantel.'</td>
+                <td style="font-weight: bold"  WIDTH="16%">NOMBRE DEL PLANTEL:</td><td colspan="3">'.$this->plantel[0]->nombre_largo.' DE '.$this->plantel[0]->nombre_plantel.'</td>
             </tr>
             <tr>
                 <td style="font-weight: bold"  WIDTH="16%">CLAVE C.C.T.:</td><td colspan="3">'.$this->plantel[0]->cct_plantel.'</td>

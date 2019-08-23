@@ -439,8 +439,8 @@ class C_estudiante extends CI_Controller {
             //'nacinalidad' => $this->input->post('/d'),
             'lugar_nacimiento' => mb_strtoupper($this->input->post('aspirante_lugar_nacimiento')),
             //'cct_escuela_procedencia' => $this->input->post('aspirante_secundaria_cct'),
-            'nacionalidad' => $this->input->post('aspirante_nacionalidad')
-            //'semestre' => $this->input->post('aspirante_semestre')
+            'nacionalidad' => $this->input->post('aspirante_nacionalidad'),
+            'etnia' =>$this->input->post('aspirante_etnia')
         );
 
         $tipo_ingreso = $this->M_estudiante->get_tipo_ingreso_estudiante($no_control);
@@ -536,6 +536,8 @@ class C_estudiante extends CI_Controller {
 
         //fin datos medicos
 
+
+        
        
         echo $this->M_estudiante->update_estudiante(
             $datos_estudiante,

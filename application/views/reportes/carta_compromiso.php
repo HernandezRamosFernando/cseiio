@@ -153,7 +153,7 @@ compromiso y para ello proporciono los siguientes datos:
 <td colspan="2">Grupo:</td>
 </tr>
 
-<tr><td colspan="3">Nombre del Bachillerato:'.$estudiante_plantel[0]->nombre_plantel.'</td></tr>
+<tr><td colspan="3">Nombre del Bachillerato:'.$estudiante_plantel[0]->nombre_largo.' DE '.$estudiante_plantel[0]->nombre_plantel.'</td></tr>
 
 <tr>
 <td>Cct:'.$estudiante_plantel[0]->cct_plantel.'</td>

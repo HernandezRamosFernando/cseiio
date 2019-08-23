@@ -140,7 +140,7 @@ $pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8',
 //------------------------------pasar variables
 
 $pdf->mes = $mes;
-$pdf->nombre_bic = $plantel->nombre_plantel;
+$pdf->nombre_bic = $plantel->nombre_largo.' DE '.$plantel->nombre_plantel;
 $pdf->cct = $plantel->cct_plantel;
 $pdf->ciclo_escolar = "2019-2020";
 $pdf->fecha_hora = $fecha_hora->fecha_calificacion." ".$fecha_hora->hora." HRS";

@@ -641,7 +641,7 @@ $pre_materias ='
 <table>
 <tbody>
 <tr>
-<td>Nombre del Plantel:'.$datos_friae->nombre_plantel.'</td>
+<td>Nombre del Plantel:'.$datos_friae->nombre_largo.' DE '.$datos_friae->nombre_plantel.'</td>
 <td style="text-align:right">Ciclo escolar:'.$datos_friae->nombre_ciclo_escolar.'</td>
 </tr>
 

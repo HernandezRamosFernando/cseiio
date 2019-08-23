@@ -9,6 +9,7 @@ class C_acreditacion extends CI_Controller
         $this->load->model('M_ciclo_escolar');
         $this->load->model('M_especialidad');
         $this->load->model('M_acreditacion');
+        $this->load->model('M_notificacion');
     }
 
 //------------------------Vistas
@@ -61,7 +62,17 @@ public function agregar_grupo(){
     $datos = json_decode($this->input->raw_input_stream);
     echo $this->M_acreditacion->agregar_grupo($datos);
     //print_r($datos);
-
+    $fecha_actual = date("Y-m-d");
+    //sumo 4 días
+     $fecha_agregada=date("Y-m-d",strtotime($fecha_actual."+ 4 days"));
+    $nota = array(
+        "autor" => "PLANTEL",
+        "mensaje" => "Se ha agregado un grupo.",
+        "titulo" => "Grupo Creado",
+        "plantel" => "CESCOLAR",
+        "fecha_fin"=>$fecha_agregada
+    );
+    $this->M_notificacion->agregar_notificacion($nota);
 
 }
 

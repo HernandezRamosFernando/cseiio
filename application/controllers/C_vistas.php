@@ -1384,17 +1384,18 @@ public function resolucion_equivalencia(){
 
     public function graficas(){
 
-        //if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
+        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
         $data= array('title'=>'Gráficas');
         $this->load->view("headers/cabecera", $data);
         $this->load->view("headers/menuarriba");
         $this->load->view("headers/menuizquierda");
         $this->load->view("admin/graficas" );
         $this->load->view("footers/footer");
-        //}
-        //    else{
-        //    redirect(base_url().'index.php/c_usuario');
-        //    }
+    }
+    else{
+    redirect(base_url().'index.php/c_usuario');
+    }
+
     }
 
 

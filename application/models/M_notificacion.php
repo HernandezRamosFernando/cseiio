@@ -50,4 +50,7 @@ class M_notificacion extends CI_Model {
     }
 
 
+    
+
+
 }

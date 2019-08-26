@@ -11,6 +11,7 @@
   <meta name="author" content="">
 
 
+  <link rel="shortcut icon" href="<?php echo base_url(); ?>/favicon.ico" />
 
 
   <!-- Bootstrap core CSS-->

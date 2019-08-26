@@ -64,15 +64,15 @@ public function agregar_grupo(){
     //print_r($datos);
     $fecha_actual = date("Y-m-d");
     //sumo 4 días
-     $fecha_agregada=date("Y-m-d",strtotime($fecha_actual."+ 4 days"));
-    $nota = array(
-        "autor" => "PLANTEL",
-        "mensaje" => "Se ha agregado un grupo.",
-        "titulo" => "Grupo Creado",
-        "plantel" => "CESCOLAR",
-        "fecha_fin"=>$fecha_agregada
-    );
-    $this->M_notificacion->agregar_notificacion($nota);
+    $fecha_agregada=date("Y-m-d",strtotime($fecha_actual."+ 4 days"));
+    
+    $plantel = new stdClass();
+    $plantel->autor="C.C.T: ".$datos->grupo->plantel;
+    $plantel->mensaje="Se ha creado el grupo ".$datos->grupo->nombre_grupo." del semestre ".$datos->grupo->semestre;
+    $plantel->titulo="NUEVO GRUPO CREADO";
+    $plantel->plantel[0]='CESCOLAR';
+    $plantel->fecha_fin=$fecha_agregada;
+    $this->M_notificacion->agregar_notificacion($plantel);
 
 }
 

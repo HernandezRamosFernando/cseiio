@@ -7,6 +7,8 @@ class M_notificacion extends CI_Model {
    function agregar_notificacion($datos){
     $this->db->trans_start();
 
+    
+
     if($datos->plantel=="todos"){
         $planteles = $this->db->query("select cct_plantel as plantel from Plantel")->result();
 

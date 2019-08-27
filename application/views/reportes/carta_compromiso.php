@@ -280,7 +280,7 @@ de estos requisitos, seré dado de baja del Bachillerato en el que obtuve mi alt
 <tr>
 <td style="text-align:center">NOMBRE Y FIRMA DEL ESTUDIANTE</td>
 <td style="text-align:center">NOMBRE Y FIRMA DEL TUTOR O RESPONSABLE</td>
-<td style="text-align:center">DIRECTOR DEL '.$estudiante_plantel[0]->nombre_plantel.'</td>
+<td style="text-align:center">DIRECTOR DEL '.$estudiante_plantel[0]->nombre_largo.' DE '.$estudiante_plantel[0]->nombre_plantel.'</td>
 </tr>
 </tbody>
 </table>

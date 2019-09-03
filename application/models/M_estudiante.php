@@ -231,7 +231,7 @@ function delete_estudiante($no_control){
 
 
 public function get_plantel_estudiante($no_control){
-   return $this->db->query("SELECT * 
+   return $this->db->query("SELECT *,(select g.nombre_grupo from Grupo g where g.id_grupo=(SELECT distinct(ge.Grupo_id_grupo) id_grupo FROM Grupo_Estudiante ge where Estudiante_no_control='".$no_control."')) nombre_grupo
    FROM Estudiante as e inner join Plantel as p on e.Plantel_cct_plantel=p.cct_plantel 
    where no_control='".$no_control."'")->result();
 }

@@ -260,13 +260,31 @@ $encabezado_tabla = $encabezado_tabla_a;
 else{
     $encabezado_tabla = $encabezado_tabla_b;
 }
+
+$asesor_nombre = sizeof($asesor)==0?"":($asesor[0]->nombre.' '.$asesor[0]->primer_apellido.' '.$asesor[0]->segundo_apellido);
+
+$firmas ='
+<table style="font-size:7pt">
+<tbody>
+<tr>
+<td><p>'.$asesor_nombre.'</p><p>___________________________</p><p>NOMBRE Y FIRMA DEL ASESOR</p></td>
+<td><p></p><p>___________________________</p><p>SELLO</p></td>
+<td><p>'.$plantel->director.'</p><p>___________________________</p><p>NOMBRE Y FIRMA DEL DIRECTOR(A)</p></td>
+</tr>
+</tbody>
+</table>
+';
+
+$pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = '270', $firmas, $border = 0, $ln = 0, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+
+
 $pdf->writeHTMLCell($w = 0, $h = 50, $x = '', $y = '5', $titulo, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
 
 $pdf->writeHTMLCell($w = 0, $h = 50, $x = '', $y = '19', $datos_cabecera, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
 
-$pdf->writeHTMLCell($w = 0, $h = 50, $x = '', $y = '37', $encabezado_tabla, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+$pdf->writeHTMLCell($w = 0, $h = 50, $x = '', $y = '42', $encabezado_tabla, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
 
-$pdf->writeHTMLCell($w = 0, $h = 50, $x = '', $y = '44', $datos_estudiantes, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+$pdf->writeHTMLCell($w = 0, $h = 50, $x = '', $y = '49', $datos_estudiantes, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
 
 //$pdf->writeHTMLCell($w = 0, $h = 50, $x = '', $y = '75', $firma_asesor, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
 

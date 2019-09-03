@@ -25,6 +25,7 @@ class C_lista_calificaciones extends CI_Controller {
         $datos['estudiantes'] = $this->M_grupo_estudiante->nombres_estudiantes_grupo_materia($grupo,$materia);
         $datos['plantel'] = $this->M_grupo_estudiante->plantel_grupo($grupo);
         $datos['materia'] = $this->M_grupo_estudiante->datos_materia_grupo($materia,$grupo);
+        $datos['asesor'] = $this->M_asesor->asesor_materia_grupo($grupo,$materia);
         $this->load->view("reportes/lista_calificaciones",$datos);
     }
 

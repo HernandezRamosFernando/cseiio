@@ -150,7 +150,7 @@ compromiso y para ello proporciono los siguientes datos:
 
 <tr>
 <td>Semestre:'.$estudiante_plantel[0]->semestre_en_curso.'</td>
-<td colspan="2">Grupo:</td>
+<td colspan="2">Grupo: '.$estudiante_plantel[0]->nombre_grupo.'</td>
 </tr>
 
 <tr><td colspan="3">Nombre del Bachillerato:'.$estudiante_plantel[0]->nombre_largo.' DE '.$estudiante_plantel[0]->nombre_plantel.'</td></tr>

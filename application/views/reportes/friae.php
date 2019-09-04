@@ -169,20 +169,20 @@ function filas_vacias_califiacion($materias){
 
     if($numero_materias==14){
         return $html_catorce_columnas='
-        <td style="width:28px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][0]->id_materia.'</td>
-        <td style="width:28px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][1]->id_materia.'</td>
-        <td style="width:28px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][2]->id_materia.'</td>
-        <td style="width:28px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][3]->id_materia.'</td>
-        <td style="width:28px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][4]->id_materia.'</td>
-        <td style="width:28px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][5]->id_materia.'</td>
-        <td style="width:28px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][6]->id_materia.'</td>
-        <td style="width:28px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][7]->id_materia.'</td>
-        <td style="width:28px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][8]->id_materia.'</td>
-        <td style="width:28px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][9]->id_materia.'</td>
-        <td style="width:28px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][10]->id_materia.'</td>
-        <td style="width:28px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][11]->id_materia.'</td>
-        <td style="width:28px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][12]->id_materia.'</td>
-        <td style="width:28px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][13]->id_materia.'</td>
+        <td style="width:26px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][0]->id_materia.'</td>
+        <td style="width:26px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][1]->id_materia.'</td>
+        <td style="width:26px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][2]->id_materia.'</td>
+        <td style="width:26px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][3]->id_materia.'</td>
+        <td style="width:26px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][4]->id_materia.'</td>
+        <td style="width:26px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][5]->id_materia.'</td>
+        <td style="width:26px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][6]->id_materia.'</td>
+        <td style="width:26px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][7]->id_materia.'</td>
+        <td style="width:26px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][8]->id_materia.'</td>
+        <td style="width:26px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][9]->id_materia.'</td>
+        <td style="width:26px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][10]->id_materia.'</td>
+        <td style="width:26px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][11]->id_materia.'</td>
+        <td style="width:26px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][12]->id_materia.'</td>
+        <td style="width:26px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][13]->id_materia.'</td>
         ';
     }
 
@@ -207,45 +207,45 @@ function filas_vacias_califiacion($materias){
 
     if($numero_materias==12){
         return $html_doce_columnas='
-        <td style="width:31px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][0]->id_materia.'</td>
-        <td style="width:31px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][1]->id_materia.'</td>
-        <td style="width:31px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][2]->id_materia.'</td>
-        <td style="width:31px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][3]->id_materia.'</td>
-        <td style="width:31px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][4]->id_materia.'</td>
-        <td style="width:31px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][5]->id_materia.'</td>
-        <td style="width:31px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][6]->id_materia.'</td>
-        <td style="width:31px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][7]->id_materia.'</td>
-        <td style="width:31px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][8]->id_materia.'</td>
-        <td style="width:31px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][9]->id_materia.'</td>
-        <td style="width:31px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][10]->id_materia.'</td>
-        <td style="width:31px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][11]->id_materia.'</td>
+        <td style="width:30.33px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][0]->id_materia.'</td>
+        <td style="width:30.33px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][1]->id_materia.'</td>
+        <td style="width:30.33px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][2]->id_materia.'</td>
+        <td style="width:30.33px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][3]->id_materia.'</td>
+        <td style="width:30.33px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][4]->id_materia.'</td>
+        <td style="width:30.33px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][5]->id_materia.'</td>
+        <td style="width:30.33px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][6]->id_materia.'</td>
+        <td style="width:30.33px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][7]->id_materia.'</td>
+        <td style="width:30.33px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][8]->id_materia.'</td>
+        <td style="width:30.33px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][9]->id_materia.'</td>
+        <td style="width:30.33px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][10]->id_materia.'</td>
+        <td style="width:30.33px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][11]->id_materia.'</td>
         ';
     }
 
     if($numero_materias==9){
         return $html_nueve_columnas='
-        <td style="width:41px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][0]->id_materia.'</td>
-        <td style="width:41px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][1]->id_materia.'</td>
-        <td style="width:41px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][2]->id_materia.'</td>
-        <td style="width:41px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][3]->id_materia.'</td>
-        <td style="width:41px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][4]->id_materia.'</td>
-        <td style="width:41px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][5]->id_materia.'</td>
-        <td style="width:41px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][6]->id_materia.'</td>
-        <td style="width:41px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][7]->id_materia.'</td>
-        <td style="width:41px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][8]->id_materia.'</td>
+        <td style="width:40.44px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][0]->id_materia.'</td>
+        <td style="width:40.44px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][1]->id_materia.'</td>
+        <td style="width:40.44px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][2]->id_materia.'</td>
+        <td style="width:40.44px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][3]->id_materia.'</td>
+        <td style="width:40.44px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][4]->id_materia.'</td>
+        <td style="width:40.44px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][5]->id_materia.'</td>
+        <td style="width:40.44px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][6]->id_materia.'</td>
+        <td style="width:40.44px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][7]->id_materia.'</td>
+        <td style="width:40.44px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][8]->id_materia.'</td>
         ';
     }
 
     if($numero_materias==8){
         return $html_ocho_columnas='
-        <td style="width:46px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][0]->id_materia.'</td>
-        <td style="width:46px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][1]->id_materia.'</td>
-        <td style="width:46px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][2]->id_materia.'</td>
-        <td style="width:46px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][3]->id_materia.'</td>
-        <td style="width:46px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][4]->id_materia.'</td>
-        <td style="width:46px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][5]->id_materia.'</td>
-        <td style="width:46px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][6]->id_materia.'</td>
-        <td style="width:46px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][7]->id_materia.'</td>
+        <td style="width:45.5px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][0]->id_materia.'</td>
+        <td style="width:45.5px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][1]->id_materia.'</td>
+        <td style="width:45.5px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][2]->id_materia.'</td>
+        <td style="width:45.5px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][3]->id_materia.'</td>
+        <td style="width:45.5px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][4]->id_materia.'</td>
+        <td style="width:45.5px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][5]->id_materia.'</td>
+        <td style="width:45.5px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][6]->id_materia.'</td>
+        <td style="width:45.5px;background-color:#f8facb"><br><br><br><br><br>'.$materias[0][7]->id_materia.'</td>
         ';
     }
 
@@ -461,6 +461,7 @@ foreach($materias_estudiantes[$contador] as $materia){
         }
 
         else{
+            $promedio_final=($promedio_final==0) ? "" : $promedio_final;
             $renglon.='<td>'.$promedio_final.'</td>';
         }
         
@@ -583,10 +584,12 @@ function primer_semestre($semestre,$materias_estudiantes,$html_pos_materias){
 
     if($semestre=='1'){
 
-        return '<tr style="font-size:4 pt;text-align:center"><td style="width:20px;background-color:#f8facb"></td><td style="width:40px;background-color:#f8facb"></td><td style="width:100px;background-color:#f8facb"></td><td style="width:20px;background-color:#f8facb"></td><td style="width:244px;background-color:#f8facb">NOMBRE DEL ALUMNO</td><td style="width:25px;background-color:#f8facb"></td><td style="width:50px;background-color:#f8facb"></td><td style="width:364px;background-color:#f8facb">(CLAVE-UNIDAD DE CONTENIDO)<br>CALIFICACIÓN</td><td style="width:40px;background-color:#f8facb"></td><td style="width:180px;background-color:#f8facb">ANTES DEL PERIODO DE REGULARIZACIÓN</td><td style="width:220px;background-color:#f8facb">DESPUES DEL PERIODO DE REGULARIZACIÓN</td><td style="width:40px;background-color:#f8facb"></td><td style="width:40px;background-color:#f8facb"></td> </tr>
+        return '<tr style="font-size:4 pt;text-align:center"><td style="width:20px;background-color:#f8facb" rowspan="2">N/P</td><td style="width:40px;background-color:#f8facb" rowspan="2">MATRICULA</td><td style="width:100px;background-color:#f8facb"></td><td style="width:20px;background-color:#f8facb"></td><td style="width:244px;background-color:#f8facb">NOMBRE DEL ALUMNO</td><td style="width:25px;background-color:#f8facb"></td><td style="width:50px;background-color:#f8facb"></td><td style="width:364px;background-color:#f8facb">(CLAVE-UNIDAD DE CONTENIDO)<br>CALIFICACIÓN</td><td style="width:40px;background-color:#f8facb"></td><td style="width:180px;background-color:#f8facb">ANTES DEL PERIODO DE REGULARIZACIÓN</td><td style="width:220px;background-color:#f8facb">DESPUES DEL PERIODO DE REGULARIZACIÓN</td><td style="width:40px;background-color:#f8facb"></td><td style="width:40px;background-color:#f8facb"></td> </tr>
+
+
         <tr style="font-size:4 pt;text-align:center">
-<td style="width:20px;background-color:#f8facb" ><br><br><br><br><br>N/P</td>
-<td style="width:40px;background-color:#f8facb"><br><br><br><br><br>MATRICULA</td>
+
+
 <td style="width:100px;background-color:#f8facb"><br><br><br><br><br>CURP</td>
 <td style="width:20px;background-color:#f8facb"><br><br><br><br><br>SEXO</td>
 <td style="width:72px;background-color:#f8facb"><br><br><br><br><br>PRIMER APELLIDO</td>
@@ -680,7 +683,7 @@ $firmas = '
 <tr>
 <td><br><br>'.$director.'<br>______________________________<br>NOMBRE Y FIRMA DEL DIRETOR(A)<br>DEL PLANTEL<br></td>
 <td><p></p><p>_________________________</p><p>SELLO DEL PLANTEL</p></td>
-<td><br><br>DAVID ERNESTO HERNANDEZ AVENDAÑO<br>_________________________<br>JEFE DEL DEPARTAMENTO DE<br>CONTROL ESCOLAR<br></td>
+<td><br><br>DAVID ERNESTO HERNANDEZ AVENDAÑO<br>___________________________________<br>JEFE DEL DEPARTAMENTO DE<br>CONTROL ESCOLAR<br></td>
 <td><p></p><p>_________________________</p><p>SELLO CONTROL ESCOLAR</p></td>
 <td><p></p><p>_________________________</p><p>REVISO Y VALIDO</p></td>
 </tr>
@@ -699,7 +702,7 @@ $tabla_escuela.='<table style="font-size:6pt;" border="1">
 foreach($materias_grupo as $materia){
     $tabla_escuela.='<tr>';
     $tabla_escuela.='<td>'.$materia->id_materia.'</td>';
-    $tabla_escuela.='<td style="text-align:left">'.strtoupper($materia->unidad_contenido).'</td></tr>';
+    $tabla_escuela.='<td style="text-align:left">'.$materia->unidad_contenido.'</td></tr>';
 }
 $tabla_escuela.='</tbody>
 </table>';

@@ -22,6 +22,12 @@
     </ul>
 
       <ul class="navbar-nav ml-auto ml-md-0" >
+		  <li class="nav-item ">
+          <a class="nav-link " href="<?php echo base_url();?>assets/manual_ayuda/manual_sise.pdf" target="_blank"  id="ayuda" role="button" ">
+            <i class="material-icons">help</i>
+            <i>Ayuda</i>
+          </a>
+        </li>
         <li class="nav-item dropdown no-arrow mx-1" >
           <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
@@ -36,7 +42,7 @@
         
         <li class="nav-item ">
           <a class="nav-link " href="#"  data-toggle="modal" data-target="#logoutModal" id="userDropdown" role="button" ">
-            <i style="color: #F83D3D;"class="material-icons">phonelink_erase</i>
+            <i style="color:#F83D3D;" class="material-icons">phonelink_erase</i>
             <i>Cerrar sesión</i>
           </a>
         </li>

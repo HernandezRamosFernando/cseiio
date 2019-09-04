@@ -154,7 +154,7 @@ class M_friae extends CI_Model {
      }
 
      function nombre_materias_friae($grupo){
-        return $this->db->query("select id_materia,unidad_contenido from Grupo_Estudiante ge inner join Materia m on ge.id_materia=m.clave where Grupo_id_grupo='".$grupo."' group by id_materia")->result();
+        return $this->db->query("select id_materia,UPPER(unidad_contenido) unidad_contenido from Grupo_Estudiante ge inner join Materia m on ge.id_materia=m.clave where Grupo_id_grupo='".$grupo."' group by id_materia")->result();
     }
 
 }

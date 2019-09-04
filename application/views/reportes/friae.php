@@ -33,12 +33,15 @@ class MYPDF extends TCPDF {
 
 	//Page header
 	public function Header() {
-/*		
+		
 		// Logo
-		//$image_file =base_url().'assets/img/cabecera.png';
-		$this->Image($image_file, 110, 10, 90, '', 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
+		$image_file =base_url().'assets/img/logo_cseiio.png';
+        $this->Image($image_file, 20, 10, 13, '', 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
+        
+        $image_file =base_url().'assets/img/logo_gobierno.png';
+		$this->Image($image_file, 397, 10, 13, '', 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
 
-		//$image_file =base_url().'assets/img/ladoderecho.png';
+/*		//$image_file =base_url().'assets/img/ladoderecho.png';
 		$this->Image($image_file, 190, 50, 15, '', 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
 
 
@@ -274,7 +277,7 @@ $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
 $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 
 // set margins
-$pdf->SetMargins(20, 5,19);
+$pdf->SetMargins(20,15,19);
 $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
 $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 
@@ -367,14 +370,14 @@ else{
 
 
 $html_pos_materias='
-<td style="width:40px;background-color:#f8facb">SIT. ALUM. FIN DEL MODULO</td>
-<td style="width:25px;background-color:#f8facb">NUMERO ADEUDOS AL FIN DEL MODULO(todos los modulos cursados y actual) antes de periodo de regularizacion</td>
-<td style="width:70px;background-color:#f8facb">CLAVE U.C. DE ADEUDOS FIN DEL MODULO(todos los modulos cursados y actual antes de periodo de regularizacion)</td>
-<td style="width:25px;background-color:#f8facb">NUMERO ADEUDOS DE TODOS LOS MODULOS CURSADOS (despues del periodo de regularizacion)</td>
-<td style="width:70px;background-color:#f8facb">CLAVE U.C. DE ADEUDOS EN TODOS LOS MODULOS CURSADOS (despues del periodo de regularizacion)</td>
-<td style="width:40px;background-color:#f8facb">SIT. ALUM. DESPUES DEL PERIODO DE REGULARIZACION</td>
-<td style="width:40px;background-color:#f8facb">FECHA DE BAJA</td>
-<td style="width:40px;background-color:#f8facb">FECHA DE NACIMIENTO</td>
+<td style="width:40px;background-color:#f8facb"><br><br><br><br><br>SIT. ALUM. FIN DEL MODULO</td>
+<td style="width:30px;background-color:#f8facb">NUMERO ADEUDOS AL FIN DEL MODULO(todos los modulos cursados y actual) antes de periodo de regularizacion</td>
+<td style="width:150px;background-color:#f8facb"><br><br><br><br><br>CLAVE U.C. DE ADEUDOS FIN DEL MODULO(todos los modulos cursados y actual antes de periodo de regularizacion)</td>
+<td style="width:30px;background-color:#f8facb">NUMERO ADEUDOS DE TODOS LOS MODULOS CURSADOS (despues del periodo de regularizacion)</td>
+<td style="width:150px;background-color:#f8facb"><br><br><br><br><br>CLAVE U.C. DE ADEUDOS EN TODOS LOS MODULOS CURSADOS (despues del periodo de regularizacion)</td>
+<td style="width:40px;background-color:#f8facb"><br><br><br><br><br>SIT. ALUM. DESPUES DEL PERIODO DE REGULARIZACION</td>
+<td style="width:40px;background-color:#f8facb"><br><br><br><br><br>FECHA DE BAJA</td>
+<td style="width:40px;background-color:#f8facb"><br><br><br><br><br>FECHA DE NACIMIENTO</td>
 ';
 
 ////////////////////////////////////////////////////////
@@ -580,14 +583,15 @@ function primer_semestre($semestre,$materias_estudiantes,$html_pos_materias){
 
     if($semestre=='1'){
 
-        return '<tr style="font-size:4 pt;text-align:center">
-<td style="width:20px;background-color:#f8facb"><br><br><br><br><br>N/P</td>
-<td style="width:35px;background-color:#f8facb"><br><br><br><br><br>MATRICULA</td>
-<td style="width:75px;background-color:#f8facb"><br><br><br><br><br>CURP</td>
+        return '<tr style="font-size:4 pt;text-align:center"><td style="width:20px;background-color:#f8facb"></td><td style="width:40px;background-color:#f8facb"></td><td style="width:100px;background-color:#f8facb"></td><td style="width:20px;background-color:#f8facb"></td><td style="width:244px;background-color:#f8facb">NOMBRE DEL ALUMNO</td><td style="width:25px;background-color:#f8facb"></td><td style="width:50px;background-color:#f8facb"></td><td style="width:364px;background-color:#f8facb">(CLAVE-UNIDAD DE CONTENIDO)<br>CALIFICACIÓN</td><td style="width:40px;background-color:#f8facb"></td><td style="width:180px;background-color:#f8facb">ANTES DEL PERIODO DE REGULARIZACIÓN</td><td style="width:220px;background-color:#f8facb">DESPUES DEL PERIODO DE REGULARIZACIÓN</td><td style="width:40px;background-color:#f8facb"></td><td style="width:40px;background-color:#f8facb"></td> </tr>
+        <tr style="font-size:4 pt;text-align:center">
+<td style="width:20px;background-color:#f8facb" ><br><br><br><br><br>N/P</td>
+<td style="width:40px;background-color:#f8facb"><br><br><br><br><br>MATRICULA</td>
+<td style="width:100px;background-color:#f8facb"><br><br><br><br><br>CURP</td>
 <td style="width:20px;background-color:#f8facb"><br><br><br><br><br>SEXO</td>
-<td style="width:70px;background-color:#f8facb"><br><br><br><br><br>PRIMER APELLIDO</td>
-<td style="width:70px;background-color:#f8facb"><br><br><br><br><br>SEGUNDO APELLIDO</td>
-<td style="width:85px;background-color:#f8facb"><br><br><br><br><br>NOMBRE(S)</td>
+<td style="width:72px;background-color:#f8facb"><br><br><br><br><br>PRIMER APELLIDO</td>
+<td style="width:72px;background-color:#f8facb"><br><br><br><br><br>SEGUNDO APELLIDO</td>
+<td style="width:100px;background-color:#f8facb"><br><br><br><br><br>NOMBRE(S)</td>
 <td style="width:25px;background-color:#f8facb"><br><br><br><br>EDAD ACTUAL</td>
 <td style="width:50px;background-color:#f8facb"><br><br><br><br><br>SITUACION ALUMNO</td>
 '.celdas_materias($materias_estudiantes).$html_pos_materias.'
@@ -641,18 +645,18 @@ $pre_materias ='
 <table>
 <tbody>
 <tr>
-<td>Nombre del Plantel:'.$datos_friae->nombre_largo.' DE '.$datos_friae->nombre_plantel.'</td>
-<td style="text-align:right">Ciclo escolar:'.$datos_friae->nombre_ciclo_escolar.'</td>
+<td><span style="font-weight: bold;">NOMBRE DEL PLANTEL: </span>'.$datos_friae->nombre_largo.' DE '.$datos_friae->nombre_plantel.'</td>
+<td style="text-align:right"><span style="font-weight: bold;">CICLO ESCOLAR: </span>'.$datos_friae->nombre_ciclo_escolar.'</td>
 </tr>
 
 <tr>
-<td>Clave cct:'.$datos_friae->cct_plantel.'</td>
-<td style="text-align:right">Semestre:'.$datos_friae->semestre.'</td>
+<td><span style="font-weight: bold;">CLAVE C.C.T: </span>'.$datos_friae->cct_plantel.'</td>
+<td style="text-align:right"><span style="font-weight: bold;">SEMESTRE: </span>'.$datos_friae->semestre.'</td>
 </tr>
 
 <tr>
-<td>Localidad y municipio:'.$datos_friae->nombre_localidad.','.$datos_friae->nombre_municipio.'</td>
-<td style="text-align:right">Grupo:'.$datos_friae->nombre_grupo.'</td>
+<td><span style="font-weight: bold;">LOCALIDAD Y MUNICIPIO: </span>'.$datos_friae->nombre_localidad.','.$datos_friae->nombre_municipio.'</td>
+<td style="text-align:right"><span style="font-weight: bold;">GRUPO: </span>'.$datos_friae->nombre_grupo.'</td>
 </tr>
 
 <tr>
@@ -695,7 +699,7 @@ $pdf->writeHTMLCell($w = 0, $h = 20, $x = '20', $y = '250', $firmas, $border = 0
 
 //Close and output PDF document
 
-
+//error_reporting(E_ALL); Aplicar cuando existan errores y no sabemos donde existe el error.
 
 $pdf->Output('example_003.pdf', 'I');
 

@@ -9,6 +9,7 @@ class C_friae extends CI_Controller {
         parent::__construct();
         $this->load->model("M_friae");
         $this->load->model('M_grupo');
+        $this->load->model('M_materia');
     }
 
     public function crear_friae(){
@@ -42,12 +43,15 @@ class C_friae extends CI_Controller {
             $datos_estudiante[$contador]=$this->M_friae->get_datos_estudiante($estudiante->no_control);
             $contador+=1;
         }
+
+        $datos['materias_grupo']=$this->M_friae->nombre_materias_friae($grupo);
+
         $datos['datos_friae_estudiante']=$datos_friae_estudiante;
         $datos['materias_estudiantes']=$materias_estudiantes;
         $datos['datos_estudiante']=$datos_estudiante;
         $datos['director'] = $director_plantel_grupo;
 
-        //print_r($datos['materias_estudiantes'][0]);
+        //print_r($materias_grupo);
         //$datos['documentos'] = $this->M_documentacion->get_documentos_base_faltantes_estudiante($no_control);
         //$datos['estudiante_plantel'] = $this->M_estudiante->get_plantel_estudiante($no_control);
         //$datos['fecha_carta'] = $this->M_documentacion->get_fecha_ultima_carta_compromiso_estudiante($no_control);

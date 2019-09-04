@@ -179,7 +179,7 @@ class M_grupo extends CI_Model {
 }
 
 public function director_plantel($grupo){
-    return $this->db->query("select director from Grupo as g inner join Plantel as p on g.plantel=p.cct_plantel where g.id_grupo='20EBD0001C11BA'")->result()[0]->director;
+    return $this->db->query("select director from Grupo as g inner join Plantel as p on g.plantel=p.cct_plantel where g.id_grupo='".$grupo."'")->result()[0]->director;
 }
 
 

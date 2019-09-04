@@ -675,12 +675,12 @@ $pre_materias ='
 
 
 $firmas = '
-<table style="font-size:6pt">
+<table style="font-size:6pt;">
 <tbody>
 <tr>
-<td><p>'.$director.'</p><p>_________________________</p><p>NOMBRE Y FIRMA DEL DIRETOR(A)</p><p>DEL PLANTEL</p></td>
+<td><br><br>'.$director.'<br>______________________________<br>NOMBRE Y FIRMA DEL DIRETOR(A)<br>DEL PLANTEL<br></td>
 <td><p></p><p>_________________________</p><p>SELLO DEL PLANTEL</p></td>
-<td><p>DAVID ERNESTO HERNANDEZ AVENDAÑO</p><p>_________________________</p><p>JEFE DEL DEPARTAMENTO DE</p><p>CONTROL ESCOLAR</p></td>
+<td><br><br>DAVID ERNESTO HERNANDEZ AVENDAÑO<br>_________________________<br>JEFE DEL DEPARTAMENTO DE<br>CONTROL ESCOLAR<br></td>
 <td><p></p><p>_________________________</p><p>SELLO CONTROL ESCOLAR</p></td>
 <td><p></p><p>_________________________</p><p>REVISO Y VALIDO</p></td>
 </tr>
@@ -688,13 +688,30 @@ $firmas = '
 </table>
 ';
 
+$tabla_escuela="";
 
+$tabla_escuela.='<table style="font-size:6pt;" border="1">
+<tbody>
+<tr>
+<td style="width:50px;"><span style="font-weight: bold;">CLAVE</span></td>
+<td style="width:230px;"><span style="font-weight: bold;">UNIDAD DE CONTENIDO</span></td>
+</tr>';
+foreach($materias_grupo as $materia){
+    $tabla_escuela.='<tr>';
+    $tabla_escuela.='<td>'.$materia->id_materia.'</td>';
+    $tabla_escuela.='<td style="text-align:left">'.strtoupper($materia->unidad_contenido).'</td></tr>';
+}
+$tabla_escuela.='</tbody>
+</table>';
 
 
 // print a block of text using Write()
 // output the HTML content
 $pdf->writeHTML($pre_materias, true, 0, true, true);
-$pdf->writeHTMLCell($w = 0, $h = 20, $x = '20', $y = '250', $firmas, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+
+$pdf->writeHTMLCell($w = 0, $h = 20, $x = '20', $y = '230',$tabla_escuela, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+
+$pdf->writeHTMLCell($w = 0, $h = 20, $x = '100', $y = '250',$firmas, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
 
 
 //Close and output PDF document

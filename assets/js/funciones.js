@@ -189,6 +189,25 @@ function discapacidad(e) {
 }
 
 
+
+function enfermedad_cronica(e) {
+  console.log(e.value);
+  if (e.value == 1) {
+    document.getElementById("c").style = "display:";
+    document.getElementById("aspirante_enfermedad_cronica").required = true;
+  }
+
+  else {
+    document.getElementById("c").style = "display:none";
+    document.getElementById("aspirante_enfermedad_cronica").required = false;
+    document.getElementById("aspirante_enfermedad_cronica").value = '';
+  }
+}
+
+
+
+
+
 function borrarmodal() {
   $('#aspirante_nuevasecundaria_cct').val('');
   $('#aspirante_nuevasecundaria_nombre').val('');

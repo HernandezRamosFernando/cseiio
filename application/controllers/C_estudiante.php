@@ -218,6 +218,13 @@ class C_estudiante extends CI_Controller {
         );
 
 
+        $datos_estudiante_medicos['enfermedad_cronica'] = array(
+            'descripcion' => 'ENFERMEDAD CRONICA',
+            'valor' => mb_strtoupper($this->input->post('aspirante_enfermedad_cronica')),
+            'Estudiante_no_control' => $no_control
+        );
+
+
 
       
 

@@ -37,7 +37,7 @@ class MYPDF extends TCPDF {
 		
 		// Logo
 		$image_file =base_url().'assets/img/cabecera.png';
-		$this->Image($image_file, 110, 10, 90, '', 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
+		$this->Image($image_file, 110, 5, 90, '', 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
 
 		$image_file =base_url().'assets/img/ladoderecho.png';
 		$this->Image($image_file, 190, 50, 15, '', 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
@@ -165,8 +165,11 @@ $sexo=$estudiante['estudiante'][0]->sexo;
 $tipo_sangre='';
 $alergia='';
 $discapacidad='';
+$enfermedad_cronica='';
+
 $tieneAlergia='NO';
 $tieneDiscapacidad='NO';
+$tieneEnfermedadCronica='NO';
 foreach ($estudiante['expediente_medico'] as $expediente) {
 
 	if($expediente->descripcion=='TIPO DE SANGRE'){
@@ -180,6 +183,9 @@ foreach ($estudiante['expediente_medico'] as $expediente) {
 	if($expediente->descripcion=='DISCAPACIDAD'){
 		$discapacidad=$expediente->valor;
 	}
+	if($expediente->descripcion=='ENFERMEDAD CRONICA'){
+		$enfermedad_cronica=$expediente->valor;
+	}
 }
 
 if($alergia!=''){
@@ -188,6 +194,11 @@ if($alergia!=''){
 
 if($discapacidad!=''){
 	$tieneDiscapacidad='SI';
+}
+
+
+if($enfermedad_cronica!=''){
+	$tieneEnfermedadCronica='SI';
 }
 
 
@@ -277,6 +288,11 @@ $html_1 ='
 <tr>
 <td><strong>¿PADECE ALGUNA DISCAPACIDAD?: </strong>'.$tieneDiscapacidad.'</td>
 <td><strong>DISCAPACIDAD: </strong>'.$discapacidad.'</td>
+</tr>
+
+<tr>
+<td><strong>¿PADECE ALGUNA ENFERMEDAD CRONICA?: </strong>'.$tieneEnfermedadCronica.'</td>
+<td><strong>ENFERMEDAD CRONICA: </strong>'.$enfermedad_cronica.'</td>
 </tr>
 
 

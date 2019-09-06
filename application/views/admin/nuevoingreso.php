@@ -233,6 +233,25 @@
             </div>
           </div>
 
+          <div class="col-md-4">
+            <label class="form-group has-float-label seltitulo">
+              <select class="form-control form-control-lg selcolor" id="aspirante_enfermedad_cronica_combo"
+                name="aspirante_enfermedad_cronica_combo" onchange="enfermedad_cronica(this)">
+                <option value="2">No</option>
+                <option value="1">Sí</option>
+              </select>
+              <span>¿Padece alguna enfermedad cronica?</span>
+            </label>
+          </div>
+          <div class="col-md-4" style="display:none" id="c" name="enfermedad_cronica">
+            <div class="form-label-group">
+              <input type="text" pattern="[A-ZÁÉÍÓÚáéíóúa-z]+[ ]*[A-ZÁÉÍÓÚáéíóúa-z ]*" 
+                class="form-control text-uppercase" id="aspirante_enfermedad_cronica" name="aspirante_enfermedad_cronica"
+                placeholder="Ingrese la enfermedad cronica" style="color: #237087 ">
+              <label for="aspirante_enfermedad_cronica">Ingrese enfermedad cronica</label>
+            </div>
+          </div>
+
         </div>
       </div>
 

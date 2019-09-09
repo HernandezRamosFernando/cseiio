@@ -465,7 +465,7 @@ https://www.youtube.com/results?search_query=+AJAX+File+Upload+with+Progress
           var fila = '<tr>';
 
           fila += '<td>';
-          fila += valor.nombre + " " + valor.primer_apellido + " " + valor.segundo_apellido;
+          fila += valor.primer_apellido+ " " + valor.segundo_apellido + " " + valor.nombre;
           fila += '</td>';
 
 

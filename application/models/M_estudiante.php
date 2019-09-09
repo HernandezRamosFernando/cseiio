@@ -238,7 +238,7 @@ public function get_plantel_estudiante($no_control){
 
 function listar_aspirantes_xplantel($curp, $plantel){
    return $this->db->query(
-      "select *,(SELECT count(*) noentregada FROM Documentacion d1 where d1.Estudiante_no_control=Estudiante.no_control and d1.entregado=0) as no_entregado,(SELECT count(*) nosubida FROM Documentacion d1 where d1.Estudiante_no_control=Estudiante.no_control and ruta is null or length(ruta)=0) as no_subida from Estudiante where Plantel_cct_plantel like'".$plantel."%' and curp like'".$curp."%' ")->result();
+      "select *,(SELECT count(*) noentregada FROM Documentacion d1 where d1.Estudiante_no_control=Estudiante.no_control and d1.entregado=0) as no_entregado,(SELECT count(*) nosubida FROM Documentacion d1 where d1.Estudiante_no_control=Estudiante.no_control and ruta is null or length(ruta)=0) as no_subida from Estudiante where Plantel_cct_plantel like'".$plantel."%' and curp like'".$curp."%' order by primer_apellido,segundo_apellido,nombre")->result();
 
 
   }
@@ -246,7 +246,7 @@ function listar_aspirantes_xplantel($curp, $plantel){
   public function estudiantes_sin_matricula($curp, $plantel){
 
    return $this->db->query(
-    "select * from Estudiante where Plantel_cct_plantel like'".$plantel."%' and curp like'".$curp."%' and matricula is null and tipo_ingreso not in('BAJA','NULIDAD SEMESTRE','DESERTOR');")->result();
+    "select * from Estudiante where Plantel_cct_plantel like'".$plantel."%' and curp like'".$curp."%' and matricula is null and tipo_ingreso not in('BAJA','NULIDAD SEMESTRE','DESERTOR') order by primer_apellido,segundo_apellido,nombre;")->result();
 
 }
 

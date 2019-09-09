@@ -121,7 +121,7 @@ function get_nombre_archivo_documentacion($no_control,$iddocumento,$plantel){
      documentos_faltantes.Estudiante_no_control=Estudiante.no_control
  WHERE
      faltantes > 0 and
-     curp like '".$curp."%' and Plantel_cct_plantel like '".$cct_plantel."%'
+     curp like '".$curp."%' and Plantel_cct_plantel like '".$cct_plantel."%' order by primer_apellido,segundo_apellido,nombre
  ")->result();
    }
 

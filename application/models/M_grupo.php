@@ -23,7 +23,7 @@ class M_grupo extends CI_Model {
             Grupo_Estudiante
         WHERE
             Grupo_id_grupo = '".$id_grupo."'
-        GROUP BY Estudiante_no_control) AS e ON Estudiante.no_control = e.Estudiante_no_control")->result();
+        GROUP BY Estudiante_no_control) AS e ON Estudiante.no_control = e.Estudiante_no_control order by primer_apellido,segundo_apellido,nombre")->result();
    }
 
 

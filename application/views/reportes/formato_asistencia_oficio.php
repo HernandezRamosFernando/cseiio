@@ -341,9 +341,9 @@ $html_1='<br>
 foreach ($lista_alumnos as $a) {
 
 $html_2.='<tr>
-<td style="font-weight: bold;" WIDTH="15%">'.$a->nombre.'</td>
-<td style="font-weight: bold;" WIDTH="11%">'.$a->primer_apellido.'</td>
-<td style="font-weight: bold;" WIDTH="10%">'.$a->segundo_apellido.'</td>
+<td style="font-weight: bold;" WIDTH="15%">'.$a->primer_apellido.'</td>
+<td style="font-weight: bold;" WIDTH="11%">'.$a->segundo_apellido.'</td>
+<td style="font-weight: bold;" WIDTH="10%">'.$a->nombre.'</td>
 '.$pdf->get_columnas_html().'
 <td style="font-weight: bold;" WIDTH="2%"></td>
 <td style="font-weight: bold;" WIDTH="2%"></td>

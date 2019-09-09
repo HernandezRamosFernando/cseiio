@@ -124,7 +124,7 @@
         var fila = '<tr>';
 
         fila += '<td>';
-        var nombre_completo = valor.nombre + " " + valor.primer_apellido + " " + valor.segundo_apellido;
+        var nombre_completo = valor.primer_apellido + " " + valor.segundo_apellido + " " + valor.nombre;
         fila += nombre_completo;
         fila += '</td>';
 

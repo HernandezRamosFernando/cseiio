@@ -30,7 +30,11 @@ class MYPDF extends TCPDF {
 
 	//Page header
 	public function Header() {
-		
+		$image_file =base_url().'assets/img/logo_cseiio.png';
+        $this->Image($image_file, 20, 5, 10, '', 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
+        
+        $image_file =base_url().'assets/img/logo_gobierno.png';
+		$this->Image($image_file, 178, 5, 10, '', 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
 
 		
 	}
@@ -98,7 +102,7 @@ $pdf->AddPage();
 $titulo = '
 <h6 style="text-align:center">COLEGIO SUPERIOR PARA LA EDUCACION INTEGRAL INTERCULTURAL DE OAXACA</h6>
 <h6 style="text-align:center">DEPARTAMENTO DE CONTROL ESCOLAR</h6>
-<p style="text-align:center;font-size:6pt">CONCENTRADO DE CALIFICACIONES MODULAR</p>
+<p style="text-align:center;font-size:6pt;  font-weight:bold">CONCENTRADO DE CALIFICACIONES MODULAR</p>
 ';
 
 $datos_cabecera='
@@ -106,35 +110,35 @@ $datos_cabecera='
 <table style="font-size:6pt">
 <tbody>
 <tr>
-<td style="text-align:left">NOMBRE DEL PLANTEL:</td>
+<td style="text-align:left"><span style="font-weight:bold">NOMBRE DEL PLANTEL:</span></td>
 <td style="text-align:left">'.$plantel->nombre_largo.' DE '.$plantel->nombre_plantel.'</td>
-<td style="text-align:right">GRUPO:</td>
+<td style="text-align:right"><span style="font-weight:bold">GRUPO:</span></td>
 <td style="text-align:right">'.$materia->semestre.'-'.$materia->nombre_grupo.'</td>
 </tr>
 
 <tr>
-<td style="text-align:left">CLAVE C.T.:</td>
+<td style="text-align:left"><span style="font-weight:bold">CLAVE C.T.:</span></td>
 <td style="text-align:left">'.$plantel->cct_plantel.'</td>
-<td style="text-align:right">PERIODO:</td>
+<td style="text-align:right"><span style="font-weight:bold">PERIODO:</span></td>
 <td style="text-align:right">'.$materia->periodo.'</td>
 </tr>
 
 <tr>
-<td style="text-align:left">LOCALIDAD Y MUNICIPIO:</td>
+<td style="text-align:left"><span style="font-weight:bold">LOCALIDAD Y MUNICIPIO:</span></td>
 <td style="text-align:left">'.$plantel->localidad_municipio.'</td>
-<td style="text-align:right">CICLO ESCOLAR:</td>
+<td style="text-align:right"><span style="font-weight:bold">CICLO ESCOLAR:</span></td>
 <td style="text-align:right">'.$materia->nombre_ciclo_escolar.'</td>
 </tr>
 
 <tr>
-<td style="text-align:left">UNIDAD DE CONTENIDO:</td>
+<td style="text-align:left"><span style="font-weight:bold">UNIDAD DE CONTENIDO:</span></td>
 <td style="text-align:left">'.$materia->unidad_contenido.'</td>
 <td></td>
 <td></td>
 </tr>
 
 <tr>
-<td style="text-align:left">CLAVE:</td>
+<td style="text-align:left"><span style="font-weight:bold">CLAVE:</span></td>
 <td style="text-align:left">'.$materia->clave.'</td>
 <td></td>
 <td></td>
@@ -267,9 +271,9 @@ $firmas ='
 <table style="font-size:7pt">
 <tbody>
 <tr>
-<td><p>'.$asesor_nombre.'</p><p>___________________________</p><p>NOMBRE Y FIRMA DEL ASESOR</p></td>
+<td><br><br>'.$asesor_nombre.'<br>___________________________<br>NOMBRE Y FIRMA DEL ASESOR</td>
 <td><p></p><p>___________________________</p><p>SELLO</p></td>
-<td><p>'.$plantel->director.'</p><p>___________________________</p><p>NOMBRE Y FIRMA DEL DIRECTOR(A)</p></td>
+<td><br><br>'.$plantel->director.'<br>___________________________<br>NOMBRE Y FIRMA DEL DIRECTOR(A)</td>
 </tr>
 </tbody>
 </table>
@@ -280,11 +284,11 @@ $pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = '270', $firmas, $border = 0, $
 
 $pdf->writeHTMLCell($w = 0, $h = 50, $x = '', $y = '5', $titulo, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
 
-$pdf->writeHTMLCell($w = 0, $h = 50, $x = '', $y = '19', $datos_cabecera, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+$pdf->writeHTMLCell($w = 0, $h = 50, $x = '', $y = '24', $datos_cabecera, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
 
-$pdf->writeHTMLCell($w = 0, $h = 50, $x = '', $y = '42', $encabezado_tabla, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+$pdf->writeHTMLCell($w = 0, $h = 50, $x = '', $y = '49', $encabezado_tabla, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
 
-$pdf->writeHTMLCell($w = 0, $h = 50, $x = '', $y = '49', $datos_estudiantes, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+$pdf->writeHTMLCell($w = 0, $h = 50, $x = '', $y = '56', $datos_estudiantes, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
 
 //$pdf->writeHTMLCell($w = 0, $h = 50, $x = '', $y = '75', $firma_asesor, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
 

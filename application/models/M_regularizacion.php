@@ -98,7 +98,7 @@ class M_regularizacion extends CI_Model {
       as estudiante_materia 
       inner join Materia as m on estudiante_materia.id_materia=m.clave
       inner join Estudiante as e on estudiante_materia.Estudiante_no_control=e.no_control
-      where id_materia='".$materia."'
+      where id_materia='".$materia." order by primer_apellido,segundo_apellido,nombre'
       ")->result();
 
    }

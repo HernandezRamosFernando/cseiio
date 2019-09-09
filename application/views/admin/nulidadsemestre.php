@@ -429,7 +429,7 @@ var form_solicitar_nulidad = document.getElementById("solicitar_nulidad");
         var fila = '<tr>';
 
         fila += '<td>';
-        fila += valor.nombre + " " + valor.primer_apellido + " " + valor.segundo_apellido;
+        fila += valor.primer_apellido + " " + valor.segundo_apellido + " " + valor.nombre;
         fila += '</td>';
 
         fila += '<td>';

@@ -356,7 +356,7 @@
 
 
           var registro = "<tr>";
-          registro += '<td>' + valor.nombre + ' ' + valor.primer_apellido + ' ' + valor.segundo_apellido + '</td>';
+          registro += '<td>' + valor.primer_apellido + ' ' + valor.segundo_apellido + ' ' + valor.nombre+ '</td>';
           registro += '<td>' + valor.no_control + '</td>';
           var primer_parcial = valor.primer_parcial !== null ? valor.primer_parcial : "";
 

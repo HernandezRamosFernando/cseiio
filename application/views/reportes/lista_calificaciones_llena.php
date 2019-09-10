@@ -28,9 +28,45 @@
 // Extend the TCPDF class to create custom Header and Footer
 class MYPDF extends TCPDF {
 
+    public function get_nombre_semestre($semestre){
+       
+        switch ($semestre){
+            case 1: return "PRIMER"; break;
+            case 2: return "SEGUNDO"; break;
+            case 3: return "TERCER"; break;
+            case 4: return "CUARTO"; break;
+            case 5: return "QUINTO"; break;
+            case 6: return "SEXTO"; break;
+            
+        }
+        }
+   
+        public function get_nombre_mes($semestre){
+          
+           switch ($semestre){
+               case 1: return "ENERO"; break;
+               case 2: return "FEBRERO"; break;
+               case 3: return "MARZO"; break;
+               case 4: return "ABRIL"; break;
+               case 5: return "MAYO"; break;
+               case 6: return "JUNIO"; break;
+               case 7: return "JULIO"; break;
+               case 8: return "AGOSTO"; break;
+               case 9: return "SEPTIEMBRE"; break;
+               case 10: return "OCTUBRE"; break;
+               case 11: return "NOVIEMBRE"; break;
+               case 12: return "DICIEMBRE"; break;
+               
+           }
+           }
+
 	//Page header
 	public function Header() {
-		
+		$image_file =base_url().'assets/img/logo_cseiio.png';
+        $this->Image($image_file, 20, 5, 10, '', 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
+        
+        $image_file =base_url().'assets/img/logo_gobierno.png';
+		$this->Image($image_file, 178, 5, 10, '', 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
 
 		
 	}
@@ -98,7 +134,8 @@ $pdf->AddPage();
 $titulo = '
 <h6 style="text-align:center">COLEGIO SUPERIOR PARA LA EDUCACION INTEGRAL INTERCULTURAL DE OAXACA</h6>
 <h6 style="text-align:center">DEPARTAMENTO DE CONTROL ESCOLAR</h6>
-<p style="text-align:center;font-size:6pt">CONCENTRADO DE CALIFICACIONES MODULAR</p>
+<br><span style="text-align:center;font-size:6pt;  font-weight:bold">CONCENTRADO DE CALIFICACIONES MODULARES</span>
+<br><span style="text-align:center;font-size:6pt;  font-style: italic">'.$pdf->get_nombre_semestre($materia->semestre).' MÓDULO</span>
 ';
 
 $datos_cabecera='
@@ -106,35 +143,35 @@ $datos_cabecera='
 <table style="font-size:6pt">
 <tbody>
 <tr>
-<td style="text-align:left">NOMBRE DEL PLANTEL:</td>
-<td style="text-align:left">'.$plantel->nombre_largo.' DE '.$plantel->nombre_plantel.'</td>
-<td style="text-align:right">GRUPO:</td>
-<td style="text-align:right">'.$materia->semestre.'-'.$materia->nombre_grupo.'</td>
+<td style="text-align:left;width:18%"><span style="font-weight:bold">NOMBRE DEL PLANTEL:</span></td>
+<td style="text-align:left;width:55%">'.$plantel->nombre_largo.' DE '.$plantel->nombre_plantel.'</td>
+<td style="text-align:right;width:15%"><span style="font-weight:bold">GRUPO:</span></td>
+<td style="text-align:left;width:12%">"'.$materia->nombre_grupo.'"</td>
 </tr>
 
 <tr>
-<td style="text-align:left">CLAVE C.T.:</td>
+<td style="text-align:left"><span style="font-weight:bold">CLAVE C.T.:</span></td>
 <td style="text-align:left">'.$plantel->cct_plantel.'</td>
-<td style="text-align:right">PERIODO:</td>
+<td style="text-align:right"><span style="font-weight:bold">PERIODO:</span></td>
 <td style="text-align:right">'.$materia->periodo.'</td>
 </tr>
 
 <tr>
-<td style="text-align:left">LOCALIDAD Y MUNICIPIO:</td>
+<td style="text-align:left"><span style="font-weight:bold">LOCALIDAD Y MUNICIPIO:</span></td>
 <td style="text-align:left">'.$plantel->localidad_municipio.'</td>
-<td style="text-align:right">CICLO ESCOLAR:</td>
+<td style="text-align:right"><span style="font-weight:bold">CICLO ESCOLAR:</span></td>
 <td style="text-align:right">'.$materia->nombre_ciclo_escolar.'</td>
 </tr>
 
 <tr>
-<td style="text-align:left">UNIDAD DE CONTENIDO:</td>
-<td style="text-align:left">'.$materia->unidad_contenido.'</td>
+<td style="text-align:left"><span style="font-weight:bold">UNIDAD DE CONTENIDO:</span></td>
+<td style="text-align:left">'.strtr(strtoupper($materia->unidad_contenido),"àèìòùáéíóúçñäëïöü","ÀÈÌÒÙÁÉÍÓÚÇÑÄËÏÖÜ").'</td>
 <td></td>
 <td></td>
 </tr>
 
 <tr>
-<td style="text-align:left">CLAVE:</td>
+<td style="text-align:left"><span style="font-weight:bold">CLAVE:</span></td>
 <td style="text-align:left">'.$materia->clave.'</td>
 <td></td>
 <td></td>
@@ -151,7 +188,7 @@ $encabezado_tabla_a='
 <table border="1" style="font-size:6pt">
 <tbody>
 <tr>
-<td style="width:20px;height:25px;background-color:#e9e9e9">NO.</td>
+<td style="width:21px;height:25px;background-color:#e9e9e9">NO.</td>
 <td style="width:280px;height:25px;background-color:#e9e9e9">NOMBRE DEL ALUMNO</td>
 <td style="width:35px;height:25px;background-color:#e9e9e9">MAR</td>
 <td style="width:35px;height:25px;background-color:#e9e9e9">MAY</td>
@@ -159,7 +196,7 @@ $encabezado_tabla_a='
 <td style="width:35px;height:25px;background-color:#e9e9e9">PROM. MOD.</td>
 <td style="width:35px;height:25px;background-color:#e9e9e9">EXA. FINAL</td>
 <td style="width:35px;height:25px;background-color:#e9e9e9">CAL. FINAL</td>
-<td style="width:90px;height:25px;background-color:#e9e9e9">FECHA DE BAJA</td>
+<td style="width:89px;height:25px;background-color:#e9e9e9">FECHA DE BAJA</td>
 </tr>
 </tbody>
 </table>
@@ -173,7 +210,7 @@ $encabezado_tabla_b='
 <table border="1" style="font-size:6pt">
 <tbody>
 <tr>
-<td style="width:20px;height:25px;background-color:#e9e9e9">NO.</td>
+<td style="width:21px;height:25px;background-color:#e9e9e9">NO.</td>
 <td style="width:280px;height:25px;background-color:#e9e9e9">NOMBRE DEL ALUMNO</td>
 <td style="width:35px;height:25px;background-color:#e9e9e9">SEP</td>
 <td style="width:35px;height:25px;background-color:#e9e9e9">NOV</td>
@@ -181,7 +218,7 @@ $encabezado_tabla_b='
 <td style="width:35px;height:25px;background-color:#e9e9e9">PROM. MOD.</td>
 <td style="width:35px;height:25px;background-color:#e9e9e9">EXA. FINAL</td>
 <td style="width:35px;height:25px;background-color:#e9e9e9">CAL. FINAL</td>
-<td style="width:90px;height:25px;background-color:#e9e9e9">FECHA DE BAJA</td>
+<td style="width:89px;height:25px;background-color:#e9e9e9">FECHA DE BAJA</td>
 </tr>
 </tbody>
 </table>
@@ -213,7 +250,7 @@ function rellenar_lista($estudiantes,$bajas){
         
 
         $respuesta.='
-        <td style="width:20px:">'.$contador.'</td>
+        <td style="width:21px:">'.$contador.'</td>
         <td style="width:85px;height:20px">'.$estudiante->primer_apellido.'</td>
         <td style="width:85px;height:15px">'.$estudiante->segundo_apellido.'</td>
         <td style="width:110px;height:15px">'.$estudiante->nombre.'</td>
@@ -224,21 +261,43 @@ function rellenar_lista($estudiantes,$bajas){
         <td style="width:35px">'.(($estudiante->examen_final)=='0'?'/':$estudiante->examen_final).'</td>
         <td style="width:35px">'.$estudiante->calificacion_final.'</td>';
         if(sizeof($bajas[$contador-1])>0){
-            $respuesta.='<td style="width:90px">'.$bajas[$contador-1][0]->fecha.'</td></tr>';
+            $respuesta.='<td style="width:89px">'.$bajas[$contador-1][0]->fecha.'</td></tr>';
         }
 
         else{
-            $respuesta.='<td style="width:90px"></td></tr>';
+            $respuesta.='<td style="width:89px"></td></tr>';
         }
         
         $contador+=1;
     }
 
+    if($contador<35){
+        for ($x=$contador;$x<=35;$x++){
+            $respuesta.='<tr>
+            <td style="width:21px:">'.$x.'</td>
+            <td style="width:85px;height:20px"></td>
+            <td style="width:85px;height:15px"></td>
+            <td style="width:110px;height:15px"></td>
+            <td style="width:35px"></td>
+            <td style="width:35px"></td>
+            <td style="width:35px"></td>
+            <td style="width:35px"></td>
+            <td style="width:35px"></td>
+            <td style="width:35px"></td>
+            <td style="width:89px"></td>
+            </tr>';
+        }
+        
+    }
     
 
     return $respuesta;
 
 }
+
+
+$date = date_create($fecha_fin);
+$cadena_fecha=date_format($date, 'd').' DE '.$pdf->get_nombre_mes(date_format($date, 'm')).' DE '.date_format($date, 'Y');
 
 $datos_estudiantes='
 <div>
@@ -248,6 +307,9 @@ $datos_estudiantes='
 </tbody>
 </table>
 <div>
+
+<br>
+<br><span style="font-weight:bold;font-size:6pt;text-align:left">FECHA: '.$cadena_fecha.'</span>
 ';
 
 
@@ -298,17 +360,16 @@ $firmas ='
 ';
 
 
-$pdf->writeHTMLCell($w = 0, $h = 0, $x = '40', $y = '260', '<p style="text-align:left;font-size:7pt">FECHA:'.$fecha_fin.'</p>', $border = 0, $ln = 0, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
 
 $pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = '270', $firmas, $border = 0, $ln = 0, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
 
 $pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = '5', $titulo, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
 
-$pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = '19', $datos_cabecera, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+$pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = '24', $datos_cabecera, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
 
-$pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = '49', $encabezado_tabla, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+$pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = '44', $encabezado_tabla, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
 
-$pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = '56', $datos_estudiantes, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+$pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = '51', $datos_estudiantes, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
 
 //$pdf->writeHTMLCell($w = 0, $h = 50, $x = '', $y = '75', $firma_asesor, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
 

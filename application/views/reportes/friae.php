@@ -695,6 +695,14 @@ $pre_materias ='
 ';
 
 
+$nombre_revisor="";
+
+if ($revisor[0]->nombre!=null){
+
+    $nombre_revisor=$revisor[0]->nombre." ".$revisor[0]->primer_apellido." ".$revisor[0]->segundo_apellido;
+}
+
+
 $firmas = '
 <table style="font-size:6pt;">
 <tbody>
@@ -703,7 +711,7 @@ $firmas = '
 <td><p></p><p>_________________________</p><p>SELLO DEL PLANTEL</p></td>
 <td><br><br>DAVID ERNESTO HERNANDEZ AVENDAÑO<br>___________________________________<br>JEFE DEL DEPARTAMENTO DE<br>CONTROL ESCOLAR<br></td>
 <td><p></p><p>_________________________</p><p>SELLO CONTROL ESCOLAR</p></td>
-<td><p></p><p>_________________________</p><p>REVISO Y VALIDO</p></td>
+<td><br><br>'.$nombre_revisor.'<br>_________________________<br>REVISO Y VALIDO</td>
 </tr>
 </tbody>
 </table>
@@ -724,6 +732,7 @@ foreach($materias_grupo as $materia){
 }
 $tabla_escuela.='</tbody>
 </table>';
+
 
 
 // print a block of text using Write()

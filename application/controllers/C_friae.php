@@ -51,6 +51,8 @@ class C_friae extends CI_Controller {
         $datos['datos_estudiante']=$datos_estudiante;
         $datos['director'] = $director_plantel_grupo;
 
+        $datos['revisor']=$this->M_friae->get_revisor($datos['datos_friae']->cct_plantel);
+
         //print_r($materias_grupo);
         //$datos['documentos'] = $this->M_documentacion->get_documentos_base_faltantes_estudiante($no_control);
         //$datos['estudiante_plantel'] = $this->M_estudiante->get_plantel_estudiante($no_control);

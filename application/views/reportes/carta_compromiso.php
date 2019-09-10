@@ -119,9 +119,9 @@ $html_1 ='
 <br>
 <br>
 <br>
-<span style="text-align:RIGTH;">FECHA DE CREACION: '.$fecha_carta[0]->fecha.'</span>
+<span style="text-align:RIGTH;"><span style="font-weight:bold">FECHA DE CREACION:</span> '.$fecha_carta[0]->fecha.'</span>
 <br>
-<span style="text-align:RIGTH;">ASUNTO: CARTA COMPROMISO</span>
+<span style="text-align:RIGTH;"><span style="font-weight:bold">ASUNTO:</span> CARTA COMPROMISO</span>
 <br>
 <span style="text-align:LEFT;"><STRONG>ING. DAVID ERNESTO HERNANDEZ AVENDAÑO</STRONG></span>
 <br>
@@ -156,7 +156,7 @@ compromiso y para ello proporciono los siguientes datos:
 <tr><td colspan="3">Nombre del Bachillerato:'.$estudiante_plantel[0]->nombre_largo.' DE '.$estudiante_plantel[0]->nombre_plantel.'</td></tr>
 
 <tr>
-<td>Cct:'.$estudiante_plantel[0]->cct_plantel.'</td>
+<td>CCT:'.$estudiante_plantel[0]->cct_plantel.'</td>
 <td>Fecha:'.$fecha_carta[0]->fecha.'</td>
 <td>Ciclo Escolar:'.$ciclo_escolar->nombre_ciclo_escolar.'</td>
 </tr>
@@ -170,10 +170,10 @@ compromiso y para ello proporciono los siguientes datos:
 
 <table  border="1">
 <thead>
-<tr>
+<tr style="font-weight:bold">
     <th>N.P</th>
-		<th>Documento</th>
-		<th>Observaciones</th>
+		<th>DOCUMENTO</th>
+		<th>OBSERVACIONES</th>
 </tr>
 </thead>
 
@@ -280,7 +280,7 @@ de estos requisitos, seré dado de baja del Bachillerato en el que obtuve mi alt
 <tr>
 <td style="text-align:center">NOMBRE Y FIRMA DEL ESTUDIANTE</td>
 <td style="text-align:center">NOMBRE Y FIRMA DEL TUTOR O RESPONSABLE</td>
-<td style="text-align:center">DIRECTOR DEL '.$estudiante_plantel[0]->nombre_largo.' DE '.$estudiante_plantel[0]->nombre_plantel.'</td>
+<td style="text-align:center">NOMBRE Y FIRMA DEL DIRECTOR(A) DEL PLANTEL</td>
 </tr>
 </tbody>
 </table>

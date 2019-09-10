@@ -15,7 +15,6 @@ class C_lista_calificaciones extends CI_Controller {
     }
 
 
-
     public function lista_calificaciones_grupo_materia(){
         
         $grupo = $this->input->get("grupo");
@@ -26,6 +25,7 @@ class C_lista_calificaciones extends CI_Controller {
         $datos['plantel'] = $this->M_grupo_estudiante->plantel_grupo($grupo);
         $datos['materia'] = $this->M_grupo_estudiante->datos_materia_grupo($materia,$grupo);
         $datos['asesor'] = $this->M_asesor->asesor_materia_grupo($grupo,$materia);
+        $datos['fecha_fin'] = $this->M_ciclo_escolar->fecha_fin_ciclo();
         $this->load->view("reportes/lista_calificaciones",$datos);
     }
 

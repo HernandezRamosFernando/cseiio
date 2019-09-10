@@ -157,4 +157,8 @@ class M_friae extends CI_Model {
         return $this->db->query("select id_materia,UPPER(unidad_contenido) unidad_contenido from Grupo_Estudiante ge inner join Materia m on ge.id_materia=m.clave where Grupo_id_grupo='".$grupo."' group by id_materia")->result();
     }
 
+    function get_revisor($cct){
+        return $this->db->query("SELECT * FROM Plantel p  LEFT JOIN Asesor a on p.id_revisor=a.id_asesor where cct_plantel='".$cct."';")->result();
+    }
+
 }

@@ -81,7 +81,7 @@ class MYPDF extends TCPDF {
 		// Set font
 		$this->SetFont('helvetica', 'I', 8);
 		// Page number
-		$this->Cell(0, 10, 'Página '.$this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
+		//$this->Cell(0, 10, 'Página '.$this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
 	}
 }
 
@@ -235,11 +235,11 @@ function rellenar_lista($estudiantes){
 
     foreach($estudiantes as $estudiante){
         $respuesta.='
-        <tr>
-        <td style="width:21px:">'.$contador.'</td>
-        <td style="width:85px;height:20px">'.$estudiante->primer_apellido.'</td>
-        <td style="width:85px;height:15px">'.$estudiante->segundo_apellido.'</td>
-        <td style="width:110px;height:15px">'.$estudiante->nombre.'</td>
+        <tr style="line-height: 20px;">
+        <td style="width:21px">'.$contador.'</td>
+        <td style="width:85px;text-align: left">'.$estudiante->primer_apellido.'</td>
+        <td style="width:85px;text-align: left">'.$estudiante->segundo_apellido.'</td>
+        <td style="width:110px;text-align: left">'.$estudiante->nombre.'</td>
         <td style="width:35px"></td>
         <td style="width:35px"></td>
         <td style="width:35px"></td>
@@ -254,11 +254,12 @@ function rellenar_lista($estudiantes){
     
     if($contador<35){
         for ($x=$contador;$x<=35;$x++){
-            $respuesta.='<tr>
-            <td style="width:21px:">'.$x.'</td>
-            <td style="width:85px;height:20px"></td>
-            <td style="width:85px;height:15px"></td>
-            <td style="width:110px;height:15px"></td>
+            if($x==$contador){
+                $respuesta.='<tr style="line-height: 20px;background-color:#909090">
+            <td style="width:21px">'.$x.'</td>
+            <td style="width:85px"></td>
+            <td style="width:85px"></td>
+            <td style="width:110px"></td>
             <td style="width:35px"></td>
             <td style="width:35px"></td>
             <td style="width:35px"></td>
@@ -267,6 +268,24 @@ function rellenar_lista($estudiantes){
             <td style="width:35px"></td>
             <td style="width:89px"></td>
             </tr>';
+
+            }
+            else{
+                $respuesta.='<tr style="line-height: 20px;">
+            <td style="width:21px">'.$x.'</td>
+            <td style="width:85px"></td>
+            <td style="width:85px"></td>
+            <td style="width:110px"></td>
+            <td style="width:35px"></td>
+            <td style="width:35px"></td>
+            <td style="width:35px"></td>
+            <td style="width:35px"></td>
+            <td style="width:35px"></td>
+            <td style="width:35px"></td>
+            <td style="width:89px"></td>
+            </tr>';
+            }
+
         }
         
     }
@@ -330,13 +349,17 @@ else{
 
 $asesor_nombre = sizeof($asesor)==0?"":($asesor[0]->nombre.' '.$asesor[0]->primer_apellido.' '.$asesor[0]->segundo_apellido);
 
+if($asesor_nombre==""){
+    $asesor_nombre="&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;  &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;";
+}
+
 $firmas ='
 <table style="font-size:7pt">
 <tbody>
 <tr>
-<td><br><br>'.$asesor_nombre.'<br>___________________________<br>NOMBRE Y FIRMA DEL ASESOR</td>
+<td><br><br><br><span style="text-decoration: underline;">  '.$asesor_nombre.'  </span><br>NOMBRE Y FIRMA DEL ASESOR</td>
 <td><p></p><p>___________________________</p><p>SELLO</p></td>
-<td><br><br>'.$plantel->director.'<br>___________________________<br>NOMBRE Y FIRMA DEL DIRECTOR(A)</td>
+<td><br><br><br><span style="text-decoration: underline;">  '.$plantel->director.'  </span><br>NOMBRE Y FIRMA DEL DIRECTOR(A)</td>
 </tr>
 </tbody>
 </table>

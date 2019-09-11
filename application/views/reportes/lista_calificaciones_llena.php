@@ -187,16 +187,16 @@ $encabezado_tabla_a='
 <div>
 <table border="1" style="font-size:6pt">
 <tbody>
-<tr>
-<td style="width:21px;height:25px;background-color:#e9e9e9">NO.</td>
-<td style="width:280px;height:25px;background-color:#e9e9e9">NOMBRE DEL ALUMNO</td>
-<td style="width:35px;height:25px;background-color:#e9e9e9">MAR</td>
-<td style="width:35px;height:25px;background-color:#e9e9e9">MAY</td>
-<td style="width:35px;height:25px;background-color:#e9e9e9">JUN</td>
+<tr style="font-weight:bold">
+<td style="width:21px;height:25px;background-color:#e9e9e9"><br><br>NO.</td>
+<td style="width:280px;height:25px;background-color:#e9e9e9"><br><br>NOMBRE DEL ALUMNO</td>
+<td style="width:35px;height:25px;background-color:#e9e9e9"><br><br>MAR</td>
+<td style="width:35px;height:25px;background-color:#e9e9e9"><br><br>MAY</td>
+<td style="width:35px;height:25px;background-color:#e9e9e9"><br><br>JUN</td>
 <td style="width:35px;height:25px;background-color:#e9e9e9">PROM. MOD.</td>
 <td style="width:35px;height:25px;background-color:#e9e9e9">EXA. FINAL</td>
 <td style="width:35px;height:25px;background-color:#e9e9e9">CAL. FINAL</td>
-<td style="width:89px;height:25px;background-color:#e9e9e9">FECHA DE BAJA</td>
+<td style="width:89px;height:25px;background-color:#e9e9e9"><br><br>FECHA DE BAJA</td>
 </tr>
 </tbody>
 </table>
@@ -209,21 +209,22 @@ $encabezado_tabla_b='
 <div>
 <table border="1" style="font-size:6pt">
 <tbody>
-<tr>
-<td style="width:21px;height:25px;background-color:#e9e9e9">NO.</td>
-<td style="width:280px;height:25px;background-color:#e9e9e9">NOMBRE DEL ALUMNO</td>
-<td style="width:35px;height:25px;background-color:#e9e9e9">SEP</td>
-<td style="width:35px;height:25px;background-color:#e9e9e9">NOV</td>
-<td style="width:35px;height:25px;background-color:#e9e9e9">DIC</td>
+<tr style="font-weight:bold">
+<td style="width:21px;height:25px;background-color:#e9e9e9"><br><br>NO.</td>
+<td style="width:280px;height:25px;background-color:#e9e9e9"><br><br>NOMBRE DEL ALUMNO</td>
+<td style="width:35px;height:25px;background-color:#e9e9e9"><br><br>SEP</td>
+<td style="width:35px;height:25px;background-color:#e9e9e9"><br><br>NOV</td>
+<td style="width:35px;height:25px;background-color:#e9e9e9"><br><br>DIC</td>
 <td style="width:35px;height:25px;background-color:#e9e9e9">PROM. MOD.</td>
 <td style="width:35px;height:25px;background-color:#e9e9e9">EXA. FINAL</td>
 <td style="width:35px;height:25px;background-color:#e9e9e9">CAL. FINAL</td>
-<td style="width:89px;height:25px;background-color:#e9e9e9">FECHA DE BAJA</td>
+<td style="width:89px;height:25px;background-color:#e9e9e9"><br><br>FECHA DE BAJA</td>
 </tr>
 </tbody>
 </table>
 <div>
 ';
+
 
 function rellenar_lista($estudiantes,$bajas){
     $respuesta='';
@@ -245,15 +246,15 @@ function rellenar_lista($estudiantes,$bajas){
         }
 
         else{
-            $respuesta.='<tr>';
+            $respuesta.='<tr style="line-height: 20px;">';
         }
         
 
         $respuesta.='
-        <td style="width:21px:">'.$contador.'</td>
-        <td style="width:85px;height:20px">'.$estudiante->primer_apellido.'</td>
-        <td style="width:85px;height:15px">'.$estudiante->segundo_apellido.'</td>
-        <td style="width:110px;height:15px">'.$estudiante->nombre.'</td>
+        <td style="width:21px">'.$contador.'</td>
+        <td style="width:85px;text-align: left">'.$estudiante->primer_apellido.'</td>
+        <td style="width:85px;text-align: left">'.$estudiante->segundo_apellido.'</td>
+        <td style="width:110px;text-align: left">'.$estudiante->nombre.'</td>
         <td style="width:35px">'.(($estudiante->primer_parcial)=='0'?'/':$estudiante->primer_parcial).'</td>
         <td style="width:35px">'.(($estudiante->segundo_parcial)=='0'?'/':$estudiante->segundo_parcial).'</td>
         <td style="width:35px">'.(($estudiante->tercer_parcial)=='0'?'/':$estudiante->tercer_parcial).'</td>
@@ -273,11 +274,13 @@ function rellenar_lista($estudiantes,$bajas){
 
     if($contador<35){
         for ($x=$contador;$x<=35;$x++){
-            $respuesta.='<tr>
-            <td style="width:21px:">'.$x.'</td>
-            <td style="width:85px;height:20px"></td>
-            <td style="width:85px;height:15px"></td>
-            <td style="width:110px;height:15px"></td>
+
+            if($x==$contador){
+                $respuesta.='<tr style="line-height: 20px;background-color:#909090">
+            <td style="width:21px">'.$x.'</td>
+            <td style="width:85px"></td>
+            <td style="width:85px"></td>
+            <td style="width:110px"></td>
             <td style="width:35px"></td>
             <td style="width:35px"></td>
             <td style="width:35px"></td>
@@ -286,6 +289,26 @@ function rellenar_lista($estudiantes,$bajas){
             <td style="width:35px"></td>
             <td style="width:89px"></td>
             </tr>';
+
+            }
+            else{
+                $respuesta.='<tr style="line-height: 20px;">
+            <td style="width:21px">'.$x.'</td>
+            <td style="width:85px"></td>
+            <td style="width:85px"></td>
+            <td style="width:110px"></td>
+            <td style="width:35px"></td>
+            <td style="width:35px"></td>
+            <td style="width:35px"></td>
+            <td style="width:35px"></td>
+            <td style="width:35px"></td>
+            <td style="width:35px"></td>
+            <td style="width:89px"></td>
+            </tr>';
+
+            }
+
+            
         }
         
     }
@@ -347,13 +370,17 @@ if($materia->tipo_semestre=='A'){
 
     $asesor_nombre = sizeof($asesor)==0?"":($asesor[0]->nombre.' '.$asesor[0]->primer_apellido.' '.$asesor[0]->segundo_apellido);
 
+    if($asesor_nombre==""){
+        $asesor_nombre="&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;  &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;";
+    }
+
 $firmas ='
 <table style="font-size:7pt">
 <tbody>
 <tr>
-<td><br><br>'.$asesor_nombre.'<br>___________________________<br>NOMBRE Y FIRMA DEL ASESOR</td>
+<td><br><br><br><span style="text-decoration: underline;">  '.$asesor_nombre.'  </span><br>NOMBRE Y FIRMA DEL ASESOR</td>
 <td><p></p><p>___________________________</p><p>SELLO</p></td>
-<td><br><br>'.$plantel->director.'<br>___________________________<br>NOMBRE Y FIRMA DEL DIRECTOR(A)</td>
+<td><br><br><br><span style="text-decoration: underline;">  '.$plantel->director.'  </span><br>NOMBRE Y FIRMA DEL DIRECTOR(A)</td>
 </tr>
 </tbody>
 </table>

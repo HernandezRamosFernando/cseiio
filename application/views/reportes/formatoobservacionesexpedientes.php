@@ -66,16 +66,7 @@ class MYPDF extends TCPDF {
 
 </tbody>
 </table>
-<p style="text-align: justify">CON MOTIVO DE SUBSANAR TODAS LAS INCONSISTENCIAS (FALTA DE DOCUMENTACIÓN) EN EXPEDIENTE DE LOS ASPIRANTES A SER ALUMNOS DEL PLANTEL A SU CARGO, ENTREGO A USTED LA RELACIÓN DE LOS MISMOS, EXHORTÁNDOLOS A QUE EN UNA REUNIÓN CON LOS PADRES DE FAMILIA O TUTORES SEAN INFORMADOS DE LA SITUACIÓN DEL ASPIRANTE, LO CUAL DEBERÁ SER ENTREGADA EN UN PLAZO NO MAYOR A 10 DÍAS HÁBILES.</p> <table border="1" width="100%">
-<tbody>
-<tr>
-<td style="background-color:#E6E6E6; font-weight: bold; text-align: center;" WIDTH="5%">NP</td>
-<td style="background-color:#E6E6E6; font-weight: bold; text-align: center;" WIDTH="10%">MOD/SEM<BR>GRUPO</td>
-<td style="background-color:#E6E6E6; font-weight: bold; text-align: center;" WIDTH="35%">NOMBRE DEL ASPIRANTE</td>
-<td style="background-color:#E6E6E6; font-weight: bold; text-align: center;" WIDTH="50%">DOCUMENTO(S) PENDIENTES</td>
-</tr>
-</tbody>
-</table>
+<p style="text-align: justify">CON MOTIVO DE SUBSANAR TODAS LAS INCONSISTENCIAS (FALTA DE DOCUMENTACIÓN) EN EXPEDIENTE DE LOS ASPIRANTES A SER ALUMNOS DEL PLANTEL A SU CARGO, ENTREGO A USTED LA RELACIÓN DE LOS MISMOS, EXHORTÁNDOLOS A QUE EN UNA REUNIÓN CON LOS PADRES DE FAMILIA O TUTORES SEAN INFORMADOS DE LA SITUACIÓN DEL ASPIRANTE, LO CUAL DEBERÁ SER ENTREGADA EN UN PLAZO NO MAYOR A 10 DÍAS HÁBILES.</p> 
 <br>
 
 <div align="center">
@@ -202,7 +193,7 @@ $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
 $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 
 // set margins
-$pdf->SetMargins(20,81,23);
+$pdf->SetMargins(20,70,23);
 $pdf->SetHeaderMargin(10);
 $pdf->SetFooterMargin(60);
 
@@ -233,6 +224,16 @@ $html_1 ='
 ';
 
 $html_2.='<table border="1" width="100%">
+
+<thead>
+<tr>
+<td style="background-color:#E6E6E6; font-weight: bold; text-align: center;" WIDTH="5%">NP</td>
+<td style="background-color:#E6E6E6; font-weight: bold; text-align: center;" WIDTH="10%">MOD/SEM<BR>GRUPO</td>
+<td style="background-color:#E6E6E6; font-weight: bold; text-align: center;" WIDTH="35%">NOMBRE DEL ASPIRANTE</td>
+<td style="background-color:#E6E6E6; font-weight: bold; text-align: center;" WIDTH="50%">DOCUMENTO(S) PENDIENTES</td>
+</tr>
+</thead>
+
 <tbody>';
 $tmp_num_control='';
 $lista_observaciones='';
@@ -259,9 +260,9 @@ if($lista->nombre_grupo!=null){
 
 if($tmp_num_control!=$lista->no_control){
 	$html_2.='<tr>
-		<td WIDTH="5%" style="text-align:center">'.$num_alumno.'</td>
+		<td WIDTH="5%" >'.$num_alumno.'</td>
 		<td WIDTH="10%">'.semestre_en_letra($lista->semestre_en_curso).' "'.$nombre_del_grupo.'"</td>
-		<td WIDTH="35%">'.$nombre_completo.'</td>
+		<td WIDTH="35%" >'.$nombre_completo.'</td>
 		<td WIDTH="50%">'.$lista_observaciones.'</td></tr>';
 	$tmp_num_control=$lista->no_control;
 	$lista_observaciones='';
@@ -274,13 +275,13 @@ if(strlen($lista_observaciones)!=0){
 $lista_observaciones.='<br>';
 }
 	$lista_observaciones.='<strong>'.strtoupper($lista->nombre_documento).'.- </strong>'.strtoupper($observaciones).'.';
-	$nombre_completo=$lista->nombre.' '.$lista->primer_apellido.' '.$lista->segundo_apellido;
+	$nombre_completo=$lista->primer_apellido.' '.$lista->segundo_apellido.' '.$lista->nombre;
 
 if(sizeof($lista_doc)==$cont){
-	$html_2.='<tr>
-		<td WIDTH="5%" style="text-align:center">'.$num_alumno.'</td>
+	$html_2.='<tr >
+		<td WIDTH="5%">'.$num_alumno.'</td>
 		<td  WIDTH="10%">'.semestre_en_letra($lista->semestre_en_curso).' "'.$nombre_del_grupo.'"</td>
-		<td WIDTH="35%">'.$nombre_completo.'</td>
+		<td WIDTH="35%" >'.$nombre_completo.'</td>
 		<td WIDTH="50%">'.$lista_observaciones.'</td></tr>';
 
 }
@@ -288,7 +289,19 @@ if(sizeof($lista_doc)==$cont){
 $cont=$cont+1;
 }
 
+if($num_alumno<10){
+	$columna=$num_alumno+1;
 
+	for($columna;$columna<=10;$columna++){
+		$html_2.='<tr >
+		<td WIDTH="5%" style="text-align:center">'.$columna.'</td>
+		<td  WIDTH="10%"></td>
+		<td WIDTH="35%"></td>
+		<td WIDTH="50%"></td>
+		</tr>';
+	}
+
+}
 
 
 $html_2.='

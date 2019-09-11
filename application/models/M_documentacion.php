@@ -203,7 +203,7 @@ function get_nombre_archivo_documentacion($no_control,$iddocumento,$plantel){
          inner join Documento doc on d1.id_documento=doc.id_documento
          inner join Estudiante e on e.no_control=d1.Estudiante_no_control
          left join (select ge.Estudiante_no_control,g.nombre_grupo from Grupo_Estudiante ge LEFT JOIN Grupo g on g.id_grupo=ge.Grupo_id_grupo where g.estatus=1 group by ge.Estudiante_no_control, g.nombre_grupo) as datos_escuela on e.no_control=datos_escuela.Estudiante_no_control
-         where doc.tipo='base' and d1.entregado='0'  and Plantel_cct_plantel like '".$plantel."%' order by e.semestre_en_curso, concat(e.nombre,' ',e.primer_apellido,' ',e.segundo_apellido)")->result();
+         where doc.tipo='base' and d1.entregado='0'  and Plantel_cct_plantel like '".$plantel."%' order by e.semestre_en_curso,e.primer_apellido,e.segundo_apellido,e.nombre")->result();
 
    }
 

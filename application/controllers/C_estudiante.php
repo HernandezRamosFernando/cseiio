@@ -688,6 +688,8 @@ public function generar_formato_observaciones_expedientes(){
     $datos['ciclo_escolar'] = $this->M_ciclo_escolar->get_ciclo_escolar();
     $datos['dato_plantel']=$this->M_plantel->get_plantel($plantel);
     $datos['lista_doc']=$this->M_documentacion->lista_observaciones_en_documentacion($plantel);
+    $datos['revisor']=$this->M_friae->get_revisor($plantel);
+
     $this->load->library('pdf');
     $this->load->view('reportes/formatoobservacionesexpedientes',$datos);
 }

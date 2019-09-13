@@ -30,6 +30,7 @@ class MYPDF extends TCPDF {
 
 	public $dato_plantel;
 	public $dato_ciclo_escolar;
+	public $nombre_revisor;
 
 
 	public function set_plantel($dato){
@@ -39,7 +40,20 @@ class MYPDF extends TCPDF {
 
     public function set_ciclo_escolar($ciclo){
     $this->dato_ciclo_escolar = $ciclo;
-    }
+	}
+	
+
+	public function set_revisor($revisor){
+		$nombre="";
+
+		if ($revisor->nombre!=null){
+
+			$nombre=$revisor->nombre." ".$revisor->primer_apellido." ".$revisor->segundo_apellido;
+		}
+		$this->nombre_revisor=$nombre;
+
+
+	}
 
 	//Page header
 	public function Header() {
@@ -71,7 +85,7 @@ class MYPDF extends TCPDF {
 
 <div align="center">
  <img src="'.base_url().'assets/img/fondocseiio.png'.'" alt="Smiley face" height="300" width="300"></div';
-     $this->writeHTMLCell($w =234.5, $h ='', $x =21, $y = 28, $html, $border = 0, $ln = 1, $fill = 0, $reseth = true, $align = 'top', $autopadding = true);
+     $this->writeHTMLCell($w =233, $h ='', $x =21, $y = 28, $html, $border = 0, $ln = 1, $fill = 0, $reseth = true, $align = 'top', $autopadding = true);
 
 
 		// Logo
@@ -109,7 +123,7 @@ class MYPDF extends TCPDF {
 <tr>
 <td style="font-weight: bold; text-align: center; border-bottom:solid 1px #000000;" WIDTH="35%">'.$this->dato_plantel->director.'</td>
 <td WIDTH="30%"></td>
-<td style="font-weight: bold; text-align: center; border-bottom:solid 1px #000000;" WIDTH="35%"></td>
+<td style="font-weight: bold; text-align: center; border-bottom:solid 1px #000000;" WIDTH="35%">'.$this->nombre_revisor.'</td>
 </tr>
 
 
@@ -175,6 +189,7 @@ $pdf = new MYPDF('L', PDF_UNIT,"LETTER", true, 'UTF-8', false);
 
 $pdf->set_plantel($dato_plantel[0]);
 $pdf->set_ciclo_escolar($ciclo_escolar[0]);
+$pdf->set_revisor($revisor[0]);
 
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
@@ -193,7 +208,7 @@ $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
 $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 
 // set margins
-$pdf->SetMargins(20,70,23);
+$pdf->SetMargins(20,75,23);
 $pdf->SetHeaderMargin(10);
 $pdf->SetFooterMargin(60);
 
@@ -226,11 +241,11 @@ $html_1 ='
 $html_2.='<table border="1" width="100%">
 
 <thead>
-<tr>
+<tr >
 <td style="background-color:#E6E6E6; font-weight: bold; text-align: center;" WIDTH="5%">NP</td>
 <td style="background-color:#E6E6E6; font-weight: bold; text-align: center;" WIDTH="10%">MOD/SEM<BR>GRUPO</td>
-<td style="background-color:#E6E6E6; font-weight: bold; text-align: center;" WIDTH="35%">NOMBRE DEL ASPIRANTE</td>
-<td style="background-color:#E6E6E6; font-weight: bold; text-align: center;" WIDTH="50%">DOCUMENTO(S) PENDIENTES</td>
+<td style="background-color:#E6E6E6; font-weight: bold; text-align: center;line-height: 30px;" WIDTH="35%">NOMBRE DEL ASPIRANTE</td>
+<td style="background-color:#E6E6E6; font-weight: bold; text-align: center;line-height: 30px;" WIDTH="50%">DOCUMENTO(S) PENDIENTES</td>
 </tr>
 </thead>
 
@@ -316,8 +331,9 @@ $html_3.='<br>';
 $pdf->writeHTML($html_1.$html_2.$html_3, true, 0, true, true);
 
 
+
 //Close and output PDF document
-$pdf->Output('example_003.pdf', 'I');
+$pdf->Output('formato observaciones.pdf', 'I');
 
 //============================================================+
 // END OF FILE

@@ -429,7 +429,7 @@
 
               <div class="col-md-4">
                 <label class="form-group has-float-label seltitulo">
-                  <select class="form-control form-control-lg selcolor" required" name="aspirante_direccion_estado"
+                  <select class="form-control form-control-lg selcolor" required name="aspirante_direccion_estado"
                     onChange="cambio_estado(selector_estado_aspirante,selector_municipio_aspirante,selector_localidad_aspirante)"
                     id="selector_estado_aspirante">
                     <option value="">Seleccione el estado</option>
@@ -816,7 +816,7 @@
               <div class="col-md-4">
                 <div class="form-label-group">
                   <button type="button" class="btn btn-outline-success btn-lg"
-                    onclick="obtener_secundaria(document.getElementById('aspirante_secundaria_cct').value)">
+                    onclick="obtener_secundaria(document.getElementById('aspirante_secundaria_cct').value)"  data-backdrop="false">
                     Buscar escuela
                   </button>
 
@@ -950,6 +950,129 @@
 <input type="text" style="display:none" id="no_control_borrar">
 
 
+
+
+<!-- Modal -->
+<div class="modal fade" id="nuevasecundaria" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" style="max-width: 80% !important;" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Agregar nueva secundaria</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-label-group">
+                <input type="text" pattern="[A-ZÁÉÍÓÚáéíóúa-z0-9]+[ ]*[A-ZÁÉÍÓÚáéíóúa-z0-9]*" 
+                  title="El nombre de la secundaria contiene caracteres incorrectos" class="form-control text-uppercase"
+                  id="aspirante_nuevasecundaria_cct" name="aspirante_nuevasecundaria_cct"
+                  placeholder="CCT de Secundaria" style="color: #237087 ">
+                <label for="aspirante_nuevasecundaria_cct">C C T</label>
+              </div>
+              <br>
+            </div>
+            <div class="col-md-4">
+              <div class="form-label-group">
+                <input type="text" ppattern="[A-ZÁÉÍÓÚáéíóúa-z0-9]+[ ]*[A-ZÁÉÍÓÚáéíóúa-z0-9]*" 
+                  class="form-control text-uppercase" id="aspirante_nuevasecundaria_nombre"
+                  name="aspirante_secundaria_nombre" placeholder="Nombre de Secundaria" style="color: #237087 ">
+                <label for="aspirante_nuevasecundaria_nombre">Nombre de Secundaria</label>
+              </div>
+              <br>
+            </div>
+
+            <div class="col-md-4">
+              <label class="form-group has-float-label seltitulo">
+                <select class="form-control form-control-lg selcolor" name="aspirante_nuevasecundaria_tipo_subsistema" 
+                  id="aspirante_nuevasecundaria_tipo_subsistema" onchange="otro_secundaria();">
+                  <option value="">Seleccione un tipo</option>
+                  <option value="TELESECUNDARIA">Telesecundaria</option>
+                  <option value="GENERAL">General</option>
+                  <option value="PARTICULAR">Particular</option>
+                  <option value="TÉCNICA">Técnica</option>
+                  <option value="COMUNITARIA">Comunitaria</option>
+                  <option value="OTRO" >Otro</option>
+                </select>
+                <span>Tipo de Subsistema</span>
+              </label>
+            </div>
+
+            <div class="col-md-4" style="display: none" id="otro_secundaria_oculto">
+              <div class="form-label-group">
+                <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ. 0-9]+"
+                  title="El tipo de la secundaria contiene caracteres incorrectos" class="form-control text-uppercase"
+                  id="aspirante_secundaria_tipo_otro" name="aspirante_secundaria_tipo_otro"
+                  placeholder="Tipo de Secundaria" style="color: #237087 ">
+                <label for="aspirante_secundaria_tipo_otro">Tipo de Secundaria</label>
+              </div>
+            </div>
+
+          </div>
+          <br>
+
+
+          <div class="row">
+
+            <div class="col-md-4">
+              <label class="form-group has-float-label seltitulo">
+                <select class="form-control form-control-lg selcolor"  name="selector_estado_secundaria"
+                onChange="cambio_estado(document.getElementById('selector_estado_secundaria'),document.getElementById('selector_municipio_secundaria'),document.getElementById('selector_localidad_secundaria'))"
+                  id="selector_estado_secundaria">
+                  <option value ="">Seleccione un estado</option>
+
+                  <?php
+                              foreach ($estados as $estado)
+                              {
+                                      echo '<option value="'.$estado->id_estado.'">'.$estado->nombre_estado.'</option>';
+                              }
+                              ?>
+
+                </select>
+                <span>Estado</span>
+              </label>
+            </div>
+
+
+            <div class="col-md-4">
+              <label class="form-group has-float-label seltitulo">
+                <select class="form-control form-control-lg selcolor"  name="selector_municipio_secundaria"
+                  onChange="cambio_municipio(document.getElementById('selector_municipio_secundaria'),document.getElementById('selector_localidad_secundaria'))"
+                  id="selector_municipio_secundaria">
+                  <option></option>
+
+
+                </select>
+                <span>Municipio</span>
+              </label>
+            </div>
+
+            <div class="col-md-4">
+              <label class="form-group has-float-label seltitulo">
+                <select class="form-control form-control-lg selcolor"  name="selector_localidad_secundaria"
+                  id="selector_localidad_secundaria">
+                  <option></option>
+
+
+
+                </select>
+                <span>Localidad</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="borrarmodal()">Cancelar</button>
+        <button type="button" class="btn btn-success" onclick="insertar_secundaria()">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
 <script>
   cargar_anio();
 
@@ -1041,6 +1164,7 @@
         municipios.open('GET', '<?php echo base_url();?>index.php/c_municipio/get_municipios_estado_html?id_estado=' + respuesta[0].id_estado, true);
         municipios.onload = function () {
           document.getElementById("selector_municipio_aspirante").innerHTML = municipios.responseText;
+          document.getElementById("selector_municipio_aspirante").value = respuesta[0].id_municipio;
         };
         municipios.send(null);
         //fin cargar municipios
@@ -1052,7 +1176,7 @@
           document.getElementById("selector_localidad_aspirante").innerHTML = localidades.responseText;
           //seleccionar las opciones de la direccion del estudiante que habia registrado
           document.getElementById("selector_estado_aspirante").value = respuesta[0].id_estado;
-          document.getElementById("selector_municipio_aspirante").value = respuesta[0].id_municipio;
+          
           document.getElementById("selector_localidad_aspirante").value = respuesta[0].id_localidad;
         };
         localidades.send(null);
@@ -1222,12 +1346,15 @@
 
         swalWithBootstrapButtons.fire({
           type: 'info',
-          text: 'Esta secundaria no existe',
+          text: 'Esta secundaria no existe por favor agreguela:',
           showCancelButton: true,
-          showConfirmButton: false,
+          
+          confirmButtonText: 'Agregar',
           cancelButtonText: 'Cancelar',
+          
         }).then((result) => {
           if (result.value) {
+            
             $('#nuevasecundaria').modal().show();
             cct();
 

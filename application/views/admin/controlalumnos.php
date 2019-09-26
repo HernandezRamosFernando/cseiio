@@ -959,7 +959,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Agregar nueva secundaria</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" onclick="cerrar_modal()" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -1067,7 +1067,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="borrarmodal()">Cancelar</button>
+        <button type="button" class="btn btn-secondary" onclick="cerrar_modal()">Cancelar</button>
         <button type="button" class="btn btn-success" onclick="insertar_secundaria()">Guardar</button>
       </div>
     </div>
@@ -1414,6 +1414,7 @@
     xhr.send(null);
   }
   function insertar_secundaria() {
+    alert();
     let secundaria = "";
     secundaria = {
       "cct_secundaria": document.getElementById("aspirante_nuevasecundaria_cct").value,
@@ -1518,4 +1519,13 @@
     xhr.send(formdata);
 
   }
+
+
+  
+
+  function cerrar_modal() {
+    $('#modalaspirante').modal().show();
+    $('#nuevasecundaria').modal('toggle');
+  }
+
 </script>

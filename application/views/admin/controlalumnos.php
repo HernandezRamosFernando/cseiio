@@ -96,7 +96,7 @@
 
 <!-- Modal -->
 <div class="modal fade" id="modalaspirante" tabindex="-1" role="dialog" aria-labelledby="modalaspiranteTitle"
-  aria-hidden="true">
+  aria-hidden="true" style="overflow-y: scroll;">
   <div class="modal-dialog modal-dialog-centered" style="max-width: 80% !important;" role="document">
     <div class="modal-content">
 
@@ -963,6 +963,8 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+
+      
       <div class="modal-body">
         <div class="container-fluid">
           <div class="row">
@@ -1070,10 +1072,86 @@
         <button type="button" class="btn btn-secondary" onclick="cerrar_modal()">Cancelar</button>
         <button type="button" class="btn btn-success" onclick="insertar_secundaria()">Guardar</button>
       </div>
+      
     </div>
   </div>
 </div>
 <script>
+
+
+function insertar_secundaria() {
+    if(document.getElementById("aspirante_nuevasecundaria_cct").value === ''||document.getElementById("aspirante_nuevasecundaria_nombre").value === ''||document.getElementById("aspirante_nuevasecundaria_tipo_subsistema").value===''){
+    Swal.fire({
+          type: 'error',
+          title: 'Bachillerato no agregado',
+          confirmButtonText: 'Cerrar'
+
+        })
+   }else{
+    let secundaria = "";
+    secundaria = {
+      "cct_escuela_procedencia": document.getElementById("aspirante_nuevasecundaria_cct").value.toUpperCase(),
+      "nombre_escuela_procedencia": document.getElementById("aspirante_nuevasecundaria_nombre").value.toUpperCase(),
+      "tipo_subsistema": document.getElementById("aspirante_nuevasecundaria_tipo_subsistema").value.toUpperCase(),
+      "id_localidad_escuela_procedencia": parseInt(document.getElementById("selector_localidad_secundaria").value),
+      "tipo_escuela_procedencia": "SECUNDARIA"
+    };
+
+    document.getElementById("secundarias").innerHTML += '<option value="' + document.getElementById("aspirante_nuevasecundaria_cct").value + '">'
+    //console.log(secundaria);
+    var xhr = new XMLHttpRequest();
+    
+    xhr.open("POST", '<?php echo base_url();?>index.php/c_escuela_procedencia/insert_escuela', true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      xhr.error = function (){
+        console.log("error de conexion");
+      }
+
+    xhr.onreadystatechange = function () {
+      if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+        $('#div_carga').hide();
+        if (xhr.responseText.trim() === "si") {
+          Swal.fire({
+            type: 'success',
+            title: 'Secundaria agregada correctamente',
+            showConfirmButton: false,
+            timer: 2500
+          })
+          $('#nuevasecundaria').modal('toggle');
+
+
+          $('#aspirante_nuevasecundaria_cct').val('');
+          $('#aspirante_nuevasecundaria_nombre').val('');
+          $('#aspirante_nuevasecundaria_tipo_subsistema').val('');
+          $('#selector_estado_secundaria').val('');
+          $('#selector_municipio_secundaria').val('');
+          $('#selector_localidad_secundaria').val('');
+
+          obtener_secundaria(document.getElementById("aspirante_secundaria_cct").value);
+         
+        } else {
+          Swal.fire({
+            type: 'error',
+            title: 'Secundaria no agregada',
+            confirmButtonText: 'Cerrar'
+
+          })
+        }
+
+      }
+    }
+    xhr.send(JSON.stringify(secundaria));
+
+  }
+
+}
+
+
+
+
   cargar_anio();
 
   function cargar_datos_aspirante(e) {
@@ -1413,52 +1491,14 @@
 
     xhr.send(null);
   }
-  function insertar_secundaria() {
-    alert();
-    let secundaria = "";
-    secundaria = {
-      "cct_secundaria": document.getElementById("aspirante_nuevasecundaria_cct").value,
-      "nombre_secundaria": document.getElementById("aspirante_nuevasecundaria_nombre").value,
-      "subsistema": document.getElementById("aspirante_nuevasecundaria_tipo_subsistema").value,
-      "localidad": parseInt(document.getElementById("selector_localidad_secundaria").value)
-    };
-    document.getElementById("secundarias").innerHTML += '<option value="' + document.getElementById("aspirante_nuevasecundaria_cct").value + '">'
-    console.log(secundaria);
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", '<?php echo base_url();?>index.php/c_secundaria/insert_secundaria', true);
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.onloadstart = function () {
-      $('#div_carga').show();
-    }
-    xhr.error = function () {
-      console.log("error de conexion");
-    }
 
-    xhr.onreadystatechange = function () {
-      if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-        $('#div_carga').hide();
-        if (xhr.responseText === "si") {
-          Swal.fire({
-            type: 'success',
-            title: 'Secundaria agregada correctamente',
-            showConfirmButton: false,
-            timer: 2500
-          })
-        } else {
-          Swal.fire({
-            type: 'error',
-            title: 'Secundaria no agregada',
-            confirmButtonText: 'Cerrar'
 
-          })//alert(xhr.responseText);
-        }
-      }
-      xhr.send(JSON.stringify(secundaria));
-    }
-  }
+  
 
   var form = document.getElementById("formulario");
   form.onsubmit = function (e) {
+
+
     if (document.getElementById("aspirante_secundaria_cct").value === '') {
       console.log("vacio");
       swalWithBootstrapButtons.fire({
@@ -1480,6 +1520,9 @@
       e.preventDefault();
       envioform(form);
     }
+
+
+    
 
 
   }
@@ -1524,6 +1567,13 @@
   
 
   function cerrar_modal() {
+    $('#aspirante_nuevasecundaria_cct').val('');
+    $('#aspirante_nuevasecundaria_nombre').val('');
+    $('#aspirante_nuevasecundaria_tipo_subsistema').val('');
+    $('#selector_estado_secundaria').val('');
+    $('#selector_municipio_secundaria').val('');
+    $('#selector_localidad_secundaria').val('');
+
     $('#modalaspirante').modal().show();
     $('#nuevasecundaria').modal('toggle');
   }

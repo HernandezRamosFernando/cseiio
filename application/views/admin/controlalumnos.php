@@ -1323,15 +1323,30 @@ function insertar_secundaria() {
         document.getElementById("bachillerato_oculto").style.display = "none";
       }
 
-      /*
-      document.getElementById("aspirante_secundaria_nombre").value = datos.secundaria_aspirante[0].nombre_secundaria;
+     /* if(datos.escuela_procedencia[0].Escuela_procedencia_cct_escuela_procedencia!=''){
+
+        document.getElementById("aspirante_secundaria_nombre").value = datos.escuela_procedencia[0].nombre_escuela_procedencia;
       document.getElementById("aspirante_secundaria_nombre").disabled = true;
       document.getElementById("nombre_secundaria_oculto").style.display = "";
- 
-      document.getElementById("aspirante_secundaria_tipo_subsistema").value = datos.secundaria_aspirante[0].tipo_subsistema;
+
+      document.getElementById("aspirante_secundaria_tipo_subsistema").value = datos.escuela_procedencia[0].tipo_subsistema;
       document.getElementById("aspirante_secundaria_tipo_subsistema").disabled = true;
       document.getElementById("tipo_subsistema_oculto").style.display = "";
-      */
+
+      }
+      else{
+
+        document.getElementById("aspirante_secundaria_nombre").value = "";
+      document.getElementById("aspirante_secundaria_nombre").disabled = true;
+      document.getElementById("nombre_secundaria_oculto").style.display = "none";
+
+      document.getElementById("aspirante_secundaria_tipo_subsistema").value = "";
+      document.getElementById("aspirante_secundaria_tipo_subsistema").disabled = true;
+      document.getElementById("tipo_subsistema_oculto").style.display = "none";
+
+      }*/
+
+      
     }
     xhr.send(null);
   }
@@ -1417,6 +1432,7 @@ function insertar_secundaria() {
         //aspirante_secundaria_tipo_subsistema
         document.getElementById("aspirante_secundaria_tipo_subsistema").value = secundaria[0].tipo_subsistema;
         document.getElementById("aspirante_secundaria_tipo_subsistema").disabled = true;
+
       }
       else {
         document.getElementById("nombre_secundaria_oculto").style.display = "none";
@@ -1496,6 +1512,18 @@ function insertar_secundaria() {
   
 
   var form = document.getElementById("formulario");
+
+
+  var nombre_secundaria = document.getElementById('nombre_secundaria_oculto'); 
+  var tipo_subsistema = document.getElementById('tipo_subsistema_oculto');
+  if(nombre_secundaria.style.visibility == 'hidden' && tipo_subsistema.style.visibility == 'hidden'){ 
+    // mensaje de alerta 
+    } 
+    else { 
+      // HA presionado el boton buscar secundaria
+      
+  } 
+
   form.onsubmit = function (e) {
 
 
@@ -1577,5 +1605,18 @@ function insertar_secundaria() {
     $('#modalaspirante').modal().show();
     $('#nuevasecundaria').modal('toggle');
   }
+/*
+delete from Grupo_estudiante where Estudiante_no_control='CSEIIO1910676';
+delete from Datos_lengua_materna where Estudiante_no_control='CSEIIO1910676';
+delete from Documentacion where Estudiante_no_control='CSEIIO1910676';
+delete from Estudiante_escuela_procedencia where Estudiante_no_control='CSEIIO1910676';
+delete from Estudiante_tutor where Estudiante_no_control='CSEIIO1910676';
+delete from Expediente_medico where Estudiante_no_control='CSEIIO1910676';
+delete from Friae_estudiante where Estudiante_no_control='CSEIIO1910676';
+delete from Estudiante where no_control='CSEIIO1910676'
 
+
+*/
 </script>
+
+

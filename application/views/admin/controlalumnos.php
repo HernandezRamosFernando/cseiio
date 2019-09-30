@@ -1078,6 +1078,23 @@
 </div>
 <script>
 
+function limpiar_modal_nueva_secundaria() {
+  $('#aspirante_nuevasecundaria_cct').val('');
+  $('#aspirante_nuevasecundaria_nombre').val('');
+  $('#aspirante_nuevasecundaria_tipo_subsistema').val('');
+  $('#selector_estado_secundaria').val('');
+  $('#selector_municipio_secundaria').val('');
+  $('#selector_localidad_secundaria').val('');
+}
+
+
+var ini_secundaria_cct = "";
+$("#aspirante_secundaria_cct").change(function(){
+
+  if ( $("#aspirante_secundaria_cct").val().toUpperCase() != ini_secundaria_cct ) {
+    obtener_secundaria($("#aspirante_secundaria_cct").val().toUpperCase());
+  }
+});
 
 function insertar_secundaria() {
     if(document.getElementById("aspirante_nuevasecundaria_cct").value === ''||document.getElementById("aspirante_nuevasecundaria_nombre").value === ''||document.getElementById("aspirante_nuevasecundaria_tipo_subsistema").value===''){
@@ -1122,6 +1139,7 @@ function insertar_secundaria() {
           })
           $('#nuevasecundaria').modal('toggle');
 
+          
 
           $('#aspirante_nuevasecundaria_cct').val('');
           $('#aspirante_nuevasecundaria_nombre').val('');
@@ -1155,6 +1173,10 @@ function insertar_secundaria() {
   cargar_anio();
 
   function cargar_datos_aspirante(e) {
+    ini_secundaria_cct = "";
+    document.getElementById("nombre_secundaria_oculto").style.display = "none";
+    document.getElementById("tipo_subsistema_oculto").style.display = "none";
+
     document.getElementById("formulario").reset();
     document.getElementById("selector_municipio_aspirante").innerHTML = "";
     document.getElementById("selector_localidad_aspirante").innerHTML = "";
@@ -1320,6 +1342,8 @@ function insertar_secundaria() {
 
       } else {
         document.getElementById("aspirante_secundaria_cct").value = datos.escuela_procedencia[0].Escuela_procedencia_cct_escuela_procedencia;
+
+        ini_secundaria_cct = $("#aspirante_secundaria_cct").val();
         document.getElementById("bachillerato_oculto").style.display = "none";
       }
 
@@ -1450,6 +1474,7 @@ function insertar_secundaria() {
           if (result.value) {
             
             $('#nuevasecundaria').modal().show();
+            limpiar_modal_nueva_secundaria();
             cct();
 
           }
@@ -1498,6 +1523,7 @@ function insertar_secundaria() {
         }).then((result) => {
           if (result.value) {
             $('#nuevasecundaria').modal().show();
+            limpiar_modal_nueva_secundaria();
             cct();
 
           }
@@ -1514,43 +1540,40 @@ function insertar_secundaria() {
   var form = document.getElementById("formulario");
 
 
+
   var nombre_secundaria = document.getElementById('nombre_secundaria_oculto'); 
   var tipo_subsistema = document.getElementById('tipo_subsistema_oculto');
-  if(nombre_secundaria.style.visibility == 'hidden' && tipo_subsistema.style.visibility == 'hidden'){ 
-    // mensaje de alerta 
-    } 
-    else { 
-      // HA presionado el boton buscar secundaria
-      
-  } 
+  
 
   form.onsubmit = function (e) {
+    e.preventDefault();
+    if ( $("#aspirante_secundaria_cct").val().toUpperCase() != ini_secundaria_cct && $("#tipo_subsistema_oculto").is(":hidden")) {
+    obtener_secundaria($("#aspirante_secundaria_cct").val().toUpperCase());
+  }
+  else{
+      if (document.getElementById("aspirante_secundaria_cct").value === '') {
+        console.log("vacio");
+        swalWithBootstrapButtons.fire({
+          type: 'warning',
+          text: 'Esta tratando de actualizar un alumno sin Secundaria',
+          showCancelButton: true,
+          confirmButtonText: 'Actualizar',
+          cancelButtonText: 'Cancelar',
+        }).then((result) => {
+          if (result.value) {
+            console.log("Entro a if")
+            e.preventDefault();
+            envioform(form);
 
+          }
+        })
+        return false;
+      } else {
+        e.preventDefault();
+        envioform(form);
+      }
 
-    if (document.getElementById("aspirante_secundaria_cct").value === '') {
-      console.log("vacio");
-      swalWithBootstrapButtons.fire({
-        type: 'warning',
-        text: 'Esta tratando de actualizar un alumno sin Secundaria',
-        showCancelButton: true,
-        confirmButtonText: 'Actualizar',
-        cancelButtonText: 'Cancelar',
-      }).then((result) => {
-        if (result.value) {
-          console.log("Entro a if")
-          e.preventDefault();
-          envioform(form);
-
-        }
-      })
-      return false;
-    } else {
-      e.preventDefault();
-      envioform(form);
-    }
-
-
-    
+ }
 
 
   }

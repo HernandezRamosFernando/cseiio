@@ -1323,6 +1323,23 @@ public function resolucion_equivalencia(){
         }
     }
 
+
+    public function permisos_cal_extemporaneas(){
+        $datos['planteles'] = $this->M_plantel->get_planteles();
+
+        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
+            $dato= array('title'=>'Permisos de calificaciones extemporaneas');
+            $this->load->view("headers/cabecera",$dato);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierda");
+            $this->load->view("admin/permisos_cal_extemporanea", $datos);
+            $this->load->view("footers/footer");
+        }
+        else{
+            redirect(base_url().'index.php/c_usuario');
+        }
+    }
+
     public function permisos_reg(){
         $datos['planteles'] = $this->M_plantel->get_planteles();
 

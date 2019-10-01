@@ -25,6 +25,20 @@
           </div>
         </a>
       </div>
+
+      <div class="col-md-4 col-lg-4"style="height: 9rem !important;">
+        <a href="<?php echo base_url();?>index.php/c_vistas/permisos_cal_extemporaneas"
+          class="btn btn-primary btn-lg btn-block  btn-responsive menu valign-center btn-9">
+          <div class="row col-12">
+            <div class="col-8 valign-center" style="padding-left: 0px;">
+            <p class="h5"><strong>Permisos de asignación de calificaciones extemporaneas</strong></p> 
+            </div>
+            <div class="col-4 valign-right">
+              <img class="icono_menu" src="<?php echo base_url();?>assets/img/permisoscal.png">
+            </div>
+          </div>
+        </a>
+      </div>
       <div class="col-md-4 col-lg-4"style="height: 9rem !important;">
         <a href="<?php echo base_url();?>index.php/c_vistas/permisos_reg"
           class="btn btn-primary btn-lg btn-block  btn-responsive menu valign-center btn-2">

@@ -321,30 +321,24 @@ function mascara(d, sep, pat, nums) {
 }
 
 function validafecha(e){
-  console.log(e.value);
-  fecha= e.value.split('-');
-  var today = new Date();
-  var dd = today.getDate();
-  var mm = today.getMonth()+1; //January is 0!
-  var yyyy = today.getFullYear();
-  if(dd<10){
-        dd='0'+dd
-    } 
-    if(mm<10){
-        mm='0'+mm
-    } 
-  today = yyyy+mm+dd;
-  fecha = fecha.join('');
 
-  if(fecha >= today){
-  }else{
+  var hoy= new Date();
+  hoy.setHours(0,0,0,0);
+  var fecha_formulario = e.value;
+  console.log("hoy: "+Date.parse(hoy));
+  console.log("fecha formulario: "+Date.parse(fecha_formulario));
+
+
+  if ((Date.parse(fecha_formulario))<(Date.parse(hoy))) {
     Swal.fire({
       type: 'error',
       title: 'La fecha ingresada es incorrecta',
       confirmButtonText: 'Cerrar'
-    });
+  
+    })
     e.value='';
-  }
+  } 
+
 }
 
 function validafechanormal(e){

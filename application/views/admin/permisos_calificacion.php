@@ -184,8 +184,8 @@
   }
 
   function guardar() {
-    validafecha(document.getElementById("fecha_inicio"));
-    validafecha(document.getElementById("fecha_fin"));
+    document.getElementById("fecha_inicio");
+    document.getElementById("fecha_fin");
 
     var datos = new Array();
     if (document.getElementById("boton_agregar").value === "todos") {

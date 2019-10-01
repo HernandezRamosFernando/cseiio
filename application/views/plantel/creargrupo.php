@@ -449,92 +449,73 @@ function validarselect(e){
         } else {
           var cGrupos = parseInt(cAlumnos / 35);
           cGrupos = cGrupos + 1;
-          document.getElementById("cantidad_alumnos").innerHTML = "La cantidad de Alumnos registrados en este semestre es: " + cAlumnos + " se recomienda crear " + cGrupos + " grupos";
-          if (cGrupos = 2) {
-            var select = document.getElementById("grupo_nombre");
-            var option = document.createElement("option");
-            option.text = "Seleccione uno";
-            option.value = "";
-            select.add(option);
-            var option = document.createElement("option");
-            option.text = "A";
-            option.value = "A";
-            select.add(option);
-            var option = document.createElement("option");
-            option.text = "B";
-            option.value = "B";
-            select.add(option);
-          } else if (cGrupos = 3) {
-            var select = document.getElementById("grupo_nombre");
-            var option = document.createElement("option");
-            option.text = "Seleccione uno";
-            option.value = "";
-            select.add(option);
-            var option = document.createElement("option");
-            option.text = "A";
-            option.value = "A";
-            select.add(option);
-            var option = document.createElement("option");
-            option.text = "B";
-            option.value = "B";
-            select.add(option);
-            var option = document.createElement("option");
-            option.text = "C";
-            option.value = "C";
-            select.add(option);
-          } else if (cGrupos = 4) {
-            var select = document.getElementById("grupo_nombre");
-            var option = document.createElement("option");
-            option.text = "Seleccione uno";
-            option.value = "";
-            select.add(option);
-            var option = document.createElement("option");
-            option.text = "A";
-            option.value = "A";
-            select.add(option);
-            var option = document.createElement("option");
-            option.text = "B";
-            option.value = "B";
-            select.add(option);
-            var option = document.createElement("option");
-            option.text = "C";
-            option.value = "C";
-            select.add(option);
-            var option = document.createElement("option");
-            option.text = "D";
-            option.value = "D";
-            select.add(option);
 
-          } else {
-            var select = document.getElementById("grupo_nombre");
-            var option = document.createElement("option");
-            option.text = "Seleccione uno";
-            option.value = "";
-            select.add(option);
-            var option = document.createElement("option");
-            option.text = "A";
-            option.value = "A";
-            select.add(option);
-            var option = document.createElement("option");
-            option.text = "B";
-            option.value = "B";
-            select.add(option);
-            var option = document.createElement("option");
-            option.text = "C";
-            option.value = "C";
-            select.add(option);
-            var option = document.createElement("option");
-            option.text = "D";
-            option.value = "D";
-            select.add(option);
-            var option = document.createElement("option");
-            option.text = "E";
-            option.value = "E";
-            select.add(option);
-            var option = document.createElement("option");
-            option.text = "F";
-            option.value = "F";
-            select.add(option);
+          console.log("no grupos: "+cGrupos);
+          document.getElementById("cantidad_alumnos").innerHTML = "La cantidad de Alumnos registrados en este semestre es: " + cAlumnos + " se recomienda crear " + cGrupos + " grupos";
+          
+          switch (cGrupos) {
+                  case 2:
+                  var select = document.getElementById("grupo_nombre");
+                  var option = document.createElement("option");
+                  option.text = "Seleccione uno";
+                  option.value = "";
+                  select.add(option);
+                  var option = document.createElement("option");
+                  option.text = "A";
+                  option.value = "A";
+                  select.add(option);
+                  var option = document.createElement("option");
+                  option.text = "B";
+                  option.value = "B";
+                  select.add(option);
+              break;
+            case 3:
+                  var select = document.getElementById("grupo_nombre");
+                  var option = document.createElement("option");
+                  option.text = "Seleccione uno";
+                  option.value = "";
+                  select.add(option);
+                  var option = document.createElement("option");
+                  option.text = "A";
+                  option.value = "A";
+                  select.add(option);
+                  var option = document.createElement("option");
+                  option.text = "B";
+                  option.value = "B";
+                  select.add(option);
+                  var option = document.createElement("option");
+                  option.text = "C";
+                  option.value = "C";
+                  select.add(option);
+              
+              break;
+            case 4:
+                  console.log("atencion");
+                  var select = document.getElementById("grupo_nombre");
+                  var option = document.createElement("option");
+                  option.text = "Seleccione uno";
+                  option.value = "";
+                  select.add(option);
+                  var option = document.createElement("option");
+                  option.text = "A";
+                  option.value = "A";
+                  select.add(option);
+                  var option = document.createElement("option");
+                  option.text = "B";
+                  option.value = "B";
+                  select.add(option);
+                  var option = document.createElement("option");
+                  option.text = "C";
+                  option.value = "C";
+                  select.add(option);
+                  var option = document.createElement("option");
+                  option.text = "D";
+                  option.value = "D";
+                  select.add(option);
+              break;
+            
+            default:
+              
           }
 
 

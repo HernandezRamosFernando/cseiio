@@ -6,6 +6,10 @@ class M_grupo_estudiante extends CI_Model {
    }
 
 
+   public function busqueda_alumnos_grupo($curp,$cct_plantel){
+    return $this->db->query("SELECT * FROM Estudiante e inner join Grupo_estudiante ge on e.no_control=ge.Estudiante_no_control inner join Grupo g on ge.Grupo_id_grupo=g.id_grupo where g.estatus=1 and curp like '%".$curp."%' and Plantel_cct_plantel like '%".$cct_plantel."%' group by e.no_control order by e.primer_apellido,e.segundo_apellido,e.nombre,e.semestre_en_curso;")->result();
+}
+
 
 
    public function agregar_calificaciones_materia_grupo2($primer_parcial,$materia,$grupo){

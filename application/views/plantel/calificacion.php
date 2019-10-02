@@ -139,83 +139,130 @@
 
 <script>
 
-  document.getElementById("boton_agregar").disabled=true;
+function contar_vacios_input_calificaciones() {
+  var validar_tabla = document.getElementById("tablagrupo");
+  var contar_vacios=0;
+  for (let i = 0; i < validar_tabla.childNodes.length; i++) {
+      if(validar_tabla.childNodes[i].childNodes[2].childNodes[0].disabled===false && validar_tabla.childNodes[i].childNodes[2].childNodes[0].value===""){
+        contar_vacios++;
+      }
+
+      if(validar_tabla.childNodes[i].childNodes[3].childNodes[0].disabled===false && validar_tabla.childNodes[i].childNodes[3].childNodes[0].value===""){
+        contar_vacios++;
+      }
+
+      if(validar_tabla.childNodes[i].childNodes[4].childNodes[0].disabled===false && validar_tabla.childNodes[i].childNodes[4].childNodes[0].value===""){
+        contar_vacios++;
+      }
+
+      if(validar_tabla.childNodes[i].childNodes[6].childNodes[0].disabled===false && validar_tabla.childNodes[i].childNodes[6].childNodes[0].value===""){
+        contar_vacios++;
+      }
+
+      
+
+    }
+    console.log('vacios: '+contar_vacios);
+    return contar_vacios;
+
+
+}
+
+
+
+  //document.getElementById("boton_agregar").disabled=true;
 
   function guardar() {
 
-    var tabla = document.getElementById("tablagrupo");
-    var datos = new Array();
+    var inputs_vacios=0;
+    inputs_vacios=contar_vacios_input_calificaciones();
+    console.log("Es el contador: "+inputs_vacios);
+   if(inputs_vacios>0){
+    Swal.fire({
+        type: 'info',
+        text: 'Faltan por rellenar algunos campos con calificaciones, verifique por favor.'
+      });
+      
+      
+   }
+   else{
+        var tabla = document.getElementById("tablagrupo");
+        var datos = new Array();
 
-    for (let i = 0; i < tabla.childNodes.length; i++) {
-      var dato = {
-        id_grupo: document.getElementById("grupos").value,
-        materia: document.getElementById("materias").value,
-        no_control: tabla.childNodes[i].childNodes[1].innerText,
-        primer_parcial: tabla.childNodes[i].childNodes[2].childNodes[0].value === "" ? null : tabla.childNodes[i].childNodes[2].childNodes[0].value,
-        segundo_parcial: tabla.childNodes[i].childNodes[3].childNodes[0].value === "" ? null : tabla.childNodes[i].childNodes[3].childNodes[0].value,
-        tercer_parcial: tabla.childNodes[i].childNodes[4].childNodes[0].value === "" ? null : tabla.childNodes[i].childNodes[4].childNodes[0].value,
-        examen_final: tabla.childNodes[i].childNodes[6].childNodes[0].value === "" ? null : tabla.childNodes[i].childNodes[6].childNodes[0].value
-      }
+        for (let i = 0; i < tabla.childNodes.length; i++) {
+          var dato = {
+            id_grupo: document.getElementById("grupos").value,
+            materia: document.getElementById("materias").value,
+            no_control: tabla.childNodes[i].childNodes[1].innerText,
+            primer_parcial: tabla.childNodes[i].childNodes[2].childNodes[0].value === "" ? null : tabla.childNodes[i].childNodes[2].childNodes[0].value,
+            segundo_parcial: tabla.childNodes[i].childNodes[3].childNodes[0].value === "" ? null : tabla.childNodes[i].childNodes[3].childNodes[0].value,
+            tercer_parcial: tabla.childNodes[i].childNodes[4].childNodes[0].value === "" ? null : tabla.childNodes[i].childNodes[4].childNodes[0].value,
+            examen_final: tabla.childNodes[i].childNodes[6].childNodes[0].value === "" ? null : tabla.childNodes[i].childNodes[6].childNodes[0].value
+          }
 
-      datos.push(dato);
-    }
-
-    //console.log(datos);
-
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", '<?php echo base_url();?>index.php/c_grupo_estudiante/agregar_calificaciones_materia_grupo', true);
-
-    swalWithBootstrapButtons.fire({
-      type: 'info',
-      text: 'Al aceptar no podrá realizar cambio alguno ¿Esta seguro?',
-      confirmButtonText: 'Aceptar',
-      allowOutsideClick: false,
-      showCancelButton: 'true',
-      cancelButtonText: 'Cancelar'
-    }).then((result) => {
-      if (result.value) {
-      //Send the proper header information along with the request
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.onloadstart = function () {
-      $('#div_carga').show();
-    }
-    xhr.error = function () {
-      console.log("error de conexion");
-    }
-    xhr.onreadystatechange = function () { // Call a function when the state changes.
-      if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-        $('#div_carga').hide();
-        if (xhr.responseText.trim() === "si") {
-          console.log(xhr.response);
-          swalWithBootstrapButtons.fire({
-            type: 'success',
-            text: 'Calificaciones guardadas correctamente',
-            allowOutsideClick: false,
-            confirmButtonText: 'Aceptar'
-          }).then((result) => {
-            if (result.value) {
-              //aqui va el aceptar
-              $(document).scrollTop(0);
-              //location.reload(); 
-              document.getElementById("alumnos_oculto").style.display = "none";
-              document.getElementById("agregar_oculto").style.display = "none";
-              
-            }
-            //aqui va si cancela
-          });
-        } else {
-          Swal.fire({
-            type: 'error',
-            text: 'Calificaciones no guardadas'
-          });
+          datos.push(dato);
         }
-      }
-    }
-    xhr.send(JSON.stringify(datos));
-    console.log(datos);
-    document.getElementById("boton_agregar").disabled=true;
-    }
-    });
+
+        //console.log(datos);
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", '<?php echo base_url();?>index.php/c_grupo_estudiante/agregar_calificaciones_materia_grupo', true);
+
+        swalWithBootstrapButtons.fire({
+          type: 'info',
+          text: 'Al aceptar no podrá realizar cambio alguno ¿Esta seguro?',
+          confirmButtonText: 'Aceptar',
+          allowOutsideClick: false,
+          showCancelButton: 'true',
+          cancelButtonText: 'Cancelar'
+        }).then((result) => {
+          if (result.value) {
+          //Send the proper header information along with the request
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onloadstart = function () {
+          $('#div_carga').show();
+        }
+        xhr.error = function () {
+          console.log("error de conexion");
+        }
+        xhr.onreadystatechange = function () { // Call a function when the state changes.
+          if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+            $('#div_carga').hide();
+            if (xhr.responseText.trim() === "si") {
+              console.log(xhr.response);
+              swalWithBootstrapButtons.fire({
+                type: 'success',
+                text: 'Calificaciones guardadas correctamente',
+                allowOutsideClick: false,
+                confirmButtonText: 'Aceptar'
+              }).then((result) => {
+                if (result.value) {
+                  //aqui va el aceptar
+                  $(document).scrollTop(0);
+                  //location.reload(); 
+                  document.getElementById("alumnos_oculto").style.display = "none";
+                  document.getElementById("agregar_oculto").style.display = "none";
+                  
+                }
+                //aqui va si cancela
+              });
+            } else {
+              Swal.fire({
+                type: 'error',
+                text: 'Calificaciones no guardadas'
+              });
+            }
+          }
+        }
+        xhr.send(JSON.stringify(datos));
+        console.log(datos);
+        
+        }
+        });
+    
+    
+   }
+    
 
     
 
@@ -311,6 +358,11 @@
           examen_final: "0",
           promedio_total: "0"
         }
+
+        document.getElementById("boton_agregar").disabled=true;
+      }
+      else{
+        document.getElementById("boton_agregar").disabled=false;
       }
 
 
@@ -522,7 +574,7 @@
     }
     //e.value=output;
     //-----------comienza validación de filas activas
-    validar_vacios_input();
+    //validar_vacios_input();
     //validacion para calcular promedio del semestre por alumno
     promedio_semestral(fila,activo_examen_final)
 

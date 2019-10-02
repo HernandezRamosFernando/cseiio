@@ -11,6 +11,12 @@ class C_grupo_estudiante extends CI_Controller {
         $this->load->model("M_plantel");
     }
 
+    public function busqueda_alumnos_grupo(){
+        $curp = $this->input->get('curp');
+        $cct_plantel = $this->input->get('cct_plantel');
+        echo json_encode($this->M_grupo_estudiante->busqueda_alumnos_grupo($curp,$cct_plantel));
+    }
+
 
     public function agregar_calificaciones_materia_grupo2(){
         $respuesta=$this->input->post(NULL, TRUE);

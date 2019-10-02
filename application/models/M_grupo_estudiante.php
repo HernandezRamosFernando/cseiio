@@ -7,6 +7,38 @@ class M_grupo_estudiante extends CI_Model {
 
 
 
+
+   public function agregar_calificaciones_materia_grupo2($primer_parcial,$materia,$grupo){
+    $this->db->trans_start();
+    foreach($primer_parcial as $estudiante =>$calificacion){
+        $this->db->query("update Grupo_Estudiante 
+                set primer_parcial=".($calificacion=="/"?0:$calificacion)." 
+                where Grupo_id_grupo='".$grupo."' and 
+                Estudiante_no_control='".$estudiante."' and 
+                id_materia='".$materia."'");
+
+                
+    }
+
+
+    $this->db->query("update Permiso_calificacion set estatus=0 where id_grupo='".$grupo."' and id_materia='".$materia."'");
+
+    $this->db->trans_complete();
+
+    if ($this->db->trans_status() === FALSE)
+    {
+           return "no";
+    }
+
+    else{
+        return "si";
+    }
+
+}
+
+
+
+
    public function agregar_calificaciones_materia_grupo($datos){
         $this->db->trans_start();
         foreach($datos as $calificaciones_estudiante){

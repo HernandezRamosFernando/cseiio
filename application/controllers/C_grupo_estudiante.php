@@ -12,6 +12,16 @@ class C_grupo_estudiante extends CI_Controller {
     }
 
 
+    public function agregar_calificaciones_materia_grupo2(){
+        $respuesta=$this->input->post(NULL, TRUE);
+        $primer_parcial=$this->input->post('primer_parcial');
+        $materia=$this->input->post('materias');
+        $grupo=$this->input->post('grupo_seleccionado');
+        echo $this->M_grupo_estudiante->agregar_calificaciones_materia_grupo2($primer_parcial,$materia,$grupo);
+        
+    }
+
+
     public function agregar_calificaciones_materia_grupo(){
         $datos = json_decode($this->input->raw_input_stream);
         echo $this->M_grupo_estudiante->agregar_calificaciones_materia_grupo($datos);

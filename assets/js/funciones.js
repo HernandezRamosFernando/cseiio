@@ -322,7 +322,7 @@ function mascara(d, sep, pat, nums) {
 
 function validafecha(e){
 
-  var hoy= new Date();
+  /*var hoy= new Date();
   hoy.setHours(0,0,0,0);
   var fecha_formulario = e.value;
   console.log("hoy: "+Date.parse(hoy));
@@ -337,7 +337,7 @@ function validafecha(e){
   
     })
     e.value='';
-  } 
+  } */
 
 }
 

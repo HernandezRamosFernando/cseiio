@@ -104,11 +104,32 @@
             }
           };
           permisos_regularizacion.send(null);
+
+
+          //Permisos de calficacion de examen extemporaneo-----------------------------------------
+          var permisos_extemporaneo = new XMLHttpRequest();
+          permisos_extemporaneo.open('GET', '<?php echo base_url();?>index.php/C_permisos_extemporaneo/permisos_cal_extemporaneo_plantel?plantel=<?php echo $this->session->userdata('user')['plantel'] ?>', true);
+
+          permisos_extemporaneo.onload = function () {
+            if(JSON.parse(permisos_extemporaneo.response).length>0){
+              $("#alerta_reg").css("display", "");
+              $("#alerta_reg").append('Tiene permisos de parciales extemporaneos, verifique.');
+            }else{
+              $("#alerta_reg").css("display", "none");
+            }
+          };
+          permisos_extemporaneo.send(null);
+
+
+
     }
 
     $(document).ready(function () {
       cargar_notificaciones();
     });
+
+
+ 
   </script>
 
 

@@ -4,12 +4,46 @@ class M_permisos_extemporaneo extends CI_Model {
       parent::__construct();
    }
 
+   public function permisos_cal_extemporaneo_plantel($plantel){
+    return $this->db->query("SELECT count(*) permiso from Permisos_extemporaneo where estatus=1 and curdate()>=fecha_inicio and curdate()<=fecha_fin and Plantel_cct_plantel='".$plantel."';")->result();
+}
+
+   function get_estudiantes_por_calificar_extemporaneo($id_grupo,$id_materia){
+    $registros = $this->db->query("SELECT *,p.primer_parcial as p1,p.segundo_parcial as p2,p.tercer_parcial as p3,p.examen_final as final FROM Permisos_extemporaneo p inner join Estudiante e on e.no_control=p.Estudiante_no_control inner join Grupo_estudiante ge on e.no_control=ge.Estudiante_no_control inner join Materia m on ge.id_materia=m.clave where id_grupo='".$id_grupo."' and p.estatus=1 and p.id_materia='".$id_materia."' and ge.id_materia='".$id_materia."' group by e.no_control order by primer_apellido,segundo_apellido,nombre;")->result();
+    return $registros;
+ }
+  
+   function get_materias_por_calificar_extemporaneo($id_grupo){
+    $registros = $this->db->query("SELECT p.id_grupo,m.clave,m.unidad_contenido FROM Permisos_extemporaneo p inner join Materia m on p.id_materia=m.clave where p.id_grupo='".$id_grupo."' and estatus=1 group by m.clave;")->result();
+    return $registros;
+ }
+
+   function get_semestre_grupos_htmloption($plantel,$semestre){
+    $registros = $this->db->query("SELECT p.id_grupo,nombre_grupo FROM Permisos_extemporaneo p inner join Grupo g on p.id_grupo=g.id_grupo where semestre=".$semestre." and p.estatus=1 and Plantel_cct_plantel='".$plantel."' group by p.id_grupo;")->result();
+    $respuesta = "";
+    $respuesta.='<option value="'."".'">'."Seleccione grupo".'</option>';
+    foreach($registros as $registro){
+       $respuesta.='<option value="'.$registro->id_grupo.'">'.$registro->nombre_grupo.'</option>';
+    }
+    return $respuesta;
+ }
+  
+   function get_semestres_htmloption($plantel){
+    $registros = $this->db->query("SELECT semestre FROM Permisos_extemporaneo p inner join Materia m on p.id_materia=m.clave where Plantel_cct_plantel='".$plantel."' and estatus=1 and CURDATE()>=fecha_inicio and curdate()<=fecha_fin group by semestre;")->result();
+    $respuesta = "";
+    $respuesta.='<option value="'."".'">'."Seleccione semestre".'</option>';
+    foreach($registros as $registro){
+       $respuesta.='<option value="'.$registro->semestre.'">'.$registro->semestre.'</option>';
+    }
+    return $respuesta;
+ }
+
 
    public function get_datos_materia($id_grupo){
         return $this->db->query("select clave, unidad_contenido from Grupo_estudiante ge inner join Materia m on ge.id_materia=m.clave where Grupo_id_grupo='".$id_grupo."' group by ge.id_materia order by unidad_contenido")->result();
     }
 
-    public function agregar_permiso($respuesta,$no_control,$id_grupo,$fecha_inicio,$fecha_fin){
+    public function agregar_permiso($respuesta,$no_control,$id_grupo,$fecha_inicio,$fecha_fin,$id_plantel){
         $this->db->trans_start();
             /*$this->db->trans_start();
                 $this->db->insert('Permisos_extemporaneo', $datos);
@@ -70,6 +104,7 @@ class M_permisos_extemporaneo extends CI_Model {
                                     'id_materia' =>$id_materia,
                                     'id_grupo' =>$id_grupo,
                                     'estatus' =>1,
+                                    'Plantel_cct_plantel' =>$id_plantel
                                     
                                 );
                                 $this->db->insert('Permisos_extemporaneo', $datos);
@@ -88,7 +123,59 @@ class M_permisos_extemporaneo extends CI_Model {
            
     }
 
+    public function actualizar_calificaciones_materia_grupo($datos){
+        $this->db->trans_start();
+        foreach($datos as $calificaciones_estudiante){
+            $id_grupo = $calificaciones_estudiante->id_grupo;
+            $id_materia = $calificaciones_estudiante->materia;
+            if($calificaciones_estudiante->primer_parcial!=null){
+                $this->db->query("update Grupo_Estudiante 
+                set primer_parcial=".($calificaciones_estudiante->primer_parcial=="/"?0:$calificaciones_estudiante->primer_parcial)." 
+                where Grupo_id_grupo='".$calificaciones_estudiante->id_grupo."' and 
+                Estudiante_no_control='".$calificaciones_estudiante->no_control."' and 
+                id_materia='".$calificaciones_estudiante->materia."'");
+            }
 
+            if($calificaciones_estudiante->segundo_parcial!=null){
+                $this->db->query("update Grupo_Estudiante 
+                set segundo_parcial=".($calificaciones_estudiante->segundo_parcial=="/"?0:$calificaciones_estudiante->segundo_parcial)." 
+                where Grupo_id_grupo='".$calificaciones_estudiante->id_grupo."' and 
+                Estudiante_no_control='".$calificaciones_estudiante->no_control."' and 
+                id_materia='".$calificaciones_estudiante->materia."'");
+            }
+
+
+            if($calificaciones_estudiante->tercer_parcial!=null){
+                $this->db->query("update Grupo_Estudiante 
+                set tercer_parcial=".($calificaciones_estudiante->tercer_parcial=="/"?0:$calificaciones_estudiante->tercer_parcial)." 
+                where Grupo_id_grupo='".$calificaciones_estudiante->id_grupo."' and 
+                Estudiante_no_control='".$calificaciones_estudiante->no_control."' and 
+                id_materia='".$calificaciones_estudiante->materia."'");
+            }
+
+
+            if($calificaciones_estudiante->examen_final!=null){
+                $this->db->query("update Grupo_Estudiante 
+                set examen_final=".($calificaciones_estudiante->examen_final=="/"?0:$calificaciones_estudiante->examen_final)." 
+                where Grupo_id_grupo='".$calificaciones_estudiante->id_grupo."' and 
+                Estudiante_no_control='".$calificaciones_estudiante->no_control."' and 
+                id_materia='".$calificaciones_estudiante->materia."'");
+            }
+            $this->db->query("update Permisos_extemporaneo set estatus=0 where id_materia='".$id_materia."' and id_grupo='".$id_grupo."' and Estudiante_no_control='".$calificaciones_estudiante->no_control."'");
+        }
+
+        $this->db->trans_complete();
+
+        if ($this->db->trans_status() === FALSE)
+        {
+               return "no";
+        }
+
+        else{
+            return "si";
+        }
+
+   }
     
 
 }

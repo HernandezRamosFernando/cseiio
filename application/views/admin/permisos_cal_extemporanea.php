@@ -112,7 +112,9 @@
 
       <input type="hidden" id="no_control" name="no_control">
       <input type="hidden" id="id_grupo" name="id_grupo">
+      <input type="hidden" id="id_plantel" name="id_plantel">
 
+      
        <div class="modal-body">
              <div class="form-row">
                 <div class="form-group col-md-12">
@@ -125,8 +127,9 @@
           
                       <thead class="thead-light">
                         <tr>
-                        <th scope="col" class="col-md-1">Clave</th>
+
                           <th scope="col" class="col-md-1">Materia</th>
+                          <th scope="col" class="col-md-1">Clave</th>
                           <th scope="col" class="col-md-1">Parcial 1 <br><input type='checkbox' class='form-check-input' id='parcial1' onclick='toggle1(this)'> Seleccionar todos</th>
                           <th scope="col" class="col-md-1">Parcial 2<br><input type='checkbox' class='form-check-input' id='parcial2' onclick='toggle2(this)'> Seleccionar todos</th>
                           <th scope="col" class="col-md-1">Parcial 3<br><input type='checkbox' class='form-check-input' id='parcial3' onclick='toggle3(this)'> Seleccionar todos</th>
@@ -164,13 +167,14 @@
 <!--Termina modal para asignar permisos-->
 <script>
 
-function cargar_datos_modal_asignar_permiso(e,id_grupo,nombre_completo) {
+function cargar_datos_modal_asignar_permiso(e,id_grupo,nombre_completo,id_plantel) {
   
 
   document.getElementById("nuevo_permiso").reset();
   document.getElementById("nombre").value = nombre_completo;
   document.getElementById("no_control").value =e.value;
   document.getElementById("id_grupo").value =id_grupo;
+  document.getElementById("id_plantel").value =id_plantel;
 
   document.getElementById("tabla_materia").innerHTML = "";
   var xhr = new XMLHttpRequest();
@@ -190,11 +194,11 @@ function cargar_datos_modal_asignar_permiso(e,id_grupo,nombre_completo) {
         fila = '<tr>';
 
         fila += '<td>';
-        fila += valor.clave;
+        fila += valor.unidad_contenido;
         fila += '</td>';
 
         fila += '<td>';
-        fila += valor.unidad_contenido;
+        fila += valor.clave;
         fila += '</td>';
 
         fila += '<td>';
@@ -270,7 +274,7 @@ function buscar() {
         fila += '</td>';
 
         fila += '<td>';
-        fila += '<button class="btn btn-lg btn-block btn-success" type="button" value="' + valor.no_control + '" onclick="cargar_datos_modal_asignar_permiso(this,\''+valor.id_grupo+'\',\''+valor.primer_apellido+' '+valor.segundo_apellido+' '+valor.nombre+'\')" data-toggle="modal" data-target="#asignar_permisos">Editar</button>';
+        fila += '<button class="btn btn-lg btn-block btn-success" type="button" value="' + valor.no_control + '" onclick="cargar_datos_modal_asignar_permiso(this,\''+valor.id_grupo+'\',\''+valor.primer_apellido+' '+valor.segundo_apellido+' '+valor.nombre+'\',\''+valor.Plantel_cct_plantel+'\')" data-toggle="modal" data-target="#asignar_permisos">Asignar permisos</button>';
         fila += '</td>';
 
 

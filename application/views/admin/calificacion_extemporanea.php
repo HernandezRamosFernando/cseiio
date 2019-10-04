@@ -18,7 +18,7 @@
           <div class="row">
             <div class="col-md-8">
               <label class="form-group has-float-label seltitulo">
-                <select class="form-control form-control-lg selcolor" id="plantel" name="plantel">
+                <select class="form-control form-control-lg selcolor" id="plantel" name="plantel" onchange="cargarsemestres()">
                 <option value="">Seleccione el plantel donde buscar el grupo</option>
                   <?php
                                         foreach ($planteles as $plantel)
@@ -140,6 +140,53 @@
 
 <script>
 
+function cargarsemestres(){
+
+var xhr = new XMLHttpRequest();
+    var plantel = document.getElementById("plantel").value;
+
+    semestre_grupo.innerHTML = "";
+    xhr.open('GET', '<?php echo base_url();?>index.php/C_permisos_extemporaneo/get_semestres_htmloption?plantel='+plantel, true);
+    xhr.onloadstart = function () {
+      $('#div_carga').show();
+    }
+    xhr.error = function () {
+      console.log("error de conexion");
+    }
+    xhr.onload = function () {
+      $('#div_carga').hide();
+      if (xhr.response === "") {
+        var option = document.createElement("option");
+        option.text = "No tiene permisos asignados";
+        option.value = "";
+        semestre_grupo.add(option);
+      } else {
+        console.log(xhr.response);
+        semestre_grupo.innerHTML = xhr.responseText;
+      }
+    };
+    xhr.send(null);
+
+
+   /* var option2 = document.createElement("option");
+    grupos.innerHTML = "";
+    option2.text = "Seleccione grupo";
+    option2.value = "";
+    grupos.add(option2);
+
+    var option3 = document.createElement("option");
+    materias.innerHTML = "";
+    option3.text = "Seleccione materia";
+    option3.value = "";
+    materias.add(option3);*/
+
+    cargargrupos();
+    cargar_materias();
+    
+
+
+}
+
 function contar_vacios_input_calificaciones() {
   var validar_tabla = document.getElementById("tablagrupo");
   var contar_vacios=0;
@@ -207,7 +254,7 @@ function contar_vacios_input_calificaciones() {
         //console.log(datos);
 
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", '<?php echo base_url();?>index.php/c_grupo_estudiante/agregar_calificaciones_materia_grupo', true);
+        xhr.open("POST", '<?php echo base_url();?>index.php/C_permisos_extemporaneo/actualizar_calificaciones_materia_grupo', true);
 
         swalWithBootstrapButtons.fire({
           type: 'info',
@@ -290,7 +337,7 @@ function contar_vacios_input_calificaciones() {
       var semestre = document.getElementById("semestre_grupo").value;
       console.log(semestre);
       grupos.innerHTML = "";
-      xhr.open('GET', '<?php echo base_url();?>index.php/c_plantel/get_grupos_plantel_htmloption?plantel=' + plantel + '&semestre=' + semestre, true);
+      xhr.open('GET', '<?php echo base_url();?>index.php/C_permisos_extemporaneo/get_semestre_grupos_htmloption?plantel=' + plantel + '&semestre=' + semestre, true);
       xhr.onloadstart = function () {
         $('#div_carga').show();
       }
@@ -311,6 +358,7 @@ function contar_vacios_input_calificaciones() {
       };
       xhr.send(null);
     }
+    cargar_materias();
   }
 
   function validarcomponente() {
@@ -338,39 +386,13 @@ function contar_vacios_input_calificaciones() {
   function cargar_materia() {
     document.getElementById("alumnos_oculto").style.display = "";
     document.getElementById("agregar_oculto").style.display = "";
-    var permisos = new XMLHttpRequest();
-    permisos.open('GET', '<?php echo base_url();?>index.php/c_permisos/get_permisos_plantel_grupo_materia?plantel=' + document.getElementById("plantel").value+'&grupo='+document.getElementById("grupos").value+'&materia='+document.getElementById("materias").value, true);
-    permisos.onloadstart = function () {
-      $('#div_carga').show();
-    }
-    permisos.error = function () {
-      console.log("error de conexion");
-    }
-
-    permisos.onload = function () {
-      $('#div_carga').hide();
-      console.log(JSON.parse(permisos.response)[0]);
-      var permisos_plantel = JSON.parse(permisos.response)[0];
-      if (permisos_plantel === undefined) {
-        var permisos_plantel = {
-          primer_parcial: "0",
-          segundo_parcial: "0",
-          tercer_parcial: "0",
-          examen_final: "0",
-          promedio_total: "0"
-        }
-
-        document.getElementById("boton_agregar").disabled=true;
-      }
-      else{
-        document.getElementById("boton_agregar").disabled=false;
-      }
+    
 
 
       //cargar inputs
       document.getElementById("tablagrupo").innerHTML = "";
       var xhr = new XMLHttpRequest();
-      xhr.open('GET', '<?php echo base_url();?>index.php/c_grupo/get_estudiantes_grupo_materia?grupo=' + document.getElementById("grupos").value + '&materia=' + document.getElementById("materias").value, true);
+      xhr.open('GET', '<?php echo base_url();?>index.php/C_permisos_extemporaneo/get_estudiantes_por_calificar_extemporaneo?grupo=' + document.getElementById("grupos").value + '&materia=' + document.getElementById("materias").value, true);
       xhr.onloadstart = function () {
         $('#div_carga').show();
       }
@@ -386,11 +408,6 @@ function contar_vacios_input_calificaciones() {
         JSON.parse(xhr.response).forEach(function (valor, indice) {
           var promedio =0;
 
-          /*if (valor.primer_parcial != null && valor.segundo_parcial != null && valor.tercer_parcial != null) {
-            promedio = (parseInt(valor.primer_parcial) + parseInt(valor.segundo_parcial) + parseInt(valor.tercer_parcial)) / 3;
-            console.log(promedio);
-            promedio = redondeo(promedio);
-          }*/
 
           var p1=0,p2=0,p3=0;
 
@@ -408,16 +425,16 @@ function contar_vacios_input_calificaciones() {
           registro += '<td>' + valor.no_control + '</td>';
           var primer_parcial = valor.primer_parcial !== null ? valor.primer_parcial : "";
 
-          if (permisos_plantel.primer_parcial === "1") {
-            registro += '<td><input type="text" class="form-control" name="primer_parcial" value="' + (primer_parcial === "0" ? "/" : primer_parcial) + '" id="primer_parcial" onchange="calificaciones(this,\''+valor.tipo+'\',2,'+indice+','+permisos_plantel.examen_final+');"></td>';
+          if (valor.p1 === "1") {
+            registro += '<td><input type="text" class="form-control" name="primer_parcial" value="' + (primer_parcial === "0" ? "/" : primer_parcial) + '" id="primer_parcial" onchange="calificaciones(this,\''+valor.tipo+'\',2,'+indice+','+valor.final+');"></td>';
           }
           else {
             registro += '<td><input type="text" class="form-control" name="primer_parcial" value="' + (primer_parcial === "0" ? "/" : primer_parcial) + '" id="primer_parcial" disabled></td>';
           }
 
           var segundo_parcial = valor.segundo_parcial !== null ? valor.segundo_parcial : "";
-          if (permisos_plantel.segundo_parcial === "1") {
-            registro += '<td><input type="text" class="form-control" name="segundo_parcial" value="' + (segundo_parcial === "0" ? "/" : segundo_parcial) + '" id="segundo_parcial"  onchange="calificaciones(this,\''+valor.tipo+'\',3,'+indice+','+permisos_plantel.examen_final+');"></td>';
+          if (valor.p2 === "1") {
+            registro += '<td><input type="text" class="form-control" name="segundo_parcial" value="' + (segundo_parcial === "0" ? "/" : segundo_parcial) + '" id="segundo_parcial"  onchange="calificaciones(this,\''+valor.tipo+'\',3,'+indice+','+valor.final+');"></td>';
           }
 
           else {
@@ -426,8 +443,8 @@ function contar_vacios_input_calificaciones() {
           }
 
           var tercer_parcial = valor.tercer_parcial !== null ? valor.tercer_parcial : "";
-          if (permisos_plantel.tercer_parcial === "1") {
-            registro += '<td><input type="text" class="form-control" name="tercer_parcial" value="' + (tercer_parcial === "0" ? "/" : tercer_parcial) + '" id="tercer_parcial" onchange="calificaciones(this,\''+valor.tipo+'\',4,'+indice+','+permisos_plantel.examen_final+');"></td>';
+          if (valor.p3 === "1") {
+            registro += '<td><input type="text" class="form-control" name="tercer_parcial" value="' + (tercer_parcial === "0" ? "/" : tercer_parcial) + '" id="tercer_parcial" onchange="calificaciones(this,\''+valor.tipo+'\',4,'+indice+','+valor.final+');"></td>';
           }
           else {
             registro += '<td><input type="text" class="form-control" name="tercer_parcial" value="' + (tercer_parcial === "0" ? "/" : tercer_parcial) + '" id="tercer_parcial" disabled></td>';
@@ -442,12 +459,12 @@ function contar_vacios_input_calificaciones() {
           
 
           var examen_final = valor.examen_final !== null ? valor.examen_final : "";
-          if (permisos_plantel.examen_final === "1" && promedio >= 6) {
-            registro += '<td><input type="text" class="form-control" name="examen_final" value="' + (examen_final === "0" ? "/" : examen_final) + '" id="examen_final" onchange="calificaciones(this,\''+valor.tipo+'\',6,'+indice+','+permisos_plantel.examen_final+');"></td>';
-          } else if (permisos_plantel.examen_final === "1" && promedio < 6) {
-            registro += '<td><input type="text" class="form-control" name="examen_final" value="/" id="examen_final" onchange="calificaciones(this,\''+valor.tipo+'\',6,'+indice+','+permisos_plantel.examen_final+');" disabled></td>';
+          if (valor.final === "1" && promedio >= 6) {
+            registro += '<td><input type="text" class="form-control" name="examen_final" value="' + (examen_final === "0" ? "/" : examen_final) + '" id="examen_final" onchange="calificaciones(this,\''+valor.tipo+'\',6,'+indice+','+valor.final+');"></td>';
+          } else if (valor.final === "1" && promedio < 6) {
+            registro += '<td><input type="text" class="form-control" name="examen_final" value="/" id="examen_final" onchange="calificaciones(this,\''+valor.tipo+'\',6,'+indice+','+valor.final+');" disabled></td>';
           } else {
-            registro += '<td><input type="text" class="form-control" name="examen_final" value="' + (examen_final === "0" ? "/" : examen_final) + '" onchange="calificaciones(this,\''+valor.tipo+'\',6,'+indice+','+permisos_plantel.examen_final+');" id="examen_final" disabled></td>';
+            registro += '<td><input type="text" class="form-control" name="examen_final" value="' + (examen_final === "0" ? "/" : examen_final) + '" onchange="calificaciones(this,\''+valor.tipo+'\',6,'+indice+','+valor.final+');" id="examen_final" disabled></td>';
           }
           
           var promedio_total= redondeo((promedio+parseInt(ef))/2);
@@ -470,12 +487,7 @@ function contar_vacios_input_calificaciones() {
 
       xhr.send(null);
       cambiarbusqueda();
-      //fin cargar inputs
-    };
-
-    permisos.send(null);
-    /*
-        */
+     
 
   }
 
@@ -483,7 +495,7 @@ function contar_vacios_input_calificaciones() {
   function cargar_materias() {
     if (document.getElementById("grupos").value != "") {
       var xhr = new XMLHttpRequest();
-      xhr.open('GET', '<?php echo base_url();?>index.php/c_grupo/get_materias_grupo_por_calificar?grupo=' + document.getElementById("grupos").value, true);
+      xhr.open('GET', '<?php echo base_url();?>index.php/C_permisos_extemporaneo/get_materias_por_calificar_extemporaneo?grupo=' + document.getElementById("grupos").value, true);
       xhr.onloadstart = function () {
         $('#div_carga').show();
       }

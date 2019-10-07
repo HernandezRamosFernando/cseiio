@@ -10,6 +10,12 @@ class C_permisos_extemporaneo extends CI_Controller {
         $this->load->model("M_permisos_extemporaneo");
     }
 
+    public function busqueda_alumnos_grupo(){
+        $curp = $this->input->get('curp');
+        $cct_plantel = $this->input->get('cct_plantel');
+        echo json_encode($this->M_permisos_extemporaneo->busqueda_alumnos_grupo($curp,$cct_plantel));
+    }
+
     public function actualizar_calificaciones_materia_grupo(){
         $datos = json_decode($this->input->raw_input_stream);
         echo $this->M_permisos_extemporaneo->actualizar_calificaciones_materia_grupo($datos);
@@ -65,6 +71,11 @@ class C_permisos_extemporaneo extends CI_Controller {
     public function permisos_cal_extemporaneo_plantel(){
         $plantel = $this->input->get("plantel");
         echo json_encode($this->M_permisos_extemporaneo->permisos_cal_extemporaneo_plantel($plantel));
+    }
+
+    public function lista_permisos(){
+ 
+        echo json_encode($this->M_permisos_extemporaneo->lista_permisos());
     }
 
 }

@@ -4,12 +4,20 @@ class M_permisos_extemporaneo extends CI_Model {
       parent::__construct();
    }
 
+   public function lista_permisos(){
+    return $this->db->query("SELECT *,if(curdate() between fecha_inicio and fecha_fin,1,0) as fecha FROM Permisos_extemporaneo p inner join Estudiante e on e.no_control=p.Estudiante_no_control where p.estatus=1 order by primer_apellido,segundo_apellido,nombre;")->result();
+}
+
+   public function busqueda_alumnos_grupo($curp,$cct_plantel){
+    return $this->db->query("SELECT * FROM Estudiante e inner join Grupo_Estudiante ge on e.no_control=ge.Estudiante_no_control inner join Grupo g on ge.Grupo_id_grupo=g.id_grupo where g.estatus=1 and curp like '%".$curp."%' and Plantel_cct_plantel like '%".$cct_plantel."%' group by e.no_control order by e.primer_apellido,e.segundo_apellido,e.nombre,e.semestre_en_curso;")->result();
+}
+   
    public function permisos_cal_extemporaneo_plantel($plantel){
-    return $this->db->query("SELECT count(*) permiso from Permisos_extemporaneo where estatus=1 and curdate()>=fecha_inicio and curdate()<=fecha_fin and Plantel_cct_plantel='".$plantel."';")->result();
+    return $this->db->query("SELECT * from Permisos_extemporaneo where estatus=1 and curdate()>=fecha_inicio and curdate()<=fecha_fin and Plantel_cct_plantel='".$plantel."';")->result();
 }
 
    function get_estudiantes_por_calificar_extemporaneo($id_grupo,$id_materia){
-    $registros = $this->db->query("SELECT *,p.primer_parcial as p1,p.segundo_parcial as p2,p.tercer_parcial as p3,p.examen_final as final FROM Permisos_extemporaneo p inner join Estudiante e on e.no_control=p.Estudiante_no_control inner join Grupo_estudiante ge on e.no_control=ge.Estudiante_no_control inner join Materia m on ge.id_materia=m.clave where id_grupo='".$id_grupo."' and p.estatus=1 and p.id_materia='".$id_materia."' and ge.id_materia='".$id_materia."' group by e.no_control order by primer_apellido,segundo_apellido,nombre;")->result();
+    $registros = $this->db->query("SELECT *,p.primer_parcial as p1,p.segundo_parcial as p2,p.tercer_parcial as p3,p.examen_final as final FROM Permisos_extemporaneo p inner join Estudiante e on e.no_control=p.Estudiante_no_control inner join Grupo_Estudiante ge on e.no_control=ge.Estudiante_no_control inner join Materia m on ge.id_materia=m.clave where id_grupo='".$id_grupo."' and p.estatus=1 and p.id_materia='".$id_materia."' and ge.id_materia='".$id_materia."' group by e.no_control order by primer_apellido,segundo_apellido,nombre;")->result();
     return $registros;
  }
   
@@ -40,7 +48,7 @@ class M_permisos_extemporaneo extends CI_Model {
 
 
    public function get_datos_materia($id_grupo){
-        return $this->db->query("select clave, unidad_contenido from Grupo_estudiante ge inner join Materia m on ge.id_materia=m.clave where Grupo_id_grupo='".$id_grupo."' group by ge.id_materia order by unidad_contenido")->result();
+        return $this->db->query("select clave, unidad_contenido from Grupo_Estudiante ge inner join Materia m on ge.id_materia=m.clave where Grupo_id_grupo='".$id_grupo."' group by ge.id_materia order by unidad_contenido")->result();
     }
 
     public function agregar_permiso($respuesta,$no_control,$id_grupo,$fecha_inicio,$fecha_fin,$id_plantel){

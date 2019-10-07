@@ -239,7 +239,7 @@ function buscar() {
     var curp = document.getElementById("aspirante_curp_busqueda").value;
     var plantel = document.getElementById("aspirante_plantel_busqueda").value;
     var query = 'curp=' + curp + '&cct_plantel=' + plantel;
-    xhr.open('GET', '<?php echo base_url();?>index.php/C_grupo_estudiante/busqueda_alumnos_grupo?' + query, true);
+    xhr.open('GET', '<?php echo base_url();?>index.php/C_permisos_extemporaneo/busqueda_alumnos_grupo?' + query, true);
     xhr.onloadstart = function () {
       $('#div_carga').show();
     }

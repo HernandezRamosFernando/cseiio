@@ -150,6 +150,31 @@
 
 
 
+<!--Empieza modal-->
+
+<div class="modal" tabindex="-1" role="dialog" id="modal_opcion_eliminar">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Mensaje de advertencia</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Seleccione las siguientes opciones</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" name="opcion_eliminar" value="cambiar_grupo" onclick="cambiar_grupo()">Cambiar de grupo</button>
+        <button type="button" class="btn btn-danger" name="opcion_eliminar" value="eliminar" onclick="eliminar_de_grupo()">Eliminar</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Termina modal-->
+
 <script>
 
   function validarcomponente() {
@@ -605,7 +630,34 @@
   }
 
 
+  function eliminar_de_grupo(e) {
+    swalWithBootstrapButtons.fire({
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Aceptar',
+                    cancelButtonText: 'Cancelar',
+                    text: 'Si elimina al alumno se perderán sus datos de grupo actual',
+                  }).then((result) => {
+                    if (result.value) {
+                      //aqui va el aceptar
+                      $(document).scrollTop(0);
+                      location.reload();
+                    }
+                    //aqui va si cancela
+                  });
+   
+}
+
+function cambiar_grupo(e) {
+   
+  }
+
+
   function eliminar(e) {
+
+    
+    $('#modal_opcion_eliminar').modal('show');
+         
     var alumnos = document.getElementById("tabla_completa_grupo").children[2].children;
     var alumnos_json = new Array();
     for (let i = 0; i < alumnos.length; i++) {

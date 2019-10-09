@@ -183,4 +183,8 @@ public function director_plantel($grupo){
 }
 
 
+public function get_lista_grupos_estudiante($no_control){
+    return $this->db->query("SELECT id_grupo,nombre_grupo FROM Grupo g inner join Estudiante e on g.plantel=e.Plantel_cct_plantel where e.no_control='".$no_control."' and e.semestre_en_curso=g.semestre and g.estatus=1;")->result();
+}
+
 }

@@ -161,14 +161,33 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+      <form id="cambiar_grupo">
       <div class="modal-body">
-        <p>Seleccione las siguientes opciones</p>
+        <p>No puede eliminar al estudiante del grupo actual debido a que tiene calificaciones asignadas hasta <span id="estatus_calificacion_parcial" style="font-weight: bold;"></span></p>
+        <p>¿Desea cambialo de grupo? </p>
+        
+        <input type="hidden" id="no_control_alumno" name="no_control_alumno">
+        
+        <div class="form-group">
+            <div class="row">
+            <div class="col-md-12">
+          <label class="form-group has-float-label seltitulo">
+                  <select class="form-control form-control-lg selcolor" name="grupo_cambiar" id="grupo_cambiar" required="required" onclick='validar_grupo_alumnos(this)'>
+                    <option value="">Seleccione el grupo</option>
+                  </select>
+                  <span>Lista de grupos</span>
+                </label>
+              </div>
+              </div>
+              </div>
+
+
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-success" name="opcion_eliminar" value="cambiar_grupo" onclick="cambiar_grupo()">Cambiar de grupo</button>
-        <button type="button" class="btn btn-danger" name="opcion_eliminar" value="eliminar" onclick="eliminar_de_grupo()">Eliminar</button>
+        <button type="submit" class="btn btn-success" name="opcion_eliminar" value="cambiar_grupo" onclick="">Guardar</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
       </div>
+      </form>
     </div>
   </div>
 </div>
@@ -708,7 +727,24 @@ function cambiar_grupo(e) {
 
         }//TErmina condicion si i el alumno no ha realizado ninguna evaluacion entra aqui
           else if(num_parcial>0 && num_parcial<=3){//Empieza validacion si num_parcial es menor o igual a 3
+            var lista_grupo = new XMLHttpRequest();
+            lista_grupo.open('GET', '<?php echo base_url();?>index.php/C_grupo/get_lista_grupos_estudiante/'+e.value, true);
+            lista_grupo.onloadstart = function(){
+                    $('#div_carga').show();
+                  }
+                  lista_grupo.error = function (){
+                    console.log("error de conexion");
+                  }
+                  lista_grupo.onload = function(){
+                    $('#div_carga').hide();
+                    document.getElementById("grupo_cambiar").innerHTML = lista_grupo.responseText;
+                    
+                  }
 
+                  lista_grupo.send(null);
+            
+            document.getElementById('estatus_calificacion_parcial').innerHTML =parciales_presentados;
+            document.getElementById('no_control_alumno').value=e.value;
             $('#modal_cambiar_grupo').modal('show');
           }//Termina si es menor a tercer parcial
           else{ // Si ek numero de parciales es examen final
@@ -729,6 +765,75 @@ function cambiar_grupo(e) {
     console.log(alumnos_json);
   }
 
+
+  var form = document.getElementById("cambiar_grupo");
+	form.onsubmit = function(e){
+		e.preventDefault();
+		var formdata = new FormData(form);
+		var xhr =  new XMLHttpRequest();
+		xhr.open("POST","<?php echo base_url();?>index.php/C_grupo/modificar_grupo",true);
+    xhr.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      xhr.error = function (){
+        console.log("error de conexion");
+      }
+  xhr.onreadystatechange = function () {
+    if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+      $('#div_carga').hide();
+      if(xhr.responseText==="si"){
+        Swal.fire({
+            type: 'success',
+            scrollbarPadding:false,
+            title: 'Materia agregada',
+            showConfirmButton: false,
+            timer: 2500 
+          });
+
+          $('#modalnuevamateria').modal('toggle');
+          borrar_formato_tabla();
+          cargar_tabla();
+      }
+
+      else{
+        Swal.fire({
+            type: 'error',
+            scrollbarPadding:false,
+            title: 'Ocurrio un error al agregar los datos',
+            showConfirmButton: false,
+            timer: 2500 
+          });
+      }
+      
+
+    }
+}
+		xhr.send(formdata);
+		
+	}
+
+
+  function validar_grupo_alumnos(e){
+    var id_grupo="";
+    var id_grupo_actual="";
+    id_grupo_actual=document.getElementById("grupos").value;
+    id_grupo=e.value;
+
+    if(id_grupo==id_grupo_actual){
+      Swal.fire({
+            type: 'error',
+            scrollbarPadding:false,
+            title: 'No puede seleccionar el grupo actual donde se encuentra el estudiante',
+            showConfirmButton: false,
+            timer: 2500 
+          });
+
+          document.getElementById('grupo_cambiar').value="";
+    }
+    
+
+
+  }
 
 </script>
 

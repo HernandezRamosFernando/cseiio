@@ -101,6 +101,30 @@ public function get_num_estudiantes_grupo(){
 
 }
 
+public function get_lista_grupos_estudiante(){
+    $no_control = $this->uri->segment(3);
+    $respuesta = "";
+    $respuesta.='<option value="">Seleccione un grupo</option>';
+    foreach($this->M_grupo->get_lista_grupos_estudiante($no_control) as $grupo){
+        $respuesta .= '<option value="'.$grupo->id_grupo.'">'.mb_strtoupper($grupo->nombre_grupo).'</option>';
+    }
+
+    echo $respuesta;
+}
+
+public function modificar_grupo(){
+    
+     $num_alumnos=0;
+     $num_alumnos=$this->M_grupo->get_num_alumnos_grupo($id_grupo)[0]->num_alumnos;
+     if($num_alumnos<35){
+         $dato['exto']
+     }
+     else{
+         $dato['error']="El grupo seleccionado ha superado el limite permitido de alumnos.";
+     }
+     echo json_encode($dato);
+}
+
 }
 ?>
 

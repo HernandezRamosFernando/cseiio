@@ -5,6 +5,10 @@ class M_estudiante extends CI_Model {
       
    }
 
+   public function obtener_datos_parciales($no_control){
+      return $this->db->query("SELECT *,sum(if(primer_parcial is not null,1,0)) as p1,sum(if(segundo_parcial is not null,1,0)) as p2,sum(if(tercer_parcial is not null,1,0)) as p3,sum(if(examen_final is not null,1,0)) as ef FROM Grupo_Estudiante ge inner join Grupo g on g.id_grupo=ge.Grupo_id_grupo where ge.Estudiante_no_control='".$no_control."' and g.estatus=1;")->result()[0];
+ }
+
    public function obtener_nombre_tutor_estudiante($no_control){
         return $this->db->query("select nombre_tutor,primer_apellido_tutor,segundo_apellido_tutor from Estudiante_Tutor as et inner join Tutor as t on et.Tutor_id_tutor=t.id_tutor where et.Estudiante_no_control='".$no_control."'")->result()[0];
    }

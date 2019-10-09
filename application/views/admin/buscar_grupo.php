@@ -152,7 +152,7 @@
 
 <!--Empieza modal-->
 
-<div class="modal" tabindex="-1" role="dialog" id="modal_opcion_eliminar">
+<div class="modal" tabindex="-1" role="dialog" id="modal_cambiar_grupo">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -656,7 +656,67 @@ function cambiar_grupo(e) {
   function eliminar(e) {
 
     
-    $('#modal_opcion_eliminar').modal('show');
+   // $('#modal_opcion_eliminar').modal('show');
+    
+   var xhr = new XMLHttpRequest();
+      xhr.open('GET', '<?php echo base_url();?>index.php/C_estudiante/obtener_datos_parciales/'+e.value, true);
+      xhr.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      xhr.error = function (){
+        console.log("error de conexion");
+      }
+      xhr.onload = function(){
+        $('#div_carga').hide();
+        console.log(JSON.parse(xhr.response));
+        let datos = JSON.parse(xhr.response);
+        //datos personales
+        var parciales_presentados='Ninguno';
+        var num_parcial=0;
+        if(datos.p1>0 && datos.p2==0 && datos.p3==0 && datos.ef==0){
+          parciales_presentados='Primer parcial';
+          num_parcial=1;
+        }
+        if(datos.p2>0 && datos.p2>0 && datos.p3==0 && datos.ef==0){
+          parciales_presentados='Segundo parcial';
+          num_parcial=2;
+        }
+        if(datos.p3>0 && datos.p2>0 && datos.p3>0 && datos.ef==0){
+          parciales_presentados='Tercer parcial';
+          num_parcial=3;
+        }
+        if(datos.p3>0 && datos.p2>0 && datos.p3>0 && datos.ef>0){
+          parciales_presentados='Examen final';
+          num_parcial=4;
+        }
+
+        if(num_parcial==0){// Si el alumno no ha realizado ninguna evaluacion entra aqui
+          swalWithBootstrapButtons.fire({
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Aceptar',
+                    cancelButtonText: 'Cancelar',
+                    text: 'Desea eliminar al alumno del grupo?',
+                  }).then((result) => {
+                    if (result.value) {
+                      //aqui va el aceptar
+                      $(document).scrollTop(0);
+                      location.reload();
+                    }
+                    //aqui va si cancela
+                  });
+
+        }//TErmina condicion si i el alumno no ha realizado ninguna evaluacion entra aqui
+          else if(num_parcial>0 && num_parcial<=3){//Empieza validacion si num_parcial es menor o igual a 3
+
+            $('#modal_cambiar_grupo').modal('show');
+          }//Termina si es menor a tercer parcial
+          else{ // Si ek numero de parciales es examen final
+
+          }
+      }
+
+      xhr.send(null);
          
     var alumnos = document.getElementById("tabla_completa_grupo").children[2].children;
     var alumnos_json = new Array();

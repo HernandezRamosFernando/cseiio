@@ -20,7 +20,10 @@ class C_estudiante extends CI_Controller {
 
     }
 
-
+    public function obtener_datos_parciales(){
+        $no_control = $this->uri->segment(3);
+        echo json_encode($this->M_estudiante->obtener_datos_parciales($no_control));
+    }
     
 
 

@@ -6,6 +6,7 @@ class C_grupo extends CI_Controller
     public function __construct(){
         parent::__construct();
         $this->load->model('M_grupo');
+        $this->load->model('M_friae');
     }
 
     public function get_existe_grupo(){
@@ -114,15 +115,22 @@ public function get_lista_grupos_estudiante(){
 
 public function modificar_grupo(){
     
+    $no_control= $this->input->post("no_control_alumno");
+    $id_grupo_destino = $this->input->post("id_grupo_destino");
+    $id_grupo_a_modificar = $this->input->post("id_grupo_a_modificar");
      $num_alumnos=0;
-     $num_alumnos=$this->M_grupo->get_num_alumnos_grupo($id_grupo)[0]->num_alumnos;
+     $num_alumnos=$this->M_grupo->get_num_alumnos_grupo($id_grupo_destino)[0]->num_alumnos;
+     $id_friae_destino=$this->M_friae->id_friae($id_grupo_destino)[0]->folio;
+     
      if($num_alumnos<35){
-         $dato['exto']
-     }
+        echo json_encode($this->M_grupo->actualizar_estudiante_grupo($no_control,$id_grupo_a_modificar,$id_grupo_destino,$id_friae_destino));
+        
+    }
      else{
-         $dato['error']="El grupo seleccionado ha superado el limite permitido de alumnos.";
+        
+         echo json_encode(array ('error'=>"El grupo seleccionado ha superado el limite permitido de alumnos."));
      }
-     echo json_encode($dato);
+     
 }
 
 }

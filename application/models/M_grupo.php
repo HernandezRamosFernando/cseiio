@@ -186,5 +186,41 @@ public function director_plantel($grupo){
 public function get_lista_grupos_estudiante($no_control){
     return $this->db->query("SELECT id_grupo,nombre_grupo FROM Grupo g inner join Estudiante e on g.plantel=e.Plantel_cct_plantel where e.no_control='".$no_control."' and e.semestre_en_curso=g.semestre and g.estatus=1;")->result();
 }
+//--------------------------------------------------
+public function actualizar_estudiante_grupo($no_control,$id_grupo_a_modificar,$id_grupo_destino,$id_friae_destino){
+    $this->db->trans_start();
+
+    $materias_estudiante = $this->db->query("select id_materia,id_asesor,Grupo_id_grupo from Grupo_Estudiante where Grupo_id_grupo='".$id_grupo_destino."' group by id_materia;")->result();
+               
+            $this->db->set('Grupo_id_grupo',$id_grupo_destino);
+            $this->db->where('Estudiante_no_control',$no_control);
+            $this->db->where('Grupo_id_grupo',$id_grupo_a_modificar);
+            $this->db->update('Grupo_Estudiante');
+
+            foreach($materias_estudiante as $m){
+                $this->db->set('id_asesor',$m->id_asesor);
+                $this->db->where('Estudiante_no_control',$no_control);
+                $this->db->where('id_materia',$m->id_materia);
+                $this->db->where('Grupo_id_grupo',$m->Grupo_id_grupo);
+                $this->db->update('Grupo_Estudiante');
+            }
+
+            $this->db->set('Friae_folio',$id_friae_destino);
+                 $this->db->where('Estudiante_no_control',$no_control);
+                 $this->db->where('Friae_folio',$id_grupo_a_modificar);
+                 $this->db->update('Friae_Estudiante');
+
+    $this->db->trans_complete();
+    if ($this->db->trans_status() === FALSE)
+        {
+            return array('error'=>"Ha ocurrido un error.");
+            
+        }
+              
+    else{
+           return array('exito'=>"Los datos han sido actualizados correctamente.");
+             
+        }
+}
 
 }

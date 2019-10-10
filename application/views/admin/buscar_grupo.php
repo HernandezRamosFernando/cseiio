@@ -167,12 +167,13 @@
         <p>¿Desea cambialo de grupo? </p>
         
         <input type="hidden" id="no_control_alumno" name="no_control_alumno">
+        <input type="hidden" id="id_grupo_a_modificar" name="id_grupo_a_modificar">
         
         <div class="form-group">
             <div class="row">
             <div class="col-md-12">
           <label class="form-group has-float-label seltitulo">
-                  <select class="form-control form-control-lg selcolor" name="grupo_cambiar" id="grupo_cambiar" required="required" onclick='validar_grupo_alumnos(this)'>
+                  <select class="form-control form-control-lg selcolor" name="id_grupo_destino" id="id_grupo_destino" required="required" onclick='validar_grupo_alumnos(this)'>
                     <option value="">Seleccione el grupo</option>
                   </select>
                   <span>Lista de grupos</span>
@@ -737,12 +738,12 @@ function cambiar_grupo(e) {
                   }
                   lista_grupo.onload = function(){
                     $('#div_carga').hide();
-                    document.getElementById("grupo_cambiar").innerHTML = lista_grupo.responseText;
+                    document.getElementById("id_grupo_destino").innerHTML = lista_grupo.responseText;
                     
                   }
 
                   lista_grupo.send(null);
-            
+            document.getElementById('id_grupo_a_modificar').value=document.getElementById('grupos').value
             document.getElementById('estatus_calificacion_parcial').innerHTML =parciales_presentados;
             document.getElementById('no_control_alumno').value=e.value;
             $('#modal_cambiar_grupo').modal('show');
@@ -781,25 +782,26 @@ function cambiar_grupo(e) {
   xhr.onreadystatechange = function () {
     if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
       $('#div_carga').hide();
-      if(xhr.responseText==="si"){
+      let datos = JSON.parse(xhr.response);
+      if (typeof datos.exito !== 'undefined'){
+      
         Swal.fire({
             type: 'success',
             scrollbarPadding:false,
-            title: 'Materia agregada',
+            title: datos.exito,
             showConfirmButton: false,
             timer: 2500 
           });
 
-          $('#modalnuevamateria').modal('toggle');
-          borrar_formato_tabla();
-          cargar_tabla();
+          $('#modal_cambiar_grupo').modal('toggle');
+          
       }
 
-      else{
+      if (typeof datos.error !== 'undefined'){
         Swal.fire({
             type: 'error',
             scrollbarPadding:false,
-            title: 'Ocurrio un error al agregar los datos',
+            title: datos.error,
             showConfirmButton: false,
             timer: 2500 
           });
@@ -828,7 +830,7 @@ function cambiar_grupo(e) {
             timer: 2500 
           });
 
-          document.getElementById('grupo_cambiar').value="";
+          document.getElementById('id_grupo_destino').value="";
     }
     
 

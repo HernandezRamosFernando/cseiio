@@ -70,7 +70,13 @@ class C_permisos_extemporaneo extends CI_Controller {
 
     public function permisos_cal_extemporaneo_plantel(){
         $plantel = $this->input->get("plantel");
-        echo json_encode($this->M_permisos_extemporaneo->permisos_cal_extemporaneo_plantel($plantel));
+        if($plantel!=''){
+            echo json_encode($this->M_permisos_extemporaneo->permisos_cal_extemporaneo_plantel($plantel));
+        }
+        else{
+            echo json_encode(array());
+        }
+        
     }
 
     public function lista_permisos(){

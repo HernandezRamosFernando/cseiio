@@ -48,7 +48,7 @@ class M_permisos_extemporaneo extends CI_Model {
 
 
    public function get_datos_materia($id_grupo){
-        return $this->db->query("select clave, unidad_contenido from Grupo_Estudiante ge inner join Materia m on ge.id_materia=m.clave where Grupo_id_grupo='".$id_grupo."' group by ge.id_materia order by unidad_contenido")->result();
+        return $this->db->query("select clave, unidad_contenido from Grupo_Estudiante ge inner join Materia m on ge.id_materia=m.clave where Grupo_id_grupo='".$id_grupo."' group by ge.id_materia order by ge.id_materia")->result();
     }
 
     public function agregar_permiso($respuesta,$no_control,$id_grupo,$fecha_inicio,$fecha_fin,$id_plantel){

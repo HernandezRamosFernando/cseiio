@@ -168,6 +168,8 @@
         
         <input type="hidden" id="no_control_alumno" name="no_control_alumno">
         <input type="hidden" id="id_grupo_a_modificar" name="id_grupo_a_modificar">
+        <input type="hidden" id="id_fila_seleccionada" name="id_fila_seleccionada">
+        
         
         <div class="form-group">
             <div class="row">
@@ -395,9 +397,11 @@
     }
     xhr.onload = function () {
       $('#div_carga').hide();
+      var cont=1;
       JSON.parse(xhr.response).forEach(function (valor, indice) {
         //console.log(valor);
-        var fila = '<tr>';
+        
+        var fila = '<tr id="fila'+cont+'">';
         fila += '<td>';
         fila += valor.primer_apellido + " " + valor.segundo_apellido + " " + valor.nombre;
         fila += '</td>';
@@ -407,11 +411,12 @@
         fila += '<td>';
         fila += valor.sexo;
         fila += '</td>';
-        fila += '<td class="">';
-        fila += '<button class="btn btn-lg btn-block btn-danger" type="button" value="' + valor.no_control + '" id="botoncambio" onclick="eliminar(this)" >Eliminar</button>';
+        fila += '<td class="" >';
+        fila += '<button class="btn btn-lg btn-block btn-danger" type="button" value="' + valor.no_control + '" id="botoncambio" onclick="eliminar(\'fila'+cont+'\',this)" >Eliminar</button>';
         fila += '</td>';
         fila += '</tr>';
         document.getElementById("tablagrupo").innerHTML += fila;
+        cont=cont+1;
       });
       //formato_tabla();
 
@@ -673,9 +678,9 @@ function cambiar_grupo(e) {
   }
 
 
-  function eliminar(e) {
-
-    
+  function eliminar(fila_seleccionada,e) {
+    console.log("Este es el valor de seleccionado");
+    console.log(e);
    // $('#modal_opcion_eliminar').modal('show');
     
    var xhr = new XMLHttpRequest();
@@ -720,8 +725,9 @@ function cambiar_grupo(e) {
                   }).then((result) => {
                     if (result.value) {
                       //aqui va el aceptar
-                      $(document).scrollTop(0);
-                      location.reload();
+                     /* $(document).scrollTop(0);
+                      location.reload();*/
+                      
                     }
                     //aqui va si cancela
                   });
@@ -743,7 +749,8 @@ function cambiar_grupo(e) {
                   }
 
                   lista_grupo.send(null);
-            document.getElementById('id_grupo_a_modificar').value=document.getElementById('grupos').value
+            document.getElementById('id_fila_seleccionada').value=fila_seleccionada;
+            document.getElementById('id_grupo_a_modificar').value=document.getElementById('grupos').value;
             document.getElementById('estatus_calificacion_parcial').innerHTML =parciales_presentados;
             document.getElementById('no_control_alumno').value=e.value;
             $('#modal_cambiar_grupo').modal('show');
@@ -755,15 +762,17 @@ function cambiar_grupo(e) {
 
       xhr.send(null);
          
-    var alumnos = document.getElementById("tabla_completa_grupo").children[2].children;
+    /*var alumnos = document.getElementById("tabla_completa_grupo").children[2].children;
     var alumnos_json = new Array();
     for (let i = 0; i < alumnos.length; i++) {
       alumnos_json.push(alumnos[i].children[1].innerText);
     }
-    $(e).parents('tr').detach();
+    console.log(alumnos_json);
+    */
+    
     contador_tablas();
 
-    console.log(alumnos_json);
+    
   }
 
 
@@ -792,7 +801,8 @@ function cambiar_grupo(e) {
             showConfirmButton: false,
             timer: 2500 
           });
-
+         
+          $('#'+document.getElementById('id_fila_seleccionada').value).remove();
           $('#modal_cambiar_grupo').modal('toggle');
           
       }

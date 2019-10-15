@@ -103,10 +103,12 @@ public function get_num_estudiantes_grupo(){
 }
 
 public function get_lista_grupos_estudiante(){
-    $no_control = $this->uri->segment(3);
+    $plantel = $this->input->get("plantel");
+    $grupo = $this->input->get("grupo");
+    $semestre_grupo = $this->input->get("semestre");
     $respuesta = "";
     $respuesta.='<option value="">Seleccione un grupo</option>';
-    foreach($this->M_grupo->get_lista_grupos_estudiante($no_control) as $grupo){
+    foreach($this->M_grupo->get_lista_grupos_estudiante($plantel,$grupo,$semestre_grupo) as $grupo){
         $respuesta .= '<option value="'.$grupo->id_grupo.'">'.mb_strtoupper($grupo->nombre_grupo).'</option>';
     }
 

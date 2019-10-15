@@ -183,8 +183,17 @@ public function director_plantel($grupo){
 }
 
 
-public function get_lista_grupos_estudiante($no_control){
-    return $this->db->query("SELECT id_grupo,nombre_grupo FROM Grupo g inner join Estudiante e on g.plantel=e.Plantel_cct_plantel where e.no_control='".$no_control."' and e.semestre_en_curso=g.semestre and g.estatus=1;")->result();
+public function get_lista_grupos_estudiante($plantel,$grupo,$semestre_grupo){
+    if($semestre_grupo>=5){
+        
+        $componente = explode("-", $grupo);
+        $componente=$componente[1];
+        return $this->db->query("SELECT id_grupo,nombre_grupo FROM Grupo g where g.plantel='".$plantel."' and g.semestre=".$semestre_grupo." and g.estatus=1 and nombre_grupo like '%-".$componente."%';")->result();
+    }
+    else{
+        return $this->db->query("SELECT id_grupo,nombre_grupo FROM Grupo g where g.plantel='".$plantel."' and g.semestre='".$semestre_grupo."' and g.estatus=1;")->result();
+    }
+    
 }
 //--------------------------------------------------
 public function actualizar_estudiante_grupo($no_control,$id_grupo_a_modificar,$id_grupo_destino,$id_friae_destino){
@@ -210,6 +219,12 @@ public function actualizar_estudiante_grupo($no_control,$id_grupo_a_modificar,$i
                  $this->db->where('Friae_folio',$id_grupo_a_modificar);
                  $this->db->update('Friae_Estudiante');
 
+                $num_alumnos= $this->get_num_alumnos_grupo($id_grupo_a_modificar)[0]->num_alumnos;
+                
+                if($num_alumnos==0){
+                    $this->db->query("delete from Grupo where id_grupo='".$id_grupo_a_modificar."'");
+                }
+                 
     $this->db->trans_complete();
     if ($this->db->trans_status() === FALSE)
         {

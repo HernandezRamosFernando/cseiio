@@ -753,7 +753,13 @@ function cambiar_grupo(e) {
             $('#modal_cambiar_grupo').modal('show');
           }//Termina si es menor a tercer parcial
           else{ // Si ek numero de parciales es examen final
-
+                  Swal.fire({
+                  type: 'error',
+                  scrollbarPadding:false,
+                  title: "No puede realizar la modificación del grupo, consulte al Depto. de Control Escolar.",
+                  showConfirmButton: false,
+                  timer: 2500 
+                });
           }
       }
 

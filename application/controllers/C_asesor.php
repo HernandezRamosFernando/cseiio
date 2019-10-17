@@ -15,4 +15,11 @@ class C_asesor extends CI_Controller
         echo $this->M_asesor->get_asesores_plantel($id_plantel);
     }
 
+    public function buscar_asesores_plantel(){
+        $plantel = $this->input->get("cct_plantel");
+        $curp = $this->input->get("curp");
+        echo $this->M_asesor->buscar_asesores_plantel($curp,$plantel);
+    }
+
+
 }

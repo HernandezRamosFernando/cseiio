@@ -257,6 +257,9 @@ $observaciones='';
 $cont=1;
 $num_alumno=1;
 
+$tmp_semestre_en_curso="";
+$tmp_nombre_grupo="";
+
 foreach ($lista_doc as $lista) {
 
 if($tmp_num_control==''){
@@ -276,26 +279,34 @@ if($lista->nombre_grupo!=null){
 if($tmp_num_control!=$lista->no_control){
 	$html_2.='<tr>
 		<td WIDTH="5%" >'.$num_alumno.'</td>
-		<td WIDTH="10%">'.semestre_en_letra($lista->semestre_en_curso).' "'.$nombre_del_grupo.'"</td>
+		<td WIDTH="10%">'.$tmp_semestre_en_curso.' "'.$tmp_nombre_grupo.'"</td>
 		<td WIDTH="35%" >'.$nombre_completo.'</td>
 		<td WIDTH="50%">'.$lista_observaciones.'</td></tr>';
 	$tmp_num_control=$lista->no_control;
 	$lista_observaciones='';
 	$nombre_completo='';
 	$num_alumno++;
+	$tmp_semestre_en_curso="";
+	$tmp_nombre_grupo="";
+
 	
 }
+
 
 if(strlen($lista_observaciones)!=0){
 $lista_observaciones.='<br>';
 }
+
+	$tmp_semestre_en_curso=semestre_en_letra($lista->semestre_en_curso);
+	$tmp_nombre_grupo=$nombre_del_grupo;
+
 	$lista_observaciones.='<strong>'.strtoupper($lista->nombre_documento).'.- </strong>'.strtoupper($observaciones).'.';
 	$nombre_completo=$lista->primer_apellido.' '.$lista->segundo_apellido.' '.$lista->nombre;
 
 if(sizeof($lista_doc)==$cont){
 	$html_2.='<tr >
 		<td WIDTH="5%">'.$num_alumno.'</td>
-		<td  WIDTH="10%">'.semestre_en_letra($lista->semestre_en_curso).' "'.$nombre_del_grupo.'"</td>
+		<td  WIDTH="10%">'.$tmp_semestre_en_curso.' "'.$tmp_nombre_grupo.'"</td>
 		<td WIDTH="35%" >'.$nombre_completo.'</td>
 		<td WIDTH="50%">'.$lista_observaciones.'</td></tr>';
 

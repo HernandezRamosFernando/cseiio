@@ -19,7 +19,7 @@
             <div class="col-md-8">
               <label class="form-group has-float-label seltitulo">
                 <select class="form-control form-control-lg selcolor" id="plantel" name="plantel">
-                  
+                  <option value="">Seleccione el plantel donde buscar el grupo</option>
 
                   <?php
                                         foreach ($planteles as $plantel)
@@ -592,7 +592,7 @@ function cambiar_grupo(e) {
           if (alumnos_json.length === 1) {
             swalWithBootstrapButtons.fire({
               type: 'warning',
-              text: 'Al quitar todos los alumnos se borrara el grupo ¿Está seguro?',
+              text: 'Al quitar todos los alumnos se borrará el grupo ¿Está seguro?',
               showCancelButton: true,
               confirmButtonText: 'Aceptar',
               cancelButtonText: 'Cancelar',
@@ -696,8 +696,10 @@ function cambiar_grupo(e) {
 												//aqui va el aceptar
 											//	$(document).scrollTop(0);
 												//location.reload();
-                        $('#'+fila_seleccionada).remove();
+                        
 											  }
+                        $('#'+fila_seleccionada).remove();
+                        contador_tablas();
 											  //aqui va si cancela
 											});
 										  }
@@ -807,7 +809,7 @@ function cambiar_grupo(e) {
          
           $('#'+document.getElementById('id_fila_seleccionada').value).remove();
           $('#modal_cambiar_grupo').modal('toggle');
-          
+          contador_tablas();
       }
 
       if (typeof datos.error !== 'undefined'){
@@ -824,7 +826,7 @@ function cambiar_grupo(e) {
     }
 }
 		xhr.send(formdata);
-		
+		contador_tablas();
 	}
 
 

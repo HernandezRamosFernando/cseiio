@@ -123,9 +123,10 @@ public function modificar_grupo(){
      $num_alumnos=0;
      $num_alumnos=$this->M_grupo->get_num_alumnos_grupo($id_grupo_destino)[0]->num_alumnos;
      $id_friae_destino=$this->M_friae->id_friae($id_grupo_destino)[0]->folio;
+     $id_friae_origen=$this->M_friae->id_friae($id_grupo_a_modificar)[0]->folio;
      
      if($num_alumnos<35){
-        echo json_encode($this->M_grupo->actualizar_estudiante_grupo($no_control,$id_grupo_a_modificar,$id_grupo_destino,$id_friae_destino));
+        echo json_encode($this->M_grupo->actualizar_estudiante_grupo($no_control,$id_grupo_a_modificar,$id_grupo_destino,$id_friae_destino,$id_friae_origen));
         
     }
      else{

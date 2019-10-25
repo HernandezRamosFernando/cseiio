@@ -18,7 +18,7 @@ class C_asesor extends CI_Controller
     public function buscar_asesores_plantel(){
         $plantel = $this->input->get("cct_plantel");
         $curp = $this->input->get("curp");
-        echo $this->M_asesor->buscar_asesores_plantel($curp,$plantel);
+        echo json_encode($this->M_asesor->buscar_asesores_plantel($curp,$plantel));
     }
 
 

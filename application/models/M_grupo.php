@@ -55,7 +55,13 @@ class M_grupo extends CI_Model {
 
    public function delete_grupo($id_grupo){
     $this->db->trans_start();
+
+        $folio=$this->db->query("SELECT * FROM Friae where id_grupo='".$id_grupo."';")->result()[0]->folio;
+       $this->db->query("delete from Grupo_Estudiante where Grupo_id_grupo='".$id_grupo."'");
         $this->db->query("delete from Grupo where id_grupo='".$id_grupo."'");
+        $this->db->query("delete from Friae_Estudiante where Friae_folio=".$folio.";");
+        $this->db->query("delete from Friae where folio=".$folio.";");
+        
         $this->db->trans_complete();
 
         if ($this->db->trans_status() === FALSE)
@@ -66,6 +72,7 @@ class M_grupo extends CI_Model {
         else{
             return "si";
         }
+        
    }
 
 
@@ -196,7 +203,7 @@ public function get_lista_grupos_estudiante($plantel,$grupo,$semestre_grupo){
     
 }
 //--------------------------------------------------
-public function actualizar_estudiante_grupo($no_control,$id_grupo_a_modificar,$id_grupo_destino,$id_friae_destino){
+public function actualizar_estudiante_grupo($no_control,$id_grupo_a_modificar,$id_grupo_destino,$id_friae_destino,$id_friae_origen){
     $this->db->trans_start();
 
     $materias_estudiante = $this->db->query("select id_materia,id_asesor,Grupo_id_grupo from Grupo_Estudiante where Grupo_id_grupo='".$id_grupo_destino."' group by id_materia;")->result();
@@ -216,7 +223,7 @@ public function actualizar_estudiante_grupo($no_control,$id_grupo_a_modificar,$i
 
             $this->db->set('Friae_folio',$id_friae_destino);
                  $this->db->where('Estudiante_no_control',$no_control);
-                 $this->db->where('Friae_folio',$id_grupo_a_modificar);
+                 $this->db->where('Friae_folio',$id_friae_origen);
                  $this->db->update('Friae_Estudiante');
 
                 $num_alumnos= $this->get_num_alumnos_grupo($id_grupo_a_modificar)[0]->num_alumnos;

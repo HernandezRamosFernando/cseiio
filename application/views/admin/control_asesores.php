@@ -5,7 +5,7 @@
     <!-- Breadcrumbs-->
     <ol class="breadcrumb">
       <li class="breadcrumb-item">
-        <a>Control de usuarios</a>
+        <a>Control de asesores</a>
       </li>
       <li class="breadcrumb-item active">Seleccione que desea hacer</li>
     </ol>    
@@ -72,7 +72,7 @@
   		</div>
 <br>
 
-      <table class="table table-hover" id="" style="width: 100%">
+      <table class="table table-hover" id="tabla_completa" style="width: 100%">
           
           <thead class="thead-light">
             <tr>
@@ -90,6 +90,7 @@
 
 
             <tbody id="tabla_asesor">
+                      
                       
             </tbody>
       </table>
@@ -265,7 +266,7 @@ function buscar() {
 
     var query = 'curp=' + curp + '&cct_plantel=' + plantel;
     var xhr = new XMLHttpRequest();
-      xhr.open('GET', '<?php echo base_url();?>index.php/C_asesor/lista_materias?'+query, true);
+      xhr.open('GET', '<?php echo base_url();?>index.php/C_asesor/buscar_asesores_plantel?'+query, true);
       xhr.onloadstart = function(){
         $('#div_carga').show();
       }
@@ -323,4 +324,6 @@ function buscar() {
 
 
 
+
+buscar();
 </script>

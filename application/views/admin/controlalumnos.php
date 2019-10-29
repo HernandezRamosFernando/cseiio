@@ -538,7 +538,7 @@
               </div>
               <div class="col-md-4">
                 <div class="form-label-group">
-                  <input type="text" pattern="[A-Za-z]+[ ]?[A-Za-z]*" onchange="valida(this)"
+                  <input type="text" pattern="[A-ZÑña-z]+[ ]*[A-ZÑña-z ]*" onchange="valida(this)"
                     title="Introduzca solo letras" class="form-control text-uppercase" onchange="valida(this)"
                     id="aspirante_tutor_apellidodos" name="aspirante_tutor_apellidodos" placeholder="Segundo Apellido"
                     style="color: #237087">

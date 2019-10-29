@@ -230,6 +230,7 @@ public function actualizar_estudiante_grupo($no_control,$id_grupo_a_modificar,$i
                 
                 if($num_alumnos==0){
                     $this->db->query("delete from Grupo where id_grupo='".$id_grupo_a_modificar."'");
+                    $this->db->query("delete from Friae where folio=".$id_friae_origen.";");
                 }
                  
     $this->db->trans_complete();

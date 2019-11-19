@@ -1079,6 +1079,14 @@ public function generar_lista_desercion(){
     $this->load->library('pdf');
     $this->load->view('reportes/reporte_desertor',$datos);
 }
+
+
+// Metodo utlizado para listar alumnos y dar de baja
+public function get_estudiantes_para_vista_bajas(){
+    $curp = $this->input->get('curp');
+    $cct_plantel = $this->input->get('cct_plantel');
+    echo json_encode($this->M_estudiante->get_estudiantes_para_vista_bajas($cct_plantel,$curp));
+}
  
  }
  ?>

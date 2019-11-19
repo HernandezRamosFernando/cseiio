@@ -643,5 +643,11 @@ public function generar_lista_desercion($plantel,$fecha_inicio,$fecha_fin,$id_ci
 }
 
 
+// Metodo utlizado para listar alumnos y dar de baja
+public function get_estudiantes_para_vista_bajas($plantel,$curp){
+   return $this->db->query("select * from Estudiante where curp like '".$curp."%' and Plantel_cct_plantel like '".$plantel."%' and tipo_ingreso!='BAJA'")->result();
+}
+
+
 }
 ?>

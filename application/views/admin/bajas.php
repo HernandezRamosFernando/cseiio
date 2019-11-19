@@ -109,7 +109,7 @@
             <div class="col-md-8">
               <div class="form-label-group">
                 <input class="form-control" placeholder="Fecha de baja" type="date" name="fecha_inicio"
-                  id="fecha_inicio" style="color: #237087" min=<?php
+                  id="fecha_inicio" style="color: #237087" max=<?php
                 echo date('Y-m-d');
                 ?>>
                 <label for="fecha_inicio">Fecha de baja</label>

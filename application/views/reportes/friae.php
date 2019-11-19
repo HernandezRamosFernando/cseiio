@@ -733,7 +733,7 @@ else if($datos_friae_estudiante[$contador][0]->tipo_ingreso_fin_semestre=='SIN D
 
 
 if($datos_friae_estudiante[$contador][0]->tipo_ingreso_fin_semestre=='REPROBADO'){
-    $renglon.='<td style="width:40px;"></td>';//tipo ingreso estudiante
+    $renglon.='<td style="">'.(($datos_friae_estudiante[$contador][0]->adeudos_fin_semestre==0)?"":$datos_friae_estudiante[$contador][0]->adeudos_fin_semestre).'</td>';//tipo ingreso estudiante
     $renglon.='<td></td>';//tipo ingreso estudiante
     $renglon.='<td></td>';//tipo ingreso estudiante
     $renglon.='<td></td>';//tipo ingreso estudiante

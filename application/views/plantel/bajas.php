@@ -107,11 +107,11 @@
           <div class="row">
             <div class="col-md-8">
               <div class="form-label-group">
-                <input class="form-control" placeholder="Fecha de inicio de periodo" type="date" name="fecha_inicio"
-                  id="fecha_inicio" style="color: #237087" min=<?php
+                <input class="form-control" placeholder="Fecha de Baja" type="date" name="fecha_inicio"
+                  id="fecha_inicio" style="color: #237087" max=<?php
                 echo date('Y-m-d');
                 ?>>
-                <label for="fecha_inicio">Fecha de inicio de periodo</label>
+                <label for="fecha_inicio">Fecha de Baja</label>
               </div>
             </div>
           </div>
@@ -191,7 +191,7 @@
       var curp = document.getElementById("aspirante_curp_busqueda").value;
       var plantel = document.getElementById("aspirante_plantel_busqueda").value;
       var query = 'curp=' + curp + '&cct_plantel=' + plantel;
-      xhr.open('GET', '<?php echo base_url();?>index.php/c_estudiante/get_estudiantes_curp_plantel?' + query, true);
+      xhr.open('GET', '<?php echo base_url();?>index.php/c_estudiante/get_estudiantes_para_vista_bajas?' + query, true);
       xhr.onloadstart = function () {
         $('#div_carga').show();
       }

@@ -10,6 +10,8 @@ class C_friae extends CI_Controller {
         $this->load->model("M_friae");
         $this->load->model('M_grupo');
         $this->load->model('M_materia');
+        $this->load->model('M_configuracion');
+        
     }
 
     public function crear_friae(){
@@ -53,6 +55,7 @@ class C_friae extends CI_Controller {
 
         $datos['revisor']=$this->M_friae->get_revisor($datos['datos_friae']->cct_plantel);
 
+        $datos['jefe_escolar']=$this->M_configuracion->get_jefe_escolar();
         //print_r($materias_grupo);
         //$datos['documentos'] = $this->M_documentacion->get_documentos_base_faltantes_estudiante($no_control);
         //$datos['estudiante_plantel'] = $this->M_estudiante->get_plantel_estudiante($no_control);

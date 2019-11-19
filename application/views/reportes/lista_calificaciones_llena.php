@@ -63,10 +63,10 @@ class MYPDF extends TCPDF {
 	//Page header
 	public function Header() {
 		$image_file =base_url().'assets/img/logo_cseiio.png';
-        $this->Image($image_file, 20, 5, 10, '', 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
+        $this->Image($image_file, 14, 5, 10, '', 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
         
         $image_file =base_url().'assets/img/logo_gobierno.png';
-		$this->Image($image_file, 178, 5, 10, '', 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
+		$this->Image($image_file, 187, 5, 10, '', 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
 
 		
 	}
@@ -105,7 +105,7 @@ $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
 $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 
 // set margins
-$pdf->SetMargins(20, 5,19);
+$pdf->SetMargins(11, 5,11);
 $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
 $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 
@@ -131,10 +131,10 @@ $pdf->AddPage();
 
 // set some text to print
 
-$titulo = '
-<h6 style="text-align:center">COLEGIO SUPERIOR PARA LA EDUCACION INTEGRAL INTERCULTURAL DE OAXACA</h6>
-<h6 style="text-align:center">DEPARTAMENTO DE CONTROL ESCOLAR</h6>
-<br><span style="text-align:center;font-size:6pt;  font-weight:bold">CONCENTRADO DE CALIFICACIONES MODULARES</span>
+$titulo = '<span style="text-align:center;font-size:8pt;  font-weight:bold">COLEGIO SUPERIOR PARA LA EDUCACION INTEGRAL INTERCULTURAL DE OAXACA</span><br>
+<span style="text-align:center;font-size:7.5pt;  font-weight:bold">DEPARTAMENTO DE CONTROL ESCOLAR</span>
+
+<br><span style="text-align:center;font-size:6.5pt;  font-weight:bold">CONCENTRADO DE CALIFICACIONES MODULARES</span>
 <br><span style="text-align:center;font-size:6pt;  font-style: italic">'.$pdf->get_nombre_semestre($materia->semestre).' MÓDULO</span>
 ';
 
@@ -144,8 +144,8 @@ $datos_cabecera='
 <tbody>
 <tr>
 <td style="text-align:left;width:18%"><span style="font-weight:bold">NOMBRE DEL PLANTEL:</span></td>
-<td style="text-align:left;width:55%">'.$plantel->nombre_largo.' DE '.$plantel->nombre_plantel.'</td>
-<td style="text-align:right;width:15%"><span style="font-weight:bold">GRUPO:</span></td>
+<td style="text-align:left;width:58%">'.$plantel->nombre_largo.' DE '.$plantel->nombre_plantel.'</td>
+<td style="text-align:right;width:12%"><span style="font-weight:bold">GRUPO:</span></td>
 <td style="text-align:left;width:12%">"'.$materia->nombre_grupo.'"</td>
 </tr>
 
@@ -153,14 +153,14 @@ $datos_cabecera='
 <td style="text-align:left"><span style="font-weight:bold">CLAVE C.T.:</span></td>
 <td style="text-align:left">'.$plantel->cct_plantel.'</td>
 <td style="text-align:right"><span style="font-weight:bold">PERIODO:</span></td>
-<td style="text-align:right">'.$materia->periodo.'</td>
+<td style="text-align:left">'.$materia->periodo.'</td>
 </tr>
 
 <tr>
 <td style="text-align:left"><span style="font-weight:bold">LOCALIDAD Y MUNICIPIO:</span></td>
 <td style="text-align:left">'.$plantel->localidad_municipio.'</td>
 <td style="text-align:right"><span style="font-weight:bold">CICLO ESCOLAR:</span></td>
-<td style="text-align:right">'.$materia->nombre_ciclo_escolar.'</td>
+<td style="text-align:left">'.$materia->nombre_ciclo_escolar.'</td>
 </tr>
 
 <tr>
@@ -188,15 +188,15 @@ $encabezado_tabla_a='
 <table border="1" style="font-size:6pt">
 <tbody>
 <tr style="font-weight:bold">
-<td style="width:21px;height:25px;background-color:#e9e9e9"><br><br>NO.</td>
-<td style="width:280px;height:25px;background-color:#e9e9e9"><br><br>NOMBRE DEL ALUMNO</td>
-<td style="width:35px;height:25px;background-color:#e9e9e9"><br><br>MAR</td>
-<td style="width:35px;height:25px;background-color:#e9e9e9"><br><br>MAY</td>
-<td style="width:35px;height:25px;background-color:#e9e9e9"><br><br>JUN</td>
-<td style="width:35px;height:25px;background-color:#e9e9e9">PROM. MOD.</td>
-<td style="width:35px;height:25px;background-color:#e9e9e9">EXA. FINAL</td>
-<td style="width:35px;height:25px;background-color:#e9e9e9">CAL. FINAL</td>
-<td style="width:89px;height:25px;background-color:#e9e9e9"><br><br>FECHA DE BAJA</td>
+<td style="width:21px;height:25px;background-color:#f8facb"><br><br>NO.</td>
+<td style="width:345px;height:25px;background-color:#f8facb"><br><br>NOMBRE DEL ALUMNO</td>
+<td style="width:35px;height:25px;background-color:#f8facb"><br><br>MAR</td>
+<td style="width:35px;height:25px;background-color:#f8facb"><br><br>MAY</td>
+<td style="width:35px;height:25px;background-color:#f8facb"><br><br>JUN</td>
+<td style="width:35px;height:25px;background-color:#f8facb">PROM. MOD.</td>
+<td style="width:35px;height:25px;background-color:#f8facb">EXA. FINAL</td>
+<td style="width:35px;height:25px;background-color:#f8facb">CAL. FINAL</td>
+<td style="width:89px;height:25px;background-color:#f8facb"><br><br>FECHA DE BAJA</td>
 </tr>
 </tbody>
 </table>
@@ -210,15 +210,15 @@ $encabezado_tabla_b='
 <table border="1" style="font-size:6pt">
 <tbody>
 <tr style="font-weight:bold">
-<td style="width:21px;height:25px;background-color:#e9e9e9"><br><br>NO.</td>
-<td style="width:280px;height:25px;background-color:#e9e9e9"><br><br>NOMBRE DEL ALUMNO</td>
-<td style="width:35px;height:25px;background-color:#e9e9e9"><br><br>SEP</td>
-<td style="width:35px;height:25px;background-color:#e9e9e9"><br><br>NOV</td>
-<td style="width:35px;height:25px;background-color:#e9e9e9"><br><br>DIC</td>
-<td style="width:35px;height:25px;background-color:#e9e9e9">PROM. MOD.</td>
-<td style="width:35px;height:25px;background-color:#e9e9e9">EXA. FINAL</td>
-<td style="width:35px;height:25px;background-color:#e9e9e9">CAL. FINAL</td>
-<td style="width:89px;height:25px;background-color:#e9e9e9"><br><br>FECHA DE BAJA</td>
+<td style="width:21px;height:25px;background-color:#f8facb"><br><br>NO.</td>
+<td style="width:345px;height:25px;background-color:#f8facb"><br><br>NOMBRE DEL ALUMNO</td>
+<td style="width:35px;height:25px;background-color:#f8facb"><br><br>SEP</td>
+<td style="width:35px;height:25px;background-color:#f8facb"><br><br>NOV</td>
+<td style="width:35px;height:25px;background-color:#f8facb"><br><br>DIC</td>
+<td style="width:35px;height:25px;background-color:#f8facb">PROM. MOD.</td>
+<td style="width:35px;height:25px;background-color:#f8facb">EXA. FINAL</td>
+<td style="width:35px;height:25px;background-color:#f8facb">CAL. FINAL</td>
+<td style="width:89px;height:25px;background-color:#f8facb"><br><br>FECHA DE BAJA</td>
 </tr>
 </tbody>
 </table>
@@ -232,13 +232,19 @@ function rellenar_lista($estudiantes,$bajas){
 
     foreach($estudiantes as $estudiante){
 
-        $promedio = (intval($estudiante->primer_parcial)+intval($estudiante->segundo_parcial)+intval($estudiante->tercer_parcial))/3;
-        if($promedio>0 && $promedio<6){
-            $promedio=5;
+        $promedio="";
+
+        if(!is_null($estudiante->primer_parcial) && !is_null($estudiante->segundo_parcial) && !is_null($estudiante->tercer_parcial)){
+            $promedio = (intval($estudiante->primer_parcial)+intval($estudiante->segundo_parcial)+intval($estudiante->tercer_parcial))/3;
+            if($promedio>0 && $promedio<6){
+                $promedio=5;
+            }
+            else{
+                $promedio = round($promedio,0,PHP_ROUND_HALF_UP);
+            }
+
         }
-        else{
-            $promedio = round($promedio,0,PHP_ROUND_HALF_UP);
-        }
+        
 
 
         if(sizeof($bajas[$contador-1])>0){
@@ -252,13 +258,16 @@ function rellenar_lista($estudiantes,$bajas){
 
         $respuesta.='
         <td style="width:21px">'.$contador.'</td>
-        <td style="width:85px;text-align: left">'.$estudiante->primer_apellido.'</td>
-        <td style="width:85px;text-align: left">'.$estudiante->segundo_apellido.'</td>
-        <td style="width:110px;text-align: left">'.$estudiante->nombre.'</td>
+        <td style="width:100px;text-align: left">'.$estudiante->primer_apellido.'</td>
+        <td style="width:100px;text-align: left">'.$estudiante->segundo_apellido.'</td>
+        <td style="width:145px;text-align: left">'.$estudiante->nombre.'</td>
         <td style="width:35px">'.(($estudiante->primer_parcial)=='0'?'/':$estudiante->primer_parcial).'</td>
         <td style="width:35px">'.(($estudiante->segundo_parcial)=='0'?'/':$estudiante->segundo_parcial).'</td>
         <td style="width:35px">'.(($estudiante->tercer_parcial)=='0'?'/':$estudiante->tercer_parcial).'</td>
-        <td style="width:35px">'.($promedio==0?'/':$promedio).'</td>
+
+
+
+        <td style="width:35px">'.(($promedio!="")?($promedio==0?'/':$promedio):"").'</td>
         <td style="width:35px">'.(($estudiante->examen_final)=='0'?'/':$estudiante->examen_final).'</td>
         <td style="width:35px">'.$estudiante->calificacion_final.'</td>';
         if(sizeof($bajas[$contador-1])>0){
@@ -278,9 +287,9 @@ function rellenar_lista($estudiantes,$bajas){
             if($x==$contador){
                 $respuesta.='<tr style="line-height: 20px;background-color:#909090">
             <td style="width:21px">'.$x.'</td>
-            <td style="width:85px"></td>
-            <td style="width:85px"></td>
-            <td style="width:110px"></td>
+            <td style="width:100px"></td>
+            <td style="width:100px"></td>
+            <td style="width:145px"></td>
             <td style="width:35px"></td>
             <td style="width:35px"></td>
             <td style="width:35px"></td>
@@ -294,9 +303,9 @@ function rellenar_lista($estudiantes,$bajas){
             else{
                 $respuesta.='<tr style="line-height: 20px;">
             <td style="width:21px">'.$x.'</td>
-            <td style="width:85px"></td>
-            <td style="width:85px"></td>
-            <td style="width:110px"></td>
+            <td style="width:100px"></td>
+            <td style="width:100px"></td>
+            <td style="width:145px"></td>
             <td style="width:35px"></td>
             <td style="width:35px"></td>
             <td style="width:35px"></td>
@@ -331,7 +340,7 @@ $datos_estudiantes='
 </table>
 <div>
 
-<br>
+
 <br><span style="font-weight:bold;font-size:6pt;text-align:left">FECHA: '.$cadena_fecha.'</span>
 ';
 
@@ -388,7 +397,7 @@ $firmas ='
 
 
 
-$pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = '270', $firmas, $border = 0, $ln = 0, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+$pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = '260', $firmas, $border = 0, $ln = 0, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
 
 $pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = '5', $titulo, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
 
@@ -406,7 +415,7 @@ $pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = '51', $datos_estudiantes, $bor
 
 
 //Close and output PDF document
-$pdf->Output('example_003.pdf', 'I');
+$pdf->Output('Lista con calificaciones.pdf', 'I');
 
 //============================================================+
 // END OF FILE

@@ -28,17 +28,16 @@
 // Extend the TCPDF class to create custom Header and Footer
 class MYPDF extends TCPDF {
 
-    
 
-    
-    
 
 	//Page header
 	public function Header() {
 		
 		// Logo
-		$image_file =base_url().'assets/img/logo_cseiio.png';
-        $this->Image($image_file, 20, 10, 13, '', 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
+		$image_file =base_url().'assets/img/logo_cseiio2.png';
+        $this->Image($image_file, 20, 10, 41, '', 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
+
+       
         
         $image_file =base_url().'assets/img/logo_gobierno.png';
 		$this->Image($image_file, 397, 10, 13, '', 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
@@ -283,7 +282,12 @@ $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
 $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 
 // set margins
-$pdf->SetMargins(20,15,19);
+if($datos_friae->semestre!=1){
+    $pdf->SetMargins(7,15,7); // Este formato se aplica a partir del 2 semestre
+}
+else{
+    $pdf->SetMargins(20,15,19); //Este formato se aplica unicamente para el 1 semestre
+}
 $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
 $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 
@@ -307,6 +311,117 @@ $pdf->SetFont('helvetica','', 10);
 // add a page
 $pdf->AddPage();
 
+
+/**Función que convierte segun numero en la palabra baja para alumnos con ese estatus */
+function convierte_palabra($posicion,$contador_materias){
+    $regreso = "";
+    if($contador_materias==8){
+        switch(intval($posicion)){
+            case 1:
+            $regreso = "B";
+            break;
+    
+            case 3:
+            $regreso = "A";
+            break;
+    
+            case 5:
+            $regreso = "J";
+            break;
+    
+            case 8:
+            $regreso = "A";
+            break;
+        }
+
+    }
+    if($contador_materias==9){
+        switch(intval($posicion)){
+            case 1:
+            $regreso = "B";
+            break;
+    
+            case 3:
+            $regreso = "A";
+            break;
+    
+            case 6:
+            $regreso = "J";
+            break;
+    
+            case 9:
+            $regreso = "A";
+            break;
+        }
+
+    }
+
+    if($contador_materias==12){
+        switch(intval($posicion)){
+            case 1:
+            $regreso = "B";
+            break;
+    
+            case 4:
+            $regreso = "A";
+            break;
+    
+            case 8:
+            $regreso = "J";
+            break;
+    
+            case 12:
+            $regreso = "A";
+            break;
+        }
+
+    }
+
+    if($contador_materias==13){
+        switch(intval($posicion)){
+            case 1:
+            $regreso = "B";
+            break;
+    
+            case 5:
+            $regreso = "A";
+            break;
+    
+            case 9:
+            $regreso = "J";
+            break;
+    
+            case 13:
+            $regreso = "A";
+            break;
+        }
+
+    }
+
+    if($contador_materias==14){
+        switch(intval($posicion)){
+            case 1:
+            $regreso = "B";
+            break;
+    
+            case 5:
+            $regreso = "A";
+            break;
+    
+            case 9:
+            $regreso = "J";
+            break;
+    
+            case 14:
+            $regreso = "A";
+            break;
+        }
+
+    }
+    
+
+    return $regreso;
+}
 
 
 
@@ -341,37 +456,105 @@ function extraescolar($calificacion){
 }
 
 
+function nombre_modulo($num_modulo){
+    $regreso = "";
+    switch(intval($num_modulo)){
+        case 1:
+        $regreso = "PRIMERO";
+        break;
+
+        case 2:
+        $regreso = "SEGUNDO";
+        break;
+
+        case 3:
+        $regreso = "TERCERO";
+        break;
+
+        case 4:
+        $regreso = "CUARTO";
+        break;
+
+        case 5:
+        $regreso = "QUINTO";
+        break;
+
+        case 6:
+        $regreso = "SEXTO";
+        break;
+    }
+
+    return $regreso;
+}
+
+
 //carga los datos de los renglones de la tabla
 $contador=0;
 
 $filas_faltantes = 35-sizeof($datos_estudiante);
+$num_fila= sizeof($datos_estudiante);
 $filas_faltantes_html="";
 if($filas_faltantes>0){
 for($i=0;$i<$filas_faltantes;$i++){
-$filas_faltantes_html.='<tr>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>'.filas_vacias_califiacion($materias_estudiantes).'
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
-</tr>';
+
+    if($i==0){
+        $filas_faltantes_html.='<tr style="background-color:#909090;font-size:5 pt;text-align:center">';
+    }
+    else{
+        $filas_faltantes_html.='<tr style="font-size:5 pt;text-align:center">';
+    }
+    $num_fila=$num_fila+1;
+
+    if($datos_friae->semestre!=1){
+        $filas_faltantes_html.='
+        <td height="15"> '.$num_fila.'</td>
+        <td> </td>
+        <td> </td>
+        <td> </td>
+        <td> </td>
+        <td> </td>
+        <td> </td>
+        <td> </td>
+        <td> </td>
+        <td> </td>
+        <td> </td>
+        <td> </td>
+        <td> </td>
+        <td> </td>'.filas_vacias_califiacion($materias_estudiantes).'
+        <td> </td>
+        <td> </td>
+        <td> </td>
+        <td> </td>
+        <td> </td>
+        <td> </td>
+        <td> </td>
+        <td> </td>
+        </tr>';
+    }
+    else{
+       $filas_faltantes_html.='
+        <td height="15"> '.$num_fila.'</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>'.filas_vacias_califiacion($materias_estudiantes).'
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        </tr>';
+
+    }
+
+
 }
 }
 
@@ -381,13 +564,20 @@ else{
 
 
 $html_pos_materias='
-<td style="width:30px;background-color:#f8facb"> esto es:NUMERO ADEUDOS AL FIN DEL MODULO (todos los modulos cursados y actual) antes de periodo de regularizacion</td>
-<td style="width:150px;background-color:#f8facb"><br><br><br><br><br>CLAVE U.C. DE ADEUDOS FIN DEL MODULO(todos los modulos cursados y actual antes de periodo de regularizacion)</td>
-<td style="width:30px;background-color:#f8facb">NUMERO ADEUDOS DE TODOS LOS MODULOS CURSADOS (despues del periodo de regularizacion)</td>
-<td style="width:150px;background-color:#f8facb"><br><br><br><br><br>CLAVE U.C. DE ADEUDOS EN TODOS LOS MODULOS CURSADOS (despues del periodo de regularizacion)</td>
-<td style="width:40px;background-color:#f8facb"><br><br><br><br><br>SIT. ALUM. DESPUES DEL PERIODO DE REGULARIZACION</td>
+<td style="width:30px;background-color:#f8facb">NÚMERO DE ADEUDOS AL FIN DEL MÓDULO (todos los módulos cursados y actual) antes de periodo de regularización</td>
+<td style="width:120px;background-color:#f8facb"><br><br><br><br><br>CLAVE DE U.C. DE ADEUDOS FIN DEL MÓDULO(todos los módulos cursados y actual antes de periodo de regularización)</td>
+<td style="width:30px;background-color:#f8facb">NÚMERO DE ADEUDOS EN TODOS LOS MÓDULOS CURSADOS (después del periodo de regularización)</td>
+<td style="width:100px;background-color:#f8facb"><br><br><br><br><br>CLAVE U.C. DE ADEUDOS EN TODOS LOS MÓDULOS CURSADOS (después del periodo de regularización)</td>
+<td style="width:30px;background-color:#f8facb"><br><br><br><br><br>SIT. ALUM. DESPUÉS DEL PERIODO DE REGULARIZACIÓN</td> ';
 
-';
+if($datos_friae->semestre==1){
+    $html_pos_materias='
+<td style="width:38px;background-color:#f8facb">NÚMERO DE ADEUDOS AL FIN DEL MÓDULO (todos los módulos cursados y actual) antes de periodo de regularización</td>
+<td style="width:140px;background-color:#f8facb"><br><br><br><br><br>CLAVE DE U.C. DE ADEUDOS FIN DEL MÓDULO(todos los módulos cursados y actual antes de periodo de regularización)</td>
+<td style="width:37px;background-color:#f8facb">NÚMERO DE ADEUDOS EN TODOS LOS MÓDULOS CURSADOS (después del periodo de regularización)</td>
+<td style="width:140px;background-color:#f8facb"><br><br><br><br><br>CLAVE U.C. DE ADEUDOS EN TODOS LOS MÓDULOS CURSADOS (después del periodo de regularización)</td>
+<td style="width:30px;background-color:#f8facb"><br><br>SIT. ALUM. DESPUÉS DEL PERIODO DE REGULARIZACIÓN</td> ';
+}
 
 ////////////////////////////////////////////////////////
 
@@ -413,42 +603,42 @@ $renglon.='<td style="width:25px">'.$edad.'</td>';//edad estudiante
 
 if($datos_friae->semestre!='1'){
     if($datos_friae_estudiante[$contador][0]->tipo_ingreso_inscripcion=="INCORPORADO"){
-        $renglon.='<td>I</td>';//tipo ingreso estudiante
+        $renglon.='<td style="width:25px">I</td>';//tipo ingreso estudiante
     }
 
     else if($datos_friae_estudiante[$contador][0]->tipo_ingreso_inscripcion=="TRASLADO"){
-        $renglon.='<td>T</td>';//tipo ingreso estudiante
+        $renglon.='<td style="width:25px">T</td>';//tipo ingreso estudiante
     }
 
     else if($datos_friae_estudiante[$contador][0]->tipo_ingreso_inscripcion=="PORTABILIDAD"){
-        $renglon.='<td>P.E.</td>';//tipo ingreso estudiante
+        $renglon.='<td style="width:25px">P.E.</td>';//tipo ingreso estudiante
     }
 
     else if($datos_friae_estudiante[$contador][0]->tipo_ingreso_inscripcion=="REPETIDOR"){
-        $renglon.='<td>R</td>';//tipo ingreso estudiante
+        $renglon.='<td style="width:25px">R</td>';//tipo ingreso estudiante
     }
 
     else if($datos_friae_estudiante[$contador][0]->tipo_ingreso_inscripcion=="REINGRESO"){
-        $renglon.='<td></td>';//tipo ingreso estudiante
+        $renglon.='<td style="width:25px"></td>';//tipo ingreso estudiante
     }
     
     if($datos_friae_estudiante[$contador][0]->estatus_inscripcion=="REGULAR"){
-        $renglon.='<td>1</td>';//tipo ingreso estudiante
+        $renglon.='<td style="width:40px">1</td>';//tipo ingreso estudiante
     }
 
     else if($datos_friae_estudiante[$contador][0]->estatus_inscripcion=="IRREGULAR"){
-        $renglon.='<td>2</td>';//tipo ingreso estudiante
+        $renglon.='<td style="width:40px">2</td>';//tipo ingreso estudiante
     }
 
     else{
-        $renglon.='<td></td>';//tipo ingreso estudiante
+        $renglon.='<td style="width:40px"></td>';//tipo ingreso estudiante
     }
 
     
 
-    $renglon.='<td>'.$datos_friae_estudiante[$contador][0]->numero_adeudos_inscripcion.'</td>';//tipo ingreso estudiante
+    $renglon.='<td>'.(($datos_friae_estudiante[$contador][0]->numero_adeudos_inscripcion==0)?"":$datos_friae_estudiante[$contador][0]->numero_adeudos_inscripcion).'</td>';//tipo ingreso estudiante
     $renglon.='<td>'.$datos_friae_estudiante[$contador][0]->id_materia_adeudos_inscripcion.'</td>';//tipo ingreso estudiante
-    $renglon.='<td>'.$datos_friae_estudiante[$contador][0]->adeudos_primera_regularizacion.'</td>';//tipo ingreso estudiante
+    $renglon.='<td>'.(($datos_friae_estudiante[$contador][0]->adeudos_primera_regularizacion==0)?"":$datos_friae_estudiante[$contador][0]->adeudos_primera_regularizacion).'</td>';//tipo ingreso estudiante
     $renglon.='<td>'.$datos_friae_estudiante[$contador][0]->id_materia_adeudos_primera_regularizacion.'</td>';//tipo ingreso estudiante
 }
 
@@ -459,10 +649,11 @@ else{
 
 
 ///------------------aqui se van a cargar las materias del estudiante
-
+$contador_fila=1;
+$contador_materias=sizeof($materias_estudiantes[$contador]);
 foreach($materias_estudiantes[$contador] as $materia){
     if($datos_friae_estudiante[$contador][0]->tipo_ingreso_fin_semestre!="BAJA" && $materia->calificacion_final==""){
-        $promedio_modular = (intval($materia->primer_parcial)+intval($materia->segundo_parcial)+intval($materia->tercer_parcial))/3;
+        /**$promedio_modular = (intval($materia->primer_parcial)+intval($materia->segundo_parcial)+intval($materia->tercer_parcial))/3;
         $promedio_final = (intval($materia->examen_final)+$promedio_modular)/2;
         $promedio_final = round($promedio_final,0,PHP_ROUND_HALF_UP);
         if($materia->tipo=='EXTRAESCOLAR'){
@@ -472,17 +663,35 @@ foreach($materias_estudiantes[$contador] as $materia){
         else{
             $promedio_final=($promedio_final==0) ? "" : $promedio_final;
             $renglon.='<td>'.$promedio_final.'</td>';
-        }
-        
+        }*/
+        $renglon.='<td></td>';
     }
 
     else{
         if($materia->tipo=='EXTRAESCOLAR'){
-            $renglon.='<td>'.extraescolar($materia->calificacion_final).'</td>';
+            
+            if($datos_friae_estudiante[$contador][0]->tipo_ingreso_fin_semestre=="BAJA"){
+                    $renglon.='<td>'.convierte_palabra($contador_fila,$contador_materias).'</td>';
+                $contador_fila++;
+                
+            }
+            else{
+                $renglon.='<td>'.extraescolar($materia->calificacion_final).'</td>';
+            }
+
         }
 
         else{
-            $renglon.='<td>'.$materia->calificacion_final.'</td>';
+            if($datos_friae_estudiante[$contador][0]->tipo_ingreso_fin_semestre=="BAJA"){
+                    $renglon.='<td>'.convierte_palabra($contador_fila,$contador_materias).'</td>';
+                    $contador_fila++;
+                
+            }
+            else{
+                $renglon.='<td>'.$materia->calificacion_final.'</td>';
+            }
+            
+            
         }
     }
 
@@ -533,10 +742,10 @@ if($datos_friae_estudiante[$contador][0]->tipo_ingreso_fin_semestre=='REPROBADO'
 
 else{
 
-$renglon.='<td>'.$datos_friae_estudiante[$contador][0]->adeudos_fin_semestre.'</td>';//tipo ingreso estudiante
+$renglon.='<td>'.(($datos_friae_estudiante[$contador][0]->adeudos_fin_semestre==0)?"":$datos_friae_estudiante[$contador][0]->adeudos_fin_semestre).'</td>';//tipo ingreso estudiante
 $renglon.='<td>'.$datos_friae_estudiante[$contador][0]->id_materia_adeudos_fin_semestre.'</td>';//tipo ingreso estudiante
 
-$renglon.='<td>'.$datos_friae_estudiante[$contador][0]->adeudos_segunda_regularizacion.'</td>';//tipo ingreso estudiante
+$renglon.='<td>'.(($datos_friae_estudiante[$contador][0]->adeudos_segunda_regularizacion==0)?"":$datos_friae_estudiante[$contador][0]->adeudos_segunda_regularizacion).'</td>';//tipo ingreso estudiante
 $renglon.='<td>'.$datos_friae_estudiante[$contador][0]->id_materia_adeudos_segunda_regularizacion.'</td>';//tipo ingreso estudiante
 
 if($datos_friae_estudiante[$contador][0]->tipo_ingreso_despues_regularizacion=="REINGRESO"){
@@ -568,8 +777,21 @@ else if($datos_friae_estudiante[$contador][0]->tipo_ingreso_despues_regularizaci
 
 }
 
-$renglon.='<td style="width:40px;">'.$datos_friae_estudiante[$contador][0]->baja.'</td>';//tipo ingreso estudiante
-$renglon.='<td style="width:40px;">'.$estudiante->fecha_nacimiento.'</td>';//matricula estudiante
+
+$fecha_baja="";
+if($datos_friae_estudiante[$contador][0]->baja!=''){
+    $fecha_baja=date("d/m/Y", strtotime($datos_friae_estudiante[$contador][0]->baja));
+}
+
+
+$renglon.='<td style="width:40px;">'.$fecha_baja.'</td>';//tipo ingreso estudiante
+
+$fecha_nacimiento="";
+if($estudiante->fecha_nacimiento!=''){
+    $fecha_nacimiento=date("Y/m/d", strtotime($estudiante->fecha_nacimiento));
+}
+
+$renglon.='<td style="width:40px;">'.$fecha_nacimiento.'</td>';//matricula estudiante
 
 
 //
@@ -593,7 +815,7 @@ function primer_semestre($semestre,$materias_estudiantes,$html_pos_materias){
 
     if($semestre=='1'){
 
-        return '<tr style="font-size:4 pt;text-align:center"><td style="width:20px;background-color:#f8facb" rowspan="2">N/P</td><td style="width:40px;background-color:#f8facb" rowspan="2">MATRICULA</td><td style="width:100px;background-color:#f8facb" rowspan="2">CURP</td><td style="width:20px;background-color:#f8facb" rowspan="2">SEXO</td><td style="width:244px;background-color:#f8facb">NOMBRE DEL ALUMNO</td><td style="width:25px;background-color:#f8facb" rowspan="2">EDAD ACTUAL</td><td style="width:50px;background-color:#f8facb" rowspan="2">SITUACIÓN ALUMNO</td><td style="width:364px;background-color:#f8facb">(CLAVE-UNIDAD DE CONTENIDO)<br>CALIFICACIÓN</td><td style="width:40px;background-color:#f8facb" rowspan="2">SIT. ALUMNO FIN DEL MÓDULO</td><td style="width:180px;background-color:#f8facb">ANTES DEL PERIODO DE REGULARIZACIÓN</td><td style="width:220px;background-color:#f8facb">DESPUES DEL PERIODO DE REGULARIZACIÓN</td><td style="width:40px;background-color:#f8facb" rowspan="2">FECHA DE BAJA</td><td style="width:40px;background-color:#f8facb" rowspan="2">FECHA DE NACIMIENTO</td> </tr>
+        return '<tr style="font-size:4 pt;text-align:center"><td style="width:25px;background-color:#f8facb" rowspan="2"><br><br><br><br><br><br><br>N/P</td><td style="width:45px;background-color:#f8facb" rowspan="2"> <br><br><br><br><br><br><br>MATRÍCULA</td><td style="width:100px;background-color:#f8facb" rowspan="2"><br><br><br><br><br><br><br>CURP</td><td style="width:25px;background-color:#f8facb" rowspan="2"><br><br><br><br><br><br><br>SEXO</td><td style="width:244px;background-color:#f8facb" >NOMBRE DEL ALUMNO</td><td style="width:25px;background-color:#f8facb;vertical-align:text-top;" rowspan="2"><br><br><br><br><br><br><br>EDAD ACTUAL</td><td style="width:50px;background-color:#f8facb" rowspan="2"><br><br><br><br><br><br><br>SITUACIÓN ALUMNO</td><td style="width:364px;background-color:#f8facb">(CLAVE-UNIDAD DE CONTENIDO)<br>CALIFICACIÓN</td><td style="width:40px;background-color:#f8facb" rowspan="2"><br><br><br><br><br><br><br>SIT. ALUMNO FIN DEL MÓDULO</td><td style="width:178px;background-color:#f8facb;">ANTES DEL PERIODO DE REGULARIZACIÓN (ENERO)</td><td style="width:207px;background-color:#f8facb">DESPUÉS DEL PERIODO DE REGULARIZACIÓN (ENERO)</td><td style="width:40px;background-color:#f8facb" rowspan="2"><br><br><br><br><br><br><br>FECHA DE BAJA</td><td style="width:40px;background-color:#f8facb" rowspan="2"><br><br><br><br><br><br><br>FECHA DE NACIMIENTO</td> </tr>
 
         
         <tr style="font-size:4 pt;text-align:center">
@@ -612,38 +834,57 @@ function primer_semestre($semestre,$materias_estudiantes,$html_pos_materias){
 
     else{
         
-        $regreso ='<tr style="font-size:4 pt;text-align:center"><td style="width:20px;background-color:#f8facb" rowspan="2">N/P</td><td style="width:35px;background-color:#f8facb" rowspan="2">MATRICULA</td><td style="width:75px;background-color:#f8facb" rowspan="2">CURP</td><td style="width:20px;background-color:#f8facb" rowspan="2">SEXO</td><td style="width:225px;background-color:#f8facb">NOMBRE DEL ALUMNO</td><td style="width:25px;background-color:#f8facb" rowspan="2">EDAD ACTUAL</td><td style="width:50px;background-color:#f8facb" rowspan="2"><br><br><br><br><br>T.I. (TIPO DE INGRESO) I, R, T, P.E.</td>
-        <td style="width:40px;background-color:#f8facb" rowspan="2"><br><br><br><br>ESTATUS INICIO DEL MOD.<br>1.-REGULAR<br>2.-IRREGULAR</td>
+        
 
-        <td style="width:95px;background-color:#f8facb">ANTES DEL PERIODO DE REGULARIZACIÓN</td>
-        <td style="width:95px;background-color:#f8facb">DESPUES DEL PERIODO DE REGULARIZACIÓN</td>
+        if($semestre=="1" || $semestre=="3" || $semestre=="5"){
+
+            $regreso ='<tr style="font-size:3.5 pt;text-align:center"><td style="width:20px;background-color:#f8facb" rowspan="2"><br><br><br><br><br><br><br>N/P</td><td style="width:37px;background-color:#f8facb" rowspan="2"><br><br><br><br><br><br><br>MATRÍCULA</td><td style="width:83px;background-color:#f8facb" rowspan="2"><br><br><br><br><br><br><br>CURP</td><td style="width:20px;background-color:#f8facb" rowspan="2"><br><br><br><br><br><br><br>SEXO</td><td style="width:225px;background-color:#f8facb">NOMBRE DEL ALUMNO</td><td style="width:25px;background-color:#f8facb" rowspan="2"><br><br><br><br><br><br><br>EDAD ACTUAL</td><td style="width:25px;background-color:#f8facb" rowspan="2"><br><br><br><br><br>T.I. (TIPO DE INGRESO) I, R, T, P.E.</td>
+        <td style="width:40px;background-color:#f8facb" rowspan="2"><br><br><br><br><br><br><br>ESTATUS INICIO DEL MÓDULO</td>
+
+        <td style="width:99px;background-color:#f8facb">ANTES DEL PERIODO DE REGULARIZACIÓN (OCTUBRE)</td>
+        <td style="width:102px;background-color:#f8facb">DESPUÉS DEL PERIODO DE REGULARIZACIÓN (OCTUBRE)</td>
         
-        <td style="width:364px;background-color:#f8facb">(CLAVE-UNIDAD DE CONTENIDO)<br>CALIFICACIÓN</td><td style="width:40px;background-color:#f8facb" rowspan="2">SIT. ALUMNO FIN DEL MÓDULO</td><td style="width:150px;background-color:#f8facb">ANTES DEL PERIODO DE REGULARIZACIÓN</td><td style="width:150px;background-color:#f8facb">DESPUES DEL PERIODO DE REGULARIZACIÓN</td><td style="width:40px;background-color:#f8facb" rowspan="2">FECHA DE BAJA</td><td style="width:40px;background-color:#f8facb" rowspan="2">FECHA DE NACIMIENTO</td> </tr>';
+        <td style="width:364px;background-color:#f8facb">(CLAVE-UNIDAD DE CONTENIDO)<br>CALIFICACIÓN</td><td style="width:40px;background-color:#f8facb" rowspan="2"><br><br><br><br><br><br><br>SIT. ALUMNO FIN DEL MÓDULO (mod. Actual)</td><td style="width:150px;background-color:#f8facb">ANTES DEL PERIODO DE REGULARIZACIÓN (ENERO)</td><td style="width:160px;background-color:#f8facb">DESPUÉS DEL PERIODO DE REGULARIZACIÓN (ENERO)</td><td style="width:40px;background-color:#f8facb" rowspan="2"><br><br><br><br><br><br><br>FECHA DE BAJA</td><td style="width:40px;background-color:#f8facb" rowspan="2"><br><br><br><br><br><br><br>FECHA DE NACIMIENTO</td> </tr>';
         
-        $regreso .= '<tr style="font-size:4 pt;text-align:center">
+        $regreso .= '<tr style="font-size:3.5 pt;text-align:center">
         
         
         <td style="width:70px;background-color:#f8facb"><br><br><br><br><br>PRIMER APELLIDO</td>
         <td style="width:70px;background-color:#f8facb"><br><br><br><br><br>SEGUNDO APELLIDO</td>
         <td style="width:85px;background-color:#f8facb"><br><br><br><br><br>NOMBRE(S)</td>
 
-        <td style="width:25px;background-color:#f8facb"><br>NÚMERO DE ADEUDOS INICIO DEL MÓDULO (Módulos anteriores)</td>
-        <td style="width:70px;background-color:#f8facb"><br><br><br><br>CLAVE U.C. ADEUDOS MODULARES ANTERIORES</td>
-
-
-        
+        <td style="width:25px;background-color:#f8facb"><br>NÚMERO DE ADEUDOS INICIO DEL MÓDULO (módulos anteriores)</td>
+        <td style="width:74px;background-color:#f8facb"><br><br><br><br><br>CLAVE U.C. ADEUDOS MODULARES ANTERIORES</td> 
         ';
 
-        if($semestre=="1" || $semestre=="3" || $semestre=="5"){
-            $regreso.='<td style="width:25px;background-color:#f8facb">NUMERO DE ADEUDOS DESPUES DE REGULARIZACION DE OCTUBRE</td>
-            <td style="width:70px;background-color:#f8facb"><br><br><br>CLAVE U.C. ADEUDOS DESPUES DE LA REGULARIZACION DE OCTUBRE</td>'.celdas_materias($materias_estudiantes).$html_pos_materias.'
+            $regreso.='<td style="width:25px;background-color:#f8facb">NÚMERO DE ADEUDOS DESPUÉS DE LA REGULARIZACIÓN</td>
+            <td style="width:77px;background-color:#f8facb"><br><br><br>CLAVE U.C. ADEUDOS DESPUÉS DE LA REGULARIZACIÓN (módulos anteriores)</td>'.celdas_materias($materias_estudiantes).$html_pos_materias.'
             </tr>';
             
         }
 
         else{
-            $regreso.='<td style="width:25px;background-color:#f8facb">NUMERO DE ADEUDOS DESPUES DE REGULARIZACION DE MAYO</td>
-            <td style="width:70px;background-color:#f8facb"><br><br><br>CLAVE U.C. ADEUDOS DESPUES DE LA REGULARIZACION DE MAYO</td>'.celdas_materias($materias_estudiantes).$html_pos_materias.'
+
+            $regreso ='<tr style="font-size:3.5 pt;text-align:center"><td style="width:20px;background-color:#f8facb" rowspan="2"><br><br><br><br><br><br><br>N/P</td><td style="width:37px;background-color:#f8facb" rowspan="2"><br><br><br><br><br><br><br>MATRÍCULA</td><td style="width:83px;background-color:#f8facb" rowspan="2"><br><br><br><br><br><br><br>CURP</td><td style="width:20px;background-color:#f8facb" rowspan="2"><br><br><br><br><br><br><br>SEXO</td><td style="width:225px;background-color:#f8facb">NOMBRE DEL ALUMNO</td><td style="width:25px;background-color:#f8facb" rowspan="2"><br><br><br><br><br><br><br>EDAD ACTUAL</td><td style="width:25px;background-color:#f8facb" rowspan="2"><br><br><br><br><br>T.I. (TIPO DE INGRESO) I, R, T, P.E.</td>
+        <td style="width:40px;background-color:#f8facb" rowspan="2"><br><br><br><br><br><br><br>ESTATUS INICIO DEL MÓDULO</td>
+
+        <td style="width:99px;background-color:#f8facb">ANTES DEL PERIODO DE REGULARIZACIÓN (MAYO)</td>
+        <td style="width:102px;background-color:#f8facb">DESPUÉS DEL PERIODO DE REGULARIZACIÓN (MAYO)</td>
+        
+        <td style="width:364px;background-color:#f8facb">(CLAVE-UNIDAD DE CONTENIDO)<br>CALIFICACIÓN</td><td style="width:40px;background-color:#f8facb" rowspan="2"><br><br><br><br><br><br><br>SIT. ALUMNO FIN DEL MÓDULO (mod. Actual)</td><td style="width:150px;background-color:#f8facb">ANTES DEL PERIODO DE REGULARIZACIÓN (JULIO)</td><td style="width:160px;background-color:#f8facb">DESPUÉS DEL PERIODO DE REGULARIZACIÓN (JULIO)</td><td style="width:40px;background-color:#f8facb" rowspan="2"><br><br><br><br><br><br><br>FECHA DE BAJA</td><td style="width:40px;background-color:#f8facb" rowspan="2"><br><br><br><br><br><br><br>FECHA DE NACIMIENTO</td> </tr>';
+        
+        $regreso .= '<tr style="font-size:3.5 pt;text-align:center">
+        
+        
+        <td style="width:70px;background-color:#f8facb"><br><br><br><br><br>PRIMER APELLIDO</td>
+        <td style="width:70px;background-color:#f8facb"><br><br><br><br><br>SEGUNDO APELLIDO</td>
+        <td style="width:85px;background-color:#f8facb"><br><br><br><br><br>NOMBRE(S)</td>
+
+        <td style="width:25px;background-color:#f8facb"><br>NÚMERO DE ADEUDOS INICIO DEL MÓDULO (módulos anteriores)</td>
+        <td style="width:74px;background-color:#f8facb"><br><br><br><br><br>CLAVE U.C. ADEUDOS MODULARES ANTERIORES</td> 
+        ';
+            $regreso.='<td style="width:25px;background-color:#f8facb">NÚMERO DE ADEUDOS DESPUÉS DE LA REGULARIZACIÓN</td>
+            <td style="width:77px;background-color:#f8facb"><br><br><br><br><br>CLAVE U.C. ADEUDOS DESPUÉS DE LA REGULARIZACIÓN (módulos anteriores)</td>'.celdas_materias($materias_estudiantes).$html_pos_materias.'
             </tr>';
         }
 
@@ -659,25 +900,25 @@ function primer_semestre($semestre,$materias_estudiantes,$html_pos_materias){
 
 //carga los datos de encabezados
 $pre_materias ='
-<h5 style="text-align:center">COLEGIO SUPERIOR PARA LA EDUCACION INTEGRAL INTERCULTURAL DE OAXACA</h5>
+<h5 style="text-align:center">COLEGIO SUPERIOR PARA LA EDUCACIÓN INTEGRAL INTERCULTURAL DE OAXACA</h5>
 <p style="text-align:center">DEPARTAMENTO DE CONTROL ESCOLAR</p>
-<h5 style="text-align:center;background-color:#e9e9e9">FORMATO DE REGISTRO DE INSCRIPCION Y ACREDITACION ESCOLAR</h5>
+<h5 style="text-align:center;background-color:#e9e9e9">FORMATO DE REGISTRO DE INSCRIPCIÓN Y ACREDITACIÓN ESCOLAR (F-RIAE)</h5>
 
 <table>
 <tbody>
 <tr>
 <td><span style="font-weight: bold;">NOMBRE DEL PLANTEL: </span>'.$datos_friae->nombre_largo.' DE '.$datos_friae->nombre_plantel.'</td>
-<td style="text-align:right"><span style="font-weight: bold;">CICLO ESCOLAR: </span>'.$datos_friae->nombre_ciclo_escolar.'</td>
+<td style="text-align:right"><span style="font-weight: bold;">MÓDULO: </span>'.nombre_modulo($datos_friae->semestre).'</td>
 </tr>
 
 <tr>
 <td><span style="font-weight: bold;">CLAVE C.C.T: </span>'.$datos_friae->cct_plantel.'</td>
-<td style="text-align:right"><span style="font-weight: bold;">SEMESTRE: </span>'.$datos_friae->semestre.'</td>
+<td style="text-align:right"><span style="font-weight: bold;">CICLO ESCOLAR: </span>'.$datos_friae->nombre_ciclo_escolar.'</td>
 </tr>
 
 <tr>
-<td><span style="font-weight: bold;">LOCALIDAD Y MUNICIPIO: </span>'.$datos_friae->nombre_localidad.','.$datos_friae->nombre_municipio.'</td>
-<td style="text-align:right"><span style="font-weight: bold;">GRUPO: </span>'.$datos_friae->nombre_grupo.'</td>
+<td><span style="font-weight: bold;">LOCALIDAD Y MUNICIPIO: </span>'.$datos_friae->nombre_localidad.','.$datos_friae->nombre_municipio.', '.$datos_friae->nombre_distrito.', '.$datos_friae->nombre_estado.'</td>
+<td style="text-align:right"><span style="font-weight: bold;">GRUPO: </span>"'.$datos_friae->nombre_grupo.'"</td>
 </tr>
 
 <tr>
@@ -689,10 +930,59 @@ $pre_materias ='
 </table>
 
 <table border="1">
-<tbody>'.primer_semestre($datos_friae->semestre,$materias_estudiantes,$html_pos_materias).$registros_html.'
+<tbody>'.primer_semestre($datos_friae->semestre,$materias_estudiantes,$html_pos_materias).$registros_html.$filas_faltantes_html.'
 </tbody>
-</table>
-';
+</table>';
+//style="border: hidden"
+
+if($datos_friae->semestre!=1){
+        $pre_materias .='
+        <table style="border: hidden">
+        <tbody>
+        <tr>
+        <td style="width:133px;"> </td>
+        <td style="width:40px;"> <img src="'.base_url().'assets/img/sexo.png" alt="Smiley face" height="35" width="41"> </td>
+        <td style="width:60px;"> </td>
+        <td style="width:158px;"> <span style="font-size:5px">ETAPA DE INSCRIPCIÓN</span></td>
+        <td style="width:48px;"> <img src="'.base_url().'assets/img/tipo_ingreso.png" alt="Smiley face" height="35" width="41"></td>
+        <td style="width:237px;"><img src="'.base_url().'assets/img/inicio_mod.png" alt="Smiley face" height="23" width="23"></td>
+        <td style="width:364px;"><span style="font-size:5px;text-align:center"><br>ETAPA DE ACREDITACIÓN</span> </td>
+        <td style="width:308px;"> <img src="'.base_url().'assets/img/sit_fin_modulo.png" alt="Smiley face" height="35" width="41"></td>
+        
+        <td style="width:45px;"> <img src="'.base_url().'assets/img/situacion_despues_de_regu.png" alt="Smiley face" height="35" width="41"></td>
+        <td  style="width:40px;"> <img src="'.base_url().'assets/img/fecha_baja.png" alt="Smiley face" height="35" width="41"></td>
+        <td  style="width:40px;"> <img src="'.base_url().'assets/img/fecha_nacimiento.png" alt="Smiley face" height="35" width="41"></td>
+        </tr>
+        
+        </tbody>
+        </table>';
+}
+else{
+        $pre_materias .='
+        <table style="border: hidden">
+        <tbody>
+        <tr>
+        <td style="width:160px;"> </td>
+        <td style="width:40px;"> <img src="'.base_url().'assets/img/sexo.png" alt="Smiley face" height="35" width="41"> </td>
+        
+        <td style="width:70px;"> </td>
+
+        <td style="width:194px;"> <span style="font-size:5px">ETAPA DE INSCRIPCIÓN</span></td>
+        <td style="width:50px;"> </td>
+        <td style="width:364px;"><span style="font-size:5px;text-align:center"><br>ETAPA DE ACREDITACIÓN</span> </td>
+        <td style="width:380px;"> <img src="'.base_url().'assets/img/sit_fin_modulo.png" alt="Smiley face" height="35" width="41"></td>
+
+        <td style="width:45px;"> <img src="'.base_url().'assets/img/situacion_despues_de_regu.png" alt="Smiley face" height="35" width="41"></td>
+        <td  style="width:40px;"> <img src="'.base_url().'assets/img/fecha_baja.png" alt="Smiley face" height="35" width="41"></td>
+        <td  style="width:40px;"> <img src="'.base_url().'assets/img/fecha_nacimiento.png" alt="Smiley face" height="35" width="41"></td>
+        </tr>
+
+        </tbody>
+        </table>';
+
+}
+
+
 
 
 $nombre_revisor="";
@@ -707,11 +997,11 @@ $firmas = '
 <table style="font-size:6pt;">
 <tbody>
 <tr>
-<td><br><br>'.$director.'<br>______________________________<br>NOMBRE Y FIRMA DEL DIRETOR(A)<br>DEL PLANTEL<br></td>
+<td><br><br>'.$director.'<br>______________________________<br>NOMBRE Y FIRMA DEL DIRECTOR(A)<br>DEL PLANTEL<br></td>
 <td><p></p><p>_________________________</p><p>SELLO DEL PLANTEL</p></td>
-<td><br><br>DAVID ERNESTO HERNANDEZ AVENDAÑO<br>___________________________________<br>JEFE DEL DEPARTAMENTO DE<br>CONTROL ESCOLAR<br></td>
+<td><br><br>'.$jefe_escolar[0]->valor.'<br>___________________________________<br>JEFE DEL DEPARTAMENTO DE<br>CONTROL ESCOLAR<br></td>
 <td><p></p><p>_________________________</p><p>SELLO CONTROL ESCOLAR</p></td>
-<td><br><br>'.$nombre_revisor.'<br>_________________________<br>REVISO Y VALIDO</td>
+<td><br><br>'.$nombre_revisor.'<br>_________________________<br>REVISÓ Y VALIDÓ</td>
 </tr>
 </tbody>
 </table>
@@ -719,7 +1009,7 @@ $firmas = '
 
 $tabla_escuela="";
 
-$tabla_escuela.='<table style="font-size:6pt;" border="1">
+$tabla_escuela.='<table style="font-size:4pt;background-color:#e9e9e9" border="1">
 <tbody>
 <tr>
 <td style="width:50px;"><span style="font-weight: bold;">CLAVE</span></td>
@@ -735,20 +1025,50 @@ $tabla_escuela.='</tbody>
 
 
 
+$rubrica='
+<table style="font-size:2.7pt;font-weight: bold;text-align:left">
+<tbody>
+<tr>
+<td>ORIGINAL - DEPTO. CONTROL ESCOLAR</td>
+</tr>
+<tr>
+<td>COPIA - PLANTEL</td>
+</tr>
+</tbody>
+</table>';
+
+
+
+
+
 // print a block of text using Write()
 // output the HTML content
 $pdf->writeHTML($pre_materias, true, 0, true, true);
 
-$pdf->writeHTMLCell($w = 0, $h = 20, $x = '20', $y = '230',$tabla_escuela, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
 
-$pdf->writeHTMLCell($w = 0, $h = 20, $x = '100', $y = '250',$firmas, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+
+if($datos_friae->semestre!=1){
+        $pdf->writeHTMLCell($w = 0, $h = 20, $x = '7', $y = '238',$tabla_escuela, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+
+        $pdf->writeHTMLCell($w ='310', $h = 20, $x = '100', $y = '250',$firmas, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+
+        $pdf->writeHTMLCell($w = '23', $h = '10', $x = '400', $y = '255',$rubrica, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+}
+else{
+        $pdf->writeHTMLCell($w = 0, $h = 20, $x = '20', $y = '238',$tabla_escuela, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+
+        $pdf->writeHTMLCell($w = '300', $h = 20, $x = '100', $y = '250',$firmas, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+
+        $pdf->writeHTMLCell($w = '23', $h = '10', $x = '390', $y = '255',$rubrica, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+}
+
 
 
 //Close and output PDF document
 
 //error_reporting(E_ALL); Aplicar cuando existan errores y no sabemos donde existe el error.
 
-$pdf->Output('example_003.pdf', 'I');
+$pdf->Output('FRIAE.pdf', 'I');
 
 //============================================================+
 // END OF FILE

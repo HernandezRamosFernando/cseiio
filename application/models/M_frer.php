@@ -20,6 +20,6 @@ class M_frer extends CI_Model {
 
 
    function datos_plantel_frer($plantel){
-      return $this->db->query("select *,concat(nombre_localidad,',',nombre_municipio) as localidad_municipio from Plantel as p inner join Localidad as l on p.id_localidad_plantel=l.id_localidad inner join Municipio as m on l.Municipio_id_municipio=m.id_municipio where cct_plantel='".$plantel."'")->result()[0];
+      return $this->db->query("select *,concat(nombre_localidad,',',nombre_municipio) as localidad_municipio from Plantel as p inner join Localidad as l on p.id_localidad_plantel=l.id_localidad inner join Municipio as m on l.Municipio_id_municipio=m.id_municipio inner join Estado e on m.Estado_id_estado=e.id_estado inner join Distrito as d on m.Distrito_id_distrito=d.id_distrito where cct_plantel='".$plantel."'")->result()[0];
    }
 }

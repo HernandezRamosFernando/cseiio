@@ -142,7 +142,7 @@ class M_friae extends CI_Model {
     }
 
     function get_datos_friae($grupo){
-        return $this->db->query("select nombre_largo, nombre_plantel,cct_plantel,nombre_localidad,nombre_municipio,semestre,nombre_ciclo_escolar,nombre_grupo from Grupo as g inner join Grupo_Estudiante as ge on g.id_grupo=ge.Grupo_id_grupo inner join Plantel as p on p.cct_plantel=g.plantel inner join Ciclo_escolar as ce on ce.id_ciclo_escolar=ge.Ciclo_escolar_id_ciclo_escolar inner join Localidad as l on l.id_localidad=p.id_localidad_plantel inner join Municipio as m on m.id_municipio=l.Municipio_id_municipio where g.id_grupo='".$grupo."' limit 1")->result()[0];
+        return $this->db->query("select nombre_largo, nombre_plantel,cct_plantel,nombre_localidad,nombre_municipio,nombre_estado,nombre_distrito,semestre,nombre_ciclo_escolar,nombre_grupo from Grupo as g inner join Grupo_Estudiante as ge on g.id_grupo=ge.Grupo_id_grupo inner join Plantel as p on p.cct_plantel=g.plantel inner join Ciclo_escolar as ce on ce.id_ciclo_escolar=ge.Ciclo_escolar_id_ciclo_escolar inner join Localidad as l on l.id_localidad=p.id_localidad_plantel inner join Municipio as m on m.id_municipio=l.Municipio_id_municipio inner join Estado e on m.Estado_id_estado=e.id_estado inner join Distrito as d on m.Distrito_id_distrito=d.id_distrito where g.id_grupo='".$grupo."' limit 1")->result()[0];
     }
 
     ///////////////////////// inicia operación panzer.......................................
@@ -158,7 +158,7 @@ class M_friae extends CI_Model {
     }
 
     function get_revisor($cct){
-        return $this->db->query("SELECT * FROM Plantel p  LEFT JOIN Asesor a on p.id_revisor=a.id_asesor where cct_plantel='".$cct."';")->result();
+        return $this->db->query("SELECT * FROM Plantel p  LEFT JOIN Revisor r on p.id_revisor=r.idrevisor where p.cct_plantel='".$cct."';")->result();
     }
 
 }

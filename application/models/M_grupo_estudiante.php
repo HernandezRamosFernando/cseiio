@@ -122,7 +122,7 @@ class M_grupo_estudiante extends CI_Model {
     }
 
     public function datos_materia_grupo($materia,$grupo){
-        return $this->db->query("select unidad_contenido,clave,nombre_grupo,g.semestre,periodo,nombre_ciclo_escolar,a.nombre,a.primer_apellido,a.segundo_apellido,if(periodo='AGOSTO-ENERO','B','A') as tipo_semestre from Grupo_Estudiante as ge inner join Ciclo_escolar as ce on ge.Ciclo_escolar_id_ciclo_escolar=ce.id_ciclo_escolar inner join Materia as m on m.clave=ge.id_materia inner join Asesor as a on a.id_asesor=if(ge.id_asesor='',964,ge.id_asesor) inner join Grupo as g on g.id_grupo=ge.Grupo_id_grupo where ge.Grupo_id_grupo='".$grupo."' and id_materia='".$materia."' limit 1")->result()[0];
+        return $this->db->query("select unidad_contenido,tipo,clave,nombre_grupo,g.semestre,periodo,nombre_ciclo_escolar,a.nombre,a.primer_apellido,a.segundo_apellido,if(periodo='AGOSTO-ENERO','B','A') as tipo_semestre from Grupo_Estudiante as ge inner join Ciclo_escolar as ce on ge.Ciclo_escolar_id_ciclo_escolar=ce.id_ciclo_escolar inner join Materia as m on m.clave=ge.id_materia inner join Asesor as a on a.id_asesor=if(ge.id_asesor='',964,ge.id_asesor) inner join Grupo as g on g.id_grupo=ge.Grupo_id_grupo where ge.Grupo_id_grupo='".$grupo."' and id_materia='".$materia."' limit 1")->result()[0];
     }
 
 

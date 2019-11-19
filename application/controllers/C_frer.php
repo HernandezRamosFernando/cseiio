@@ -10,6 +10,8 @@ class C_frer extends CI_Controller {
         $this->load->model("M_frer");
         $this->load->model("M_regularizacion");
         $this->load->model("M_friae");
+
+        $this->load->model("M_configuracion");
     }
 
 
@@ -41,6 +43,9 @@ class C_frer extends CI_Controller {
             break;
         }
 
+        $datos['revisor']=$this->M_friae->get_revisor($plantel);
+
+        $datos['jefe_escolar']=$this->M_configuracion->get_jefe_escolar();
 
         $datos['ano']=$mes_ano[1];
 

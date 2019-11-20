@@ -182,6 +182,12 @@
     var pasar_boton;
 
 
+    function borrar_formato_tabla(){
+  $("#tabla_completa").dataTable().fnDestroy();
+  
+}
+
+
 
     function buscar() {
       document.getElementById("aspirante_plantel_busqueda").disabled = true;
@@ -275,7 +281,10 @@
               }
               //aqui va si cancela
             });
-            $(pasar_boton).parents('tr').detach();
+            //$(pasar_boton).parents('tr').detach();
+            borrar_formato_tabla();
+            buscar();
+
           } else {
             Swal.fire({
               type: 'error',

@@ -210,7 +210,7 @@
           //console.log(valor);
           var fila = '<tr>';
           fila += '<td>';
-          fila += valor.nombre + " " + valor.primer_apellido + " " + valor.segundo_apellido;
+          fila += valor.primer_apellido + " " + valor.segundo_apellido+" "+valor.nombre;
           fila += '</td>';
           fila += '<td>';
           fila += valor.curp;

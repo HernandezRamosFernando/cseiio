@@ -184,7 +184,10 @@
   <script>
     var pasar_boton;
 
-
+    function borrar_formato_tabla(){
+  $("#tabla_completa").dataTable().fnDestroy();
+  
+}
 
     function buscar() {
       document.getElementById("aspirante_plantel_busqueda").disabled = true;
@@ -194,7 +197,7 @@
       var curp = document.getElementById("aspirante_curp_busqueda").value;
       var plantel = document.getElementById("aspirante_plantel_busqueda").value;
       var query = 'curp=' + curp + '&cct_plantel=' + plantel;
-      xhr.open('GET', '<?php echo base_url();?>index.php/c_estudiante/get_estudiantes_curp_plantel?' + query, true);
+      xhr.open('GET', '<?php echo base_url();?>index.php/c_estudiante/get_estudiantes_para_vista_bajas?' + query, true);
       xhr.onloadstart = function () {
         $('#div_carga').show();
       }
@@ -207,7 +210,7 @@
           //console.log(valor);
           var fila = '<tr>';
           fila += '<td>';
-          fila += valor.nombre + " " + valor.primer_apellido + " " + valor.segundo_apellido;
+          fila += valor.primer_apellido + " " + valor.segundo_apellido+" "+valor.nombre;
           fila += '</td>';
           fila += '<td>';
           fila += valor.curp;
@@ -278,7 +281,8 @@
               }
               //aqui va si cancela
             });
-            $(pasar_boton).parents('tr').detach();
+            borrar_formato_tabla();
+            buscar();
           } else {
             Swal.fire({
               type: 'error',

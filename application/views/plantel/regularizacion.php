@@ -145,7 +145,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" value="nuevo" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button type="button" onclick="validarcomponentefecha()" class="btn btn-success">Guardar fecha</button>
+        <button type="button" onclick="validarcomponentefecha()" class="btn btn-success" data-backdrop="false" data-dismiss="modal">Guardar fecha</button>
       </div>
     </div>
   </div>
@@ -154,7 +154,7 @@
 <script>
   function validarcomponentefecha() {
 
-    if (document.getElementById("fecha_inicio").value != '') {
+    if (document.getElementById("fecha_inicio").value != '' && document.getElementById("hora_inicio").value != '' && document.getElementById("asesor").value != '') {
       enviar_formulario();
     } else {
       Swal.fire({
@@ -430,9 +430,9 @@
 
     console.log(datos);
 
-    var xhr = new XMLHttpRequest();
+    //var xhr = new XMLHttpRequest();
     $('#fechacalificacion').modal().hide();
-    xhr.open("POST", '<?php echo base_url();?>index.php/c_regularizacion/agregar_regularizacion', true);
+    //xhr.open("POST", 'index.php/c_regularizacion/agregar_regularizacion', true);
 
     swalWithBootstrapButtons.fire({
       type: 'info',
@@ -473,6 +473,8 @@
                   location.reload();
                 }
                 //aqui va si cancela
+                
+                      
               });
             } else {
               Swal.fire({
@@ -484,6 +486,11 @@
           }
         }
         xhr.send(JSON.stringify(datos));
+      }
+
+      else{
+        
+              
       }
       //aqui va si cancela
     });

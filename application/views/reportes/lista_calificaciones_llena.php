@@ -248,7 +248,7 @@ function rellenar_lista($estudiantes,$bajas){
 
 
         if(sizeof($bajas[$contador-1])>0){
-            $respuesta.='<tr style="background-color:#ececec">';
+            $respuesta.='<tr style="background-color:#ececec;line-height: 20px;">';
         }
 
         else{
@@ -271,7 +271,13 @@ function rellenar_lista($estudiantes,$bajas){
         <td style="width:35px">'.(($estudiante->examen_final)=='0'?'/':$estudiante->examen_final).'</td>
         <td style="width:35px">'.$estudiante->calificacion_final.'</td>';
         if(sizeof($bajas[$contador-1])>0){
-            $respuesta.='<td style="width:89px">'.$bajas[$contador-1][0]->fecha.'</td></tr>';
+            $fecha_baja="";
+
+            if($bajas[$contador-1][0]->fecha!=''){
+                $fecha_baja=date("d/m/Y", strtotime($bajas[$contador-1][0]->fecha));
+            }
+            
+            $respuesta.='<td style="width:89px">'.$fecha_baja.'</td></tr>';
         }
 
         else{

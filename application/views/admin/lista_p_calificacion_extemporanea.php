@@ -69,7 +69,7 @@ function cargar_permisos(){
             var fila = '<tr class="table-warning">';
             fila+='<td>'+valor.primer_apellido+' '+valor.segundo_apellido+' '+valor.nombre+'</td>';
             fila+='<td>'+valor.Plantel_cct_plantel+'</td>';
-            fila+='<td>'+valor.materia+'</td>';
+            fila+='<td>'+valor.id_materia+'</td>';
             fila+='<td>'+valor.primer_parcial+'</td>';
             fila+='<td>'+valor.segundo_parcial+'</td>';
             fila+='<td>'+valor.tercer_parcial+'</td>';

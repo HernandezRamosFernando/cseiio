@@ -78,6 +78,8 @@ class C_frer extends CI_Controller {
             $datos ['datos_frer_estudiante_con_grupo'][$contador] = $this->M_frer->datos_frer_estudiante($folio_frer,$regularizacion->no_control);
             $datos ['materias_debe_estudiante_con_grupo'][$contador] = $this->M_regularizacion->materias_debe_estudiante_actualmente($regularizacion->no_control);
             $contador+=1;
+
+            
         }
         
         $contador=0;

@@ -745,8 +745,17 @@ else{
 $renglon.='<td>'.(($datos_friae_estudiante[$contador][0]->adeudos_fin_semestre==0)?"":$datos_friae_estudiante[$contador][0]->adeudos_fin_semestre).'</td>';//tipo ingreso estudiante
 $renglon.='<td>'.$datos_friae_estudiante[$contador][0]->id_materia_adeudos_fin_semestre.'</td>';//tipo ingreso estudiante
 
-$renglon.='<td>'.(($datos_friae_estudiante[$contador][0]->adeudos_segunda_regularizacion==0)?"":$datos_friae_estudiante[$contador][0]->adeudos_segunda_regularizacion).'</td>';//tipo ingreso estudiante
-$renglon.='<td>'.$datos_friae_estudiante[$contador][0]->id_materia_adeudos_segunda_regularizacion.'</td>';//tipo ingreso estudiante
+$adeudos_segunda_regularizacion='';
+$id_materia_adeudos_segunda_regularizacion='';
+
+if($datos_friae_estudiante[$contador][0]->tipo_ingreso_fin_semestre!="BAJA"){
+    $adeudos_segunda_regularizacion=($datos_friae_estudiante[$contador][0]->adeudos_segunda_regularizacion==0)?"":$datos_friae_estudiante[$contador][0]->adeudos_segunda_regularizacion;
+
+    $id_materia_adeudos_segunda_regularizacion=$datos_friae_estudiante[$contador][0]->id_materia_adeudos_segunda_regularizacion;
+}
+
+$renglon.='<td>'.$adeudos_segunda_regularizacion.'</td>';//tipo ingreso estudiante
+$renglon.='<td>'.$id_materia_adeudos_segunda_regularizacion.'</td>';//tipo ingreso estudiante
 
 if($datos_friae_estudiante[$contador][0]->tipo_ingreso_despues_regularizacion=="REINGRESO"){
 

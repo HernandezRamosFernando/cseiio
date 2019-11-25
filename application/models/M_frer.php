@@ -7,7 +7,7 @@ class M_frer extends CI_Model {
 
 
    function folio_frer_periodo_plantel($plantel,$mes,$ano){
-      return $this->db->query("select id_frer from Frer where month(fecha)=".$mes." and year(fecha)=".$ano." and Plantel_cct_plantel='".$plantel."'")->result()[0]->id_frer;
+      return $this->db->query("select max(id_frer) id_frer from Frer where month(fecha)=".$mes." and year(fecha)=".$ano." and Plantel_cct_plantel='".$plantel."'")->result()[0]->id_frer;
    }
 
    function datos_estudiante($no_control){

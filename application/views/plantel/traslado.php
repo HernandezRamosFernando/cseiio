@@ -183,7 +183,7 @@
               <label class="form-group has-float-label seltitulo">
                 <select class="form-control form-control-lg selcolor" required="required"
                   id="plantel_para_traslado" name="plantel_para_traslado" onchange="cargargrupos()">
-                  
+                  <option value="">Seleccione un plantel</option>
                   <?php
                       foreach ($planteles as $plantel)
                       {
@@ -587,6 +587,8 @@ var form_nuevo_traslado = document.getElementById("nuevo_traslado");
    var plantel = document.getElementById("plantel_para_traslado").value;
       console.log(plantel);
 
+      if(plantel!=""){
+
       var semestre = document.getElementById("semestre_en_curso").value;
       console.log(semestre);
     
@@ -666,6 +668,8 @@ var form_nuevo_traslado = document.getElementById("nuevo_traslado");
      }
       
     }
+
+ }
   
 
 

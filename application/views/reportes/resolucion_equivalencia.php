@@ -171,7 +171,7 @@ $pdf->writeHTML($html_1, true, 0, true, true);
 
 
 //Close and output PDF document
-$pdf->Output('example_003.pdf', 'I');
+$pdf->Output('Resolucion_equivalencia.pdf', 'I');
 
 //============================================================+
 // END OF FILE

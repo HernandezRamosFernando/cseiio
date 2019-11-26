@@ -583,10 +583,13 @@ var form_nuevo_traslado = document.getElementById("nuevo_traslado");
 
 
  function cargargrupos() {
+
+  
  	document.getElementById("btn_enviar").setAttribute('disabled','disabled');
    var plantel = document.getElementById("plantel_para_traslado").value;
       console.log(plantel);
 
+      if(plantel!=""){
       var semestre = document.getElementById("semestre_en_curso").value;
       console.log(semestre);
     
@@ -664,6 +667,8 @@ var form_nuevo_traslado = document.getElementById("nuevo_traslado");
         }
 
      }
+
+      }
       
     }
   

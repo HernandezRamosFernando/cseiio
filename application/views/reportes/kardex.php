@@ -189,7 +189,7 @@ $pdf->writeHTMLCell($w = 145, $h = 5, $x = '50', $y = '77', '<p>'.$estudiante->n
 
 //observaciones
 $pdf->writeHTMLCell($w = 40, $h = 5, $x = '14', $y = '85', '<p style="font-size:7pt">OBSERVACIONES</p>', $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
-$pdf->writeHTMLCell($w = 145, $h = 5, $x = '50', $y = '85', '<p></p>', $border = 1, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+$pdf->writeHTMLCell($w = 145, $h = 5, $x = '50', $y = '85', '<p>'.$estudiante->tipo_ingreso.'</p>', $border = 1, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
 
 //espacio vacio
 $pdf->writeHTMLCell($w = 145, $h = 5, $x = '50', $y = '90', '<p></p>', $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);

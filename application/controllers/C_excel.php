@@ -20,6 +20,8 @@ class C_excel extends CI_Controller {
 		// load model
 		$this->load->model('M_ciclo_escolar');
 		$this->load->model('M_grupo');
+		$this->load->model('M_grupo_estudiante');
+		$this->load->model('M_Regularizacion');
 	}
 	// index
 	public function index()
@@ -59,7 +61,7 @@ class C_excel extends CI_Controller {
                 
                 $totalDeHojas = $spreadsheet->getSheetCount();
                 
-                //Empieza a leer hoja Friae y calificaciones
+//Empieza a leer hoja Friae y calificaciones___________________________________________________________________
                     $indiceHoja = 0;
                     $calificaciones_friae = $spreadsheet->getSheet($indiceHoja);
                     echo "<h3>Vamos en la hoja con índice $indiceHoja</h3>";
@@ -100,17 +102,204 @@ class C_excel extends CI_Controller {
 							$this->M_grupo->agregar_grupo_de_ciclo_anterior($id_grupo,$modulo,$grupo,$plantel_cct);
 						}
 
+								
 
 					
 						foreach ($calificaciones_friae->getRowIterator(10) as $fila) {
+							$no_control='';
+								$matricula='';
+								$clave='';
+								$p1=null;
+								$p2=null;
+								$p3=null;
+								$promedio_modular=null;
+								$examen_final=null;
+								$cal_final=null;
+								$bandera=0;
 
 							$fila=$fila->getCellIterator("A","I");
 
-							
-							
 							foreach ($fila as $celda) {
 								if(!is_null($celda->getValue())){
-									# El valor, así como está en el documento
+
+								$fila = $celda->getRow();
+								# Columna, que es la A, B, C y así...
+								$columna = $celda->getColumn();
+								
+
+								if($columna=='A'){
+									$no_control=trim($celda->getValue());
+									$bandera++;
+								}
+
+								if($columna=='B'){
+									$matricula=trim($celda->getValue());
+									$bandera++;
+								}
+
+								if($columna=='C'){
+									$clave=trim($celda->getValue());
+									$bandera++;
+								}
+
+								if($columna=='D'){
+									$p1=trim($celda->getValue());
+									if($p1=='/'){
+										$p1=0;
+									}
+									$bandera++;
+								}
+
+								if($columna=='E'){
+									$p2=trim($celda->getValue());
+									if($p2=='/'){
+										$p2=0;
+									}
+									$bandera++;
+								}
+
+								if($columna=='F'){
+									$p3=trim($celda->getValue());
+									if($p3=='/'){
+										$p3=0;
+									}
+									$bandera++;
+								}
+
+								if($columna=='G'){
+									$promedio_modular=$celda->getCalculatedValue();
+									if($promedio_modular=='/'){
+										$promedio_modular=0;
+									}
+									$bandera++;
+								}
+
+								if($columna=='H'){
+									$examen_final=$celda->getCalculatedValue();
+									if($examen_final=='/'){
+										$examen_final=0;
+									}
+									$bandera++;
+								}
+
+								if($columna=='I'){
+									$cal_final=$celda->getCalculatedValue();
+									if($cal_final=='/'){
+										$cal_final=0;
+									}
+									$bandera++;
+								}
+
+								if($bandera==9){//Solo se insertaran aquellas calificaciones en donde todas las 9 columnas esten rellenados.
+									$datos_calificacion_estudiante = array(
+										'Grupo_id_grupo' => strtoupper($id_grupo),
+										'Estudiante_no_control' => strtoupper($no_control),
+										'Ciclo_escolar_id_ciclo_escolar' =>$id_ciclo_escolar,
+										'id_materia' => strtoupper($clave),
+										'primer_parcial' => $p1,
+										'segundo_parcial' => $p2,
+										'tercer_parcial' => $p3,
+										'examen_final' => $examen_final,
+										'calificacion_final' => $cal_final
+									);
+									//$this->M_grupo_estudiante->insertar_calificaciones_ciclos_anteriores($datos_calificacion_estudiante);
+								}
+								
+
+								}
+
+								
+
+								
+								
+							}
+						}
+						
+//Termina a leer hoja Friae y calificaciones_______________________________________________________________________
+					
+//Empieza a leer pestaña FRER_______________________________________________________________________________________
+					$indiceHoja = 1;
+					$frer = $spreadsheet->getSheet($indiceHoja);
+					echo "<h3>Vamos en la hoja con índice $indiceHoja</h3>";
+
+					foreach ($frer->getRowIterator(3) as $fila) {
+						$no_control='';
+						$clave_materia='';
+						$calificacion_regularizacion=null;
+						$fecha_regularizacion=null;
+						$hora_regularizacion=null;
+						$bandera=0;
+
+						$fila=$fila->getCellIterator("A","E");
+
+						foreach ($fila as $celda) {
+							if(!is_null($celda->getValue())){
+
+							$fila = $celda->getRow();
+							# Columna, que es la A, B, C y así...
+							$columna = $celda->getColumn();
+							
+
+							if($columna=='A'){
+								$no_control=trim($celda->getValue());
+								$bandera++;
+							}
+
+							if($columna=='B'){
+								$clave_materia=trim($celda->getValue());
+								$bandera++;
+							}
+
+							if($columna=='C'){
+								$calificacion_regularizacion=$celda->getValue();
+								$bandera++;
+							}
+
+							if($columna=='D'){
+								$fecha_regularizacion=$celda->getFormattedValue();
+								$bandera++;
+							}
+
+							if($columna=='E'){
+								$hora_regularizacion=$celda->getFormattedValue();
+								$bandera++;
+							}
+
+							
+
+							if($bandera==5){//Solo se insertaran aquellas calificaciones en donde todas las 9 columnas esten rellenados.
+								$datos_regularizacion_estudiante = array(
+									'id_materia' => strtoupper($clave_materia),
+									'calificacion' =>$calificacion_regularizacion,
+									'fecha_calificacion' =>$fecha_regularizacion,
+									'Estudiante_no_control' => $no_control,
+									'Plantel_cct_plantel' => $plantel_cct,
+									'estatus'=>0,
+									'hora'=>$hora_regularizacion,
+									'fecha'=>date('Y-m-d')
+
+								);
+								$this->M_Regularizacion->insertar_regularizacion_ciclos_anteriores($datos_regularizacion_estudiante);
+								echo "id_materia: ".$clave_materia;
+							}
+							
+
+							}
+
+							
+
+							
+							
+						}
+					}
+
+//TERmina lectura de pestaña FRER---------------------------------------------------------------------------------
+
+                
+            }
+            // If file uploaded
+		   /*
+		   # El valor, así como está en el documento
 								$valorRaw = $celda->getValue();
 								# Formateado por ejemplo como dinero o con decimales
 								$valorFormateado = $celda->getFormattedValue();
@@ -120,29 +309,7 @@ class C_excel extends CI_Controller {
 								$fila = $celda->getRow();
 								# Columna, que es la A, B, C y así...
 								$columna = $celda->getColumn();
-								echo "En <strong>$columna$fila</strong> tenemos el valor <strong>$valorRaw</strong>. ";
-								echo "Formateado es: <strong>$valorFormateado</strong>. ";
-								echo "Calculado es: <strong>$valorCalculado</strong><br><br>";
 
-								}
-								
-							}
-						}
-						
-
-
-					
-
-					
-					
-					//
-
-                    //Empieza a leer hoja Friae y calificaciones
-            
-                
-            }
-            // If file uploaded
-           /*
            
            # Formateado por ejemplo como dinero o con decimales
                     $valorFormateado = $celda->getFormattedValue();

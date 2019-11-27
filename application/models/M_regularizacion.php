@@ -582,5 +582,21 @@ function materias_regularizadas_periodo($mes,$ano,$plantel){
    return $this->db->query("select clave,unidad_contenido from Materia as m inner join (select id_materia from Regularizacion where month(fecha_calificacion)=".$mes." and year(fecha_calificacion)=".$ano." and Plantel_cct_plantel='".$plantel."' group by id_materia) as ma on m.clave=ma.id_materia group by clave")->result();
 }
 
+
+public function insertar_regularizacion_ciclos_anteriores($datos){
+   $this->db->trans_start();
+       $this->db->insert('Regularizacion', $datos);
+       $this->db->trans_complete();
+
+       if ($this->db->trans_status() === FALSE)
+       {
+           return "no";
+       }
+
+       else{
+           return "si";
+       }
+  }
+
    
 }

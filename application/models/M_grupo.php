@@ -246,4 +246,37 @@ public function actualizar_estudiante_grupo($no_control,$id_grupo_a_modificar,$i
         }
 }
 
+
+
+public function agregar_grupo_de_ciclo_anterior($id_grupo,$semestre,$nombre_grupo,$plantel){
+    $this->db->trans_start();
+
+    $this->db->insert('Grupo',array(
+        'id_grupo'=>$id_grupo,
+        'semestre'=>$semestre,
+        'nombre_grupo'=>$nombre_grupo,
+        'plantel'=>$plantel,
+        'estatus'=>0
+    ));
+    $this->db->trans_complete();
+
+        if ($this->db->trans_status() === FALSE)
+        {
+                return "no";
+        }
+
+        else{
+            return "si";
+        }
+    
+   }
+
+
+   public function existe_id_grupo_ciclo_anterior($id_grupo){
+    return $this->db->query("SELECT * FROM Grupo where id_grupo='".$id_grupo."';")->result();    
+   }
+
+
+
+
 }

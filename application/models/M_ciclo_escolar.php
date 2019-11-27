@@ -77,4 +77,9 @@ public function ciclo_escolar_fecha_carta_compromiso($fecha){
         
 }
 
+
+public function get_id_ciclo_escolar_x_periodo_x_nombre($periodo,$ciclo_escolar){
+   return $this->db->query("SELECT * FROM Ciclo_escolar where periodo='".$periodo."' and nombre_ciclo_escolar='".$ciclo_escolar."';")->result()[0];
+}
+
 }

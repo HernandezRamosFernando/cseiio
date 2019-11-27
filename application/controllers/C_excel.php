@@ -18,7 +18,8 @@ class C_excel extends CI_Controller {
 	{
 		parent::__construct();
 		// load model
-       // $this->load->model('Site', 'site');
+		$this->load->model('M_ciclo_escolar');
+		$this->load->model('M_grupo');
 	}
 	// index
 	public function index()
@@ -66,19 +67,76 @@ class C_excel extends CI_Controller {
                     # Lo que hay en B2
                     $celda = $calificaciones_friae->getCell('B2');
                     # El valor, así como está en el documento
-                    $plantel_cct = $celda->getValue();
+                    $plantel_cct = trim($celda->getValue());
 
-                    $ciclo_escolar= $calificaciones_friae->getCell('B3')->getValue();
+                    $nombre_ciclo_escolar= trim($calificaciones_friae->getCell('B3')->getValue());
 
-                    $periodo= $calificaciones_friae->getCell('B4')->getValue();
+                    $periodo= trim($calificaciones_friae->getCell('B4')->getValue());
 
-                    $modulo= $calificaciones_friae->getCell('B5')->getValue();
+                    $modulo= trim($calificaciones_friae->getCell('B5')->getValue());
 
-                    $grupo= $calificaciones_friae->getCell('B6')->getValue();
+					$grupo= trim($calificaciones_friae->getCell('B6')->getValue());
+					
+					$id_ciclo_escolar=""; //inicializamos variable
+					$id_grupo=""; //inicializamos variable id_grupo
+					$id_periodo="";//inicalizamos variable periodo
+					$existe_grupo=0;//inicializamos varfiable existe grupo
 
-                    echo $plantel_cct.'_'.$ciclo_escolar.'_'.$periodo.'_'.$modulo.'_'.$grupo;                
-                
-                
+					$id_ciclo_escolar=$this->M_ciclo_escolar->get_id_ciclo_escolar_x_periodo_x_nombre($periodo,$nombre_ciclo_escolar)->id_ciclo_escolar;
+
+					if(trim($periodo) == "AGOSTO-ENERO"){
+						$id_periodo="B";
+					  }else{
+						$id_periodo="A";
+					  }
+
+
+					$id_grupo=$plantel_cct.$modulo.$id_ciclo_escolar.$id_periodo.$grupo;// GENERANDO ID_GRUPO
+
+					$existe_grupo=count($this->M_grupo->existe_id_grupo_ciclo_anterior($id_grupo));
+		
+					if ($existe_grupo==0) 
+						{
+							$this->M_grupo->agregar_grupo_de_ciclo_anterior($id_grupo,$modulo,$grupo,$plantel_cct);
+						}
+
+
+					
+						foreach ($calificaciones_friae->getRowIterator(10) as $fila) {
+
+							$fila=$fila->getCellIterator("A","I");
+
+							
+							
+							foreach ($fila as $celda) {
+								if(!is_null($celda->getValue())){
+									# El valor, así como está en el documento
+								$valorRaw = $celda->getValue();
+								# Formateado por ejemplo como dinero o con decimales
+								$valorFormateado = $celda->getFormattedValue();
+								# Si es una fórmula y necesitamos su valor, llamamos a:
+								$valorCalculado = $celda->getCalculatedValue();
+								# Fila, que comienza en 1, luego 2 y así...
+								$fila = $celda->getRow();
+								# Columna, que es la A, B, C y así...
+								$columna = $celda->getColumn();
+								echo "En <strong>$columna$fila</strong> tenemos el valor <strong>$valorRaw</strong>. ";
+								echo "Formateado es: <strong>$valorFormateado</strong>. ";
+								echo "Calculado es: <strong>$valorCalculado</strong><br><br>";
+
+								}
+								
+							}
+						}
+						
+
+
+					
+
+					
+					
+					//
+
                     //Empieza a leer hoja Friae y calificaciones
             
                 

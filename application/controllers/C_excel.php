@@ -35,9 +35,7 @@ class C_excel extends CI_Controller {
 	public function num_materias_semestre($id_semestre){
 		$resultado=0;
 		switch ($id_semestre) {
-			case :
-				$resultado=0;
-				break;
+
 			case 1:
 				$resultado=13;//Numero de materias
 				break;
@@ -257,11 +255,16 @@ class C_excel extends CI_Controller {
 										$temp_no_control=$no_control;
 										
 									}
+									  
+									
+									$existe_alumno_materia='';
+									
+									$existe_alumno_materia=count($this->M_grupo_estudiante->existe_materia_grupo_ciclo_anterior($id_grupo,$clave,$no_control));
 
+									if($existe_alumno_materia==0){
+										$this->M_grupo_estudiante->insertar_calificaciones_ciclos_anteriores($datos_calificacion_estudiante);
+									}
 									
-									
-									
-									//$this->M_grupo_estudiante->insertar_calificaciones_ciclos_anteriores($datos_calificacion_estudiante);
 								}
 								
 
@@ -291,6 +294,7 @@ class C_excel extends CI_Controller {
 						$fecha_regularizacion=null;
 						$hora_regularizacion=null;
 						$bandera=0;
+						
 
 						$fila=$fila->getCellIterator("A","E");
 
@@ -341,8 +345,15 @@ class C_excel extends CI_Controller {
 									'fecha'=>date('Y-m-d')
 
 								);
-								//$this->M_Regularizacion->insertar_regularizacion_ciclos_anteriores($datos_regularizacion_estudiante);
-								echo "id_materia: ".$clave_materia;
+
+								$existe_regu=count($this->M_Regularizacion->existe_regu_ciclo_anterior($plantel_cct,$clave_materia,$no_control,$fecha_regularizacion));
+								if($existe_regu==0){
+									$this->M_Regularizacion->insertar_regularizacion_ciclos_anteriores($datos_regularizacion_estudiante);
+								}
+
+								
+								
+
 							}
 							
 
@@ -357,7 +368,11 @@ class C_excel extends CI_Controller {
 
 //TERmina lectura de pestaña FRER---------------------------------------------------------------------------------
 
-                
+//Empieza actualizacion de estado del estudiante-------------------------------------------------------------------
+
+
+
+//TErmina actulizacion de estado del estudiante--------------------------------------------------------------------
             }
             // If file uploaded
 		   /*

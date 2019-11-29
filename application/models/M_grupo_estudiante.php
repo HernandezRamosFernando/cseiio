@@ -155,4 +155,9 @@ public function insertar_calificaciones_ciclos_anteriores($datos){
         }
    }
 
+   public function existe_materia_grupo_ciclo_anterior($id_grupo,$materia,$no_control){
+    return $this->db->query("SELECT * FROM Grupo_Estudiante where Grupo_id_grupo='".$id_grupo."' and id_materia='".$materia."' and Estudiante_no_control='".$no_control."';")->result();
+}
+
+
 }

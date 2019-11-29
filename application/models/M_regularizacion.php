@@ -598,5 +598,9 @@ public function insertar_regularizacion_ciclos_anteriores($datos){
        }
   }
 
+
+  public function existe_regu_ciclo_anterior($id_plantel,$materia,$no_control,$fecha_regularizacion){
+   return $this->db->query("SELECT * FROM Regularizacion where id_materia='".$materia."' and Estudiante_no_control='".$no_control."' and Plantel_cct_plantel='".$id_plantel."' and fecha_calificacion='".$fecha_regularizacion."';")->result();
+}
    
 }

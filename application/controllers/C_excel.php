@@ -115,7 +115,14 @@ class C_excel extends CI_Controller {
 					$id_grupo=""; //inicializamos variable id_grupo
 					$id_periodo="";//inicalizamos variable periodo
 					$existe_grupo=0;//inicializamos varfiable existe grupo
+					$num_materias=0; //inicalizamos variable numero de materias semestre
+					
+					$cont_materias_reprobadas=0;// Contador de materias reprobadas por cada alumno
+					$cont_materias_estudiante=0;// cuenta el número de materias subidas por el estudiante.
+					$temp_no_control='';// Almacena de manera temporal el número de control de cada estudiante
+					$estudiantes_grupo=[];
 
+					$num_materias=$this->num_materias_semestre($modulo);
 					$id_ciclo_escolar=$this->M_ciclo_escolar->get_id_ciclo_escolar_x_periodo_x_nombre($periodo,$nombre_ciclo_escolar)->id_ciclo_escolar;
 
 					if(trim($periodo) == "AGOSTO-ENERO"){
@@ -164,6 +171,8 @@ class C_excel extends CI_Controller {
 								if($columna=='A'){
 									$no_control=trim($celda->getValue());
 									$bandera++;
+									
+									
 								}
 
 								if($columna=='B'){
@@ -222,9 +231,6 @@ class C_excel extends CI_Controller {
 										$cal_final=0;
 									}
 
-									if($cal_final>5){
-										$num_materias_reprobadas++;
-									}
 									$bandera++;
 								}
 
@@ -240,6 +246,21 @@ class C_excel extends CI_Controller {
 										'examen_final' => $examen_final,
 										'calificacion_final' => $cal_final
 									);
+
+									if($no_control!=$temp_no_control){
+										$cont_materias_reprobadas=0;
+									}
+
+									if(intval(trim($cal_final))<=5){
+										$cont_materias_reprobadas=$cont_materias_reprobadas+1;
+										$estudiantes_grupo[$no_control]=['materias_reprobadas'=>$cont_materias_reprobadas];
+										$temp_no_control=$no_control;
+										
+									}
+
+									
+									
+									
 									//$this->M_grupo_estudiante->insertar_calificaciones_ciclos_anteriores($datos_calificacion_estudiante);
 								}
 								
@@ -252,6 +273,9 @@ class C_excel extends CI_Controller {
 								
 							}
 						}
+
+						echo "Hola mundo: ";
+						var_dump($estudiantes_grupo);
 						
 //Termina a leer hoja Friae y calificaciones_______________________________________________________________________
 					
@@ -317,7 +341,7 @@ class C_excel extends CI_Controller {
 									'fecha'=>date('Y-m-d')
 
 								);
-								$this->M_Regularizacion->insertar_regularizacion_ciclos_anteriores($datos_regularizacion_estudiante);
+								//$this->M_Regularizacion->insertar_regularizacion_ciclos_anteriores($datos_regularizacion_estudiante);
 								echo "id_materia: ".$clave_materia;
 							}
 							
@@ -454,3 +478,4 @@ class C_excel extends CI_Controller {
     }
 
 }
+//Hola mundo

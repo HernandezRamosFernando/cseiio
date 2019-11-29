@@ -32,6 +32,38 @@ class C_excel extends CI_Controller {
 		$this->load->view('spreadsheet/index', $data);
 	}
 
+	public function num_materias_semestre($id_semestre){
+		$resultado=0;
+		switch ($id_semestre) {
+			case :
+				$resultado=0;
+				break;
+			case 1:
+				$resultado=13;//Numero de materias
+				break;
+			case 2:
+				$resultado=14;//Numero de materias
+			break;
+
+			case 3:
+				$resultado=13;//Numero de materias
+			break;
+
+			case 4:
+				$resultado=12;//Numero de materias
+			break;
+
+			case 5:
+				$resultado=9;//Numero de materias
+			break;
+
+			case 6:
+				$resultado=8;//Numero de materias
+			break;
+		}
+		return $resultado;
+	}
+
 	// file upload functionality
     public function upload() {
     	$data = array();
@@ -102,8 +134,8 @@ class C_excel extends CI_Controller {
 							$this->M_grupo->agregar_grupo_de_ciclo_anterior($id_grupo,$modulo,$grupo,$plantel_cct);
 						}
 
-								
-
+					
+						
 					
 						foreach ($calificaciones_friae->getRowIterator(10) as $fila) {
 							$no_control='';
@@ -116,6 +148,8 @@ class C_excel extends CI_Controller {
 								$examen_final=null;
 								$cal_final=null;
 								$bandera=0;
+								$num_materias_reprobadas=0;
+								$cont_materias_alumno=0;
 
 							$fila=$fila->getCellIterator("A","I");
 
@@ -186,6 +220,10 @@ class C_excel extends CI_Controller {
 									$cal_final=$celda->getCalculatedValue();
 									if($cal_final=='/'){
 										$cal_final=0;
+									}
+
+									if($cal_final>5){
+										$num_materias_reprobadas++;
 									}
 									$bandera++;
 								}

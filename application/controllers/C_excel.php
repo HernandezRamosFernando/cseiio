@@ -369,7 +369,19 @@ class C_excel extends CI_Controller {
 //TERmina lectura de pestaña FRER---------------------------------------------------------------------------------
 
 //Empieza actualizacion de estado del estudiante-------------------------------------------------------------------
+$estudiantes_grupo=$this->M_grupo->get_estudiantes_grupo($id_grupo);
+var_dump($estudiantes_grupo);
+echo "----------------------------------------------------------------------------";
+foreach($estudiantes_grupo as $e){
 
+	$num_adeudos= count($this->M_grupo->materias_adeudo_estudiante($e->no_control));
+	$this->M_grupo->actualizar_estatus_estudiante($e->no_control,$num_adeudos,$modulo,$plantel_cct);
+	
+	/*$num_adeudos= count($this->M_regularizacion->get_materias_adeudo_estudiante($e->no_control));
+	*/
+
+
+}
 
 
 //TErmina actulizacion de estado del estudiante--------------------------------------------------------------------

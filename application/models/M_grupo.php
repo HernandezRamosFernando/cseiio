@@ -272,8 +272,47 @@ public function agregar_grupo_de_ciclo_anterior($id_grupo,$semestre,$nombre_grup
    }
 
 
+
+   public function actualizar_estatus_estudiante($no_control,$num_adeudos,$modulo,$plantel_cct){
+    $tipo_ingreso='';
+    $semestre_en_curso=0;
+    if($num_adeudos==0){
+       $tipo_ingreso='REINGRESO';
+       $semestre_en_curso=$modulo+1;
+       $this->db->query("update Estudiante set tipo_ingreso='".$tipo_ingreso."',estatus='REGULAR',semestre_en_curso=".$semestre_en_curso.",semestre=semestre+1 where no_control='".$no_control."'");
+    }
+    if($num_adeudos>=1 && $num_adeudos<=3){
+       $tipo_ingreso='REINGRESO';
+       $semestre_en_curso=$modulo+1;
+
+       $this->db->query("update Estudiante set tipo_ingreso='".$tipo_ingreso."',estatus='IRREGULAR',semestre_en_curso=".$semestre_en_curso.",semestre=semestre+1 where no_control='".$no_control."'");
+    }
+ 
+    if($num_adeudos>3 && $num_adeudos<=5){
+       $tipo_ingreso='SIN DERECHO';
+       $semestre_en_curso=$modulo;
+       $this->db->query("update Estudiante set tipo_ingreso='".$tipo_ingreso."',estatus='IRREGULAR',semestre_en_curso=".$semestre_en_curso.",semestre=semestre+1 where no_control='".$no_control."'");
+       
+    }
+    if($num_adeudos>6){
+        $tipo_ingreso='REPROBADO';
+        $semestre_en_curso=$modulo;
+       $this->db->query("update Estudiante set tipo_ingreso='".$tipo_ingreso."',estatus='IRREGULAR',semestre_en_curso=".$semestre_en_curso.",semestre=semestre+1 where no_control='".$no_control."'");
+       
+    }
+
+    echo $no_control.", Estatus: ".$tipo_ingreso."-----";
+ 
+ }
+
+
    public function existe_id_grupo_ciclo_anterior($id_grupo){
     return $this->db->query("SELECT * FROM Grupo where id_grupo='".$id_grupo."';")->result();    
+   }
+
+
+   public function materias_adeudo_estudiante($no_control){
+    return $this->db->query("select * from Grupo_Estudiante where calificacion_final<6 and Estudiante_no_control='".$no_control."' and id_materia not in(select id_materia from Regularizacion where calificacion>=6 and Estudiante_no_control='".$no_control."')")->result();    
    }
 
 

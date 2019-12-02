@@ -602,5 +602,38 @@ public function insertar_regularizacion_ciclos_anteriores($datos){
   public function existe_regu_ciclo_anterior($id_plantel,$materia,$no_control,$fecha_regularizacion){
    return $this->db->query("SELECT * FROM Regularizacion where id_materia='".$materia."' and Estudiante_no_control='".$no_control."' and Plantel_cct_plantel='".$id_plantel."' and fecha_calificacion='".$fecha_regularizacion."';")->result();
 }
+
+public function actualizar_estatus_estudiante($no_control,$num_adeudos,$modulo,$plantel_cct){
+   $estatus='';
+   if($num_adeudos==0){
+      $estatus='REGULAR';
+   }
+   if($num_adeudos>1 && $num_adeudos<=3){
+      $estatus='IRREGULAR';
+      
+   }
+
+   if($num_adeudos>3 && $num_adeudos<=5){
+      $estatus='SIN DERECHO';
+      
+   }
+   if($num_adeudos>6){
+      $estatus='REPROBADO';
+      
+   }
+   echo $no_control.", Estatus: ".$estatus;
+
+}
    
+
+
+public function materias_adeudo_estudiante($no_control){
+   //return $this->db->query("select * from Grupo_Estudiante where calificacion_final<6 and Estudiante_no_control='".$no_control."' and id_materia not in(select id_materia from Regularizacion where calificacion>=6 and Estudiante_no_control='".$no_control."')")->result();
+
+   echo "Hoo";
+}
+
+
+
+
 }

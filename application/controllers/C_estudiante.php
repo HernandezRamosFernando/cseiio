@@ -44,12 +44,60 @@ class C_estudiante extends CI_Controller {
     
     }
 
+
+    
+
+
         //fin generacion de matriucla
+        //Generacion de número de control ciclos anteriores
+        public function generar_numcontrol_ciclos_anteriores($semestre,$anio){
+
+            $numero=$this->M_estudiante->asignar_numero_consecutivo_ciclos_anteriores($anio);
+            
+            $no_control='';
+            if($numero==NULL){
+                $numero=1;
+            }
+            else{
+                $numero=$numero+1;
+            }
+            $no_control = 'CSEIIO'.$anio.$semestre.str_pad($numero,4,'0',STR_PAD_LEFT);
+            
+            return $no_control;
+        
+        }
+
+        //Fin de generacion de número de control de ciclos anteriores
 
     public function registrar_datos_estudiante(){
-        $no_control=$this->generar_numcontrol(1);
+        $no_control=NULL;
         $tipo_estudiante = $this->input->post('formulario');
-        $fecha_inscripcion_del_ciclo = $this->M_ciclo_escolar->fecha_inscripcion();
+        
+
+        $fecha_inscripcion_del_ciclo=NULL;
+        $fecha_ingreso=NULL;
+
+        if(!is_null($this->input->post("id_ciclo_escolar"))){
+            $fecha_inscripcion_del_ciclo=$this->M_ciclo_escolar->obtener_nombre_ciclo_escolar($this->input->post("id_ciclo_escolar"))[0]->fecha_inicio;
+
+            $anio_inscripcion = date("y", strtotime($fecha_inscripcion_del_ciclo)); 
+
+
+            
+            $fecha_ingreso=$fecha_inscripcion_del_ciclo;
+
+            
+            $no_control=$this->generar_numcontrol_ciclos_anteriores(1,$anio_inscripcion);
+
+        }
+        else{
+            $fecha_inscripcion_del_ciclo = $this->M_ciclo_escolar->fecha_inscripcion();
+            $fecha_ingreso=mb_strtoupper(date("Y-m-d"));
+            $no_control=$this->generar_numcontrol(1);
+        }
+
+
+
 
         if($this->input->post("aspirante_procedencia_combo")=="igual"){
             $localidad_origen = $this->M_localidad->get_nombre_localidad($this->input->post('aspirante_direccion_localidad'))->nombre_localidad.'-'.$this->M_localidad->get_nombre_localidad($this->input->post('aspirante_direccion_localidad'))->nombre_municipio;
@@ -82,7 +130,7 @@ class C_estudiante extends CI_Controller {
             'fecha_nacimiento' => $this->input->post('aspirante_anio_nacimiento').'-'.$this->input->post('aspirante_mes_nacimiento').'-'.(strlen($this->input->post('aspirante_dia_nacimiento'))==1?('0'.$this->input->post('aspirante_dia_nacimiento')):$this->input->post('aspirante_dia_nacimiento')),
             'sexo' => $this->input->post('aspirante_sexo'),
             'curp' => mb_strtoupper($this->input->post('aspirante_curp')),
-            'fecha_registro' => mb_strtoupper(date("Y-m-d")),
+            'fecha_registro' => $fecha_ingreso,
             'folio_programa_social' => $this->input->post('aspirante_programa_social'),
             'correo' => mb_strtoupper($this->input->post('aspirante_correo')),
             'nss' => mb_strtoupper($this->input->post('aspirante_nss')),

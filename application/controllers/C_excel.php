@@ -21,7 +21,7 @@ class C_excel extends CI_Controller {
 		$this->load->model('M_ciclo_escolar');
 		$this->load->model('M_grupo');
 		$this->load->model('M_grupo_estudiante');
-		$this->load->model('M_Regularizacion');
+		$this->load->model('M_regularizacion');
 	}
 	// index
 	public function index()
@@ -245,7 +245,7 @@ class C_excel extends CI_Controller {
 										'calificacion_final' => $cal_final
 									);
 
-									if($no_control!=$temp_no_control){
+									/*if($no_control!=$temp_no_control){
 										$cont_materias_reprobadas=0;
 									}
 
@@ -254,6 +254,9 @@ class C_excel extends CI_Controller {
 										$estudiantes_grupo[$no_control]=['materias_reprobadas'=>$cont_materias_reprobadas];
 										$temp_no_control=$no_control;
 										
+									}*/
+									if (!in_array($no_control,$estudiantes_grupo)) {
+										$estudiantes_grupo[]=$no_control;
 									}
 									  
 									
@@ -277,8 +280,8 @@ class C_excel extends CI_Controller {
 							}
 						}
 
-						echo "Hola mundo: ";
-						var_dump($estudiantes_grupo);
+						
+						
 						
 //Termina a leer hoja Friae y calificaciones_______________________________________________________________________
 					
@@ -346,9 +349,13 @@ class C_excel extends CI_Controller {
 
 								);
 
-								$existe_regu=count($this->M_Regularizacion->existe_regu_ciclo_anterior($plantel_cct,$clave_materia,$no_control,$fecha_regularizacion));
+								$existe_regu=count($this->M_regularizacion->existe_regu_ciclo_anterior($plantel_cct,$clave_materia,$no_control,$fecha_regularizacion));
 								if($existe_regu==0){
-									$this->M_Regularizacion->insertar_regularizacion_ciclos_anteriores($datos_regularizacion_estudiante);
+									$this->M_regularizacion->insertar_regularizacion_ciclos_anteriores($datos_regularizacion_estudiante);
+
+									if (!in_array($no_control,$estudiantes_grupo)) {
+										$estudiantes_grupo[]=$no_control;
+									}
 								}
 
 								
@@ -368,17 +375,15 @@ class C_excel extends CI_Controller {
 
 //TERmina lectura de pestaña FRER---------------------------------------------------------------------------------
 
+
 //Empieza actualizacion de estado del estudiante-------------------------------------------------------------------
-$estudiantes_grupo=$this->M_grupo->get_estudiantes_grupo($id_grupo);
-var_dump($estudiantes_grupo);
+
 echo "----------------------------------------------------------------------------";
+
 foreach($estudiantes_grupo as $e){
 
-	$num_adeudos= count($this->M_grupo->materias_adeudo_estudiante($e->no_control));
-	$this->M_grupo->actualizar_estatus_estudiante($e->no_control,$num_adeudos,$modulo,$plantel_cct);
-	
-	/*$num_adeudos= count($this->M_regularizacion->get_materias_adeudo_estudiante($e->no_control));
-	*/
+	$num_adeudos= count($this->M_regularizacion->materias_debe_estudiante_actualmente($e));
+	$this->M_regularizacion->actualizar_estatus_estudiante($e,$num_adeudos,$modulo,$plantel_cct);
 
 
 }

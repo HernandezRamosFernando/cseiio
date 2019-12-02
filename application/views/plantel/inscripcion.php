@@ -25,6 +25,21 @@
           </div>
         </a>
       </div>
+
+      <div class="col-md-4 col-lg-4"style="height: 9rem !important;">
+        <a href="<?php echo base_url();?>index.php/c_vistas/nuevo_ingreso_ciclo_anterior"
+          class="btn btn-primary btn-lg btn-block  btn-responsive menu valign-center btn-8">
+          <div class="row col-12">
+            <div class="col-8 valign-center" style="padding-left: 0px;">
+            <p class="h5"><strong>Inscripción Ciclo anterior</strong></p> 
+            </div>
+            <div class="col-4 valign-right">
+              <i class="material-icons md-48">person_add</i>
+            </div>
+          </div>
+        </a>
+      </div>
+
       <div class="col-md-4 col-lg-4"style="height: 9rem !important;">
         <a href="<?php echo base_url();?>index.php/c_vistas/portabilidad"
           class="btn btn-primary btn-lg btn-block  btn-responsive menu valign-center btn-2">

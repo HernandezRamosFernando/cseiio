@@ -40,7 +40,7 @@ class M_ciclo_escolar extends CI_Model {
    }
 
    public function lista_ciclo_escolar(){
-      return $this->db->query('SELECT * FROM Ciclo_escolar')->result();
+      return $this->db->query('SELECT * FROM Ciclo_escolar order by fecha_inicio')->result();
  }
 
  public function obtener_nombre_ciclo_escolar($ciclo){

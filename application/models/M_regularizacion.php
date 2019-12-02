@@ -603,36 +603,39 @@ public function insertar_regularizacion_ciclos_anteriores($datos){
    return $this->db->query("SELECT * FROM Regularizacion where id_materia='".$materia."' and Estudiante_no_control='".$no_control."' and Plantel_cct_plantel='".$id_plantel."' and fecha_calificacion='".$fecha_regularizacion."';")->result();
 }
 
+
 public function actualizar_estatus_estudiante($no_control,$num_adeudos,$modulo,$plantel_cct){
-   $estatus='';
+   $tipo_ingreso='';
+   $semestre_en_curso=0;
    if($num_adeudos==0){
-      $estatus='REGULAR';
+      $tipo_ingreso='REINGRESO';
+      $semestre_en_curso=$modulo+1;
+      $this->db->query("update Estudiante set tipo_ingreso='".$tipo_ingreso."',estatus='REGULAR',semestre_en_curso=".$semestre_en_curso.",semestre=semestre+1 where no_control='".$no_control."'");
    }
-   if($num_adeudos>1 && $num_adeudos<=3){
-      $estatus='IRREGULAR';
-      
+   if($num_adeudos>=1 && $num_adeudos<=3){
+      $tipo_ingreso='REINGRESO';
+      $semestre_en_curso=$modulo+1;
+
+      $this->db->query("update Estudiante set tipo_ingreso='".$tipo_ingreso."',estatus='IRREGULAR',semestre_en_curso=".$semestre_en_curso.",semestre=semestre+1 where no_control='".$no_control."'");
    }
 
    if($num_adeudos>3 && $num_adeudos<=5){
-      $estatus='SIN DERECHO';
+      $tipo_ingreso='SIN DERECHO';
+      $semestre_en_curso=$modulo;
+      $this->db->query("update Estudiante set tipo_ingreso='".$tipo_ingreso."',estatus='IRREGULAR',semestre_en_curso=".$semestre_en_curso.",semestre=semestre+1 where no_control='".$no_control."'");
       
    }
    if($num_adeudos>6){
-      $estatus='REPROBADO';
+       $tipo_ingreso='REPROBADO';
+       $semestre_en_curso=$modulo;
+      $this->db->query("update Estudiante set tipo_ingreso='".$tipo_ingreso."',estatus='IRREGULAR',semestre_en_curso=".$semestre_en_curso.",semestre=semestre+1 where no_control='".$no_control."'");
       
    }
-   echo $no_control.", Estatus: ".$estatus;
+
+   echo $no_control.", Estatus: ".$tipo_ingreso."-----";
 
 }
    
-
-
-public function materias_adeudo_estudiante($no_control){
-   //return $this->db->query("select * from Grupo_Estudiante where calificacion_final<6 and Estudiante_no_control='".$no_control."' and id_materia not in(select id_materia from Regularizacion where calificacion>=6 and Estudiante_no_control='".$no_control."')")->result();
-
-   echo "Hoo";
-}
-
 
 
 

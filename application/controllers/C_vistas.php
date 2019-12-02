@@ -58,6 +58,46 @@ class C_vistas extends CI_Controller {
         }
     }
 
+
+    public function nuevo_ingreso_ciclo_anterior(){
+        $datos['estados'] = $this->M_estado->get_estados();
+        $datos['lenguas'] = $this->M_lengua->get_lenguas();
+        $datos['ciclo_escolar'] = $this->M_ciclo_escolar->lista_ciclo_escolar();
+        $datos['escuela_procedencia'] = $this->M_escuela_procedencia->get_secundarias();
+
+        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
+            $data= array('title'=>'Inscripcion Nuevo Ingreso');
+            $datos['planteles'] = $this->M_plantel->get_planteles();
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierda");
+            $this->load->view("admin/nuevoingreso",$datos);
+            $this->load->view("footers/footer");
+        }
+        elseif($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='CESCOLAR'){
+            $data= array('title'=>'Inscripcion Nuevo Ingreso');
+            $datos['planteles'] = $this->M_plantel->get_planteles();
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierdacescolar");
+            $this->load->view("admin/nuevoingreso",$datos);
+            $this->load->view("footers/footer");
+        }
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
+            $datos['planteles'] = $this->M_plantel->get_plantel($this->session->userdata('user')['plantel']);
+            $data= array('title'=>'Inscripcion Nuevo Ingreso');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierdaplantel");
+            $this->load->view("plantel/nuevoingreso_cicloanterior",$datos);
+            $this->load->view("footers/footer");
+        }
+        else{
+            redirect(base_url().'index.php/c_usuario');
+        }
+    }
+
+
 public function portabilidad(){
     $datos['estados'] = $this->M_estado->get_estados();
         $datos['ciclo_escolar'] = $this->M_ciclo_escolar->get_ciclo_escolar();

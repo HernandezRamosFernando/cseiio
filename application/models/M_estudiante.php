@@ -5,6 +5,20 @@ class M_estudiante extends CI_Model {
       
    }
 
+   public function asignar_numero_consecutivo_ciclos_anteriores($anio){
+      /*Utilzado para generacion de no_control_ciclos anteriores*/
+     $this->db->select('max(CONVERT(SUBSTRING(e.no_control,10,LENGTH(e.no_control)), SIGNED INTEGER)) as numero');
+     $this->db->from('Estudiante e');
+     $this->db->like('e.no_control','CSEIIO'.$anio,'after');
+   
+     $consulta = $this->db->get();
+     $resultado=$consulta->row()->numero;
+   
+     return $resultado;
+      
+   }
+
+
    public function obtener_datos_parciales($no_control){
       return $this->db->query("SELECT *,sum(if(primer_parcial is not null,1,0)) as p1,sum(if(segundo_parcial is not null,1,0)) as p2,sum(if(tercer_parcial is not null,1,0)) as p3,sum(if(examen_final is not null,1,0)) as ef FROM Grupo_Estudiante ge inner join Grupo g on g.id_grupo=ge.Grupo_id_grupo where ge.Estudiante_no_control='".$no_control."' and g.estatus=1;")->result()[0];
  }

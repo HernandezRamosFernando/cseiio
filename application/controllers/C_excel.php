@@ -108,6 +108,10 @@ class C_excel extends CI_Controller {
                     $modulo= trim($calificaciones_friae->getCell('B5')->getValue());
 
 					$grupo= trim($calificaciones_friae->getCell('B6')->getValue());
+
+					$no_control= trim($calificaciones_friae->getCell('A9')->getValue());
+
+					$matricula= trim($calificaciones_friae->getCell('B9')->getValue());
 					
 					$id_ciclo_escolar=""; //inicializamos variable
 					$id_grupo=""; //inicializamos variable id_grupo
@@ -117,10 +121,10 @@ class C_excel extends CI_Controller {
 					
 					$cont_materias_reprobadas=0;// Contador de materias reprobadas por cada alumno
 					$cont_materias_estudiante=0;// cuenta el número de materias subidas por el estudiante.
-					$temp_no_control='';// Almacena de manera temporal el número de control de cada estudiante
-					$estudiantes_grupo=[];
+					
 
 					$num_materias=$this->num_materias_semestre($modulo);
+					
 					$id_ciclo_escolar=$this->M_ciclo_escolar->get_id_ciclo_escolar_x_periodo_x_nombre($periodo,$nombre_ciclo_escolar)->id_ciclo_escolar;
 
 					if(trim($periodo) == "AGOSTO-ENERO"){
@@ -142,9 +146,8 @@ class C_excel extends CI_Controller {
 					
 						
 					
-						foreach ($calificaciones_friae->getRowIterator(10) as $fila) {
-							$no_control='';
-								$matricula='';
+						foreach ($calificaciones_friae->getRowIterator(13) as $fila) {
+							
 								$clave='';
 								$p1=null;
 								$p2=null;
@@ -166,24 +169,13 @@ class C_excel extends CI_Controller {
 								$columna = $celda->getColumn();
 								
 
+
 								if($columna=='A'){
-									$no_control=trim($celda->getValue());
-									$bandera++;
-									
-									
-								}
-
-								if($columna=='B'){
-									$matricula=trim($celda->getValue());
-									$bandera++;
-								}
-
-								if($columna=='C'){
 									$clave=trim($celda->getValue());
 									$bandera++;
 								}
 
-								if($columna=='D'){
+								if($columna=='B'){
 									$p1=trim($celda->getValue());
 									if($p1=='/'){
 										$p1=0;
@@ -191,7 +183,7 @@ class C_excel extends CI_Controller {
 									$bandera++;
 								}
 
-								if($columna=='E'){
+								if($columna=='C'){
 									$p2=trim($celda->getValue());
 									if($p2=='/'){
 										$p2=0;
@@ -199,7 +191,7 @@ class C_excel extends CI_Controller {
 									$bandera++;
 								}
 
-								if($columna=='F'){
+								if($columna=='D'){
 									$p3=trim($celda->getValue());
 									if($p3=='/'){
 										$p3=0;
@@ -207,7 +199,7 @@ class C_excel extends CI_Controller {
 									$bandera++;
 								}
 
-								if($columna=='G'){
+								if($columna=='E'){
 									$promedio_modular=$celda->getCalculatedValue();
 									if($promedio_modular=='/'){
 										$promedio_modular=0;
@@ -215,7 +207,7 @@ class C_excel extends CI_Controller {
 									$bandera++;
 								}
 
-								if($columna=='H'){
+								if($columna=='F'){
 									$examen_final=$celda->getCalculatedValue();
 									if($examen_final=='/'){
 										$examen_final=0;
@@ -223,7 +215,7 @@ class C_excel extends CI_Controller {
 									$bandera++;
 								}
 
-								if($columna=='I'){
+								if($columna=='G'){
 									$cal_final=$celda->getCalculatedValue();
 									if($cal_final=='/'){
 										$cal_final=0;
@@ -232,7 +224,7 @@ class C_excel extends CI_Controller {
 									$bandera++;
 								}
 
-								if($bandera==9){//Solo se insertaran aquellas calificaciones en donde todas las 9 columnas esten rellenados.
+								if($bandera==7){//Solo se insertaran aquellas calificaciones en donde todas las 9 columnas esten rellenados.
 									$datos_calificacion_estudiante = array(
 										'Grupo_id_grupo' => strtoupper($id_grupo),
 										'Estudiante_no_control' => strtoupper($no_control),
@@ -255,9 +247,7 @@ class C_excel extends CI_Controller {
 										$temp_no_control=$no_control;
 										
 									}*/
-									if (!in_array($no_control,$estudiantes_grupo)) {
-										$estudiantes_grupo[]=$no_control;
-									}
+									
 									  
 									
 									$existe_alumno_materia='';
@@ -286,7 +276,7 @@ class C_excel extends CI_Controller {
 //Termina a leer hoja Friae y calificaciones_______________________________________________________________________
 					
 //Empieza a leer pestaña FRER_______________________________________________________________________________________
-					$indiceHoja = 1;
+					$indiceHoja = 0;
 					$frer = $spreadsheet->getSheet($indiceHoja);
 					echo "<h3>Vamos en la hoja con índice $indiceHoja</h3>";
 
@@ -299,7 +289,7 @@ class C_excel extends CI_Controller {
 						$bandera=0;
 						
 
-						$fila=$fila->getCellIterator("A","E");
+						$fila=$fila->getCellIterator("A","J");
 
 						foreach ($fila as $celda) {
 							if(!is_null($celda->getValue())){
@@ -309,27 +299,24 @@ class C_excel extends CI_Controller {
 							$columna = $celda->getColumn();
 							
 
-							if($columna=='A'){
-								$no_control=trim($celda->getValue());
-								$bandera++;
-							}
+							
 
-							if($columna=='B'){
+							if($columna=='A'){
 								$clave_materia=trim($celda->getValue());
 								$bandera++;
 							}
 
-							if($columna=='C'){
+							if($columna=='H'){
 								$calificacion_regularizacion=$celda->getValue();
 								$bandera++;
 							}
 
-							if($columna=='D'){
+							if($columna=='I'){
 								$fecha_regularizacion=$celda->getFormattedValue();
 								$bandera++;
 							}
 
-							if($columna=='E'){
+							if($columna=='J'){
 								$hora_regularizacion=$celda->getFormattedValue();
 								$bandera++;
 							}
@@ -353,9 +340,7 @@ class C_excel extends CI_Controller {
 								if($existe_regu==0){
 									$this->M_regularizacion->insertar_regularizacion_ciclos_anteriores($datos_regularizacion_estudiante);
 
-									if (!in_array($no_control,$estudiantes_grupo)) {
-										$estudiantes_grupo[]=$no_control;
-									}
+									
 								}
 
 								
@@ -379,14 +364,9 @@ class C_excel extends CI_Controller {
 //Empieza actualizacion de estado del estudiante-------------------------------------------------------------------
 
 echo "----------------------------------------------------------------------------";
-
-foreach($estudiantes_grupo as $e){
-
-	$num_adeudos= count($this->M_regularizacion->materias_debe_estudiante_actualmente($e));
-	$this->M_regularizacion->actualizar_estatus_estudiante($e,$num_adeudos,$modulo,$plantel_cct);
-
-
-}
+$num_adeudos=0;
+$num_adeudos=count($this->M_regularizacion->materias_debe_estudiante_actualmente($no_control));
+$this->M_regularizacion->actualizar_estatus_estudiante($no_control,$num_adeudos,$modulo,$plantel_cct);
 
 
 //TErmina actulizacion de estado del estudiante--------------------------------------------------------------------

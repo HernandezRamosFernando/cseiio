@@ -22,6 +22,9 @@ class C_excel extends CI_Controller {
 		$this->load->model('M_grupo');
 		$this->load->model('M_grupo_estudiante');
 		$this->load->model('M_regularizacion');
+		$this->load->model('M_estudiante');
+		$this->load->model('M_plantel');
+		
 	}
 	// index
 	public function index()
@@ -63,11 +66,7 @@ class C_excel extends CI_Controller {
 	}
 	
 	
-	public function validacion_plantilla($modulo,$existe_ciclo_escolar,$datos_plantel_alumno,$datos_materia,$datos_regu){
-		$resultado_error="";
-		
-		
-	}
+	
 	
 	
 
@@ -136,38 +135,124 @@ class C_excel extends CI_Controller {
 					$num_materias=$this->num_materias_semestre($modulo);
 					
 					 ///////////////////////////////////////////////////COMIENZA VALIDACIÓN DE DATOS ///////////////////////
-					  if(empty($this->M_ciclo_escolar->existe_ciclo_escolar_x_periodo_x_nombre($periodo,$nombre_ciclo_escolar))){
-						  $resultado_error.="El ciclo escolar seleccionado no se encuentra dado de alta en el sistema, consulte con el Depto. de Control Escolar.<br>";
-						  
-					  }
-					  
-					  
-					  
-					  
-					  
+
 					  if($plantel_cct==""){
-							$resultado_error.="No ha seleccionado CCT de un Plantel.<br>";  
+							$resultado_error.="<li>No ha seleccionado CCT de un Plantel.</li>";  
 					  }
+
+					  else{
+						  if(empty($this->M_plantel->get_plantel($plantel_cct))){
+							$resultado_error.="<li>CCT de Plantel incorrecto, vuelva a seleccionar.</li>";
+						  }
+					  }
+
+					  if($periodo==""){
+						$resultado_error.="<li>No ha seleccionado un periodo.</li>";  
+						  }
+						  
+						  else{
+							  if(trim($periodo)!='FEBRERO-JULIO' && trim($periodo)!='AGOSTO-ENERO'){
+								$resultado_error.="<li>Seleccione un periodo valido.</li>";
+							  }
+						  }
 					  
 					  if($nombre_ciclo_escolar==""){
-							$resultado_error.="No ha seleccionado el ciclo escolar.<br>";  
+							$resultado_error.="<li>No ha seleccionado el ciclo escolar.</li>"; 
+
+					  }
+					  else{
+							if(empty($this->M_ciclo_escolar->existe_ciclo_escolar_x_periodo_x_nombre($periodo,$nombre_ciclo_escolar))){
+								$resultado_error.="<li>El ciclo escolar seleccionado no se encuentra dado de alta en el sistema, consulte al Depto. de Control Escolar</li>";
+								
+							}
 					  }
 					  
-					  if($periodo==""){
-							$resultado_error.="No ha seleccionado el periodo.<br>";  
-					  }
+					  
 					  
 					  if($modulo=="" && $modulo>6){
-							$resultado_error.="No ha seleccionado un semestre valido.<br>";  
+							$resultado_error.="<li>No ha seleccionado un semestre valido.</li>";  
 					  }
 					  
 					  if($grupo==""){
-							$resultado_error.="No ha seleccionado un grupo.<br>";  
+							$resultado_error.="<li>No ha seleccionado un grupo.</li>";  
 					  }
 					  
 					  if($no_control==""){
-							$resultado_error.="No ha ingresado un NO. de Control.<br>";  
+							$resultado_error.="<li>No ha ingresado un número de control del alumno.</li>"; 
+							
 					  }
+
+					  else{
+						 if(empty($this->M_estudiante->get_estudiante($no_control)['estudiante'][0])){
+							$resultado_error.="<li>Los datos pertenecientes al número de control <span style='font-weight:bold'>".$no_control."</span> no se encuentran registrados en el sistema, ingrese los datos del estudiante en el módulo correspondiente.</li>"; 
+						 } 
+						 
+					  }
+
+					  $calificacion_valida = array("/",5,6,7,8,9,10);
+					  $cont_calificacion=0;
+					  
+
+					  foreach ($calificaciones_friae->getRowIterator(13) as $fila) {
+
+							$fila=$fila->getCellIterator("A","I");
+
+							foreach ($fila as $celda) {
+								$fila = $celda->getRow();
+								$columna = $celda->getColumn();
+
+								/*if($columna=='A' && $columna==''){
+									$p1=trim($celda->getValue());
+									
+								}*/
+								
+								if($columna=='B' && trim($celda->getValue())!='' && in_array($celda->getValue(), $calificacion_valida)){
+									$columna++;
+									
+								}
+
+								if($columna=='C' && trim($celda->getValue())!='' && in_array($celda->getValue(), $calificacion_valida)){
+									$columna++;
+									
+								}
+
+								if($columna=='D' && trim($celda->getValue())!='' && in_array($celda->getValue(), $calificacion_valida)){
+									$columna++;
+									
+								}
+								
+									
+								
+
+								
+
+								/*if($columna=='C'){
+									$p2=trim($celda->getValue());
+									
+								}
+
+								if($columna=='D'){
+									$p3=trim($celda->getValue());
+									
+								}
+
+								if($columna=='E'){
+									$promedio_modular=$celda->getCalculatedValue();
+									
+								}
+
+								if($columna=='F'){
+									$examen_final=$celda->getCalculatedValue();
+									
+								}
+
+								if($columna=='G'){
+									$cal_final=$celda->getCalculatedValue();
+
+
+								}*/
+							}
+						}
 					  
 					  
 					  

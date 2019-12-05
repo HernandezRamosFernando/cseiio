@@ -61,6 +61,15 @@ class C_excel extends CI_Controller {
 		}
 		return $resultado;
 	}
+	
+	
+	public function validacion_plantilla($modulo,$existe_ciclo_escolar,$datos_plantel_alumno,$datos_materia,$datos_regu){
+		$resultado_error="";
+		
+		
+	}
+	
+	
 
 	// file upload functionality
     public function upload() {
@@ -121,9 +130,56 @@ class C_excel extends CI_Controller {
 					
 					$cont_materias_reprobadas=0;// Contador de materias reprobadas por cada alumno
 					$cont_materias_estudiante=0;// cuenta el número de materias subidas por el estudiante.
+					$resultado_error="";
 					
 
 					$num_materias=$this->num_materias_semestre($modulo);
+					
+					 ///////////////////////////////////////////////////COMIENZA VALIDACIÓN DE DATOS ///////////////////////
+					  if(empty($this->M_ciclo_escolar->existe_ciclo_escolar_x_periodo_x_nombre($periodo,$nombre_ciclo_escolar))){
+						  $resultado_error.="El ciclo escolar seleccionado no se encuentra dado de alta en el sistema, consulte con el Depto. de Control Escolar.<br>";
+						  
+					  }
+					  
+					  
+					  
+					  
+					  
+					  if($plantel_cct==""){
+							$resultado_error.="No ha seleccionado CCT de un Plantel.<br>";  
+					  }
+					  
+					  if($nombre_ciclo_escolar==""){
+							$resultado_error.="No ha seleccionado el ciclo escolar.<br>";  
+					  }
+					  
+					  if($periodo==""){
+							$resultado_error.="No ha seleccionado el periodo.<br>";  
+					  }
+					  
+					  if($modulo=="" && $modulo>6){
+							$resultado_error.="No ha seleccionado un semestre valido.<br>";  
+					  }
+					  
+					  if($grupo==""){
+							$resultado_error.="No ha seleccionado un grupo.<br>";  
+					  }
+					  
+					  if($no_control==""){
+							$resultado_error.="No ha ingresado un NO. de Control.<br>";  
+					  }
+					  
+					  
+					  
+					  
+					  
+					  
+					  
+					  
+					  
+					  ///////////////////////////////////////////////TERMINA VALIDACIÓN DE DATOS ////////////////////////////
+					if($resultado_error==""){
+					
 					
 					$id_ciclo_escolar=$this->M_ciclo_escolar->get_id_ciclo_escolar_x_periodo_x_nombre($periodo,$nombre_ciclo_escolar)->id_ciclo_escolar;
 
@@ -132,6 +188,8 @@ class C_excel extends CI_Controller {
 					  }else{
 						$id_periodo="A";
 					  }
+					  
+					 
 
 
 					$id_grupo=$plantel_cct.$modulo.$id_ciclo_escolar.$id_periodo.$grupo;// GENERANDO ID_GRUPO
@@ -281,7 +339,7 @@ class C_excel extends CI_Controller {
 					echo "<h3>Vamos en la hoja con índice $indiceHoja</h3>";
 
 					foreach ($frer->getRowIterator(3) as $fila) {
-						$no_control='';
+						
 						$clave_materia='';
 						$calificacion_regularizacion=null;
 						$fecha_regularizacion=null;
@@ -366,96 +424,25 @@ class C_excel extends CI_Controller {
 echo "----------------------------------------------------------------------------";
 $num_adeudos=0;
 $num_adeudos=count($this->M_regularizacion->materias_debe_estudiante_actualmente($no_control));
-$this->M_regularizacion->actualizar_estatus_estudiante($no_control,$num_adeudos,$modulo,$plantel_cct);
+$this->M_regularizacion->actualizar_estatus_estudiante($no_control,$num_adeudos,$modulo,$plantel_cct,$matricula);
 
 
 //TErmina actulizacion de estado del estudiante--------------------------------------------------------------------
+			}
+			
+			else{
+				echo $resultado_error;
+				
+			}
+
+
+
+
+
             }
             // If file uploaded
 		   /*
-		   # El valor, así como está en el documento
-								$valorRaw = $celda->getValue();
-								# Formateado por ejemplo como dinero o con decimales
-								$valorFormateado = $celda->getFormattedValue();
-								# Si es una fórmula y necesitamos su valor, llamamos a:
-								$valorCalculado = $celda->getCalculatedValue();
-								# Fila, que comienza en 1, luego 2 y así...
-								$fila = $celda->getRow();
-								# Columna, que es la A, B, C y así...
-								$columna = $celda->getColumn();
-
-           
-           # Formateado por ejemplo como dinero o con decimales
-                    $valorFormateado = $celda->getFormattedValue();
-                    # Si es una fórmula y necesitamos su valor, llamamos a:
-                    $valorCalculado = $celda->getCalculatedValue();
-                    # Imprimir
-                    echo "En <strong>B2</strong> tenemos el valor <strong>$valorRaw</strong>. ";
-                    echo "Formateado es: <strong>$valorFormateado</strong>. ";
-                    echo "Calculado es: <strong>$valorCalculado</strong><br><br>";
-           
-           
-           if(!empty($_FILES['fileURL']['name'])) { 
-            	// get file extension
-            	$extension = pathinfo($_FILES['fileURL']['name'], PATHINFO_EXTENSION);
-
-            	if($extension == 'csv'){
-					$reader = new \PhpOffice\PhpSpreadsheet\Reader\Csv();
-				} elseif($extension == 'xlsx') {
-					$reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
-				} else {
-					$reader = new \PhpOffice\PhpSpreadsheet\Reader\Xls();
-				}
-				// file path
-				$spreadsheet = $reader->load($_FILES['fileURL']['tmp_name']);
-				$allDataInSheet = $spreadsheet->getActiveSheet()->toArray(null, true, true, true);
-			
-				// array Count
-				$arrayCount = count($allDataInSheet);
-	            $flag = 0;
-	            $createArray = array('First_Name', 'Last_Name', 'Email', 'DOB', 'Contact_No');
-	            $makeArray = array('First_Name' => 'First_Name', 'Last_Name' => 'Last_Name', 'Email' => 'Email', 'DOB' => 'DOB', 'Contact_No' => 'Contact_No');
-                $SheetDataKey = array();
-                
-                
-	            foreach ($allDataInSheet as $dataInSheet) {
-	                foreach ($dataInSheet as $key => $value) {
-	                    if (in_array(trim($value), $createArray)) {
-                            $value = preg_replace('/\s+/', '', $value);
-                            
-	                        $SheetDataKey[trim($value)] = $key;
-	                    } 
-	                }
-	            }
-	            $dataDiff = array_diff_key($makeArray, $SheetDataKey);
-	            if (empty($dataDiff)) {
-                	$flag = 1;
-            	}
-            	// match excel sheet column
-	            if ($flag == 1) {
-	                for ($i = 2; $i <= $arrayCount; $i++) {
-	                    $addresses = array();
-	                    $firstName = $SheetDataKey['First_Name'];
-	                    $lastName = $SheetDataKey['Last_Name'];
-	                    $email = $SheetDataKey['Email'];
-	                    $dob = $SheetDataKey['DOB'];
-	                    $contactNo = $SheetDataKey['Contact_No'];
-
-	                    $firstName = filter_var(trim($allDataInSheet[$i][$firstName]), FILTER_SANITIZE_STRING);
-	                    $lastName = filter_var(trim($allDataInSheet[$i][$lastName]), FILTER_SANITIZE_STRING);
-	                    $email = filter_var(trim($allDataInSheet[$i][$email]), FILTER_SANITIZE_EMAIL);
-	                    $dob = filter_var(trim($allDataInSheet[$i][$dob]), FILTER_SANITIZE_STRING);
-	                    $contactNo = filter_var(trim($allDataInSheet[$i][$contactNo]), FILTER_SANITIZE_STRING);
-	                    $fetchData[] = array('first_name' => $firstName, 'last_name' => $lastName, 'email' => $email, 'dob' => $dob, 'contact_no' => $contactNo);
-	                }   
-	                $data['dataInfo'] = $fetchData;
-	                //$this->site->setBatchImport($fetchData);
-	                //$this->site->importData();
-	            } else {
-	                echo "Please import correct file, did not match excel sheet column";
-	            }
-	           // $this->load->view('spreadsheet/display', $data);
-        	}              */
+		               */
     	}
 	}
 

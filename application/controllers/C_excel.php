@@ -24,6 +24,7 @@ class C_excel extends CI_Controller {
 		$this->load->model('M_regularizacion');
 		$this->load->model('M_estudiante');
 		$this->load->model('M_plantel');
+		$this->load->model('M_materia');
 		
 	}
 	// index
@@ -66,7 +67,22 @@ class C_excel extends CI_Controller {
 	}
 	
 	
+
+	function validar_fecha_espanol($fecha){
+		//checkdate(2, 30, 2000); mes, dia,año 2018-12-01
+		$valores = explode('-', $fecha);
+		if(count($valores) == 3 && checkdate($valores[1], $valores[2], $valores[0])){
+			return true;
+		}
+		return false;
+	}
 	
+
+	//preg_match("/^(?:2[0-3]|[01][0-9]|[0-9]):[0-5][0-9]$/", $time)
+
+	//if(preg_match('/^(?:[01][0-9]|2[0-3]):[0-5][0-9]$/',$input)) {
+        //$input is valid HH:MM format.
+//}([0-9]+):([0-5]?[0-9]):([0-5]?[0-9])
 	
 	
 
@@ -190,9 +206,15 @@ class C_excel extends CI_Controller {
 					  }
 
 					  $calificacion_valida = array("/",5,6,7,8,9,10);
-					  $cont_calificacion=0;
-					  
+					  $lista_materias =array();
+					  foreach( $this->M_materia->get_materias_semestre($modulo) as $materia){
+							$lista_materias[]=$materia->clave;
+					  }
 
+					  
+					  $cont_materias_cal_alumno=0;
+					  
+					  
 					  foreach ($calificaciones_friae->getRowIterator(13) as $fila) {
 
 							$fila=$fila->getCellIterator("A","I");
@@ -201,61 +223,52 @@ class C_excel extends CI_Controller {
 								$fila = $celda->getRow();
 								$columna = $celda->getColumn();
 
-								/*if($columna=='A' && $columna==''){
-									$p1=trim($celda->getValue());
+								if($columna=='A' && $columna!='' && in_array($celda->getValue(), $lista_materias)){
 									
-								}*/
+									$cont_materias_cal_alumno++;
+								}
+								
 								
 								if($columna=='B' && trim($celda->getValue())!='' && in_array($celda->getValue(), $calificacion_valida)){
-									$columna++;
+									$cont_materias_cal_alumno++;
 									
 								}
 
 								if($columna=='C' && trim($celda->getValue())!='' && in_array($celda->getValue(), $calificacion_valida)){
-									$columna++;
+									$cont_materias_cal_alumno++;
 									
 								}
 
 								if($columna=='D' && trim($celda->getValue())!='' && in_array($celda->getValue(), $calificacion_valida)){
-									$columna++;
+									$cont_materias_cal_alumno++;
+									
+								}
+
+								if($columna=='E' && trim($celda->getCalculatedValue())!='' && in_array($celda->getCalculatedValue(), $calificacion_valida)){
+									$cont_materias_cal_alumno++;
+									
+								}
+
+
+								if($columna=='F' && trim($celda->getCalculatedValue())!='' && in_array($celda->getCalculatedValue(), $calificacion_valida)){
+									$cont_materias_cal_alumno++;
+									
+								}
+
+								if($columna=='G' && trim($celda->getCalculatedValue())!='' && in_array($celda->getCalculatedValue(), $calificacion_valida)){
+									$cont_materias_cal_alumno++;
 									
 								}
 								
-									
-								
 
-								
-
-								/*if($columna=='C'){
-									$p2=trim($celda->getValue());
-									
-								}
-
-								if($columna=='D'){
-									$p3=trim($celda->getValue());
-									
-								}
-
-								if($columna=='E'){
-									$promedio_modular=$celda->getCalculatedValue();
-									
-								}
-
-								if($columna=='F'){
-									$examen_final=$celda->getCalculatedValue();
-									
-								}
-
-								if($columna=='G'){
-									$cal_final=$celda->getCalculatedValue();
-
-
-								}*/
 							}
 						}
 					  
-					  
-					  
+						
+					 
+					  if($cont_materias_cal_alumno!=($num_materias*7)){
+						$resultado_error.="<li>Verifique el concentrado de calificaciones si cumple con los criterios de evaluación y si ha asignado las calificaciones parciales, modulares y finales de las materias pertenecientes al semestre.</li>";
+					  }
 					  
 					  
 					  

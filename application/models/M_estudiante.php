@@ -5,6 +5,26 @@ class M_estudiante extends CI_Model {
       
    }
 
+public function update_estudiante_campos_activos($no_control,$lugar_nacimiento){
+   
+      $this->db->trans_start();
+
+      $this->db->query("update Estudiante set lugar_nacimiento='".$lugar_nacimiento."' where no_control='".$no_control."'");
+
+      $this->db->trans_complete();
+
+      if ($this->db->trans_status() === FALSE)
+      {
+          return "no";
+      }
+
+      else{
+          return "si";
+      } 
+ 
+}
+
+
    public function asignar_numero_consecutivo_ciclos_anteriores($anio){
       /*Utilzado para generacion de no_control_ciclos anteriores*/
      $this->db->select('max(CONVERT(SUBSTRING(e.no_control,10,LENGTH(e.no_control)), SIGNED INTEGER)) as numero');
@@ -194,12 +214,20 @@ public function update_estudiante(
                $this->db->update('Datos_lengua_materna',$dato_lengua);
             }
 
+           
             
-            $cct = $this->db->query("select cct_escuela_procedencia as cct from Escuela_procedencia as ep inner join Estudiante_Escuela_procedencia as eep on ep.cct_escuela_procedencia=eep.Escuela_procedencia_cct_escuela_procedencia where Estudiante_no_control='".$no_control."' and tipo_escuela_procedencia='SECUNDARIA'")->result()[0]->cct;
-            $this->db->query("delete from Estudiante_Escuela_procedencia where Estudiante_no_control='".$no_control."' and Escuela_procedencia_cct_escuela_procedencia='".$cct."'");
-            foreach($datos_escuela_procedencia as $escuela){
-               $this->db->insert("Estudiante_Escuela_procedencia",$escuela);
+            if(!is_null($datos_escuela_procedencia)){
+                  $cct = $this->db->query("select cct_escuela_procedencia as cct from Escuela_procedencia as ep inner join Estudiante_Escuela_procedencia as eep on ep.cct_escuela_procedencia=eep.Escuela_procedencia_cct_escuela_procedencia where Estudiante_no_control='".$no_control."' and tipo_escuela_procedencia='SECUNDARIA'")->result()[0]->cct;
+               $this->db->query("delete from Estudiante_Escuela_procedencia where Estudiante_no_control='".$no_control."' and Escuela_procedencia_cct_escuela_procedencia='".$cct."'");
+               
+               
+               foreach($datos_escuela_procedencia as $escuela){
+                  $this->db->insert("Estudiante_Escuela_procedencia",$escuela);
+               }
+
             }
+
+            
             
 
             //print_r($datos_escuela_procedencia);

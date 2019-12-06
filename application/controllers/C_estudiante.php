@@ -20,6 +20,23 @@ class C_estudiante extends CI_Controller {
 
     }
 
+
+    public function update_estudiante_campos_activos(){
+        //$no_control=$this->generar_numcontrol(1);
+
+
+        //inicio estudiante
+        $no_control = $this->input->post("aspirante_no_control");
+        $lugar_nacimiento=mb_strtoupper($this->input->post('aspirante_lugar_nacimiento'));
+        
+        echo $this->M_estudiante->update_estudiante_campos_activos(
+            $no_control,
+            $lugar_nacimiento
+        );
+  
+
+    }
+
     public function obtener_datos_parciales(){
         $no_control = $this->uri->segment(3);
         echo json_encode($this->M_estudiante->obtener_datos_parciales($no_control));
@@ -466,6 +483,8 @@ class C_estudiante extends CI_Controller {
 
     }
 
+    
+
     public function update_estudiante(){
         //$no_control=$this->generar_numcontrol(1);
 
@@ -503,19 +522,26 @@ class C_estudiante extends CI_Controller {
 
         $tipo_ingreso = $this->M_estudiante->get_tipo_ingreso_estudiante($no_control);
 
-        if($tipo_ingreso=="NUEVO INGRESO"){
-            $datos_escuela_procedencia['secundaria']=array(
-                'Estudiante_no_control'=>$no_control,
-                'Escuela_procedencia_cct_escuela_procedencia'=>$this->input->post('aspirante_secundaria_cct')
-            );
-        }
+        $datos_escuela_procedencia=NULL;
+        if(trim($this->input->post('aspirante_secundaria_cct'))!=''){
+            if($tipo_ingreso=="NUEVO INGRESO"){
+                $datos_escuela_procedencia['secundaria']=array(
+                    'Estudiante_no_control'=>$no_control,
+                    'Escuela_procedencia_cct_escuela_procedencia'=>$this->input->post('aspirante_secundaria_cct'),
+                    'promedio_procedencia'=>$this->input->post('promedio_procedencia_secundaria')
+                );
+            }
+    
+            else{
+                $datos_escuela_procedencia['secundaria']=array(
+                    'Estudiante_no_control'=>$no_control,
+                    'Escuela_procedencia_cct_escuela_procedencia'=>$this->input->post('aspirante_secundaria_cct'),
+                    'promedio_procedencia'=>$this->input->post('promedio_procedencia_secundaria')
+                );
+            }
 
-        else{
-            $datos_escuela_procedencia['secundaria']=array(
-                'Estudiante_no_control'=>$no_control,
-                'Escuela_procedencia_cct_escuela_procedencia'=>$this->input->post('aspirante_secundaria_cct')
-            );
         }
+        
 
        
 
@@ -532,7 +558,17 @@ class C_estudiante extends CI_Controller {
             'ocupacion' => mb_strtoupper($this->input->post('aspirante_tutor_ocupacion'))
         );
 
-        $parentesco_estudiante_tutor = mb_strtoupper($this->input->post('aspirante_tutor_parentesco')); 
+        
+        if(trim($this->input->post('aspirante_tutor_parentesco'))!='otro'){
+            $parentesco_estudiante_tutor = mb_strtoupper($this->input->post('aspirante_tutor_parentesco')); 
+        }
+
+        else{
+            
+                $parentesco_estudiante_tutor = mb_strtoupper($this->input->post('aspirante_tutor_otro'));
+            
+        }
+        
 
         //print_r($datos_estudiante_tutor);
 

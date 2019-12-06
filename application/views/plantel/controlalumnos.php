@@ -37,6 +37,7 @@
               <label class="form-group has-float-label seltitulo">
                 <select class="form-control form-control-lg selcolor" required="required"
                   id="aspirante_plantel_busqueda" name="aspirante_plantel">
+                  
 
                   <?php
                       foreach ($planteles as $plantel)
@@ -72,6 +73,7 @@
               <th scope="col" class="col-md-1">Matrícula</th>
               <th scope="col" class="col-md-1">Plantel CCT</th>
               <th scope="col" class="col-md-1">Fecha Ingreso</th>
+              <th scope="col" class="col-md-1">Editar</th>
               <th scope="col" class="col-md-1">Imprimir</th>
             </tr>
           </thead>
@@ -90,10 +92,1102 @@
 </div>
 <!-- /.content-wrapper -->
 
+
+
+<!-- Modal -->
+<div class="modal fade" id="modalaspirante" tabindex="-1" role="dialog" aria-labelledby="modalaspiranteTitle"
+  aria-hidden="true" style="overflow-y: scroll;">
+  <div class="modal-dialog modal-dialog-centered" style="max-width: 80% !important;" role="document">
+    <div class="modal-content">
+
+      <div class="modal-body">
+        <!-- formulario -->
+        <form id="formulario">
+
+
+
+          <!--datos personales------------------------------------------------------>
+          <p class="text-center text-white rounded titulo-form h4">
+            Datos personales de Aspirante
+            <hr>
+          </p>
+
+          <div class="form-group">
+
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-label-group">
+                  <input type="text" pattern="[A-ZÑña-z]+[ ]*[A-ZÑña-z ]*" required title="Introduzca solo letras validas"
+                    class="form-control text-uppercase" id="aspirante_nombre" name="aspirante_nombre"
+                    onchange="valida(this)" placeholder="Nombre(s)" style="color: #237087" disabled="disabled" >
+                  <label for="aspirante_nombre">Nombre(s)</label>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="form-label-group">
+                  <input type="text" pattern="[A-ZÑña-z]+[ ]*[A-ZÑña-z ]*" required title="Introduzca solo letras"
+                    class="form-control text-uppercase" id="aspirante_apellido_paterno" onchange="valida(this)"
+                    name="aspirante_apellido_paterno" placeholder="Apellido Paterno" style="color: #237087" disabled="disabled" >
+                  <label for="aspirante_apellido_paterno">Primer Apellido</label>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="form-label-group">
+                  <input type="text" pattern="[A-ZÑña-z]+[ ]*[A-ZÑña-z ]*" title="Introduzca solo letras"
+                    class="form-control text-uppercase" id="aspirante_apellido_materno" onchange="valida(this)"
+                    name="aspirante_apellido_materno" placeholder="Apellido Materno" style="color: #237087" disabled="disabled" >
+                  <label for="aspirante_apellido_materno">Segundo Apellido</label>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+
+
+          <div class="card form-group">
+            <div>
+              <label class="form-group has-float-label text-center"
+                style="font-size: 12pt; font-weight: bold; color:#777;">Fecha de nacimiento</label>
+            </div>
+
+            <div class="row">
+
+              <div class=" col-md-4 ">
+                <label class="form-group has-float-label seltitulo">
+                  <select class="form-control form-control-lg selcolor" id="aspirante_anio_nacimiento" required
+                    name="aspirante_anio_nacimiento" onclick="get_dias()" disabled="disabled" >
+
+                  </select>
+                  <span>Año</span>
+                </label>
+              </div>
+              <div class="col-md-4">
+                <label class="form-group has-float-label seltitulo">
+                  <select class="form-control form-control-lg selcolor" id="aspirante_mes_nacimiento" required
+                    name="aspirante_mes_nacimiento" onclick="get_dias()" disabled="disabled" >
+                    <option value="01">Enero</option>
+                    <option value="02">Febrero</option>
+                    <option value="03">Marzo</option>
+                    <option value="04">Abril</option>
+                    <option value="05">Mayo</option>
+                    <option value="06">Junio</option>
+                    <option value="07">Julio</option>
+                    <option value="08">Agosto</option>
+                    <option value="09">Septiembre</option>
+                    <option value="10">Octubre</option>
+                    <option value="11">Noviembre</option>
+                    <option value="12">Diciembre</option>
+                  </select>
+                  <span>Mes</span>
+                </label>
+              </div>
+              <div class="col-md-4 ">
+                <label class="form-group has-float-label seltitulo">
+                  <select class="form-control form-control-lg selcolor" id="aspirante_dia_nacimiento" required
+                    name="aspirante_dia_nacimiento" disabled="disabled" >
+
+                  </select>
+                  <span>Día</span>
+                </label>
+              </div>
+
+
+            </div>
+
+          </div>
+
+          <div class="form-group">
+
+            <div class="row">
+
+              <div class="col-md-4">
+                <div class="form-label-group">
+                  <input type="number" title="El numero de telefono debe de ser a 13 digitos" style="color: #237087 "
+                    class="form-control text-uppercase" id="aspirante_telefono" name="aspirante_telefono"
+                    placeholder="Telefono" disabled="disabled" >
+                  <label for="aspirante_telefono">Teléfono</label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-label-group">
+                  <input type="email" title="Introduzca un correo valido" class="form-control text-lowercase"
+                    id="aspirante_correo" name="aspirante_correo" placeholder="Correo Electrónico"
+                    style="color: #237087 " disabled="disabled" >
+                  <label for="aspirante_correo">Correo electrónico</label>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <label class="form-group has-float-label seltitulo">
+                  <select class="form-control form-control-lg selcolor" id="aspirante_sexo" required
+                    name="aspirante_sexo" disabled="disabled" >
+                    <option value="">Seleccione</option>
+                    <option value="H">Hombre</option>
+                    <option value="M">Mujer</option>
+                  </select>
+                  <span>Sexo</span>
+                </label>
+              </div>
+
+            </div>
+
+          </div>
+
+
+
+          <div class="form-group">
+            <div class="row">
+
+
+              <div class="col-md-4">
+                <div class="form-label-group">
+                  <input type="number" pattern="[0-9]{11}" title="Introduzca 11 digitos"
+                    class="form-control text-uppercase" id="aspirante_nss" name="aspirante_nss"
+                    placeholder="Numero de Seguro Social" style="color: #237087 " disabled="disabled" >
+                  <label for="aspirante_nss">NSS (IMSS)</label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-label-group">
+                  <input type="text" class="form-control text-uppercase" id="aspirante_programa_social"
+                    name="aspirante_programa_social" placeholder="Folio de programa social" style="color: #237087 " disabled="disabled" >
+                  <label for="aspirante_programa_social">Folio de Prospera</label>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="form-group has-float-label seltitulo">
+                    <select class="form-control form-control-lg selcolor" name="tipo_sangre" required id="tipo_sangre" disabled="disabled" >
+                      <option value="">Seleccione una opción</option>
+                      <option value="NO CONOCE">No conoce su tipo de sangre</option>
+                      <option value="A+">A+</option>
+                      <option value="A-">A-</option>
+                      <option value="B+">B+</option>
+                      <option value="B-">B-</option>
+                      <option value="AB+">AB+</option>
+                      <option value="AB-">AB-</option>
+                      <option value="O+">O+</option>
+                      <option value="O-">O-</option>
+                    </select>
+                    <span>Tipo de sangre</span>
+                  </label>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+
+              <div class="col-md-4">
+                <label class="form-group has-float-label seltitulo">
+                  <select class="form-control form-control-lg selcolor" id="aspirante_alergia_combo"
+                    name="aspirante_alergia_combo" onchange="alergia(this)" disabled="disabled" >
+                    <option value="2">No</option>
+                    <option value="1">Si</option>
+                  </select>
+                  <span>¿Alérgico a algún medicamento?</span>
+                </label>
+              </div>
+              <div class="col-md-4" style="display:none" id="a" name="alergia_medicamento">
+                <div class="form-label-group">
+                  <input type="text" pattern="[A-ZÁÉÍÓÚáéíóúa-z]+[ ]*[A-ZÁÉÍÓÚáéíóúa-z ]*"
+                    class="form-control text-uppercase" id="aspirante_alergia" name="aspirante_alergia"
+                    placeholder="Ingrese el medicamento" style="color: #237087 " disabled="disabled" >
+                  <label for="aspirante_alergia">Ingrese el medicamento</label>
+                </div>
+              </div>
+
+
+              <div class="col-md-4">
+                <label class="form-group has-float-label seltitulo">
+                  <select class="form-control form-control-lg selcolor" id="aspirante_discapacidad_combo"
+                    name="aspirante_discapacidad_combo" onchange="discapacidad(this)" disabled="disabled" >
+                    <option value="2">No</option>
+                    <option value="1">Si</option>
+                  </select>
+                  <span>¿Padece alguna discapacidad?</span>
+                </label>
+              </div>
+              <div class="col-md-4" style="display:none" id="b" name="discapacidad">
+                <div class="form-label-group">
+                  <input type="text" pattern="[A-ZÁÉÍÓÚáéíóúa-z]+[ ]*[A-ZÁÉÍÓÚáéíóúa-z ]*"
+                    class="form-control text-uppercase" id="aspirante_discapacidad" name="aspirante_discapacidad"
+                    placeholder="Ingrese la discapacidad" style="color: #237087 " disabled="disabled" >
+                  <label for="aspirante_discapacidad">Ingrese la discapacidad</label>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+
+          <div class="form-group">
+
+            <div class="row">
+              <div class="col-md-8">
+                <label class="form-group has-float-label seltitulo">
+                  <select class="form-control form-control-lg selcolor" id="aspirante_plantel" name="aspirante_plantel" disabled="disabled" >
+                    <option>Seleccione el plantel de ingreso</option>
+
+                    <?php
+                                        foreach ($planteles as $plantel)
+                                        {
+                                          echo '<option value="'.$plantel->cct_plantel.'">'.$plantel->nombre_plantel.' ----- CCT: '.$plantel->cct_plantel.'</option>';
+                                        }
+                                        ?>
+
+                  </select>
+                  <span>Plantel</span>
+                </label>
+              </div>
+
+              <div class="col-md-4">
+                <label class="form-group has-float-label seltitulo">
+                  <select class="form-control form-control-lg selcolor" required="required" id="aspirante_semestre"
+                    name="aspirante_semestre" disabled="disabled" >
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                  </select>
+                  <span>Semestre al que ingresa</span>
+                </label>
+              </div>
+
+            </div>
+
+          </div>
+          <!--fin datos personales------------------------------------------------------>
+          <!--curp------------------------------------------------------>
+          <p class="text-center text-white rounded titulo-form h4">CURP</p>
+          <hr>
+
+          <div class="form-group">
+            <div class="row">
+
+
+              <div class="col-md-4">
+                <div class="form-label-group">
+                  <input type="text" pattern="[A-Za-z0-9]{18}" title="Faltan datos" class="form-control text-uppercase"
+                    id="aspirante_curp" name="aspirante_curp" placeholder="CURP" style="color: #237087" disabled="disabled" >
+                  <label for="aspirante_curp">CURP</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-label-group">
+                  <a name="" id="" class="btn btn-outline-success btn-lg btn-block btn-responsive"
+                    href="https://www.gob.mx/curp/" target="_blank" role="button" disabled="disabled" >
+                    ¿No cuenta con curp? Buscar aquí</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-4">
+                <label class="form-group has-float-label seltitulo">
+                  <select class="form-control form-control-lg selcolor" id="aspirante_nacionalidad" required
+                    name="aspirante_nacionalidad" disabled="disabled" >
+                    <option value="">Seleccione</option>
+                    <option value="MEXICANA">MEXICANA</option>
+                    <option value="EXTRANJERA">EXTRANJERA</option>
+                  </select>
+                  <span>Nacionalidad</span>
+                </label>
+              </div>
+
+              <div class="col-md-4">
+                <div class="form-label-group">
+                  <input type="text" title="Datos incorrectos" class="form-control text-uppercase"
+                    id="aspirante_lugar_nacimiento" name="aspirante_lugar_nacimiento" required
+                    placeholder="Lugar de nacimiento" style="color: #237087 ">
+                  <label for="aspirante_lugar_nacimiento">Lugar de Nacimiento</label>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!--direccion------------------------------------------------------>
+          <p class="text-center text-white rounded titulo-form h4">
+            Dirección familiar del Aspirante
+            <hr>
+          </p>
+
+          <div class="form-group">
+
+            <div class="row">
+
+              <div class="col-md-4">
+                <label class="form-group has-float-label seltitulo">
+                  <select class="form-control form-control-lg selcolor" required name="aspirante_direccion_estado"
+                    onChange="cambio_estado(selector_estado_aspirante,selector_municipio_aspirante,selector_localidad_aspirante)"
+                    id="selector_estado_aspirante" disabled="disabled" >
+                    <option value="">Seleccione el estado</option>
+
+                    <?php
+                              foreach ($estados as $estado)
+                              {
+                                      echo '<option value="'.$estado->id_estado.'">'.$estado->nombre_estado.'</option>';
+                              }
+                              ?>
+
+
+
+                  </select>
+                  <span>Estado</span>
+                </label>
+              </div>
+
+
+              <div class="col-md-4">
+                <label class="form-group has-float-label seltitulo">
+                  <select class="form-control form-control-lg selcolor" name="aspirante_direccion_municipio"
+                    onChange="cambio_municipio(selector_municipio_aspirante,selector_localidad_aspirante)"
+                    id="selector_municipio_aspirante" disabled="disabled" >
+                    <option></option>
+                  </select>
+                  <span>Municipio</span>
+                </label>
+              </div>
+              <div class="col-md-4">
+                <label class="form-group has-float-label seltitulo">
+                  <select class="form-control form-control-lg selcolor" name="aspirante_direccion_localidad"
+                    id="selector_localidad_aspirante" disabled="disabled" >
+                    <option></option>
+                  </select>
+                  <span>Localidad</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="form-group">
+
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-label-group">
+                  <input type="text" title="La direccion tiene caracteres incorrectos" class="form-control"
+                    id="aspirante_direccion_calle" name="aspirante_direccion_calle" placeholder="Calle y número"
+                    style="color: #237087" disabled="disabled" >
+                  <label for="aspirante_direccion_calle">Calle y Número</label>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="form-label-group">
+                  <input type="text" title="La colonia tiene caracteres incorrectos" class="form-control"
+                    id="aspirante_direccion_colonia" name="aspirante_direccion_colonia"
+                    placeholder="Colonia/Sección/Paraje/Barrio" style="color: #237087" disabled="disabled" >
+                  <label for="aspirante_direccion_colonia">Colonia/Sección/Paraje/Barrio</label>
+                </div>
+              </div>
+
+              <div class="col-md-2">
+                <div class="form-label-group">
+                  <input type="text" pattern="[0-9]{5}" title="El código postal solo debe contener 5 digitos"
+                    class="form-control" id="aspirante_direccion_cp" name="aspirante_direccion_cp"
+                    placeholder="Código Postal" style="color: #237087" disabled="disabled" >
+                  <label for="aspirante_direccion_cp">Código Postal</label>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!--fin direccion------------------------------------------------------>
+
+
+
+          <!--datos tutor------------------------------------------------------>
+          <p class="text-center text-white rounded titulo-form h4">
+            Datos de Tutor
+            <hr>
+          </p>
+
+          <div class="form-group">
+
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-label-group">
+                  <input type="text" pattern="[A-ZÑña-z]+[ ]*[A-ZÑña-z ]*" onchange="valida(this)" required
+                    title="Introduzca solo letras" class="form-control text-uppercase" id="aspirante_tutor_nombre"
+                    onchange="valida(this)" name="aspirante_tutor_nombre" placeholder="Nombre Completo"
+                    style="color: #237087" disabled="disabled" >
+                  <label for="aspirante_tutor_nombre">Nombre de Tutor</label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-label-group">
+                  <input type="text" pattern="[A-ZÑña-z]+[ ]*[A-ZÑña-z ]*" onchange="valida(this)" required
+                    title="Introduzca solo letras" class="form-control text-uppercase" id="aspirante_tutor_apellido"
+                    onchange="valida(this)" name="aspirante_tutor_apellido" placeholder="Primer Apellido"
+                    style="color: #237087" disabled="disabled" >
+                  <label for="aspirante_tutor_apellido">Primer Apellido</label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-label-group">
+                  <input type="text" pattern="[A-ZÑña-z]+[ ]*[A-ZÑña-z ]*" onchange="valida(this)"
+                    title="Introduzca solo letras" class="form-control text-uppercase" onchange="valida(this)"
+                    id="aspirante_tutor_apellidodos" name="aspirante_tutor_apellidodos" placeholder="Segundo Apellido"
+                    style="color: #237087" disabled="disabled" >
+                  <label for="aspirante_tutor_apellidodos">Segundo Apellido</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+
+              <div class="col-md-4">
+                <label class="form-group has-float-label seltitulo">
+                  <select class="form-control form-control-lg selcolor" id="aspirante_tutor_parentesco" required
+                    name="aspirante_tutor_parentesco" onchange="parentesco(this)" disabled="disabled" >
+                    <option value="">Seleccione</option>
+                    <option value="PADRE">PADRE</option>
+                    <option value="MADRE">MADRE</option>
+                    <option value="HERMANO/A">HERMANO/A</option>
+                    <option value="TIO">TIO</option>
+                    <option value="TIA">TIA</option>
+                    <option value="ABUELO">ABUELO</option>
+                    <option value="ABUELA">ABUELA</option>
+                    <option value="otro">OTRO</option>
+                  </select>
+                  <span>Parentesco</span>
+
+                </label>
+              </div>
+
+              <div class="col-md-4" id="parentescootro" style="display:none;">
+                <div class="form-label-group">
+                  <input type="text" pattern="[A-ZÑña-z]+[ ]*[A-ZÑña-z ]*" onchange="valida(this)"
+                    class="form-control text-uppercase" id="aspirante_tutor_otro" name="aspirante_tutor_otro"
+                    onchange="valida(this)" placeholder="Escriba el parentesco" style="color: #237087" disabled="disabled" >
+                  <label for="aspirante_tutor_otro">Escriba el parentesco</label>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="form-group">
+
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="form-label-group">
+                    <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ. ]+" title="Introduzca solo letras"
+                      class="form-control" id="aspirante_tutor_ocupacion" name="aspirante_tutor_ocupacion"
+                      onchange="valida(this)" placeholder="Ocupación" style="color: #237087" disabled="disabled" >
+                    <label for="aspirante_tutor_ocupacion">Ocupación</label>
+                  </div>
+                </div>
+
+                <div class="col-md-3">
+                  <div class="form-label-group">
+                    <input type="text"
+                      title="El numero de telefono debe de ser a 13 digitos con lada" class="form-control"
+                      id="aspirante_tutor_telefono" name="aspirante_tutor_telefono" placeholder="Teléfono particular"
+                      style="color: #237087" disabled="disabled" >
+                    <label for="aspirante_tutor_telefono">Teléfono particular</label>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-label-group">
+                    <input type="text"
+                      title="El numero de telefono debe de ser a 13 digitos con lada" class="form-control"
+                      id="aspirante_tutor_telefono_comunidad" name="aspirante_tutor_telefono_comunidad"
+                      placeholder="Teléfono de la comunidad" style="color: #237087" disabled="disabled" >
+                    <label for="aspirante_tutor_telefono_comunidad">Teléfono de la comunidad</label>
+                  </div>
+                </div>
+
+
+                <div class="col-md-3">
+                  <div class="form-label-group">
+                    <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ. ]+" class="form-control" style="color: #237087"
+                      id="aspirante_tutor_prospera" name="aspirante_tutor_prospera" placeholder="Folio de Prospera" disabled="disabled" >
+                    <label for="aspirante_tutor_prospera">Folio de Prospera</label>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!--fin tutor------------------------------------------------------>
+
+
+            <!--datos lengua materna------------------------------------------------------>
+            <p class="text-center text-white rounded titulo-form h4">
+              Datos de lengua materna
+              <hr>
+            </p>
+
+            <div class="form-group">
+
+              <div class="row">
+                <div class="col-md-2">
+                  <label class="form-group has-float-label seltitulo">
+                    <select class="form-control selcolor" required="required" onchange="lenguas_evento(this)"
+                      id="aspirante_lengua_nombre" name="aspirante_lengua_nombre" disabled="disabled" >
+                      <option value="NO CONOCE LENGUA">Seleccione una lengua</option>
+
+                      <?php
+                              foreach ($lenguas as $lengua)
+                              {
+                                      echo '<option value="'.$lengua->id_lengua.'">'.strtoupper($lengua->nombre_lengua).'</option>';
+                              }
+                              ?>
+                      <option value="otra">OTRA</option>
+
+                    </select>
+                    <span>Lengua</span>
+                  </label>
+                </div>
+
+                <div class="col-md-2">
+                  <label class="form-group has-float-label seltitulo">
+                    <select class="form-control selcolor" required="required" id="aspirante_lengua_lee"
+                      name="aspirante_lengua_lee" disabled="disabled" >
+                      <option value="0">Nada 0%</option>
+                      <option value="25">Poco 25%</option>
+                      <option value="50">Regular 50%</option>
+                      <option value="75">Bien 75%</option>
+                      <option value="100">Muy Bien 100%</option>
+                    </select>
+                    <span>Lee</span>
+                  </label>
+                </div>
+
+                <div class="col-md-2">
+                  <label class="form-group has-float-label seltitulo">
+                    <select class="form-control selcolor" required="required" id="aspirante_lengua_habla"
+                      name="aspirante_lengua_habla" disabled="disabled" >
+                      <option value="0">Nada 0%</option>
+                      <option value="25">Poco 25%</option>
+                      <option value="50">Regular 50%</option>
+                      <option value="75">Bien 75%</option>
+                      <option value="100">Muy bien 100%</option>
+                    </select>
+                    <span>Habla</span>
+                  </label>
+                </div>
+
+                <div class="col-md-2">
+                  <label class="form-group has-float-label seltitulo">
+                    <select class="form-control selcolor" required="required" id="aspirante_lengua_escribe"
+                      name="aspirante_lengua_escribe" disabled="disabled" >
+                      <option value="0">Nada 0%</option>
+                      <option value="25">Poco 25%</option>
+                      <option value="50">Regular 50%</option>
+                      <option value="75">Bien 75%</option>
+                      <option value="100">Muy bien 100%</option>
+                    </select>
+                    <span>Escribe</span>
+                  </label>
+                </div>
+
+                <div class="col-md-2">
+                  <label class="form-group has-float-label seltitulo">
+                    <select class="form-control selcolor" required="required" id="aspirante_lengua_entiende"
+                      name="aspirante_lengua_entiende" disabled="disabled" >
+                      <option value="0">Nada 0%</option>
+                      <option value="25">Poco 25%</option>
+                      <option value="50">Regular 50%</option>
+                      <option value="75">Bien 75%</option>
+                      <option value="100">Muy bien 100%</option>
+                    </select>
+                    <span>Entiende</span>
+                  </label>
+                </div>
+
+
+                <div class="col-md-2">
+                  <label class="form-group has-float-label seltitulo">
+                    <select class="form-control selcolor" required="required" id="aspirante_lengua_traduce"
+                      name="aspirante_lengua_traduce" disabled="disabled" >
+                      <option value="0">Nada 0%</option>
+                      <option value="25">Poco 25%</option>
+                      <option value="50">Regular 50%</option>
+                      <option value="75">Bien 75%</option>
+                      <option value="100">Muy bien 100%</option>
+                    </select>
+                    <span>Traduce</span>
+                  </label>
+                </div>
+
+
+
+
+              </div>
+
+              <div class="row" id="lengua_oculto" style="display: none">
+
+                <div class="col-md-2">
+                  <div class="form-label-group">
+                    <input type="text" class="form-control text-uppercase" id="aspirante_lengua_oculto"
+                      name="aspirante_lengua_oculto" placeholder="Agregue lengua" style="color: #237087 " disabled="disabled" >
+                    <label for="aspirante_lengua_oculto">Agregue lengua</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+
+          <!--fin legua materna------------------------------------------------------>
+
+                  <!-- etnia ------------------------------------------------------------------>
+        <div class="form-group">
+        <div class="row">
+
+          <div class="col-md-4"  >
+            <label class="form-group has-float-label seltitulo">
+              <select class="form-control form-control-lg selcolor" onchange="etnias_evento(this)"  name="aspirante_etnia" 
+                id="aspirante_etnia" disabled="disabled" >
+                <option value="">Seleccione la etnia de procedencia</option>
+                <?php
+                              foreach ($lenguas as $lengua)
+                              {
+                                      echo '<option value="'.strtoupper($lengua->nombre_lengua).'">'.strtoupper($lengua->nombre_lengua).'</option>';
+                              }
+                              ?>
+                              <option value="otra">OTRA</option>
+
+              </select>
+              <span>Etnia</span>
+            </label>
+          </div>
+
+          <div class="col-md-2" id="etnia_oculto" style="display: none"  >
+              <div class="form-label-group">
+                <input type="text" class="form-control text-uppercase" id="aspirante_etnia_oculto"
+                  name="aspirante_etnia_oculto" placeholder="Agregue etnia" style="color: #237087 " >
+                <label for="aspirante_etnia_oculto">Agregue etnia</label>
+              </div>
+            </div>
+
+
+      </div>
+        <!-- fin etnia --------------------------------------------------------------->
+
+
+
+
+          <!--datos secundaria------------------------------------------------------>
+          <p class="text-center text-white rounded titulo-form h4">
+            Datos de Escuela de procedencia
+            <hr>
+          </p>
+
+          <div class="form-group">
+
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-label-group">
+
+                  <input list="secundarias" class="form-control text-uppercase" id="aspirante_secundaria_cct"
+                    name="aspirante_secundaria_cct" placeholder="Buscar escuela por CCT" style="color: #237087" disabled="disabled" >
+                  <datalist id="secundarias">
+
+                    <?php
+                              foreach ($escuela_procedencia as $escuela)
+                              {
+                                      echo '<option value="'.$escuela->cct_escuela_procedencia.'">';
+                              }
+                              ?>
+                  </datalist>
+
+                  <label for="aspirante_secundaria_cct">Buscar secundaria por CCT</label>
+                </div>
+                <br>
+              </div>
+              <div class="col-md-4">
+                <div class="form-label-group">
+                  <button type="button" class="btn btn-outline-success btn-lg"
+                    onclick="obtener_secundaria(document.getElementById('aspirante_secundaria_cct').value)"  data-backdrop="false" disabled="disabled" >
+                    Buscar escuela
+                  </button>
+
+
+                </div>
+                <br>
+              </div>
+                
+                <div class="col-md-4">
+                  <div class="form-label-group">
+                    <input type="number" step="any" class="form-control text-uppercase" id="promedio_procedencia_secundaria"
+                      name="promedio_procedencia_secundaria" placeholder="Promedio procedencia de Secundaria" style="color: #237087 " disabled="disabled" >
+                    <label for="promedio_procedencia_secundaria">Promedio de Secundaria</label>
+                  </div>
+              </div>
+
+
+            </div>
+
+            <div class="row">
+              <div class="col-md-4" style="display: none" id="nombre_secundaria_oculto">
+                <div class="form-label-group">
+                  <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ. 0-9]+"
+                    title="El nombre de la secundaria contiene caracteres incorrectos"
+                    class="form-control text-uppercase" id="aspirante_secundaria_nombre" style="color: #237087"
+                    name="aspirante_secundaria_nombre" placeholder="Nombre de Secundaria">
+                  <label for="aspirante_secundaria_nombre">Nombre de Secundaria</label>
+                </div>
+                <br>
+              </div>
+
+              <div class="col-md-4" style="display: none" id="tipo_subsistema_oculto">
+                <label class="form-group has-float-label seltitulo">
+                  <select class="form-control form-control-lg selcolor" name="aspirante_secundaria_tipo_subsistema"
+                    id="aspirante_secundaria_tipo_subsistema">
+                    <option value="">Seleccione un tipo</option>
+                    <option value="TELESECUNDARIA">Telesecundaria</option>
+                    <option value="GENERAL">General</option>
+                    <option value="PARTICULAR">Particular</option>
+                    <option value="TÉCNICA">Técnica</option>
+                    <option value="COMUNITARIA">Comunitaria</option>
+                    <option value="OTRO">Otro</option>
+                  </select>
+                  <span>Tipo de Subsistema</span>
+                </label>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="form-group" id="bachillerato_oculto" style="display:none">
+
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-label-group">
+
+                  <input list="secundarias" class="form-control text-uppercase" id="aspirante_bachillerato_cct"
+                    name="aspirante_bachillerato_cct" placeholder="Buscar escuela por CCT" style="color: #237087">
+                  <datalist id="secundarias">
+
+                    <?php
+                              foreach ($escuela_procedencia as $escuela)
+                              {
+                                      echo '<option value="'.$escuela->cct_escuela_procedencia.'">';
+                              }
+                              ?>
+                  </datalist>
+
+                  <label for="aspirante_bachillerato_cct">Buscar Bachillerato por CCT</label>
+                </div>
+                <br>
+              </div>
+              <div class="col-md-4">
+                <div class="form-label-group">
+                  <button type="button" class="btn btn-outline-success btn-lg"
+                    onclick="obtener_bachillerato(document.getElementById('aspirante_bachillerato_cct').value)">
+                    Buscar escuela
+                  </button>
+
+
+                </div>
+                <br>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-4" style="display: none" id="nombre_bachillerato_oculto">
+                <div class="form-label-group">
+                  <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ. 0-9]+"
+                    title="El nombre de la secundaria contiene caracteres incorrectos"
+                    class="form-control text-uppercase" id="aspirante_bachillerato_nombre" style="color: #237087"
+                    name="aspirante_bachillerato_nombre" placeholder="Nombre de Bachillerato">
+                  <label for="aspirante_bachillerato_nombre">Nombre de Bachillerato</label>
+                </div>
+                <br>
+              </div>
+
+              <div class="col-md-4" style="display: none" id="tipo_subsistema_bachillerato_oculto">
+                <label class="form-group has-float-label seltitulo">
+                  <select class="form-control form-control-lg selcolor" name="aspirante_bachillerato_tipo_subsistema"
+                    id="aspirante_bachillerato_tipo_subsistema">
+                    <option value="">Seleccione un tipo</option>
+                    <option value="TELESECUNDARIA">Educación Profesional Técnica</option>
+                    <option value="GENERAL">Bachillerato General</option>
+                    <option value="PARTICULAR">Bachillerato Tecnológico</option>
+                    <option value="OTRO">Otro</option>
+                  </select>
+                  <span>Tipo de Subsistema</span>
+                </label>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!--fin datos secundaria------------------------------------------------------>
+          <input type="text" id="aspirante_no_control" name="aspirante_no_control" style="display:none">
+          <input type="text" id="id_tutor" name="id_tutor" style="display:none">
+
+
+
+          <br>
+          <button type="submit" class="btn btn-success btn-lg btn-block" style="padding: 1.5rem">Actualizar
+            Datos</button>
+
+
+        </form>
+
+        <!-- fin cuerpo modal -->
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<input type="text" style="display:none" id="no_control_borrar">
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="nuevasecundaria" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" style="max-width: 80% !important;" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Agregar nueva secundaria</h5>
+        <button type="button" class="close" onclick="cerrar_modal()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-label-group">
+                <input type="text" pattern="[A-ZÁÉÍÓÚáéíóúa-z0-9]+[ ]*[A-ZÁÉÍÓÚáéíóúa-z0-9]*" 
+                  title="El nombre de la secundaria contiene caracteres incorrectos" class="form-control text-uppercase"
+                  id="aspirante_nuevasecundaria_cct" name="aspirante_nuevasecundaria_cct"
+                  placeholder="CCT de Secundaria" style="color: #237087 ">
+                <label for="aspirante_nuevasecundaria_cct">C C T</label>
+              </div>
+              <br>
+            </div>
+            <div class="col-md-4">
+              <div class="form-label-group">
+                <input type="text" ppattern="[A-ZÁÉÍÓÚáéíóúa-z0-9]+[ ]*[A-ZÁÉÍÓÚáéíóúa-z0-9]*" 
+                  class="form-control text-uppercase" id="aspirante_nuevasecundaria_nombre"
+                  name="aspirante_secundaria_nombre" placeholder="Nombre de Secundaria" style="color: #237087 ">
+                <label for="aspirante_nuevasecundaria_nombre">Nombre de Secundaria</label>
+              </div>
+              <br>
+            </div>
+
+            <div class="col-md-4">
+              <label class="form-group has-float-label seltitulo">
+                <select class="form-control form-control-lg selcolor" name="aspirante_nuevasecundaria_tipo_subsistema" 
+                  id="aspirante_nuevasecundaria_tipo_subsistema" onchange="otro_secundaria();">
+                  <option value="">Seleccione un tipo</option>
+                  <option value="TELESECUNDARIA">Telesecundaria</option>
+                  <option value="GENERAL">General</option>
+                  <option value="PARTICULAR">Particular</option>
+                  <option value="TÉCNICA">Técnica</option>
+                  <option value="COMUNITARIA">Comunitaria</option>
+                  <option value="OTRO" >Otro</option>
+                </select>
+                <span>Tipo de Subsistema</span>
+              </label>
+            </div>
+
+            <div class="col-md-4" style="display: none" id="otro_secundaria_oculto">
+              <div class="form-label-group">
+                <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ. 0-9]+"
+                  title="El tipo de la secundaria contiene caracteres incorrectos" class="form-control text-uppercase"
+                  id="aspirante_secundaria_tipo_otro" name="aspirante_secundaria_tipo_otro"
+                  placeholder="Tipo de Secundaria" style="color: #237087 ">
+                <label for="aspirante_secundaria_tipo_otro">Tipo de Secundaria</label>
+              </div>
+            </div>
+
+          </div>
+          <br>
+
+
+          <div class="row">
+
+            <div class="col-md-4">
+              <label class="form-group has-float-label seltitulo">
+                <select class="form-control form-control-lg selcolor"  name="selector_estado_secundaria"
+                onChange="cambio_estado(document.getElementById('selector_estado_secundaria'),document.getElementById('selector_municipio_secundaria'),document.getElementById('selector_localidad_secundaria'))"
+                  id="selector_estado_secundaria">
+                  <option value ="">Seleccione un estado</option>
+
+                  <?php
+                              foreach ($estados as $estado)
+                              {
+                                      echo '<option value="'.$estado->id_estado.'">'.$estado->nombre_estado.'</option>';
+                              }
+                              ?>
+
+                </select>
+                <span>Estado</span>
+              </label>
+            </div>
+
+
+            <div class="col-md-4">
+              <label class="form-group has-float-label seltitulo">
+                <select class="form-control form-control-lg selcolor"  name="selector_municipio_secundaria"
+                  onChange="cambio_municipio(document.getElementById('selector_municipio_secundaria'),document.getElementById('selector_localidad_secundaria'))"
+                  id="selector_municipio_secundaria">
+                  <option></option>
+
+
+                </select>
+                <span>Municipio</span>
+              </label>
+            </div>
+
+            <div class="col-md-4">
+              <label class="form-group has-float-label seltitulo">
+                <select class="form-control form-control-lg selcolor"  name="selector_localidad_secundaria"
+                  id="selector_localidad_secundaria">
+                  <option></option>
+
+
+
+                </select>
+                <span>Localidad</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" onclick="cerrar_modal()">Cancelar</button>
+        <button type="button" class="btn btn-success" onclick="insertar_secundaria()">Guardar</button>
+      </div>
+      
+    </div>
+  </div>
+</div>
 <script>
+
+function limpiar_modal_nueva_secundaria() {
+  $('#aspirante_nuevasecundaria_cct').val('');
+  $('#aspirante_nuevasecundaria_nombre').val('');
+  $('#aspirante_nuevasecundaria_tipo_subsistema').val('');
+  $('#selector_estado_secundaria').val('');
+  $('#selector_municipio_secundaria').val('');
+  $('#selector_localidad_secundaria').val('');
+}
+
+
+var ini_secundaria_cct = "";
+$("#aspirante_secundaria_cct").change(function(){
+
+  if ( $("#aspirante_secundaria_cct").val().toUpperCase() != ini_secundaria_cct ) {
+    obtener_secundaria($("#aspirante_secundaria_cct").val().toUpperCase());
+  }
+});
+
+function insertar_secundaria() {
+    if(document.getElementById("aspirante_nuevasecundaria_cct").value === ''||document.getElementById("aspirante_nuevasecundaria_nombre").value === ''||document.getElementById("aspirante_nuevasecundaria_tipo_subsistema").value===''){
+    Swal.fire({
+          type: 'error',
+          title: 'Bachillerato no agregado',
+          confirmButtonText: 'Cerrar'
+
+        })
+   }else{
+    let secundaria = "";
+    secundaria = {
+      "cct_escuela_procedencia": document.getElementById("aspirante_nuevasecundaria_cct").value.toUpperCase(),
+      "nombre_escuela_procedencia": document.getElementById("aspirante_nuevasecundaria_nombre").value.toUpperCase(),
+      "tipo_subsistema": document.getElementById("aspirante_nuevasecundaria_tipo_subsistema").value.toUpperCase(),
+      "id_localidad_escuela_procedencia": parseInt(document.getElementById("selector_localidad_secundaria").value),
+      "tipo_escuela_procedencia": "SECUNDARIA"
+    };
+
+    document.getElementById("secundarias").innerHTML += '<option value="' + document.getElementById("aspirante_nuevasecundaria_cct").value + '">'
+    //console.log(secundaria);
+    var xhr = new XMLHttpRequest();
+    
+    xhr.open("POST", '<?php echo base_url();?>index.php/c_escuela_procedencia/insert_escuela', true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      xhr.error = function (){
+        console.log("error de conexion");
+      }
+
+    xhr.onreadystatechange = function () {
+      if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+        $('#div_carga').hide();
+        if (xhr.responseText.trim() === "si") {
+          Swal.fire({
+            type: 'success',
+            title: 'Secundaria agregada correctamente',
+            showConfirmButton: false,
+            timer: 2500
+          })
+          $('#nuevasecundaria').modal('toggle');
+
+          
+
+          $('#aspirante_nuevasecundaria_cct').val('');
+          $('#aspirante_nuevasecundaria_nombre').val('');
+          $('#aspirante_nuevasecundaria_tipo_subsistema').val('');
+          $('#selector_estado_secundaria').val('');
+          $('#selector_municipio_secundaria').val('');
+          $('#selector_localidad_secundaria').val('');
+
+          obtener_secundaria(document.getElementById("aspirante_secundaria_cct").value);
+         
+        } else {
+          Swal.fire({
+            type: 'error',
+            title: 'Secundaria no agregada',
+            confirmButtonText: 'Cerrar'
+
+          })
+        }
+
+      }
+    }
+    xhr.send(JSON.stringify(secundaria));
+
+  }
+
+}
+
+
+
+
   cargar_anio();
 
   function cargar_datos_aspirante(e) {
+    ini_secundaria_cct = "";
+    document.getElementById("nombre_secundaria_oculto").style.display = "none";
+    document.getElementById("tipo_subsistema_oculto").style.display = "none";
+
+    document.getElementById("formulario").reset();
     document.getElementById("selector_municipio_aspirante").innerHTML = "";
     document.getElementById("selector_localidad_aspirante").innerHTML = "";
     document.getElementById("aspirante_no_control").value = e.value;
@@ -180,6 +1274,7 @@
         municipios.open('GET', '<?php echo base_url();?>index.php/c_municipio/get_municipios_estado_html?id_estado=' + respuesta[0].id_estado, true);
         municipios.onload = function () {
           document.getElementById("selector_municipio_aspirante").innerHTML = municipios.responseText;
+          document.getElementById("selector_municipio_aspirante").value = respuesta[0].id_municipio;
         };
         municipios.send(null);
         //fin cargar municipios
@@ -191,7 +1286,7 @@
           document.getElementById("selector_localidad_aspirante").innerHTML = localidades.responseText;
           //seleccionar las opciones de la direccion del estudiante que habia registrado
           document.getElementById("selector_estado_aspirante").value = respuesta[0].id_estado;
-          document.getElementById("selector_municipio_aspirante").value = respuesta[0].id_municipio;
+          
           document.getElementById("selector_localidad_aspirante").value = respuesta[0].id_localidad;
         };
         localidades.send(null);
@@ -211,6 +1306,7 @@
       document.getElementById("aspirante_tutor_ocupacion").value = datos.tutor[0].ocupacion;
       //document.getElementById("aspirante_tutor_telefono").value = datos.tutor[0].telefono_tutor;
       document.getElementById("aspirante_tutor_telefono_comunidad").value = datos.tutor[0].telefono_comunidad;
+      document.getElementById("aspirante_tutor_telefono").value=datos.tutor[0].telefono_tutor;
       document.getElementById("aspirante_tutor_prospera").value = datos.tutor[0].folio_programa_social_tutor;
       $parentesco = datos.tutor[0].parentesco;
       if ($parentesco !== "PADRE" && $parentesco !== "MADRE" && $parentesco !== "HERMANO/A" && $parentesco !== "TIO" && $parentesco !== "TIA" && $parentesco !== "ABUELO" && $parentesco !== "ABUELA") {
@@ -235,17 +1331,19 @@
       }
       else {
         document.getElementById("aspirante_lengua_nombre").value = datos.lengua_materna[0].id_lengua;
-        document.getElementById("aspirante_lengua_lee").disabled = false;
+        //document.getElementById("aspirante_lengua_lee").disabled = false;
         document.getElementById("aspirante_lengua_lee").value = datos.lengua_materna[0].porcentaje;
-        document.getElementById("aspirante_lengua_habla").disabled = false;
+        //document.getElementById("aspirante_lengua_habla").disabled = false;
         document.getElementById("aspirante_lengua_habla").value = datos.lengua_materna[1].porcentaje;
-        document.getElementById("aspirante_lengua_escribe").disabled = false;
+        //document.getElementById("aspirante_lengua_escribe").disabled = false;
         document.getElementById("aspirante_lengua_escribe").value = datos.lengua_materna[2].porcentaje;
-        document.getElementById("aspirante_lengua_entiende").disabled = false;
+        //document.getElementById("aspirante_lengua_entiende").disabled = false;
         document.getElementById("aspirante_lengua_entiende").value = datos.lengua_materna[3].porcentaje;
-        document.getElementById("aspirante_lengua_traduce").disabled = false;
+        //document.getElementById("aspirante_lengua_traduce").disabled = false;
         document.getElementById("aspirante_lengua_traduce").value = datos.lengua_materna[4].porcentaje;
       }
+
+      document.getElementById("aspirante_etnia").value=datos.estudiante[0].etnia;
       //fin datos lengua materna
       //secundaria
       if (datos.estudiante[0].tipo_ingreso === "PORTABILIDAD") {
@@ -255,18 +1353,42 @@
 
       } else {
         document.getElementById("aspirante_secundaria_cct").value = datos.escuela_procedencia[0].Escuela_procedencia_cct_escuela_procedencia;
+
+        $validar_cct=datos.escuela_procedencia[0].Escuela_procedencia_cct_escuela_procedencia;
+
+        if($validar_cct.length>0){
+          //document.getElementById("promedio_procedencia_secundaria").disabled = false;
+        }
+        document.getElementById("promedio_procedencia_secundaria").value = datos.escuela_procedencia[0].promedio_procedencia;
+
+        ini_secundaria_cct = $("#aspirante_secundaria_cct").val();
         document.getElementById("bachillerato_oculto").style.display = "none";
       }
 
-      /*
-      document.getElementById("aspirante_secundaria_nombre").value = datos.secundaria_aspirante[0].nombre_secundaria;
+     /* if(datos.escuela_procedencia[0].Escuela_procedencia_cct_escuela_procedencia!=''){
+
+        document.getElementById("aspirante_secundaria_nombre").value = datos.escuela_procedencia[0].nombre_escuela_procedencia;
       document.getElementById("aspirante_secundaria_nombre").disabled = true;
       document.getElementById("nombre_secundaria_oculto").style.display = "";
- 
-      document.getElementById("aspirante_secundaria_tipo_subsistema").value = datos.secundaria_aspirante[0].tipo_subsistema;
+
+      document.getElementById("aspirante_secundaria_tipo_subsistema").value = datos.escuela_procedencia[0].tipo_subsistema;
       document.getElementById("aspirante_secundaria_tipo_subsistema").disabled = true;
       document.getElementById("tipo_subsistema_oculto").style.display = "";
-      */
+
+      }
+      else{
+
+        document.getElementById("aspirante_secundaria_nombre").value = "";
+      document.getElementById("aspirante_secundaria_nombre").disabled = true;
+      document.getElementById("nombre_secundaria_oculto").style.display = "none";
+
+      document.getElementById("aspirante_secundaria_tipo_subsistema").value = "";
+      document.getElementById("aspirante_secundaria_tipo_subsistema").disabled = true;
+      document.getElementById("tipo_subsistema_oculto").style.display = "none";
+
+      }*/
+
+      
     }
     xhr.send(null);
   }
@@ -292,7 +1414,7 @@
         //console.log(valor);
         var fila = '<tr>';
         fila += '<td>';
-        fila += valor.primer_apellido+ " " +valor.segundo_apellido+ " " + valor.nombre;
+        fila += valor.primer_apellido + " " + valor.segundo_apellido + " " + valor.nombre;
         fila += '</td>';
         fila += '<td>';
         fila += valor.curp;
@@ -308,6 +1430,9 @@
         fila += '</td>';
         fila += '<td>';
         fila += valor.fecha_registro;
+        fila += '</td>';
+        fila += '<td>';
+        fila += '<button class="btn btn-lg btn-block btn-success" type="button" value="' + valor.no_control + '" onclick="cargar_datos_aspirante(this)" data-toggle="modal" data-target="#">Editar</button>';
         fila += '</td>';
         fila += '<td>';
         fila += '<a href="<?php echo base_url();?>index.php/C_estudiante/generar_formato_inscripcion?no_control=' + valor.no_control + '" class="btn btn-lg btn-block btn-info btn btn-primary" target="_blank">Imprimir</a>';
@@ -349,6 +1474,7 @@
         //aspirante_secundaria_tipo_subsistema
         document.getElementById("aspirante_secundaria_tipo_subsistema").value = secundaria[0].tipo_subsistema;
         document.getElementById("aspirante_secundaria_tipo_subsistema").disabled = true;
+
       }
       else {
         document.getElementById("nombre_secundaria_oculto").style.display = "none";
@@ -356,13 +1482,17 @@
 
         swalWithBootstrapButtons.fire({
           type: 'info',
-          text: 'Esta secundaria no existe',
+          text: 'Esta secundaria no existe por favor agreguela:',
           showCancelButton: true,
-          showConfirmButton: false,
+          
+          confirmButtonText: 'Agregar',
           cancelButtonText: 'Cancelar',
+          
         }).then((result) => {
           if (result.value) {
+            
             $('#nuevasecundaria').modal().show();
+            limpiar_modal_nueva_secundaria();
             cct();
 
           }
@@ -411,6 +1541,7 @@
         }).then((result) => {
           if (result.value) {
             $('#nuevasecundaria').modal().show();
+            limpiar_modal_nueva_secundaria();
             cct();
 
           }
@@ -420,72 +1551,23 @@
 
     xhr.send(null);
   }
-  function insertar_secundaria() {
-    let secundaria = "";
-    secundaria = {
-      "cct_secundaria": document.getElementById("aspirante_nuevasecundaria_cct").value,
-      "nombre_secundaria": document.getElementById("aspirante_nuevasecundaria_nombre").value,
-      "subsistema": document.getElementById("aspirante_nuevasecundaria_tipo_subsistema").value,
-      "localidad": parseInt(document.getElementById("selector_localidad_secundaria").value)
-    };
-    document.getElementById("secundarias").innerHTML += '<option value="' + document.getElementById("aspirante_nuevasecundaria_cct").value + '">'
-    console.log(secundaria);
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", '<?php echo base_url();?>index.php/c_secundaria/insert_secundaria', true);
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.onloadstart = function () {
-      $('#div_carga').show();
-    }
-    xhr.error = function () {
-      console.log("error de conexion");
-    }
 
-    xhr.onreadystatechange = function () {
-      if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-        $('#div_carga').hide();
-        if (xhr.responseText === "si") {
-          Swal.fire({
-            type: 'success',
-            title: 'Secundaria agregada correctamente',
-            showConfirmButton: false,
-            timer: 2500
-          })
-        } else {
-          Swal.fire({
-            type: 'error',
-            title: 'Secundaria no agregada',
-            confirmButtonText: 'Cerrar'
 
-          })//alert(xhr.responseText);
-        }
-      }
-      xhr.send(JSON.stringify(secundaria));
-    }
-  }
+  
 
   var form = document.getElementById("formulario");
-  form.onsubmit = function (e) {
-    if (document.getElementById("aspirante_secundaria_cct").value === '') {
-      console.log("vacio");
-      swalWithBootstrapButtons.fire({
-        type: 'warning',
-        text: 'Esta tratando de actualizar un alumno sin Secundaria',
-        showCancelButton: true,
-        confirmButtonText: 'Actualizar',
-        cancelButtonText: 'Cancelar',
-      }).then((result) => {
-        if (result.value) {
-          console.log("Entro a if")
-          e.preventDefault();
-          envioform(form);
 
-        }
-      })
-      return false;
-    } else {
-      e.preventDefault();
-      envioform(form);
-    }
+
+
+  var nombre_secundaria = document.getElementById('nombre_secundaria_oculto'); 
+  var tipo_subsistema = document.getElementById('tipo_subsistema_oculto');
+  
+
+  form.onsubmit = function (e) {
+    
+        e.preventDefault();
+        envioform(form);
+  
 
 
   }
@@ -496,7 +1578,7 @@
     $('#modalaspirante').modal('toggle');
     var formdata = new FormData(form);
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "<?php echo base_url();?>index.php/c_estudiante/update_estudiante", true);
+    xhr.open("POST", "<?php echo base_url();?>index.php/c_estudiante/update_estudiante_campos_activos", true);
     xhr.onloadstart = function () {
       $('#div_carga').show();
     }
@@ -506,7 +1588,7 @@
     xhr.onreadystatechange = function () {
       if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
         $('#div_carga').hide();
-        if (xhr.responseText === "si") {
+        if (xhr.responseText.trim() === "si") {
           Swal.fire({
             type: 'success',
             title: 'Actualizacion exitosa'
@@ -525,4 +1607,33 @@
     xhr.send(formdata);
 
   }
+
+
+  
+
+  function cerrar_modal() {
+    $('#aspirante_nuevasecundaria_cct').val('');
+    $('#aspirante_nuevasecundaria_nombre').val('');
+    $('#aspirante_nuevasecundaria_tipo_subsistema').val('');
+    $('#selector_estado_secundaria').val('');
+    $('#selector_municipio_secundaria').val('');
+    $('#selector_localidad_secundaria').val('');
+
+    $('#modalaspirante').modal().show();
+    $('#nuevasecundaria').modal('toggle');
+  }
+/*
+delete from Grupo_estudiante where Estudiante_no_control='CSEIIO1910676';
+delete from Datos_lengua_materna where Estudiante_no_control='CSEIIO1910676';
+delete from Documentacion where Estudiante_no_control='CSEIIO1910676';
+delete from Estudiante_escuela_procedencia where Estudiante_no_control='CSEIIO1910676';
+delete from Estudiante_tutor where Estudiante_no_control='CSEIIO1910676';
+delete from Expediente_medico where Estudiante_no_control='CSEIIO1910676';
+delete from Friae_estudiante where Estudiante_no_control='CSEIIO1910676';
+delete from Estudiante where no_control='CSEIIO1910676'
+
+
+*/
 </script>
+
+

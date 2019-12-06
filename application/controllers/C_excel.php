@@ -76,6 +76,20 @@ class C_excel extends CI_Controller {
 		}
 		return false;
 	}
+
+
+	function validar_formato_hora($hora){
+		
+		if(preg_match('/^(?:[01][0-9]|2[0-3]):[0-5][0-9]$/',$hora)) {
+			return true;
+		}
+		
+			return false;
+
+	}
+
+
+
 	
 
 	//preg_match("/^(?:2[0-3]|[01][0-9]|[0-9]):[0-5][0-9]$/", $time)
@@ -270,9 +284,47 @@ class C_excel extends CI_Controller {
 						$resultado_error.="<li>Verifique el concentrado de calificaciones si cumple con los criterios de evaluación y si ha asignado las calificaciones parciales, modulares y finales de las materias pertenecientes al semestre.</li>";
 					  }
 					  
+
+
+					$indiceHoja = 0;
+					$calificaciones_frer = $spreadsheet->getSheet($indiceHoja);
+					
+		
+							foreach ($calificaciones_frer->getRowIterator(13) as $fila) {
+		
+								$fila=$fila->getCellIterator("H","J");
+		
+								foreach ($fila as $celda) {
+									$fila = $celda->getRow();
+									$columna = $celda->getColumn();
+
+									if(!is_null($celda->getValue())){
+										if($columna=='H' && $columna!='' && !in_array($celda->getValue(), $calificacion_valida)){
+											$resultado_error.="<li>La calificación de regularización en la celda <span style='font-weight:bold'>".$columna.$fila."</span> no es valida.</li>";
+											
+										}
+
+										if($columna=='I' && $columna!='' && $this->validar_fecha_espanol($celda->getValue())){
+											$resultado_error.="<li>El formato de fecha de regularización en la celda <span style='font-weight:bold'>".$columna.$fila."</span> no es valida.</li>";
+											
+										}
+
+										if($columna=='J' && $columna!='' && $this->validar_formato_hora($celda->getValue())){
+											$resultado_error.="<li>El formato de hora de regularización en la celda <span style='font-weight:bold'>".$columna.$fila."</span> no es valida.</li>";
+											
+										}
+
+									}
+
+								}
+							
+						} 
 					  
 					  
 					  
+
+
+					 
 					  
 					  
 					  ///////////////////////////////////////////////TERMINA VALIDACIÓN DE DATOS ////////////////////////////
@@ -491,6 +543,8 @@ class C_excel extends CI_Controller {
 									'fecha'=>date('Y-m-d')
 
 								);
+
+								var_dump($datos_regularizacion_estudiante);
 
 								$existe_regu=count($this->M_regularizacion->existe_regu_ciclo_anterior($plantel_cct,$clave_materia,$no_control,$fecha_regularizacion));
 								if($existe_regu==0){

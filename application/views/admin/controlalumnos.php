@@ -824,6 +824,16 @@
                 </div>
                 <br>
               </div>
+                
+                <div class="col-md-4">
+                  <div class="form-label-group">
+                    <input type="number" step="any" class="form-control text-uppercase" id="promedio_procedencia_secundaria"
+                      name="promedio_procedencia_secundaria" placeholder="Promedio procedencia de Secundaria" style="color: #237087 " disabled>
+                    <label for="promedio_procedencia_secundaria">Promedio de Secundaria</label>
+                  </div>
+              </div>
+
+
             </div>
 
             <div class="row">
@@ -1296,6 +1306,7 @@ function insertar_secundaria() {
       document.getElementById("aspirante_tutor_ocupacion").value = datos.tutor[0].ocupacion;
       //document.getElementById("aspirante_tutor_telefono").value = datos.tutor[0].telefono_tutor;
       document.getElementById("aspirante_tutor_telefono_comunidad").value = datos.tutor[0].telefono_comunidad;
+      document.getElementById("aspirante_tutor_telefono").value=datos.tutor[0].telefono_tutor;
       document.getElementById("aspirante_tutor_prospera").value = datos.tutor[0].folio_programa_social_tutor;
       $parentesco = datos.tutor[0].parentesco;
       if ($parentesco !== "PADRE" && $parentesco !== "MADRE" && $parentesco !== "HERMANO/A" && $parentesco !== "TIO" && $parentesco !== "TIA" && $parentesco !== "ABUELO" && $parentesco !== "ABUELA") {
@@ -1342,6 +1353,13 @@ function insertar_secundaria() {
 
       } else {
         document.getElementById("aspirante_secundaria_cct").value = datos.escuela_procedencia[0].Escuela_procedencia_cct_escuela_procedencia;
+
+        $validar_cct=datos.escuela_procedencia[0].Escuela_procedencia_cct_escuela_procedencia;
+
+        if($validar_cct.length>0){
+          document.getElementById("promedio_procedencia_secundaria").disabled = false;
+        }
+        document.getElementById("promedio_procedencia_secundaria").value = datos.escuela_procedencia[0].promedio_procedencia;
 
         ini_secundaria_cct = $("#aspirante_secundaria_cct").val();
         document.getElementById("bachillerato_oculto").style.display = "none";

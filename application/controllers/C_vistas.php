@@ -836,6 +836,32 @@ public function resolucion_equivalencia(){
     }
 
 
+    public function lectura_excel(){
+        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
+            
+            $data= array('title'=>'Importar archivo de Excel');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierda");
+            $this->load->view("spreadsheet/upload_excel");
+            $this->load->view("footers/footer");
+        }
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='CESCOLAR'){
+            
+            $data= array('title'=>'Importar archivo de Excel');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierdacescolar");
+            $this->load->view("spreadsheet/upload_excel");
+            $this->load->view("footers/footer");
+        }
+
+        else{
+            redirect(base_url().'index.php/c_usuario');
+        }
+    }
+
+
     // fin acreditacion ------------------------------------------------------
 
     // Reportes -----------------------------------------------------------------

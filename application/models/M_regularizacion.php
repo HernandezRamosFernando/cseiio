@@ -651,7 +651,7 @@ public function actualizar_estatus_estudiante($no_control,$num_adeudos,$modulo,$
        }
 
        else{
-         echo $no_control.", Estatus:-----".$num_adeudos;
+         
            return "si";
        }
 

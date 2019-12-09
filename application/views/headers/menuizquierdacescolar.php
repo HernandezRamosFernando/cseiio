@@ -29,7 +29,7 @@
       </a>
     </li>
     <li class="nav-item ">
-      <a class="nav-link <?php ($this->uri->segment(2)=='acreditacion'||$this->uri->segment(2)=='crear_grupo'||$this->uri->segment(2)=='terminar_ciclo'||$this->uri->segment(2)=='calificacion'||$this->uri->segment(2)=='cerrar_cal'||$this->uri->segment(2)=='regularizacion'||$this->uri->segment(2)=='buscar_grupo'||$this->uri->segment(2)=='asesor_grupo'||$this->uri->segment(2)=='cerrar_reg'||$this->uri->segment(2)=='bajas') ? print 'bg-info text-light ' : print 'null'; ?>"
+      <a class="nav-link <?php ($this->uri->segment(2)=='acreditacion'||$this->uri->segment(2)=='crear_grupo'||$this->uri->segment(2)=='terminar_ciclo'||$this->uri->segment(2)=='calificacion'||$this->uri->segment(2)=='cerrar_cal'||$this->uri->segment(2)=='regularizacion'||$this->uri->segment(2)=='buscar_grupo'||$this->uri->segment(2)=='asesor_grupo'||$this->uri->segment(2)=='cerrar_reg'||$this->uri->segment(2)=='bajas' ||$this->uri->segment(2)=='lectura_excel') ? print 'bg-info text-light ' : print 'null'; ?>"
       href="<?php echo base_url();?>index.php/c_vistas/acreditacion">
         <i class="material-icons">beenhere</i>
         <span>Acreditación</span>

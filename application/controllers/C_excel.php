@@ -175,6 +175,14 @@ $this->form_validation->set_rules('fileURL','Upload File', 'callback_checkCampos
 					$no_control= trim($calificaciones_friae->getCell('A9')->getValue());
 
 					$matricula= trim($calificaciones_friae->getCell('B9')->getValue());
+
+					$fecha_baja= trim($calificaciones_friae->getCell('C9')->getFormattedValue());
+
+					
+
+					$motivo_baja= trim($calificaciones_friae->getCell('D9')->getValue());
+
+					
 					
 					$id_ciclo_escolar=""; //inicializamos variable
 					$id_grupo=""; //inicializamos variable id_grupo
@@ -433,8 +441,15 @@ $this->form_validation->set_rules('fileURL','Upload File', 'callback_checkCampos
 //Empieza actualizacion de estado del estudiante-------------------------------------------------------------------
 
 $num_adeudos=0;
-$num_adeudos=count($this->M_regularizacion->materias_debe_estudiante_actualmente($no_control));
-$this->M_regularizacion->actualizar_estatus_estudiante($no_control,$num_adeudos,$modulo,$plantel_cct,$matricula);
+if(strlen(trim($fecha_baja))==0){
+	$num_adeudos=count($this->M_regularizacion->materias_debe_estudiante_actualmente($no_control));
+}
+else{
+	$num_adeudos=-1;
+	
+}
+
+$this->M_regularizacion->actualizar_estatus_estudiante($no_control,$num_adeudos,$modulo,$plantel_cct,$matricula,$fecha_baja,$motivo_baja);
 
 
 $this->session->set_flashdata('msg_exito', 'Los datos del alumno se han agregado al sistema correctamente, para corroborar verique en el reporte KARDEX.');
@@ -517,6 +532,12 @@ $this->session->set_flashdata('msg_exito', 'Los datos del alumno se han agregado
 					$no_control= trim($calificaciones_friae->getCell('A9')->getValue());
 
 					$matricula= trim($calificaciones_friae->getCell('B9')->getValue());
+
+					$fecha_baja= trim($calificaciones_friae->getCell('C9')->getFormattedValue());
+
+					$motivo_baja= trim($calificaciones_friae->getCell('D9')->getValue());
+
+
 					
 					$id_ciclo_escolar=""; //inicializamos variable
 					$id_grupo=""; //inicializamos variable id_grupo
@@ -527,11 +548,30 @@ $this->session->set_flashdata('msg_exito', 'Los datos del alumno se han agregado
 					$cont_materias_reprobadas=0;// Contador de materias reprobadas por cada alumno
 					$cont_materias_estudiante=0;// cuenta el número de materias subidas por el estudiante.
 					$resultado_error="";
+
+
+
+					
+
+					
 					
 
 					$num_materias=$this->num_materias_semestre($modulo);
 					
 					 ///////////////////////////////////////////////////COMIENZA VALIDACIÓN DE DATOS ///////////////////////
+					 if(trim($fecha_baja)!='' && !$this->validar_fecha_espanol($fecha_baja)){
+						$resultado_error.="<li>El formato de fecha de baja en la celda <span style='font-weight:bold'>".$columna.$fila."</span> no es valida.</li>";
+						if(trim($motivo_baja)==''){
+							$resultado_error.="<li>El motivo de de baja en la celda <span style='font-weight:bold'>".$columna.$fila."</span> esta vacia seleccione el motivo.</li>";
+							
+							
+						}
+						
+						
+					}
+
+					
+
 
 					  if($plantel_cct==""){
 							$resultado_error.="<li>No ha seleccionado CCT de un Plantel.</li>";  

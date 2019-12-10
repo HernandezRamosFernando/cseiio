@@ -604,7 +604,7 @@ public function insertar_regularizacion_ciclos_anteriores($datos){
 }
 
 
-public function actualizar_estatus_estudiante($no_control,$num_adeudos,$modulo,$plantel_cct,$matricula){
+public function actualizar_estatus_estudiante($no_control,$num_adeudos,$modulo,$plantel_cct,$matricula,$fecha_baja,$motivo_baja){
 
    
    $this->db->trans_start();
@@ -640,6 +640,32 @@ public function actualizar_estatus_estudiante($no_control,$num_adeudos,$modulo,$
       $this->db->query("update Estudiante set tipo_ingreso='".$tipo_ingreso."',estatus='IRREGULAR',semestre_en_curso=".$semestre_en_curso.",semestre=".$num_semestres_trascurridos.", matricula='".$matricula."' where no_control='".$no_control."'");
       
    }
+
+
+   if($num_adeudos<0){
+      
+      $semestre_en_curso=$modulo;
+     $this->db->query("update Estudiante set tipo_ingreso='BAJA',semestre_en_curso=".$semestre_en_curso.",semestre=".$num_semestres_trascurridos.", matricula='".$matricula."' where no_control='".$no_control."'");
+
+     $existe_registro_baja=$this->db->query("select * from Baja where Estudiante_no_control='".$no_control."' and fecha='".$fecha_baja."'")->result();
+
+     if(count($existe_registro_baja)==0){
+            $datos = array(
+               'Estudiante_no_control' => strtoupper($no_control),
+               'motivo' => strtoupper($motivo_baja),
+               'fecha' => $fecha_baja,
+               'observacion' =>'NINGUNA'
+         );
+         
+            $this->db->insert('Baja', $datos);
+
+     }
+
+    
+     
+  }
+
+
 
    $this->db->trans_complete();
 

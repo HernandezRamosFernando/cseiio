@@ -75,6 +75,61 @@ class C_excel extends CI_Controller {
 		}
 		return $resultado;
 	}
+
+
+	public function num_mes($mes){
+		$resultado='';
+		switch ($mes) {
+
+			case 'ENERO':
+				$resultado=1;//Numero de mES
+				break;
+			case 'FEBRERO':
+				$resultado=2;//Numero de mes
+			break;
+
+			case 'MARZO':
+				$resultado=3;//Numero de mes
+			break;
+
+			case 'ABRIL':
+				$resultado=4;//Numero de mes
+			break;
+
+			case 'MAYO':
+				$resultado=5;//Numero de mes
+			break;
+
+			case 'JUNIO':
+				$resultado=6;//Numero de mes
+			break;
+
+			case 'JULIO':
+				$resultado=7;//Numero de mes
+			break;
+
+			case 'AGOSTO':
+				$resultado=8;//Numero de mes
+			break;
+
+			case 'SEPTIEMBRE':
+				$resultado=9;//Numero de mes
+			break;
+
+			case 'OCTUBRE':
+				$resultado=10;//Numero de mes
+			break;
+
+			case 'NOVIEMBRE':
+				$resultado=11;//Numero de mes
+			break;
+
+			case 'DICIEMBRE':
+				$resultado=12;//Numero de mes
+			break;
+		}
+		return $resultado;
+	}
 	
 	
 
@@ -82,6 +137,17 @@ class C_excel extends CI_Controller {
 		//checkdate(2, 30, 2000); mes, dia,año 2018-12-01
 		$valores = explode('-', $fecha);
 		if(count($valores) == 3 && checkdate($valores[1], $valores[2], $valores[0])){
+			return true;
+		}
+		return false;
+	}
+
+
+	function validar_fecha($anio,$mes,$dia){
+		//checkdate(2, 30, 2000); mes, dia,año 2018-12-01
+        $mes=$this->num_mes($mes);
+		
+		if(checkdate($mes, $dia, $anio){
 			return true;
 		}
 		return false;
@@ -172,15 +238,19 @@ $this->form_validation->set_rules('fileURL','Upload File', 'callback_checkCampos
 
 					$grupo= trim($calificaciones_friae->getCell('B6')->getValue());
 
-					$no_control= trim($calificaciones_friae->getCell('A9')->getValue());
+					$no_control= trim($calificaciones_friae->getCell('A10')->getValue());
 
-					$matricula= trim($calificaciones_friae->getCell('B9')->getValue());
+					$matricula= trim($calificaciones_friae->getCell('B10')->getValue());
 
-					$fecha_baja= trim($calificaciones_friae->getCell('C9')->getFormattedValue());
+					$anio_baja= trim($calificaciones_friae->getCell('C10')->getFormattedValue());
+					$mes_baja= trim($calificaciones_friae->getCell('D10')->getFormattedValue());
+					$dia_baja= trim($calificaciones_friae->getCell('E10')->getFormattedValue());
+
+					$fecha_baja=$anio_baja."-".$this->num_mes($mes_baja)."-".$dia_baja;
 
 					
 
-					$motivo_baja= trim($calificaciones_friae->getCell('D9')->getValue());
+					$motivo_baja= trim($calificaciones_friae->getCell('F10')->getValue());
 
 					
 					
@@ -220,7 +290,7 @@ $this->form_validation->set_rules('fileURL','Upload File', 'callback_checkCampos
 					
 						
 					
-						foreach ($calificaciones_friae->getRowIterator(13) as $fila) {
+						foreach ($calificaciones_friae->getRowIterator(15) as $fila) {
 							
 								$clave='';
 								$p1=null;
@@ -233,7 +303,7 @@ $this->form_validation->set_rules('fileURL','Upload File', 'callback_checkCampos
 								$num_materias_reprobadas=0;
 								$cont_materias_alumno=0;
 
-							$fila=$fila->getCellIterator("A","I");
+							$fila=$fila->getCellIterator("B","H");
 
 							foreach ($fila as $celda) {
 								if(!is_null($celda->getValue())){
@@ -244,12 +314,12 @@ $this->form_validation->set_rules('fileURL','Upload File', 'callback_checkCampos
 								
 
 
-								if($columna=='A'){
+								if($columna=='B'){
 									$clave=trim($celda->getValue());
 									$bandera++;
 								}
 
-								if($columna=='B'){
+								if($columna=='C'){
 									$p1=trim($celda->getValue());
 									if($p1=='/'){
 										$p1=0;
@@ -257,7 +327,7 @@ $this->form_validation->set_rules('fileURL','Upload File', 'callback_checkCampos
 									$bandera++;
 								}
 
-								if($columna=='C'){
+								if($columna=='D'){
 									$p2=trim($celda->getValue());
 									if($p2=='/'){
 										$p2=0;
@@ -265,7 +335,7 @@ $this->form_validation->set_rules('fileURL','Upload File', 'callback_checkCampos
 									$bandera++;
 								}
 
-								if($columna=='D'){
+								if($columna=='E'){
 									$p3=trim($celda->getValue());
 									if($p3=='/'){
 										$p3=0;
@@ -273,7 +343,7 @@ $this->form_validation->set_rules('fileURL','Upload File', 'callback_checkCampos
 									$bandera++;
 								}
 
-								if($columna=='E'){
+								if($columna=='F'){
 									$promedio_modular=$celda->getCalculatedValue();
 									if($promedio_modular=='/'){
 										$promedio_modular=0;
@@ -281,7 +351,7 @@ $this->form_validation->set_rules('fileURL','Upload File', 'callback_checkCampos
 									$bandera++;
 								}
 
-								if($columna=='F'){
+								if($columna=='G'){
 									$examen_final=$celda->getCalculatedValue();
 									if($examen_final=='/'){
 										$examen_final=0;
@@ -289,7 +359,7 @@ $this->form_validation->set_rules('fileURL','Upload File', 'callback_checkCampos
 									$bandera++;
 								}
 
-								if($columna=='G'){
+								if($columna=='H'){
 									$cal_final=$celda->getCalculatedValue();
 									if($cal_final=='/'){
 										$cal_final=0;
@@ -354,7 +424,7 @@ $this->form_validation->set_rules('fileURL','Upload File', 'callback_checkCampos
 					$frer = $spreadsheet->getSheet($indiceHoja);
 					//echo "<h3>Vamos en la hoja con índice $indiceHoja</h3>";
 
-					foreach ($frer->getRowIterator(13) as $fila) {
+					foreach ($frer->getRowIterator(14) as $fila) {
 						
 						$clave_materia='';
 						$calificacion_regularizacion=null;
@@ -363,7 +433,7 @@ $this->form_validation->set_rules('fileURL','Upload File', 'callback_checkCampos
 						$bandera=0;
 						
 
-						$fila=$fila->getCellIterator("A","J");
+						$fila=$fila->getCellIterator("B","M");
 
 						foreach ($fila as $celda) {
 							if(!is_null($celda->getValue())){
@@ -375,12 +445,12 @@ $this->form_validation->set_rules('fileURL','Upload File', 'callback_checkCampos
 
 							
 
-							if($columna=='A'){
+							if($columna=='B'){
 								$clave_materia=trim($celda->getValue());
 								$bandera++;
 							}
 
-							if($columna=='H'){
+							if($columna=='I'){
 								$calificacion_regularizacion=$celda->getValue();
 								$bandera++;
 							}
@@ -529,13 +599,31 @@ $this->session->set_flashdata('msg_exito', 'Los datos del alumno se han agregado
 
 					$grupo= trim($calificaciones_friae->getCell('B6')->getValue());
 
-					$no_control= trim($calificaciones_friae->getCell('A9')->getValue());
+					$no_control= trim($calificaciones_friae->getCell('A10')->getValue());
 
-					$matricula= trim($calificaciones_friae->getCell('B9')->getValue());
+					$matricula= trim($calificaciones_friae->getCell('B10')->getValue());
 
-					$fecha_baja= trim($calificaciones_friae->getCell('C9')->getFormattedValue());
+					
 
-					$motivo_baja= trim($calificaciones_friae->getCell('D9')->getValue());
+					$motivo_baja= trim($calificaciones_friae->getCell('F10')->getValue());
+
+					$anio_baja= trim($calificaciones_friae->getCell('C10')->getValue());
+					$mes_baja= trim($calificaciones_friae->getCell('D10')->getValue());
+					$dia_baja= trim($calificaciones_friae->getCell('E10')->getValue());
+
+					if(trim($anio_baja)!='' || trim($mes_baja)!='' || trim($dia_baja)!=''){
+						 if(!$this->validar_fecha($anio_baja,$mes_baja,$dia_baja)){
+							$resultado_error.="<li>El formato de fecha de baja no es valida.</li>";
+
+						 }
+
+						 if(trim($motivo_baja)==''){
+							$resultado_error.="<li>El motivo de baja en la celda <span style='font-weight:bold'>".$columna.$fila."</span> esta vacia seleccione el motivo.</li>";
+							
+							
+						}
+
+					}
 
 
 					
@@ -559,16 +647,7 @@ $this->session->set_flashdata('msg_exito', 'Los datos del alumno se han agregado
 					$num_materias=$this->num_materias_semestre($modulo);
 					
 					 ///////////////////////////////////////////////////COMIENZA VALIDACIÓN DE DATOS ///////////////////////
-					 if(trim($fecha_baja)!='' && !$this->validar_fecha_espanol($fecha_baja)){
-						$resultado_error.="<li>El formato de fecha de baja en la celda <span style='font-weight:bold'>".$columna.$fila."</span> no es valida.</li>";
-						if(trim($motivo_baja)==''){
-							$resultado_error.="<li>El motivo de de baja en la celda <span style='font-weight:bold'>".$columna.$fila."</span> esta vacia seleccione el motivo.</li>";
-							
-							
-						}
-						
-						
-					}
+					 
 
 					
 
@@ -638,23 +717,18 @@ $this->session->set_flashdata('msg_exito', 'Los datos del alumno se han agregado
 					  
 					  foreach ($calificaciones_friae->getRowIterator(13) as $fila) {
 
-							$fila=$fila->getCellIterator("A","I");
+							$fila=$fila->getCellIterator("B","H");
 
 							foreach ($fila as $celda) {
 								$fila = $celda->getRow();
 								$columna = $celda->getColumn();
 
-								if($columna=='A' && $columna!='' && in_array($celda->getValue(), $lista_materias)){
+								if($columna=='B' && $columna!='' && in_array($celda->getValue(), $lista_materias)){
 									
 									$cont_materias_cal_alumno++;
 								}
 								
 								
-								if($columna=='B' && trim($celda->getValue())!='' && in_array($celda->getValue(), $calificacion_valida)){
-									$cont_materias_cal_alumno++;
-									
-								}
-
 								if($columna=='C' && trim($celda->getValue())!='' && in_array($celda->getValue(), $calificacion_valida)){
 									$cont_materias_cal_alumno++;
 									
@@ -665,18 +739,23 @@ $this->session->set_flashdata('msg_exito', 'Los datos del alumno se han agregado
 									
 								}
 
-								if($columna=='E' && trim($celda->getCalculatedValue())!='' && in_array($celda->getCalculatedValue(), $calificacion_valida)){
+								if($columna=='E' && trim($celda->getValue())!='' && in_array($celda->getValue(), $calificacion_valida)){
 									$cont_materias_cal_alumno++;
 									
 								}
-
 
 								if($columna=='F' && trim($celda->getCalculatedValue())!='' && in_array($celda->getCalculatedValue(), $calificacion_valida)){
 									$cont_materias_cal_alumno++;
 									
 								}
 
+
 								if($columna=='G' && trim($celda->getCalculatedValue())!='' && in_array($celda->getCalculatedValue(), $calificacion_valida)){
+									$cont_materias_cal_alumno++;
+									
+								}
+
+								if($columna=='H' && trim($celda->getCalculatedValue())!='' && in_array($celda->getCalculatedValue(), $calificacion_valida)){
 									$cont_materias_cal_alumno++;
 									
 								}
@@ -699,27 +778,52 @@ $this->session->set_flashdata('msg_exito', 'Los datos del alumno se han agregado
 		
 							foreach ($calificaciones_frer->getRowIterator(13) as $fila) {
 		
-								$fila=$fila->getCellIterator("H","J");
+								$fila=$fila->getCellIterator("I","M");
 		
 								foreach ($fila as $celda) {
 									$fila = $celda->getRow();
 									$columna = $celda->getColumn();
 
 									if(!is_null($celda->getValue())){
-										if($columna=='H' && !in_array($celda->getCalculatedValue(), $calificacion_valida)){
+										if($columna=='I' && !in_array($celda->getCalculatedValue(), $calificacion_valida)){
 											$resultado_error.="<li>La calificación de regularización en la celda <span style='font-weight:bold'>".$columna.$fila."</span> no es valida.</li>";
 											//echo "hola".$celda->getFormattedValue();
 										}
-										
 
-										if($columna=='I' && !$this->validar_fecha_espanol($celda->getFormattedValue())){
-											$resultado_error.="<li>El formato de fecha de regularización en la celda <span style='font-weight:bold'>".$columna.$fila."</span> no es valida.</li>";
+
+										$anio_baja='';
+										$mes_baja='';
+										$dia_baja='';
+										if($columna=='J'){
 											
+											$anio_baja=$celda->getValue();
 											
 										}
+
+										if($columna=='K'){
+											
+											$mes_baja=$celda->getValue();
+											
+										}
+
+										if($columna=='L'){
+											
+											$dia_baja=$celda->getValue();
+											
+										}
+
+
+										if(trim($anio_baja)!='' || trim($mes_baja)!='' || trim($dia_baja)!=''){
+											if(!$this->validar_fecha($anio_baja,$mes_baja,$dia_baja)){
+											   $resultado_error.="<li>El formato de fecha de regularización en la fila <span style='font-weight:bold'>".$fila."</span> no es valida.</li>";
+				   
+											}
 										
 
-										if($columna=='J' && !$this->validar_formato_hora($celda->getFormattedValue())){
+										
+										
+
+										if($columna=='M' && !$this->validar_formato_hora($celda->getFormattedValue())){
 											$resultado_error.="<li>El formato de hora de regularización en la celda <span style='font-weight:bold'>".$columna.$fila."</span> no es valida.</li>";
 
 											

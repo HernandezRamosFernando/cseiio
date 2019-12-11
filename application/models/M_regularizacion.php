@@ -604,7 +604,7 @@ public function insertar_regularizacion_ciclos_anteriores($datos){
 }
 
 
-public function actualizar_estatus_estudiante($no_control,$num_adeudos,$modulo,$plantel_cct,$matricula,$fecha_baja,$motivo_baja){
+public function actualizar_estatus_estudiante($no_control,$num_adeudos,$modulo,$plantel_cct,$matricula,$fecha_baja,$motivo_baja,$tipo_operacion,$grupo){
 
    
    $this->db->trans_start();
@@ -617,12 +617,12 @@ public function actualizar_estatus_estudiante($no_control,$num_adeudos,$modulo,$
    
 
    if($num_adeudos==0){
-      $tipo_ingreso='REINGRESO';
+      $tipo_ingreso='PROBABLE REINCORPORADO';
       $semestre_en_curso=$modulo+1;
       $this->db->query("update Estudiante set tipo_ingreso='".$tipo_ingreso."',estatus='REGULAR',semestre_en_curso=".$semestre_en_curso.",semestre=".$num_semestres_trascurridos.", matricula='".$matricula."' where no_control='".$no_control."'");
    }
    if($num_adeudos>=1 && $num_adeudos<=3){
-      $tipo_ingreso='REINGRESO';
+      $tipo_ingreso='PROBABLE REINCORPORADO';
       $semestre_en_curso=$modulo+1;
 
       $this->db->query("update Estudiante set tipo_ingreso='".$tipo_ingreso."',estatus='IRREGULAR',semestre_en_curso=".$semestre_en_curso.",semestre=".$num_semestres_trascurridos.",matricula='".$matricula."' where no_control='".$no_control."'");
@@ -661,7 +661,31 @@ public function actualizar_estatus_estudiante($no_control,$num_adeudos,$modulo,$
 
      }
 
-    
+
+     switch ($tipo_operacion) {
+      case 'DESERTOR':
+         $semestre_en_curso=$modulo;
+         $this->db->query("update Estudiante set tipo_ingreso='DESERTOR',semestre_en_curso=".$semestre_en_curso.",semestre=".$num_semestres_trascurridos.", matricula='".$matricula."' where no_control='".$no_control."'");
+
+         
+         $existe_registro_desercion=$this->db->query("SELECT * FROM Desertor where Estudiante_no_control='".$no_control."' and fecha='".$fecha_baja."';")->result();
+
+         if(count($existe_registro_desercion)==0){
+         $this->db->query("update Estudiante set tipo_ingreso='DESERTOR' where no_control='".$no_control."'");
+            $data = array(
+               'Estudiante_no_control' =>$no_control,
+               'motivo' => $motivo_baja,
+               'fecha' => $fecha_baja,
+               'semestre' => $semestre_en_curso,
+               'grupo' => $grupo
+         );
+
+         $this->db->insert('Desertor', $data);
+      }
+          
+          break;
+      }
+
      
   }
 

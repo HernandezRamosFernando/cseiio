@@ -145,14 +145,26 @@ class C_excel extends CI_Controller {
 
 	function validar_fecha($anio,$mes,$dia){
 		//checkdate(2, 30, 2000); mes, dia,año 2018-12-01
-
-		
-        $mes=$this->num_mes($mes);
-		
-		if(checkdate($mes, $dia, $anio)){
-			return true;
+		//str_pad($dia,2,'0',STR_PAD_LEFT)
+		$mes=$this->num_mes($mes);
+	   $fecha=$anio."-".str_pad($mes,2,'0',STR_PAD_LEFT)."-".str_pad($dia,2,'0',STR_PAD_LEFT);
+	   
+		if (preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/",$fecha)) {
+			
+				if(checkdate($mes, $dia, $anio)){
+					return true;
+				}
+				else{
+					return false;
+				}
+			
 		}
-		return false;
+		else {
+			return false;
+		}
+		
+        
+		
 	}
 
 
@@ -244,9 +256,14 @@ $this->form_validation->set_rules('fileURL','Upload File', 'callback_checkCampos
 
 					$matricula= trim($calificaciones_friae->getCell('B10')->getValue());
 
+					$tipo_operacion='';
+					$tipo_operacion= trim($calificaciones_friae->getCell('B1')->getValue());
+
+
 					$anio_baja= trim($calificaciones_friae->getCell('C10')->getFormattedValue());
 					$mes_baja= trim($calificaciones_friae->getCell('D10')->getFormattedValue());
 					$dia_baja= trim($calificaciones_friae->getCell('E10')->getFormattedValue());
+
 
 					$fecha_baja="";
 
@@ -547,7 +564,7 @@ else{
 	
 }
 
-$this->M_regularizacion->actualizar_estatus_estudiante($no_control,$num_adeudos,$modulo,$plantel_cct,$matricula,$fecha_baja,$motivo_baja);
+$this->M_regularizacion->actualizar_estatus_estudiante($no_control,$num_adeudos,$modulo,$plantel_cct,$matricula,$fecha_baja,$motivo_baja,$tipo_operacion,$grupo);
 
 
 $this->session->set_flashdata('msg_exito', 'Los datos del alumno se han agregado al sistema correctamente, para corroborar verique en el reporte KARDEX.');
@@ -638,16 +655,30 @@ $this->session->set_flashdata('msg_exito', 'Los datos del alumno se han agregado
 					$anio_baja= trim($calificaciones_friae->getCell('C10')->getValue());
 					$mes_baja= trim($calificaciones_friae->getCell('D10')->getValue());
 					$dia_baja= trim($calificaciones_friae->getCell('E10')->getValue());
+					$tipo_operacion='';
+					$tipo_operacion= trim($calificaciones_friae->getCell('B1')->getValue());
+
+					$resultado_error='';
 
 					if(trim($anio_baja)!='' || trim($mes_baja)!='' || trim($dia_baja)!=''){
 						 if(!$this->validar_fecha($anio_baja,$mes_baja,$dia_baja)){
-							$resultado_error.="<li>El formato de fecha de baja no es valida.</li>";
+							if($tipo_operacion=='DESERTOR'){
+								$resultado_error.="<li>El formato de fecha de deserción no es valida.</li>";
+							}
+							else{
+								$resultado_error.="<li>El formato de fecha de baja no es valida.</li>";
+							}
+							
 
 						 }
 
 						 if(trim($motivo_baja)==''){
-							$resultado_error.="<li>El motivo de baja en la celda <span style='font-weight:bold'>".$columna.$fila."</span> esta vacia seleccione el motivo.</li>";
-							
+							if($tipo_operacion=='DESERTOR'){
+							$resultado_error.="<li>El motivo de deserción en la celda <span style='font-weight:bold'>F10</span> esta vacia seleccione el motivo.</li>";
+							}
+							else{
+								$resultado_error.="<li>El motivo de baja en la celda <span style='font-weight:bold'>F10</span> esta vacia seleccione el motivo.</li>";
+							}
 							
 						}
 
@@ -663,7 +694,7 @@ $this->session->set_flashdata('msg_exito', 'Los datos del alumno se han agregado
 					
 					$cont_materias_reprobadas=0;// Contador de materias reprobadas por cada alumno
 					$cont_materias_estudiante=0;// cuenta el número de materias subidas por el estudiante.
-					$resultado_error="";
+					
 
 
 

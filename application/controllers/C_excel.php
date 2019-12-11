@@ -145,9 +145,11 @@ class C_excel extends CI_Controller {
 
 	function validar_fecha($anio,$mes,$dia){
 		//checkdate(2, 30, 2000); mes, dia,año 2018-12-01
+
+		
         $mes=$this->num_mes($mes);
 		
-		if(checkdate($mes, $dia, $anio){
+		if(checkdate($mes, $dia, $anio)){
 			return true;
 		}
 		return false;
@@ -246,7 +248,16 @@ $this->form_validation->set_rules('fileURL','Upload File', 'callback_checkCampos
 					$mes_baja= trim($calificaciones_friae->getCell('D10')->getFormattedValue());
 					$dia_baja= trim($calificaciones_friae->getCell('E10')->getFormattedValue());
 
-					$fecha_baja=$anio_baja."-".$this->num_mes($mes_baja)."-".$dia_baja;
+					$fecha_baja="";
+
+					if($anio_baja!='' && $mes_baja!='' && $dia_baja!=''){
+						$fecha_baja=$anio_baja."-".$this->num_mes($mes_baja)."-".$dia_baja;
+					}
+					
+
+
+
+					
 
 					
 
@@ -424,13 +435,17 @@ $this->form_validation->set_rules('fileURL','Upload File', 'callback_checkCampos
 					$frer = $spreadsheet->getSheet($indiceHoja);
 					//echo "<h3>Vamos en la hoja con índice $indiceHoja</h3>";
 
-					foreach ($frer->getRowIterator(14) as $fila) {
+					foreach ($frer->getRowIterator(15) as $fila) {
 						
 						$clave_materia='';
 						$calificacion_regularizacion=null;
 						$fecha_regularizacion=null;
 						$hora_regularizacion=null;
 						$bandera=0;
+
+						$anio_regu='';
+						$mes_regu='';
+						$dia_regu='';
 						
 
 						$fila=$fila->getCellIterator("B","M");
@@ -455,12 +470,24 @@ $this->form_validation->set_rules('fileURL','Upload File', 'callback_checkCampos
 								$bandera++;
 							}
 
-							if($columna=='I'){
-								$fecha_regularizacion=$celda->getFormattedValue();
+							if($columna=='J'){
+								$anio_regu=$celda->getValue();
 								$bandera++;
 							}
 
-							if($columna=='J'){
+							if($columna=='K'){
+								$mes_regu=$celda->getValue();
+								
+								$bandera++;
+							}
+
+							if($columna=='L'){
+								$dia_regu=$celda->getValue();
+								
+								$bandera++;
+							}
+
+							if($columna=='M'){
 								$hora_regularizacion=str_pad($celda->getFormattedValue(),5,'0',STR_PAD_LEFT);
 								
 								$bandera++;
@@ -468,7 +495,8 @@ $this->form_validation->set_rules('fileURL','Upload File', 'callback_checkCampos
 
 							
 
-							if($bandera=4){//Solo se insertaran aquellas calificaciones en donde todas las 9 columnas esten rellenados.
+							if($bandera=6){//Solo se insertaran aquellas calificaciones en donde todas las 9 columnas esten rellenados.
+								$fecha_regularizacion=$anio_regu."-".$this->num_mes($mes_regu)."-".$dia_regu;
 								$datos_regularizacion_estudiante = array(
 									'id_materia' => strtoupper($clave_materia),
 									'calificacion' =>$calificacion_regularizacion,
@@ -715,7 +743,7 @@ $this->session->set_flashdata('msg_exito', 'Los datos del alumno se han agregado
 					  $cont_materias_cal_alumno=0;
 					  
 					  
-					  foreach ($calificaciones_friae->getRowIterator(13) as $fila) {
+					  foreach ($calificaciones_friae->getRowIterator(15) as $fila) {
 
 							$fila=$fila->getCellIterator("B","H");
 
@@ -776,9 +804,13 @@ $this->session->set_flashdata('msg_exito', 'Los datos del alumno se han agregado
 					$calificaciones_frer = $this->get_archivo()->getSheet($indiceHoja);
 					
 		
-							foreach ($calificaciones_frer->getRowIterator(13) as $fila) {
+							foreach ($calificaciones_frer->getRowIterator(15) as $fila) {
 		
 								$fila=$fila->getCellIterator("I","M");
+
+								$anio_regu='';
+								$mes_regu='';
+								$dia_regu='';
 		
 								foreach ($fila as $celda) {
 									$fila = $celda->getRow();
@@ -791,35 +823,28 @@ $this->session->set_flashdata('msg_exito', 'Los datos del alumno se han agregado
 										}
 
 
-										$anio_baja='';
-										$mes_baja='';
-										$dia_baja='';
+										
 										if($columna=='J'){
 											
-											$anio_baja=$celda->getValue();
+											$anio_regu=$celda->getValue();
 											
 										}
 
 										if($columna=='K'){
 											
-											$mes_baja=$celda->getValue();
+											$mes_regu=$celda->getValue();
+											
 											
 										}
 
 										if($columna=='L'){
 											
-											$dia_baja=$celda->getValue();
+											$dia_regu=$celda->getValue();
 											
 										}
 
 
-										if(trim($anio_baja)!='' || trim($mes_baja)!='' || trim($dia_baja)!=''){
-											if(!$this->validar_fecha($anio_baja,$mes_baja,$dia_baja)){
-											   $resultado_error.="<li>El formato de fecha de regularización en la fila <span style='font-weight:bold'>".$fila."</span> no es valida.</li>";
-				   
-											}
 										
-
 										
 										
 
@@ -832,6 +857,14 @@ $this->session->set_flashdata('msg_exito', 'Los datos del alumno se han agregado
 
 									}
 
+								}
+
+								if(trim($anio_regu)!='' || trim($mes_regu)!='' || trim($dia_regu)!=''){
+									if(!$this->validar_fecha($anio_regu,$mes_regu,$dia_regu)){
+									   $resultado_error.="<li>El formato de fecha de regularización en la fila <span style='font-weight:bold'>".$fila."</span> no es valida.</li>";
+		   
+									}
+								
 								}
 							
 						} 

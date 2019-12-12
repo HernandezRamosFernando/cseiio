@@ -556,7 +556,7 @@ $this->form_validation->set_rules('fileURL','Upload File', 'callback_checkCampos
 //Empieza actualizacion de estado del estudiante-------------------------------------------------------------------
 
 $num_adeudos=0;
-if(strlen(trim($fecha_baja))==0){
+if(strlen(trim($fecha_baja))==0 || $tipo_operacion=='DESERTOR'){
 	$num_adeudos=count($this->M_regularizacion->materias_debe_estudiante_actualmente($no_control));
 }
 else{
@@ -660,12 +660,20 @@ $this->session->set_flashdata('msg_exito', 'Los datos del alumno se han agregado
 
 					$resultado_error='';
 
+					if($matricula==''){
+						$resultado_error.="<li>No ha ingresado la matricula.</li>";
+					}
+
+					$bandera_error=0;
+
 					if(trim($anio_baja)!='' || trim($mes_baja)!='' || trim($dia_baja)!=''){
 						 if(!$this->validar_fecha($anio_baja,$mes_baja,$dia_baja)){
 							if($tipo_operacion=='DESERTOR'){
+								$bandera_error=1;
 								$resultado_error.="<li>El formato de fecha de deserción no es valida.</li>";
 							}
 							else{
+								$bandera_error=1;
 								$resultado_error.="<li>El formato de fecha de baja no es valida.</li>";
 							}
 							
@@ -681,7 +689,20 @@ $this->session->set_flashdata('msg_exito', 'Los datos del alumno se han agregado
 							}
 							
 						}
+						
 
+					}
+
+					if($motivo_baja!=''){
+						if(!$this->validar_fecha($anio_baja,$mes_baja,$dia_baja) && $bandera_error==0){
+							if($tipo_operacion=='DESERTOR'){
+								$resultado_error.="<li>El formato de fecha de deserción no es valida.</li>";
+							}
+							else{
+								$resultado_error.="<li>El formato de fecha de baja no es valida.</li>";
+							}
+
+						}
 					}
 
 
@@ -826,7 +847,7 @@ $this->session->set_flashdata('msg_exito', 'Los datos del alumno se han agregado
 						
 					 
 					  if($cont_materias_cal_alumno!=($num_materias*7)){
-						$resultado_error.="<li>Verifique el concentrado de calificaciones si cumple con los criterios de evaluación y si ha asignado las calificaciones parciales, modulares y finales de las materias pertenecientes al semestre.</li>";
+						$resultado_error.="<li>Verifique el concentrado de calificaciones si alguna de las celdas se encuentra vacia o no cumple con los criterios de evaluación de calificaciones parciales, modulares y finales de las materias pertenecientes al semestre.</li>";
 					  }
 					  
 
@@ -842,34 +863,44 @@ $this->session->set_flashdata('msg_exito', 'Los datos del alumno se han agregado
 								$anio_regu='';
 								$mes_regu='';
 								$dia_regu='';
+								$cont_columnas_regu=0;
 		
 								foreach ($fila as $celda) {
 									$fila = $celda->getRow();
 									$columna = $celda->getColumn();
 
 									if(!is_null($celda->getValue())){
-										if($columna=='I' && !in_array($celda->getCalculatedValue(), $calificacion_valida)){
-											$resultado_error.="<li>La calificación de regularización en la celda <span style='font-weight:bold'>".$columna.$fila."</span> no es valida.</li>";
-											//echo "hola".$celda->getFormattedValue();
+
+										if($columna=='I'){
+											if(!in_array($celda->getCalculatedValue(), $calificacion_valida)){
+												$resultado_error.="<li>La calificación de regularización en la celda <span style='font-weight:bold'>".$columna.$fila."</span> no es valida.</li>";
+
+											}
+											else{
+												$cont_columnas_regu++;
+
+											}
+											
+											
 										}
 
 
 										
 										if($columna=='J'){
-											
+											$cont_columnas_regu++;
 											$anio_regu=$celda->getValue();
 											
 										}
 
 										if($columna=='K'){
-											
+											$cont_columnas_regu++;
 											$mes_regu=$celda->getValue();
 											
 											
 										}
 
 										if($columna=='L'){
-											
+											$cont_columnas_regu++;
 											$dia_regu=$celda->getValue();
 											
 										}
@@ -879,8 +910,15 @@ $this->session->set_flashdata('msg_exito', 'Los datos del alumno se han agregado
 										
 										
 
-										if($columna=='M' && !$this->validar_formato_hora($celda->getFormattedValue())){
-											$resultado_error.="<li>El formato de hora de regularización en la celda <span style='font-weight:bold'>".$columna.$fila."</span> no es valida.</li>";
+										if($columna=='M'){
+											if(!$this->validar_formato_hora($celda->getFormattedValue())){
+												$resultado_error.="<li>El formato de hora de regularización en la celda <span style='font-weight:bold'>".$columna.$fila."</span> no es valida.</li>";
+
+											}
+
+											else{
+												$cont_columnas_regu++;
+											}
 
 											
 											
@@ -890,6 +928,12 @@ $this->session->set_flashdata('msg_exito', 'Los datos del alumno se han agregado
 
 								}
 
+								
+
+								if($cont_columnas_regu>0 && $cont_columnas_regu<5){
+									$resultado_error.="<li>Existen algunos campos vacios, verifique en las columnas pertenecientes a Calificación de regularizacion, fecha y hora de aplicación de la fila <span style='font-weight:bold'>".$fila."</span>.</li>";
+								}
+
 								if(trim($anio_regu)!='' || trim($mes_regu)!='' || trim($dia_regu)!=''){
 									if(!$this->validar_fecha($anio_regu,$mes_regu,$dia_regu)){
 									   $resultado_error.="<li>El formato de fecha de regularización en la fila <span style='font-weight:bold'>".$fila."</span> no es valida.</li>";
@@ -897,6 +941,8 @@ $this->session->set_flashdata('msg_exito', 'Los datos del alumno se han agregado
 									}
 								
 								}
+
+								
 							
 						} 
 					  

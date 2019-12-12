@@ -614,9 +614,40 @@ public function actualizar_estatus_estudiante($no_control,$num_adeudos,$modulo,$
 
    $num_semestres_trascurridos=count($this->db->query("SELECT * FROM Ciclo_escolar where fecha_inicio between (select fecha_registro from Estudiante where no_control='".$no_control."') and CURDATE()")->result());
 
-   
+ 
+  
+  switch ($tipo_operacion) {
+      
+      case 'DESERTOR':
+         $estatus_desertor='IRREGULAR';
+            if($num_adeudos==0){
+               $estatus_desertor='REGULAR';
+            }
+         
+            $semestre_en_curso=$modulo+1;
+            $this->db->query("update Estudiante set tipo_ingreso='DESERTOR',semestre_en_curso=".$semestre_en_curso.",semestre=".$num_semestres_trascurridos.", matricula='".$matricula."' where no_control='".$no_control."'");
 
-   if($num_adeudos==0){
+            
+            $existe_registro_desercion=$this->db->query("SELECT * FROM Desertor where Estudiante_no_control='".$no_control."' and fecha='".$fecha_baja."';")->result();
+
+            $this->db->query("update Estudiante set tipo_ingreso='DESERTOR',estatus='".$estatus_desertor."' where no_control='".$no_control."'");
+
+            if(count($existe_registro_desercion)==0){
+            
+               $data = array(
+                  'Estudiante_no_control' =>$no_control,
+                  'motivo' => $motivo_baja,
+                  'fecha' => $fecha_baja,
+                  'semestre' => $semestre_en_curso,
+                  'grupo' => $grupo
+            );
+
+            $this->db->insert('Desertor', $data);
+         }
+          
+          break;
+          default:
+		  if($num_adeudos==0){
       $tipo_ingreso='PROBABLE REINCORPORADO';
       $semestre_en_curso=$modulo+1;
       $this->db->query("update Estudiante set tipo_ingreso='".$tipo_ingreso."',estatus='REGULAR',semestre_en_curso=".$semestre_en_curso.",semestre=".$num_semestres_trascurridos.", matricula='".$matricula."' where no_control='".$no_control."'");
@@ -660,34 +691,10 @@ public function actualizar_estatus_estudiante($no_control,$num_adeudos,$modulo,$
             $this->db->insert('Baja', $datos);
 
      }
-
-
-     switch ($tipo_operacion) {
-      case 'DESERTOR':
-         $semestre_en_curso=$modulo+1;
-         $this->db->query("update Estudiante set tipo_ingreso='DESERTOR',semestre_en_curso=".$semestre_en_curso.",semestre=".$num_semestres_trascurridos.", matricula='".$matricula."' where no_control='".$no_control."'");
-
-         
-         $existe_registro_desercion=$this->db->query("SELECT * FROM Desertor where Estudiante_no_control='".$no_control."' and fecha='".$fecha_baja."';")->result();
-
-         if(count($existe_registro_desercion)==0){
-         $this->db->query("update Estudiante set tipo_ingreso='DESERTOR' where no_control='".$no_control."'");
-            $data = array(
-               'Estudiante_no_control' =>$no_control,
-               'motivo' => $motivo_baja,
-               'fecha' => $fecha_baja,
-               'semestre' => $semestre_en_curso,
-               'grupo' => $grupo
-         );
-
-         $this->db->insert('Desertor', $data);
-      }
-          
-          break;
-      }
-
      
   }
+		  
+      }//Termina condicion multiple
 
 
 

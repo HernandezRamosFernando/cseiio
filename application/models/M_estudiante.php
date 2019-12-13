@@ -412,11 +412,35 @@ public function obtener_fecha_inscripcion_semestre($no_control){
 
    public function reinscribir_reprobado($datos){
       $this->db->trans_start();
-      $this->db->query("update Estudiante set tipo_ingreso='REPETIDOR' where no_control='".$datos->no_control."'");
+      
       $materias_anular = $this->db->query("select Grupo_id_grupo as grupo,id_materia from Grupo_Estudiante as ge inner join Grupo as g on ge.Grupo_id_grupo=g.id_grupo where Estudiante_no_control='".$datos->no_control."' and semestre=(select semestre_en_curso from Estudiante where no_control='".$datos->no_control."')")->result();
       foreach($materias_anular as $materia){
          $this->db->query("update Grupo_Estudiante set calificacion_final=null where Estudiante_no_control='".$datos->no_control."' and id_materia='".$materia->id_materia."' and Grupo_id_grupo='".$materia->grupo."'");
       }
+
+      $num_materias_adeudo = $this->db->query("select * from (select Estudiante_no_control,id_materia from Grupo_Estudiante as ge 
+      inner join 
+      Grupo as g on ge.Grupo_id_grupo=g.id_grupo
+      inner join Estudiante as e on ge.Estudiante_no_control=e.no_control
+      where calificacion_final<6 and calificacion_final!=null and no_control='".$datos->no_control."'
+      union
+      select Estudiante_no_control,Materia_id_materia as id_materia from Portabilidad_adeudos as pa 
+      inner join 
+      Estudiante as e on pa.Estudiante_no_control=e.no_control
+      where calificacion<6 and no_control='".$datos->no_control."') 
+      as a where concat(a.Estudiante_no_control,a.id_materia) 
+      not in 
+      (select concat(Estudiante_no_control,id_materia) 
+      from Regularizacion 
+      where calificacion>=6 and estatus!=2)")->result();
+
+      $estatus_estudiante='REGULAR';
+
+      if(count($num_materias_adeudo)>0){
+         $estatus_estudiante='IRREGULAR';
+      }
+
+      $this->db->query("update Estudiante set tipo_ingreso='REPETIDOR',estatus='".$estatus_estudiante."' where no_control='".$datos->no_control."'");
       $this->db->trans_complete();
    
                if ($this->db->trans_status() === FALSE)

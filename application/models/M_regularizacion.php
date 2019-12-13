@@ -624,7 +624,7 @@ public function actualizar_estatus_estudiante($no_control,$num_adeudos,$modulo,$
                $estatus_desertor='REGULAR';
             }
          
-            $semestre_en_curso=$modulo+1;
+            $semestre_en_curso=$modulo;
             $this->db->query("update Estudiante set tipo_ingreso='DESERTOR',semestre_en_curso=".$semestre_en_curso.",semestre=".$num_semestres_trascurridos.", matricula='".$matricula."' where no_control='".$no_control."'");
 
             

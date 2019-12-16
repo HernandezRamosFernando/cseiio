@@ -42,6 +42,53 @@
 
       </div>
 
+      <div class="form-group">
+
+        <div class="row">
+          <div class="col-md-6">
+              <label class="form-group has-float-label seltitulo">
+                  <select class="form-control form-control-lg selcolor" id="ultimo_semestre_acreditado" required name="ultimo_semestre_acreditado" onclick="">
+                  <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+
+                  </select>
+                  <span>Último Semestre Acreditado</span>
+                </label>
+          </div>
+
+          <div class="col-md-6">
+              <label class="form-group has-float-label seltitulo">
+                  <select class="form-control form-control-lg selcolor" id="num_materias_adeudo" required name="num_materias_adeudo" onclick="">
+                  <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+
+                  </select>
+                  <span>Número de Materias que Adeuda Actualmente</span>
+                </label>
+          </div>
+
+        </div>
+
+      </div>
+
+
+
       <!--datos personales------------------------------------------------------>
       <p class="text-center text-white rounded titulo-form h4 ">Datos personales de Aspirante</p>
       <hr>
@@ -304,7 +351,7 @@
           <div class="col-md-4">
             <label class="form-group has-float-label seltitulo">
               <select class="form-control form-control-lg selcolor" disabled id="aspirante_semestre" name="aspirante_semestre">
-                <option value="">1</option>
+                <option value="">2</option>
 
               </select>
               <span>Semestre de ingreso</span>
@@ -1291,6 +1338,8 @@
   }
   function envioform(form) {
     bPreguntar = false;
+
+    
     var formdata = new FormData(form);
 
     var xhr = new XMLHttpRequest();

@@ -606,6 +606,7 @@ public function insertar_regularizacion_ciclos_anteriores($datos){
 
 public function actualizar_estatus_estudiante($no_control,$num_adeudos,$modulo,$plantel_cct,$matricula,$fecha_baja,$motivo_baja,$tipo_operacion,$grupo){
 
+
    
    $this->db->trans_start();
    $tipo_ingreso='';
@@ -628,11 +629,14 @@ public function actualizar_estatus_estudiante($no_control,$num_adeudos,$modulo,$
             $this->db->query("update Estudiante set tipo_ingreso='DESERTOR',semestre_en_curso=".$semestre_en_curso.",semestre=".$num_semestres_trascurridos.", matricula='".$matricula."' where no_control='".$no_control."'");
 
             
+            
             $existe_registro_desercion=$this->db->query("SELECT * FROM Desertor where Estudiante_no_control='".$no_control."' and fecha='".$fecha_baja."';")->result();
 
-            $this->db->query("update Estudiante set tipo_ingreso='DESERTOR',estatus='".$estatus_desertor."' where no_control='".$no_control."'");
+            
 
-            if(count($existe_registro_desercion)==0){
+            
+
+           if(count($existe_registro_desercion)==0){
             
                $data = array(
                   'Estudiante_no_control' =>$no_control,
@@ -641,6 +645,8 @@ public function actualizar_estatus_estudiante($no_control,$num_adeudos,$modulo,$
                   'semestre' => $semestre_en_curso,
                   'grupo' => $grupo
             );
+
+           
 
             $this->db->insert('Desertor', $data);
          }

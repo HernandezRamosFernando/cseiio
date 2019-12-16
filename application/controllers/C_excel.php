@@ -236,7 +236,11 @@ $tipo_operacion_excel= trim($plantilla_excel->getCell('B1')->getValue());
 
 switch ($tipo_operacion_excel) {
 			case 'DESERTOR'://Empieza caso desertor
-			$indiceHoja = 0;
+			
+			$this->form_validation->set_rules('fileURL','Upload File', 'callback_checkValidateDesertor');
+				if($this->form_validation->run() != false){
+					$indiceHoja = 0;
+					
                     $calificaciones_friae = $spreadsheet->getSheet($indiceHoja);
                    // echo "<h3>Vamos en la hoja con índice $indiceHoja</h3>";
                     
@@ -280,21 +284,229 @@ switch ($tipo_operacion_excel) {
 					
 
 					$motivo_baja= trim($calificaciones_friae->getCell('F10')->getValue());
-			$this->form_validation->set_rules('fileURL','Upload File', 'callback_checkValidateDesertor');
-				if($this->form_validation->run() != false){
 					$num_adeudos=0;
 			$num_adeudos=count($this->M_regularizacion->materias_debe_estudiante_actualmente($no_control));
 		
 		$this->M_regularizacion->actualizar_estatus_estudiante($no_control,$num_adeudos,$modulo,$plantel_cct,$matricula,$fecha_baja,$motivo_baja,$tipo_operacion_excel,$grupo);
 		
 		
-		$this->session->set_flashdata('msg_exito', 'Los datos del alumno DESERTOR se han agregado al sistema correctamente, para corroborar verique en el reporte KARDEX.');
+		$this->session->set_flashdata('msg_exito', 'Los datos del alumno <span style="font-weight:bold">DESERTOR</span> se han agregado al sistema correctamente, para corroborar verique en el reporte KARDEX.');
 		}
         
         break;//Termina caso desertor
     case 'BAJA': //Empieza caso Baja
 			$this->form_validation->set_rules('fileURL','Upload File', 'callback_checkValidateBaja');
 		if($this->form_validation->run() != false){
+			$indiceHoja = 0;
+                    $calificaciones_friae = $spreadsheet->getSheet($indiceHoja);
+                   // echo "<h3>Vamos en la hoja con índice $indiceHoja</h3>";
+                    
+                    # Lo que hay en B2
+                    $celda = $calificaciones_friae->getCell('B2');
+                    # El valor, así como está en el documento
+                    $plantel_cct = trim($celda->getValue());
+
+                    $nombre_ciclo_escolar= trim($calificaciones_friae->getCell('B3')->getValue());
+
+                    $periodo= trim($calificaciones_friae->getCell('B4')->getValue());
+
+                    $modulo= trim($calificaciones_friae->getCell('B5')->getValue());
+
+					$grupo= trim($calificaciones_friae->getCell('B6')->getValue());
+
+					$no_control= trim($calificaciones_friae->getCell('A10')->getValue());
+
+					$matricula= trim($calificaciones_friae->getCell('B10')->getValue());
+
+					$tipo_operacion='';
+					$tipo_operacion= trim($calificaciones_friae->getCell('B1')->getValue());
+
+
+					$anio_baja= trim($calificaciones_friae->getCell('C10')->getFormattedValue());
+					$mes_baja= trim($calificaciones_friae->getCell('D10')->getFormattedValue());
+					$dia_baja= trim($calificaciones_friae->getCell('E10')->getFormattedValue());
+
+
+					$fecha_baja="";
+
+					if($anio_baja!='' && $mes_baja!='' && $dia_baja!=''){
+						$fecha_baja=$anio_baja."-".$this->num_mes($mes_baja)."-".$dia_baja;
+					}
+						
+
+					$motivo_baja= trim($calificaciones_friae->getCell('F10')->getValue());
+					$num_adeudos=-1;
+					
+					
+					$id_ciclo_escolar=""; //inicializamos variable
+					$id_grupo=""; //inicializamos variable id_grupo
+					$id_periodo="";//inicalizamos variable periodo
+					$existe_grupo=0;//inicializamos varfiable existe grupo
+					$num_materias=0; //inicalizamos variable numero de materias semestre
+					
+					$cont_materias_reprobadas=0;// Contador de materias reprobadas por cada alumno
+					$cont_materias_estudiante=0;// cuenta el número de materias subidas por el estudiante.
+					$resultado_error="";
+					
+//Empieza a leer hoja Friae y calificaciones_______________________________________________________________________
+					
+					
+					$id_ciclo_escolar=$this->M_ciclo_escolar->get_id_ciclo_escolar_x_periodo_x_nombre($periodo,$nombre_ciclo_escolar)->id_ciclo_escolar;
+
+					if(trim($periodo) == "AGOSTO-ENERO"){
+						$id_periodo="B";
+					  }else{
+						$id_periodo="A";
+					  }
+					  
+					 
+
+
+					$id_grupo=$plantel_cct.$modulo.$id_ciclo_escolar.$id_periodo.$grupo;// GENERANDO ID_GRUPO
+
+					$existe_grupo=count($this->M_grupo->existe_id_grupo_ciclo_anterior($id_grupo));
+		
+					if ($existe_grupo==0) 
+						{
+							$this->M_grupo->agregar_grupo_de_ciclo_anterior($id_grupo,$modulo,$grupo,$plantel_cct);
+						}
+
+					
+						
+					
+						foreach ($calificaciones_friae->getRowIterator(15) as $fila) {
+							
+								$clave='';
+								$p1=null;
+								$p2=null;
+								$p3=null;
+								$promedio_modular=null;
+								$examen_final=null;
+								$cal_final=null;
+								$bandera=0;
+								$num_materias_reprobadas=0;
+								$cont_materias_alumno=0;
+
+							$fila=$fila->getCellIterator("B","H");
+
+							foreach ($fila as $celda) {
+								if(!is_null($celda->getValue())){
+
+								$fila = $celda->getRow();
+								# Columna, que es la A, B, C y así...
+								$columna = $celda->getColumn();
+								
+
+
+								if($columna=='B'){
+									$clave=trim($celda->getValue());
+									$bandera++;
+								}
+
+								if($columna=='C'){
+									$p1=trim($celda->getValue());
+									if($p1=='/'){
+										$p1=0;
+									}
+									$bandera++;
+								}
+
+								if($columna=='D'){
+									$p2=trim($celda->getValue());
+									if($p2=='/'){
+										$p2=0;
+									}
+									$bandera++;
+								}
+
+								if($columna=='E'){
+									$p3=trim($celda->getValue());
+									if($p3=='/'){
+										$p3=0;
+									}
+									$bandera++;
+								}
+
+
+								if($columna=='F'){
+									$promedio_modular=$celda->getCalculatedValue();
+									if($promedio_modular=='/'){
+										$promedio_modular=0;
+									}
+									$bandera++;
+								}
+
+								if($columna=='G'){
+									$examen_final=$celda->getCalculatedValue();
+									if($examen_final=='/'){
+										$examen_final=0;
+									}
+									$bandera++;
+								}
+
+								if($columna=='H'){
+									$cal_final=$celda->getCalculatedValue();
+									if($cal_final=='/'){
+										$cal_final=0;
+									}
+
+									$bandera++;
+								}
+
+								if($bandera==7){//Solo se insertaran aquellas calificaciones en donde todas las 9 columnas esten rellenados.
+									$datos_calificacion_estudiante = array(
+										'Grupo_id_grupo' => strtoupper($id_grupo),
+										'Estudiante_no_control' => strtoupper($no_control),
+										'Ciclo_escolar_id_ciclo_escolar' =>$id_ciclo_escolar,
+										'id_materia' => strtoupper($clave),
+										'primer_parcial' => $p1,
+										'segundo_parcial' => $p2,
+										'tercer_parcial' => $p3,
+										'examen_final' => $examen_final,
+										'calificacion_final' => $cal_final
+									);
+
+									/*if($no_control!=$temp_no_control){
+										$cont_materias_reprobadas=0;
+									}
+
+									if(intval(trim($cal_final))<=5){
+										$cont_materias_reprobadas=$cont_materias_reprobadas+1;
+										$estudiantes_grupo[$no_control]=['materias_reprobadas'=>$cont_materias_reprobadas];
+										$temp_no_control=$no_control;
+										
+									}*/
+									
+									  
+									
+									$existe_alumno_materia='';
+									
+									$existe_alumno_materia=count($this->M_grupo_estudiante->existe_materia_grupo_ciclo_anterior($id_grupo,$clave,$no_control));
+
+									if($existe_alumno_materia==0){
+										$this->M_grupo_estudiante->insertar_calificaciones_ciclos_anteriores($datos_calificacion_estudiante);
+									}
+									
+								}
+								
+
+								}
+
+								
+
+								
+								
+							}
+						}
+
+						
+						
+						
+//Termina a leer hoja Friae y calificaciones_______________________________________________________________________
+			
+		
+		$this->M_regularizacion->actualizar_estatus_estudiante($no_control,$num_adeudos,$modulo,$plantel_cct,$matricula,$fecha_baja,$motivo_baja,$tipo_operacion_excel,$grupo);
+		$this->session->set_flashdata('msg_exito', 'Los datos del alumno con estatus <span style="font-weight:bold">BAJA</span> se han agregado al sistema correctamente, para corroborar verique en el reporte KARDEX.');
 			
 		}
         
@@ -919,7 +1131,7 @@ $this->session->set_flashdata('msg_exito', 'Los datos del alumno se han agregado
 								
 
 							}
-						}
+						}//Fin ciclo
 					  
 						
 						

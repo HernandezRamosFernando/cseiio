@@ -6,6 +6,27 @@ class M_friae extends CI_Model {
    }
 
 
+   public function crear_friae_ciclos_anteriores($id){
+    $insert_id="";
+    
+    $this->db->trans_start();
+    $this->db->query("insert into Friae (id_grupo) values ('".$id."')");
+    $insert_id = $this->db->insert_id();
+
+    $this->db->trans_complete();
+
+        if ($this->db->trans_status() === FALSE)
+        {
+            $insert_id="";
+         return $insert_id;
+        }
+
+        else{
+            return $insert_id;
+        }
+   }
+
+
    public function quitar_estudiante($datos){
     $this->db->trans_start();
     $folio = $this->db->query("select folio from Friae where id_grupo='".$datos->id_grupo."'")->result()[0]->folio;
@@ -81,6 +102,7 @@ class M_friae extends CI_Model {
 
 
     public function agregar_estudiantes_friae($datos){
+        //var_dump($datos);
 
         $this->db->trans_start();
 

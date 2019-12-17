@@ -40,6 +40,7 @@ class C_excel extends CI_Controller {
 		$this->load->model('M_estudiante');
 		$this->load->model('M_plantel');
 		$this->load->model('M_materia');
+		$this->load->model('M_friae');
 		
 		
 	}
@@ -588,12 +589,19 @@ switch ($tipo_operacion_excel) {
 
 
 					$id_grupo=$plantel_cct.$modulo.$id_ciclo_escolar.$id_periodo.$grupo;// GENERANDO ID_GRUPO
+					$id_friae="";
 
 					$existe_grupo=count($this->M_grupo->existe_id_grupo_ciclo_anterior($id_grupo));
 		
 					if ($existe_grupo==0) 
 						{
 							$this->M_grupo->agregar_grupo_de_ciclo_anterior($id_grupo,$modulo,$grupo,$plantel_cct);
+
+							$id_friae=$this->M_friae->crear_friae_ciclos_anteriores($id_grupo);
+
+						}
+						else{
+							$id_friae=$this->M_friae->id_friae($id_grupo)->id_grupo;
 						}
 
 					
@@ -710,7 +718,10 @@ switch ($tipo_operacion_excel) {
 
 									if($existe_alumno_materia==0){
 										$this->M_grupo_estudiante->insertar_calificaciones_ciclos_anteriores($datos_calificacion_estudiante);
+										
 									}
+
+									
 									
 								}
 								
@@ -724,10 +735,26 @@ switch ($tipo_operacion_excel) {
 							}
 						}
 
+						$datos_friae = array(
+							'estudiantes' => array($no_control),
+							'id_grupo' => $id_grupo,
+							'semestre' =>$modulo,
+							
+						);
+
+						
+						$this->M_friae->agregar_estudiantes_friae((object)$datos_friae);
+
+
 						
 						
 						
 //Termina a leer hoja Friae y calificaciones_______________________________________________________________________
+
+//Empiepza elaboración de Friae---------------------------------------------------------------------------
+
+
+//Termina Elaboración de Friae----------------------------------------------------------------------------
 					
 //Empieza a leer pestaña FRER_______________________________________________________________________________________
 					$indiceHoja = 0;
@@ -834,6 +861,9 @@ switch ($tipo_operacion_excel) {
 					}
 
 //TERmina lectura de pestaña FRER---------------------------------------------------------------------------------
+
+$this->M_regularizacion->actualizar_friae_ciclos_anteriores();
+
 
 
 //Empieza actualizacion de estado del estudiante-------------------------------------------------------------------

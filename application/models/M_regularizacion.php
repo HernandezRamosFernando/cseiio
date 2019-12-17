@@ -604,6 +604,12 @@ public function insertar_regularizacion_ciclos_anteriores($datos){
 }
 
 
+
+
+
+
+
+
 public function actualizar_estatus_estudiante($no_control,$num_adeudos,$modulo,$plantel_cct,$matricula,$fecha_baja,$motivo_baja,$tipo_operacion,$grupo){
 
 
@@ -724,6 +730,105 @@ public function actualizar_estatus_estudiante($no_control,$num_adeudos,$modulo,$
 }
    
 
+
+
+
+public function actualizar_friae_ciclos_anteriores(){
+
+   $this->db->trans_complete();
+
+if($periodo=="AGOSTO-ENERO"){
+
+   if(intval($semestre)==1){
+      $situacion_fin_modulo='REGULAR';
+      $num_adeudos_fin_modulo=0;
+      $materias_adeudo_fin_modulo='';
+      $adeudos_sin_regu_enero=$this->db->query("SELECT * FROM Grupo_Estudiante where Estudiante_no_control='CSEIIO1911211' and calificacion_final>0 and calificacion_final<=5 and calificacion_final!=null and id_materia not in (SELECT id_materia FROM Regularizacion where fecha_calificacion<'2020-01-01' and Estudiante_no_control='CSEIIO1911211' and calificacion>=6);")->result();
+
+      $num_adeudos_fin_modulo=count($adeudos_sin_regu_enero);
+
+      if($num_adeudos_fin_modulo>0 && $num_adeudos_fin_modulo<=5){
+         $situacion_fin_modulo='IRREGULAR';// equivale a irregular
+      }
+
+      if($num_adeudos_fin_modulo>6){
+         $situacion_fin_modulo='SIN DERECHO';// SIN DERECHO
+      }
+
+      foreach($adeudos_sin_regu_enero as $id){
+         $materias_adeudo_fin_modulo.=$id->id_materia.",";
+     }
+
+      
+     $situacion_despues_regu='REGULAR';
+     $num_adeudos_despues_regu=0;
+     $materias_adeudo_despues_regu='';
+      $adeudos_despues_regu_enero=$this->db->query("SELECT * FROM Grupo_Estudiante where Estudiante_no_control='CSEIIO1911211' and calificacion_final>0 and calificacion_final<=5 and calificacion_final!=null and id_materia not in (SELECT id_materia FROM Regularizacion where fecha_calificacion<'".$fecha_termino_ciclo."' and Estudiante_no_control='CSEIIO1911211' and calificacion>=6);")->result();
+      $num_adeudos_despues_regu=count($adeudos_despues_regu_enero);
+
+      if($num_adeudos_despues_regu>0 && $num_adeudos_despues_regu<=3){
+         $situacion_fin_modulo='IRREGULAR';// equivale a irregular
+      }
+
+
+      if($num_adeudos_despues_regu>3 && $num_adeudos_despues_regu<=5){
+         $situacion_fin_modulo='SIN DERECHO';// equivale a irregular
+      }
+
+      foreach($adeudos_despues_regu_enero as $id){
+         $materias_adeudo_despues_regu.=$id->id_materia.",";
+     }
+
+
+     
+      
+
+
+   }
+   else{
+      $regu_octubre=$this->db->query("SELECT * FROM Regularizacion where MONTH(fecha_calificacion)=10 and YEAR(fecha_calificacion)=2020 and Estudiante_no_control='".$no_control."';")->result();
+
+      $sin_regu_octubre=$this->db->query("SELECT * FROM Regularizacion where fecha_calificacion<'2020-10-01' and Estudiante_no_control='".$no_control."';")->result();
+
+      $regu_enero=$this->db->query("SELECT * FROM Regularizacion where MONTH(fecha_calificacion)=1 and YEAR(fecha_calificacion)=2020 and Estudiante_no_control='".$no_control."';")->result();
+
+      $sin_regu_enero=$this->db->query("SELECT * FROM Regularizacion where fecha_calificacion<'2020-01-01' and Estudiante_no_control='".$no_control."';")->result();
+
+      
+   }
+
+
+}
+
+if($periodo=="FEBRERO-JULIO"){
+   
+      $regu_mayo=$this->db->query("SELECT * FROM Regularizacion where MONTH(fecha_calificacion)=5 and YEAR(fecha_calificacion)=2020 and Estudiante_no_control='".$no_control."';")->result();
+
+      $regu_julio=$this->db->query("SELECT * FROM Regularizacion where MONTH(fecha_calificacion)=7 and YEAR(fecha_calificacion)=2020 and Estudiante_no_control='".$no_control."';")->result();
+
+}
+  
+
+
+
+   
+
+   
+
+       if ($this->db->trans_status() === FALSE)
+       {
+           return "no";
+       }
+
+       else{
+         
+           return "si";
+       }
+
+
+   
+
+}
 
 
 }

@@ -563,7 +563,7 @@ switch ($tipo_operacion_excel) {
 					$motivo_baja= trim($calificaciones_friae->getCell('F10')->getValue());
 
 					
-					
+					$ciclo_escolar="";
 					$id_ciclo_escolar=""; //inicializamos variable
 					$id_grupo=""; //inicializamos variable id_grupo
 					$id_periodo="";//inicalizamos variable periodo
@@ -577,7 +577,13 @@ switch ($tipo_operacion_excel) {
 
 					
 					
-					$id_ciclo_escolar=$this->M_ciclo_escolar->get_id_ciclo_escolar_x_periodo_x_nombre($periodo,$nombre_ciclo_escolar)->id_ciclo_escolar;
+					
+
+					$ciclo_escolar=$this->M_ciclo_escolar->get_id_ciclo_escolar_x_periodo_x_nombre($periodo,$nombre_ciclo_escolar);
+
+					$id_ciclo_escolar=$ciclo_escolar->id_ciclo_escolar;
+
+					
 
 					if(trim($periodo) == "AGOSTO-ENERO"){
 						$id_periodo="B";
@@ -601,7 +607,7 @@ switch ($tipo_operacion_excel) {
 
 						}
 						else{
-							$id_friae=$this->M_friae->id_friae($id_grupo)->id_grupo;
+							$id_friae=$this->M_friae->id_friae($id_grupo)->folio;
 						}
 
 					
@@ -862,7 +868,26 @@ switch ($tipo_operacion_excel) {
 
 //TERmina lectura de pestaña FRER---------------------------------------------------------------------------------
 
-$this->M_regularizacion->actualizar_friae_ciclos_anteriores();
+$valores = explode('-',$ciclo_escolar->fecha_inicio);
+$valores2 = explode('-',$ciclo_escolar->fecha_terminacion);
+		
+$anio_inicio=$valores[0];
+$anio_terminacion=$valores2[0];
+
+$parametros_friae= array(
+	'anio_inicio' => $anio_inicio,
+	'anio_termino' => $anio_terminacion,
+	'fecha_termino'=>$ciclo_escolar->fecha_terminacion,
+	'semestre' =>$modulo,
+	'no_control'=>$no_control,
+	'id_friae'=>$id_friae,
+	'periodo'=>$periodo
+
+	
+);
+
+
+$this->M_regularizacion->actualizar_friae_ciclos_anteriores((object)$parametros_friae);
 
 
 

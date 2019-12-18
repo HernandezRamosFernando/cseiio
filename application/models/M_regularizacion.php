@@ -851,7 +851,7 @@ if($parametros->periodo=="AGOSTO-ENERO"){
       $num_adeudos_regu_enero=0;
       $materias_adeudo_regu_enero='';
 
-      $adeudos_sin_regu_enero=$this->db->query("SELECT * FROM Grupo_Estudiante where Estudiante_no_control='".$parametros->no_control."' and calificacion_final>0 and calificacion_final<=5 and calificacion_final IS NOT NULL and id_materia not in (SELECT id_materia FROM Regularizacion where fecha_calificacion<'".$parametros->anio_termino."-01-01' and Estudiante_no_control='".$parametros->no_control."' and calificacion>=6);")->result();
+      $adeudos_sin_regu_enero=$this->db->query("SELECT * FROM Grupo_Estudiante ge inner join Grupo g on g.id_grupo=ge.Grupo_id_grupo where g.semestre<=".$parametros->semestre." and Estudiante_no_control='".$parametros->no_control."' and calificacion_final>0 and calificacion_final<=5 and calificacion_final IS NOT NULL and id_materia not in (SELECT id_materia FROM Regularizacion where fecha_calificacion<'".$parametros->anio_termino."-01-01' and Estudiante_no_control='".$parametros->no_control."' and calificacion>=6);")->result();
 
       $num_adeudos_fin_modulo=count($adeudos_sin_regu_enero);
       
@@ -860,7 +860,7 @@ if($parametros->periodo=="AGOSTO-ENERO"){
          $materias_adeudo_fin_modulo.=$id->id_materia.",";
      }
 
-     $adeudos_con_regu_enero=$this->db->query("SELECT * FROM Grupo_Estudiante where Estudiante_no_control='".$parametros->no_control."' and calificacion_final>0 and calificacion_final<=5 and calificacion_final IS NOT NULL and id_materia not in (SELECT id_materia FROM Regularizacion where fecha_calificacion<'".$parametros->anio_termino."-02-01' and Estudiante_no_control='".$parametros->no_control."' and calificacion>=6);")->result();
+     $adeudos_con_regu_enero=$this->db->query("SELECT * FROM Grupo_Estudiante ge inner join Grupo g on g.id_grupo=ge.Grupo_id_grupo where g.semestre<=".$parametros->semestre." and Estudiante_no_control='".$parametros->no_control."' and calificacion_final>0 and calificacion_final<=5 and calificacion_final IS NOT NULL and id_materia not in (SELECT id_materia FROM Regularizacion where fecha_calificacion<'".$parametros->anio_termino."-02-01' and Estudiante_no_control='".$parametros->no_control."' and calificacion>=6);")->result();
 
      $num_adeudos_regu_enero=count($adeudos_con_regu_enero);
 
@@ -968,7 +968,7 @@ $estatus_final='REINGRESO';
    $num_adeudos_regu_julio=0;
    $materias_adeudo_regu_julio='';
 
-   $adeudos_sin_regu_julio=$this->db->query("SELECT * FROM Grupo_Estudiante where Estudiante_no_control='".$parametros->no_control."' and calificacion_final>0 and calificacion_final<=5 and calificacion_final IS NOT NULL and id_materia not in (SELECT id_materia FROM Regularizacion where fecha_calificacion<'".$parametros->anio_termino."-01-01' and Estudiante_no_control='".$parametros->no_control."' and calificacion>=6);")->result();
+   $adeudos_sin_regu_julio=$this->db->query("SELECT * FROM Grupo_Estudiante ge inner join Grupo g on g.id_grupo=ge.Grupo_id_grupo where g.semestre<=".$parametros->semestre." and Estudiante_no_control='".$parametros->no_control."' and calificacion_final>0 and calificacion_final<=5 and calificacion_final IS NOT NULL and id_materia not in (SELECT id_materia FROM Regularizacion where fecha_calificacion<'".$parametros->anio_termino."-07-01' and Estudiante_no_control='".$parametros->no_control."' and calificacion>=6);")->result();
 
    $num_adeudos_fin_modulo=count($adeudos_sin_regu_julio);
    
@@ -977,7 +977,7 @@ $estatus_final='REINGRESO';
       $materias_adeudo_fin_modulo.=$id->id_materia.",";
   }
 
-  $adeudos_con_regu_julio=$this->db->query("SELECT * FROM Grupo_Estudiante where Estudiante_no_control='".$parametros->no_control."' and calificacion_final>0 and calificacion_final<=5 and calificacion_final IS NOT NULL and id_materia not in (SELECT id_materia FROM Regularizacion where fecha_calificacion<'".$parametros->anio_termino."-02-01' and Estudiante_no_control='".$parametros->no_control."' and calificacion>=6);")->result();
+  $adeudos_con_regu_julio=$this->db->query("SELECT * FROM Grupo_Estudiante ge inner join Grupo g on g.id_grupo=ge.Grupo_id_grupo where g.semestre<=".$parametros->semestre." and Estudiante_no_control='".$parametros->no_control."' and calificacion_final>0 and calificacion_final<=5 and calificacion_final IS NOT NULL and id_materia not in (SELECT id_materia FROM Regularizacion where fecha_calificacion<'".$parametros->anio_termino."-08-01' and Estudiante_no_control='".$parametros->no_control."' and calificacion>=6);")->result();
 
   $num_adeudos_regu_julio=count($adeudos_con_regu_julio);
 
@@ -1002,11 +1002,11 @@ if($num_adeudos_fin_modulo>0 && $num_adeudos_fin_modulo<=3){
       $estatus_final='REINGRESO';// equivale a irregular
       }
 
-      if($adeudos_sin_regu_julio>3 && $adeudos_sin_regu_julio<=5){
+      if($num_adeudos_regu_julio>3 && $num_adeudos_regu_julio<=5){
          $estatus_final='SIN DERECHO';// equivale a irregular
       }
 
-      if($adeudos_sin_regu_julio>6){
+      if($num_adeudos_regu_julio>6){
          $estatus_final='REPROBADO';// SIN DERECHO
       }
 
@@ -1061,5 +1061,67 @@ if($num_adeudos_fin_modulo>0 && $num_adeudos_fin_modulo<=3){
 
 }
 
+
+public function actualizar_frer_ciclos_ant($datos){
+   $this->db->trans_complete();
+   $id_frer=0;
+   $frer_dato=$this->db->query("SELECT max(id_frer) as id_frer FROM Frer where month(fecha)=".$datos->mes_regu." and year(fecha)=".$datos->anio_regu." and Plantel_cct_plantel='".$datos->cct_plantel."';")->result();
+
+   if(count($frer_dato)==0){
+      $frer = array(
+               'Plantel_cct_plantel' =>$datos->cct_plantel,
+               'fecha' => $datos->anio_regu."-".$datos->mes_regu."-".20;
+
+      );
+ 
+      $this->db->insert('Frer', $frer);
+         $id_frer = $this->db->insert_id();
+   }
+   else{
+      $id_frer=$frer_dato->id_frer;
+   }
+
+   $detalle_frer=$frer_dato=$this->db->query("SELECT * FROM Detalle_frer where Estudiante_no_control='".$datos->no_control."' and Frer_id_frer=".$id_frer.";")->result();
+
+   if(count($detalle_frer)==0){
+               $insertar_frer = array(
+                  'Estudiante_no_control' =>$datos->no_control,
+                  'Frer_id_frer' =>$id_frer,
+                  'ultimo_semestre_cursado' =>'',
+                  'numero_adeudos' =>0,
+                  'situacion_estudiante' =>'IRREGULAR',
+                  'observaciones'=>''
+         );
+
+         $this->db->insert('Detalle_frer', $insertar_frer);
+
+   }
+   else{
+               $modificar_frer = array(
+                  'ultimo_semestre_cursado' =>'',
+                  'numero_adeudos' =>0,
+                  'situacion_estudiante' =>'IRREGULAR',
+                  'observaciones'=>''
+
+                );
+                $this->db->where('Frer_id_frer',$id_frer);
+                $this->db->where('Estudiante_no_control',$datos->no_control);
+               $this->db->update('Detalle_frer', $modificar_frer);
+
+
+   }
+
+
+   if ($this->db->trans_status() === FALSE)
+       {
+           return "no";
+       }
+
+       else{
+         
+           return "si";
+       }
+
+   }
 
 }

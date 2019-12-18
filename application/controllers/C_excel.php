@@ -887,9 +887,48 @@ $parametros_friae= array(
 );
 
 
+
+
+
 $this->M_regularizacion->actualizar_friae_ciclos_anteriores((object)$parametros_friae);
 
+foreach ($frer->getRowIterator(15) as $fila) {
+			$fila=$fila->getCellIterator("B","M");
+			$anio_regu='';
+			$mes_regu='';
+			$dia_regu='';
 
+						foreach ($fila as $celda) {
+							if(!is_null($celda->getValue())){
+
+							$fila = $celda->getRow();
+							# Columna, que es la A, B, C y así...
+							$columna = $celda->getColumn();
+							if($columna=='J'){
+								$anio_regu=$celda->getValue();
+							}
+
+							if($columna=='K'){
+								$mes_regu=$celda->getValue();
+							}
+
+							if($columna=='L'){
+								$dia_regu=$celda->getValue();
+							}
+								  
+							}
+							}
+						
+							$fecha_regularizacion=$anio_regu."-".$this->num_mes($mes_regu)."-".$dia_regu;
+							$parametros_frer= array(
+								'semestre' =>$modulo,
+								'no_control'=>$no_control,
+								
+							);
+						
+	$this->M_regularizacion->actualizar_frer_ciclos_ant((object)$parametros_frer);
+
+}
 
 //Empieza actualizacion de estado del estudiante-------------------------------------------------------------------
 

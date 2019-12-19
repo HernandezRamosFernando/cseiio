@@ -159,5 +159,25 @@ public function insertar_calificaciones_ciclos_anteriores($datos){
     return $this->db->query("SELECT * FROM Grupo_Estudiante where Grupo_id_grupo='".$id_grupo."' and id_materia='".$materia."' and Estudiante_no_control='".$no_control."';")->result();
 }
 
+public function actualizar_calificaciones_ciclos_anteriores($parametros,$datos){
+    $this->db->trans_start();
+
+        $this->db->where('Grupo_id_grupo',$parametros->id_grupo);
+        $this->db->where('Estudiante_no_control',$parametros->no_control);
+        $this->db->where('Ciclo_escolar_id_ciclo_escolar',$parametros->id_ciclo_escolar);
+        $this->db->where('id_materia',$parametros->id_materia);
+        $this->db->update('Grupo_Estudiante', $datos);
+        $this->db->trans_complete();
+
+        if ($this->db->trans_status() === FALSE)
+        {
+            return "no";
+        }
+
+        else{
+            return "si";
+        }
+   }
+
 
 }

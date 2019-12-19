@@ -775,7 +775,7 @@ if($parametros->periodo=="AGOSTO-ENERO"){
      $situacion_despues_regu='REINGRESO';
      $num_adeudos_despues_regu=0;
      $materias_adeudo_despues_regu='';
-      $adeudos_despues_regu_enero=$this->db->query("SELECT * FROM Grupo_Estudiante where Estudiante_no_control='".$parametros->no_control."' and calificacion_final>0 and calificacion_final<=5 and calificacion_final IS NOT NULL and id_materia not in (SELECT id_materia FROM Regularizacion where fecha_calificacion<'".$parametros->fecha_termino."' and Estudiante_no_control='".$parametros->no_control."' and calificacion>=6);")->result();
+      $adeudos_despues_regu_enero=$this->db->query("SELECT * FROM Grupo_Estudiante where Estudiante_no_control='".$parametros->no_control."' and calificacion_final>0 and calificacion_final<=5 and calificacion_final IS NOT NULL and id_materia not in (SELECT id_materia FROM Regularizacion where fecha_calificacion<'".$parametros->anio_termino."-02-01' and Estudiante_no_control='".$parametros->no_control."' and calificacion>=6);")->result();
       $num_adeudos_despues_regu=count($adeudos_despues_regu_enero);
 
       if($num_adeudos_despues_regu>0 && $num_adeudos_despues_regu<=3){
@@ -1065,28 +1065,40 @@ if($num_adeudos_fin_modulo>0 && $num_adeudos_fin_modulo<=3){
 public function actualizar_frer_ciclos_ant($datos){
    $this->db->trans_complete();
    $id_frer=0;
-   $frer_dato=$this->db->query("SELECT max(id_frer) as id_frer FROM Frer where month(fecha)=".$datos->mes_regu." and year(fecha)=".$datos->anio_regu." and Plantel_cct_plantel='".$datos->cct_plantel."';")->result();
 
-   if(count($frer_dato)==0){
-      $frer = array(
-               'Plantel_cct_plantel' =>$datos->cct_plantel,
-               'fecha' => $datos->anio_regu."-".$datos->mes_regu."-20"
+   
 
-      );
- 
-      $this->db->insert('Frer', $frer);
-         $id_frer = $this->db->insert_id();
+   $frer_dato=$this->db->query("SELECT max(id_frer) as id_frer FROM Frer where month(fecha)=".$datos->mes_regu." and year(fecha)=".$datos->anio_regu." and Plantel_cct_plantel='".$datos->cct_plantel."';")->row();
+
+  
+
+   if(!is_null($frer_dato->id_frer)){
+      $id_frer=$frer_dato->id_frer;
+      
+      
    }
    else{
-      $id_frer=$frer_dato->id_frer;
+         
+         $frer = array(
+            'Plantel_cct_plantel' =>$datos->cct_plantel,
+            'fecha' => $datos->anio_regu."-".$datos->mes_regu."-20"
+
+         );
+
+   $this->db->insert('Frer', $frer);
+      $id_frer = $this->db->insert_id();
    }
 
+
+   
    $detalle_frer=$this->db->query("SELECT * FROM Detalle_frer where Estudiante_no_control='".$datos->no_control."' and Frer_id_frer=".$id_frer.";")->result();
 
-   $mes_final=intval($datos->semestre)+1;
+   $mes_final=intval($datos->mes_regu)+1;
 
 
    $datos_adeudos_estudiante=$this->db->query("SELECT * FROM Ciclo_escolar c inner join Grupo_Estudiante ge on c.id_ciclo_escolar=ge.Ciclo_escolar_id_ciclo_escolar where fecha_inicio<'".$datos->fecha_regularizacion."' and Estudiante_no_control='".$datos->no_control."' and calificacion_final>0 and calificacion_final<=5 and calificacion_final is not null and id_materia not in (SELECT id_materia FROM Regularizacion where fecha_calificacion<'".$datos->anio_regu."-".$mes_final."-01' and Estudiante_no_control='".$datos->no_control."' and calificacion>=6);")->result();
+
+
 
 $datos_grupo=$this->db->query("SELECT * FROM Ciclo_escolar c inner join Grupo_Estudiante ge on c.id_ciclo_escolar=ge.Ciclo_escolar_id_ciclo_escolar inner join Grupo g on g.id_grupo=ge.Grupo_id_grupo where fecha_inicio<'".$datos->fecha_regularizacion."' and Estudiante_no_control='".$datos->no_control."' order by fecha_inicio desc")->result();
 
@@ -1108,7 +1120,23 @@ if(count($datos_grupo)>0){
       $estatus_alumno='IRREGULAR';
   }
 
-   if(count($detalle_frer)==0){
+   if(count($detalle_frer)>0){
+      $modificar_frer = array(
+         'ultimo_semestre_cursado' =>$ultimo_grupo_cursado,
+         'numero_adeudos' =>$num_adeudos_regu,
+         'situacion_estudiante' =>$estatus_alumno,
+         'observaciones'=>$materias_adeudos_despues_de_regu
+
+       );
+       $this->db->where('Frer_id_frer',$id_frer);
+       $this->db->where('Estudiante_no_control',$datos->no_control);
+      $this->db->update('Detalle_frer', $modificar_frer);
+              
+
+   }
+   else{
+               
+
                $insertar_frer = array(
                   'Estudiante_no_control' =>$datos->no_control,
                   'ultimo_semestre_cursado' =>$ultimo_grupo_cursado,
@@ -1119,20 +1147,6 @@ if(count($datos_grupo)>0){
          );
 
          $this->db->insert('Detalle_frer', $insertar_frer);
-
-   }
-   else{
-               $modificar_frer = array(
-                  'ultimo_semestre_cursado' =>$ultimo_grupo_cursado,
-                  'numero_adeudos' =>$num_adeudos_regu,
-                  'situacion_estudiante' =>$estatus_alumno,
-                  'observaciones'=>$materias_adeudos_despues_de_regu
-
-                );
-                $this->db->where('Frer_id_frer',$id_frer);
-                $this->db->where('Estudiante_no_control',$datos->no_control);
-               $this->db->update('Detalle_frer', $modificar_frer);
-
 
    }
 

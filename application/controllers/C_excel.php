@@ -607,7 +607,7 @@ switch ($tipo_operacion_excel) {
 
 						}
 						else{
-							$id_friae=$this->M_friae->id_friae($id_grupo)->folio;
+							$id_friae=$this->M_friae->id_friae($id_grupo)[0]->folio;
 						}
 
 					
@@ -705,6 +705,21 @@ switch ($tipo_operacion_excel) {
 										'calificacion_final' => $cal_final
 									);
 
+									$datos_calificacion_estudiante_update = array(
+										'primer_parcial' => $p1,
+										'segundo_parcial' => $p2,
+										'tercer_parcial' => $p3,
+										'examen_final' => $examen_final,
+										'calificacion_final' => $cal_final
+									);
+
+									$parametros_estudiante_update_cal = array(
+										'id_grupo' => strtoupper($id_grupo),
+										'no_control' => strtoupper($no_control),
+										'id_ciclo_escolar' =>$id_ciclo_escolar,
+										'id_materia' => strtoupper($clave)
+									);
+
 									/*if($no_control!=$temp_no_control){
 										$cont_materias_reprobadas=0;
 									}
@@ -725,6 +740,9 @@ switch ($tipo_operacion_excel) {
 									if($existe_alumno_materia==0){
 										$this->M_grupo_estudiante->insertar_calificaciones_ciclos_anteriores($datos_calificacion_estudiante);
 										
+									}
+									else{
+										$this->M_grupo_estudiante->actualizar_calificaciones_ciclos_anteriores((object)$parametros_estudiante_update_cal,$datos_calificacion_estudiante_update);
 									}
 
 									
@@ -850,6 +868,9 @@ switch ($tipo_operacion_excel) {
 
 									
 								}
+								else{
+									$this->M_regularizacion->update_regularizacion_ciclos_anteriores($datos_regularizacion_estudiante);
+								}
 
 								
 								
@@ -886,17 +907,19 @@ $parametros_friae= array(
 	
 );
 
-
-
-
-
 $this->M_regularizacion->actualizar_friae_ciclos_anteriores((object)$parametros_friae);
 
-foreach ($frer->getRowIterator(15) as $fila) {
-			$fila=$fila->getCellIterator("B","M");
-			$anio_regu='';
-			$mes_regu='';
-			$dia_regu='';
+$indiceHoja = 0;
+					$frer = $spreadsheet->getSheet($indiceHoja);
+					
+					foreach ($frer->getRowIterator(15) as $fila) {
+						$anio_regu='';
+						$mes_regu='';
+						$dia_regu='';
+						$bandera=0;
+						
+
+						$fila=$fila->getCellIterator("J","M");
 
 						foreach ($fila as $celda) {
 							if(!is_null($celda->getValue())){
@@ -904,35 +927,70 @@ foreach ($frer->getRowIterator(15) as $fila) {
 							$fila = $celda->getRow();
 							# Columna, que es la A, B, C y así...
 							$columna = $celda->getColumn();
+							
+
+
 							if($columna=='J'){
 								$anio_regu=$celda->getValue();
+								$bandera++;
+								
 							}
 
 							if($columna=='K'){
 								$mes_regu=$celda->getValue();
+								
+								$bandera++;
 							}
 
 							if($columna=='L'){
 								$dia_regu=$celda->getValue();
+								
+								$bandera++;
 							}
-								  
+
+							if($columna=='M'){
+								$hora_regularizacion=str_pad($celda->getFormattedValue(),5,'0',STR_PAD_LEFT);
+								
+								$bandera++;
 							}
-							}
-						
-							$fecha_regularizacion=$anio_regu."-".$this->num_mes($mes_regu)."-".$dia_regu;
+
+							if($bandera==4){
+								$fecha_regularizacion=$anio_regu."-".$this->num_mes($mes_regu)."-".$dia_regu;
 							$parametros_frer= array(
 								'semestre' =>$modulo,
 								'no_control'=>$no_control,
-								'mes_regu'=>$mes_regu,
+								'mes_regu'=>$this->num_mes($mes_regu),
 								'anio_regu'=>$anio_regu,
 								'fecha_regularizacion'=>$fecha_regularizacion,
 								'cct_plantel'=>$plantel_cct
 
 							);
 						
-	$this->M_regularizacion->actualizar_frer_ciclos_ant((object)$parametros_frer);
+						$this->M_regularizacion->actualizar_frer_ciclos_ant((object)$parametros_frer);
 
-}
+							}
+							
+
+							
+							
+
+							}//Fin de celdas no vacias
+
+							
+
+							
+							
+
+							
+							
+						}//Fin de for columnas por fila
+
+						
+					}//Fin de ciclo de frer
+
+
+
+
 
 //Empieza actualizacion de estado del estudiante-------------------------------------------------------------------
 

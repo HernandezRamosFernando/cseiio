@@ -923,7 +923,11 @@ foreach ($frer->getRowIterator(15) as $fila) {
 							$parametros_frer= array(
 								'semestre' =>$modulo,
 								'no_control'=>$no_control,
-								
+								'mes_regu'=>$mes_regu,
+								'anio_regu'=>$anio_regu,
+								'fecha_regularizacion'=>$fecha_regularizacion,
+								'cct_plantel'=>$plantel_cct
+
 							);
 						
 	$this->M_regularizacion->actualizar_frer_ciclos_ant((object)$parametros_frer);

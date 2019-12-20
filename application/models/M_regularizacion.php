@@ -1093,7 +1093,7 @@ public function actualizar_frer_ciclos_ant($datos){
    
    $detalle_frer=$this->db->query("SELECT * FROM Detalle_frer where Estudiante_no_control='".$datos->no_control."' and Frer_id_frer=".$id_frer.";")->result();
 
-   $mes_final=intval($datos->mes_regu)+1;
+   $mes_final=intval($datos->mes_regu)+1;          
 
 
    $datos_adeudos_estudiante=$this->db->query("SELECT * FROM Ciclo_escolar c inner join Grupo_Estudiante ge on c.id_ciclo_escolar=ge.Ciclo_escolar_id_ciclo_escolar where fecha_inicio<'".$datos->fecha_regularizacion."' and Estudiante_no_control='".$datos->no_control."' and calificacion_final>0 and calificacion_final<=5 and calificacion_final is not null and id_materia not in (SELECT id_materia FROM Regularizacion where fecha_calificacion<'".$datos->anio_regu."-".$mes_final."-01' and Estudiante_no_control='".$datos->no_control."' and calificacion>=6);")->result();
@@ -1162,5 +1162,25 @@ if(count($datos_grupo)>0){
        }
 
    }
+
+   public function update_regularizacion_ciclos_anteriores($parametros,$datos){
+      $this->db->trans_start();
+  
+         $this->db->where('id_materia',$parametros->id_materia);
+         $this->db->where('Estudiante_no_control',$parametros->no_control);
+         $this->db->where('Plantel_cct_plantel',$parametros->plantel_cct);
+         $this->db->where('fecha_calificacion',$parametros->fecha_calificacion);
+          $this->db->update('Regularizacion', $datos);
+          $this->db->trans_complete();
+   
+          if ($this->db->trans_status() === FALSE)
+          {
+              return "no";
+          }
+   
+          else{
+              return "si";
+          }
+     }
 
 }

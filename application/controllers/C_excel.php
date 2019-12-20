@@ -507,6 +507,14 @@ switch ($tipo_operacion_excel) {
 			
 		
 		$this->M_regularizacion->actualizar_estatus_estudiante($no_control,$num_adeudos,$modulo,$plantel_cct,$matricula,$fecha_baja,$motivo_baja,$tipo_operacion_excel,$grupo);
+		
+		
+		
+		
+		
+		
+		
+		
 		$this->session->set_flashdata('msg_exito', 'Los datos del alumno con estatus <span style="font-weight:bold">BAJA</span> se han agregado al sistema correctamente, para corroborar verique en el reporte KARDEX.');
 			
 		}
@@ -810,34 +818,34 @@ switch ($tipo_operacion_excel) {
 
 							
 
-							if($columna=='B'){
+							if($columna=='B' && $celda->getCalculatedValue()!=''){
 								$clave_materia=trim($celda->getValue());
 								$bandera++;
 							}
 
-							if($columna=='I'){
+							if($columna=='I' && $celda->getCalculatedValue()!=''){
 								$calificacion_regularizacion=$celda->getValue();
 								$bandera++;
 							}
 
-							if($columna=='J'){
+							if($columna=='J' && $celda->getCalculatedValue()!=''){
 								$anio_regu=$celda->getValue();
 								$bandera++;
 							}
 
-							if($columna=='K'){
+							if($columna=='K' && $celda->getCalculatedValue()!=''){
 								$mes_regu=$celda->getValue();
 								
 								$bandera++;
 							}
 
-							if($columna=='L'){
+							if($columna=='L' && $celda->getCalculatedValue()!=''){
 								$dia_regu=$celda->getValue();
 								
 								$bandera++;
 							}
 
-							if($columna=='M'){
+							if($columna=='M' && $celda->getCalculatedValue()!=''){
 								$hora_regularizacion=str_pad($celda->getFormattedValue(),5,'0',STR_PAD_LEFT);
 								
 								$bandera++;
@@ -845,7 +853,7 @@ switch ($tipo_operacion_excel) {
 
 							
 
-							if($bandera=6){//Solo se insertaran aquellas calificaciones en donde todas las 9 columnas esten rellenados.
+							if($bandera==6){//Solo se insertaran aquellas calificaciones en donde todas las 9 columnas esten rellenados.
 								$fecha_regularizacion=$anio_regu."-".$this->num_mes($mes_regu)."-".$dia_regu;
 								$datos_regularizacion_estudiante = array(
 									'id_materia' => strtoupper($clave_materia),
@@ -869,7 +877,23 @@ switch ($tipo_operacion_excel) {
 									
 								}
 								else{
-									$this->M_regularizacion->update_regularizacion_ciclos_anteriores($datos_regularizacion_estudiante);
+									$datos_update_regularizacion_estudiante = array(
+										
+										'calificacion' =>$calificacion_regularizacion,
+										'estatus'=>0,
+										'hora'=>$hora_regularizacion,
+										'fecha'=>date('Y-m-d')
+	
+									);
+
+									$parametros_estudiante = array(
+										'id_materia' => strtoupper($clave_materia),
+										'no_control' => $no_control,
+										'plantel_cct' => $plantel_cct,
+										'fecha_calificacion'=>$fecha_regularizacion
+									);
+	
+									$this->M_regularizacion->update_regularizacion_ciclos_anteriores((object)$parametros_estudiante,$datos_update_regularizacion_estudiante);
 								}
 
 								

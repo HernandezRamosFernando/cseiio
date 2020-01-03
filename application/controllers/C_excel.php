@@ -348,6 +348,7 @@ switch ($tipo_operacion_excel) {
 					$cont_materias_reprobadas=0;// Contador de materias reprobadas por cada alumno
 					$cont_materias_estudiante=0;// cuenta el número de materias subidas por el estudiante.
 					$resultado_error="";
+					$id_friae="";
 					
 //Empieza a leer hoja Friae y calificaciones_______________________________________________________________________
 					
@@ -370,6 +371,12 @@ switch ($tipo_operacion_excel) {
 					if ($existe_grupo==0) 
 						{
 							$this->M_grupo->agregar_grupo_de_ciclo_anterior($id_grupo,$modulo,$grupo,$plantel_cct);
+							$id_friae=$this->M_friae->crear_friae_ciclos_anteriores($id_grupo);
+						}
+
+
+						else{
+							$id_friae=$this->M_friae->id_friae($id_grupo)[0]->folio;
 						}
 
 					
@@ -486,7 +493,20 @@ switch ($tipo_operacion_excel) {
 
 									if($existe_alumno_materia==0){
 										$this->M_grupo_estudiante->insertar_calificaciones_ciclos_anteriores($datos_calificacion_estudiante);
+
+										$datos_friae = array(
+											'estudiantes' => array($no_control),
+											'id_grupo' => $id_grupo,
+											'semestre' =>$modulo,
+											
+										);
+				
+										if(count($this->M_friae->get_datos_friae_estudiante($id_grupo,$no_control))==0){
+											$this->M_friae->agregar_estudiante_friae_ciclos_anteriores((object)$datos_friae);
+										}
+										
 									}
+									
 									
 								}
 								
@@ -509,6 +529,20 @@ switch ($tipo_operacion_excel) {
 		$this->M_regularizacion->actualizar_estatus_estudiante($no_control,$num_adeudos,$modulo,$plantel_cct,$matricula,$fecha_baja,$motivo_baja,$tipo_operacion_excel,$grupo);
 		
 		
+		$datos_friae_baja = array(
+			'no_control' => $no_control,
+			'id_friae' => $id_friae,
+			'fecha_baja' =>$fecha_baja,
+			'anio_baja' =>$anio_baja,
+			'semestre'=>$modulo,
+			'periodo'=>$periodo
+
+		);
+
+
+		$this->M_friae->actualizar_friae_baja_ciclos_anteriores((object)$datos_friae_baja);
+
+
 		
 		
 		
@@ -768,14 +802,19 @@ switch ($tipo_operacion_excel) {
 						}
 
 						$datos_friae = array(
-							'estudiantes' => array($no_control),
+							'no_control' => $no_control,
 							'id_grupo' => $id_grupo,
 							'semestre' =>$modulo,
+							'id_friae'=>$id_friae
 							
 						);
 
+
+						if(count($this->M_friae->get_datos_friae_estudiante($id_grupo,$no_control))==0){
+							$this->M_friae->agregar_estudiante_friae_ciclos_anteriores((object)$datos_friae);
+						}
 						
-						$this->M_friae->agregar_estudiantes_friae((object)$datos_friae);
+						
 
 
 						
@@ -1146,12 +1185,12 @@ $this->session->set_flashdata('msg_exito', 'Los datos del alumno se han agregado
 
 					if(trim($anio_baja)!='' && trim($mes_baja)!='' && trim($dia_baja)!=''){
 						 if(!$this->validar_fecha($anio_baja,$mes_baja,$dia_baja)){
-								$resultado_error.="<li>El formato de fecha de deserción no es valida.</li>";
+								$resultado_error.="<li>El formato de fecha de baja no es valida.</li>";
 						 }
 
 					}
 					else{
-						$resultado_error.="<li>El formato de fecha de deserción no es valida o se encuentra vacia</li>";
+						$resultado_error.="<li>El formato de fecha de baja no es valida o se encuentra vacia</li>";
 					}
 
 					if($motivo_baja==''){
@@ -1280,30 +1319,22 @@ $this->session->set_flashdata('msg_exito', 'Los datos del alumno se han agregado
 									
 								}
 
-								if($columna=='F' && trim($celda->getCalculatedValue())!='' && in_array($celda->getCalculatedValue(), $calificacion_valida)){
+								if($columna=='F' && trim($celda->getCalculatedValue())!='' && trim($celda->getCalculatedValue())=='/'){
 									$cont_materias_cal_alumno++;
 									
 								}
 
 
-								if($columna=='G' && trim($celda->getCalculatedValue())!='' && in_array($celda->getCalculatedValue(), $calificacion_valida)){
+								if($columna=='G' && trim($celda->getCalculatedValue())!='' && trim($celda->getCalculatedValue())=='/'){
 									$cont_materias_cal_alumno++;
 									
 								}
 
-								if($columna=='H' && trim($celda->getCalculatedValue())!='' && in_array($celda->getCalculatedValue(), $calificacion_valida)){
+								if($columna=='H' && trim($celda->getCalculatedValue())!='' && trim($celda->getCalculatedValue())=='/'){
 									$cont_materias_cal_alumno++;
-									if($celda->getCalculatedValue()=='/')
-									{
-										$cal_final=0;
-									}
-									else{
-										$cal_final=$celda->getCalculatedValue();
-									}
 									
-									if($cal_final>=6){ //Contador de materias aprobadas en el semestre
-										$cont_materias_aprobadas++;
-										}
+									
+									
 									
 								}
 

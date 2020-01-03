@@ -183,4 +183,179 @@ class M_friae extends CI_Model {
         return $this->db->query("SELECT * FROM Plantel p  LEFT JOIN Revisor r on p.id_revisor=r.idrevisor where p.cct_plantel='".$cct."';")->result();
     }
 
+
+
+    public function actualizar_friae_baja_ciclos_anteriores($parametros){
+
+
+        $this->db->trans_start();
+        $semestre_anterior=intval($parametros->semestre)-1;
+        $datos = array();
+
+        if($parametros->periodo=="AGOSTO-ENERO"){
+            if(intval($parametros->semestre)!=1){
+                $tipo_ingreso_modulo='REINGRESO';
+                $estatus_inscripcion='REGULAR';
+                $num_adeudos_inicio_modulo=0;
+                $materias_adeudo_inicio_modulo='';
+
+                $num_adeudos_regu_octubre=0;
+                $materias_adeudo_regu_octubre='';
+
+                $adeudos_sin_regu_octubre=$this->db->query("SELECT * FROM Grupo_Estudiante ge inner join Grupo g on g.id_grupo=ge.Grupo_id_grupo where g.semestre<=".$semestre_anterior." and Estudiante_no_control='".$parametros->no_control."' and calificacion_final>0 and calificacion_final<=5 and calificacion_final IS NOT NULL and id_materia not in (SELECT id_materia FROM Regularizacion where fecha_calificacion<'".$parametros->anio_baja."-10-01' and Estudiante_no_control='".$parametros->no_control."' and calificacion>=6);")->result();
+
+                $num_adeudos_inicio_modulo=count($adeudos_sin_regu_octubre);
+                if($num_adeudos_inicio_modulo>0){
+                    $estatus_inscripcion='IRREGULAR';
+
+                }
+
+                foreach($adeudos_sin_regu_octubre as $id){
+                    $materias_adeudo_inicio_modulo.=$id->id_materia.",";
+                }
+
+                $adeudos_con_regu_octubre=$this->db->query("SELECT * FROM Grupo_Estudiante ge inner join Grupo g on g.id_grupo=ge.Grupo_id_grupo where g.semestre<=".$semestre_anterior." and Estudiante_no_control='".$parametros->no_control."' and calificacion_final>0 and calificacion_final<=5 and calificacion_final IS NOT NULL and id_materia not in (SELECT id_materia FROM Regularizacion where fecha_calificacion<'".$parametros->anio_baja."-11-01' and Estudiante_no_control='".$parametros->no_control."' and calificacion>=6);")->result();
+
+                $num_adeudos_regu_octubre=count($adeudos_con_regu_octubre);
+
+                foreach($adeudos_con_regu_octubre as $id){
+                $materias_adeudo_regu_octubre.=$id->id_materia.",";
+                }
+
+                $datos = array(
+                    'tipo_ingreso_inscripcion' => $tipo_ingreso_modulo,
+                    'estatus_inscripcion' => $estatus_inscripcion,
+                    'numero_adeudos_inscripcion' => $num_adeudos_inicio_modulo,
+                    'id_materia_adeudos_inscripcion' => $materias_adeudo_inicio_modulo,
+                    'adeudos_primera_regularizacion' => $num_adeudos_regu_octubre,
+                    'id_materia_adeudos_primera_regularizacion' => $materias_adeudo_regu_octubre,
+                    'baja' => $parametros->fecha_baja,
+                    'tipo_ingreso_fin_semestre' => 'BAJA'
+        
+                );
+
+            }
+            
+        }
+
+        if($parametros->periodo=="FEBRERO-JULIO"){
+
+            $tipo_ingreso_modulo='REINGRESO';
+            $estatus_inscripcion='REGULAR';
+            $num_adeudos_inicio_modulo=0;
+            $materias_adeudo_inicio_modulo='';
+
+            $num_adeudos_regu_mayo=0;
+            $materias_adeudo_regu_mayo='';
+
+            
+            
+
+            $adeudos_sin_regu_mayo=$this->db->query("SELECT * FROM Grupo_Estudiante ge inner join Grupo g on g.id_grupo=ge.Grupo_id_grupo where g.semestre<=".$semestre_anterior." and Estudiante_no_control='".$parametros->no_control."' and calificacion_final>0 and calificacion_final<=5 and calificacion_final IS NOT NULL and id_materia not in (SELECT id_materia FROM Regularizacion where fecha_calificacion<'".$parametros->anio_baja."-05-01' and Estudiante_no_control='".$parametros->no_control."' and calificacion>=6);")->result();
+
+            $num_adeudos_inicio_modulo=count($adeudos_sin_regu_mayo);
+            if($num_adeudos_inicio_modulo>0){
+                $estatus_inscripcion='IRREGULAR';
+
+            }
+
+            foreach($adeudos_sin_regu_mayo as $id){
+                $materias_adeudo_inicio_modulo.=$id->id_materia.",";
+            }
+
+            $adeudos_con_regu_mayo=$this->db->query("SELECT * FROM Grupo_Estudiante ge inner join Grupo g on g.id_grupo=ge.Grupo_id_grupo where g.semestre<=".$semestre_anterior." and Estudiante_no_control='".$parametros->no_control."' and calificacion_final>0 and calificacion_final<=5 and calificacion_final IS NOT NULL and id_materia not in (SELECT id_materia FROM Regularizacion where fecha_calificacion<'".$parametros->anio_baja."-06-01' and Estudiante_no_control='".$parametros->no_control."' and calificacion>=6);")->result();
+
+            $num_adeudos_regu_mayo=count($adeudos_con_regu_mayo);
+
+            foreach($adeudos_con_regu_mayo as $id){
+            $materias_adeudo_regu_mayo.=$id->id_materia.",";
+            }
+
+
+            $datos = array(
+                'tipo_ingreso_inscripcion' => $tipo_ingreso_modulo,
+                'estatus_inscripcion' => $estatus_inscripcion,
+                'numero_adeudos_inscripcion' => $num_adeudos_inicio_modulo,
+                'id_materia_adeudos_inscripcion' => $materias_adeudo_inicio_modulo,
+                'adeudos_primera_regularizacion' => $num_adeudos_regu_mayo,
+                'id_materia_adeudos_primera_regularizacion' => $materias_adeudo_regu_mayo,
+                'baja' => $parametros->fecha_baja,
+                'tipo_ingreso_fin_semestre' => 'BAJA'
+    
+            );
+
+
+        }
+
+        
+       $this->db->where('Estudiante_no_control',$parametros->no_control);
+        $this->db->where('Friae_folio',$parametros->id_friae);
+        $this->db->update('Friae_Estudiante',$datos);
+
+        $this->db->trans_complete();
+
+        if ($this->db->trans_status() === FALSE)
+        {
+            return "no";
+        }
+
+        else{
+            return "si";
+        }
+      
+   }
+
+
+
+
+
+   public function agregar_estudiante_friae_ciclos_anteriores($datos){
+    //var_dump($datos);
+
+    $this->db->trans_start();
+
+
+   /* semestre*/
+
+            $datos_estudiante = $this->db->query("select * from Estudiante where no_control='".$datos->no_control."'")->result();
+
+            if($datos->semestre>1){
+                $datos = array(
+                    'Friae_folio' => $datos->id_friae,
+                    'Estudiante_no_control'=>$datos->no_control,
+                    'tipo_ingreso_inscripcion'=>$datos_estudiante[0]->tipo_ingreso,
+                    'estatus_inscripcion'=>$datos_estudiante[0]->estatus
+                );
+            }
+
+            else{
+                $datos = array(
+                    'Friae_folio' => $datos->id_friae,
+                    'Estudiante_no_control'=>$datos->no_control,
+                    'tipo_ingreso_inscripcion'=>$datos_estudiante[0]->tipo_ingreso,
+                    'estatus_inscripcion'=>'',
+                    'numero_adeudos_inscripcion'=>0,
+                    'id_materia_adeudos_inscripcion'=>''
+
+                    
+                );
+
+            }
+            
+                
+    $this->db->insert('Friae_Estudiante', $datos);
+
+
+    $this->db->trans_complete();
+
+    if ($this->db->trans_status() === FALSE)
+    {
+            return "no";
+    }
+
+    else{
+        return "si";
+    }
+}
+
 }

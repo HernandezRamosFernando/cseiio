@@ -748,6 +748,8 @@ public function actualizar_friae_ciclos_anteriores($parametros){
 if($parametros->periodo=="AGOSTO-ENERO"){
 
    if(intval($parametros->semestre)==1){
+
+      
       $situacion_fin_modulo='REINGRESO';
       $num_adeudos_fin_modulo=0;
       $materias_adeudo_fin_modulo='';
@@ -814,6 +816,7 @@ if($parametros->periodo=="AGOSTO-ENERO"){
 
    }
    else{
+      
       $tipo_ingreso_modulo='REINGRESO';
       $estatus_inscripcion='REGULAR';
       $num_adeudos_inicio_modulo=0;
@@ -895,7 +898,7 @@ if($parametros->periodo=="AGOSTO-ENERO"){
 
 
 
-         $datos = array(
+        $datos = array(
             'tipo_ingreso_inscripcion' => $tipo_ingreso_modulo,
             'estatus_inscripcion' => $estatus_inscripcion,
             'numero_adeudos_inscripcion' => $num_adeudos_inicio_modulo,

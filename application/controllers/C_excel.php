@@ -495,9 +495,11 @@ switch ($tipo_operacion_excel) {
 										$this->M_grupo_estudiante->insertar_calificaciones_ciclos_anteriores($datos_calificacion_estudiante);
 
 										$datos_friae = array(
-											'estudiantes' => array($no_control),
+											
+											'no_control' => $no_control,
 											'id_grupo' => $id_grupo,
 											'semestre' =>$modulo,
+											'id_friae'=>$id_friae
 											
 										);
 				
@@ -1058,13 +1060,15 @@ $indiceHoja = 0;
 //Empieza actualizacion de estado del estudiante-------------------------------------------------------------------
 
 $num_adeudos=0;
-if(strlen(trim($fecha_baja))==0 || $tipo_operacion=='DESERTOR'){
+//if(strlen(trim($fecha_baja))==0 || $tipo_operacion=='DESERTOR'){
 	$num_adeudos=count($this->M_regularizacion->materias_debe_estudiante_actualmente($no_control));
-}
-else{
+
+	
+//}
+/*else{
 	$num_adeudos=-1;
 	
-}
+}*/
 
 $this->M_regularizacion->actualizar_estatus_estudiante($no_control,$num_adeudos,$modulo,$plantel_cct,$matricula,$fecha_baja,$motivo_baja,$tipo_operacion,$grupo);
 

@@ -677,7 +677,9 @@ public function actualizar_estatus_estudiante($no_control,$num_adeudos,$modulo,$
       $this->db->query("update Estudiante set tipo_ingreso='".$tipo_ingreso."',estatus='IRREGULAR',semestre_en_curso=".$semestre_en_curso.",semestre=".$num_semestres_trascurridos.", matricula='".$matricula."' where no_control='".$no_control."'");
       
    }
-   if($num_adeudos>6){
+   if($num_adeudos>=6){
+
+   
        $tipo_ingreso='REPROBADO';
        $semestre_en_curso=$modulo;
       $this->db->query("update Estudiante set tipo_ingreso='".$tipo_ingreso."',estatus='IRREGULAR',semestre_en_curso=".$semestre_en_curso.",semestre=".$num_semestres_trascurridos.", matricula='".$matricula."' where no_control='".$no_control."'");
@@ -765,7 +767,7 @@ if($parametros->periodo=="AGOSTO-ENERO"){
          $situacion_fin_modulo='SIN DERECHO';// equivale a irregular
       }
 
-      if($num_adeudos_fin_modulo>6){
+      if($num_adeudos_fin_modulo>=6){
          $situacion_fin_modulo='REPROBADO';// SIN DERECHO
       }
 
@@ -789,7 +791,7 @@ if($parametros->periodo=="AGOSTO-ENERO"){
          $situacion_despues_regu='SIN DERECHO';// equivale a irregular
       }
 
-      if($num_adeudos_despues_regu>6){
+      if($num_adeudos_despues_regu>=6){
          $situacion_despues_regu='REPROBADO';// equivale a irregular
       }
 
@@ -879,7 +881,7 @@ if($parametros->periodo=="AGOSTO-ENERO"){
          $situacion_fin_modulo='SIN DERECHO';// equivale a irregular
       }
 
-      if($num_adeudos_fin_modulo>6){
+      if($num_adeudos_fin_modulo>=6){
          $situacion_fin_modulo='REPROBADO';// SIN DERECHO
       }
 
@@ -892,7 +894,7 @@ if($parametros->periodo=="AGOSTO-ENERO"){
             $estatus_final='SIN DERECHO';// equivale a irregular
          }
    
-         if($num_adeudos_regu_enero>6){
+         if($num_adeudos_regu_enero>=6){
             $estatus_final='REPROBADO';// SIN DERECHO
          }
 
@@ -996,7 +998,7 @@ if($num_adeudos_fin_modulo>0 && $num_adeudos_fin_modulo<=3){
       $situacion_fin_modulo='SIN DERECHO';// equivale a irregular
    }
 
-   if($num_adeudos_fin_modulo>6){
+   if($num_adeudos_fin_modulo>=6){
       $situacion_fin_modulo='REPROBADO';// SIN DERECHO
    }
 
@@ -1009,7 +1011,7 @@ if($num_adeudos_fin_modulo>0 && $num_adeudos_fin_modulo<=3){
          $estatus_final='SIN DERECHO';// equivale a irregular
       }
 
-      if($num_adeudos_regu_julio>6){
+      if($num_adeudos_regu_julio>=6){
          $estatus_final='REPROBADO';// SIN DERECHO
       }
 

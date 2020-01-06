@@ -1311,29 +1311,74 @@
 
   var form = document.getElementById("formulario");
   form.onsubmit = function (e) {
-    if (document.getElementById("aspirante_secundaria_cct").value === '') {
-      console.log("vacio");
-      swalWithBootstrapButtons.fire({
-        type: 'warning',
-        text: 'Esta tratando de agregar un alumno sin Secundaria',
-        showCancelButton: true,
-        allowOutsideClick: false,
-        confirmButtonText: 'Registrar',
-        cancelButtonText: 'Cancelar',
-      }).then((result) => {
-        if (result.value) {
-          console.log("Entro a if")
-          e.preventDefault();
-          envioform(form);
 
-        }
-      })
-      return false;
-    } else {
-      e.preventDefault();
-      envioform(form);
+    e.preventDefault();
+    num_materias_adeudo=document.getElementById("num_materias_adeudo").value;
+    ultimo_semestre_acreditado=document.getElementById("ultimo_semestre_acreditado").value;
+
+    x = document.getElementById("id_ciclo_escolar").selectedIndex;
+    id_ciclo_escolar=document.getElementById("id_ciclo_escolar").options;
+
+    semestres_cursados=0;
+    errores_ciclo_anterior="";
+
+    if(num_materias_adeudo>3){
+      errores_ciclo_anterior+="<li>El aspirante no puede ser registrado porque adeuda mas de 3 materias</li>";
     }
 
+    if(ultimo_semestre_acreditado>1){
+      errores_ciclo_anterior+="<li>El aspirante debe tener acreditado unicamente el primer semestre</li>";
+    }
+
+
+   anio= id_ciclo_escolar[x].text.split("-");
+    anio_inicio=anio[0];
+    anio_fin=anio[1];
+    semestres_cursados=((anio_fin-anio_inicio)*2)+1;
+
+    console.log("semestres:"+anio_inicio);
+    if(semestres_cursados>5){
+      errores_ciclo_anterior+="<li>Ha rebasado el limite permitido de 12 semestres para culminar sus estudios</li>";
+    }
+
+
+    if(errores_ciclo_anterior!=''){
+      Swal.fire({
+            type: 'error',
+            title: 'Error al ingresar datos del aspirante',
+            html:'<p style="text-align:left;margin-left:5%;font-weight: bold;">Verifique lo siguiente:</p><p style="text-align:left;margin-left:20%"><ul>'+errores_ciclo_anterior+'</ul></p>',
+            confirmButtonText: "Aceptar",
+            showConfirmButton: true,
+            
+          });
+    }
+
+    
+    else{
+              if (document.getElementById("aspirante_secundaria_cct").value === '') {
+              console.log("vacio");
+              swalWithBootstrapButtons.fire({
+                type: 'warning',
+                text: 'Esta tratando de agregar un alumno sin Secundaria',
+                showCancelButton: true,
+                allowOutsideClick: false,
+                confirmButtonText: 'Registrar',
+                cancelButtonText: 'Cancelar',
+              }).then((result) => {
+                if (result.value) {
+                  console.log("Entro a if")
+                  e.preventDefault();
+                  envioform(form);
+
+                }
+              })
+              return false;
+            } else {
+              e.preventDefault();
+              envioform(form);
+            }
+
+    }
 
   }
   function envioform(form) {

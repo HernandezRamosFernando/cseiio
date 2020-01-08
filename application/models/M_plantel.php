@@ -107,7 +107,9 @@ function get_lista_planteles_especialidad_traslado_html($no_control,$semestre,$i
 
 
 
-
+function get_plantel_sin_examen_final($cct){
+   return $this->db->query("select * from Grupo_Estudiante as ge inner join Grupo as g on ge.Grupo_id_grupo=g.id_grupo where estatus=1 and examen_final is null and plantel='".$cct."'")->result();
+}
 
 
 }

@@ -59,5 +59,11 @@ public function get_lista_planteles_especialidad_traslado_html(){
         echo json_encode($this->M_plantel->get_planteles_sin_examen_final());
      }
 
+
+     function get_plantel_sin_examen_final(){
+        $cct_plantel = $this->input->get("cct_plantel");
+        echo json_encode($this->M_plantel->get_planteles_sin_examen_final($cct_plantel));
+     }
+
      
 }

@@ -74,13 +74,20 @@ class M_grupo_estudiante extends CI_Model {
             }
 
 
-            if($calificaciones_estudiante->examen_final!=null){
-                $this->db->query("update Grupo_Estudiante 
-                set examen_final=".($calificaciones_estudiante->examen_final=="/"?0:$calificaciones_estudiante->examen_final)." 
+           // if($calificaciones_estudiante->examen_final!=null){
+               if($calificaciones_estudiante->primer_parcial!=null && $calificaciones_estudiante->segundo_parcial!=null && $calificaciones_estudiante->tercer_parcial!=null){
+                $examen_final="/";
+                   if($calificaciones_estudiante->examen_final!=null){
+                    $examen_final=$calificaciones_estudiante->examen_final;
+                   }
+               $this->db->query("update Grupo_Estudiante 
+                set examen_final=".($examen_final=="/"?0:$examen_final)." 
                 where Grupo_id_grupo='".$calificaciones_estudiante->id_grupo."' and 
                 Estudiante_no_control='".$calificaciones_estudiante->no_control."' and 
                 id_materia='".$calificaciones_estudiante->materia."'");
-            }
+               }
+                
+           // }
         }
 
 

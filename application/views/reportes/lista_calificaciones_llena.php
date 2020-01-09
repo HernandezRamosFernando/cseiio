@@ -246,13 +246,24 @@ function rellenar_lista($estudiantes,$bajas){
         }
         
 
-
+       
         if(sizeof($bajas[$contador-1])>0){
             $respuesta.='<tr style="background-color:#ececec;line-height: 20px;">';
+            $promedio="/";
+            
         }
 
         else{
             $respuesta.='<tr style="line-height: 20px;">';
+            
+        }
+
+        if($estudiante->calificacion_final>0 && $estudiante->calificacion_final!=""){
+            $calificacion_final=$estudiante->calificacion_final;
+        }
+
+        else{
+            $calificacion_final="/";
         }
         
 
@@ -269,7 +280,7 @@ function rellenar_lista($estudiantes,$bajas){
 
         <td style="width:35px">'.(($promedio!="")?($promedio==0?'/':$promedio):"").'</td>
         <td style="width:35px">'.(($estudiante->examen_final)=='0'?'/':$estudiante->examen_final).'</td>
-        <td style="width:35px">'.$estudiante->calificacion_final.'</td>';
+        <td style="width:35px">'.$calificacion_final.'</td>';
         if(sizeof($bajas[$contador-1])>0){
             $fecha_baja="";
 

@@ -299,7 +299,7 @@
     window.onload = function () {
       var xhr = new XMLHttpRequest();
       var query = 'cct_plantel='+document.getElementById("aspirante_plantel_busqueda").value;
-      xhr.open('GET', '<?php echo base_url();?>index.php/c_plantel/get_plantel_sin_examen_final?', true);
+      xhr.open('GET', '<?php echo base_url();?>index.php/c_plantel/get_plantel_sin_examen_final?'+query, true);
       xhr.onloadstart = function () {
         $('#div_carga').show();
       }

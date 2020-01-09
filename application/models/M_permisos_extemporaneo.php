@@ -162,13 +162,23 @@ class M_permisos_extemporaneo extends CI_Model {
             }
 
 
-            if($calificaciones_estudiante->examen_final!=null){
+           // if($calificaciones_estudiante->examen_final!=null){
+               if($calificaciones_estudiante->primer_parcial!=null && $calificaciones_estudiante->segundo_parcial!=null && $calificaciones_estudiante->tercer_parcial!=null){
+               
+                $examen_fin="/";
+                if($calificaciones_estudiante->examen_final!=null){
+                    $examen_fin=$calificaciones_estudiante->examen_final;
+                }
+
                 $this->db->query("update Grupo_Estudiante 
-                set examen_final=".($calificaciones_estudiante->examen_final=="/"?0:$calificaciones_estudiante->examen_final)." 
+                set examen_final=".($examen_fin=="/"?0:$examen_fin)." 
                 where Grupo_id_grupo='".$calificaciones_estudiante->id_grupo."' and 
                 Estudiante_no_control='".$calificaciones_estudiante->no_control."' and 
                 id_materia='".$calificaciones_estudiante->materia."'");
-            }
+
+               }
+                
+           // }
             $this->db->query("update Permisos_extemporaneo set estatus=0 where id_materia='".$id_materia."' and id_grupo='".$id_grupo."' and Estudiante_no_control='".$calificaciones_estudiante->no_control."'");
         }
 

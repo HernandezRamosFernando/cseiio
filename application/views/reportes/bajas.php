@@ -59,17 +59,11 @@ class MYPDF extends TCPDF {
 	//Page header
 	public function Header() {
 
-        $html='<div style="text-align: center;" ><span ><strong>DEPARTAMENTO DE CONTROL ESCOLAR</strong></span></div>
-
+        $html='<div style="text-align: center;" >
+        <span style="text-align:center;font-size:8pt;  font-weight:bold">COLEGIO SUPERIOR PARA LA EDUCACIÓN INTEGRAL INTERCULTURAL DE OAXACA</span><br>
+        <span style="text-align:center;font-size:7pt;  font-weight:bold">DEPARTAMENTO DE CONTROL ESCOLAR</span>
         <br>
-        <table border="1" cellpadding="3">
-            <tr>
-            <td style="text-align: center;font-weight: bold">REPORTE DE BAJAS</td>
-            </tr>
-        </table>
-        
-        <br>
-        <br>
+        <span style="text-align:center;font-size:6pt;  font-style: italic">REPORTE DE BAJAS</span></div>
         <br>
 
         <table border="0">
@@ -89,14 +83,17 @@ class MYPDF extends TCPDF {
 
 $this->SetFont('helvetica', 'B',8);
 
-		$this->writeHTMLCell($w =234.5, $h =59.8, $x =21, $y = 28, $html, $border = 0, $ln = 1, $fill = 0, $reseth = true, $align = 'top', $autopadding = true);
+		$this->writeHTMLCell($w =234.5, $h =59.8, $x =14, $y = 12, $html, $border = 0, $ln = 1, $fill = 0, $reseth = true, $align = 'top', $autopadding = true);
 
 		// Logo
-		$image_file =base_url().'assets/img/cabecera.png';
-		$this->Image($image_file, 176,6, 90, '', 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
+		$image_file =base_url().'assets/img/logo_cseiio.png';
+        $this->Image($image_file, 14,6, 13, '', 'PNG', '', 'T', false, 100, '', false, false, 0, false, false, false);
+        
+        $image_file =base_url().'assets/img/logo_gobierno.png';
+		$this->Image($image_file, 250,6, 13, '', 'PNG', '', 'T', false, 100, '', false, false, 0, false, false, false);
 
-		$image_file =base_url().'assets/img/ladoderecho.png';
-		$this->Image($image_file, 257, 40, 15, '', 'PNG', '', 'T', false, 100, '', false, false, 0, false, false, false);
+		/*$image_file =base_url().'assets/img/ladoderecho.png';
+		$this->Image($image_file, 257, 40, 15, '', 'PNG', '', 'T', false, 100, '', false, false, 0, false, false, false);*/
 
 
 		// Set font
@@ -104,9 +101,9 @@ $this->SetFont('helvetica', 'B',8);
 
 
 
-		// Titulo
+		/*
 		$this->SetXY(25,26);
-		$this->Cell(0,0, '"2019, AÑO POR LA ERRADICACIÓN DE LA VIOLENCIA CONTRA LA MUJER"', 0, false, 'C', 0, '', 0, false, 'M', 'M');
+		$this->Cell(0,0, '"2019, AÑO POR LA ERRADICACIÓN DE LA VIOLENCIA CONTRA LA MUJER"', 0, false, 'C', 0, '', 0, false, 'M', 'M');*/
 
 
 		
@@ -114,37 +111,37 @@ $this->SetFont('helvetica', 'B',8);
 
 	// Page footer
 	public function Footer() {
-		$html = '<br><br><br><br><br><br><br><br><table>
+		$html = '<table >
                 <tbody>
                 <tr>
         
-                <td>
+                <td style="text-align:center">
                 
-                <p style="text-decoration: underline;">'.$this->plantel[0]->director.'</p>
-                <p>NOMBRE Y FIRMA DEL DIRECTOR</p>
-                <p>DEL PLANTEL</p>
+                <span style="text-decoration: underline;">'.$this->plantel[0]->director.'</span><br>
+                NOMBRE Y FIRMA DEL DIRECTOR<br>
+                DEL PLANTEL
                 </td>
         
-                <td>
-                <p> </p>
-                <p>____________________________</p>
-                <p>SELLO DEL PLANTEL</p>
-                <p></p>
+                <td style="text-align:center">
+                
+                ____________________________
+                <br>SELLO DEL PLANTEL
                 </td>
         
-                <td>
-                <p>DAVID ERNESTO HERNANDEZ AVENDAÑO</p>
-                <p>____________________________</p>
-                <p>JEFA DE DEPARTAMENTO</p>
-                <p>DE CONTROL ESCOLAR</p>
+                <td style="text-align:center">
+                
+                <span style="text-decoration: underline;">DAVID ERNESTO HERNANDEZ AVENDAÑO</span><br>
+                
+                JEFE DE DEPARTAMENTO<br>
+               DE CONTROL ESCOLAR
                 </td>
         
         
-                <td>
-                <p> </p>
-                <p>____________________________</p>
-                <p>SELLO DE CONTROL ESCOLAR</p>
-                <p></p>
+                <td style="text-align:center">
+                
+                ____________________________<br>
+                SELLO DE CONTROL ESCOLAR<
+                
                 </td>
         
                 </tr>
@@ -219,12 +216,12 @@ $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
 $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 
 // set margins
-$pdf->SetMargins(20,65,23);
-$pdf->SetHeaderMargin(65);
-$pdf->SetFooterMargin(94);
+$pdf->SetMargins(12,45,15);
+$pdf->SetHeaderMargin(30);
+$pdf->SetFooterMargin(60);
 
 // set auto page breaks
-$pdf->SetAutoPageBreak(TRUE,94);
+$pdf->SetAutoPageBreak(TRUE,60);
 
 // set image scale factor
 $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
@@ -249,12 +246,12 @@ $pdf->AddPage();
         <table border="1">
         <thead>
         <tr style="background-color:#ececec;height:10px">
-        <td style="width:5%;text-align:center">N/P</td>
-        <td style="width:20%;text-align:center">MODULO/GRUPO</td>
-        <td style="width:15%;text-align:center">NOMBRE DEL ALUMNO</td>
-        <td style="width:20%;text-align:center">MOTIVO</td>
-        <td style="width:10%;text-align:center">FECHA DE BAJA</td>
-        <td style="width:30%;text-align:center">OBSERVACIONES</td>
+        <td style="width:5%;text-align:center;font-weight:bold">N/P</td>
+        <td style="width:13%;text-align:center;font-weight:bold">MODULO/GRUPO</td>
+        <td style="width:20%;text-align:center;font-weight:bold">NOMBRE DEL ALUMNO</td>
+        <td style="width:25%;text-align:center;font-weight:bold">MOTIVO</td>
+        <td style="width:10%;text-align:center;font-weight:bold">FECHA DE BAJA</td>
+        <td style="width:28%;text-align:center;font-weight:bold">OBSERVACIONES</td>
         </tr>
         </thead>
 
@@ -262,17 +259,48 @@ $pdf->AddPage();
        $cont=1;
         foreach ($lista_baja as $baja) {
 
-            $tabla.='<tr>
-            <td style="width:5%">'.$cont.'</td>
-            <td style="width:20%">'.semestre_en_letra($baja->semestre).'/'.$baja->nombre_grupo.'</td>
-            <td style="width:15%">'.$baja->primer_apellido.' '.$baja->segundo_apellido.' '.$baja->nombre.'</td>
-            <td style="width:20%">'.$baja->motivo.'</td>
-            <td style="width:10%">'.$baja->fecha.'</td>
-            <td style="width:30%">'.$baja->observacion.'</td>
+            $tabla.='<tr style="line-height: 30px">
+            <td style="width:5%;text-align:center;font-size: 7px;">'.$cont.'</td>
+            <td style="width:13%;text-align:center;font-size: 7px;">'.semestre_en_letra($baja->semestre).'/'.$baja->nombre_grupo.'</td>
+            <td style="width:20%;font-size: 7px;">'.$baja->primer_apellido.' '.$baja->segundo_apellido.' '.$baja->nombre.'</td>
+            <td style="width:25%;font-size: 7px;">'.$baja->motivo.'</td>
+            <td style="width:10%;font-size: 7px;">'.$baja->fecha.'</td>
+            <td style="width:28%;font-size: 7px;">'.strtr(strtoupper($baja->observacion),"àèìòùáéíóúçñäëïöü","ÀÈÌÒÙÁÉÍÓÚÇÑÄËÏÖÜ").'</td>
             </tr>';
-            $cont=$cont++;
+            $cont++;
             
         }
+
+
+        if($cont>1){
+            $tabla.='<tr style="line-height: 20px;background-color:#909090">
+            <td style="width:5%;text-align:center;font-size: 7px">'.$cont.'</td>
+            <td style="width:13%"></td>
+            <td style="width:20%"></td>
+            <td style="width:25%"></td>
+            <td style="width:10%"></td>
+            <td style="width:28%"></td>
+            </tr>';
+            $cont++;
+        }
+        
+
+            while ($cont <= 15) {
+
+                $tabla.='<tr style="line-height: 20px">
+                <td style="width:5%;text-align:center;font-size: 7px">'.$cont.'</td>
+                <td style="width:13%;text-align:center"></td>
+                <td style="width:20%"></td>
+                <td style="width:25%"></td>
+                <td style="width:10%"></td>
+                <td style="width:28%"></td>
+                </tr>';
+                $cont++;
+                
+            }
+        
+
+
         
 
         $tabla.=' </tbody>
@@ -285,7 +313,7 @@ $pdf->writeHTML($tabla, true, 0, true, true);
 
 
 //Close and output PDF document
-$pdf->Output('Lista de Asistencia.pdf', 'I');
+$pdf->Output('Lista de bajas.pdf', 'I');
 
 //============================================================+
 // END OF FILE

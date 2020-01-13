@@ -60,6 +60,8 @@ class MYPDF extends TCPDF {
            }
            }
 
+           
+
 	//Page header
 	public function Header() {
 		$image_file =base_url().'assets/img/logo_cseiio.png';
@@ -84,6 +86,9 @@ class MYPDF extends TCPDF {
 		//$this->Cell(0, 10, 'Página '.$this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
 	}
 }
+
+
+
 
 // create new PDF document
 $pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
@@ -226,7 +231,9 @@ $encabezado_tabla_b='
 ';
 
 
-function rellenar_lista($estudiantes,$bajas){
+
+
+function rellenar_lista($estudiantes,$bajas,$tipo_materia){
     $respuesta='';
     $contador=1;
 
@@ -258,12 +265,46 @@ function rellenar_lista($estudiantes,$bajas){
             
         }
 
-        if($estudiante->calificacion_final>0 && $estudiante->calificacion_final!=""){
-            $calificacion_final=$estudiante->calificacion_final;
+        if($estudiante->calificacion_final>0 && $estudiante->calificacion_final!="" && !is_null($estudiante->calificacion_final)){
+            if($tipo_materia=="EXTRAESCOLAR"){
+                switch ($estudiante->calificacion_final){
+        
+                    case 6: 
+                        $calificacion_final="S";
+                    break;
+                    case 7: 
+                        $calificacion_final="R"; 
+                    break;
+                    case 8: 
+                        $calificacion_final="B"; 
+                    break;
+                    case 9: 
+                        $calificacion_final="MB"; 
+                    break;
+                    case 10: 
+                        $calificacion_final="E"; 
+                    break;
+                    default:
+                    $calificacion_final="/";
+                    
+                }
+
+                
+            }
+            else{
+                $calificacion_final=$estudiante->calificacion_final;
+            }
+            
         }
 
         else{
-            $calificacion_final="/";
+            if(is_null($estudiante->calificacion_final) && $estudiante->calificacion_final==""){
+                $calificacion_final="";
+            }
+            else{
+                $calificacion_final="/";
+            }
+            
         }
         
 
@@ -280,6 +321,7 @@ function rellenar_lista($estudiantes,$bajas){
 
         <td style="width:35px">'.(($promedio!="")?($promedio==0?'/':$promedio):"").'</td>
         <td style="width:35px">'.(($estudiante->examen_final)=='0'?'/':$estudiante->examen_final).'</td>
+
         <td style="width:35px">'.$calificacion_final.'</td>';
         if(sizeof($bajas[$contador-1])>0){
             $fecha_baja="";
@@ -352,7 +394,7 @@ $datos_estudiantes='
 <div>
 <table border="1" style="font-size:6pt">
 <tbody>
-'.rellenar_lista($estudiantes,$bajas).'
+'.rellenar_lista($estudiantes,$bajas,$materia->tipo).'
 </tbody>
 </table>
 <div>

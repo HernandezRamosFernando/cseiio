@@ -755,7 +755,7 @@ if($parametros->periodo=="AGOSTO-ENERO"){
       $situacion_fin_modulo='REINGRESO';
       $num_adeudos_fin_modulo=0;
       $materias_adeudo_fin_modulo='';
-      $adeudos_sin_regu_enero=$this->db->query("SELECT * FROM Grupo_Estudiante where Estudiante_no_control='".$parametros->no_control."' and calificacion_final>0 and calificacion_final<=5 and calificacion_final IS NOT NULL and id_materia not in (SELECT id_materia FROM Regularizacion where fecha_calificacion<'".$parametros->anio_termino."-01-01' and Estudiante_no_control='".$parametros->no_control."' and calificacion>=6);")->result();
+      $adeudos_sin_regu_enero=$this->db->query("SELECT * FROM Grupo_Estudiante ge inner join Grupo g on g.id_grupo=ge.Grupo_id_grupo where g.semestre=1 and Estudiante_no_control='".$parametros->no_control."' and calificacion_final>0 and calificacion_final<=5 and calificacion_final IS NOT NULL and id_materia not in (SELECT id_materia FROM Regularizacion where fecha_calificacion<'".$parametros->anio_termino."-01-01' and Estudiante_no_control='".$parametros->no_control."' and calificacion>=6);")->result();
 
       $num_adeudos_fin_modulo=count($adeudos_sin_regu_enero);
 
@@ -779,7 +779,7 @@ if($parametros->periodo=="AGOSTO-ENERO"){
      $situacion_despues_regu='REINGRESO';
      $num_adeudos_despues_regu=0;
      $materias_adeudo_despues_regu='';
-      $adeudos_despues_regu_enero=$this->db->query("SELECT * FROM Grupo_Estudiante where Estudiante_no_control='".$parametros->no_control."' and calificacion_final>0 and calificacion_final<=5 and calificacion_final IS NOT NULL and id_materia not in (SELECT id_materia FROM Regularizacion where fecha_calificacion<'".$parametros->anio_termino."-02-01' and Estudiante_no_control='".$parametros->no_control."' and calificacion>=6);")->result();
+      $adeudos_despues_regu_enero=$this->db->query("SELECT * FROM Grupo_Estudiante ge inner join Grupo g on g.id_grupo=ge.Grupo_id_grupo where g.semestre=1 and Estudiante_no_control='".$parametros->no_control."' and calificacion_final>0 and calificacion_final<=5 and calificacion_final IS NOT NULL and id_materia not in (SELECT id_materia FROM Regularizacion where fecha_calificacion<'".$parametros->anio_termino."-02-01' and Estudiante_no_control='".$parametros->no_control."' and calificacion>=6);")->result();
       $num_adeudos_despues_regu=count($adeudos_despues_regu_enero);
 
       if($num_adeudos_despues_regu>0 && $num_adeudos_despues_regu<=3){

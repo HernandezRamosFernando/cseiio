@@ -34,7 +34,7 @@
                                         ?>
 
               </select>
-              <span>Ciclo Escolar</span>
+              <span>Ciclo Escolar que cursó primer semestre</span>
             </label>
           </div>
 
@@ -63,6 +63,7 @@
           <div class="col-md-6">
               <label class="form-group has-float-label seltitulo">
                   <select class="form-control form-control-lg selcolor" id="num_materias_adeudo" required name="num_materias_adeudo" onclick="">
+                  <option value="0">Ninguna</option>
                   <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>

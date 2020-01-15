@@ -30,9 +30,39 @@ class MYPDF extends TCPDF {
 
         public $plantel;
         public $ciclo;
-	
+        public $revisor;
+        public $jefe_escolar;
+        
+        public function get_nombre_mes($semestre){
+          
+            switch ($semestre){
+                case 1: return "ENERO"; break;
+                case 2: return "FEBRERO"; break;
+                case 3: return "MARZO"; break;
+                case 4: return "ABRIL"; break;
+                case 5: return "MAYO"; break;
+                case 6: return "JUNIO"; break;
+                case 7: return "JULIO"; break;
+                case 8: return "AGOSTO"; break;
+                case 9: return "SEPTIEMBRE"; break;
+                case 10: return "OCTUBRE"; break;
+                case 11: return "NOVIEMBRE"; break;
+                case 12: return "DICIEMBRE"; break;
+                
+            }
+            }
 
-	
+        public function set_revisor($revisor){
+            $this->revisor=$revisor;
+                }
+        
+        
+                
+
+
+                public function set_jefe_escolar($jefe_escolar){
+                    $this->jefe_escolar=$jefe_escolar;
+                        }
 
 	public function set_plantel($plantel){
 	$this->plantel=$plantel;
@@ -63,7 +93,7 @@ class MYPDF extends TCPDF {
         <span style="text-align:center;font-size:8pt;  font-weight:bold">COLEGIO SUPERIOR PARA LA EDUCACIÓN INTEGRAL INTERCULTURAL DE OAXACA</span><br>
         <span style="text-align:center;font-size:7pt;  font-weight:bold">DEPARTAMENTO DE CONTROL ESCOLAR</span>
         <br>
-        <span style="text-align:center;font-size:6pt;  font-style: italic">REPORTE DE BAJAS</span></div>
+        <span style="text-align:center;font-size:6.5pt;  font-style: italic">REPORTE DE BAJAS</span></div>
         <br>
 
         <table border="0">
@@ -111,15 +141,16 @@ $this->SetFont('helvetica', 'B',8);
 
 	// Page footer
 	public function Footer() {
-		$html = '<table >
+        $html = '
+        <table>
                 <tbody>
                 <tr>
         
                 <td style="text-align:center">
                 
                 <span style="text-decoration: underline;">'.$this->plantel[0]->director.'</span><br>
-                NOMBRE Y FIRMA DEL DIRECTOR<br>
-                DEL PLANTEL
+               <span style="font-weight: bold"> NOMBRE Y FIRMA DEL DIRECTOR<br>
+                DEL PLANTEL</span>
                 </td>
         
                 <td style="text-align:center">
@@ -130,23 +161,52 @@ $this->SetFont('helvetica', 'B',8);
         
                 <td style="text-align:center">
                 
-                <span style="text-decoration: underline;">DAVID ERNESTO HERNANDEZ AVENDAÑO</span><br>
+                <span style="text-decoration: underline;">'.$this->jefe_escolar[0]->valor.'</span><br>
                 
-                JEFE DE DEPARTAMENTO<br>
-               DE CONTROL ESCOLAR
+                <span style="font-weight: bold">JEFE DE DEPARTAMENTO<br>
+               DE CONTROL ESCOLAR</span>
                 </td>
         
         
                 <td style="text-align:center">
                 
                 ____________________________<br>
-                SELLO DE CONTROL ESCOLAR<
+                <span style="font-weight: bold">SELLO DE CONTROL ESCOLAR</span>
                 
                 </td>
         
                 </tr>
                 </tbody>
-                </table>';
+                </table>
+                
+                <p></p>
+
+                <table>
+                <tbody>
+                <tr>
+
+                <td style="width: 10%;text-align:right;font-weight: bold">
+                VALIDÓ:
+                </td>
+
+
+                <td style="width: 70%">
+                '.$this->revisor[0]->nombre.' '.$this->revisor[0]->primer_apellido.' '.$this->revisor[0]->segundo_apellido.'
+                
+                </td>
+
+                <td style="width: 20%;font-size:7px" >
+                ORIGINAL.- DEPTO. CONTROL ESCOLAR.<br>
+                COPIA.- PLANTEL.
+                    
+                </td>
+
+                </tr>
+                </tbody>
+                </table>
+                
+                
+                ';
 		// Position at 15 mm from bottom
 		$this->writeHTMLCell($w = 0, $h = 0, $x ='', $y ='', $html, $border = 0, $ln = 1, $fill = 0, $reseth = true, $align = 'top', $autopadding = true);
 		
@@ -197,6 +257,10 @@ $pdf = new MYPDF('L', PDF_UNIT,"LETTER", true, 'UTF-8', false);
 
 $pdf->set_plantel($plantel);
 $pdf->set_ciclo($ciclo_escolar);
+$pdf->set_revisor($revisor);
+
+$pdf->set_jefe_escolar($jefe_escolar);
+
 
 
 // set document information
@@ -301,10 +365,15 @@ $pdf->AddPage();
         
 
 
-        
+            $date = date_create($fecha_fin);
+            $cadena_fecha=date_format($date, 'd').' DE '.$pdf->get_nombre_mes(date_format($date, 'm')).' DE '.date_format($date, 'Y');
 
         $tabla.=' </tbody>
         </table>
+            <br>
+            <br>
+
+        <span style="font-weight: bold">Fecha:</span>'.$cadena_fecha.'
         ';
 
 // print a block of text using Write()

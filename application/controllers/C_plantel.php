@@ -8,6 +8,12 @@ class C_plantel extends CI_Controller
         $this->load->model("M_plantel");
     }
 
+    public function get_plantel(){
+        $plantel = $this->input->get("cct");
+        
+        echo json_encode($this->M_plantel->get_plantel($plantel));
+    }
+
 
     public function get_plantel_especialidad(){
         $plantel = $this->input->get("plantel");

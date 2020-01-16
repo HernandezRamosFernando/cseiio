@@ -10,11 +10,14 @@
       <li class="breadcrumb-item active">Busque al alumno que desea trasladar al plantel</li>
     </ol>
 
+    
 
     <div class="card">
       <div class="card-body">
 
         <div class="form-group">
+
+        <input type="hidden" name="cct_plantel" id="cct_plantel" value=<?php echo $cct[0]->cct_plantel?>>
 
           <div class="row">
             <div class="col-md-6">
@@ -427,6 +430,41 @@
 
                           }
 
+                          else{
+
+                            if(document.getElementById("cct_plantel").value!=estudiante[0].Plantel_cct_plantel){
+                              var xhr_plantel_destino = new XMLHttpRequest();
+                            var query = 'cct='+document.getElementById("cct_plantel").value;
+                            xhr_plantel_destino.open('GET', '<?php echo base_url();?>index.php/C_plantel/get_plantel?'+query, true);
+                              
+                            xhr_plantel_destino.error = function () {
+                                    console.log("error de conexion");
+                                  }
+                                  xhr_plantel_destino.onload = function () {
+                                     
+                                    document.getElementById("plantel_para_traslado").innerHTML='<option value="">Seleccione el plantel de destino</option>';
+                                    var opcion='';
+                                    JSON.parse(xhr_plantel_destino.response).forEach(function (valor, indice) {
+                                      opcion = '<option value="'+valor.cct_plantel+'">'+valor.nombre_corto+' '+valor.nombre_plantel;
+                                      opcion += '</option>';
+                                    });
+
+                                    document.getElementById("plantel_para_traslado").innerHTML += opcion;
+                                    
+                                  
+                                          
+                                };
+
+                                xhr_plantel_destino.send(null);
+
+                            }
+
+                            
+                            
+
+
+                          }
+
                       }
 
                       else{
@@ -570,6 +608,8 @@ var form_nuevo_traslado = document.getElementById("nuevo_traslado");
 		    }
 		    xhr_2.send(formdata);
 
+        document.getElementById("aspirante_curp_busqueda").value='';
+        document.getElementById("matricula_busqueda").value='';
         borrar_formato_tabla();
           buscar();
         

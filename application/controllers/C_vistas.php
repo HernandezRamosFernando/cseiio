@@ -375,6 +375,7 @@ public function resolucion_equivalencia(){
         else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
             $datos['planteles'] =  $this->M_plantel->get_planteles();
             $datos['lista_planteles'] = $this->M_plantel->get_planteles();
+            $datos['cct'] = $this->M_plantel->get_plantel($this->session->userdata('user')['plantel']);
             $data= array('title'=>'Traslado');
             $this->load->view("headers/cabecera", $data);
             $this->load->view("headers/menuarriba");

@@ -720,7 +720,8 @@ var form_nuevo_traslado = document.getElementById("nuevo_traslado");
  	var id_grupo="";
      id_grupo=document.getElementById("grupos").value;
 
-     var xhr = new XMLHttpRequest();
+     if(id_grupo!=''){
+      var xhr = new XMLHttpRequest();
      var query = 'id_grupo=' +id_grupo;
      xhr.open('GET', '<?php echo base_url();?>index.php/c_grupo/get_num_estudiantes_grupo?' + query, true);
     
@@ -757,6 +758,13 @@ console.log("num_alumnos: "+num_alumnos);
   };
 
   xhr.send(null); 
+
+     }
+
+     else{
+      document.getElementById("btn_enviar").setAttribute('disabled','disabled');
+     }
+     
 
 
   }

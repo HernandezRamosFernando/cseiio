@@ -661,12 +661,12 @@ public function actualizar_estatus_estudiante($no_control,$num_adeudos,$modulo,$
           default:
 		  if($num_adeudos==0){
       $tipo_ingreso='PROBABLE REINCORPORADO';
-      $semestre_en_curso=$modulo+1;
+      $semestre_en_curso=$modulo;
       $this->db->query("update Estudiante set tipo_ingreso='".$tipo_ingreso."',estatus='REGULAR',semestre_en_curso=".$semestre_en_curso.",semestre=".$num_semestres_trascurridos.", matricula='".$matricula."' where no_control='".$no_control."'");
    }
    if($num_adeudos>=1 && $num_adeudos<=3){
       $tipo_ingreso='PROBABLE REINCORPORADO';
-      $semestre_en_curso=$modulo+1;
+      $semestre_en_curso=$modulo;
 
       $this->db->query("update Estudiante set tipo_ingreso='".$tipo_ingreso."',estatus='IRREGULAR',semestre_en_curso=".$semestre_en_curso.",semestre=".$num_semestres_trascurridos.",matricula='".$matricula."' where no_control='".$no_control."'");
    }

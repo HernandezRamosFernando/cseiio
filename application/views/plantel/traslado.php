@@ -303,11 +303,32 @@
                       var semestre_curso = estudiante[0].semestre_en_curso;
 
                       var restantes = (6 - semestre_curso) + parseInt(semestre);
+
+                      if(estudiante[0].tipo_ingreso=='SIN DERECHO' || estudiante[0].tipo_ingreso=='REPROBADO'){
+                        validacion_resultado+="<p style='text-align:left;margin-left:30%'> - No puede realizar el proceso porque el alumno es.</p>";
+
+                      }
                       if(restantes> 12){
                         validacion_resultado+="<p style='text-align:left;margin-left:30%'> - No puede realizar el proceso porque el alumno ha rebasado el límite de 12 semestres permitido por el Depto. de Control Escolar.</p>";
                       }
 
-                      if(estudiante[0].matricula===null){
+                      if(estudiante[0].num_tercer_parcial>0){
+                              validacion_resultado+="<p style='text-align:left;margin-left:30%'> - Tiene calificaciones de tercer parcial.<p>";
+                                    
+                                }
+
+
+                                if(estudiante[0].num_examen_final>0){
+                                  validacion_resultado+="<p style='text-align:left;margin-left:30%'> - Tiene calificaciones de  examen final.</p>";
+                                    
+                                }
+
+
+                                if(estudiante[0].num_calificacion_final>0){
+                                  validacion_resultado+="<p style='text-align:left;margin-left:30%'> - Con calificacion final.</p>";
+                                    
+                                }
+                      if(estudiante[0].matricula===null || estudiante[0].matricula.length!=7){
                             validacion_resultado+="<p style='text-align:left;margin-left:30%'> - El alumno no cuenta con matricula.</p>";
                       }
 

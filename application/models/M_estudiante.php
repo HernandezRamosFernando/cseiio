@@ -2,6 +2,7 @@
 class M_estudiante extends CI_Model { 
    public function __construct() {
       parent::__construct();
+      $this->load->model('M_ciclo_escolar');
       
    }
 
@@ -565,11 +566,13 @@ public function realizar_traslado_estudiante($no_control,
            $this->db->trans_start();
 
            if($tipo_ingreso!='DESERTOR'){
-                  
+
+            
+            $fecha_inscripcion_del_ciclo = $this->M_ciclo_escolar->fecha_inscripcion();
                   $data = array(
                      'Estudiante_no_control' =>$no_control,
                      'motivo' => "SE CAMBIO A OTRO PLANTEL",
-                     'fecha' =>date('Y-m-d'),
+                     'fecha' =>$fecha_inscripcion_del_ciclo,
                      'semestre' => $semestre_en_curso,
                      'grupo' => $grupo
                );
@@ -704,7 +707,7 @@ public function get_estudiantes_porsibles_traslados($matricula,$curp){
 
 public function generar_lista_desercion($plantel,$fecha_inicio,$fecha_fin,$id_ciclo){
    //return $this->db->query("SELECT e.nombre,e.primer_apellido,e.segundo_apellido,d.semestre,d.grupo,d.motivo FROM Desertor d inner join Estudiante e on d.Estudiante_no_control=e.no_control where e.Plantel_cct_plantel='".$plantel."' and d.fecha between '".$fecha_inicio."' and '".$fecha_fin."' order by d.semestre,d.grupo, e.primer_apellido,e.segundo_apellido,e.nombre")->result();
-   return $this->db->query("SELECT e.nombre,e.primer_apellido,e.segundo_apellido,d.semestre,d.grupo,d.motivo FROM Desertor d inner join Estudiante e on d.Estudiante_no_control=e.no_control inner join (SELECT distinct ge.Estudiante_no_control FROM Grupo_Estudiante ge inner join Grupo g on ge.Grupo_id_grupo=g.id_grupo where ge.Ciclo_escolar_id_ciclo_escolar=".$id_ciclo." and g.plantel='".$plantel."') grupo_anterior on grupo_anterior.Estudiante_no_control=d.Estudiante_no_control where e.Plantel_cct_plantel='".$plantel."' and d.fecha between '".$fecha_inicio."' and '".$fecha_fin."' order by d.semestre,d.grupo, e.primer_apellido,e.segundo_apellido,e.nombre")->result();
+   return $this->db->query("SELECT e.nombre,e.primer_apellido,e.segundo_apellido,d.semestre,d.grupo,d.motivo FROM Desertor d inner join Estudiante e on d.Estudiante_no_control=e.no_control where fecha>='".$fecha_inicio."' and fecha<='".$fecha_fin."' and d.Estudiante_no_control in (SELECT distinct ge.Estudiante_no_control FROM Grupo_Estudiante ge inner join Grupo g on ge.Grupo_id_grupo=g.id_grupo where ge.Ciclo_escolar_id_ciclo_escolar in (select id_ciclo_escolar from Ciclo_escolar c where fecha_inicio<'".$fecha_inicio."') and g.plantel='".$plantel."') order by d.semestre,d.grupo, e.primer_apellido,e.segundo_apellido,e.nombre")->result();
 
 }
 

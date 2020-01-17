@@ -422,7 +422,7 @@ public function obtener_fecha_inscripcion_semestre($no_control){
       inner join 
       Grupo as g on ge.Grupo_id_grupo=g.id_grupo
       inner join Estudiante as e on ge.Estudiante_no_control=e.no_control
-      where calificacion_final<6 and calificacion_final!=null and no_control='".$datos->no_control."'
+      where calificacion_final<6 and calificacion_final is not null and no_control='".$datos->no_control."'
       union
       select Estudiante_no_control,Materia_id_materia as id_materia from Portabilidad_adeudos as pa 
       inner join 

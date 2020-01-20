@@ -305,7 +305,7 @@
                       var restantes = (6 - semestre_curso) + parseInt(semestre);
 
                       if(estudiante[0].tipo_ingreso=='SIN DERECHO' || estudiante[0].tipo_ingreso=='REPROBADO'){
-                        validacion_resultado+="<p style='text-align:left;margin-left:30%'> - No puede realizar el proceso porque el alumno es.</p>";
+                        validacion_resultado+="<p style='text-align:left;margin-left:30%'> - No puede realizar el proceso porque el alumno tiene estatus de "+estudiante[0].tipo_ingreso+".</p>";
 
                       }
                       if(restantes> 12){

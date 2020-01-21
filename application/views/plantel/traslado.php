@@ -308,6 +308,12 @@
                         validacion_resultado+="<p style='text-align:left;margin-left:30%'> - No puede realizar el proceso porque el alumno tiene estatus de "+estudiante[0].tipo_ingreso+".</p>";
 
                       }
+
+                      if(estudiante[0].tipo_ingreso=='PROBABLE REINCORPORADO'){
+                        validacion_resultado+="<p style='text-align:left;margin-left:30%'> - EL Encargado de Plantel del CCT "+estudiante[0].Plantel_cct_plantel+" debe primeramente incorporar al alumno, una vez efectuado el paso anterior, ya puede realizar el traslado.</p>";
+
+                      }
+
                       if(restantes> 12){
                         validacion_resultado+="<p style='text-align:left;margin-left:30%'> - No puede realizar el proceso porque el alumno ha rebasado el límite de 12 semestres permitido por el Depto. de Control Escolar.</p>";
                       }

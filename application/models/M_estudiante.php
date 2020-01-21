@@ -565,7 +565,7 @@ public function realizar_traslado_estudiante($no_control,
            
            $this->db->trans_start();
 
-           if($tipo_ingreso!='DESERTOR'){
+           if($tipo_ingreso!='DESERTOR' && $tipo_ingreso=='REINGRESO'){
 
             
             $fecha_inscripcion_del_ciclo = $this->M_ciclo_escolar->fecha_inscripcion();

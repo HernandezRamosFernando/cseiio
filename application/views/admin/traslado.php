@@ -10,11 +10,14 @@
       <li class="breadcrumb-item active">Busque al alumno que desea trasladar al plantel</li>
     </ol>
 
+    
 
     <div class="card">
       <div class="card-body">
 
         <div class="form-group">
+
+        <input type="hidden" name="cct_plantel" id="cct_plantel" value=<?php echo $cct[0]->cct_plantel?>>
 
           <div class="row">
             <div class="col-md-6">
@@ -300,11 +303,50 @@
                       var semestre_curso = estudiante[0].semestre_en_curso;
 
                       var restantes = (6 - semestre_curso) + parseInt(semestre);
+
+                      
+
                       if(restantes> 12){
                         validacion_resultado+="<p style='text-align:left;margin-left:30%'> - No puede realizar el proceso porque el alumno ha rebasado el límite de 12 semestres permitido por el Depto. de Control Escolar.</p>";
                       }
+                      else{
+                          if(estudiante[0].tipo_ingreso=='SIN DERECHO'){
+                          validacion_resultado+="<p style='text-align:left;margin-left:30%'> - No puede realizar el proceso porque el alumno tiene estatus de "+estudiante[0].tipo_ingreso+".</p>";
 
-                      if(estudiante[0].matricula===null){
+                        }
+
+                        if(estudiante[0].tipo_ingreso=='PROBABLE REINCORPORADO'){
+                          validacion_resultado+="<p style='text-align:left;margin-left:30%'> - EL Encargado de Plantel del CCT "+estudiante[0].Plantel_cct_plantel+" debe primeramente incorporar al alumno, una vez efectuado el paso anterior, ya puede realizar el traslado.</p>";
+
+                        }
+
+                        if(estudiante[0].tipo_ingreso=='BAJA'){
+                          validacion_resultado+="<p style='text-align:left;margin-left:30%'> - El estatus actual del alumno es BAJA, por lo tanto el Encargado de Plantel del CCT "+estudiante[0].Plantel_cct_plantel+" debe marcar a este alumno como repetidor, una vez efectuado el paso anterior, ya puede realizar el traslado.</p>";
+
+                        }
+
+                        if(estudiante[0].tipo_ingreso=='REPROBADO'){
+                          validacion_resultado+="<p style='text-align:left;margin-left:30%'> - El estatus actual del alumno es REPROBADO, por lo tanto el Encargado de Plantel del CCT "+estudiante[0].Plantel_cct_plantel+" debe marcar a este alumno como repetidor, una vez efectuado el paso anterior, ya puede realizar el traslado.</p>";
+
+                        }
+
+                        if(estudiante[0].num_tercer_parcial>0){
+                              validacion_resultado+="<p style='text-align:left;margin-left:30%'> - Tiene calificaciones de tercer parcial.<p>";
+                                    
+                                }
+
+
+                                if(estudiante[0].num_examen_final>0){
+                                  validacion_resultado+="<p style='text-align:left;margin-left:30%'> - Tiene calificaciones de  examen final.</p>";
+                                    
+                                }
+
+
+                                if(estudiante[0].num_calificacion_final>0){
+                                  validacion_resultado+="<p style='text-align:left;margin-left:30%'> - Con calificacion final.</p>";
+                                    
+                                }
+                      if(estudiante[0].matricula===null || estudiante[0].matricula.length!=7){
                             validacion_resultado+="<p style='text-align:left;margin-left:30%'> - El alumno no cuenta con matricula.</p>";
                       }
 
@@ -313,6 +355,10 @@
                       if(estudiante[0].faltantes>0){
                             validacion_resultado+="<p style='text-align:left;margin-left:30%'> - El alumno adeuda documentación base.</p>";
                       }
+
+                      }
+
+                      
 
 
                       if(validacion_resultado===""){
@@ -424,6 +470,41 @@
                                 };
 
                                 xhr_plantel.send(null);
+
+                          }
+
+                          else{
+
+                            if(document.getElementById("cct_plantel").value!=estudiante[0].Plantel_cct_plantel){
+                              var xhr_plantel_destino = new XMLHttpRequest();
+                            var query = 'cct='+document.getElementById("cct_plantel").value;
+                            xhr_plantel_destino.open('GET', '<?php echo base_url();?>index.php/C_plantel/get_plantel?'+query, true);
+                              
+                            xhr_plantel_destino.error = function () {
+                                    console.log("error de conexion");
+                                  }
+                                  xhr_plantel_destino.onload = function () {
+                                     
+                                    document.getElementById("plantel_para_traslado").innerHTML='<option value="">Seleccione el plantel de destino</option>';
+                                    var opcion='';
+                                    JSON.parse(xhr_plantel_destino.response).forEach(function (valor, indice) {
+                                      opcion = '<option value="'+valor.cct_plantel+'">'+valor.nombre_corto+' '+valor.nombre_plantel;
+                                      opcion += '</option>';
+                                    });
+
+                                    document.getElementById("plantel_para_traslado").innerHTML += opcion;
+                                    
+                                  
+                                          
+                                };
+
+                                xhr_plantel_destino.send(null);
+
+                            }
+
+                            
+                            
+
 
                           }
 
@@ -570,6 +651,8 @@ var form_nuevo_traslado = document.getElementById("nuevo_traslado");
 		    }
 		    xhr_2.send(formdata);
 
+        document.getElementById("aspirante_curp_busqueda").value='';
+        document.getElementById("matricula_busqueda").value='';
         borrar_formato_tabla();
           buscar();
         
@@ -583,13 +666,12 @@ var form_nuevo_traslado = document.getElementById("nuevo_traslado");
 
 
  function cargargrupos() {
-
-  
  	document.getElementById("btn_enviar").setAttribute('disabled','disabled');
    var plantel = document.getElementById("plantel_para_traslado").value;
       console.log(plantel);
 
       if(plantel!=""){
+
       var semestre = document.getElementById("semestre_en_curso").value;
       console.log(semestre);
     
@@ -667,10 +749,10 @@ var form_nuevo_traslado = document.getElementById("nuevo_traslado");
         }
 
      }
-
-      }
       
     }
+
+ }
   
 
 
@@ -681,7 +763,8 @@ var form_nuevo_traslado = document.getElementById("nuevo_traslado");
  	var id_grupo="";
      id_grupo=document.getElementById("grupos").value;
 
-     var xhr = new XMLHttpRequest();
+     if(id_grupo!=''){
+      var xhr = new XMLHttpRequest();
      var query = 'id_grupo=' +id_grupo;
      xhr.open('GET', '<?php echo base_url();?>index.php/c_grupo/get_num_estudiantes_grupo?' + query, true);
     
@@ -718,6 +801,13 @@ console.log("num_alumnos: "+num_alumnos);
   };
 
   xhr.send(null); 
+
+     }
+
+     else{
+      document.getElementById("btn_enviar").setAttribute('disabled','disabled');
+     }
+     
 
 
   }

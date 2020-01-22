@@ -310,7 +310,7 @@
                         validacion_resultado+="<p style='text-align:left;margin-left:30%'> - No puede realizar el proceso porque el alumno ha rebasado el límite de 12 semestres permitido por el Depto. de Control Escolar.</p>";
                       }
                       else{
-                          if(estudiante[0].tipo_ingreso=='SIN DERECHO' || estudiante[0].tipo_ingreso=='REPROBADO'){
+                          if(estudiante[0].tipo_ingreso=='SIN DERECHO'){
                           validacion_resultado+="<p style='text-align:left;margin-left:30%'> - No puede realizar el proceso porque el alumno tiene estatus de "+estudiante[0].tipo_ingreso+".</p>";
 
                         }

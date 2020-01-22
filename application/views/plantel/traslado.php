@@ -304,21 +304,33 @@
 
                       var restantes = (6 - semestre_curso) + parseInt(semestre);
 
-                      if(estudiante[0].tipo_ingreso=='SIN DERECHO' || estudiante[0].tipo_ingreso=='REPROBADO'){
-                        validacion_resultado+="<p style='text-align:left;margin-left:30%'> - No puede realizar el proceso porque el alumno tiene estatus de "+estudiante[0].tipo_ingreso+".</p>";
-
-                      }
-
-                      if(estudiante[0].tipo_ingreso=='PROBABLE REINCORPORADO'){
-                        validacion_resultado+="<p style='text-align:left;margin-left:30%'> - EL Encargado de Plantel del CCT "+estudiante[0].Plantel_cct_plantel+" debe primeramente incorporar al alumno, una vez efectuado el paso anterior, ya puede realizar el traslado.</p>";
-
-                      }
+                      
 
                       if(restantes> 12){
                         validacion_resultado+="<p style='text-align:left;margin-left:30%'> - No puede realizar el proceso porque el alumno ha rebasado el límite de 12 semestres permitido por el Depto. de Control Escolar.</p>";
                       }
+                      else{
+                          if(estudiante[0].tipo_ingreso=='SIN DERECHO' || estudiante[0].tipo_ingreso=='REPROBADO'){
+                          validacion_resultado+="<p style='text-align:left;margin-left:30%'> - No puede realizar el proceso porque el alumno tiene estatus de "+estudiante[0].tipo_ingreso+".</p>";
 
-                      if(estudiante[0].num_tercer_parcial>0){
+                        }
+
+                        if(estudiante[0].tipo_ingreso=='PROBABLE REINCORPORADO'){
+                          validacion_resultado+="<p style='text-align:left;margin-left:30%'> - EL Encargado de Plantel del CCT "+estudiante[0].Plantel_cct_plantel+" debe primeramente incorporar al alumno, una vez efectuado el paso anterior, ya puede realizar el traslado.</p>";
+
+                        }
+
+                        if(estudiante[0].tipo_ingreso=='BAJA'){
+                          validacion_resultado+="<p style='text-align:left;margin-left:30%'> - El estatus actual del alumno es BAJA, por lo tanto el Encargado de Plantel del CCT "+estudiante[0].Plantel_cct_plantel+" debe marcar a este alumno como repetidor, una vez efectuado el paso anterior, ya puede realizar el traslado.</p>";
+
+                        }
+
+                        if(estudiante[0].tipo_ingreso=='REPROBADO'){
+                          validacion_resultado+="<p style='text-align:left;margin-left:30%'> - El estatus actual del alumno es REPROBADO, por lo tanto el Encargado de Plantel del CCT "+estudiante[0].Plantel_cct_plantel+" debe marcar a este alumno como repetidor, una vez efectuado el paso anterior, ya puede realizar el traslado.</p>";
+
+                        }
+
+                        if(estudiante[0].num_tercer_parcial>0){
                               validacion_resultado+="<p style='text-align:left;margin-left:30%'> - Tiene calificaciones de tercer parcial.<p>";
                                     
                                 }
@@ -343,6 +355,10 @@
                       if(estudiante[0].faltantes>0){
                             validacion_resultado+="<p style='text-align:left;margin-left:30%'> - El alumno adeuda documentación base.</p>";
                       }
+
+                      }
+
+                      
 
 
                       if(validacion_resultado===""){

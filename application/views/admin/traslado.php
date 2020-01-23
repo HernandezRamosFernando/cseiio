@@ -17,7 +17,7 @@
 
         <div class="form-group">
 
-        <input type="hidden" name="cct_plantel" id="cct_plantel" value=<?php echo $cct[0]->cct_plantel?>>
+        <input type="hidden" name="cct_plantel" id="cct_plantel" value=<?php echo (is_array($cct))? $cct[0]->cct_plantel : ""?>>
 
           <div class="row">
             <div class="col-md-6">

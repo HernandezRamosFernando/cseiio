@@ -355,6 +355,7 @@ public function resolucion_equivalencia(){
         if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
             $datos['planteles'] = $this->M_plantel->get_planteles();
             $datos['lista_planteles'] = $this->M_plantel->get_planteles();
+            $datos['cct'] = "";
             $data= array('title'=>'Traslado');
             $this->load->view("headers/cabecera", $data);
             $this->load->view("headers/menuarriba");
@@ -365,6 +366,7 @@ public function resolucion_equivalencia(){
         else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='CESCOLAR'){
             $datos['planteles'] = $this->M_plantel->get_planteles();
             $datos['lista_planteles'] = $this->M_plantel->get_planteles();
+            $datos['cct'] = "";
             $data= array('title'=>'Traslado');
             $this->load->view("headers/cabecera", $data);
             $this->load->view("headers/menuarriba");

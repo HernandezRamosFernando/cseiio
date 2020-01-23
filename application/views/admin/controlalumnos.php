@@ -75,6 +75,7 @@
               <th scope="col" class="col-md-1">Fecha Ingreso</th>
               <th scope="col" class="col-md-1">Editar</th>
               <th scope="col" class="col-md-1">Imprimir</th>
+              <th scope="col" class="col-md-1">Eliminar</th>
             </tr>
           </thead>
 
@@ -1412,9 +1413,10 @@ function insertar_secundaria() {
       $('#div_carga').hide();
       JSON.parse(xhr.response).forEach(function (valor, indice) {
         //console.log(valor);
+        nombre_completo=valor.primer_apellido + " " + valor.segundo_apellido + " " + valor.nombre;
         var fila = '<tr>';
         fila += '<td>';
-        fila += valor.primer_apellido + " " + valor.segundo_apellido + " " + valor.nombre;
+        fila += nombre_completo;
         fila += '</td>';
         fila += '<td>';
         fila += valor.curp;
@@ -1435,7 +1437,10 @@ function insertar_secundaria() {
         fila += '<button class="btn btn-lg btn-block btn-success" type="button" value="' + valor.no_control + '" onclick="cargar_datos_aspirante(this)" data-toggle="modal" data-target="#">Editar</button>';
         fila += '</td>';
         fila += '<td>';
-        fila += '<a href="<?php echo base_url();?>index.php/C_estudiante/generar_formato_inscripcion?no_control=' + valor.no_control + '" class="btn btn-lg btn-block btn-info btn btn-primary" target="_blank">Imprimir</a>';
+        fila += '<a href="<?php echo base_url();?>index.php/C_estudiante/generar_formato_inscripcion?no_control=' + valor.no_control + '" class="btn btn-lg btn-block btn-info btn btn-primary" target="_blank">Imprimir</a></td>';
+        fila += '<td>';
+        fila += '<button class="btn btn-lg btn-block btn-danger" type="button" value="' + valor.no_control + '" onclick="eliminar_permanente(this)" data-toggle="modal" data-target="#">Eliminar</button>';
+
         fila += '</td>';
         fila += '</tr>';
         document.getElementById("tabla").innerHTML += fila;
@@ -1658,6 +1663,25 @@ delete from Estudiante where no_control='CSEIIO1910676'
 
 
 */
+
+function eliminar_permanente(e) {
+    
+
+  swalWithBootstrapButtons.fire({
+          type: 'info',
+          text: 'Esta secundaria no existe',
+          showCancelButton: true,
+          showConfirmButton: true,
+          cancelButtonText: 'Cancelar',
+        }).then((result) => {
+          if (result.value) {
+            alert("");
+
+          }
+        })
+     
+
+  }
 </script>
 
 

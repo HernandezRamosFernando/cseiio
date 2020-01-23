@@ -1171,6 +1171,11 @@ public function get_estudiantes_para_vista_bajas(){
     $cct_plantel = $this->input->get('cct_plantel');
     echo json_encode($this->M_estudiante->get_estudiantes_para_vista_bajas($cct_plantel,$curp));
 }
+
+public function eliminar_estudiante_permanente_bd(){
+    $datos = json_decode($this->input->raw_input_stream);
+    echo $this->M_estudiante->eliminar_estudiante_permanente_bd($datos);
+}
  
  }
  ?>

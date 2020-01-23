@@ -718,5 +718,37 @@ public function get_estudiantes_para_vista_bajas($plantel,$curp){
 }
 
 
+
+public function eliminar_estudiante_permanente_bd($datos){
+   $this->db->trans_start();
+
+   $this->db->query("delete from Grupo_Estudiante where Estudiante_no_control='".$datos->no_control."';");
+   $this->db->query("delete from Datos_lengua_materna where Estudiante_no_control='".$datos->no_control."';");
+   $this->db->query("delete from Documentacion where Estudiante_no_control='".$datos->no_control."';");
+   $this->db->query("delete from Estudiante_Escuela_procedencia where Estudiante_no_control='".$datos->no_control."';");
+   $this->db->query("delete from Estudiante_Tutor where Estudiante_no_control='".$datos->no_control."';");
+   $this->db->query("delete from Expediente_medico where Estudiante_no_control='".$datos->no_control."';");
+   $this->db->query("delete from Friae_Estudiante where Estudiante_no_control='".$datos->no_control."';");
+
+   $this->db->query("delete from Baja where Estudiante_no_control='".$datos->no_control."';");
+   $this->db->query("delete from Desertor where Estudiante_no_control='".$datos->no_control."';");
+   $this->db->query("delete from Regularizacion where Estudiante_no_control='".$datos->no_control."';");
+
+   $this->db->query("delete from Estudiante where no_control='".$datos->no_control."'");
+  
+   $this->db->trans_complete();
+
+            if ($this->db->trans_status() === FALSE)
+            {
+               return "no";
+             }
+               
+            else{
+               return "si";
+              
+            }
+}
+
+
 }
 ?>

@@ -1439,7 +1439,7 @@ function insertar_secundaria() {
         fila += '<td>';
         fila += '<a href="<?php echo base_url();?>index.php/C_estudiante/generar_formato_inscripcion?no_control=' + valor.no_control + '" class="btn btn-lg btn-block btn-info btn btn-primary" target="_blank">Imprimir</a></td>';
         fila += '<td>';
-        fila += '<button class="btn btn-lg btn-block btn-danger" type="button" value="' + valor.no_control + '" onclick="eliminar_permanente(this)" data-toggle="modal" data-target="#">Eliminar</button>';
+        fila += '<button class="btn btn-lg btn-block btn-danger" type="button" value="' + valor.no_control + '" onclick="eliminar_permanente(this,\''+nombre_completo+'\')" data-toggle="modal" data-target="#">Eliminar</button>';
 
         fila += '</td>';
         fila += '</tr>';
@@ -1664,24 +1664,67 @@ delete from Estudiante where no_control='CSEIIO1910676'
 
 */
 
-function eliminar_permanente(e) {
+function eliminar_permanente(e,nombre_alumno) {
     
 
   swalWithBootstrapButtons.fire({
-          type: 'info',
-          text: 'Esta secundaria no existe',
+          type: 'warning',
+          html: '<p>Esta seguro de eliminar los datos de manera permanente de: </p><p style="font-weight: bold;">'+nombre_alumno+'</p><p>Esto ocacionará que sean eliminados sus datos de: <ul style="text-align:left;margin-left:30%"><li>Documentación.</li><li>Datos Personales.</li><li>Datos de Tutor</li><li>Reportes de FRIAE,FRER, Lista de Calificaciones, Lista de Asistencia,KARDEX, etc.</li></ul></p>',
           showCancelButton: true,
           showConfirmButton: true,
           cancelButtonText: 'Cancelar',
         }).then((result) => {
           if (result.value) {
-            alert("");
+
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", '<?php echo base_url();?>index.php/c_estudiante/eliminar_estudiante_permanente_bd', true);
+                xhr.onloadstart = function () {
+                  $('#div_carga').show();
+                }
+                xhr.error = function () {
+                  console.log("error de conexion");
+                }
+                //Send the proper header information along with the request
+                xhr.setRequestHeader("Content-Type", "application/json");
+
+                xhr.onreadystatechange = function () { // Call a function when the state changes.
+                  if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                    $('#div_carga').hide();
+                    if (xhr.responseText.trim() === "si") {
+                      Swal.fire({
+                        type: 'success',
+                        title: 'Actualizacion exitosa'
+                      });
+
+                      refrescar_tabla();
+                      
+                    } else {
+                      Swal.fire({
+                        type: 'error',
+                        text: 'Ha ocurrido un error, contacte con el administrador'
+                      });
+                    }
+                  }
+                }
+                    xhr.send(JSON.stringify({no_control:e.value})); 
+            
 
           }
         })
      
 
   }
+
+
+  function refrescar_tabla(){
+  borrar_formato_tabla();
+  buscar();
+}
+
+ function borrar_formato_tabla(){
+      $("#tabla_completa").dataTable().fnDestroy();
+      
+    }
 </script>
 
 

@@ -136,6 +136,13 @@ public function modificar_grupo(){
      
 }
 
+
+public function get_grupos_activos(){
+    $cct_plantel= $this->input->get("plantel");
+    echo json_encode($this->M_grupo->get_grupos_activos_plantel_completo($cct_plantel));
+}
+
+
 }
 ?>
 

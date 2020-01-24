@@ -24,28 +24,14 @@
 
     <br>
     <form class="card" id="formulariounplantel" name="formulariounplantel" style="display: none">
-      <div class="form-group">
-        <div class="col-md-12" id="tabla_plantel">
-          <div class="card card-body">
-            <table class="table table-hover" id="tabla_completa_plantel" style="width: 100%">
-              <caption>Lista de los planteles</caption>
-              <thead class="thead-light">
-                <tr>
-                  <th scope="col" class="col-md-5">Plantel</th>
-                  <th scope="col" class="col-md-1">Parcial 1</th>
-                  <th scope="col" class="col-md-1">Parcial 2</th>
-                  <th scope="col" class="col-md-1">Parcial 3</th>
-                  <th scope="col" class="col-md-1">Examen Final</th>
-                </tr>
-              </thead>
 
-              <tbody id="tablaunplantel">
-
-                <td>
-                  <label class="form-group has-float-label seltitulo">
+    <div class="form-group">
+    <div class="row">
+    <div class="col-md-12 ">
+    <label class="form-group has-float-label seltitulo">
                     <select class="form-control form-control-lg selcolor" required="required"
-                      id="aspirante_plantel_busqueda" name="aspirante_plantel">
-                      <option value="">Seleccione uno</option>
+                      id="aspirante_plantel_busqueda" name="aspirante_plantel" onChange="grupos_cct(this)">
+                      <option value="">Seleccione un plantel</option>
 
                       <?php
                       foreach ($planteles as $plantel)
@@ -57,7 +43,59 @@
                     </select>
                     <span>Plantel</span>
                   </label>
-                </td>
+        </div>
+
+        
+      </div>
+      </div>
+
+
+      <div class="form-group">
+    <div class="row">
+
+    <div class="col-md-6 ">
+    <label class="form-group has-float-label seltitulo">
+                    <select class="form-control form-control-lg selcolor" required="required"
+                      id="aspirante_grupo_busqueda" name="aspirante_grupo" onChange="materias_grupo(this)">
+                      <option value="">Todos las grupos</option>
+                    </select>
+                    <span>Grupo</span>
+                  </label>
+        </div>
+
+
+    <div class="col-md-6 ">
+    <label class="form-group has-float-label seltitulo">
+                    <select class="form-control form-control-lg selcolor" required="required"
+                      id="aspirante_materia_busqueda" name="aspirante_materia">
+                      <option value="">Todas las materias</option>
+                    </select>
+                    <span>Materia</span>
+                  </label>
+        </div>
+
+    </div>
+      </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-md-12" id="tabla_plantel">
+          <div class="card card-body">
+            <table class="table table-hover" id="tabla_completa_plantel" style="width: 100%">
+              <caption>Lista de parciales y examen final</caption>
+              <thead class="thead-light">
+                <tr>
+                  
+                  <th scope="col" class="col-md-1">Parcial 1</th>
+                  <th scope="col" class="col-md-1">Parcial 2</th>
+                  <th scope="col" class="col-md-1">Parcial 3</th>
+                  <th scope="col" class="col-md-1">Examen Final</th>
+                </tr>
+              </thead>
+
+              <tbody id="tablaunplantel">
+              <tr>
+                
                 <td>
                   <input type='checkbox' class='form-check-input' id='parcial1' name='parcial1'>
                 </td>
@@ -70,6 +108,7 @@
                 <td class="">
                   <input type='checkbox' class='form-check-input' id='examenfinal' name='examenfinal'>
                 </td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -192,6 +231,7 @@
       var tabla = document.getElementById("tablaplantel");
       for (let i = 2; i < tabla.childNodes.length; i++) {
         var dato = {
+          tipo_operacion:"PLANTELES_SELECCIONADOS",
           cct_plantel: tabla.childNodes[i].childNodes[1].innerText,
           primer_parcial: tabla.childNodes[i].childNodes[3].childNodes[0].checked,
           segundo_parcial: tabla.childNodes[i].childNodes[4].childNodes[0].checked,
@@ -211,7 +251,10 @@
     else {
       var tabla = document.getElementById("tablaunplantel");
       var dato = {
-        cct_plantel: tabla.childNodes[1].childNodes[0].childNodes[1].childNodes[1].value,
+        tipo_operacion:"UN_PLANTEL",
+        cct_plantel: document.getElementById("aspirante_plantel").value,
+        grupo: document.getElementById("aspirante_grupo").value,
+        materia: document.getElementById("aspirante_materia").value,
         primer_parcial: tabla.childNodes[1].childNodes[2].childNodes[1].checked,
         segundo_parcial: tabla.childNodes[1].childNodes[4].childNodes[1].checked,
         tercer_parcial: tabla.childNodes[1].childNodes[6].childNodes[1].checked,
@@ -421,6 +464,96 @@
     }
 
   }
+
+
+
+function grupos_cct(parametro_cct){
+  var cct=parametro_cct.value;
+    var xhr = new XMLHttpRequest();
+        xhr.open('GET', '<?php echo base_url();?>index.php/c_grupo/get_grupos_activos?plantel='+cct, true);
+        xhr.onloadstart = function () {
+        $('#div_carga').show();
+      }
+      xhr.error = function () {
+        console.log("error de conexion");
+      }
+      xhr.onload = function () {
+        $('#div_carga').hide();
+          console.log(xhr.response);
+
+          
+          document.getElementById("aspirante_grupo_busqueda").innerHTML="";
+          let opciones="";
+          opciones += '<option value="TODOS_LOS_GRUPOS">Todos los grupos</option>';
+                  JSON.parse(xhr.response).forEach(function (valor, indice) {
+                //console.log(valor);
+                JSON.parse(xhr.response).forEach(function (valor, indice) {
+                  opciones += '<option value="' + valor.id_grupo + '">' +valor.semestre+'-'+valor.nombre_grupo+'</option>';
+                });
+              });
+              document.getElementById("aspirante_grupo_busqueda").innerHTML += opciones;
+              document.getElementById("aspirante_materia_busqueda").innerHTML ="";
+              var select = document.getElementById("aspirante_materia_busqueda");
+              var option = document.createElement("option");
+              option.text = "Seleccione una grupo";
+              option.value = ""
+              select.add(option);
+          
+        };
+
+        xhr.send(null);
+
+}
+
+
+function materias_grupo(parametro_grupo){
+  
+  var grupo=parametro_grupo.value;
+  if(grupo==""){
+    document.getElementById("aspirante_materia_busqueda").innerHTML="";
+              var select = document.getElementById("aspirante_materia_busqueda");
+              var option = document.createElement("option");
+              option.text = "Seleccione una materia";
+              option.value = ""
+              select.add(option);
+  }
+  else{
+    var xhr = new XMLHttpRequest();
+        xhr.open('GET', '<?php echo base_url();?>index.php/c_grupo/get_materias_grupo?grupo='+grupo, true);
+        xhr.onloadstart = function () {
+        $('#div_carga').show();
+      }
+      xhr.error = function () {
+        console.log("error de conexion");
+      }
+      xhr.onload = function () {
+        $('#div_carga').hide();
+          console.log(xhr.response);
+          document.getElementById("aspirante_materia_busqueda").innerHTML="";
+          let opciones="";
+          opciones += '<option value="TODAS_LAS_MATERIAS">Todas las materias</option>';
+                  JSON.parse(xhr.response).forEach(function (valor, indice) {
+                //console.log(valor);
+                JSON.parse(xhr.response).forEach(function (valor, indice) {
+                  opciones += '<option value="' + valor.clave + '">' +valor.clave+'-'+valor.unidad_contenido+'</option>';
+                });
+              });
+              document.getElementById("aspirante_materia_busqueda").innerHTML += opciones;
+
+
+              
+          
+        };
+
+        xhr.send(null);
+
+  }
+    
+  }
+
+
+
+
 
 
 

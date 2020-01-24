@@ -73,6 +73,7 @@
             <tr>
               <th scope="col" class="col-md-1">Nombre completo</th>
               <th scope="col" class="col-md-1">CURP</th>
+              <th scope="col" class="col-md-1">Estatus</th>
               <th scope="col" class="col-md-1">N° control</th>
               <th scope="col" class="col-md-1">Semestre</th>
               <th scope="col" class="col-md-1">Plantel CCT</th>
@@ -121,7 +122,16 @@
       $('#div_carga').hide();
 
       JSON.parse(xhr.response).forEach(function (valor, indice) {
-        var fila = '<tr>';
+
+        var tipo_ingreso = valor.tipo_ingreso;
+
+        if(tipo_ingreso=='BAJA'){
+          var fila = '<tr style="background-color:#d4284f; color:#ffffff; font-weight:bold">';
+        }
+        else{
+          var fila = '<tr>';
+        }
+        
 
         fila += '<td>';
         var nombre_completo = valor.primer_apellido + " " + valor.segundo_apellido + " " + valor.nombre;
@@ -131,6 +141,11 @@
         fila += '<td>';
         var curp = valor.curp
         fila += curp;
+        fila += '</td>';
+         
+        
+        fila += '<td>';
+        fila += tipo_ingreso;
         fila += '</td>';
 
         fila += '<td>';

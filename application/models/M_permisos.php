@@ -19,21 +19,50 @@ class M_permisos extends CI_Model {
     }
     
 
+    
+
     foreach($datos as $dato){
-        $grupos = $this->M_grupo->get_grupos_activos_plantel($dato->cct_plantel);
+        $grupos="";
+        $materias="";
+        if($dato->tipo_operacion=="UN_PLANTEL"){
+            if($dato->grupo=="TODOS_LOS_GRUPOS"){
+                $grupos = $this->M_grupo->get_grupos_activos_plantel($dato->cct_plantel);
+            }
+            else{
+                $grupos= (object)array("titulo"=>$dato->grupo);
+            }
 
-        foreach($grupos as $grupo){
-        $materias = $this->M_grupo->get_materias_grupo($grupo->id_grupo);//id_materia=clave
+           
+            foreach($grupos as $grupo){
+                if($dato->materia=="TODAS_LAS_MATERIAS"){
+                    $materias =  
+                }
+                else{
+                    $materias="";
+                }
+                
+            }
 
-        foreach($materias as $materia){
-        $primer_parcial = $dato->primer_parcial==1?1:0;
-        $segundo_parcial = $dato->segundo_parcial==1?1:0;
-        $tercer_parcial = $dato->tercer_parcial==1?1:0;
-        $examen_final = $dato->examen_final==1?1:0;
-        $this->db->query("insert into Permiso_calificacion (Plantel_cct_plantel,usuario,primer_parcial,segundo_parcial,tercer_parcial,examen_final,fecha_inicio,fecha_fin,id_grupo,id_materia,estatus)
-        values ('".$dato->cct_plantel."','".$dato->usuario."',".$primer_parcial.",".$segundo_parcial.",".$tercer_parcial.",".$examen_final.",'".$dato->fecha_inicio."','".$dato->fecha_fin."','".$grupo->id_grupo."','".$materia->clave."',1)");
         }
+
+        if($dato->tipo_operacion=="PLANTELES_SELECCIONADOS"){
+            $grupos = $this->M_grupo->get_grupos_activos_plantel($dato->cct_plantel);
+            foreach($grupos as $grupo){
+            $materias = $this->M_grupo->get_materias_grupo($grupo->id_grupo);//id_materia=clave
+    
+            foreach($materias as $materia){
+            $primer_parcial = $dato->primer_parcial==1?1:0;
+            $segundo_parcial = $dato->segundo_parcial==1?1:0;
+            $tercer_parcial = $dato->tercer_parcial==1?1:0;
+            $examen_final = $dato->examen_final==1?1:0;
+            $this->db->query("insert into Permiso_calificacion (Plantel_cct_plantel,usuario,primer_parcial,segundo_parcial,tercer_parcial,examen_final,fecha_inicio,fecha_fin,id_grupo,id_materia,estatus)
+            values ('".$dato->cct_plantel."','".$dato->usuario."',".$primer_parcial.",".$segundo_parcial.",".$tercer_parcial.",".$examen_final.",'".$dato->fecha_inicio."','".$dato->fecha_fin."','".$grupo->id_grupo."','".$materia->clave."',1)");
+            }
+            }
+
         }
+
+        
     }
 
     

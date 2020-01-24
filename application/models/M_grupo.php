@@ -277,6 +277,12 @@ public function agregar_grupo_de_ciclo_anterior($id_grupo,$semestre,$nombre_grup
    }
 
 
+
+   public function get_grupos_activos_plantel_completo($plantel){
+      
+    return $this->db->query("select * from Grupo where estatus=1 and plantel='".$plantel."' order by semestre,nombre_grupo")->result();
+}
+
   /* public function materias_adeudo_estudiante($no_control){
     return $this->db->query("select * from Grupo_Estudiante where calificacion_final<6 and Estudiante_no_control='".$no_control."' and id_materia not in(select id_materia from Regularizacion where calificacion>=6 and Estudiante_no_control='".$no_control."')")->result();    
    }*/

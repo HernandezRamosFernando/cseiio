@@ -260,7 +260,10 @@ $html_1 ='
 </tr>
 
 <tr>
-<td><strong>SEXO: </strong>'.$sexo.'</td>
+<td><table  border="1">
+<tbody><tr><td WIDTH="70%"><strong>FECHA REGISTRO DE ACTA: </strong>'.$estudiante['estudiante'][0]->fecha_registro_nacimiento.'</td>
+<td WIDTH="30%"><strong>SEXO: </strong>'.$sexo.'</td></tr></tbody></table>
+</td>
 <td><strong>EDAD: </strong>'.$edad.'</td>
 </tr>
 
@@ -510,7 +513,7 @@ $pdf->writeHTML($html_1.$html_2.$html_3, true, 0, true, true);
 
 
 //Close and output PDF document
-$pdf->Output('example_003.pdf', 'I');
+$pdf->Output('Formato ficha Inscripción.pdf', 'I');
 
 //============================================================+
 // END OF FILE

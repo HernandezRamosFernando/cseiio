@@ -91,9 +91,17 @@ class MYPDF extends TCPDF {
 
         $html='<div style="text-align: center;" >
         <span style="text-align:center;font-size:8pt;  font-weight:bold">COLEGIO SUPERIOR PARA LA EDUCACIÓN INTEGRAL INTERCULTURAL DE OAXACA</span><br>
-        <span style="text-align:center;font-size:7pt;  font-weight:bold">DEPARTAMENTO DE CONTROL ESCOLAR</span>
+        <span style="text-align:center;font-size:7pt;  font-weight:bold">DEPARTAMENTO DE CONTROL ESCOLAR</span></div>
         <br>
-        <span style="text-align:center;font-size:6.5pt;  font-style: italic">REPORTE DE BAJAS</span></div>
+        
+        <br>
+
+
+        <table border="1" WIDTH="100%"><tr>
+        <td style="font-weight: bold;font-size:10pt;text-align: center;background-color:#ececec;height:10px">
+        <br>REPORTE DE BAJAS</td>
+    </tr></table>
+    <br>
         <br>
 
         <table border="0">
@@ -107,13 +115,17 @@ class MYPDF extends TCPDF {
                 <td style="font-weight: bold"  WIDTH="16%">CICLO ESCOLAR:</td><td WIDTH="69%">'.$this->ciclo[0]->nombre_ciclo_escolar.'</td><td WIDTH="10%">PERIODO:</td><td WIDTH="5%">"'.$this->periodo($this->ciclo[0]->periodo).'"</td>
             </tr>
         </table>
-
+        <br>
+        
+        <br>
+        <br>
+        <br>
 
         ';
 
 $this->SetFont('helvetica', 'B',8);
 
-		$this->writeHTMLCell($w =234.5, $h =59.8, $x =14, $y = 12, $html, $border = 0, $ln = 1, $fill = 0, $reseth = true, $align = 'top', $autopadding = true);
+		$this->writeHTMLCell($w =250, $h =59.8, $x =14, $y = 12, $html, $border = 0, $ln = 1, $fill = 0, $reseth = true, $align = 'top', $autopadding = true);
 
 		// Logo
 		$image_file =base_url().'assets/img/logo_cseiio.png';
@@ -311,11 +323,12 @@ $pdf->AddPage();
         <thead>
         <tr style="background-color:#ececec;height:10px">
         <td style="width:5%;text-align:center;font-weight:bold">N/P</td>
-        <td style="width:13%;text-align:center;font-weight:bold">MODULO/GRUPO</td>
-        <td style="width:20%;text-align:center;font-weight:bold">NOMBRE DEL ALUMNO</td>
-        <td style="width:25%;text-align:center;font-weight:bold">MOTIVO</td>
+        <td style="width:10%;text-align:center;font-weight:bold">MODULO</td>
+        <td style="width:6%;text-align:center;font-weight:bold">GRUPO</td>
+        <td style="width:30%;text-align:center;font-weight:bold">NOMBRE DEL ALUMNO</td>
+        <td style="width:39%;text-align:center;font-weight:bold">MOTIVO</td>
         <td style="width:10%;text-align:center;font-weight:bold">FECHA DE BAJA</td>
-        <td style="width:28%;text-align:center;font-weight:bold">OBSERVACIONES</td>
+        
         </tr>
         </thead>
 
@@ -325,11 +338,12 @@ $pdf->AddPage();
 
             $tabla.='<tr style="line-height: 30px">
             <td style="width:5%;text-align:center;font-size: 7px;">'.$cont.'</td>
-            <td style="width:13%;text-align:center;font-size: 7px;">'.semestre_en_letra($baja->semestre).'/'.$baja->nombre_grupo.'</td>
-            <td style="width:20%;font-size: 7px;">'.$baja->primer_apellido.' '.$baja->segundo_apellido.' '.$baja->nombre.'</td>
-            <td style="width:25%;font-size: 7px;">'.$baja->motivo.'</td>
-            <td style="width:10%;font-size: 7px;">'.$baja->fecha.'</td>
-            <td style="width:28%;font-size: 7px;">'.strtr(strtoupper($baja->observacion),"àèìòùáéíóúçñäëïöü","ÀÈÌÒÙÁÉÍÓÚÇÑÄËÏÖÜ").'</td>
+            <td style="width:10%;text-align:center;font-size: 7px;">'.semestre_en_letra($baja->semestre).'</td>
+            <td style="width:6%;text-align:center;font-size: 7px;">'.$baja->nombre_grupo.'</td>
+            <td style="width:30%;font-size: 7px;">'.$baja->primer_apellido.' '.$baja->segundo_apellido.' '.$baja->nombre.'</td>
+            <td style="width:39%;font-size: 7px;">'.$baja->motivo.'</td>
+            <td style="width:10%;font-size: 7px;text-align:center">'.$baja->fecha.'</td>
+            
             </tr>';
             $cont++;
             
@@ -339,11 +353,12 @@ $pdf->AddPage();
         if($cont>1){
             $tabla.='<tr style="line-height: 20px;background-color:#909090">
             <td style="width:5%;text-align:center;font-size: 7px">'.$cont.'</td>
-            <td style="width:13%"></td>
-            <td style="width:20%"></td>
-            <td style="width:25%"></td>
             <td style="width:10%"></td>
-            <td style="width:28%"></td>
+            <td style="width:6%"></td>
+            <td style="width:30%"></td>
+            <td style="width:39%"></td>
+            <td style="width:10%"></td>
+            
             </tr>';
             $cont++;
         }
@@ -353,11 +368,12 @@ $pdf->AddPage();
 
                 $tabla.='<tr style="line-height: 20px">
                 <td style="width:5%;text-align:center;font-size: 7px">'.$cont.'</td>
-                <td style="width:13%;text-align:center"></td>
-                <td style="width:20%"></td>
-                <td style="width:25%"></td>
+                <td style="width:10%;text-align:center"></td>
+                <td style="width:6%"></td>
+                <td style="width:30%"></td>
+                <td style="width:39%"></td>
                 <td style="width:10%"></td>
-                <td style="width:28%"></td>
+                
                 </tr>';
                 $cont++;
                 

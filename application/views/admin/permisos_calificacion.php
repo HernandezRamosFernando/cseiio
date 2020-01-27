@@ -76,7 +76,7 @@
 
     </div>
       </div>
-      </div>
+      
 
       <div class="form-group">
         <div class="col-md-12" id="tabla_plantel">
@@ -147,9 +147,9 @@
       </div>
     </form>
     <br>
-    <div class="col-md-12" id="agregar_oculto" style="display: ">
-      <button type="button" data-toggle="modal" data-target="#fechapermiso" id="boton_agregar"
-        class="btn btn-success btn-lg btn-block btn-guardar" style="padding: 1rem"> Guardar cambios</button>
+    <div class="col-md-12" id="agregar_oculto" style="display: none">
+      <button type="button" id="boton_agregar"
+        class="btn btn-success btn-lg btn-block btn-guardar" style="padding: 1rem" onclick="validar_form()"> Guardar cambios</button>
     </div>
 
   </div>
@@ -203,6 +203,31 @@
 
 <script>
 
+function validar_form(){
+  if(document.getElementById('formulariounplantel').style.display==""){
+     if(document.getElementById("aspirante_plantel_busqueda").value == '' || document.getElementById("aspirante_grupo_busqueda").value == '' || document.getElementById("aspirante_materia_busqueda").value == ''){
+     
+     
+            Swal.fire({
+              type: 'warning',
+              text: 'Faltan algunos campos por rellenar.'
+            });
+           
+     }
+     else{
+      $('#fechapermiso').modal('show');
+     }
+
+  }
+  else{
+    if(document.getElementById('formulario').style.display==""){
+      $('#fechapermiso').modal('show');
+    }
+
+  }
+  
+}
+
   function validarcomponente() {
     validafecha(document.getElementById("fecha_inicio"));
     validafecha(document.getElementById("fecha_fin"));
@@ -249,16 +274,19 @@
     }
 
     else {
+      
       var tabla = document.getElementById("tablaunplantel");
+
+      //console.log("hola: "+tabla.childNodes[1].childNodes[5].childNodes[1].name);
       var dato = {
         tipo_operacion:"UN_PLANTEL",
-        cct_plantel: document.getElementById("aspirante_plantel").value,
-        grupo: document.getElementById("aspirante_grupo").value,
-        materia: document.getElementById("aspirante_materia").value,
-        primer_parcial: tabla.childNodes[1].childNodes[2].childNodes[1].checked,
-        segundo_parcial: tabla.childNodes[1].childNodes[4].childNodes[1].checked,
-        tercer_parcial: tabla.childNodes[1].childNodes[6].childNodes[1].checked,
-        examen_final: tabla.childNodes[1].childNodes[8].childNodes[1].checked,
+        cct_plantel: document.getElementById("aspirante_plantel_busqueda").value,
+        grupo: document.getElementById("aspirante_grupo_busqueda").value,
+        materia: document.getElementById("aspirante_materia_busqueda").value,
+        primer_parcial: tabla.childNodes[1].childNodes[1].childNodes[1].checked,
+        segundo_parcial: tabla.childNodes[1].childNodes[3].childNodes[1].checked,
+        tercer_parcial: tabla.childNodes[1].childNodes[5].childNodes[1].checked,
+        examen_final: tabla.childNodes[1].childNodes[7].childNodes[1].checked,
         fecha_inicio: fecha_sql(document.getElementById("fecha_inicio").value),
         fecha_fin: fecha_sql(document.getElementById("fecha_fin").value),
         usuario: "<?= $this->session->userdata('user')['usuario'] ?>"
@@ -317,6 +345,7 @@
     document.getElementById("todos_planteles").style.display = "none";
     document.getElementById("formulariounplantel").style.display = "";
     document.getElementById("un_plantel").disabled = true;
+    document.getElementById("agregar_oculto").style.display = "";
 
     var xhr = new XMLHttpRequest();
     xhr.open('GET', '<?php echo base_url();?>index.php/c_plantel/get_planteles', true);
@@ -362,6 +391,8 @@
     document.getElementById("un_plantel").style.display = "none";
     document.getElementById("formulario").style.display = "";
     document.getElementById("todos_planteles").disabled = true;
+    document.getElementById("agregar_oculto").style.display = "";
+    
 
     var xhr = new XMLHttpRequest();
     xhr.open('GET', '<?php echo base_url();?>index.php/c_plantel/get_planteles', true);
@@ -484,18 +515,28 @@ function grupos_cct(parametro_cct){
           
           document.getElementById("aspirante_grupo_busqueda").innerHTML="";
           let opciones="";
-          opciones += '<option value="TODOS_LOS_GRUPOS">Todos los grupos</option>';
-                  JSON.parse(xhr.response).forEach(function (valor, indice) {
-                //console.log(valor);
+          let cont=0;
+         
+                  
                 JSON.parse(xhr.response).forEach(function (valor, indice) {
+                  if(cont==0){
+                    opciones += '<option value="">Seleccione un grupo</option>';
+                  opciones += '<option value="TODOS_LOS_GRUPOS">Todos los grupos</option>';
+                }
                   opciones += '<option value="' + valor.id_grupo + '">' +valor.semestre+'-'+valor.nombre_grupo+'</option>';
+                  cont=cont+1;
                 });
-              });
+
+                if(cont==0){
+                  opciones += '<option value="">Sin grupos activos</option>';
+                  
+                }
+              
               document.getElementById("aspirante_grupo_busqueda").innerHTML += opciones;
               document.getElementById("aspirante_materia_busqueda").innerHTML ="";
               var select = document.getElementById("aspirante_materia_busqueda");
               var option = document.createElement("option");
-              option.text = "Seleccione una grupo";
+              option.text = "Seleccione una materia";
               option.value = ""
               select.add(option);
           
@@ -518,7 +559,17 @@ function materias_grupo(parametro_grupo){
               select.add(option);
   }
   else{
-    var xhr = new XMLHttpRequest();
+    if (grupo=="TODOS_LOS_GRUPOS"){
+      document.getElementById("aspirante_materia_busqueda").innerHTML="";
+      var select = document.getElementById("aspirante_materia_busqueda");
+              var option = document.createElement("option");
+              option.text = "Todas las materias";
+              option.value = "TODAS_LAS_MATERIAS"
+              select.add(option);
+
+    }
+    else{
+      var xhr = new XMLHttpRequest();
         xhr.open('GET', '<?php echo base_url();?>index.php/c_grupo/get_materias_grupo?grupo='+grupo, true);
         xhr.onloadstart = function () {
         $('#div_carga').show();
@@ -532,12 +583,11 @@ function materias_grupo(parametro_grupo){
           document.getElementById("aspirante_materia_busqueda").innerHTML="";
           let opciones="";
           opciones += '<option value="TODAS_LAS_MATERIAS">Todas las materias</option>';
-                  JSON.parse(xhr.response).forEach(function (valor, indice) {
-                //console.log(valor);
+                  
                 JSON.parse(xhr.response).forEach(function (valor, indice) {
                   opciones += '<option value="' + valor.clave + '">' +valor.clave+'-'+valor.unidad_contenido+'</option>';
                 });
-              });
+              
               document.getElementById("aspirante_materia_busqueda").innerHTML += opciones;
 
 
@@ -546,6 +596,9 @@ function materias_grupo(parametro_grupo){
         };
 
         xhr.send(null);
+
+    }
+    
 
   }
     

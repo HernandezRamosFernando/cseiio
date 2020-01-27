@@ -93,15 +93,18 @@ $pdf->SetFont('helvetica','', 10);
 $pdf->AddPage();
 
 // set some text to print
-$encabezado ='<h6 style="text-align:center">COLEGIO SUPERIOR PARA LA EDUCACION INTEGRAL INTERCULTURAL DE OAXACA</h6>
-<h6 style="text-align:center">DEPARTAMENTO DE CONTROL ESCOLAR</h6>
-<h5 style="text-align:center">K A R D E X</h5>
-<p style="text-align:center;font-weight: bold;font-size:5pt">'.$estudiante->nombre_largo.' DE '.$estudiante->nombre_plantel.'</p>';
+$encabezado ='<span style="text-align:center;font-size:8pt;  font-weight:bold">COLEGIO SUPERIOR PARA LA EDUCACION INTEGRAL INTERCULTURAL DE OAXACA</span><br>
+<span style="text-align:center;font-size:7pt;  font-weight:bold">DEPARTAMENTO DE CONTROL ESCOLAR</span>
 
+<br><span style="text-align:center;font-size:9pt;  font-weight:bold">K A R D E X</span>
 
+<p style="text-align:center;font-weight: bold;font-size:6.5pt">'.$estudiante->nombre_largo.' DE '.$estudiante->nombre_plantel.'</p>';
+
+$pdf->SetXY(15, 5);
+$pdf->Image(base_url().'assets/img/logo_cseiio2.png', '', '', 28, 10, '', '', 'T', false, 300, '', false, false, 1, false, false, false);
 // print a block of text using Write()
 // output the HTML content
-$pdf->writeHTML($encabezado, true, 0, true, true);
+//$pdf->writeHTMLCell($encabezado,true,0,true,true);
 
 //curp
 $pdf->writeHTMLCell($w = 50, $h = 5, $x = '110', $y = '24', '<p>'.$estudiante->curp.'</p>', $border = 1, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);

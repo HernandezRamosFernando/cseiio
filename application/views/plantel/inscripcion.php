@@ -31,7 +31,7 @@
           class="btn btn-primary btn-lg btn-block  btn-responsive menu valign-center btn-8">
           <div class="row col-12">
             <div class="col-8 valign-center" style="padding-left: 0px;">
-            <p class="h5"><strong>Inscripción Ciclo anterior</strong></p> 
+            <p class="h5"><strong>Inscripción a Ciclos Anteriores</strong></p> 
             </div>
             <div class="col-4 valign-right">
               <i class="material-icons md-48">person_add</i>

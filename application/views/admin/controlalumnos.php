@@ -75,7 +75,9 @@
               <th scope="col" class="col-md-1">Fecha Ingreso</th>
               <th scope="col" class="col-md-1">Editar</th>
               <th scope="col" class="col-md-1">Imprimir</th>
+              <?php if ($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){?>
               <th scope="col" class="col-md-1">Eliminar</th>
+              <?php }?>
             </tr>
           </thead>
 
@@ -1438,10 +1440,10 @@ function insertar_secundaria() {
         fila += '</td>';
         fila += '<td>';
         fila += '<a href="<?php echo base_url();?>index.php/C_estudiante/generar_formato_inscripcion?no_control=' + valor.no_control + '" class="btn btn-lg btn-block btn-info btn btn-primary" target="_blank">Imprimir</a></td>';
-        fila += '<td>';
+        fila += '<?php if ($this->session->userdata("user")["usuario"]!="" && $this->session->userdata("user")["rol"]=="ADMINISTRADOR"){?><td>';
         fila += '<button class="btn btn-lg btn-block btn-danger" type="button" value="' + valor.no_control + '" onclick="eliminar_permanente(this,\''+nombre_completo+'\')" data-toggle="modal" data-target="#">Eliminar</button>';
 
-        fila += '</td>';
+        fila += '</td><?php }?>';
         fila += '</tr>';
         document.getElementById("tabla").innerHTML += fila;
       });

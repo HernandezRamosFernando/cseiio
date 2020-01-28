@@ -68,7 +68,7 @@ $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
 $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 
 // set margins
-$pdf->SetMargins(20, 5,19);
+$pdf->SetMargins(14, 5,19);
 $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
 $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 
@@ -93,12 +93,15 @@ $pdf->SetFont('helvetica','', 10);
 $pdf->AddPage();
 
 // set some text to print
-$encabezado ='<span style="text-align:center;font-size:8pt;  font-weight:bold">COLEGIO SUPERIOR PARA LA EDUCACION INTEGRAL INTERCULTURAL DE OAXACA</span><br>
-<span style="text-align:center;font-size:7pt;  font-weight:bold">DEPARTAMENTO DE CONTROL ESCOLAR</span>
+$encabezado ='<span style="text-align:center;font-size:9pt;  font-weight:bold">COLEGIO SUPERIOR PARA LA EDUCACION INTEGRAL INTERCULTURAL DE OAXACA</span><br>
+<span style="text-align:center;font-size:7.6pt;  font-weight:bold">DEPARTAMENTO DE CONTROL ESCOLAR</span>
 
-<br><span style="text-align:center;font-size:9pt;  font-weight:bold">K A R D E X</span>
+<br><span style="text-align:center;font-size:9.3pt;  font-weight:bold">K A R D E X</span>
 
-<p style="text-align:center;font-weight: bold;font-size:6.5pt">'.$estudiante->nombre_largo.' DE '.$estudiante->nombre_plantel.'</p>';
+<p style="text-align:center;font-weight: bold;font-size:7pt">'.$estudiante->nombre_largo.' DE '.$estudiante->nombre_plantel.'</p>';
+
+
+$datos_cct ='<span style="text-align:center;font-size:6.7pt;  font-weight:bold">CLAVE C.T.<br>'.$estudiante->cct_plantel.'</span>';
 
 $pdf->SetXY(15, 5);
 $pdf->Image(base_url().'assets/img/logo_cseiio2.png', '', '', 28, 10, '', '', 'T', false, 300, '', false, false, 1, false, false, false);
@@ -106,16 +109,21 @@ $pdf->Image(base_url().'assets/img/logo_cseiio2.png', '', '', 28, 10, '', '', 'T
 // output the HTML content
 //$pdf->writeHTMLCell($encabezado,true,0,true,true);
 
+
 //curp
-$pdf->writeHTMLCell($w = 50, $h = 5, $x = '110', $y = '24', '<p>'.$estudiante->curp.'</p>', $border = 1, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
-$pdf->writeHTMLCell($w = 50, $h = 3, $x = '110', $y = '30', '<p style="font-size:6pt">CURP</p>', $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+$pdf->writeHTMLCell($w = 50, $h = 5, $x = '110', $y = '28', '<p>'.$estudiante->curp.'</p>', $border = 1, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+$pdf->writeHTMLCell($w = 50, $h = 3, $x = '110', $y = '34', '<p style="font-size:6pt">CURP</p>', $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
 //matricula
-$pdf->writeHTMLCell($w = 30, $h = 5, $x = '165', $y = '24', '<p>'.$estudiante->matricula.'</p>', $border = 1, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
-$pdf->writeHTMLCell($w = 50, $h = 3, $x = '156', $y = '30', '<p style="font-size:6pt">MATRICULA</p>', $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+$pdf->writeHTMLCell($w = 30, $h = 5, $x = '165', $y = '28', '<p>'.$estudiante->matricula.'</p>', $border = 1, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+$pdf->writeHTMLCell($w = 50, $h = 3, $x = '156', $y = '34', '<p style="font-size:6pt">MATRICULA</p>', $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
 
 
 //recuadro de foto
 $pdf->writeHTMLCell($w = 25, $h = 30, $x = '14', $y = '34','<p></p>', $border = 1, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+
+$pdf->writeHTMLCell($w = 168, $h = 5, $x = '27', $y = '5',$encabezado, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+
+$pdf->writeHTMLCell($w = 18, $h = 5, $x = '178', $y = '19',$datos_cct, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
 
 
 $nombre = '
@@ -136,22 +144,22 @@ $nombre_titulo = '
 <tr>
 <td style="text-align:center;width:179px;font-size:6pt">PRIMER APELLIDO</td>
 <td style="text-align:center;width:179px;font-size:6pt">SEGUNDO APELLIDO</td>
-<td style="text-align:center;width:179px;font-size:6pt">NOMBRE</td>
+<td style="text-align:center;width:179px;font-size:6pt">NOMBRE(S)</td>
 </tr>
 </tbody>
 </table>
 ';
 
-$pdf->writeHTMLCell($w = 30, $h = 5, $x = '42', $y = '34', $nombre, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
-$pdf->writeHTMLCell($w = 30, $h = 5, $x = '42', $y = '39', $nombre_titulo, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+$pdf->writeHTMLCell($w = 30, $h = 5, $x = '42', $y = '38', $nombre, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+$pdf->writeHTMLCell($w = 30, $h = 5, $x = '42', $y = '43', $nombre_titulo, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
 
 $domicilio = '
 <table border="1" style="font-size:8pt">
 <tbody>
 <tr>
-<td style="text-align:center;width:179px;height:27px">'.$estudiante->calle.'</td>
-<td style="text-align:center;width:254px">'.$estudiante->nombre_localidad.','.$estudiante->nombre_municipio.'</td>
-<td style="text-align:center;width:104px">'.$estudiante->cp.'</td>
+<td style="text-align:center;width:185px;height:27px">'.$estudiante->calle.'</td>
+<td style="text-align:center;width:280px">'.$estudiante->nombre_localidad.','.$estudiante->nombre_municipio.'</td>
+
 </tr>
 </tbody>
 </table>
@@ -161,41 +169,57 @@ $domicilio_titulo = '
 <table>
 <tbody>
 <tr>
-<td style="text-align:center;width:179px;font-size:6pt">DOMICILIO</td>
-<td style="text-align:center;width:254px;font-size:6pt">LOCALIDAD Y MUNICIPIO</td>
-<td style="text-align:center;width:104px;font-size:6pt">C. P.</td>
+<td style="text-align:center;width:185px;font-size:6pt">DOMICILIO</td>
+<td style="text-align:center;width:280px;font-size:6pt">LOCALIDAD Y MUNICIPIO</td>
+
 </tr>
 </tbody>
 </table>
 ';
 
-$pdf->writeHTMLCell($w = 30, $h = 5, $x = '42', $y = '43', $domicilio, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
-$pdf->writeHTMLCell($w = 30, $h = 5, $x = '42', $y = '51', $domicilio_titulo, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+$cp_domicilio = '<span style="text-align:center;width:104px;font-size:6pt">C. P.</span>';
+$dato_cp_domicilio = $estudiante->cp;
+
+
+$pdf->writeHTMLCell($w = 40, $h = 5, $x = '42', $y = '47', $domicilio, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+$pdf->writeHTMLCell($w = 30, $h = 5, $x = '42', $y = '55', $domicilio_titulo, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+
+
+$pdf->writeHTMLCell($w = 17, $h = 7.5, $x = '178', $y = '47', $dato_cp_domicilio, $border = 1, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+$pdf->writeHTMLCell($w = 17, $h = 5, $x = '178', $y = '55', $cp_domicilio, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
 
 
 //lugar de nacimiento
-$pdf->writeHTMLCell($w = 153, $h = 5, $x = '42', $y = '56', '<p>'.$estudiante->lugar_nacimiento.'</p>', $border = 1, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
-$pdf->writeHTMLCell($w = 153, $h = 5, $x = '42', $y = '61', '<p style="font-size:7pt">LUGAR DE NACIMIENTO</p>', $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+$pdf->writeHTMLCell($w = 153, $h = 5, $x = '42', $y = '60', '<p>'.$estudiante->lugar_nacimiento.'</p>', $border = "B", $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+$pdf->writeHTMLCell($w = 153, $h = 5, $x = '42', $y = '65', '<p style="font-size:7pt">LUGAR DE NACIMIENTO</p>', $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
 
 //sexo
-$pdf->writeHTMLCell($w = 10, $h = 5, $x = '82', $y = '68', '<p style="font-size:7pt">SEXO</p>', $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
-$pdf->writeHTMLCell($w = 10, $h = 5, $x = '94', $y = '68', '<p>'.$estudiante->sexo.'</p>', $border = 1, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+$pdf->writeHTMLCell($w = 10, $h = 5, $x = '82', $y = '72', '<p style="font-size:7pt">SEXO</p>', $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+$pdf->writeHTMLCell($w = 10, $h = 5, $x = '94', $y = '72', '<p>'.$estudiante->sexo.'</p>', $border = 1, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
 
 //fecha_nacimiento
-$pdf->writeHTMLCell($w = 20, $h = 5, $x = '150', $y = '68', '<p style="font-size:7pt">FECHA DE NACIMIENTO</p>', $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
-$pdf->writeHTMLCell($w = 25, $h = 5, $x = '170', $y = '68', '<p>'.$estudiante->fecha_nacimiento.'</p>', $border = 1, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+
+$fecha_nacimiento="";
+if($estudiante->fecha_nacimiento!=''){
+    $fecha_nacimiento=date("d/m/Y", strtotime($estudiante->fecha_nacimiento));
+}
+
+
+
+$pdf->writeHTMLCell($w = 20, $h = 5, $x = '150', $y = '72', '<p style="font-size:7pt">FECHA DE NACIMIENTO</p>', $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+$pdf->writeHTMLCell($w = 25, $h = 5, $x = '170', $y = '72', '<p>'.$fecha_nacimiento.'</p>', $border = 1, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
 
 //nombre tutor
-$pdf->writeHTMLCell($w = 40, $h = 5, $x = '14', $y = '77', '<p style="font-size:7pt">NOMBRE DEL TUTOR</p>', $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
-$pdf->writeHTMLCell($w = 145, $h = 5, $x = '50', $y = '77', '<p>'.$estudiante->nombre_tutor.' '.$estudiante->primer_apellido_tutor.' '.$estudiante->segundo_apellido_tutor.'</p>', $border = 1, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+$pdf->writeHTMLCell($w = 40, $h = 5, $x = '14', $y = '81', '<p style="font-size:7pt;text-align: left;">NOMBRE DEL TUTOR</p>', $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+$pdf->writeHTMLCell($w = 150, $h = 5, $x = '45', $y = '81', '<p>'.$estudiante->nombre_tutor.' '.$estudiante->primer_apellido_tutor.' '.$estudiante->segundo_apellido_tutor.'</p>', $border = 1, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
 
 
 //observaciones
-$pdf->writeHTMLCell($w = 40, $h = 5, $x = '14', $y = '85', '<p style="font-size:7pt">OBSERVACIONES</p>', $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
-$pdf->writeHTMLCell($w = 145, $h = 5, $x = '50', $y = '85', '<p>'.$estudiante->tipo_ingreso.'</p>', $border = 1, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+$pdf->writeHTMLCell($w = 40, $h = 5, $x = '14', $y = '89', '<p style="font-size:7pt;text-align: left;">OBSERVACIONES:</p>', $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+$pdf->writeHTMLCell($w = 150, $h = 5, $x = '45', $y = '89', '<p>'.$estudiante->tipo_ingreso.'</p>', $border = "B", $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
 
 //espacio vacio
-$pdf->writeHTMLCell($w = 145, $h = 5, $x = '50', $y = '90', '<p></p>', $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+$pdf->writeHTMLCell($w = 145, $h = 5, $x = '50', $y = '94', '<p></p>', $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
 ///////////////////encabezosooo---------------------------------------------
 
 function extraescolar($calificacion){
@@ -240,7 +264,7 @@ function renglones($materias,$regularizaciones_aprobadas){
 
        $renglones.='<tr>
        <td style="width:50px;text-align:center">'.$materia->id_materia.'</td>
-       <td style="width:200px">'.$materia->unidad_contenido.'</td>
+       <td style="width:220px">'.$materia->unidad_contenido.'</td>
        <td style="width:40px;text-align:center">'.($materia->primer_parcial=="0"?"/":$materia->primer_parcial).'</td>
        <td style="width:40px;text-align:center">'.($materia->segundo_parcial=="0"?"/":$materia->segundo_parcial).'</td>
        <td style="width:40px;text-align:center">'.($materia->tercer_parcial=="0"?"/":$materia->tercer_parcial).'</td>
@@ -332,7 +356,7 @@ function crear_tabla_materias_semestre($grupos,$regularizaciones_aprobadas){
     <tbody>
     <tr>
     <td style="width:50px;background-color:#cfcfcf;text-align:center" rowspan="3"> <br><br> CLAVE</td>
-    <td style="width:200px;background-color:#cfcfcf">CICLO ESCOLAR: '.$materias_grupo[0]->nombre_ciclo_escolar.'</td>
+    <td style="width:220px;background-color:#cfcfcf">CICLO ESCOLAR: '.$materias_grupo[0]->nombre_ciclo_escolar.'</td>
     <td style="width:120px;text-align:center;background-color:#cfcfcf" colspan="3">PARCIALES</td>
     <td style="width:40px;text-align:center;background-color:#cfcfcf" rowspan="3">PROM. MOD.</td>
     <td style="width:40px;text-align:center;background-color:#cfcfcf" rowspan="3">EXAM. MOD.</td>
@@ -343,7 +367,7 @@ function crear_tabla_materias_semestre($grupos,$regularizaciones_aprobadas){
 
     <tr>
   
-    <td style="width:200px;background-color:#cfcfcf">'.nombre_modulo($materias_grupo[0]->semestre).' MODULO</td>
+    <td style="width:220px;background-color:#cfcfcf">'.nombre_modulo($materias_grupo[0]->semestre).' MODULO</td>
     <td style="width:40px;text-align:center;background-color:#cfcfcf" rowspan="2">1ER</td>
     <td style="width:40px;text-align:center;background-color:#cfcfcf" rowspan="2">2DO</td>
     <td style="width:40px;text-align:center;background-color:#cfcfcf" rowspan="2">3ER</td>
@@ -355,7 +379,7 @@ function crear_tabla_materias_semestre($grupos,$regularizaciones_aprobadas){
 
     <tr>
   
-    <td style="width:200px;background-color:#cfcfcf">UNIDAD DE CONTENIDO</td>
+    <td style="width:220px;background-color:#cfcfcf">UNIDAD DE CONTENIDO</td>
 
 
     </tr>
@@ -380,10 +404,10 @@ function renglones_materias_revalidadas($materias,$bachillerato_procedencia,$dat
     foreach($materias as $materia){
         $renglones.='<tr>
         <td style="width:50px;text-align:center">'.$materia->clave.'</td>
-        <td style="width:200px">'.$materia->unidad_contenido.'</td>';
+        <td style="width:220px">'.$materia->unidad_contenido.'</td>';
 
         if($contador==0){
-            $renglones .= '<td style="width:200px;text-align:left;font-size:6pt" rowspan="'.sizeof($materias).'">
+            $renglones .= '<td style="width:220px;text-align:left;font-size:6pt" rowspan="'.sizeof($materias).'">
             <p>NOMBRE DE LA INSTITUCION:'.$bachillerato_procedencia->nombre_escuela_procedencia.'</p>
             <p>CCT:'.$bachillerato_procedencia->cct_escuela_procedencia.'</p>
             <p>'.$bachillerato_procedencia->lugar_escuela.'</p>
@@ -417,7 +441,7 @@ function tabla_portabilidad($materias_semestre,$bachillerato_procedencia,$datos_
         <tbody>
         <tr>
         <td style="width:50px;background-color:#cfcfcf;text-align:center" rowspan="3"> <br><br> CLAVE</td>
-        <td style="width:200px;background-color:#cfcfcf">CICLO ESCOLAR:</td>
+        <td style="width:220px;background-color:#cfcfcf">CICLO ESCOLAR:</td>
         <td style="width:120px;text-align:center;background-color:#cfcfcf" colspan="3">PARCIALES</td>
         <td style="width:40px;text-align:center;background-color:#cfcfcf" rowspan="3">PROM. MOD.</td>
         <td style="width:40px;text-align:center;background-color:#cfcfcf" rowspan="3">EXAM. MOD.</td>
@@ -428,7 +452,7 @@ function tabla_portabilidad($materias_semestre,$bachillerato_procedencia,$datos_
     
         <tr>
       
-        <td style="width:200px;background-color:#cfcfcf">'.nombre_modulo($semestre[0]->semestre).' MODULO</td>
+        <td style="width:220px;background-color:#cfcfcf">'.nombre_modulo($semestre[0]->semestre).' MODULO</td>
         <td style="width:40px;text-align:center;background-color:#cfcfcf" rowspan="2">1ER</td>
         <td style="width:40px;text-align:center;background-color:#cfcfcf" rowspan="2">2DO</td>
         <td style="width:40px;text-align:center;background-color:#cfcfcf" rowspan="2">3ER</td>
@@ -440,7 +464,7 @@ function tabla_portabilidad($materias_semestre,$bachillerato_procedencia,$datos_
     
         <tr>
       
-        <td style="width:200px;background-color:#cfcfcf">UNIDAD DE CONTENIDO</td>
+        <td style="width:220px;background-color:#cfcfcf">UNIDAD DE CONTENIDO</td>
     
     
         </tr>
@@ -463,6 +487,7 @@ function tabla_portabilidad($materias_semestre,$bachillerato_procedencia,$datos_
 //tablas de datos de materias de estudiante
 if($portabilidad=="no"){
     $pdf->writeHTML(crear_tabla_materias_semestre($materias_grupo,$regularizaciones_aprobadas), true, 0, true, true);
+    
 }
 
 else{
@@ -473,7 +498,7 @@ else{
 
 
 //Close and output PDF document
-$pdf->Output('example_003.pdf', 'I');
+$pdf->Output('kardex.pdf', 'I');
 
 //============================================================+
 // END OF FILE

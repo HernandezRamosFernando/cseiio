@@ -93,6 +93,37 @@ $pdf->SetFont('helvetica','', 10);
 $pdf->AddPage();
 
 // set some text to print
+function tipo_ingreso($tipo){
+    $regreso = "";
+    switch(trim($tipo)){
+        case "NUEVO INGRESO":
+        $regreso = "";
+        break;
+
+        case "REINGRESO":
+        $regreso = "";
+        break;
+
+        case "PROBABLE REINCORPORADO":
+        $regreso = "";
+        break;
+
+        case "SIN DERECHO":
+        $regreso = "S/D";
+        break;
+
+        case "INCORPORADO":
+        $regreso = "";
+        break;
+
+        default:
+        $regreso= $tipo;    
+    }
+
+    return $regreso;
+}
+
+//
 $encabezado ='<span style="text-align:center;font-size:9pt;  font-weight:bold">COLEGIO SUPERIOR PARA LA EDUCACION INTEGRAL INTERCULTURAL DE OAXACA</span><br>
 <span style="text-align:center;font-size:7.6pt;  font-weight:bold">DEPARTAMENTO DE CONTROL ESCOLAR</span>
 
@@ -214,9 +245,13 @@ $pdf->writeHTMLCell($w = 40, $h = 5, $x = '14', $y = '81', '<p style="font-size:
 $pdf->writeHTMLCell($w = 150, $h = 5, $x = '45', $y = '81', '<p>'.$estudiante->nombre_tutor.' '.$estudiante->primer_apellido_tutor.' '.$estudiante->segundo_apellido_tutor.'</p>', $border = 1, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
 
 
+
+
+
+
 //observaciones
 $pdf->writeHTMLCell($w = 40, $h = 5, $x = '14', $y = '89', '<p style="font-size:7pt;text-align: left;">OBSERVACIONES:</p>', $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
-$pdf->writeHTMLCell($w = 150, $h = 5, $x = '45', $y = '89', '<p>'.$estudiante->tipo_ingreso.'</p>', $border = "B", $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
+$pdf->writeHTMLCell($w = 150, $h = 5, $x = '45', $y = '89', '<p>'.tipo_ingreso($estudiante->tipo_ingreso).'</p>', $border = "B", $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
 
 //espacio vacio
 $pdf->writeHTMLCell($w = 145, $h = 5, $x = '50', $y = '94', '<p></p>', $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'C', $autopadding = true);
@@ -244,6 +279,9 @@ function extraescolar($calificacion){
         case 6:
         $regreso = "S";
         break;
+
+        default:
+        $regreso="/";
     }
 
     return $regreso;
@@ -259,8 +297,11 @@ function renglones($materias,$regularizaciones_aprobadas){
         }
 
         else{
+            
             $promedio_modular = round($promedio_modular,0,PHP_ROUND_HALF_UP);
         }
+
+        
 
        $renglones.='<tr>
        <td style="width:50px;text-align:center">'.$materia->id_materia.'</td>
@@ -277,11 +318,17 @@ function renglones($materias,$regularizaciones_aprobadas){
        }
 
        else{
-        $renglones.='<td style="width:40px;text-align:center">'.($materia->calificacion_final).'</td>';
+        $renglones.='<td style="width:40px;text-align:center">'.($materia->calificacion_final=="0"?"/":$materia->calificacion_final).'</td>';
        }
        
+
+
+       $fecha_regu=materia_regularizada_fecha($materia->id_materia,$regularizaciones_aprobadas);
+        if($fecha_regu!=''){
+            $fecha_regu=date("d/m/Y", strtotime($fecha_regu));
+        }
    
-       $renglones.='<td style="width:87px;text-align:center">'.materia_regularizada_fecha($materia->id_materia,$regularizaciones_aprobadas).'</td>
+       $renglones.='<td style="width:87px;text-align:center">'.$fecha_regu.'</td>
        <td style="width:40px;text-align:center">'.materia_regularizada_calificacion($materia->id_materia,$regularizaciones_aprobadas).'</td>
    
        </tr>
@@ -503,4 +550,10 @@ $pdf->Output('kardex.pdf', 'I');
 //============================================================+
 // END OF FILE
 //============================================================+
+
+
+/*
+select *,(SELECT if(count(*)>0,"si","no") esbaja FROM Baja where fecha between ce.fecha_inicio_inscripcion and ce.fecha_terminacion) esbaja from Grupo_Estudiante as ge inner join Materia as m on m.clave=ge.id_materia inner join Ciclo_escolar as ce on ce.id_ciclo_escolar=ge.Ciclo_escolar_id_ciclo_escolar where Estudiante_no_control='CSEIIO1810002' and Grupo_id_grupo='20EBD0006Y24AA' group by m.clave
+*/
 ?>
+

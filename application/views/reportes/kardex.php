@@ -292,14 +292,29 @@ function renglones($materias,$regularizaciones_aprobadas){
     foreach($materias as $materia){//materias de grupo
         $promedio_modular = (intval($materia->primer_parcial)+intval($materia->segundo_parcial)+intval($materia->tercer_parcial))/3;
 
-        if($promedio_modular>0 && $promedio_modular<6){
-            $promedio_modular=5;
+        if($materia->esbaja=="si"){
+            $promedio_modular="/";
         }
-
+        
         else{
-            
-            $promedio_modular = round($promedio_modular,0,PHP_ROUND_HALF_UP);
+            if($promedio_modular==0){
+                $promedio_modular="/";
+            }
+    
+            else{
+    
+                if($promedio_modular>0 && $promedio_modular<6){
+                    $promedio_modular=5;
+                }
+                
+                else{
+                    $promedio_modular = round($promedio_modular,0,PHP_ROUND_HALF_UP);
+                }
+                
+            }
+
         }
+        
 
         
 
@@ -310,8 +325,9 @@ function renglones($materias,$regularizaciones_aprobadas){
        <td style="width:40px;text-align:center">'.($materia->segundo_parcial=="0"?"/":$materia->segundo_parcial).'</td>
        <td style="width:40px;text-align:center">'.($materia->tercer_parcial=="0"?"/":$materia->tercer_parcial).'</td>
    
+
    
-       <td style="width:40px;text-align:center">'.($promedio_modular=="0"?"/":$promedio_modular).'</td>
+       <td style="width:40px;text-align:center">'.$promedio_modular.'</td>
        <td style="width:40px;text-align:center">'.($materia->examen_final=="0"?"/":$materia->examen_final).'</td>';
        if($materia->tipo=="EXTRAESCOLAR"){
         $renglones.='<td style="width:40px;text-align:center">'.extraescolar($materia->calificacion_final).'</td>';

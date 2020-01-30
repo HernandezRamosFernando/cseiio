@@ -17,7 +17,7 @@ class M_kardex extends CI_Model {
    }
 
    function datos_materias_grupo_estudiante($grupo,$no_control){
-      return $this->db->query("select * from Grupo_Estudiante as ge inner join Materia as m on m.clave=ge.id_materia inner join Ciclo_escolar as ce on ce.id_ciclo_escolar=ge.Ciclo_escolar_id_ciclo_escolar where Estudiante_no_control='".$no_control."' and Grupo_id_grupo='".$grupo."' group by m.clave")->result();
+      return $this->db->query("select *,(SELECT if(count(*)>0,'si','no') esbaja FROM Baja where fecha between ce.fecha_inicio_inscripcion and ce.fecha_terminacion) esbaja from Grupo_Estudiante as ge inner join Materia as m on m.clave=ge.id_materia inner join Ciclo_escolar as ce on ce.id_ciclo_escolar=ge.Ciclo_escolar_id_ciclo_escolar where Estudiante_no_control='".$no_control."' and Grupo_id_grupo='".$grupo."' group by m.clave")->result();
    }
 
    function materia_regularizacion_estudiante($no_control,$materia){

@@ -417,7 +417,7 @@ function crear_tabla_materias_semestre($grupos,$regularizaciones_aprobadas){
     $tabla = '
     <table border="1" style="font-size:7pt">
     <tbody>
-    <tr>
+    <tr style="font-weight: bold;">
     <td style="width:50px;background-color:#cfcfcf;text-align:center" rowspan="3"> <br><br> CLAVE</td>
     <td style="width:220px;background-color:#cfcfcf">CICLO ESCOLAR: '.$materias_grupo[0]->nombre_ciclo_escolar.'</td>
     <td style="width:120px;text-align:center;background-color:#cfcfcf" colspan="3">PARCIALES</td>
@@ -428,7 +428,7 @@ function crear_tabla_materias_semestre($grupos,$regularizaciones_aprobadas){
 
     </tr>
 
-    <tr>
+    <tr style="font-weight: bold;">
   
     <td style="width:220px;background-color:#cfcfcf">'.nombre_modulo($materias_grupo[0]->semestre).' MODULO</td>
     <td style="width:40px;text-align:center;background-color:#cfcfcf" rowspan="2">1ER</td>
@@ -442,7 +442,7 @@ function crear_tabla_materias_semestre($grupos,$regularizaciones_aprobadas){
 
     <tr>
   
-    <td style="width:220px;background-color:#cfcfcf">UNIDAD DE CONTENIDO</td>
+    <td style="width:220px;background-color:#cfcfcf;font-weight: bold;">UNIDAD DE CONTENIDO</td>
 
 
     </tr>
@@ -470,7 +470,7 @@ function renglones_materias_revalidadas($materias,$bachillerato_procedencia,$dat
         <td style="width:220px">'.$materia->unidad_contenido.'</td>';
 
         if($contador==0){
-            $renglones .= '<td style="width:220px;text-align:left;font-size:6pt" rowspan="'.sizeof($materias).'">
+            $renglones .= '<td style="width:200px;text-align:left;font-size:6pt" rowspan="'.sizeof($materias).'">
             <p>NOMBRE DE LA INSTITUCION:'.$bachillerato_procedencia->nombre_escuela_procedencia.'</p>
             <p>CCT:'.$bachillerato_procedencia->cct_escuela_procedencia.'</p>
             <p>'.$bachillerato_procedencia->lugar_escuela.'</p>
@@ -502,7 +502,7 @@ function tabla_portabilidad($materias_semestre,$bachillerato_procedencia,$datos_
     foreach($materias_semestre as $semestre){
         $tabla .= '<table border="1" style="font-size:7pt">
         <tbody>
-        <tr>
+        <tr style="font-weight: bold;">
         <td style="width:50px;background-color:#cfcfcf;text-align:center" rowspan="3"> <br><br> CLAVE</td>
         <td style="width:220px;background-color:#cfcfcf">CICLO ESCOLAR:</td>
         <td style="width:120px;text-align:center;background-color:#cfcfcf" colspan="3">PARCIALES</td>
@@ -513,7 +513,7 @@ function tabla_portabilidad($materias_semestre,$bachillerato_procedencia,$datos_
     
         </tr>
     
-        <tr>
+        <tr style="font-weight: bold;">
       
         <td style="width:220px;background-color:#cfcfcf">'.nombre_modulo($semestre[0]->semestre).' MODULO</td>
         <td style="width:40px;text-align:center;background-color:#cfcfcf" rowspan="2">1ER</td>

@@ -147,10 +147,24 @@
       </div>
       <div class="col-md-4 col-lg-4"style="height: 9rem !important;">
         <a href="<?php echo base_url();?>index.php/c_vistas/notificaciones"
-          class="btn btn-primary btn-lg btn-block  btn-responsive menu valign-center btn-9">
+          class="btn btn-primary btn-lg btn-block  btn-responsive menu valign-center btn-1">
           <div class="row col-12">
             <div class="col-8 valign-center" style="padding-left: 0px;">
             <p class="h5"><strong>Enviar notificaciones</strong></p> 
+            </div>
+            <div class="col-4 valign-right">
+              <img class="icono_menu" src="<?php echo base_url();?>assets/img/finalizarperiodo.png">
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-md-4 col-lg-4"style="height: 9rem !important;">
+        <a href="<?php echo base_url();?>index.php/c_vistas/notificaciones"
+          class="btn btn-primary btn-lg btn-block  btn-responsive menu valign-center btn-9">
+          <div class="row col-12">
+            <div class="col-8 valign-center" style="padding-left: 0px;">
+            <p class="h5"><strong>Permisos alumnos dados de baja</strong></p> 
             </div>
             <div class="col-4 valign-right">
               <img class="icono_menu" src="<?php echo base_url();?>assets/img/finalizarperiodo.png">

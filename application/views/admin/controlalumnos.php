@@ -420,6 +420,54 @@
             </div>
           </div>
 
+          <div class="form-group">
+        <div class="row">
+        <div class=" col-md-2 ">
+          <label class="form-group has-float-label text-center" style="font-size: 12pt; font-weight: bold; color:#777;">Fecha de registro de Acta</label>
+          </div>
+
+          <div class=" col-md-2 ">
+          <label class="form-group has-float-label seltitulo">
+              <select class="form-control form-control-lg selcolor" id="aspirante_anio_nacimiento_registro"  name="aspirante_anio_nacimiento_registro" onclick="get_dias_registro()">
+
+              </select>
+              <span>Año</span>
+            </label>
+          </div>
+          <div class="col-md-2">
+          <label class="form-group has-float-label seltitulo">
+              <select class="form-control form-control-lg selcolor" id="aspirante_mes_nacimiento_registro"  name="aspirante_mes_nacimiento_registro" onclick="get_dias_registro()">
+              <option value="">Seleccione uno</option>
+              <option value="01">Enero</option>
+            <option value="02">Febrero</option>
+            <option value="03">Marzo</option>
+            <option value="04">Abril</option>
+            <option value="05">Mayo</option>
+            <option value="06">Junio</option>
+            <option value="07">Julio</option>
+            <option value="08">Agosto</option>
+            <option value="09">Septiembre</option>
+            <option value="10">Octubre</option>
+            <option value="11">Noviembre</option>
+            <option value="12">Diciembre</option>
+              </select>
+              <span>Mes</span>
+            </label>
+          </div>
+          <div class="col-md-2 ">
+          <label class="form-group has-float-label seltitulo">
+              <select class="form-control form-control-lg selcolor" id="aspirante_dia_nacimiento_registro"  name="aspirante_dia_nacimiento_registro" onchange="validaracta()">
+
+              </select>
+              <span>Día</span>
+            </label>
+          </div>
+
+
+        </div>
+
+      </div>
+
           <!--direccion------------------------------------------------------>
           <p class="text-center text-white rounded titulo-form h4">
             Dirección familiar del Aspirante

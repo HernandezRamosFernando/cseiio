@@ -876,7 +876,7 @@ public function resolucion_equivalencia(){
             $this->load->view("footers/footer");
         }
 
-        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='CESCOLAR'){
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='CESCOLAR'){
             $datos['planteles'] = $this->M_plantel->get_planteles();
             $data= array('title'=>'Panel alumnos de baja');
             $this->load->view("headers/cabecera", $data);

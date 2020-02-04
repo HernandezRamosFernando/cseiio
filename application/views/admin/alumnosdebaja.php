@@ -28,7 +28,7 @@
           </div>
         </div>
 
-        <div id="div_asignar_calificaciones" style="display: none">
+<div id="div_asignar_calificaciones" style="display: none">
 
         <ol class="breadcrumb">
       <li class="breadcrumb-item">
@@ -159,150 +159,18 @@
 
           
 
-        </div> <!-- cerrar agregar -->
+</div> <!-- cerrar agregar -->
 
-        <div id="divmodificar_usuario" style="display: none">
-          <div class="form-group">
-            <div class="row">
-              <div class="col-md-8">
-                <label class="form-group has-float-label seltitulo">
-                  <select class="form-control form-control-lg selcolor" onchange="cargar_usuario()" id="lista_modificar"
-                    name="lista_modificar">
-                    <option value="">Seleccione un usuario </option>
+        <div id="diveditar_alumnos_baja" style="display: none">
 
-                    <?php
-                                        foreach ($usuarios as $usuario)
-                                        {
-                                          if($usuario->usuario!='depto_tecnologia'){
-                                            echo '<option value="'.$usuario->id_usuario.'">'.$usuario->usuario.'</option>';
-
-                                          }
-                                          
-                                        }
-                                        ?>
-
-                  </select>
-                  <span>Lista de usuarios</span>
-                </label>
-              </div>
-
-            </div>
-          </div>
-
-          <div class="form-group">
-            <div class="row">
-
-              <div class="col-md-4">
-                <div class="form-label-group ">
-                  <input type="text" class="form-control " id="usuario_modificar"
-                    placeholder="Nombre de usuario">
-                  <label for="usuario_modificar">Usuario</label>
-                </div>
-              </div>
-
-              <div class="col-md-4">
-                <div class="form-label-group ">
-                  <input type="text" class="form-control " id="password_modificar"
-                    placeholder="Contraseña (No escribir)">
-                  <label for="password_modificar">Contraseña (No escribir)</label>
-                </div>
-              </div>
-
-              <div class="col-md-4">
-                <button type="button" onclick="generar()" class="btn btn-primary btn-lg btn-block">Crear
-                  contraseña</button>
-              </div>
-
-            </div>
-          </div>
-
-          <div class="form-group">
-            <div class="row">
-
-              <div class="col-md-4">
-                <div class="form-label-group ">
-                  <input type="mail" class="form-control " id="correo_modificar" placeholder="Contraseña">
-                  <label for="correo_modificar">Correo</label>
-                </div>
-              </div>
-
-              <div class="col-md-6">
-                <label class="form-group has-float-label seltitulo">
-                  <select class="form-control form-control-lg selcolor" disabled id="rol_modificar" name="rol_modificar">
-                    <option value="">Seleccione</option>
-                    <option value="ADMINISTRADOR">ADMINISTRADOR</option>
-                    <option value="CESCOLAR">CONTROL ESCOLAR OFICINAS CENTRALES</option>
-                    <option value="PLANTEL">CONTROL ESCOLAR PLANTEL</option>
-                  </select>
-                  <span>ROL</span>
-                </label>
-              </div>
-
-              <div class="col-md-8" id="plantel_modificar_oculto" style="display: none">
-                <label class="form-group has-float-label seltitulo">
-                  <select class="form-control form-control-lg selcolor" id="plantel_modificar" name="plantel_modificar">
-                    <option value="">Seleccione el plantel </option>
-                    <option value="CESCOLAR">Control Escolar oficinas centrales </option>
-
-                    <?php
-                                        foreach ($planteles as $plantel)
-                                        {
-                                          echo '<option value="'.$plantel->cct_plantel.'">'.$plantel->nombre_plantel.' ----- CCT: '.$plantel->cct_plantel.'</option>';
-                                        }
-                                        ?>
-
-                  </select>
-                  <span>Plantel</span>
-                </label>
-              </div>
-
-
-            </div>
-
-          </div>
-
-          <div class="form-group">
-            <div class="row">
-              <div class="col-md-4">
-                <button type="button" class="btn btn-info btn-lg btn-block" onclick="modificar_usuario()" style="padding: 1rem">Modificar usuario</button>
-              </div>
-            </div>
-          </div>
-
-        </div> <!-- cerrar modificar -->
-
-        <div id="diveliminar_usuario" style="display: none">
-          <div class="form-group">
-            <div class="row">
-              <div class="col-md-8">
-                <label class="form-group has-float-label seltitulo">
-                  <select class="form-control form-control-lg selcolor"  id="lista_eliminar"
-                    name="lista_eliminar">
-                    <option value="">Seleccione un usuario </option>
-
-                    <?php
-                                        foreach ($usuarios as $usuario)
-                                        {
-                                          if($usuario->usuario!='depto_tecnologia'){
-                                          echo '<option value="'.$usuario->id_usuario.'">Usuario: '.$usuario->usuario.' || Rol:  '.$usuario->rol.'</option>';
-                                          }
-                                        }
-                                        ?>
-
-                  </select>
-                  <span>Lista de usuarios</span>
-                </label>
-              </div>
-
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="row">
-              <div class="col-md-4">
-                <button type="button" class="btn btn-warning btn-lg btn-block" onclick="borrar_usuario()" style="padding: 1rem">Eliminar usuario</button>
-              </div>
-            </div>
-          </div>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a>Editar calificaciones baja</a>
+          </li>
+          <li class="breadcrumb-item active">Busque la materia que desea calificar</li>
+        </ol>
+          
+            
         </div> <!-- cerrar eliminar -->
 
       </div>
@@ -320,14 +188,13 @@
 
   function asignar_calificaciones_baja() {
     document.getElementById("div_asignar_calificaciones").style.display = "";
-    document.getElementById("divmodificar_usuario").style.display = "none";
+    document.getElementById("diveditar_alumnos_baja").style.display = "none";
     
   }
-  function modificar() {
-    document.getElementById("password_modificar").value = "";
-    document.getElementById("divagregar_usuario").style.display = "none";
-    document.getElementById("divmodificar_usuario").style.display = "";
-    document.getElementById("diveliminar_usuario").style.display = "none";
+  function modificar_fecha_baja() {
+    document.getElementById("div_asignar_calificaciones").style.display = "none";
+    document.getElementById("diveditar_alumnos_baja").style.display = "";
+    
   }
 
 

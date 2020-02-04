@@ -487,7 +487,12 @@ class C_estudiante extends CI_Controller {
 
     public function update_estudiante(){
         //$no_control=$this->generar_numcontrol(1);
+        $fecha_registro_nacimiento=NULL;
 
+        if($this->input->post('aspirante_anio_nacimiento_registro')!='' && $this->input->post('aspirante_mes_nacimiento_registro')!='' && $this->input->post('aspirante_dia_nacimiento_registro')!=''){
+            $fecha_registro_nacimiento= $this->input->post('aspirante_anio_nacimiento_registro').'-'.$this->input->post('aspirante_mes_nacimiento_registro').'-'.(strlen($this->input->post('aspirante_dia_nacimiento_registro'))==1?('0'.$this->input->post('aspirante_dia_nacimiento_registro')):$this->input->post('aspirante_dia_nacimiento_registro'));
+
+        }
 
         //inicio estudiante
         $no_control = $this->input->post("aspirante_no_control");
@@ -517,7 +522,8 @@ class C_estudiante extends CI_Controller {
             'lugar_nacimiento' => mb_strtoupper($this->input->post('aspirante_lugar_nacimiento')),
             //'cct_escuela_procedencia' => $this->input->post('aspirante_secundaria_cct'),
             'nacionalidad' => $this->input->post('aspirante_nacionalidad'),
-            'etnia' =>$this->input->post('aspirante_etnia')
+            'etnia' =>$this->input->post('aspirante_etnia'),
+            'fecha_registro_nacimiento' =>$fecha_registro_nacimiento
         );
 
         $tipo_ingreso = $this->M_estudiante->get_tipo_ingreso_estudiante($no_control);
@@ -631,7 +637,7 @@ class C_estudiante extends CI_Controller {
         //fin datos medicos
 
 
-        
+        $necesita_carta_extemporaneo = $this->input->post('necesita_carta_extemporaneo');
        
         echo $this->M_estudiante->update_estudiante(
             $datos_estudiante,
@@ -641,7 +647,8 @@ class C_estudiante extends CI_Controller {
             $datos_estudiante_medicos,
             $no_control,
             $id_tutor,
-            $datos_escuela_procedencia
+            $datos_escuela_procedencia,
+            $necesita_carta_extemporaneo
         );
         
         

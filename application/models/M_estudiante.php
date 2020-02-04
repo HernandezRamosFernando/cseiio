@@ -173,7 +173,8 @@ public function update_estudiante(
    $datos_estudiante_medicos,
    $no_control,
    $id_tutor,
-   $datos_escuela_procedencia
+   $datos_escuela_procedencia,
+   $necesita_carta_extemporaneo
    ){
 
       
@@ -228,8 +229,28 @@ public function update_estudiante(
 
             }
 
+            $resultado= $this->db->query("select * from Documentacion where id_documento=8 and Estudiante_no_control='".$no_control."'")->result();
             
-            
+            if(count($resultado)>0){
+               if($necesita_carta_extemporaneo=="no"){
+                  $this->db->query("delete from Documentacion where Estudiante_no_control='".$no_control."' and id_documento=8");
+
+               }
+
+            }
+            else{
+               if($necesita_carta_extemporaneo=="si"){
+                     $datos_documento = array(
+                        'id_documento' => 8,
+                        'entregado' => 0,
+                        'Estudiante_no_control' => $no_control
+                  );
+                  $this->db->insert("Documentacion",$datos_documento);
+                  
+
+               }
+
+            }
 
             //print_r($datos_escuela_procedencia);
 

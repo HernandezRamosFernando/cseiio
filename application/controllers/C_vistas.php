@@ -865,6 +865,44 @@ public function resolucion_equivalencia(){
     }
 
 
+    public function panel_alumnos_baja(){
+        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
+            $datos['planteles'] = $this->M_plantel->get_planteles();
+            $data= array('title'=>'Panel alumnos de baja');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierda");
+            $this->load->view("admin/alumnosdebaja",$datos);
+            $this->load->view("footers/footer");
+        }
+
+        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='CESCOLAR'){
+            $datos['planteles'] = $this->M_plantel->get_planteles();
+            $data= array('title'=>'Panel alumnos de baja');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierda");
+            $this->load->view("admin/alumnosdebaja",$datos);
+            $this->load->view("footers/footer");
+        }
+
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
+            $datos['planteles'] = $this->M_plantel->get_plantel($this->session->userdata('user')['plantel']);
+            $data= array('title'=>'Panel alumnos de baja');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierda");
+            $this->load->view("plantel/alumnosdebaja",$datos);
+            $this->load->view("footers/footer");
+        }
+        
+
+        else{
+            redirect(base_url().'index.php/c_usuario');
+        }
+    }
+
+
     // fin acreditacion ------------------------------------------------------
 
     // Reportes -----------------------------------------------------------------
@@ -1399,6 +1437,23 @@ public function resolucion_equivalencia(){
             redirect(base_url().'index.php/c_usuario');
         }
     }
+
+
+    public function panel_permisos_alumnos_baja(){
+        $datos['planteles'] = $this->M_plantel->get_planteles();
+        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
+        $data= array('title'=>'Lista de Permisos calificaciones');
+        $this->load->view("headers/cabecera", $data);
+        $this->load->view("headers/menuarriba");
+        $this->load->view("headers/menuizquierda");
+        $this->load->view("admin/panel_alumnos_baja",$datos);
+        $this->load->view("footers/footer");
+        }
+        else{
+            redirect(base_url().'index.php/c_usuario');
+        }
+    }
+
 
     public function lista_permisos_regularizacion(){
         if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){

@@ -160,7 +160,7 @@
       </div>
 
       <div class="col-md-4 col-lg-4"style="height: 9rem !important;">
-        <a href="<?php echo base_url();?>index.php/c_vistas/notificaciones"
+        <a href="<?php echo base_url();?>index.php/c_vistas/panel_permisos_alumnos_baja"
           class="btn btn-primary btn-lg btn-block  btn-responsive menu valign-center btn-9">
           <div class="row col-12">
             <div class="col-8 valign-center" style="padding-left: 0px;">

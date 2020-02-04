@@ -44,7 +44,7 @@
             <div class="col-md-8">
               <label class="form-group has-float-label seltitulo">
                 <select class="form-control form-control-lg selcolor" id="plantel" name="plantel">
-                <option value="">Seleccione el plantel donde buscar el grupo</option>
+                
                   <?php
                                         foreach ($planteles as $plantel)
                                         {

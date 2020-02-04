@@ -991,6 +991,9 @@
 
 
           <br>
+          <input type="hidden" id="necesita_carta_extemporaneo" name="necesita_carta_extemporaneo" value="">
+          
+
           <button type="submit" class="btn btn-success btn-lg btn-block" style="padding: 1.5rem">Actualizar
             Datos</button>
 
@@ -1138,6 +1141,40 @@
   </div>
 </div>
 <script>
+cargar_anio_registro();
+
+function validaracta(){
+  var fechaInicio = document.getElementById("aspirante_anio_nacimiento").value+"," +document.getElementById("aspirante_mes_nacimiento").value;
+  if(document.getElementById("aspirante_dia_nacimiento").value.length =! 1){
+  fechaInicio = fechaInicio + "," + document.getElementById("aspirante_dia_nacimiento").value
+  }else{
+    fechaInicio = fechaInicio + "," + 0 + document.getElementById("aspirante_dia_nacimiento").value
+  }
+  var fechaFin = document.getElementById("aspirante_anio_nacimiento_registro").value + "," +document.getElementById("aspirante_mes_nacimiento_registro").value;
+  if(document.getElementById("aspirante_dia_nacimiento_registro").value.length =! 1){
+  fechaFin = fechaFin + "," + document.getElementById("aspirante_dia_nacimiento_registro").value
+  }else{
+    fechaFin = fechaFin + "," + 0 + document.getElementById("aspirante_dia_nacimiento_registro").value
+  }
+  fechaInicio=new Date(fechaInicio).getTime();
+fechaFin = new Date(fechaFin).getTime();
+
+var diff = fechaFin - fechaInicio;
+var resultado = diff/(1000*60*60*24);
+if(resultado > 2193 && document.getElementById("aspirante_nacionalidad").value === "MEXICANA"){
+console.log("Necesita acta de registro extemporaneo");
+
+document.getElementById("necesita_carta_extemporaneo").value="si";
+
+}else{
+  console.log("No Necesita acta de registro extemporaneo");
+
+  document.getElementById("necesita_carta_extemporaneo").value="no";
+
+}
+
+console.log(diff/(1000*60*60*24) );
+}
 
 function limpiar_modal_nueva_secundaria() {
   $('#aspirante_nuevasecundaria_cct').val('');
@@ -1269,6 +1306,23 @@ function insertar_secundaria() {
       var mes = datos.estudiante[0].fecha_nacimiento.split("-")[1];
       var dia = parseInt(datos.estudiante[0].fecha_nacimiento.split("-")[2]);
       dia = dia.toString();
+
+      //datos registro fecha registro acta
+      if(datos.estudiante[0].fecha_registro_nacimiento!=null){
+
+      var anio_registro = datos.estudiante[0].fecha_registro_nacimiento.split("-")[0];
+      var mes_registro = datos.estudiante[0].fecha_registro_nacimiento.split("-")[1];
+      var dia_registro = parseInt(datos.estudiante[0].fecha_registro_nacimiento.split("-")[2]);
+      dia_registro= dia_registro.toString();
+
+      
+      document.getElementById("aspirante_anio_nacimiento_registro").value = anio_registro;
+      document.getElementById("aspirante_mes_nacimiento_registro").value = mes_registro;
+      document.getElementById("aspirante_dia_nacimiento_registro").value =dia_registro;
+      }
+
+      //Fin datos registro fecha registro acta
+
       //console.log(anio,mes,dia.toString());
       //$('#aspirante_anio_nacimiento option[value="'+anio+'"]')
       document.getElementById("aspirante_anio_nacimiento").value = anio;

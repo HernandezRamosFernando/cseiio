@@ -10,6 +10,35 @@ class C_bajas extends CI_Controller {
         $this->load->model("M_baja");
     }
 
+    public function editar_datos_baja(){
+        $no_control = $this->input->post('no_control_baja');
+        $fecha = $this->input->post('fecha_baja');
+        $motivo = $this->input->post('motivo_baja');
+        $observacion = $this->input->post('observacion_baja');
+
+        $datos = array(
+            'fecha' => $fecha,
+            'motivo' =>$motivo,
+            'observacion' =>$observacion
+        );
+        
+        
+        echo $this->M_baja->editar_datos_baja($datos,$no_control);
+
+    }
+
+    public function datos_alumno_baja(){
+        $no_control = $this->uri->segment(3);
+        $datos['datos_baja']=$this->M_baja->datos_alumno_baja($no_control);
+        echo json_encode($datos);
+    }
+
+    public function busqueda_alumnos_grupo_baja(){
+        $curp = $this->input->get('curp');
+        $cct_plantel = $this->input->get('cct_plantel');
+        echo json_encode($this->M_baja->busqueda_alumnos_grupo_baja($curp,$cct_plantel));
+    }
+
     public function busqueda_alumnos_grupo(){
         $curp = $this->input->get('curp');
         $cct_plantel = $this->input->get('cct_plantel');

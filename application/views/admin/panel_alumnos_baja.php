@@ -112,7 +112,12 @@
         </div> <!-- cerrar agregar -->
 
         <div id="divpermisos_editar_fecha" style="display: none">
-          
+          <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a>Asignar calificaciones</a>
+          </li>
+          <li class="breadcrumb-item active">Busque la materia que desea calificar</li>
+        </ol>
 
 
         </div> <!-- cerrar modificar -->

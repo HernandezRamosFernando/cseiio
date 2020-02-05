@@ -249,6 +249,7 @@ function rellenar_lista($estudiantes,$bajas,$tipo_materia){
             else{
                 $promedio = round($promedio,0,PHP_ROUND_HALF_UP);
             }
+            
 
         }
         
@@ -307,6 +308,16 @@ function rellenar_lista($estudiantes,$bajas,$tipo_materia){
             
         }
         
+        if(strlen($promedio)>0){
+            if($promedio=='0'){
+                $promedio='/';
+            }
+
+        }
+        
+            
+            
+       
 
         $respuesta.='
         <td style="width:21px">'.$contador.'</td>
@@ -319,7 +330,7 @@ function rellenar_lista($estudiantes,$bajas,$tipo_materia){
 
 
 
-        <td style="width:35px">'.(($promedio!="")?($promedio==0?'/':$promedio):"").'</td>
+        <td style="width:35px">'.$promedio.'</td>
         <td style="width:35px">'.(($estudiante->examen_final)=='0'?'/':$estudiante->examen_final).'</td>
 
         <td style="width:35px">'.$calificacion_final.'</td>';

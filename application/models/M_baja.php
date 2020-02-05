@@ -4,6 +4,33 @@ class M_baja extends CI_Model {
       parent::__construct();
    }
 
+   public function editar_datos_baja($datos,$no_control){
+    $this->db->trans_start();
+
+    $this->db->where('Estudiante_no_control',$no_control);
+    $this->db->update('Baja',$datos);
+
+    $this->db->trans_complete();
+
+    if ($this->db->trans_status() === FALSE)
+    {
+        return "no";
+    }
+
+    else{
+        return "si";
+    }
+  
+}
+
+   public function datos_alumno_baja($no_control){
+    return $this->db->query("SELECT * FROM Estudiante e inner join Baja b on b.Estudiante_no_control=e.no_control where no_control='".$no_control."';")->row();
+}
+
+
+   public function busqueda_alumnos_grupo_baja($curp,$cct_plantel){
+    return $this->db->query("SELECT * FROM Estudiante e inner join Grupo_Estudiante ge on e.no_control=ge.Estudiante_no_control inner join Grupo g on ge.Grupo_id_grupo=g.id_grupo inner join Baja b on b.Estudiante_no_control=e.no_control where g.estatus=1 and tipo_ingreso='BAJA' and curp like '%".$curp."%' and Plantel_cct_plantel like '%".$cct_plantel."%' group by e.no_control order by e.primer_apellido,e.segundo_apellido,e.nombre,e.semestre_en_curso;")->result();
+}
 
 
    function baja_estudiante($no_control){

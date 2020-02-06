@@ -170,11 +170,11 @@
           <li class="breadcrumb-item">
             <a>Editar fechas de baja</a>
           </li>
-          <li class="breadcrumb-item active">Busque al alumno del ciclo anterior en turno para asignar permisos de editar fecha de baja</li>
+          <li class="breadcrumb-item active">Busque al alumno para asignar permisos de editar fecha de baja</li>
         </ol>
 
         <div class="card">
-      <div class="card-body">
+          <div class="card-body">
 
         <div class="form-group">
 

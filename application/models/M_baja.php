@@ -4,11 +4,38 @@ class M_baja extends CI_Model {
       parent::__construct();
    }
 
+   public function permisos_editar_datos_baja($datos,$no_control){
+    $this->db->trans_start();
+
+    $this->db->query("update Permiso_editar_baja set estatus=0 where Estudiante_no_control='".$no_control."' and idpermiso>=0;");
+    
+    $this->db->insert('Permiso_editar_baja',$datos);
+
+    $this->db->trans_complete();
+
+    if ($this->db->trans_status() === FALSE)
+    {
+        return "no";
+    }
+
+    else{
+        return "si";
+    }
+  
+}
+
+
+   public function busqueda_alumnos_grupo_baja_permisos($curp,$cct_plantel){
+    return $this->db->query("SELECT * FROM Estudiante e inner join Grupo_Estudiante ge on e.no_control=ge.Estudiante_no_control inner join Grupo g on ge.Grupo_id_grupo=g.id_grupo inner join Baja b on b.Estudiante_no_control=e.no_control inner join Permiso_editar_baja edit_baja on edit_baja.Estudiante_no_control=e.no_control where g.estatus=1 and edit_baja.estatus=1 and tipo_ingreso='BAJA' and curp like '%".$curp."%' and curdate() between fecha_inicio and fecha_termino and Plantel_cct_plantel  like '%".$cct_plantel."%' group by e.no_control order by e.primer_apellido,e.segundo_apellido,e.nombre,e.semestre_en_curso;")->result();
+}
+
    public function editar_datos_baja($datos,$no_control){
     $this->db->trans_start();
 
     $this->db->where('Estudiante_no_control',$no_control);
     $this->db->update('Baja',$datos);
+
+    $this->db->query("update Permiso_editar_baja set estatus=0 where Estudiante_no_control='".$no_control."' and idpermiso>=0;");
 
     $this->db->trans_complete();
 

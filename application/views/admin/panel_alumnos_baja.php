@@ -112,12 +112,89 @@
         </div> <!-- cerrar agregar -->
 
         <div id="divpermisos_editar_fecha" style="display: none">
-          <ol class="breadcrumb">
+        <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a>Asignar calificaciones</a>
+            <a>Permisos editar fechas de baja</a>
           </li>
-          <li class="breadcrumb-item active">Busque la materia que desea calificar</li>
+          <li class="breadcrumb-item active">Busque al alumno para asignar permisos de editar fecha de baja</li>
         </ol>
+
+        <div class="card">
+          <div class="card-body">
+
+        <div class="form-group">
+
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-label-group ">
+                <input type="text" pattern="[A-Za-z0-9]{18}" title="Faltan datos" class="form-control text-uppercase"
+                  id="aspirante_curp_busqueda2" placeholder="CURP" style="color: #237087">
+                <label for="aspirante_curp_busqueda2">CURP</label>
+              </div>
+            </div>
+
+          </div>
+
+
+        </div>
+
+        <div class="form-group">
+          <div class="row">
+
+
+            <div class="col-md-8">
+              <label class="form-group has-float-label seltitulo">
+                <select class="form-control form-control-lg selcolor" required="required"
+                  id="aspirante_plantel_busqueda2" name="aspirante_plantel2">
+                  <option value="">Buscar en todos los planteles</option>
+
+                  <?php
+                      foreach ($planteles as $plantel)
+                      {
+                        echo '<option value="'.$plantel->cct_plantel.'">'.$plantel->nombre_corto.' DE '.$plantel->nombre_plantel.' ----- CCT: '.$plantel->cct_plantel.'</option>';
+                      }
+                      ?>
+
+                </select>
+                <span>Plantel</span>
+              </label>
+
+            </div>
+
+            <div class="col-md-4">
+              <button type='button' class="btn btn-success btn-lg btn-block" id="btn_buscar2"
+                onclick='buscar_editar_permisos_baja()'>Buscar</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="overflow:scroll; display:none" id="busqueda_oculto2">
+      <div class="card-body">
+        <table class="table table-hover" id="tabla_completa_permisos" style="width: 100%">
+          <caption>Lista de todos los alumnos</caption>
+          <thead class="thead-light">
+            <tr>
+              <th scope="col" class="col-md-1">Nombre completo</th>
+              <th scope="col" class="col-md-1">CURP</th>
+              <th scope="col" class="col-md-1">N° control</th>
+              <th scope="col" class="col-md-1">Matrícula</th>
+              <th scope="col" class="col-md-1">Plantel CCT</th>
+              <th scope="col" class="col-md-1">Fecha de baja</th>
+              <th scope="col" class="col-md-1"></th>
+            </tr>
+          </thead>
+
+
+
+          <tbody id="tabla_permisos">
+
+          </tbody>
+        </table>
+      </div>
+    </div>
 
 
         </div> <!-- cerrar modificar -->
@@ -209,6 +286,170 @@
 </div>
 
 <!--Termina modal para asignar permisos-->
+
+
+<!-- Modal permisos editar-->
+<div class="modal fade" id="fechapermiso" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" style="max-width: 80% !important;" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Asignar fecha de permiso de editar baja</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form id="editar_fecha_permiso">
+      <div class="modal-body">
+
+      <input type="hidden" id="no_control_editar" name="no_control_editar">
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-label-group">
+              <input type="date" class="form-control" id="fecha_inicio2" name="fecha_inicio2" placeholder="Fecha de inicio" min=<?php
+                echo date('Y-m-d');
+                ?> required>
+              <label for="fecha_inicio">Fecha de inicio de permiso </label>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-label-group">
+              <input type="date" class="form-control" id="fecha_fin2" name="fecha_fin2" placeholder="Fecha de finalización " min=<?php
+                echo date('Y-m-d');
+                ?> required>
+              <label for="fecha_fin">Fecha de finalización de permiso </label>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="submit" class="btn btn-success">Guardar fecha</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- Termina modal permisos editar-->
+<script>
+function buscar_editar_permisos_baja() {
+      document.getElementById("aspirante_plantel_busqueda2").disabled = true;
+      document.getElementById("aspirante_curp_busqueda2").disabled = true;
+      document.getElementById("tabla_permisos").innerHTML = "";
+      var xhr = new XMLHttpRequest();
+      var curp = document.getElementById("aspirante_curp_busqueda2").value;
+      var plantel = document.getElementById("aspirante_plantel_busqueda2").value;
+      var query = 'curp=' + curp + '&cct_plantel=' + plantel;
+      xhr.open('GET', '<?php echo base_url();?>index.php/c_bajas/busqueda_alumnos_grupo_baja?' + query, true);
+      xhr.onloadstart = function () {
+        $('#div_carga').show();
+      }
+      xhr.error = function () {
+        console.log("error de conexion");
+      }
+      xhr.onload = function () {
+        $('#div_carga').hide();
+        JSON.parse(xhr.response).forEach(function (valor, indice) {
+          //console.log(valor);
+          var fila = '<tr>';
+          fila += '<td>';
+          fila += valor.primer_apellido + " " + valor.segundo_apellido+" "+valor.nombre;
+          fila += '</td>';
+          fila += '<td>';
+          fila += valor.curp;
+          fila += '</td>';
+          fila += '<td>';
+          fila += valor.no_control;
+          fila += '</td>';
+          fila += '<td>';
+          fila += valor.matricula === null ? "" : valor.matricula;
+          fila += '</td>';
+          fila += '<td>';
+          fila += valor.Plantel_cct_plantel;
+          fila += '</td>';
+          fila += '<td>';
+          fila += valor.fecha;
+          fila += '</td>';
+          fila += '<td>';
+          fila += '<button class="btn btn-lg btn-block btn-primary" type="button" onclick="cargar_datos_alumno_baja(this)" value="' + valor.no_control + '" onclick="" data-toggle="modal" data-target="#fechapermiso">Asignar permisos</button>';
+          fila += '</td>';
+          fila += '</tr>';
+          document.getElementById("tabla_permisos").innerHTML += fila;
+        });
+        formato_tabla_editar();
+      };
+      xhr.send(null);
+      document.getElementById('btn_buscar2').setAttribute("onClick", "limpiar();");
+      document.getElementById('btn_buscar2').innerHTML = 'Limpiar Búsqueda';
+      document.getElementById('btn_buscar2').classList.remove('btn-success');
+      document.getElementById('btn_buscar2').classList.add('btn-info');
+      document.getElementById('busqueda_oculto2').style.display = "";
+    }
+
+
+    function cargar_datos_alumno_baja(e) {
+      document.getElementById("editar_fecha_permiso").reset();
+      document.getElementById("no_control_editar").value =e.value;
+    }
+    
+
+
+    var form2 = document.getElementById("editar_fecha_permiso");
+	form2.onsubmit = function(e){
+		e.preventDefault();
+		var formdata = new FormData(form2);
+		var xhr =  new XMLHttpRequest();
+		xhr.open("POST","<?php echo base_url();?>index.php/C_bajas/permisos_editar_datos_baja",true);
+    xhr.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      xhr.error = function (){
+        console.log("error de conexion");
+      }
+  xhr.onreadystatechange = function () {
+    if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+      $('#div_carga').hide();
+      if(xhr.responseText==="si"){
+        Swal.fire({
+            type: 'success',
+            scrollbarPadding:false,
+            title: 'Permisos dados de alta exitosamente.',
+            showConfirmButton: false,
+            timer: 2500 
+          });
+
+          $('#fechapermiso').modal('toggle');
+          borrar_formato_tabla();
+          buscar_editar_permisos_baja();
+      }
+
+      else{
+        Swal.fire({
+            type: 'error',
+            scrollbarPadding:false,
+            title: 'Ocurrió un error en la base de datos.',
+            showConfirmButton: false,
+            timer: 2500 
+          });
+      }
+      
+
+    }
+}
+		xhr.send(formdata);
+		
+  }
+  
+  function borrar_formato_tabla(){
+  $("#tabla_completa_permisos").dataTable().fnDestroy();
+  
+}
+</script>
+
+
 <script>
 
   function permisos_calificacion_baja() {
@@ -217,11 +458,39 @@
     
   }
   function permisos_editar_fecha() {
-    document.getElementById("divpermisos_editar_fecha").value = "";
+    document.getElementById("divpermisos_editar_fecha").style.display = "";
     document.getElementById("divpermisos_baja").style.display = "none";
   }
 
-  
+  function formato_tabla_editar() {
+  $('#tabla_completa_permisos').DataTable({
+    //"order": [[ 0, 'desc' ]],
+    "language": {
+      "sProcessing": "Procesando...",
+      "sLengthMenu": "Mostrar _MENU_ ",
+      "sZeroRecords": "No se encontraron resultados",
+      "sEmptyTable": "No se encontraron resultados",
+      "sInfo": "Mostrando del _START_ al _END_ de un total de _TOTAL_ ",
+      "sInfoEmpty": "Mostrando del 0 al 0 de un total de 0 ",
+      "sInfoFiltered": "(filtrado de un total de _MAX_ )",
+      "sInfoPostFix": "",
+      "sSearch": "Buscar específico:",
+      "sUrl": "",
+      "sInfoThousands": ",",
+      "sLoadingRecords": "Cargando...",
+      "oPaginate": {
+        "sFirst": "Primero",
+        "sLast": "Último",
+        "sNext": "Siguiente",
+        "sPrevious": "Anterior"
+      },
+      "oAria": {
+        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+      }
+    }
+  });
+}
 </script>
 
 <script>

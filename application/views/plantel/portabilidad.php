@@ -361,7 +361,7 @@
           </div>
           <div class="col-md-2">
           <label class="form-group has-float-label seltitulo">
-              <select class="form-control form-control-lg selcolor" id="aspirante_mes_nacimiento_registro"  name="aspirante_anio_nacimiento_registro" onclick="get_dias_registro()">
+              <select class="form-control form-control-lg selcolor" id="aspirante_mes_nacimiento_registro"  name="aspirante_mes_nacimiento_registro" onclick="get_dias_registro()">
               <option value="">Seleccione uno</option>
               <option value="01">Enero 01</option>
             <option value="02">Febrero 02</option>

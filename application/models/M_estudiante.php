@@ -219,8 +219,15 @@ public function update_estudiante(
            
             
             if(!is_null($datos_escuela_procedencia)){
-                  $cct = $this->db->query("select cct_escuela_procedencia as cct from Escuela_procedencia as ep inner join Estudiante_Escuela_procedencia as eep on ep.cct_escuela_procedencia=eep.Escuela_procedencia_cct_escuela_procedencia where Estudiante_no_control='".$no_control."' and tipo_escuela_procedencia='SECUNDARIA'")->result()[0]->cct;
-               $this->db->query("delete from Estudiante_Escuela_procedencia where Estudiante_no_control='".$no_control."' and Escuela_procedencia_cct_escuela_procedencia='".$cct."'");
+
+                  $cct = $this->db->query("select cct_escuela_procedencia as cct_procedencia from Escuela_procedencia as ep inner join Estudiante_Escuela_procedencia as eep on ep.cct_escuela_procedencia=eep.Escuela_procedencia_cct_escuela_procedencia where Estudiante_no_control='".$no_control."' and tipo_escuela_procedencia='SECUNDARIA'")->result();
+                  if(count($cct)>0){
+                     $cct=$cct[0]->cct_procedencia;
+                     $this->db->query("delete from Estudiante_Escuela_procedencia where Estudiante_no_control='".$no_control."' and Escuela_procedencia_cct_escuela_procedencia='".$cct."'");
+
+                  }
+                  
+              
                
                
                foreach($datos_escuela_procedencia as $escuela){

@@ -1274,6 +1274,8 @@ function insertar_secundaria() {
     ini_secundaria_cct = "";
     document.getElementById("nombre_secundaria_oculto").style.display = "none";
     document.getElementById("tipo_subsistema_oculto").style.display = "none";
+    document.getElementById("nombre_bachillerato_oculto").style.display = "none";
+    document.getElementById("tipo_subsistema_bachillerato_oculto").style.display = "none";
 
     document.getElementById("formulario").reset();
     document.getElementById("selector_municipio_aspirante").innerHTML = "";
@@ -1453,8 +1455,24 @@ function insertar_secundaria() {
       //secundaria
       if (datos.estudiante[0].tipo_ingreso === "PORTABILIDAD") {
         document.getElementById("aspirante_secundaria_cct").value = datos.escuela_procedencia[0].Escuela_procedencia_cct_escuela_procedencia;
+        $validar_cct=datos.escuela_procedencia[0].Escuela_procedencia_cct_escuela_procedencia;
+
+        if($validar_cct.length>0){
+          document.getElementById("promedio_procedencia_secundaria").disabled = false;
+        }
+        document.getElementById("promedio_procedencia_secundaria").value = datos.escuela_procedencia[0].promedio_procedencia;
+        ini_secundaria_cct = $("#aspirante_secundaria_cct").val();
+
         document.getElementById("bachillerato_oculto").style.display = "";
-        document.getElementById("aspirante_bachillerato_cct").value = datos.escuela_procedencia[1].Escuela_procedencia_cct_escuela_procedencia;
+
+        cct_bachillerato=datos.escuela_procedencia[1];
+        if (typeof cct_bachillerato !== 'undefined') { // devuelve true
+          //se ejecutan estas instrucciones
+          document.getElementById("aspirante_bachillerato_cct").value = datos.escuela_procedencia[1].Escuela_procedencia_cct_escuela_procedencia;
+
+        }
+
+        
 
       } else {
         document.getElementById("aspirante_secundaria_cct").value = datos.escuela_procedencia[0].Escuela_procedencia_cct_escuela_procedencia;

@@ -884,6 +884,13 @@
               </div>
               <br>
             </div>
+            <div class="col-md-4">
+                  <div class="form-label-group">
+                    <input type="number" step="any" class="form-control text-uppercase" id="promedio_procedencia_secundaria"
+                      name="promedio_procedencia_secundaria" placeholder="Promedio procedencia de Secundaria" style="color: #237087 " disabled>
+                    <label for="promedio_procedencia_secundaria">Promedio de Secundaria</label>
+                  </div>
+              </div>
           </div>
 
           <div class="row">
@@ -915,6 +922,7 @@
             </div>
 
            
+            
 
           </div>
 
@@ -980,9 +988,9 @@
               <select class="form-control form-control-lg selcolor" name="aspirante_bachillerato_tipo_subsistema"
                 id="aspirante_bachillerato_tipo_subsistema">
                 <option value="">Seleccione un tipo</option>
-                <option value="TELESECUNDARIA">Educación Profesional Técnica</option>
-                <option value="GENERAL">Bachillerato General</option>
-                <option value="PARTICULAR">Bachillerato Tecnológico</option>
+                <option value="EDUCACIÓN PROFESIONAL TÉCNICA">Educación Profesional Técnica</option>
+                <option value="BACHILLERATO GENERAL">Bachillerato General</option>
+                <option value="BACHILLERATO TECNOLÓGICO">Bachillerato Tecnológico</option>
                 <option value="OTRO">Otro</option>
               </select>
               <span>Tipo de Subsistema</span>
@@ -1145,9 +1153,9 @@ aria-hidden="true">
               <select class="form-control form-control-lg selcolor" name="aspirante_nuevobachillerato_tipo_subsistema" 
                   id="aspirante_nuevobachillerato_tipo_subsistema" onchange="otro_secundaria();">
                 <option value="">Seleccione un tipo</option>
-                <option value="TELESECUNDARIA">Educación Profesional Técnica</option>
-                <option value="GENERAL">Bachillerato General</option>
-                <option value="PARTICULAR">Bachillerato Tecnológico</option>
+                <option value="EDUCACIÓN PROFESIONAL TÉCNICA">Educación Profesional Técnica</option>
+                <option value="BACHILLERATO GENERAL">Bachillerato General</option>
+                <option value="BACHILLERATO TECNOLÓGICO">Bachillerato Tecnológico</option>
                 <option value="OTRO">Otro</option>
               </select>
               <span>Tipo de Subsistema</span>
@@ -1389,9 +1397,11 @@ aria-hidden="true">
         //aspirante_secundaria_tipo_subsistema
         document.getElementById("aspirante_secundaria_tipo_subsistema").value = secundaria[0].tipo_subsistema;
         document.getElementById("aspirante_secundaria_tipo_subsistema").disabled = true;
+        document.getElementById("promedio_procedencia_secundaria").disabled = false;
       }
 
       else {
+        document.getElementById("promedio_procedencia_secundaria").disabled = true;
         document.getElementById("nombre_secundaria_oculto").style.display = "none";
         document.getElementById("tipo_subsistema_oculto").style.display = "none";
 

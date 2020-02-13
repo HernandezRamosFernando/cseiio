@@ -226,6 +226,13 @@ public function update_estudiante(
                      $this->db->query("delete from Estudiante_Escuela_procedencia where Estudiante_no_control='".$no_control."' and Escuela_procedencia_cct_escuela_procedencia='".$cct."'");
 
                   }
+
+                  $cct_bachillerato = $this->db->query("select cct_escuela_procedencia as cct_procedencia from Escuela_procedencia as ep inner join Estudiante_Escuela_procedencia as eep on ep.cct_escuela_procedencia=eep.Escuela_procedencia_cct_escuela_procedencia where Estudiante_no_control='".$no_control."' and tipo_escuela_procedencia='BACHILLERATO'")->result();
+                  if(count($cct_bachillerato)>0){
+                     $cct_bachillerato=$cct_bachillerato[0]->cct_procedencia;
+                     $this->db->query("delete from Estudiante_Escuela_procedencia where Estudiante_no_control='".$no_control."' and Escuela_procedencia_cct_escuela_procedencia='".$cct_bachillerato."'");
+
+                  }
                   
               
                

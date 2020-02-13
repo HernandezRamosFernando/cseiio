@@ -971,10 +971,10 @@
                   <select class="form-control form-control-lg selcolor" name="aspirante_bachillerato_tipo_subsistema"
                     id="aspirante_bachillerato_tipo_subsistema">
                     <option value="">Seleccione un tipo</option>
-                    <option value="TELESECUNDARIA">Educación Profesional Técnica</option>
-                    <option value="GENERAL">Bachillerato General</option>
-                    <option value="PARTICULAR">Bachillerato Tecnológico</option>
-                    <option value="OTRO">Otro</option>
+                <option value="EDUCACIÓN PROFESIONAL TÉCNICA">Educación Profesional Técnica</option>
+                <option value="BACHILLERATO GENERAL">Bachillerato General</option>
+                <option value="BACHILLERATO TECNOLÓGICO">Bachillerato Tecnológico</option>
+                <option value="OTRO">Otro</option>
                   </select>
                   <span>Tipo de Subsistema</span>
                 </label>
@@ -1140,8 +1140,227 @@
     </div>
   </div>
 </div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="nuevobachillerato" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered" style="max-width: 80% !important;" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">Agregar nuevo Bachillerato</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-label-group">
+              <input type="text" pattern="[A-ZÁÉÍÓÚáéíóúa-z0-9]+[ ]*[A-ZÁÉÍÓÚáéíóúa-z0-9]*" 
+                title="El nombre de la secundaria contiene caracteres incorrectos" class="form-control text-uppercase"
+                id="aspirante_nuevobachillerato_cct" name="aspirante_nuevobachillerato_cct" style="color: #237087"
+                placeholder="CCT de Bachillerato">
+              <label for="aspirante_nuevobachillerato_cct">C C T</label>
+            </div>
+            <br>
+          </div>
+          <div class="col-md-4">
+            <div class="form-label-group">
+              <input type="text" ppattern="[A-ZÁÉÍÓÚáéíóúa-z0-9]+[ ]*[A-ZÁÉÍÓÚáéíóúa-z0-9]*" 
+                class="form-control text-uppercase" id="aspirante_nuevobachillerato_nombre" style="color: #237087"
+                name="aspirante_nuevobachillerato_nombre" placeholder="Nombre de Bachillerato">
+              <label for="aspirante_nuevobachillerato_nombre">Nombre de Bachillerato</label>
+            </div>
+            <br>
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-group has-float-label seltitulo">
+              <select class="form-control form-control-lg selcolor" name="aspirante_nuevobachillerato_tipo_subsistema" 
+                  id="aspirante_nuevobachillerato_tipo_subsistema" onchange="otro_secundaria();">
+                <option value="">Seleccione un tipo</option>
+                <option value="EDUCACIÓN PROFESIONAL TÉCNICA">Educación Profesional Técnica</option>
+                <option value="BACHILLERATO GENERAL">Bachillerato General</option>
+                <option value="BACHILLERATO TECNOLÓGICO">Bachillerato Tecnológico</option>
+                <option value="OTRO">Otro</option>
+              </select>
+              <span>Tipo de Subsistema</span>
+            </label>
+          </div>
+
+          <div class="col-md-4" style="display: none" id="otro_secundaria_oculto">
+              <div class="form-label-group">
+                <input type="text" pattern="[A-Za-zÉÁÍÓÚÑéáíóúñ. 0-9]+"
+                  title="El tipo de la secundaria contiene caracteres incorrectos" class="form-control text-uppercase"
+                  id="aspirante_secundaria_tipo_otro" name="aspirante_secundaria_tipo_otro"
+                  placeholder="Tipo de Bachillerato" style="color: #237087">
+                <label for="aspirante_secundaria_tipo_otro">Tipo de Bachillerato</label>
+              </div>
+            </div>
+          
+
+        </div>
+        <br>
+
+        <div class="row">
+
+          <div class="col-md-4">
+            <label class="form-group has-float-label seltitulo">
+              <select class="form-control form-control-lg selcolor"  name="selector_estado_bachillerato"
+              onChange="cambio_estado(document.getElementById('selector_estado_bachillerato'),document.getElementById('selector_municipio_bachillerato'),document.getElementById('selector_localidad_bachillerato'))"
+                  id="selector_estado_bachillerato">
+                <option>Seleccione un estado</option>
+
+                <?php
+                            foreach ($estados as $estado)
+                            {
+                                    echo '<option value="'.$estado->id_estado.'">'.$estado->nombre_estado.'</option>';
+                            }
+                            ?>
+
+              </select>
+              <span>Estado</span>
+            </label>
+          </div>
+
+
+          <div class="col-md-4">
+            <label class="form-group has-float-label seltitulo">
+              <select class="form-control form-control-lg selcolor"  name="aspirante_bachillerato_municipio"
+              onChange="cambio_municipio(document.getElementById('selector_municipio_bachillerato'),document.getElementById('selector_localidad_bachillerato'))"
+                  id="selector_municipio_bachillerato">
+                <option></option>
+
+
+              </select>
+              <span>Municipio</span>
+            </label>
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-group has-float-label seltitulo">
+              <select class="form-control form-control-lg selcolor"  name="aspirante_bachillerato_localidad"
+                id="selector_localidad_bachillerato">
+                <option></option>
+
+
+
+              </select>
+              <span>Localidad</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="limpiar_modal_nueva_bachillerato()">Cancelar</button>
+      <button type="button" class="btn btn-success" id="insertarsecundaria" onclick="insertar_bachillerato()">Guardar</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Modal -->
+
 <script>
 cargar_anio_registro();
+
+function limpiar_modal_nueva_bachillerato() {
+  $('#aspirante_nuevobachillerato_cct').val('');
+  $('#aspirante_nuevobachillerato_nombre').val('');
+  $('#aspirante_nuevobachillerato_tipo_subsistema').val('');
+  $('#aspirante_secundaria_tipo_otro').val('');
+  $('#selector_estado_bachillerato').val('');
+  $('#aspirante_bachillerato_municipio').val('');
+  $('#aspirante_bachillerato_localidad').val('');
+}
+
+function cerrar_modal_bachillerato() {
+  $('#aspirante_nuevobachillerato_cct').val('');
+  $('#aspirante_nuevobachillerato_nombre').val('');
+  $('#aspirante_nuevobachillerato_tipo_subsistema').val('');
+  $('#aspirante_secundaria_tipo_otro').val('');
+  $('#selector_estado_bachillerato').val('');
+  $('#aspirante_bachillerato_municipio').val('');
+  $('#aspirante_bachillerato_localidad').val('');
+    
+    $('#modalaspirante').modal().show();
+    $('#nuevobachillerato').modal('toggle');
+  }
+
+function cerrar_modal() {
+    $('#aspirante_nuevasecundaria_cct').val('');
+    $('#aspirante_nuevasecundaria_nombre').val('');
+    $('#aspirante_nuevasecundaria_tipo_subsistema').val('');
+    $('#selector_estado_secundaria').val('');
+    $('#selector_municipio_secundaria').val('');
+    $('#selector_localidad_secundaria').val('');
+
+    $('#modalaspirante').modal().show();
+    $('#nuevasecundaria').modal('toggle');
+  }
+
+
+function insertar_bachillerato() {
+  if(document.getElementById("aspirante_nuevobachillerato_cct").value === ''||document.getElementById("aspirante_nuevobachillerato_nombre").value === ''||document.getElementById("aspirante_nuevobachillerato_tipo_subsistema").value===''){
+    Swal.fire({
+          type: 'error',
+          title: 'Bachillerato no agregado',
+          confirmButtonText: 'Cerrar'
+
+        })
+  }else{
+
+  let secundaria = "";
+  secundaria = {
+    "cct_escuela_procedencia": document.getElementById("aspirante_nuevobachillerato_cct").value.toUpperCase(),
+    "nombre_escuela_procedencia": document.getElementById("aspirante_nuevobachillerato_nombre").value,
+    "tipo_subsistema": document.getElementById("aspirante_nuevobachillerato_tipo_subsistema").value,
+    "id_localidad_escuela_procedencia": parseInt(document.getElementById("selector_localidad_bachillerato").value),
+    "tipo_escuela_procedencia": "BACHILLERATO"
+  };
+
+  document.getElementById("secundarias").innerHTML += '<option value="' + document.getElementById("aspirante_nuevobachillerato_cct").value + '">'
+  //console.log(secundaria);
+  var xhr = new XMLHttpRequest();
+  
+  xhr.open("POST", '<?php echo base_url();?>index.php/c_escuela_procedencia/insert_escuela', true);
+  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  xhr.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      xhr.error = function (){
+        console.log("error de conexion");
+      }
+  xhr.onreadystatechange = function () {
+    if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+      $('#div_carga').hide();
+      if (xhr.responseText.trim() === "si") {
+        Swal.fire({
+          type: 'success',
+          title: 'Bachillerato agregado correctamente',
+          showConfirmButton: false,
+          timer: 2500
+        })
+        $('#nuevobachillerato').modal('toggle');
+        obtener_bachillerato(document.getElementById("aspirante_bachillerato_cct").value);
+      } else {
+        Swal.fire({
+          type: 'error',
+          title: 'Bachillerato no agregado',
+          confirmButtonText: 'Cerrar'
+
+        })
+      }
+
+    }
+  }
+  xhr.send(JSON.stringify(secundaria));
+
+  }
+}
 
 function validaracta(){
   var fechaInicio = document.getElementById("aspirante_anio_nacimiento").value+"," +document.getElementById("aspirante_mes_nacimiento").value;
@@ -1187,6 +1406,7 @@ function limpiar_modal_nueva_secundaria() {
 
 
 var ini_secundaria_cct = "";
+var ini_bachillerato_cct = "";
 $("#aspirante_secundaria_cct").change(function(){
 
   if ( $("#aspirante_secundaria_cct").val().toUpperCase() != ini_secundaria_cct ) {
@@ -1271,7 +1491,10 @@ function insertar_secundaria() {
   cargar_anio();
 
   function cargar_datos_aspirante(e) {
+    limpiar_modal_nueva_bachillerato()
+    limpiar_modal_nueva_secundaria()
     ini_secundaria_cct = "";
+    ini_bachillerato_cct="";
     document.getElementById("nombre_secundaria_oculto").style.display = "none";
     document.getElementById("tipo_subsistema_oculto").style.display = "none";
     document.getElementById("nombre_bachillerato_oculto").style.display = "none";
@@ -1474,6 +1697,7 @@ function insertar_secundaria() {
         if (typeof cct_bachillerato !== 'undefined') { // devuelve true
           //se ejecutan estas instrucciones
           document.getElementById("aspirante_bachillerato_cct").value = datos.escuela_procedencia[1].Escuela_procedencia_cct_escuela_procedencia;
+          ini_bachillerato_cct=$("#aspirante_bachillerato_cct").val();
 
         }
 
@@ -1661,6 +1885,7 @@ function insertar_secundaria() {
         //aspirante_secundaria_tipo_subsistema
         document.getElementById("aspirante_bachillerato_tipo_subsistema").value = secundaria[0].tipo_subsistema;
         document.getElementById("aspirante_bachillerato_tipo_subsistema").disabled = true;
+        console.log("cct_ bachillerato"+secundaria[0].tipo_subsistema);
       }
       else {
         document.getElementById("nombre_bachillerato_oculto").style.display = "none";
@@ -1668,15 +1893,17 @@ function insertar_secundaria() {
 
         swalWithBootstrapButtons.fire({
           type: 'info',
-          text: 'Esta secundaria no existe',
+          text: 'Este bachillerato no existe por favor agreguela:',
           showCancelButton: true,
-          showConfirmButton: false,
+          
+          confirmButtonText: 'Agregar',
           cancelButtonText: 'Cancelar',
+          
         }).then((result) => {
           if (result.value) {
-            $('#nuevasecundaria').modal().show();
-            limpiar_modal_nueva_secundaria();
-            cct();
+            
+            $('#nuevobachillerato').modal().show();
+          cctbachillerato();
 
           }
         })
@@ -1702,12 +1929,24 @@ function insertar_secundaria() {
     if ( $("#aspirante_secundaria_cct").val().toUpperCase() != ini_secundaria_cct && $("#tipo_subsistema_oculto").is(":hidden")) {
     obtener_secundaria($("#aspirante_secundaria_cct").val().toUpperCase());
   }
+  else if($("#aspirante_bachillerato_cct").val().toUpperCase() != ini_bachillerato_cct && $("#tipo_subsistema_bachillerato_oculto").is(":hidden")){
+    obtener_bachillerato($("#aspirante_bachillerato_cct").val().toUpperCase());
+  }
   else{
-      if (document.getElementById("aspirante_secundaria_cct").value === '') {
+      if (document.getElementById("aspirante_secundaria_cct").value === '' || document.getElementById("aspirante_bachillerato_cct").value === '') {
+        mensaje="";
+        if (document.getElementById("aspirante_secundaria_cct").value === ''){
+          mensaje="<p style='text-align:left;margin-left:30%'>-Secundaria.</p>";
+        }
+
+        if (document.getElementById("aspirante_bachillerato_cct").value === ''){
+          mensaje+="<p style='text-align:left;margin-left:30%'>-Bachillerato.<p>";
+        }
+
         console.log("vacio");
         swalWithBootstrapButtons.fire({
           type: 'warning',
-          text: 'Esta tratando de actualizar un alumno sin Secundaria',
+          html: '<p>Esta tratando de actualizar un alumno sin: </p>'+mensaje,
           showCancelButton: true,
           confirmButtonText: 'Actualizar',
           cancelButtonText: 'Cancelar',

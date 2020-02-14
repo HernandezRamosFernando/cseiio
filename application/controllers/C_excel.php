@@ -236,6 +236,268 @@ $tipo_operacion_excel='';
 $tipo_operacion_excel= trim($plantilla_excel->getCell('B1')->getValue());
 
 switch ($tipo_operacion_excel) {
+			case 'SIN MATRICULA'://Empieza caso baja sin matricula
+			
+			$this->form_validation->set_rules('fileURL','Upload File', 'callback_checkValidateSinMatricula');
+		if($this->form_validation->run() != false){
+			$indiceHoja = 0;
+                    $calificaciones_friae = $spreadsheet->getSheet($indiceHoja);
+                   // echo "<h3>Vamos en la hoja con índice $indiceHoja</h3>";
+                    
+                    # Lo que hay en B2
+                    $celda = $calificaciones_friae->getCell('B2');
+                    # El valor, así como está en el documento
+                    $plantel_cct = trim($celda->getValue());
+
+                    $nombre_ciclo_escolar= trim($calificaciones_friae->getCell('B3')->getValue());
+
+                    $periodo= trim($calificaciones_friae->getCell('B4')->getValue());
+
+                    $modulo= trim($calificaciones_friae->getCell('B5')->getValue());
+
+					$grupo= trim($calificaciones_friae->getCell('B6')->getValue());
+
+					$no_control= trim($calificaciones_friae->getCell('A10')->getValue());
+
+					$matricula= trim($calificaciones_friae->getCell('B10')->getValue());
+
+					$tipo_operacion='';
+					$tipo_operacion= trim($calificaciones_friae->getCell('B1')->getValue());
+
+
+					$anio_baja= trim($calificaciones_friae->getCell('C10')->getFormattedValue());
+					$mes_baja= trim($calificaciones_friae->getCell('D10')->getFormattedValue());
+					$dia_baja= trim($calificaciones_friae->getCell('E10')->getFormattedValue());
+
+
+					$fecha_baja="";
+
+					if($anio_baja!='' && $mes_baja!='' && $dia_baja!=''){
+						$fecha_baja=$anio_baja."-".$this->num_mes($mes_baja)."-".$dia_baja;
+					}
+						
+
+					$motivo_baja= trim($calificaciones_friae->getCell('F10')->getValue());
+					$num_adeudos=-1;
+					
+					
+					$id_ciclo_escolar=""; //inicializamos variable
+					$id_grupo=""; //inicializamos variable id_grupo
+					$id_periodo="";//inicalizamos variable periodo
+					$existe_grupo=0;//inicializamos varfiable existe grupo
+					$num_materias=0; //inicalizamos variable numero de materias semestre
+					
+					$cont_materias_reprobadas=0;// Contador de materias reprobadas por cada alumno
+					$cont_materias_estudiante=0;// cuenta el número de materias subidas por el estudiante.
+					$resultado_error="";
+					$id_friae="";
+					
+//Empieza a leer hoja Friae y calificaciones_______________________________________________________________________
+					
+					
+					$id_ciclo_escolar=$this->M_ciclo_escolar->get_id_ciclo_escolar_x_periodo_x_nombre($periodo,$nombre_ciclo_escolar)->id_ciclo_escolar;
+
+					if(trim($periodo) == "AGOSTO-ENERO"){
+						$id_periodo="B";
+					  }else{
+						$id_periodo="A";
+					  }
+					  
+					 
+
+
+					$id_grupo=$plantel_cct.$modulo.$id_ciclo_escolar.$id_periodo.$grupo;// GENERANDO ID_GRUPO
+
+					$existe_grupo=count($this->M_grupo->existe_id_grupo_ciclo_anterior($id_grupo));
+		
+					if ($existe_grupo==0) 
+						{
+							$this->M_grupo->agregar_grupo_de_ciclo_anterior($id_grupo,$modulo,$grupo,$plantel_cct);
+							$id_friae=$this->M_friae->crear_friae_ciclos_anteriores($id_grupo);
+						}
+
+
+						else{
+							$id_friae=$this->M_friae->id_friae($id_grupo)[0]->folio;
+						}
+
+					
+						
+					
+						foreach ($calificaciones_friae->getRowIterator(15) as $fila) {
+							
+								$clave='';
+								$p1=null;
+								$p2=null;
+								$p3=null;
+								$promedio_modular=null;
+								$examen_final=null;
+								$cal_final=null;
+								$bandera=0;
+								$num_materias_reprobadas=0;
+								$cont_materias_alumno=0;
+
+							$fila=$fila->getCellIterator("B","H");
+
+							foreach ($fila as $celda) {
+								if(!is_null($celda->getValue())){
+
+								$fila = $celda->getRow();
+								# Columna, que es la A, B, C y así...
+								$columna = $celda->getColumn();
+								
+
+
+								if($columna=='B'){
+									$clave=trim($celda->getValue());
+									$bandera++;
+								}
+
+								if($columna=='C'){
+									$p1=trim($celda->getValue());
+									if($p1=='/'){
+										$p1=0;
+									}
+									$bandera++;
+								}
+
+								if($columna=='D'){
+									$p2=trim($celda->getValue());
+									if($p2=='/'){
+										$p2=0;
+									}
+									$bandera++;
+								}
+
+								if($columna=='E'){
+									$p3=trim($celda->getValue());
+									if($p3=='/'){
+										$p3=0;
+									}
+									$bandera++;
+								}
+
+
+								if($columna=='F'){
+									$promedio_modular=$celda->getCalculatedValue();
+									if($promedio_modular=='/'){
+										$promedio_modular=0;
+									}
+									$bandera++;
+								}
+
+								if($columna=='G'){
+									$examen_final=$celda->getCalculatedValue();
+									if($examen_final=='/'){
+										$examen_final=0;
+									}
+									$bandera++;
+								}
+
+								if($columna=='H'){
+									$cal_final=$celda->getCalculatedValue();
+									if($cal_final=='/'){
+										$cal_final=0;
+									}
+
+									$bandera++;
+								}
+
+								if($bandera==7){//Solo se insertaran aquellas calificaciones en donde todas las 9 columnas esten rellenados.
+									$datos_calificacion_estudiante = array(
+										'Grupo_id_grupo' => strtoupper($id_grupo),
+										'Estudiante_no_control' => strtoupper($no_control),
+										'Ciclo_escolar_id_ciclo_escolar' =>$id_ciclo_escolar,
+										'id_materia' => strtoupper($clave),
+										'primer_parcial' => $p1,
+										'segundo_parcial' => $p2,
+										'tercer_parcial' => $p3,
+										'examen_final' => $examen_final,
+										'calificacion_final' => $cal_final
+									);
+
+									/*if($no_control!=$temp_no_control){
+										$cont_materias_reprobadas=0;
+									}
+
+									if(intval(trim($cal_final))<=5){
+										$cont_materias_reprobadas=$cont_materias_reprobadas+1;
+										$estudiantes_grupo[$no_control]=['materias_reprobadas'=>$cont_materias_reprobadas];
+										$temp_no_control=$no_control;
+										
+									}*/
+									
+									  
+									
+									$existe_alumno_materia='';
+									
+									$existe_alumno_materia=count($this->M_grupo_estudiante->existe_materia_grupo_ciclo_anterior($id_grupo,$clave,$no_control));
+
+									if($existe_alumno_materia==0){
+										$this->M_grupo_estudiante->insertar_calificaciones_ciclos_anteriores($datos_calificacion_estudiante);
+
+										$datos_friae = array(
+											
+											'no_control' => $no_control,
+											'id_grupo' => $id_grupo,
+											'semestre' =>$modulo,
+											'id_friae'=>$id_friae
+											
+										);
+				
+										if(count($this->M_friae->get_datos_friae_estudiante($id_grupo,$no_control))==0){
+											$this->M_friae->agregar_estudiante_friae_ciclos_anteriores((object)$datos_friae);
+										}
+										
+									}
+									
+									
+								}
+								
+
+								}
+
+								
+
+								
+								
+							}
+						}
+
+						
+						
+						
+//Termina a leer hoja Friae y calificaciones_______________________________________________________________________
+			
+		
+		$this->M_regularizacion->actualizar_estatus_estudiante($no_control,$num_adeudos,$modulo,$plantel_cct,$matricula,$fecha_baja,$motivo_baja,$tipo_operacion_excel,$grupo);
+		
+		
+		$datos_friae_baja = array(
+			'no_control' => $no_control,
+			'id_friae' => $id_friae,
+			'fecha_baja' =>$fecha_baja,
+			'anio_baja' =>$anio_baja,
+			'semestre'=>$modulo,
+			'periodo'=>$periodo
+
+		);
+
+
+		$this->M_friae->actualizar_friae_baja_ciclos_anteriores((object)$datos_friae_baja);
+
+
+		
+		
+		
+		
+		
+		
+		$this->session->set_flashdata('msg_exito', 'Los datos del alumno con estatus <span style="font-weight:bold">BAJA</span> se han agregado al sistema correctamente, para corroborar verique en el reporte KARDEX.');
+			
+		}
+			
+			break;//Termina caso baja sin matricula
 			case 'DESERTOR'://Empieza caso desertor
 			
 			$this->form_validation->set_rules('fileURL','Upload File', 'callback_checkValidateDesertor');
@@ -1644,6 +1906,408 @@ $this->session->set_flashdata('msg_exito', 'Los datos del alumno se han agregado
 							$resultado_error.="<li>CCT de Plantel incorrecto, vuelva a seleccionar.</li>";
 						  }
 					  }
+
+					  if($periodo==""){
+						$resultado_error.="<li>No ha seleccionado un periodo.</li>";  
+						  }
+						  
+						  else{
+							  if(trim($periodo)!='FEBRERO-JULIO' && trim($periodo)!='AGOSTO-ENERO'){
+								$resultado_error.="<li>Seleccione un periodo valido.</li>";
+							  }
+						  }
+					  
+					  if($nombre_ciclo_escolar==""){
+							$resultado_error.="<li>No ha seleccionado el ciclo escolar.</li>"; 
+
+					  }
+					  else{
+							if(empty($this->M_ciclo_escolar->existe_ciclo_escolar_x_periodo_x_nombre($periodo,$nombre_ciclo_escolar))){
+								$resultado_error.="<li>El ciclo escolar seleccionado no se encuentra dado de alta en el sistema, consulte al Depto. de Control Escolar</li>";
+								
+							}
+					  }
+					  
+					  
+					  
+					  if($modulo=="" && $modulo>6){
+							$resultado_error.="<li>No ha seleccionado un semestre valido.</li>";  
+					  }
+					  
+					  if($grupo==""){
+							$resultado_error.="<li>No ha seleccionado un grupo.</li>";  
+					  }
+					  
+					  if($no_control==""){
+							$resultado_error.="<li>No ha ingresado un número de control del alumno.</li>"; 
+							
+					  }
+
+					  else{
+						 if(empty($this->M_estudiante->get_estudiante($no_control)['estudiante'][0])){
+							$resultado_error.="<li>Los datos pertenecientes al número de control <span style='font-weight:bold'>".$no_control."</span> no se encuentran registrados en el sistema, ingrese los datos del estudiante en el módulo correspondiente.</li>"; 
+						 } 
+						 
+					  }
+
+					  $calificacion_valida = array("/",5,6,7,8,9,10);
+					  $lista_materias =array();
+					  foreach( $this->M_materia->get_materias_semestre($modulo) as $materia){
+							$lista_materias[]=$materia->clave;
+					  }
+
+					  
+					  $cont_materias_cal_alumno=0;
+					  
+
+					  $cont_materias_aprobadas=0;
+					  
+					  foreach ($calificaciones_friae->getRowIterator(15) as $fila) {
+
+						        $clave='';
+								$cal_final=null;
+								
+							$fila=$fila->getCellIterator("B","H");
+
+							foreach ($fila as $celda) {
+								$fila = $celda->getRow();
+								$columna = $celda->getColumn();
+
+								if($columna=='B' && $columna!='' && in_array($celda->getValue(), $lista_materias)){
+									$clave=$celda->getValue();
+									$cont_materias_cal_alumno++;
+								}
+								
+								
+								if($columna=='C' && trim($celda->getValue())!='' && in_array($celda->getValue(), $calificacion_valida)){
+									$cont_materias_cal_alumno++;
+									
+								}
+
+								if($columna=='D' && trim($celda->getValue())!='' && in_array($celda->getValue(), $calificacion_valida)){
+									$cont_materias_cal_alumno++;
+									
+								}
+
+								if($columna=='E' && trim($celda->getValue())!='' && in_array($celda->getValue(), $calificacion_valida)){
+									$cont_materias_cal_alumno++;
+									
+								}
+
+								if($columna=='F' && trim($celda->getCalculatedValue())!='' && in_array($celda->getCalculatedValue(), $calificacion_valida)){
+									$cont_materias_cal_alumno++;
+									
+								}
+
+
+								if($columna=='G' && trim($celda->getCalculatedValue())!='' && in_array($celda->getCalculatedValue(), $calificacion_valida)){
+									$cont_materias_cal_alumno++;
+									
+								}
+
+								if($columna=='H' && trim($celda->getCalculatedValue())!='' && in_array($celda->getCalculatedValue(), $calificacion_valida)){
+									$cont_materias_cal_alumno++;
+									if($celda->getCalculatedValue()=='/')
+									{
+										$cal_final=0;
+									}
+									else{
+										$cal_final=$celda->getCalculatedValue();
+									}
+									
+									if($cal_final>=6){ //Contador de materias aprobadas en el semestre
+										$cont_materias_aprobadas++;
+										}
+									
+								}
+
+								
+								
+
+							}
+						}
+					  
+						
+						
+					 
+					  if($cont_materias_cal_alumno!=($num_materias*7)){
+						$resultado_error.="<li>Verifique el concentrado de calificaciones si alguna de las celdas se encuentra vacia o no cumple con los criterios de evaluación de calificaciones parciales, modulares y finales de las materias pertenecientes al semestre.</li>";
+					  }
+
+					  else{
+
+					  }
+					  
+
+
+					$indiceHoja = 0;
+					$cont_cal_frer=0;
+					$calificaciones_frer = $this->get_archivo()->getSheet($indiceHoja);
+					
+		
+							foreach ($calificaciones_frer->getRowIterator(15) as $fila) {
+		
+								$fila=$fila->getCellIterator("B","M");
+
+								$clave_materia='';
+								$calificacion_regularizacion=0;
+								$anio_regu='';
+								$mes_regu='';
+								$dia_regu='';
+								$cont_columnas_regu=0;
+		
+								foreach ($fila as $celda) {
+									$fila = $celda->getRow();
+									$columna = $celda->getColumn();
+
+									if(!is_null($celda->getValue())){
+
+										if($columna=='B'){
+											$clave_materia=$celda->getValue();
+											
+										}
+
+										if($columna=='I'){
+											if(!in_array($celda->getCalculatedValue(), $calificacion_valida)){
+												$resultado_error.="<li>La calificación de regularización en la celda <span style='font-weight:bold'>".$columna.$fila."</span> no es valida.</li>";
+
+											}
+											else{
+												$cont_columnas_regu++;
+												if($celda->getCalculatedValue()=='/'){
+													$calificacion_regularizacion=0;
+												}
+												else{
+													$calificacion_regularizacion=$celda->getCalculatedValue();
+												}
+												if($calificacion_regularizacion>=6){
+													$cont_cal_frer++;
+													
+												}
+
+											}
+											
+											
+										}
+
+
+										
+										if($columna=='J'){
+											$cont_columnas_regu++;
+											$anio_regu=$celda->getValue();
+											
+										}
+
+										if($columna=='K'){
+											$cont_columnas_regu++;
+											$mes_regu=$celda->getValue();
+											
+											
+										}
+
+										if($columna=='L'){
+											$cont_columnas_regu++;
+											$dia_regu=$celda->getValue();
+											
+										}
+
+
+										
+										
+										
+
+										if($columna=='M'){
+											if(!$this->validar_formato_hora($celda->getFormattedValue())){
+												$resultado_error.="<li>El formato de hora de regularización en la celda <span style='font-weight:bold'>".$columna.$fila."</span> no es valida.</li>";
+
+											}
+
+											else{
+												$cont_columnas_regu++;
+											}
+
+											
+											
+										}
+
+									}
+
+									
+
+								}
+
+								
+
+								if($cont_columnas_regu>0 && $cont_columnas_regu<5){
+									$resultado_error.="<li>Existen algunos campos vacios, verifique en las columnas pertenecientes a Calificación de regularizacion, fecha y hora de aplicación de la fila <span style='font-weight:bold'>".$fila."</span>.</li>";
+								}
+								
+
+								if(trim($anio_regu)!='' || trim($mes_regu)!='' || trim($dia_regu)!=''){
+									if(!$this->validar_fecha($anio_regu,$mes_regu,$dia_regu)){
+									   $resultado_error.="<li>El formato de fecha de regularización en la fila <span style='font-weight:bold'>".$fila."</span> no es valida.</li>";
+		   
+									}
+								
+								}
+
+								
+							
+						} 
+					  
+					  
+					  
+
+
+					 if(intval($modulo)==1){
+						$total_materias_aprobadas=$cont_materias_aprobadas+$cont_cal_frer;
+						$num_adeudos_alumno_validacion=$num_materias-$total_materias_aprobadas;
+						
+						if($num_adeudos_alumno_validacion>3 && $num_adeudos_alumno_validacion<=5){
+						   $resultado_error.="<li>El alumno que intenta ingresar al sistema es un alumno <span style='font-weight:bold'>SIN DERECHO</span>.</li>";
+   
+						}
+   
+						if($num_adeudos_alumno_validacion>5){
+						   $resultado_error.="<li>El alumno que intenta ingresar al sistema es un alumno <span style='font-weight:bold'>REPROBADO</span>.</li>";
+   
+						}
+
+					 }
+					 
+
+					 
+					  
+					  
+					  ///////////////////////////////////////////////TERMINA VALIDACIÓN DE DATOS ////////////////////////////
+					 if($resultado_error!=""){
+						$this->form_validation->set_message('checkCamposPermitidos',$resultado_error);
+						return false;
+
+					 }
+					 else{
+						return true;
+					 }
+					  
+		
+	  }
+	  
+	  public function checkValidateSinMatricula($spreadsheet) {
+
+
+		$indiceHoja = 0;
+                    $calificaciones_friae = $this->get_archivo()->getSheet($indiceHoja);
+                   // echo "<h3>Vamos en la hoja con índice $indiceHoja</h3>";
+                    
+                    # Lo que hay en B2
+                    $celda = $calificaciones_friae->getCell('B2');
+                    # El valor, así como está en el documento
+                    $plantel_cct = trim($celda->getValue());
+
+                    $nombre_ciclo_escolar= trim($calificaciones_friae->getCell('B3')->getValue());
+
+                    $periodo= trim($calificaciones_friae->getCell('B4')->getValue());
+
+                    $modulo= trim($calificaciones_friae->getCell('B5')->getValue());
+
+					$grupo= trim($calificaciones_friae->getCell('B6')->getValue());
+
+					$no_control= trim($calificaciones_friae->getCell('A10')->getValue());
+
+					
+
+					
+
+					$motivo_baja= trim($calificaciones_friae->getCell('F10')->getValue());
+
+					$anio_baja= trim($calificaciones_friae->getCell('C10')->getValue());
+					$mes_baja= trim($calificaciones_friae->getCell('D10')->getValue());
+					$dia_baja= trim($calificaciones_friae->getCell('E10')->getValue());
+					$tipo_operacion='';
+					$tipo_operacion= trim($calificaciones_friae->getCell('B1')->getValue());
+
+					$resultado_error='';
+
+					
+
+					$bandera_error=0;
+
+					if(trim($anio_baja)!='' || trim($mes_baja)!='' || trim($dia_baja)!=''){
+						 if(!$this->validar_fecha($anio_baja,$mes_baja,$dia_baja)){
+							if($tipo_operacion=='DESERTOR'){
+								$bandera_error=1;
+								$resultado_error.="<li>El formato de fecha de deserción no es valida.</li>";
+							}
+							else{
+								$bandera_error=1;
+								$resultado_error.="<li>El formato de fecha de baja no es valida.</li>";
+							}
+							
+
+						 }
+
+						 if(trim($motivo_baja)==''){
+							if($tipo_operacion=='DESERTOR'){
+							$resultado_error.="<li>El motivo de deserción en la celda <span style='font-weight:bold'>F10</span> esta vacia seleccione el motivo.</li>";
+							}
+							else{
+								$resultado_error.="<li>El motivo de baja en la celda <span style='font-weight:bold'>F10</span> esta vacia seleccione el motivo.</li>";
+							}
+							
+						}
+						
+
+					}
+
+					if($motivo_baja!=''){
+						if(!$this->validar_fecha($anio_baja,$mes_baja,$dia_baja) && $bandera_error==0){
+							if($tipo_operacion=='DESERTOR'){
+								$resultado_error.="<li>El formato de fecha de deserción no es valida.</li>";
+							}
+							else{
+								$resultado_error.="<li>El formato de fecha de baja no es valida.</li>";
+							}
+
+						}
+					}
+
+
+					
+					$id_ciclo_escolar=""; //inicializamos variable
+					$id_grupo=""; //inicializamos variable id_grupo
+					$id_periodo="";//inicalizamos variable periodo
+					$existe_grupo=0;//inicializamos varfiable existe grupo
+					$num_materias=0; //inicalizamos variable numero de materias semestre
+					
+					$cont_materias_reprobadas=0;// Contador de materias reprobadas por cada alumno
+					$cont_materias_estudiante=0;// cuenta el número de materias subidas por el estudiante.
+					
+
+
+
+					
+
+					
+					
+
+					$num_materias=$this->num_materias_semestre($modulo);
+					
+					 ///////////////////////////////////////////////////COMIENZA VALIDACIÓN DE DATOS ///////////////////////
+					 
+
+					
+
+
+					  if($plantel_cct==""){
+							$resultado_error.="<li>No ha seleccionado CCT de un Plantel.</li>";  
+					  }
+
+					  else{
+						  if(empty($this->M_plantel->get_plantel($plantel_cct))){
+							$resultado_error.="<li>CCT de Plantel incorrecto, vuelva a seleccionar.</li>";
+						  }
+					  }
+
 
 					  if($periodo==""){
 						$resultado_error.="<li>No ha seleccionado un periodo.</li>";  

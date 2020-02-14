@@ -16,7 +16,7 @@ class M_portabilidad extends CI_Model {
         return $this->db->query("select * from Estudiante as e inner join (select no_control from Estudiante where tipo_ingreso='PORTABILIDAD' and no_control not in
         (select Estudiante_no_control as no_control from Friae_Estudiante as fe inner join Estudiante as e on fe.Estudiante_no_control=e.no_control where tipo_ingreso_inscripcion='PORTABILIDAD' and e.curp like '".$curp."%' and Plantel_cct_plantel like '".$plantel."%')) as sin_grupo on e.no_control=sin_grupo.no_control
         union
-        select no_control, nombre, primer_apellido, segundo_apellido, fecha_nacimiento, sexo, curp, fecha_registro, tipo_ingreso, folio_programa_social, matricula, semestre, estatus, correo, nss, calle, colonia, cp, id_localidad, semestre_en_curso, fecha_inscripcion, telefono, Plantel_cct_plantel, nacionalidad, lugar_nacimiento, semestre_ingreso, observaciones, localidad_origen, etnia, no_control from Friae_Estudiante as fe inner join Estudiante as e on fe.Estudiante_no_control=e.no_control where tipo_ingreso_inscripcion='PORTABILIDAD' and e.curp like '".$curp."%' and Plantel_cct_plantel like '".$plantel."%';")->result();
+        select no_control, nombre, primer_apellido, segundo_apellido, fecha_nacimiento, sexo, curp, fecha_registro, tipo_ingreso, folio_programa_social, matricula, semestre, estatus, correo, nss, calle, colonia, cp, id_localidad, semestre_en_curso, fecha_inscripcion, telefono, Plantel_cct_plantel, nacionalidad, lugar_nacimiento, semestre_ingreso, observaciones, localidad_origen, etnia,fecha_registro_nacimiento, no_control from Friae_Estudiante as fe inner join Estudiante as e on fe.Estudiante_no_control=e.no_control where tipo_ingreso_inscripcion='PORTABILIDAD' and e.curp like '".$curp."%' and Plantel_cct_plantel like '".$plantel."%';")->result();
    }
 
    //select if(datediff(curdate(),fecha_inscripcion)<=60,"si","no") as dias from Estudiante where no_control='CSEIIO1910001';
@@ -37,10 +37,12 @@ class M_portabilidad extends CI_Model {
      // $this->db->trans_start();
       if($datos->materias_pasadas=="no"){//se agregan como materias que debe con calificion 5
          $claves_materias="";
+         $cont_materias=0;
          foreach($datos->materias as $materia){
             $claves_materias.=$materia.",";
             $this->db->query("insert into Portabilidad_adeudos (Estudiante_no_control,Materia_id_materia,calificacion)
             values ('".$datos->no_control."','".$materia."',5)");
+            $cont_materias++;
          }
 
          $this->db->query("update Estudiante set estatus='IRREGULAR' where no_control='".$datos->no_control."'");
@@ -49,7 +51,7 @@ class M_portabilidad extends CI_Model {
       
          if(sizeof($folio)>0){//si ya tiene grupo
             
-            $this->db->query("update Friae_Estudiante set estatus_inscripcion='IRREGULAR',numero_adeudos_inscripcion=".sizeof($datos).",id_materia_adeudos_inscripcion='".$claves_materias."' where Friae_folio=".$folio[0]->folio." and Estudiante_no_control='".$datos->no_control."'");
+            $this->db->query("update Friae_Estudiante set estatus_inscripcion='IRREGULAR',numero_adeudos_inscripcion=".$cont_materias.",id_materia_adeudos_inscripcion='".$claves_materias."' where Friae_folio=".$folio[0]->folio." and Estudiante_no_control='".$datos->no_control."'");
          }
       }
 

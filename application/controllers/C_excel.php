@@ -236,7 +236,7 @@ $tipo_operacion_excel='';
 $tipo_operacion_excel= trim($plantilla_excel->getCell('B1')->getValue());
 
 switch ($tipo_operacion_excel) {
-			case 'SIN MATRICULA'://Empieza caso baja sin matricula
+			case 'BAJA SIN MATRICULA'://Empieza caso baja sin matricula
 			
 			$this->form_validation->set_rules('fileURL','Upload File', 'callback_checkValidateSinMatricula');
 		if($this->form_validation->run() != false){
@@ -259,7 +259,7 @@ switch ($tipo_operacion_excel) {
 
 					$no_control= trim($calificaciones_friae->getCell('A10')->getValue());
 
-					$matricula= trim($calificaciones_friae->getCell('B10')->getValue());
+					
 
 					$tipo_operacion='';
 					$tipo_operacion= trim($calificaciones_friae->getCell('B1')->getValue());
@@ -416,16 +416,7 @@ switch ($tipo_operacion_excel) {
 										'calificacion_final' => $cal_final
 									);
 
-									/*if($no_control!=$temp_no_control){
-										$cont_materias_reprobadas=0;
-									}
-
-									if(intval(trim($cal_final))<=5){
-										$cont_materias_reprobadas=$cont_materias_reprobadas+1;
-										$estudiantes_grupo[$no_control]=['materias_reprobadas'=>$cont_materias_reprobadas];
-										$temp_no_control=$no_control;
-										
-									}*/
+									
 									
 									  
 									
@@ -468,7 +459,7 @@ switch ($tipo_operacion_excel) {
 						
 						
 //Termina a leer hoja Friae y calificaciones_______________________________________________________________________
-			
+			$matricula=NULL;
 		
 		$this->M_regularizacion->actualizar_estatus_estudiante($no_control,$num_adeudos,$modulo,$plantel_cct,$matricula,$fecha_baja,$motivo_baja,$tipo_operacion_excel,$grupo);
 		
@@ -493,7 +484,7 @@ switch ($tipo_operacion_excel) {
 		
 		
 		
-		$this->session->set_flashdata('msg_exito', 'Los datos del alumno con estatus <span style="font-weight:bold">BAJA</span> se han agregado al sistema correctamente, para corroborar verique en el reporte KARDEX.');
+		$this->session->set_flashdata('msg_exito', 'Los datos del alumno con estatus <span style="font-weight:bold">BAJA SIN MATRICULA</span> se han agregado al sistema correctamente, para corroborar verique en el reporte KARDEX.');
 			
 		}
 			
@@ -843,6 +834,10 @@ switch ($tipo_operacion_excel) {
 					$no_control= trim($calificaciones_friae->getCell('A10')->getValue());
 
 					$matricula= trim($calificaciones_friae->getCell('B10')->getValue());
+					
+					if($matricula==''){
+						$matricula=NULL;
+					}
 
 					$tipo_operacion='';
 					$tipo_operacion= trim($calificaciones_friae->getCell('B1')->getValue());
@@ -1806,6 +1801,8 @@ $this->session->set_flashdata('msg_exito', 'Los datos del alumno se han agregado
 					$no_control= trim($calificaciones_friae->getCell('A10')->getValue());
 
 					$matricula= trim($calificaciones_friae->getCell('B10')->getValue());
+					
+					$tiene_matricula= trim($calificaciones_friae->getCell('C10')->getValue());
 
 					
 
@@ -1818,7 +1815,8 @@ $this->session->set_flashdata('msg_exito', 'Los datos del alumno se han agregado
 					$tipo_operacion= trim($calificaciones_friae->getCell('B1')->getValue());
 
 					$resultado_error='';
-
+                      if($tiene_matricula!='' && $tiene_matricula=='SI'){
+					  
 					if($matricula==''){
 						$resultado_error.="<li>No ha ingresado la matricula.</li>";
 					}
@@ -1828,8 +1826,11 @@ $this->session->set_flashdata('msg_exito', 'Los datos del alumno se han agregado
 						}
 
 					}
+					}
 
 					$bandera_error=0;
+					
+					if($modulo>1){
 
 					if(trim($anio_baja)!='' || trim($mes_baja)!='' || trim($dia_baja)!=''){
 						 if(!$this->validar_fecha($anio_baja,$mes_baja,$dia_baja)){
@@ -1858,7 +1859,9 @@ $this->session->set_flashdata('msg_exito', 'Los datos del alumno se han agregado
 
 					}
 
-					if($motivo_baja!=''){
+					}
+					if($motivo_baja!='' && $modulo!=1){
+						
 						if(!$this->validar_fecha($anio_baja,$mes_baja,$dia_baja) && $bandera_error==0){
 							if($tipo_operacion=='DESERTOR'){
 								$resultado_error.="<li>El formato de fecha de deserción no es valida.</li>";
@@ -2436,154 +2439,19 @@ $this->session->set_flashdata('msg_exito', 'Los datos del alumno se han agregado
 						$resultado_error.="<li>Verifique el concentrado de calificaciones si alguna de las celdas se encuentra vacia o no cumple con los criterios de evaluación de calificaciones parciales, modulares y finales de las materias pertenecientes al semestre.</li>";
 					  }
 
-					  else{
 
-					  }
 					  
 
 
-					$indiceHoja = 0;
-					$cont_cal_frer=0;
-					$calificaciones_frer = $this->get_archivo()->getSheet($indiceHoja);
+
 					
-		
-							foreach ($calificaciones_frer->getRowIterator(15) as $fila) {
-		
-								$fila=$fila->getCellIterator("B","M");
-
-								$clave_materia='';
-								$calificacion_regularizacion=0;
-								$anio_regu='';
-								$mes_regu='';
-								$dia_regu='';
-								$cont_columnas_regu=0;
-		
-								foreach ($fila as $celda) {
-									$fila = $celda->getRow();
-									$columna = $celda->getColumn();
-
-									if(!is_null($celda->getValue())){
-
-										if($columna=='B'){
-											$clave_materia=$celda->getValue();
-											
-										}
-
-										if($columna=='I'){
-											if(!in_array($celda->getCalculatedValue(), $calificacion_valida)){
-												$resultado_error.="<li>La calificación de regularización en la celda <span style='font-weight:bold'>".$columna.$fila."</span> no es valida.</li>";
-
-											}
-											else{
-												$cont_columnas_regu++;
-												if($celda->getCalculatedValue()=='/'){
-													$calificacion_regularizacion=0;
-												}
-												else{
-													$calificacion_regularizacion=$celda->getCalculatedValue();
-												}
-												if($calificacion_regularizacion>=6){
-													$cont_cal_frer++;
-													
-												}
-
-											}
-											
-											
-										}
-
-
-										
-										if($columna=='J'){
-											$cont_columnas_regu++;
-											$anio_regu=$celda->getValue();
-											
-										}
-
-										if($columna=='K'){
-											$cont_columnas_regu++;
-											$mes_regu=$celda->getValue();
-											
-											
-										}
-
-										if($columna=='L'){
-											$cont_columnas_regu++;
-											$dia_regu=$celda->getValue();
-											
-										}
-
-
-										
-										
-										
-
-										if($columna=='M'){
-											if(!$this->validar_formato_hora($celda->getFormattedValue())){
-												$resultado_error.="<li>El formato de hora de regularización en la celda <span style='font-weight:bold'>".$columna.$fila."</span> no es valida.</li>";
-
-											}
-
-											else{
-												$cont_columnas_regu++;
-											}
-
-											
-											
-										}
-
-									}
-
-									
-
-								}
-
-								
-
-								if($cont_columnas_regu>0 && $cont_columnas_regu<5){
-									$resultado_error.="<li>Existen algunos campos vacios, verifique en las columnas pertenecientes a Calificación de regularizacion, fecha y hora de aplicación de la fila <span style='font-weight:bold'>".$fila."</span>.</li>";
-								}
-								
-
-								if(trim($anio_regu)!='' || trim($mes_regu)!='' || trim($dia_regu)!=''){
-									if(!$this->validar_fecha($anio_regu,$mes_regu,$dia_regu)){
-									   $resultado_error.="<li>El formato de fecha de regularización en la fila <span style='font-weight:bold'>".$fila."</span> no es valida.</li>";
-		   
-									}
-								
-								}
-
-								
-							
-						} 
-					  
-					  
-					  
-
-
-					 if(intval($modulo)==1){
-						$total_materias_aprobadas=$cont_materias_aprobadas+$cont_cal_frer;
-						$num_adeudos_alumno_validacion=$num_materias-$total_materias_aprobadas;
-						
-						if($num_adeudos_alumno_validacion>3 && $num_adeudos_alumno_validacion<=5){
-						   $resultado_error.="<li>El alumno que intenta ingresar al sistema es un alumno <span style='font-weight:bold'>SIN DERECHO</span>.</li>";
-   
-						}
-   
-						if($num_adeudos_alumno_validacion>5){
-						   $resultado_error.="<li>El alumno que intenta ingresar al sistema es un alumno <span style='font-weight:bold'>REPROBADO</span>.</li>";
-   
-						}
-
-					 }
-					 
 
 					 
 					  
 					  
 					  ///////////////////////////////////////////////TERMINA VALIDACIÓN DE DATOS ////////////////////////////
 					 if($resultado_error!=""){
-						$this->form_validation->set_message('checkCamposPermitidos',$resultado_error);
+						$this->form_validation->set_message('checkValidateSinMatricula',$resultado_error);
 						return false;
 
 					 }

@@ -1926,6 +1926,7 @@ function insertar_secundaria() {
 
   form.onsubmit = function (e) {
     e.preventDefault();
+    mensaje="";
     if ( $("#aspirante_secundaria_cct").val().toUpperCase() != ini_secundaria_cct && $("#tipo_subsistema_oculto").is(":hidden")) {
     obtener_secundaria($("#aspirante_secundaria_cct").val().toUpperCase());
   }
@@ -1934,15 +1935,19 @@ function insertar_secundaria() {
   }
   else{
       if (document.getElementById("aspirante_secundaria_cct").value === '' || document.getElementById("aspirante_bachillerato_cct").value === '') {
-        mensaje="";
+        
         if (document.getElementById("aspirante_secundaria_cct").value === ''){
-          mensaje="<p style='text-align:left;margin-left:30%'>-Secundaria.</p>";
+          mensaje+="<p style='text-align:left;margin-left:30%'>-Secundaria.</p>";
         }
 
-        if (document.getElementById("aspirante_bachillerato_cct").value === ''){
+        if (document.getElementById("aspirante_bachillerato_cct").value === '' && document.getElementById("bachillerato_oculto").style.display == ""){
           mensaje+="<p style='text-align:left;margin-left:30%'>-Bachillerato.<p>";
+          
         }
+        
+       
 
+        if(mensaje!=''){
         console.log("vacio");
         swalWithBootstrapButtons.fire({
           type: 'warning',
@@ -1959,10 +1964,18 @@ function insertar_secundaria() {
           }
         })
         return false;
-      } else {
-        e.preventDefault();
-        envioform(form);
-      }
+        }
+        else {
+            e.preventDefault();
+            envioform(form);
+          }
+            
+      } 
+
+      else {
+            e.preventDefault();
+            envioform(form);
+          }
 
  }
 

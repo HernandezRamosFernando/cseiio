@@ -45,6 +45,13 @@ class M_grupo_estudiante extends CI_Model {
 
    public function agregar_calificaciones_materia_grupo($datos){
         $this->db->trans_start();
+        $cont_examen_final=0;
+        foreach($datos as $calificaciones_estudiante){
+            if($calificaciones_estudiante->examen_final!=null){
+                $cont_examen_final++;
+            }
+
+        }
         foreach($datos as $calificaciones_estudiante){
             $id_grupo = $calificaciones_estudiante->id_grupo;
             $id_materia = $calificaciones_estudiante->materia;
@@ -75,7 +82,7 @@ class M_grupo_estudiante extends CI_Model {
 
 
            // if($calificaciones_estudiante->examen_final!=null){
-               if($calificaciones_estudiante->primer_parcial!=null && $calificaciones_estudiante->segundo_parcial!=null && $calificaciones_estudiante->tercer_parcial!=null){
+               if($calificaciones_estudiante->primer_parcial!=null && $calificaciones_estudiante->segundo_parcial!=null && $calificaciones_estudiante->tercer_parcial!=null && $cont_examen_final>0){
                 $examen_final="/";
                    if($calificaciones_estudiante->examen_final!=null){
                     $examen_final=$calificaciones_estudiante->examen_final;

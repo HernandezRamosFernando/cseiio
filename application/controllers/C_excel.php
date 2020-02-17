@@ -459,7 +459,7 @@ switch ($tipo_operacion_excel) {
 						
 						
 //Termina a leer hoja Friae y calificaciones_______________________________________________________________________
-			$matricula=NULL;
+			$matricula="NULL";
 		
 		$this->M_regularizacion->actualizar_estatus_estudiante($no_control,$num_adeudos,$modulo,$plantel_cct,$matricula,$fecha_baja,$motivo_baja,$tipo_operacion_excel,$grupo);
 		
@@ -836,7 +836,7 @@ switch ($tipo_operacion_excel) {
 					$matricula= trim($calificaciones_friae->getCell('B10')->getValue());
 					
 					if($matricula==''){
-						$matricula=NULL;
+						$matricula="NULL";
 					}
 
 					$tipo_operacion='';

@@ -22,12 +22,29 @@
     </ul>
 
       <ul class="navbar-nav ml-auto ml-md-0" >
-		  <li class="nav-item ">
-          <a class="nav-link " href="<?php echo base_url();?>assets/manual_ayuda/manual_sise.pdf" target="_blank"  id="ayuda" role="button" ">
-            <i class="material-icons">help</i>
-            <i>Ayuda</i>
+		  
+        
+        
+        <li class="nav-item dropdown no-arrow mx-1">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+           Ayuda<i class="material-icons">help</i><i class="material-icons">keyboard_arrow_down</i>
           </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
+            <a class="dropdown-item" href="<?php echo base_url();?>assets/manual_ayuda/manual_sise.pdf" target="_blank" role="button">Manual de usuario SISE</a>
+
+            <div class="dropdown-divider"></div>
+            
+            <a class="dropdown-item" href="<?php echo base_url();?>assets/manual_ayuda/pasos_ingreso_ciclos_escolares_anteriores.pdf" target="_blank" role="button">Guía de los procedimientos<br>despues del tercer parcial</a>
+
+            <div class="dropdown-divider"></div>
+            
+            <a class="dropdown-item" href="<?php echo base_url();?>assets/manual_ayuda/pasos_ingreso_ciclos_escolares_anteriores.pdf" target="_blank" role="button">Guía para ingresar alumnos<br> de ciclos anteriores</a>
+            
+          </div>
         </li>
+        
+        
         <li class="nav-item dropdown no-arrow mx-1" >
           <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">

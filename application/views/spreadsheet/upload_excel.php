@@ -20,14 +20,22 @@
           if(form_error('fileURL')) {?>    
             <div class="alert alert-danger alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <?php print form_error('fileURL'); ?>
+                <?php print form_error('fileURL'); 
+                
+                ?>
             </div>       
         <?php } ?>
 
         <?php if($this->session->flashdata('msg_exito')): ?>
           <div class="alert alert-success alert-dismissible">
           <button type="button" class="close" data-dismiss="alert">&times;</button>
-    <p><?php echo $this->session->flashdata('msg_exito'); ?></p>
+    <p><?php echo $this->session->flashdata('msg_exito'); 
+    echo '<script>window.setTimeout(function() {
+      $(".alert").fadeTo(500, 0).slideUp(500, function(){
+          $(this).remove(); 
+      });
+  }, 2000);</script>';
+    ?></p>
     </div>
 <?php endif; ?>
       

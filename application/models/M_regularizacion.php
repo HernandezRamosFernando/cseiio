@@ -659,22 +659,25 @@ public function actualizar_estatus_estudiante($no_control,$num_adeudos,$modulo,$
           
           break;
           default:
+          if($matricula!='NULL'){
+            $matricula="'".$matricula."'";
+         }
 		  if($num_adeudos==0){
       $tipo_ingreso='PROBABLE REINCORPORADO';
       $semestre_en_curso=$modulo;
-      $this->db->query("update Estudiante set tipo_ingreso='".$tipo_ingreso."',estatus='REGULAR',semestre_en_curso=".$semestre_en_curso.",semestre=".$num_semestres_trascurridos.", matricula='".$matricula."' where no_control='".$no_control."'");
+      $this->db->query("update Estudiante set tipo_ingreso='".$tipo_ingreso."',estatus='REGULAR',semestre_en_curso=".$semestre_en_curso.",semestre=".$num_semestres_trascurridos.", matricula=".$matricula." where no_control='".$no_control."'");
    }
    if($num_adeudos>=1 && $num_adeudos<=3){
       $tipo_ingreso='PROBABLE REINCORPORADO';
       $semestre_en_curso=$modulo;
 
-      $this->db->query("update Estudiante set tipo_ingreso='".$tipo_ingreso."',estatus='IRREGULAR',semestre_en_curso=".$semestre_en_curso.",semestre=".$num_semestres_trascurridos.",matricula='".$matricula."' where no_control='".$no_control."'");
+      $this->db->query("update Estudiante set tipo_ingreso='".$tipo_ingreso."',estatus='IRREGULAR',semestre_en_curso=".$semestre_en_curso.",semestre=".$num_semestres_trascurridos.",matricula=".$matricula." where no_control='".$no_control."'");
    }
 
    if($num_adeudos>3 && $num_adeudos<=5){
       $tipo_ingreso='SIN DERECHO';
       $semestre_en_curso=$modulo;
-      $this->db->query("update Estudiante set tipo_ingreso='".$tipo_ingreso."',estatus='IRREGULAR',semestre_en_curso=".$semestre_en_curso.",semestre=".$num_semestres_trascurridos.", matricula='".$matricula."' where no_control='".$no_control."'");
+      $this->db->query("update Estudiante set tipo_ingreso='".$tipo_ingreso."',estatus='IRREGULAR',semestre_en_curso=".$semestre_en_curso.",semestre=".$num_semestres_trascurridos.", matricula=".$matricula." where no_control='".$no_control."'");
       
    }
    if($num_adeudos>=6){
@@ -682,7 +685,7 @@ public function actualizar_estatus_estudiante($no_control,$num_adeudos,$modulo,$
    
        $tipo_ingreso='REPROBADO';
        $semestre_en_curso=$modulo;
-      $this->db->query("update Estudiante set tipo_ingreso='".$tipo_ingreso."',estatus='IRREGULAR',semestre_en_curso=".$semestre_en_curso.",semestre=".$num_semestres_trascurridos.", matricula='".$matricula."' where no_control='".$no_control."'");
+      $this->db->query("update Estudiante set tipo_ingreso='".$tipo_ingreso."',estatus='IRREGULAR',semestre_en_curso=".$semestre_en_curso.",semestre=".$num_semestres_trascurridos.", matricula=".$matricula." where no_control='".$no_control."'");
       
    }
 
@@ -690,7 +693,7 @@ public function actualizar_estatus_estudiante($no_control,$num_adeudos,$modulo,$
    if($num_adeudos<0){
       
       $semestre_en_curso=$modulo;
-     $this->db->query("update Estudiante set tipo_ingreso='BAJA',semestre_en_curso=".$semestre_en_curso.",semestre=".$num_semestres_trascurridos.", matricula='".$matricula."' where no_control='".$no_control."'");
+     $this->db->query("update Estudiante set tipo_ingreso='BAJA',semestre_en_curso=".$semestre_en_curso.",semestre=".$num_semestres_trascurridos.", matricula=".$matricula." where no_control='".$no_control."'");
 
      $existe_registro_baja=$this->db->query("select * from Baja where Estudiante_no_control='".$no_control."' and fecha='".$fecha_baja."'")->result();
 

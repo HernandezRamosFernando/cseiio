@@ -102,6 +102,14 @@ $pdf->SetFont('helvetica','', 10);
 // add a page
 $pdf->AddPage();
 
+if($semestre_acreditado!="primer"){
+	$semestre_acreditado=" al ".$semestre_acreditado;
+
+}
+else{
+	$semestre_acreditado="";
+}
+
 // set some text to print
 $html_1 ='
 <br>

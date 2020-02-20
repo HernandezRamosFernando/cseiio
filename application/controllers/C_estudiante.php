@@ -189,7 +189,8 @@ class C_estudiante extends CI_Controller {
             $datos_estudiante['semestre_ingreso'] = $this->input->post('aspirante_semestre');
             $datos_escuela_procedencia['secundaria']=array(
                 'Estudiante_no_control'=>$no_control,
-                'Escuela_procedencia_cct_escuela_procedencia'=>$this->input->post('aspirante_secundaria_cct')
+                'Escuela_procedencia_cct_escuela_procedencia'=>$this->input->post('aspirante_secundaria_cct'),
+                'promedio_procedencia'=>$this->input->post('promedio_procedencia_secundaria')
             );
 
             if(strlen($this->input->post('aspirante_bachillerato_cct'))>0){
@@ -916,7 +917,7 @@ public function descargar_resolucion_equivalencia(){
     $datos['cct_procedencia'] = $datos_escuela_procedencia[0]->cct_escuela_procedencia;
     $datos['nombre_completo']=$datos_estudiante[0]->nombre." ".$datos_estudiante[0]->primer_apellido." ".$datos_estudiante[0]->segundo_apellido;
     $datos['plantel_inscrito']=$datos_estudiante[0]->Plantel_cct_plantel;
-    $datos['semestre_acreditado']=" a ".$this->nombre_del_semestre($datos_resolucion[0]->ultimo_semestre_acreditado);
+    $datos['semestre_acreditado']=$this->nombre_del_semestre($datos_resolucion[0]->ultimo_semestre_acreditado);
     $datos['promedio_acreditado']=$datos_resolucion[0]->promedio_acreditado;
    
     $datos['nombre_plantel_inscrito']=$this->M_plantel->get_nombre_localidad($datos_estudiante[0]->Plantel_cct_plantel)[0]->nombre_localidad;

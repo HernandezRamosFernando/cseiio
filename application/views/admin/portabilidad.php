@@ -1369,6 +1369,8 @@ aria-hidden="true">
 <script>
   cargar_anio();
   cargar_anio_registro();
+  ini_secundaria_cct = "";
+    ini_bachillerato_cct="";
 
   function obtener_secundaria(e) {
     console.log(e);
@@ -1398,6 +1400,7 @@ aria-hidden="true">
         document.getElementById("aspirante_secundaria_tipo_subsistema").value = secundaria[0].tipo_subsistema;
         document.getElementById("aspirante_secundaria_tipo_subsistema").disabled = true;
         document.getElementById("promedio_procedencia_secundaria").disabled = false;
+        ini_bachillerato_cct=$("#aspirante_bachillerato_cct").val();
       }
 
       else {
@@ -1451,6 +1454,7 @@ function obtener_bachillerato(e) {
       //aspirante_secundaria_tipo_subsistema
       document.getElementById("aspirante_bachillerato_tipo_subsistema").value = secundaria[0].tipo_subsistema;
       document.getElementById("aspirante_bachillerato_tipo_subsistema").disabled = true;
+      ini_secundaria_cct = $("#aspirante_secundaria_cct").val();
     }
 
     else {
@@ -1478,8 +1482,9 @@ function obtener_bachillerato(e) {
 }
 
 
-var form = document.getElementById("formulario");
+/*var form = document.getElementById("formulario");
 form.onsubmit = function (e) {
+  mensaje="";
   if (document.getElementById("aspirante_secundaria_cct").value === '') {
     console.log("vacio");
     swalWithBootstrapButtons.fire({
@@ -1504,7 +1509,67 @@ form.onsubmit = function (e) {
   }
 
 
-}
+}*/
+var form = document.getElementById("formulario");
+form.onsubmit = function (e) {
+    e.preventDefault();
+    mensaje="";
+    if ( $("#aspirante_secundaria_cct").val().toUpperCase() != ini_secundaria_cct && $("#tipo_subsistema_oculto").is(":hidden")) {
+    obtener_secundaria($("#aspirante_secundaria_cct").val().toUpperCase());
+  }
+  else if($("#aspirante_bachillerato_cct").val().toUpperCase() != ini_bachillerato_cct && $("#tipo_subsistema_bachillerato_oculto").is(":hidden")){
+    obtener_bachillerato($("#aspirante_bachillerato_cct").val().toUpperCase());
+  }
+  else{
+      if (document.getElementById("aspirante_secundaria_cct").value === '' || document.getElementById("aspirante_bachillerato_cct").value === '') {
+        
+        if (document.getElementById("aspirante_secundaria_cct").value === ''){
+          mensaje+="<p style='text-align:left;margin-left:30%'>-Secundaria.</p>";
+        }
+
+        if (document.getElementById("aspirante_bachillerato_cct").value === ''){
+          mensaje+="<p style='text-align:left;margin-left:30%'>-Bachillerato.<p>";
+          
+        }
+        
+       
+
+        if(mensaje!=''){
+        console.log("vacio");
+        swalWithBootstrapButtons.fire({
+          type: 'warning',
+          html: '<p>Esta tratando de registrar un alumno sin: </p>'+mensaje,
+          showCancelButton: true,
+          confirmButtonText: 'Registrar',
+          cancelButtonText: 'Cancelar',
+        }).then((result) => {
+          if (result.value) {
+            console.log("Entro a if")
+            e.preventDefault();
+            envioform(form);
+
+          }
+        })
+        return false;
+        }
+        else {
+            e.preventDefault();
+            envioform(form);
+          }
+            
+      } 
+
+      else {
+            e.preventDefault();
+            envioform(form);
+          }
+
+ }
+
+
+  }
+
+
 function envioform(form) {
   bPreguntar = false;
   var formdata = new FormData(form);

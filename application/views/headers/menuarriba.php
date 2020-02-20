@@ -35,7 +35,7 @@
 
             <div class="dropdown-divider"></div>
             
-            <a class="dropdown-item" href="<?php echo base_url();?>assets/manual_ayuda/pasos_ingreso_ciclos_escolares_anteriores.pdf" target="_blank" role="button">Guía de los procedimientos<br>despues del tercer parcial</a>
+            <a class="dropdown-item" href="<?php echo base_url();?>assets/manual_ayuda/guia_de_procedimientos_sise .pdf" target="_blank" role="button">Guía de los procedimientos<br>despues del tercer parcial</a>
 
             <div class="dropdown-divider"></div>
             

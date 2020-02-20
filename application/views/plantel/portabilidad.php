@@ -82,18 +82,18 @@
   <div class="col-md-4">
   <label class="form-group has-float-label seltitulo">
       <select class="form-control form-control-lg selcolor" id="aspirante_mes_nacimiento" required name="aspirante_mes_nacimiento" onclick="get_dias()">
-      <option value="01">Enero</option>
-    <option value="02">Febrero</option>
-    <option value="03">Marzo</option>
-    <option value="04">Abril</option>
-    <option value="05">Mayo</option>
-    <option value="06">Junio</option>
-    <option value="07">Julio</option>
-    <option value="08">Agosto</option>
-    <option value="09">Septiembre</option>
-    <option value="10">Octubre</option>
-    <option value="11">Noviembre</option>
-    <option value="12">Diciembre</option>
+      <option value="01">Enero 01</option>
+            <option value="02">Febrero 02</option>
+            <option value="03">Marzo 03</option>
+            <option value="04">Abril 04</option>
+            <option value="05">Mayo 05</option>
+            <option value="06">Junio 06</option>
+            <option value="07">Julio 07</option>
+            <option value="08">Agosto 08</option>
+            <option value="09">Septiembre 09</option>
+            <option value="10">Octubre 10</option>
+            <option value="11">Noviembre 11</option>
+            <option value="12">Diciembre 12</option>
       </select>
       <span>Mes</span>
     </label>
@@ -243,6 +243,7 @@
         <div class="col-md-8">
           <label class="form-group has-float-label seltitulo">
             <select class="form-control form-control-lg selcolor" id="aspirante_plantel" required name="aspirante_plantel">
+              
 
               <?php
                                       foreach ($planteles as $plantel)
@@ -363,19 +364,19 @@
           <label class="form-group has-float-label seltitulo">
               <select class="form-control form-control-lg selcolor" id="aspirante_mes_nacimiento_registro"  name="aspirante_mes_nacimiento_registro" onclick="get_dias_registro()">
               <option value="">Seleccione uno</option>
-              <option value="01">Enero 01</option>
-            <option value="02">Febrero 02</option>
-            <option value="03">Marzo 03</option>
-            <option value="04">Abril 04</option>
-            <option value="05">Mayo 05</option>
-            <option value="06">Junio 06</option>
-            <option value="07">Julio 07</option>
-            <option value="08">Agosto 08</option>
-            <option value="09">Septiembre 09</option>
-            <option value="10">Octubre 10</option>
-            <option value="11">Noviembre 11</option>
-            <option value="12">Diciembre 12</option> 
-                       </select>
+              <option value="01">Enero</option>
+            <option value="02">Febrero</option>
+            <option value="03">Marzo</option>
+            <option value="04">Abril</option>
+            <option value="05">Mayo</option>
+            <option value="06">Junio</option>
+            <option value="07">Julio</option>
+            <option value="08">Agosto</option>
+            <option value="09">Septiembre</option>
+            <option value="10">Octubre</option>
+            <option value="11">Noviembre</option>
+            <option value="12">Diciembre</option>
+              </select>
               <span>Mes</span>
             </label>
           </div>
@@ -920,10 +921,8 @@
               </label>
             </div>
 
-
-            
-
            
+            
 
           </div>
 
@@ -1153,7 +1152,7 @@ aria-hidden="true">
             <label class="form-group has-float-label seltitulo">
               <select class="form-control form-control-lg selcolor" name="aspirante_nuevobachillerato_tipo_subsistema" 
                   id="aspirante_nuevobachillerato_tipo_subsistema" onchange="otro_secundaria();">
-                  <option value="">Seleccione un tipo</option>
+                <option value="">Seleccione un tipo</option>
                 <option value="EDUCACIÓN PROFESIONAL TÉCNICA">Educación Profesional Técnica</option>
                 <option value="BACHILLERATO GENERAL">Bachillerato General</option>
                 <option value="BACHILLERATO TECNOLÓGICO">Bachillerato Tecnológico</option>
@@ -1370,6 +1369,8 @@ aria-hidden="true">
 <script>
   cargar_anio();
   cargar_anio_registro();
+  ini_secundaria_cct = "";
+    ini_bachillerato_cct="";
 
   function obtener_secundaria(e) {
     console.log(e);
@@ -1399,12 +1400,13 @@ aria-hidden="true">
         document.getElementById("aspirante_secundaria_tipo_subsistema").value = secundaria[0].tipo_subsistema;
         document.getElementById("aspirante_secundaria_tipo_subsistema").disabled = true;
         document.getElementById("promedio_procedencia_secundaria").disabled = false;
+        ini_bachillerato_cct=$("#aspirante_bachillerato_cct").val();
       }
 
       else {
+        document.getElementById("promedio_procedencia_secundaria").disabled = true;
         document.getElementById("nombre_secundaria_oculto").style.display = "none";
         document.getElementById("tipo_subsistema_oculto").style.display = "none";
-        document.getElementById("promedio_procedencia_secundaria").disabled = true;
 
         swalWithBootstrapButtons.fire({
           type: 'info',
@@ -1452,6 +1454,7 @@ function obtener_bachillerato(e) {
       //aspirante_secundaria_tipo_subsistema
       document.getElementById("aspirante_bachillerato_tipo_subsistema").value = secundaria[0].tipo_subsistema;
       document.getElementById("aspirante_bachillerato_tipo_subsistema").disabled = true;
+      ini_secundaria_cct = $("#aspirante_secundaria_cct").val();
     }
 
     else {
@@ -1479,8 +1482,9 @@ function obtener_bachillerato(e) {
 }
 
 
-var form = document.getElementById("formulario");
+/*var form = document.getElementById("formulario");
 form.onsubmit = function (e) {
+  mensaje="";
   if (document.getElementById("aspirante_secundaria_cct").value === '') {
     console.log("vacio");
     swalWithBootstrapButtons.fire({
@@ -1505,7 +1509,67 @@ form.onsubmit = function (e) {
   }
 
 
-}
+}*/
+var form = document.getElementById("formulario");
+form.onsubmit = function (e) {
+    e.preventDefault();
+    mensaje="";
+    if ( $("#aspirante_secundaria_cct").val().toUpperCase() != ini_secundaria_cct && $("#tipo_subsistema_oculto").is(":hidden")) {
+    obtener_secundaria($("#aspirante_secundaria_cct").val().toUpperCase());
+  }
+  else if($("#aspirante_bachillerato_cct").val().toUpperCase() != ini_bachillerato_cct && $("#tipo_subsistema_bachillerato_oculto").is(":hidden")){
+    obtener_bachillerato($("#aspirante_bachillerato_cct").val().toUpperCase());
+  }
+  else{
+      if (document.getElementById("aspirante_secundaria_cct").value === '' || document.getElementById("aspirante_bachillerato_cct").value === '') {
+        
+        if (document.getElementById("aspirante_secundaria_cct").value === ''){
+          mensaje+="<p style='text-align:left;margin-left:30%'>-Secundaria.</p>";
+        }
+
+        if (document.getElementById("aspirante_bachillerato_cct").value === ''){
+          mensaje+="<p style='text-align:left;margin-left:30%'>-Bachillerato.<p>";
+          
+        }
+        
+       
+
+        if(mensaje!=''){
+        console.log("vacio");
+        swalWithBootstrapButtons.fire({
+          type: 'warning',
+          html: '<p>Esta tratando de registrar un alumno sin: </p>'+mensaje,
+          showCancelButton: true,
+          confirmButtonText: 'Registrar',
+          cancelButtonText: 'Cancelar',
+        }).then((result) => {
+          if (result.value) {
+            console.log("Entro a if")
+            e.preventDefault();
+            envioform(form);
+
+          }
+        })
+        return false;
+        }
+        else {
+            e.preventDefault();
+            envioform(form);
+          }
+            
+      } 
+
+      else {
+            e.preventDefault();
+            envioform(form);
+          }
+
+ }
+
+
+  }
+
+
 function envioform(form) {
   bPreguntar = false;
   var formdata = new FormData(form);
@@ -1659,7 +1723,6 @@ function insertar_secundaria() {
             type: 'error',
             title: 'Secundaria no agregada',
             confirmButtonText: 'Cerrar'
-
           })
         }
 

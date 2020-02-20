@@ -6,9 +6,18 @@ class C_portabilidad extends CI_Controller
     public function __construct(){
         parent::__construct();
         $this->load->model("M_portabilidad");
+        $this->load->model("M_resolucion_equivalencia");
     }
 
+    public function datos_estudiante_estatus(){
+        $no_control = $this->input->get("no_control");
+        echo json_encode($this->M_portabilidad->datos_estudiante_estatus($no_control));  
+    }
 
+    function datos_estudiante(){
+        $no_control = $this->input->get("no_control");
+        echo json_encode($this->M_portabilidad->datos_estudiante($no_control));
+    }
 
     function estudiantes_de_portabilidad(){
         $plantel = $this->input->get("plantel");

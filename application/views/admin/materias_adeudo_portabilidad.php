@@ -393,16 +393,20 @@
 
     //api para jalar los datos
         var informacion_estudiante = new XMLHttpRequest();
-        informacion_estudiante.open('GET', '<?php echo base_url();?>index.php/c_portabilidad/datos_cargar_materias_estudiante?no_control='+e.value, true);
+        informacion_estudiante.open('GET', '<?php echo base_url();?>index.php/c_portabilidad/datos_estudiante?no_control='+e.value, true);
 
         informacion_estudiante.onload = function () {
-          console.log(informacion_estudiante.response);
+          //console.log(informacion_estudiante.response);
           let informacion = JSON.parse(informacion_estudiante.response);
-          document.getElementById("nombre_completo").value=informacion.nombre+" "+informacion.primer_apellido+" "+informacion.segundo_apellido;
-          document.getElementById("escuela_procedencia").value=informacion.nombre_escuela_procedencia;
-          document.getElementById("cct_procedencia").value=informacion.cct_escuela_procedencia;
-          document.getElementById("plantel_inscripcion").value=informacion.nombre_plantel;
-          document.getElementById("no_control").value = informacion.no_control;
+          document.getElementById("nombre_completo").value=informacion.estudiante[0].nombre+" "+informacion.estudiante[0].primer_apellido+" "+informacion.estudiante[0].segundo_apellido;
+          if(typeof informacion.media_superior[0] !== "undefined"){
+            document.getElementById("escuela_procedencia").value=informacion.media_superior[0].nombre_escuela_procedencia;
+          document.getElementById("cct_procedencia").value=informacion.media_superior[0].cct_escuela_procedencia;
+
+          }
+          
+          document.getElementById("plantel_inscripcion").value=informacion.estudiante[0].nombre_corto+" de "+informacion.estudiante[0].nombre_plantel;
+          document.getElementById("no_control").value = informacion.estudiante[0].no_control;
         };
 
         informacion_estudiante.send(null);

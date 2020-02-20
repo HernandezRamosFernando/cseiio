@@ -6,6 +6,26 @@ class M_portabilidad extends CI_Model {
    }
 
 
+   function datos_estudiante_estatus($no_control){
+      $datos['estudiante']=$this->db->query("SELECT * FROM Estudiante e inner join Plantel p on e.Plantel_cct_plantel=p.cct_plantel where no_control='".$no_control."';")->result();
+
+      $datos['media_superior']=$this->db->query("select * from Estudiante_Escuela_procedencia as eep left join Escuela_procedencia as ep on eep.Escuela_procedencia_cct_escuela_procedencia=ep.cct_escuela_procedencia where eep.Estudiante_no_control='".$no_control."' and ep.tipo_escuela_procedencia='BACHILLERATO';")->result();
+
+      $datos['adeudos_portabilidad']=$this->db->query("select * from Portabilidad_adeudos p where p.Estudiante_no_control='".$no_control."' and p.Materia_id_materia not in (select r.id_materia from Regularizacion r where r.Estudiante_no_control='".$no_control."' and r.calificacion>=6) ")->result();
+
+      return $datos;
+
+  }
+
+
+   function datos_estudiante($no_control){
+      $datos['estudiante']=$this->db->query("SELECT * FROM Estudiante e inner join Plantel p on e.Plantel_cct_plantel=p.cct_plantel where no_control='".$no_control."';")->result();
+
+      $datos['media_superior']=$this->db->query("select * from Estudiante_Escuela_procedencia as eep left join Escuela_procedencia as ep on eep.Escuela_procedencia_cct_escuela_procedencia=ep.cct_escuela_procedencia where eep.Estudiante_no_control='".$no_control."' and ep.tipo_escuela_procedencia='BACHILLERATO';")->result();
+      return $datos;
+
+  }
+
 
 
    function estudiante_portabilidad($no_control){
@@ -26,7 +46,7 @@ class M_portabilidad extends CI_Model {
    }
 
    function datos_cargar_materias_estudiante($no_control){
-      return $this->db->query("select nombre,primer_apellido,segundo_apellido,cct_escuela_procedencia,nombre_escuela_procedencia,nombre_plantel,no_control from Estudiante as e inner join Estudiante_Escuela_procedencia as eep on e.no_control=eep.Estudiante_no_control inner join Escuela_procedencia as ep on eep.Escuela_procedencia_cct_escuela_procedencia=ep.cct_escuela_procedencia inner join Plantel as p on e.Plantel_cct_plantel=p.cct_plantel where e.no_control='".$no_control."' and ep.tipo_escuela_procedencia='BACHILLERATO'")->result()[0];
+      return $this->db->query("select nombre,primer_apellido,segundo_apellido,cct_escuela_procedencia,nombre_escuela_procedencia,nombre_plantel,no_control from Estudiante as e inner join Estudiante_Escuela_procedencia as eep on e.no_control=eep.Estudiante_no_control inner join Escuela_procedencia as ep on eep.Escuela_procedencia_cct_escuela_procedencia=ep.cct_escuela_procedencia left join Plantel as p on e.Plantel_cct_plantel=p.cct_plantel where e.no_control='".$no_control."' and ep.tipo_escuela_procedencia='BACHILLERATO'")->result()[0];
    }
 
    function materias(){

@@ -743,7 +743,7 @@ function semestre_ciclo(id_semestre,id_ciclo,valor_id_ciclo) {
 
     console.log(no_control);
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', '<?php echo base_url();?>index.php/c_estudiante/get_plantel_estudiante?no_control=' + no_control.value, true);
+    xhr.open('GET', '<?php echo base_url();?>index.php/c_portabilidad/datos_estudiante_estatus?no_control=' + no_control.value, true);
 
     xhr.onloadstart = function () {
       $('#div_carga').show();
@@ -754,34 +754,30 @@ function semestre_ciclo(id_semestre,id_ciclo,valor_id_ciclo) {
 
     xhr.onload = function () {
       $('#div_carga').hide();
-      let estudiante = JSON.parse(xhr.response);
-      console.log(estudiante);
+      let dato = JSON.parse(xhr.response);
+      console.log("DAtos: "+dato.adeudos_portabilidad.length);
 
-      document.getElementById("num_control_estudiante").value = estudiante[0].no_control;
-      document.getElementById("nombre_completo").value = estudiante[0].nombre + " " + estudiante[0].primer_apellido + " " + estudiante[0].segundo_apellido;
+      if(dato.adeudos_portabilidad.length>0){
+        Swal.fire({
+              type: 'error',
+              title: 'No puede realizar el proceso, el alumno adeuda materias del plantel de procedencia.',
+              showConfirmButton: true
+              
+            });
+            cerrar_modal();
 
-      document.getElementById("plantel_inscrito").value = estudiante[0].Plantel_cct_plantel;
-      document.getElementById("plantel_inscripcion").value = estudiante[0].nombre_plantel;
+      }
+      else{
 
-      
+      document.getElementById("num_control_estudiante").value = dato.estudiante[0].no_control;
+      document.getElementById("nombre_completo").value = dato.estudiante[0].nombre + " " + dato.estudiante[0].primer_apellido + " " + dato.estudiante[0].segundo_apellido;
 
-        document.getElementById('btn_enviar').disabled = false;
-        
-        var xhr_escuela = new XMLHttpRequest();
-        xhr_escuela.open('GET', '<?php echo base_url();?>index.php/c_escuela_procedencia/get_escuela_procedencia_repetidor?no_control=' + estudiante[0].no_control, true);
-        xhr_escuela.onloadstart = function () {
-          $('#div_carga').show();
-        }
-        xhr_escuela.error = function () {
-          console.log("error de conexion");
-        }
-
-        xhr_escuela.onload = function () {
-          $('#div_carga').hide();
-          let procedencia = JSON.parse(xhr_escuela.response);
-          if (typeof procedencia[0] !== 'undefined') {
-              document.getElementById("escuela_procedencia").value = procedencia[0].nombre_escuela_procedencia;
-              document.getElementById("cct_procedencia").value = procedencia[0].cct_escuela_procedencia;
+      document.getElementById("plantel_inscrito").value = dato.estudiante[0].Plantel_cct_plantel;
+      document.getElementById("plantel_inscripcion").value = dato.estudiante[0].nombre_plantel;
+      document.getElementById('btn_enviar').disabled = false;
+        if (typeof dato.media_superior[0] !== 'undefined') {
+              document.getElementById("escuela_procedencia").value = dato.media_superior[0].nombre_escuela_procedencia;
+              document.getElementById("cct_procedencia").value = dato.media_superior[0].cct_escuela_procedencia;
               document.getElementById("btn_num_equivalencia").disabled = false; 
 
           }
@@ -797,11 +793,7 @@ function semestre_ciclo(id_semestre,id_ciclo,valor_id_ciclo) {
             document.getElementById('btn_enviar').disabled = true;
         }
 
-
-        };
-
-        xhr_escuela.send(null);
-
+    }
 
     };
 

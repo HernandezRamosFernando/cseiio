@@ -162,8 +162,8 @@ class M_permisos_extemporaneo extends CI_Model {
             }
 
 
-           // if($calificaciones_estudiante->examen_final!=null){
-               if($calificaciones_estudiante->primer_parcial!=null && $calificaciones_estudiante->segundo_parcial!=null && $calificaciones_estudiante->tercer_parcial!=null){
+            if($calificaciones_estudiante->examen_final!=null){
+              /* if($calificaciones_estudiante->primer_parcial!=null && $calificaciones_estudiante->segundo_parcial!=null && $calificaciones_estudiante->tercer_parcial!=null){*/
                
                 $examen_fin="/";
                 if($calificaciones_estudiante->examen_final!=null){

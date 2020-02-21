@@ -14,7 +14,10 @@ class M_permiso_regularizacion extends CI_Model {
     public function agregar_permiso_todos_planteles($datos){
       $this->db->trans_start();
       $this->db->query("SET SQL_SAFE_UPDATES = 0");
-      $this->db->query("update Permiso_regularizacion set estatus=0");
+      foreach($datos as $permiso_plantel){
+         $cct_plantel=$permiso_plantel->plantel;
+      $this->db->query("update Permiso_regularizacion set estatus=0 where Plantel_cct_plantel='".$cct_plantel."';");
+      }
       $this->db->query("SET SQL_SAFE_UPDATES = 1");
       foreach($datos as $permiso_plantel){//para cada plante;
          $materias = $this->M_regularizacion->materias_con_reprobados_html_regularizacion($permiso_plantel->plantel);

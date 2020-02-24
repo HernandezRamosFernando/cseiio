@@ -442,11 +442,18 @@ function contar_vacios_input_calificaciones() {
           
 
           var examen_final = valor.examen_final !== null ? valor.examen_final : "";
+          console.log("Promedio es:"+promedio+", examen_final"+examen_final);
           if (permisos_plantel.examen_final === "1" && promedio >= 6) {
             registro += '<td><input type="text" class="form-control" name="examen_final" value="' + (examen_final === "0" ? "/" : examen_final) + '" id="examen_final" onchange="calificaciones(this,\''+valor.tipo+'\',6,'+indice+','+permisos_plantel.examen_final+');"></td>';
           } else if (permisos_plantel.examen_final === "1" && promedio < 6) {
             registro += '<td><input type="text" class="form-control" name="examen_final" value="/" id="examen_final" onchange="calificaciones(this,\''+valor.tipo+'\',6,'+indice+','+permisos_plantel.examen_final+');" disabled></td>';
-          } else {
+          } 
+          
+          else if (permisos_plantel.examen_final == "1" && promedio=='/') {
+            registro += '<td><input type="text" class="form-control" name="examen_final" value="/" id="examen_final" onchange="calificaciones(this,\''+valor.tipo+'\',6,'+indice+','+valor.final+');" disabled></td>';
+          }
+          
+          else {
             registro += '<td><input type="text" class="form-control" name="examen_final" value="' + (examen_final === "0" ? "/" : examen_final) + '" onchange="calificaciones(this,\''+valor.tipo+'\',6,'+indice+','+permisos_plantel.examen_final+');" id="examen_final" disabled></td>';
           }
           
@@ -650,7 +657,12 @@ if(promedio_modular>=6){
 		tabla.childNodes[fila].childNodes[5].innerHTML='<input type="text" class="form-control" name="promedio_modular" value="' +promedio_modular+'" id="promedio_modular" disabled style="background-color:#1F934C;color: white;font-weight:bold">';
    
 		 if(activo_examen_final===1){
-		 	tabla.childNodes[fila].childNodes[6].childNodes[0].disabled=false;
+      if(tabla.childNodes[fila].childNodes[6].childNodes[0].disabled==true){
+        tabla.childNodes[fila].childNodes[6].childNodes[0].disabled=false;
+        tabla.childNodes[fila].childNodes[6].childNodes[0].value="";
+
+      }
+		 	
 
 		 	
 		 }

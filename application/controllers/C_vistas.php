@@ -16,6 +16,15 @@ class C_vistas extends CI_Controller {
         $this->load->model('M_usuario');
     }
     
+    public function prueba(){
+        $data= array('title'=>'Inscripcion Nuevo Ingreso');
+        
+        $this->load->view("headers/cabecera", $data);
+        $this->load->view("headers/menuarriba");
+        $this->load->view("headers/menuizquierda");
+        $this->load->view("spreadsheet/prueba");
+        $this->load->view("footers/footer");
+    }
     //------------------------------------------vistas
 
     //inscripcion.------------------------------------------

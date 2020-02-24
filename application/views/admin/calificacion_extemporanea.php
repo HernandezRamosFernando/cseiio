@@ -669,7 +669,12 @@ if(promedio_modular>=6){
 		tabla.childNodes[fila].childNodes[5].innerHTML='<input type="text" class="form-control" name="promedio_modular" value="' +promedio_modular+'" id="promedio_modular" disabled style="background-color:#1F934C;color: white;font-weight:bold">';
    
 		 if(activo_examen_final===1){
-		 	tabla.childNodes[fila].childNodes[6].childNodes[0].disabled=false;
+		 	
+       if(tabla.childNodes[fila].childNodes[6].childNodes[0].disabled==true){
+        tabla.childNodes[fila].childNodes[6].childNodes[0].disabled=false;
+        tabla.childNodes[fila].childNodes[6].childNodes[0].value="";
+       }
+       
 
 		 	
 		 }

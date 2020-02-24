@@ -2,6 +2,7 @@
 class M_baja extends CI_Model { 
    public function __construct() {
       parent::__construct();
+      $this->load->model("M_reinscripcion");
    }
 
    public function permisos_editar_datos_baja($datos,$no_control){
@@ -34,6 +35,17 @@ class M_baja extends CI_Model {
 
     $this->db->where('Estudiante_no_control',$no_control);
     $this->db->update('Baja',$datos);
+
+    $folio = $this->db->query("select max(Friae_folio) as folio from Friae_Estudiante as a where a.Estudiante_no_control='".$no_control."'")->result()[0]->folio;
+   $this->db->query("update Friae_Estudiante set baja='".$datos['fecha']."', tipo_ingreso_fin_semestre='BAJA',adeudos_fin_semestre='', id_materia_adeudos_fin_semestre='' where Estudiante_no_control='".$no_control."' and Friae_folio=".$folio);
+
+   $materias = $this->M_reinscripcion->get_materias_cursando_estudiante_actual($no_control);//materias de cada estudiante
+            foreach($materias as $materia){
+    
+                $this->db->query("update Grupo_Estudiante set calificacion_final=0 where id_materia='".$materia->id_materia."' and Estudiante_no_control='".$no_control."'");//agrega las calificaciones finales a cada materia
+            }
+
+
 
     $this->db->query("update Permiso_editar_baja set estatus=0 where Estudiante_no_control='".$no_control."' and idpermiso>=0;");
 

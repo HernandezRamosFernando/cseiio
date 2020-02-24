@@ -3,6 +3,7 @@ class M_estudiante extends CI_Model {
    public function __construct() {
       parent::__construct();
       $this->load->model('M_ciclo_escolar');
+      $this->load->model("M_reinscripcion");
       
    }
 
@@ -530,7 +531,13 @@ $this->db->insert('Desertor', $data);
    $this->db->query("update Estudiante set tipo_ingreso='BAJA' where no_control='".$datos->no_control."'");
    $this->db->query("insert into Baja (motivo,Estudiante_no_control,fecha,observacion) values ('".$datos->motivo."','".$datos->no_control."','".$datos->fecha."','".$datos->observacion."')");
    $folio = $this->db->query("select max(Friae_folio) as folio from Friae_Estudiante as a where a.Estudiante_no_control='".$datos->no_control."'")->result()[0]->folio;
-   $this->db->query("update Friae_Estudiante set baja='".$datos->fecha."' where Estudiante_no_control='".$datos->no_control."' and Friae_folio=".$folio);
+   $this->db->query("update Friae_Estudiante set baja='".$datos->fecha."',tipo_ingreso_fin_semestre='BAJA',adeudos_fin_semestre='', id_materia_adeudos_fin_semestre='' where Estudiante_no_control='".$datos->no_control."' and Friae_folio=".$folio);
+
+   $materias = $this->M_reinscripcion->get_materias_cursando_estudiante_actual($datos->no_control);//materias de cada estudiante
+            foreach($materias as $materia){
+    
+                $this->db->query("update Grupo_Estudiante set calificacion_final=0 where id_materia='".$materia->id_materia."' and Estudiante_no_control='".$datos->no_control."'");//agrega las calificaciones finales a cada materia
+            }
 
    $this->db->trans_complete();
    

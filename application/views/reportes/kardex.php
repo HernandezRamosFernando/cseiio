@@ -301,9 +301,7 @@ function renglones($materias,$regularizaciones_aprobadas){
                 $promedio_modular="/";
             }
     
-            else{
-    
-                if($promedio_modular>0 && $promedio_modular<6){
+            else if($promedio_modular>0 && $promedio_modular<6){
                     $promedio_modular=5;
                 }
                 
@@ -313,7 +311,7 @@ function renglones($materias,$regularizaciones_aprobadas){
                 
             }
 
-        }
+        
         
 
         

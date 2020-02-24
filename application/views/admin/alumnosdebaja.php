@@ -390,7 +390,7 @@ var form = document.getElementById("editar_datos_baja");
   xhr.onreadystatechange = function () {
     if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
       $('#div_carga').hide();
-      if(xhr.responseText==="si"){
+      if(xhr.responseText.trim()==="si"){
         Swal.fire({
             type: 'success',
             scrollbarPadding:false,

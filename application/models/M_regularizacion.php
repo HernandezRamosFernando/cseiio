@@ -5,6 +5,11 @@ class M_regularizacion extends CI_Model {
       parent::__construct();
    }
 
+   function estudiantes_regularizadas_periodo_mostrar($mes,$ano,$plantel,$materia){
+      $mes_anterior=$mes-1;
+      $mes_posterior=$mes+1;
+      return $this->db->query("select *,a.primer_apellido primer_apellido_asesor,a.segundo_apellido segundo_apellido_asesor,a.nombre nombre_asesor,e.primer_apellido primer_apellido_alumno,e.segundo_apellido segundo_apellido_alumno,e.nombre nombre_alumno from Regularizacion r inner join Estudiante e on r.Estudiante_no_control=e.no_control left join Asesor a on r.id_asesor=a.id_asesor where month(fecha_calificacion) between ".$mes_anterior." and ".$mes_posterior." and id_materia='".$materia."' and year(fecha_calificacion)=".$ano." and r.Plantel_cct_plantel='".$plantel."'")->result();
+   }
 
    public function get_materias_pasadas_estudiante($no_control){
       return $this->db->query("select id_materia,calificacion from Regularizacion where calificacion>=6 and Estudiante_no_control='".$no_control."'")->result();

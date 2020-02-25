@@ -10,6 +10,40 @@ class C_regularizacion extends CI_Controller {
         $this->load->model("M_regularizacion");
     }
 
+    public function estudiantes_regularizadas_periodo_mostrar(){
+        $datos = $this->input->get('periodo');
+        $plantel = $this->input->get('plantel');
+        $materia = $this->input->get('materia');
+
+        $separados = explode('-',$datos);
+
+        switch($separados[0]){
+
+            case 'ENERO':
+            $mes = 1;
+            break;
+
+            case 'MAYO':
+            $mes = 5;
+            break;
+
+            case 'JULIO':
+            $mes = 7;
+            break;
+
+            case 'OCTUBRE':
+            $mes = 10;
+            break;
+        }
+
+        $ano = intval($separados[1]);
+
+        
+        echo json_encode($this->M_regularizacion->estudiantes_regularizadas_periodo_mostrar($mes,$ano,$plantel,$materia)); 
+
+    }
+    
+
     public function materias_con_reprobados_html(){
         $respuesta = "";
         $plantel = $this->input->get("plantel");

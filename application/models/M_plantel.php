@@ -5,7 +5,9 @@ class M_plantel extends CI_Model {
    }
 
 
-
+   function get_grupos_plantel($plantel){
+      return $this->db->query("select * from Grupo where plantel='".$plantel."' and estatus=1")->result();
+   }
 
 
    function get_planteles(){

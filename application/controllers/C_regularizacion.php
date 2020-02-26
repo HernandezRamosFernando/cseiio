@@ -10,6 +10,41 @@ class C_regularizacion extends CI_Controller {
         $this->load->model("M_regularizacion");
     }
 
+    
+    public function modificar_datos_regularizacion(){
+        $no_control = $this->input->post('no_control');
+        $id_materia = $this->input->post('id_materia');
+        $fecha = $this->input->post('fecha');
+        $cct_plantel = $this->input->post('cct_plantel');
+        $calificacion_inicial = $this->input->post('calificacion_inicial');
+
+        $calificacion = $this->input->post('calificacion');
+        $fecha_calificacion = $this->input->post('fecha_calificacion');
+        $hora_inicio = $this->input->post('hora_inicio');
+        $asesor = $this->input->post('asesor');
+
+        $parametros_actualizar= array(
+            'calificacion' =>$calificacion,
+            'fecha_calificacion' =>$fecha_calificacion,
+            'hora' =>$hora_inicio,
+            'id_asesor' =>$asesor
+
+        );
+
+        $parametros_regu= array(
+            'no_control' =>$no_control,
+            'id_materia' =>$id_materia,
+            'fecha' =>$fecha,
+            'cct_plantel' =>$cct_plantel,
+            'calificacion_inicial' =>$calificacion_inicial,
+
+
+        );
+
+
+        echo $this->M_regularizacion->modificar_datos_regularizacion((object)$parametros_regu,$parametros_actualizar);
+    }
+
     public function estudiantes_regularizadas_periodo_mostrar(){
         $datos = $this->input->get('periodo');
         $plantel = $this->input->get('plantel');

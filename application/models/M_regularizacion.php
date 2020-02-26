@@ -5,6 +5,29 @@ class M_regularizacion extends CI_Model {
       parent::__construct();
    }
 
+   public function modificar_datos_regularizacion($parametros_regu,$parametros_actualizar){
+      $this->db->trans_start();
+
+        $this->db->where('id_materia',$parametros_regu->id_materia);
+        $this->db->where('fecha',$parametros_regu->fecha);
+        $this->db->where('Plantel_cct_plantel',$parametros_regu->cct_plantel);
+        $this->db->where('calificacion',$parametros_regu->calificacion_inicial);
+        $this->db->where('Estudiante_no_control',$parametros_regu->no_control);
+        $this->db->update('Regularizacion',$parametros_actualizar);
+
+        $this->db->trans_complete();
+
+        if ($this->db->trans_status() === FALSE)
+        {
+            return "no";
+        }
+
+        else{
+            return "si";
+        }
+
+   }
+
    function estudiantes_regularizadas_periodo_mostrar($mes,$ano,$plantel,$materia){
       $mes_anterior=$mes-1;
       $mes_posterior=$mes+1;

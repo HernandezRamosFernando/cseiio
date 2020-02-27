@@ -165,14 +165,14 @@
                     class="btn btn-primary btn-lg btn-block menu valign-center  btn-4">
                     <div class="row col-12">
                         <div class="col-9  valign-center" style="padding-left: 0px;">
-                        <p class="h5"><strong>Generar FRIAE</strong></p> 
+                        <p class="h5"><strong>Actualizar FRIAE</strong></p> 
                         </div>
                         <div class="col-3 valign-right ">
                         <img class="icono_menu_disparejo" src="<?php echo base_url();?>assets/img/calificaciones.png">
                         </div>
                     </div>
                 </a>
-            </div>
+            </div><!-- -->
         </div>
 
 

@@ -290,16 +290,11 @@ function buscar_registros() {
           fila += valor.primer_apellido_asesor+' '+( typeof(valor.segundo_apellido_asesor) == "undefined" ? "" : valor.segundo_apellido_asesor)+' '+valor.nombre_asesor;
           fila += '</td>';
 
-          <?php if ($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){?>
+          
           fila += '<td>';
           fila += '<button class="btn btn-lg btn-block btn-danger" type="button" onclick="pasar_no_control('+parametros_regu+')" value="' + valor.id_materia + '" onclick="" data-toggle="modal" data-target="#modificar_regularizacion">Editar</button>';
           fila += '</td>';
-          <?php }
-          else{?>
-              fila += '<td>';
-          fila += '';
-          fila += '</td>';
-        <?php }?>
+          
           fila += '</tr>';
           document.getElementById("tabla").innerHTML += fila;
         });

@@ -39,10 +39,28 @@ class C_vistas extends CI_Controller {
             $this->load->view("headers/cabecera", $data);
             $this->load->view("headers/menuarriba");
             $this->load->view("headers/menuizquierda");
-            $this->load->view("admin/generar_friae",$datos);
+            $this->load->view("admin/actualizar_friae",$datos);
             $this->load->view("footers/footer");
         }
         
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='CESCOLAR'){
+            $data= array('title'=>'Inscripcion Nuevo Ingreso');
+            $datos['planteles'] = $this->M_plantel->get_planteles();
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierdacescolar");
+            $this->load->view("admin/actualizar_friae",$datos);
+            $this->load->view("footers/footer");
+        }
+        else if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='PLANTEL'){
+            $datos['planteles'] = $this->M_plantel->get_plantel($this->session->userdata('user')['plantel']);
+            $data= array('title'=>'Inscripcion Nuevo Ingreso');
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierdaplantel");
+            $this->load->view("plantel/actualizar_friae",$datos);
+            $this->load->view("footers/footer");
+        }
         else{
             redirect(base_url().'index.php/c_usuario');
         }

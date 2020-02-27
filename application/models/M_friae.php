@@ -37,6 +37,7 @@ class M_friae extends CI_Model {
        foreach($adeudos_sin_regu_enero as $id){
           $materias_adeudo_fin_modulo.=$id->id_materia.",";
       }
+      $materias_adeudo_fin_modulo=trim($materias_adeudo_fin_modulo,',');
  
        
       $situacion_despues_regu='REINGRESO';
@@ -61,9 +62,11 @@ class M_friae extends CI_Model {
        foreach($adeudos_despues_regu_enero as $id){
           $materias_adeudo_despues_regu.=$id->id_materia.",";
       }
+      $materias_adeudo_despues_regu=trim($materias_adeudo_despues_regu,',');
  
- 
-      
+      if($num_adeudos_fin_modulo==0){
+        $situacion_despues_regu="";
+      }
        
  
       $datos = array(

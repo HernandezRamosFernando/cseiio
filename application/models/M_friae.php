@@ -333,20 +333,34 @@ class M_friae extends CI_Model {
     $this->db->trans_start();
     $grupos_plantel = $this->M_plantel->get_grupos_plantel($plantel);
     foreach($grupos_plantel as $grupo){
-        $estudiante = $this->db->query("SELECT Estudiante_no_control FROM Grupo_Estudiante where Grupo_id_grupo='".$grupo->id_grupo."' group by Estudiante_no_control;")->result();
+        $estudiante = $this->db->query("SELECT * FROM Grupo_Estudiante ge inner join Ciclo_escolar c on ge.Ciclo_escolar_id_ciclo_escolar=c.id_ciclo_escolar inner join Grupo g on g.id_grupo=ge.Grupo_id_grupo where Grupo_id_grupo='".$grupo->id_grupo."' group by Estudiante_no_control;")->result();
         foreach($estudiante as $e){
-            $parametros_friae= array(
-                'anio_inicio' => $anio_inicio,
-                'anio_termino' => $anio_terminacion,
-                'fecha_termino'=>$ciclo_escolar->fecha_terminacion,
-                'semestre' =>$modulo,
-                'no_control'=>$no_control,
-                'id_friae'=>$id_friae,
-                'periodo'=>$periodo
-            
-                
-            );
-            $this->actualizar((object)$parametros_friae);
+            $friae=$this->id_friae($e->id_grupo)[0]->folio;
+            $detalle_friae = $this->db->query("select * from Friae_Estudiante where Estudiante_no_control='".$e->Estudiante_no_control."' and Friae_folio=".$friae)->result();
+
+           if( $detalle_friae[0]->tipo_ingreso_fin_semestre!='BAJA'){
+
+           
+
+                    $valores = explode('-',$e->fecha_inicio);
+                    $valores2 = explode('-',$e->fecha_terminacion);
+                            
+                    $anio_inicio=$valores[0];
+                    $anio_terminacion=$valores2[0];
+                    
+                    $parametros_friae= array(
+                        'anio_inicio' => $anio_inicio,
+                        'anio_termino' => $anio_terminacion,
+                        'fecha_termino'=>$e->fecha_terminacion,
+                        'semestre' =>$e->semestre,
+                        'no_control'=>$e->Estudiante_no_control,
+                        'id_friae'=>$friae,
+                        'periodo'=>$e->periodo
+                    
+                        
+                    );
+                    $this->actualizar((object)$parametros_friae);
+            }
 
         }
 

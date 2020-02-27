@@ -69,7 +69,7 @@ class C_friae extends CI_Controller {
 
     public function cerrar_friae(){
         $plantel = $this->input->get('plantel');
-        $this->M_friae->cerrar_friae($plantel);
+        echo $this->M_friae->cerrar_friae($plantel);
 
     }
 }

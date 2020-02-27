@@ -25,6 +25,28 @@ class C_vistas extends CI_Controller {
         $this->load->view("spreadsheet/prueba");
         $this->load->view("footers/footer");
     }
+
+
+    public function crear_friae(){
+        $datos['estados'] = $this->M_estado->get_estados();
+        $datos['lenguas'] = $this->M_lengua->get_lenguas();
+        $datos['ciclo_escolar'] = $this->M_ciclo_escolar->get_ciclo_escolar();
+        $datos['escuela_procedencia'] = $this->M_escuela_procedencia->get_secundarias();
+
+        if($this->session->userdata('user')['usuario']!='' && $this->session->userdata('user')['rol']=='ADMINISTRADOR'){
+            $data= array('title'=>'Inscripcion Nuevo Ingreso');
+            $datos['planteles'] = $this->M_plantel->get_planteles();
+            $this->load->view("headers/cabecera", $data);
+            $this->load->view("headers/menuarriba");
+            $this->load->view("headers/menuizquierda");
+            $this->load->view("admin/generar_friae",$datos);
+            $this->load->view("footers/footer");
+        }
+        
+        else{
+            redirect(base_url().'index.php/c_usuario');
+        }
+    }
     //------------------------------------------vistas
 
     //inscripcion.------------------------------------------

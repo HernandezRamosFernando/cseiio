@@ -161,7 +161,7 @@
             </div>
 
             <div class="col-md-4 col-lg-4"style="height: 9rem !important;">
-                <a href="<?php echo base_url();?>index.php/c_vistas/panel_alumnos_baja"
+                <a href="<?php echo base_url();?>index.php/c_vistas/crear_friae"
                     class="btn btn-primary btn-lg btn-block menu valign-center  btn-4">
                     <div class="row col-12">
                         <div class="col-9  valign-center" style="padding-left: 0px;">

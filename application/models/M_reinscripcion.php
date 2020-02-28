@@ -214,7 +214,8 @@ class M_reinscripcion extends CI_Model {
         foreach($estudiantes_en_grupos as $estudiante){
             
             if($estudiante->tipo_ingreso!="BAJA"){
-            $materias_debe = $this->M_regularizacion->materias_debe_estudiante_actualmente($estudiante->no_control);
+                /*Codigo desActivado para caso de emergencia actualiza las ultimas regularizaciones y estatus despues del segundo periodo de regu*/
+           $materias_debe = $this->M_regularizacion->materias_debe_estudiante_actualmente($estudiante->no_control);
     
             
             $folio = $this->db->query("select max(Friae_folio) as folio from Friae_Estudiante where Estudiante_no_control='".$estudiante->no_control."'")->result()[0]->folio;//folio del friae
@@ -225,9 +226,10 @@ class M_reinscripcion extends CI_Model {
                  $materias_ids.=$id->id_materia.",";
              }
  
-         $materias_ids = substr($materias_ids,0,-1);
+         $materias_ids = trim($materias_ids,',');
 
-         $this->db->query("update Friae_Estudiante set adeudos_segunda_regularizacion=".sizeof($materias_debe).",id_materia_adeudos_segunda_regularizacion='".$materias_ids."',tipo_ingreso_despues_regularizacion='".$estudiante->tipo_ingreso."' where Estudiante_no_control='".$estudiante->no_control."' and Friae_folio=".$folio);//aqui actualiza el friae en su segunda regularizacion
+         $this->db->query("update Friae_Estudiante set adeudos_segunda_regularizacion=".sizeof($materias_debe).",id_materia_adeudos_segunda_regularizacion='".$materias_ids."',tipo_ingreso_despues_regularizacion=if(adeudos_fin_semestre=0,'','".$estudiante->tipo_ingreso."') where Estudiante_no_control='".$estudiante->no_control."' and Friae_folio=".$folio);//aqui actualiza el friae en su segunda regularizacion
+         /*Termina Codigo desActivado para caso de emergencia */
 
             if(sizeof($materias_debe)>=0 && sizeof($materias_debe)<=3){
                 $this->db->query("update Estudiante set semestre_en_curso=semestre_en_curso+1 where no_control='".$estudiante->no_control."'");

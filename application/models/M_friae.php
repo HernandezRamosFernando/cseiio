@@ -14,6 +14,8 @@ class M_friae extends CI_Model {
  
     if(intval($parametros->semestre)==1){
  
+       if($parametros->realizo_examen_final=="si"){
+
        
        $situacion_fin_modulo='REINGRESO';
        $num_adeudos_fin_modulo=0;
@@ -80,7 +82,7 @@ class M_friae extends CI_Model {
          $this->db->where('Friae_folio',$parametros->id_friae);
          $this->db->where('Estudiante_no_control',$parametros->no_control);
          $this->db->update('Friae_Estudiante',$datos);
- 
+    }
  
     }
     else{
@@ -335,6 +337,8 @@ class M_friae extends CI_Model {
    public function cerrar_friae($plantel){
     $this->db->trans_start();
     $grupos_plantel = $this->M_plantel->get_grupos_plantel($plantel);
+    $examen_final=$this->db->query("select * from Grupo_Estudiante as ge inner join Grupo as g on ge.Grupo_id_grupo=g.id_grupo where estatus=1 and calificacion_final is not null and plantel='".$plantel."'")->result();
+    $realizo_examen_final=(count( $examen_final)>0)? "si": "no";
     foreach($grupos_plantel as $grupo){
         $estudiante = $this->db->query("SELECT * FROM Grupo_Estudiante ge inner join Ciclo_escolar c on ge.Ciclo_escolar_id_ciclo_escolar=c.id_ciclo_escolar inner join Grupo g on g.id_grupo=ge.Grupo_id_grupo where Grupo_id_grupo='".$grupo->id_grupo."' group by Estudiante_no_control;")->result();
         foreach($estudiante as $e){
@@ -358,7 +362,8 @@ class M_friae extends CI_Model {
                         'semestre' =>$e->semestre,
                         'no_control'=>$e->Estudiante_no_control,
                         'id_friae'=>$friae,
-                        'periodo'=>$e->periodo
+                        'periodo'=>$e->periodo,
+                        'realizo_examen_final'=>$realizo_examen_final
                     
                         
                     );

@@ -5,6 +5,26 @@ class M_baja extends CI_Model {
       $this->load->model("M_reinscripcion");
    }
 
+
+   public function eliminar_datos_baja($datos){
+    
+    $this->db->trans_start();
+    $this->db->update('Baja',$datos);
+
+    $folio = $this->db->query("select max(Friae_folio) as folio from Friae_Estudiante where Estudiante_no_control='".$estudiante->Estudiante_no_control."'")->result()[0]->folio;//folio del friae del estudiante del grupo actual
+
+    $this->db->trans_complete();
+
+    if ($this->db->trans_status() === FALSE)
+    {
+        return "no";
+    }
+
+    else{
+        return "si";
+    }
+  
+}
    public function permisos_editar_datos_baja($datos,$no_control){
     $this->db->trans_start();
 

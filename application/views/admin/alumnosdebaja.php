@@ -22,7 +22,7 @@
 
             <div class="col-md-4 ">
               <button type="button" class="btn btn-info btn-lg btn-block" onclick="modificar_fecha_baja()" style="padding: 1rem"
-                id="modificar_usuario">Modificar fecha de baja</button>
+                id="modificar_usuario">Editar baja</button>
             </div>
 
           </div>
@@ -237,6 +237,7 @@
               <th scope="col" class="col-md-1">Plantel CCT</th>
               <th scope="col" class="col-md-1">Fecha de baja</th>
               <th scope="col" class="col-md-1"></th>
+              <th scope="col" class="col-md-1"></th>
             </tr>
           </thead>
 
@@ -263,7 +264,7 @@
 </div>
 <!-- /#wrapper -->
 
-
+<!--Empieza Modal editar baja -->
 <div class="modal fade" id="fecha_baja_modal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
   aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" style="max-width: 80% !important;" role="document">
@@ -364,13 +365,123 @@
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
           <button type="submit" id="boton_guardar" class="btn btn-success" onclick="">Guardar</button>
         </div>
-
+			</div>
         </form>
         
       </div>
     </div>
   </div>
+<!--Termina Modal editar baja -->
 
+<!--Empieza Modal eliminar baja -->
+<div class="modal fade" id="eliminar_baja_modal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" style="max-width: 80% !important;" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Eliminar baja</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form id="eliminar_datos_baja">
+      <div class="modal-body ">
+
+      
+
+      <input type="hidden" id="no_control_baja_eliminar" name="no_control_baja_eliminar" value=""/>
+
+      <input type="hidden" id="fecha_baja_eliminar" name="fecha_baja_eliminar" value=""/>
+
+        <div class="form-group">
+          <div class="row">
+
+          <div class="col-md-8">
+              <div class="form-label-group">
+                <input class="form-control" placeholder="Nombre del alumno" type="text" name="nombre_alumno_baja_eliminar"
+                  id="nombre_alumno_baja_eliminar" style="color: #237087" disabled="disabled"/>
+                <label for="nombre_alumno_baja_eliminar">Nombre del alumno</label>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="form-label-group">
+                <input class="form-control" placeholder="Fecha de baja" type="date" name="fecha_baja_eliminar2"
+                  id="fecha_baja_eliminar2" style="color: #237087" max=<?php
+                echo date('Y-m-d');
+                ?> disabled="disabled">
+                <label for="fecha_baja_eliminar2">Fecha de baja</label>
+              </div>
+            </div>
+          </div>
+          </div>
+			<div class="form-group">
+          <div class="row">
+            <div class="col-md-12">
+              <label class="form-group has-float-label seltitulo">
+                <select class="form-control selcolor" id="motivo_baja_eliminar" name="motivo_baja_eliminar" disabled="disabled">
+                <option value="">Seleccione un motivo</option>
+                  <option value="FALTA DINERO EN HOGAR PARA UTILES, PASAJES O INSCRIPCIÓN">FALTA DINERO EN HOGAR PARA
+                    UTILES, PASAJES O INSCRIPCIÓN</option>
+                  <option value="LE DISGUSTABA ESTUDIAR">LE DISGUSTABA ESTUDIAR</option>
+                  <option value="CONSIDERA TRABAJAR ES MAS IMPORTANTE QUE ESTUDIAR">CONSIDERA TRABAJAR ES MAS IMPORTANTE
+                    QUE ESTUDIAR</option>
+                  <option value="PROBLEMAS PARA ENTENDER A LOS MAESTROS">PROBLEMAS PARA ENTENDER A LOS MAESTROS</option>
+                  <option value="POR REPROBACIÓN DE MATERIAS">POR REPROBACIÓN DE MATERIAS</option>
+                  <option value="SE EMBARAZÓ, EMBARAZÓ A ALGUIEN O TUVO UN HIJO">SE EMBARAZÓ, EMBARAZÓ A ALGUIEN O TUVO
+                    UN HIJO</option>
+                  <option value="SE CASÓ/JUNTÓ">SE CASÓ/JUNTÓ</option>
+                  <option value="LA ESCUELA QUEDA LEJOS DE SU LOCALIDAD">LA ESCUELA QUEDA LEJOS DE SU LOCALIDAD</option>
+                  <option value="HABÍA REGLAS DE DISCIPLINA CON LAS QUE NO ESTABA DE ACUERDO">HABÍA REGLAS DE DISCIPLINA
+                    CON LAS QUE NO ESTABA DE ACUERDO</option>
+                  <option value="TENÍA PROBLEMAS PERSONALES CON MAMÁ, PAPÁ O PAREJA DE UNO DE ELLOS">TENÍA PROBLEMAS
+                    PERSONALES CON MAMÁ, PAPÁ O PAREJA DE UNO DE ELLOS</option>
+                  <option value="HABÍA COMPAÑEROS QUE LO MOLESTABAN">HABÍA COMPAÑEROS QUE LO MOLESTABAN</option>
+                  <option value="FALLECIÓ UN FAMILIAR O ALGUIEN DE LA FAMILIA SE ENFERMÓ GRAVEMENTE">FALLECIÓ UN
+                    FAMILIAR O ALGUIEN DE LA FAMILIA SE ENFERMÓ GRAVEMENTE</option>
+                  <option value="EXPULSADO POR INDISCIPLINA">EXPULSADO POR INDISCIPLINA</option>
+                  <option value="SE CAMBIÓ DE DOMICILIO">SE CAMBIÓ DE DOMICILIO</option>
+                  <option value="TENÍA BAJA AUTOESTIMA">TENÍA BAJA AUTOESTIMA</option>
+                  <option value="SE SENTÍA INSEGURO EN LA ESCUELA O EN EL CAMINO PARA LLEGAR A ESTA">SE SENTÍA INSEGURO
+                    EN LA ESCUELA O EN EL CAMINO PARA LLEGAR A ESTA</option>
+                  <option value="LE DISGUSTABAN LAS INSTALACIONES DE LA ESCUELA">LE DISGUSTABAN LAS INSTALACIONES DE LA
+                    ESCUELA</option>
+                  <option value="SE SENTIA DISCRIMINADO POR SU FORMA DE PENSAR O DE VESTIR">SE SENTIA DISCRIMINADO POR
+                    SU FORMA DE PENSAR O DE VESTIR</option>
+                  <option value="CONSIDERABA QUE ESTUDIAR ERA DE POCA UTILIDAD">CONSIDERABA QUE ESTUDIAR ERA DE POCA
+                    UTILIDAD</option>
+                  <option value="LA FAMILIA PREFERIA QUE ESTUDIARAN OTROS HERMANOS ">LA FAMILIA PREFERIA QUE ESTUDIARAN
+                    OTROS HERMANOS </option>
+                  <option value="OTRO">OTRO MOTIVO</option>
+                </select>
+                <span>Motivo de baja</span>
+              </label>
+            </div>
+				</div>
+                </div>
+          
+          <div class="form-group">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-label-group">
+                <input class="form-control" placeholder="observacion baja" type="input" name="observacion_baja_eliminar"
+                  id="observacion_baja_eliminar" style="color: #237087" disabled="disabled">
+                <label for="observacion_baja_eliminar">Observacion</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="submit" id="boton_guardar" class="btn btn-success" onclick="">Guardar</button>
+        </div>
+			</div>
+        </form>
+        
+      </div>
+    </div>
+  </div>
+<!--Termina Modal eliminar baja -->
 
 <script>
 
@@ -400,6 +511,52 @@ var form = document.getElementById("editar_datos_baja");
           });
 
           $('#fecha_baja_modal').modal('toggle');
+          borrar_formato_tabla();
+          buscar();
+      }
+
+      else{
+        Swal.fire({
+            type: 'error',
+            scrollbarPadding:false,
+            title: 'Ocurrió un error al modificar los datos.',
+            showConfirmButton: false,
+            timer: 2500 
+          });
+      }
+      
+
+    }
+}
+		xhr.send(formdata);
+		
+	}
+
+  var form_eliminar = document.getElementById("eliminar_datos_baja");
+	form_eliminar.onsubmit = function(e){
+		e.preventDefault();
+		var formdata = new FormData(form_eliminar);
+		var xhr =  new XMLHttpRequest();
+		xhr.open("POST","<?php echo base_url();?>index.php/C_bajas/eliminar_datos_baja",true);
+    xhr.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      xhr.error = function (){
+        console.log("error de conexion");
+      }
+  xhr.onreadystatechange = function () {
+    if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+      $('#div_carga').hide();
+      if(xhr.responseText.trim()==="si"){
+        Swal.fire({
+            type: 'success',
+            scrollbarPadding:false,
+            title: 'Datos de baja eliminados exitosamente.',
+            showConfirmButton: false,
+            timer: 2500 
+          });
+
+          $('#eliminar_baja_modal').modal('toggle');
           borrar_formato_tabla();
           buscar();
       }
@@ -457,6 +614,39 @@ function borrar_formato_tabla(){
 
 }
 
+
+function cargar_datos_eliminar_alumno_baja(e) {
+      
+      document.getElementById("eliminar_datos_baja").reset();
+      var no_control= e.value;
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', '<?php echo base_url();?>index.php/C_bajas/datos_alumno_baja/'+e.value, true);
+      xhr.onloadstart = function(){
+        $('#div_carga').show();
+      }
+      xhr.error = function (){
+        console.log("error de conexion");
+      }
+      xhr.onload = function(){
+        $('#div_carga').hide();
+        console.log(JSON.parse(xhr.response));
+        let datos = JSON.parse(xhr.response);
+        //datos personales
+        document.getElementById("no_control_baja_eliminar").value = datos.datos_baja.no_control;
+        document.getElementById("nombre_alumno_baja_eliminar").value = datos.datos_baja.primer_apellido+" "+datos.datos_baja.segundo_apellido+" "+datos.datos_baja.nombre;
+        document.getElementById("fecha_baja_eliminar").value =datos.datos_baja.fecha;
+        document.getElementById("fecha_baja_eliminar2").value =datos.datos_baja.fecha;
+        document.getElementById("motivo_baja_eliminar").value =datos.datos_baja.motivo;
+        document.getElementById("observacion_baja_eliminar").value =datos.datos_baja.observacion;
+
+        
+      }
+
+      xhr.send(null);
+    
+
+}
+
 function buscar() {
       document.getElementById("aspirante_plantel_busqueda").disabled = true;
       document.getElementById("aspirante_curp_busqueda").disabled = true;
@@ -496,7 +686,10 @@ function buscar() {
           fila += valor.fecha;
           fila += '</td>';
           fila += '<td>';
-          fila += '<button class="btn btn-lg btn-block btn-primary" type="button" onclick="cargar_datos_alumno_baja(this)" value="' + valor.no_control + '" onclick="" data-toggle="modal" data-target="#fecha_baja_modal">Editar baja</button>';
+          fila += '<button class="btn btn-lg btn-block btn-primary" type="button" onclick="cargar_datos_alumno_baja(this)" value="' + valor.no_control + '" onclick="" data-toggle="modal" data-target="#fecha_baja_modal">Editar</button>';
+          fila += '</td>';
+          fila += '<td>';
+          fila += '<button class="btn btn-lg btn-block btn-danger" type="button" onclick="cargar_datos_eliminar_alumno_baja(this)" value="' + valor.no_control + '" onclick="" data-toggle="modal" data-target="#eliminar_baja_modal">Eliminar</button>';
           fila += '</td>';
           fila += '</tr>';
           document.getElementById("tabla").innerHTML += fila;

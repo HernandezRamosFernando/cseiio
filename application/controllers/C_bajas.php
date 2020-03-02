@@ -10,6 +10,20 @@ class C_bajas extends CI_Controller {
         $this->load->model("M_baja");
     }
 
+    public function eliminar_datos_baja(){
+        $no_control = $this->input->post('no_control_baja_eliminar');
+        $fecha_baja = $this->input->post('fecha_baja_eliminar');
+
+        $datos = array(
+            'Estudiante_no_control' => $no_control,
+            'fecha' =>$fecha_baja
+        );
+        
+        
+        echo $this->M_baja->eliminar_datos_baja($datos);
+
+    }
+
     public function busqueda_alumnos_grupo_baja_permisos(){
         $curp = $this->input->get('curp');
         $cct_plantel = $this->input->get('cct_plantel');

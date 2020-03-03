@@ -11,7 +11,70 @@ class M_baja extends CI_Model {
     $this->db->trans_start();
     $this->db->update('Baja',$datos);
 
-    $folio = $this->db->query("select max(Friae_folio) as folio from Friae_Estudiante where Estudiante_no_control='".$estudiante->Estudiante_no_control."'")->result()[0]->folio;//folio del friae del estudiante del grupo actual
+    //rellenar calificaciones finales
+    $materias = $this->M_reinscripcion->get_materias_cursando_estudiante_actual($datos['Estudiante_no_control']);//materias de cada estudiante
+    foreach($materias as $materia){
+        $primer_parcial = $materia->primer_parcial==null?0:intval($materia->primer_parcial);//primer parcial de la materia
+        $segundo_parcial = $materia->segundo_parcial==null?0:intval($materia->segundo_parcial);//segundo parcial de la materia
+        $tercer_parcial = $materia->tercer_parcial==null?0:intval($materia->tercer_parcial);//tercer parcial de la materia
+        $examen_final = $materia->examen_final==null?0:intval($materia->examen_final);//examen final 
+
+        $promedio_modular = ($primer_parcial+$segundo_parcial+$tercer_parcial)/3;
+
+        //$promedio = (intval($estudiante->primer_parcial)+intval($estudiante->segundo_parcial)+intval($estudiante->tercer_parcial))/3;
+    if($promedio_modular>0 && $promedio_modular<6){
+        $promedio_modular=5;
+    }
+    else{
+        $promedio_modular = round($promedio_modular,0,PHP_ROUND_HALF_UP);
+    }
+
+
+        $promedio_final = ($promedio_modular+$examen_final)/2;
+
+        if($promedio_final>0 && $promedio_final<6){
+            $promedio_final=5;
+        }
+        else{
+            $promedio_final = round($promedio_final,0,PHP_ROUND_HALF_UP);
+        }
+        //$promedio_final = round($promedio_final,0,PHP_ROUND_HALF_UP);
+
+        $this->db->query("update Grupo_Estudiante set calificacion_final=".$promedio_final." where id_materia='".$materia->id_materia."' and Estudiante_no_control='".$datos['Estudiante_no_control']."'");//agrega las calificaciones finales a cada materia
+    }
+
+    //estatus despues de haber calificado (calcular calificacion final)
+    $materias_debe = $this->M_regularizacion->materias_debe_estudiante_actualmente($datos['Estudiante_no_control']);// materias que debe  incluyendo las del grupo actual porque ya se calificaron
+    $materias_ids="";
+    foreach($materias_debe as $id){
+        $materias_ids.=$id->id_materia.",";//string de las claves de materias
+    }
+
+    $materias_ids = substr($materias_ids,0,-1);
+
+    if(sizeof($materias_debe)==0){//si el estudiante debe nada
+        $this->db->query("update Estudiante set tipo_ingreso='REINGRESO',estatus='REGULAR' where no_control='".$estudiante->Estudiante_no_control."'");
+        $this->db->query("update Friae_Estudiante set tipo_ingreso_fin_semestre='REINGRESO', adeudos_fin_semestre=".sizeof($materias_debe).", id_materia_adeudos_fin_semestre='".$materias_ids."' where Estudiante_no_control='".$estudiante->Estudiante_no_control."' and Friae_folio=".$folio);
+    }
+
+    else if(sizeof($materias_debe)>0 && sizeof($materias_debe)<=3){// irregular reingreso
+        $this->db->query("update Estudiante set tipo_ingreso='REINGRESO',estatus='IRREGULAR' where no_control='".$estudiante->Estudiante_no_control."'");
+        $this->db->query("update Friae_Estudiante set tipo_ingreso_fin_semestre='REINGRESO', adeudos_fin_semestre=".sizeof($materias_debe).", id_materia_adeudos_fin_semestre='".$materias_ids."' where Estudiante_no_control='".$estudiante->Estudiante_no_control."' and Friae_folio=".$folio);
+     
+        
+    }
+
+    else if(sizeof($materias_debe)>3 && sizeof($materias_debe)<=5){//sin derecho
+        $this->db->query("update Estudiante set tipo_ingreso='SIN DERECHO',estatus='IRREGULAR' where no_control='".$estudiante->Estudiante_no_control."'");
+        $this->db->query("update Friae_Estudiante set tipo_ingreso_fin_semestre='SIN DERECHO', adeudos_fin_semestre=".sizeof($materias_debe).", id_materia_adeudos_fin_semestre='".$materias_ids."' where Estudiante_no_control='".$estudiante->Estudiante_no_control."' and Friae_folio=".$folio);
+    }
+
+    else if(sizeof($materias_debe)>5){//reprobado
+        $this->db->query("update Estudiante set tipo_ingreso='REPROBADO',estatus='IRREGULAR' where no_control='".$estudiante->Estudiante_no_control."'");
+        $this->db->query("update Friae_Estudiante set tipo_ingreso_fin_semestre='REPROBADO', adeudos_fin_semestre=".sizeof($materias_debe).", id_materia_adeudos_fin_semestre='".$materias_ids."' where Estudiante_no_control='".$estudiante->Estudiante_no_control."' and Friae_folio=".$folio);
+      
+    }
+
 
     $this->db->trans_complete();
 

@@ -3,6 +3,7 @@ class M_baja extends CI_Model {
    public function __construct() {
       parent::__construct();
       $this->load->model("M_reinscripcion");
+      $this->load->model("M_friae");
    }
 
 
@@ -53,27 +54,57 @@ class M_baja extends CI_Model {
     $materias_ids = substr($materias_ids,0,-1);
 
     if(sizeof($materias_debe)==0){//si el estudiante debe nada
-        $this->db->query("update Estudiante set tipo_ingreso='REINGRESO',estatus='REGULAR' where no_control='".$estudiante->Estudiante_no_control."'");
-        $this->db->query("update Friae_Estudiante set tipo_ingreso_fin_semestre='REINGRESO', adeudos_fin_semestre=".sizeof($materias_debe).", id_materia_adeudos_fin_semestre='".$materias_ids."' where Estudiante_no_control='".$estudiante->Estudiante_no_control."' and Friae_folio=".$folio);
+        $this->db->query("update Estudiante set tipo_ingreso='REINGRESO',estatus='REGULAR' where no_control='".$datos['Estudiante_no_control']."'");
+        
     }
 
     else if(sizeof($materias_debe)>0 && sizeof($materias_debe)<=3){// irregular reingreso
-        $this->db->query("update Estudiante set tipo_ingreso='REINGRESO',estatus='IRREGULAR' where no_control='".$estudiante->Estudiante_no_control."'");
-        $this->db->query("update Friae_Estudiante set tipo_ingreso_fin_semestre='REINGRESO', adeudos_fin_semestre=".sizeof($materias_debe).", id_materia_adeudos_fin_semestre='".$materias_ids."' where Estudiante_no_control='".$estudiante->Estudiante_no_control."' and Friae_folio=".$folio);
+        $this->db->query("update Estudiante set tipo_ingreso='REINGRESO',estatus='IRREGULAR' where no_control='".$datos['Estudiante_no_control']."'");
+        
      
         
     }
 
     else if(sizeof($materias_debe)>3 && sizeof($materias_debe)<=5){//sin derecho
-        $this->db->query("update Estudiante set tipo_ingreso='SIN DERECHO',estatus='IRREGULAR' where no_control='".$estudiante->Estudiante_no_control."'");
-        $this->db->query("update Friae_Estudiante set tipo_ingreso_fin_semestre='SIN DERECHO', adeudos_fin_semestre=".sizeof($materias_debe).", id_materia_adeudos_fin_semestre='".$materias_ids."' where Estudiante_no_control='".$estudiante->Estudiante_no_control."' and Friae_folio=".$folio);
+        $this->db->query("update Estudiante set tipo_ingreso='SIN DERECHO',estatus='IRREGULAR' where no_control='".$datos['Estudiante_no_control']."'");
+       
     }
 
     else if(sizeof($materias_debe)>5){//reprobado
-        $this->db->query("update Estudiante set tipo_ingreso='REPROBADO',estatus='IRREGULAR' where no_control='".$estudiante->Estudiante_no_control."'");
-        $this->db->query("update Friae_Estudiante set tipo_ingreso_fin_semestre='REPROBADO', adeudos_fin_semestre=".sizeof($materias_debe).", id_materia_adeudos_fin_semestre='".$materias_ids."' where Estudiante_no_control='".$estudiante->Estudiante_no_control."' and Friae_folio=".$folio);
+        $this->db->query("update Estudiante set tipo_ingreso='REPROBADO',estatus='IRREGULAR' where no_control='".$datos['Estudiante_no_control']."'");
+        
       
     }
+
+    
+
+   $datos_grupo= $this->db->query("SELECT * FROM Grupo_Estudiante ge inner join Ciclo_escolar c on ge.Ciclo_escolar_id_ciclo_escolar=c.id_ciclo_escolar inner join Grupo g on g.id_grupo=ge.Grupo_id_grupo where ge.Estudiante_no_control='".$datos['Estudiante_no_control']."' AND g.estatus=1 group by Estudiante_no_control;")->row();
+
+   $examen_final=$this->db->query("select * from Grupo_Estudiante as ge inner join Grupo as g on ge.Grupo_id_grupo=g.id_grupo where estatus=1 and calificacion_final is not null and plantel='".$datos_grupo->plantel."'")->result();
+    $realizo_examen_final=(count( $examen_final)>0)? "si": "no";
+
+   $friae=$this->M_friae->id_friae($datos_grupo->id_grupo)[0]->folio;
+    
+    $valores = explode('-',$datos_grupo->fecha_inicio);
+                    $valores2 = explode('-',$datos_grupo->fecha_terminacion);
+                            
+                    $anio_inicio=$valores[0];
+                    $anio_terminacion=$valores2[0];
+                    
+                    $parametros_friae= array(
+                        'anio_inicio' => $anio_inicio,
+                        'anio_termino' => $anio_terminacion,
+                        'fecha_termino'=>$datos_grupo->fecha_terminacion,
+                        'semestre' =>$datos_grupo->semestre,
+                        'no_control'=>$datos_grupo->Estudiante_no_control,
+                        'id_friae'=>$friae,
+                        'periodo'=>$datos_grupo->periodo,
+                        'realizo_examen_final'=>$realizo_examen_final
+                    
+                        
+                    );
+                    $this->M_friae->actualizar((object)$parametros_friae);
+    
 
 
     $this->db->trans_complete();

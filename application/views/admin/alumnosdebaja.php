@@ -565,7 +565,7 @@ var form = document.getElementById("editar_datos_baja");
         Swal.fire({
             type: 'error',
             scrollbarPadding:false,
-            title: 'Ocurrió un error al modificar los datos.',
+            title: 'Ocurrió un error al eliminar los datos.',
             showConfirmButton: false,
             timer: 2500 
           });

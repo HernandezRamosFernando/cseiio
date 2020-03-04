@@ -23,6 +23,11 @@ class M_friae extends CI_Model {
        $adeudos_sin_regu_enero=$this->db->query("SELECT * FROM Grupo_Estudiante ge inner join Grupo g on g.id_grupo=ge.Grupo_id_grupo where g.semestre=1 and Estudiante_no_control='".$parametros->no_control."' and calificacion_final>0 and calificacion_final<=5 and calificacion_final IS NOT NULL and id_materia not in (SELECT id_materia FROM Regularizacion where fecha_calificacion<'".$parametros->anio_termino."-01-01' and Estudiante_no_control='".$parametros->no_control."' and calificacion>=6);")->result();
  
        $num_adeudos_fin_modulo=count($adeudos_sin_regu_enero);
+
+       foreach($adeudos_sin_regu_enero as $id){
+        $materias_adeudo_fin_modulo.=$id->id_materia.",";
+    }
+    $materias_adeudo_fin_modulo=trim($materias_adeudo_fin_modulo,',');
  
        if($num_adeudos_fin_modulo>0 && $num_adeudos_fin_modulo<=3){
           $situacion_fin_modulo='REINGRESO';// equivale a irregular
@@ -34,12 +39,10 @@ class M_friae extends CI_Model {
  
        if($num_adeudos_fin_modulo>=6){
           $situacion_fin_modulo='REPROBADO';// SIN DERECHO
+          $materias_adeudo_fin_modulo='';
        }
  
-       foreach($adeudos_sin_regu_enero as $id){
-          $materias_adeudo_fin_modulo.=$id->id_materia.",";
-      }
-      $materias_adeudo_fin_modulo=trim($materias_adeudo_fin_modulo,',');
+       
  
        
       $situacion_despues_regu='REINGRESO';
@@ -47,6 +50,11 @@ class M_friae extends CI_Model {
       $materias_adeudo_despues_regu='';
        $adeudos_despues_regu_enero=$this->db->query("SELECT * FROM Grupo_Estudiante ge inner join Grupo g on g.id_grupo=ge.Grupo_id_grupo where g.semestre=1 and Estudiante_no_control='".$parametros->no_control."' and calificacion_final>0 and calificacion_final<=5 and calificacion_final IS NOT NULL and id_materia not in (SELECT id_materia FROM Regularizacion where fecha_calificacion<'".$parametros->anio_termino."-02-01' and Estudiante_no_control='".$parametros->no_control."' and calificacion>=6);")->result();
        $num_adeudos_despues_regu=count($adeudos_despues_regu_enero);
+
+       foreach($adeudos_despues_regu_enero as $id){
+        $materias_adeudo_despues_regu.=$id->id_materia.",";
+    }
+    $materias_adeudo_despues_regu=trim($materias_adeudo_despues_regu,',');
  
        if($num_adeudos_despues_regu>0 && $num_adeudos_despues_regu<=3){
           $situacion_despues_regu='REINGRESO';// equivale a irregular
@@ -59,12 +67,10 @@ class M_friae extends CI_Model {
  
        if($num_adeudos_despues_regu>=6){
           $situacion_despues_regu='REPROBADO';// equivale a irregular
+          $materias_adeudo_despues_regu="";
        }
  
-       foreach($adeudos_despues_regu_enero as $id){
-          $materias_adeudo_despues_regu.=$id->id_materia.",";
-      }
-      $materias_adeudo_despues_regu=trim($materias_adeudo_despues_regu,',');
+      
  
       if($num_adeudos_fin_modulo==0){
         $situacion_despues_regu="";

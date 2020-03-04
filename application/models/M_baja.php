@@ -10,7 +10,7 @@ class M_baja extends CI_Model {
    public function eliminar_datos_baja($datos){
     
     $this->db->trans_start();
-    $this->db->update('Baja',$datos);
+    $this->db->query("delete from Baja where Estudiante_no_control='".$datos['Estudiante_no_control']."' and fecha='".$datos['fecha']."'");
 
     //rellenar calificaciones finales
     $materias = $this->M_reinscripcion->get_materias_cursando_estudiante_actual($datos['Estudiante_no_control']);//materias de cada estudiante
@@ -84,6 +84,13 @@ class M_baja extends CI_Model {
     $realizo_examen_final=(count( $examen_final)>0)? "si": "no";
 
    $friae=$this->M_friae->id_friae($datos_grupo->id_grupo)[0]->folio;
+
+   $datos_baja = array(
+    'baja' =>NULL,
+);
+      $this->db->where('Friae_folio',$friae);
+      $this->db->where('Estudiante_no_control',$datos_grupo->Estudiante_no_control);
+      $this->db->update('Friae_Estudiante',$datos_baja);
     
     $valores = explode('-',$datos_grupo->fecha_inicio);
                     $valores2 = explode('-',$datos_grupo->fecha_terminacion);
@@ -151,7 +158,7 @@ class M_baja extends CI_Model {
     $this->db->update('Baja',$datos);
 
     $folio = $this->db->query("select max(Friae_folio) as folio from Friae_Estudiante as a where a.Estudiante_no_control='".$no_control."'")->result()[0]->folio;
-   $this->db->query("update Friae_Estudiante set baja='".$datos['fecha']."', tipo_ingreso_fin_semestre='BAJA',adeudos_fin_semestre='', id_materia_adeudos_fin_semestre='' where Estudiante_no_control='".$no_control."' and Friae_folio=".$folio);
+   $this->db->query("update Friae_Estudiante set baja='".$datos['fecha']."', tipo_ingreso_fin_semestre='BAJA',adeudos_fin_semestre=0, id_materia_adeudos_fin_semestre='',adeudos_segunda_regularizacion=0,id_materia_adeudos_segunda_regularizacion='',tipo_ingreso_despues_regularizacion='BAJA' where Estudiante_no_control='".$no_control."' and Friae_folio=".$folio);
 
    $materias = $this->M_reinscripcion->get_materias_cursando_estudiante_actual($no_control);//materias de cada estudiante
             foreach($materias as $materia){

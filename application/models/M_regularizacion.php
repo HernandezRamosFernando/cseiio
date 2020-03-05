@@ -574,6 +574,10 @@ public function cerrar_regularizacion($plantel){
             }
             $materias_ids=trim($materias_ids,',');
 
+            if(sizeof($materias_debe)>=6){
+               $materias_ids='';
+            }
+
       $this->db->query("update Friae_Estudiante set tipo_ingreso_despues_regularizacion=if(adeudos_fin_semestre=0,'','".$estudiante->tipo_ingreso."') where Friae_folio=".$folio_friae." and Estudiante_no_control='".$estudiante->no_control."'");//-----------------------------------------------------------------------------------------------------------------------------------------------------------
       $this->db->query("update Friae_Estudiante set adeudos_segunda_regularizacion=".(sizeof($materias_debe)).",id_materia_adeudos_segunda_regularizacion='".$materias_ids."' where Friae_folio=".$folio_friae." and Estudiante_no_control='".$estudiante->no_control."'");
 

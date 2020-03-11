@@ -196,8 +196,8 @@
     }
     xhr.onload = function () {
       $('#div_carga').hide();
-      console.log(xhr.responseText.length);
-      if (xhr.responseText.length <= 2) {
+      //console.log("datos:"+parseInt(xhr.responseText.length));
+      if (xhr.response.trim() === "[]") {
         console.log("se puede generar matricula");
         var xhrmatricula = new XMLHttpRequest();
         xhrmatricula.open('GET', '<?php echo base_url();?>index.php/c_estudiante/generar_matricula?no_control=' + e.value, true);

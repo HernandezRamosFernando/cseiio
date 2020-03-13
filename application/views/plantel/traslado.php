@@ -310,23 +310,23 @@
                         validacion_resultado+="<p style='text-align:left;margin-left:30%'> - No puede realizar el proceso porque el alumno ha rebasado el límite de 12 semestres permitido por el Depto. de Control Escolar.</p>";
                       }
                       else{
-                          if(estudiante[0].tipo_ingreso=='SIN DERECHO'){
-                          validacion_resultado+="<p style='text-align:left;margin-left:30%'> - No puede realizar el proceso porque el alumno tiene estatus de "+estudiante[0].tipo_ingreso+".</p>";
+                        if(estudiante[0].tipo_ingreso!='DESERTOR'){
+                          validacion_resultado+="<p style='text-align:left;margin-left:30%'> - No puede realizar el proceso porque el alumno no tiene estatus de DESERTOR</p>";
 
                         }
 
-                        if(estudiante[0].tipo_ingreso=='PROBABLE REINCORPORADO'){
+                        /*if(estudiante[0].tipo_ingreso=='PROBABLE REINCORPORADO'){
                           validacion_resultado+="<p style='text-align:left;margin-left:30%'> - EL Encargado de Plantel del CCT "+estudiante[0].Plantel_cct_plantel+" debe primeramente incorporar al alumno, una vez efectuado el paso anterior, ya puede realizar el traslado.</p>";
 
-                        }
+                        }*/
 
                         if(estudiante[0].tipo_ingreso=='BAJA'){
-                          validacion_resultado+="<p style='text-align:left;margin-left:30%'> - El estatus actual del alumno es BAJA, por lo tanto el Encargado de Plantel del CCT "+estudiante[0].Plantel_cct_plantel+" debe marcar a este alumno como repetidor, una vez efectuado el paso anterior, ya puede realizar el traslado.</p>";
+                          validacion_resultado+="<p style='text-align:left;margin-left:30%'> - El estatus actual del alumno es BAJA, por lo tanto el Encargado de Plantel del CCT "+estudiante[0].Plantel_cct_plantel+" debe marcar a este alumno como REPETIDOR y posteriormente como DESERTOR</p>";
 
                         }
 
                         if(estudiante[0].tipo_ingreso=='REPROBADO'){
-                          validacion_resultado+="<p style='text-align:left;margin-left:30%'> - El estatus actual del alumno es REPROBADO, por lo tanto el Encargado de Plantel del CCT "+estudiante[0].Plantel_cct_plantel+" debe marcar a este alumno como repetidor, una vez efectuado el paso anterior, ya puede realizar el traslado.</p>";
+                          validacion_resultado+="<p style='text-align:left;margin-left:30%'> - El estatus actual del alumno es REPROBADO, por lo tanto el Encargado de Plantel del CCT "+estudiante[0].Plantel_cct_plantel+" debe marcar a este alumno como REPETIDOR y posteriormente como DESERTOR.</p>";
 
                         }
 

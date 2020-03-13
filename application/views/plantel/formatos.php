@@ -18,7 +18,7 @@
       <a class="list-group-item list-group-item-action" href="<?php echo base_url();?>formatos/credenciales.docx" download="Credenciales.docx">Credenciales</a>
       <a class="list-group-item list-group-item-action" href="<?php echo base_url();?>formatos/ficha_inscripcion.pdf" download="Ficha de Inscripcion.pdf">Ficha de inscripción</a>
       <a class="list-group-item list-group-item-action" href="<?php echo base_url();?>formatos/examen_regularizacion.docx" download="Formato de examen de regularización.docx">Formato de éxamen de regularización</a>
-      
+      <a class="list-group-item list-group-item-action" href="<?php echo base_url();?>formatos/solicitud_equivalencia.docx" download="solicitud_equivalencia.docx">Solicitud de equivalencia de estudios</a>
       <a class="list-group-item list-group-item-action" href="<?php echo base_url();?>formatos/primer_semestre.xlsx" download="primer_semestre.xlsx">Primer semestre.xls</a>
       <a class="list-group-item list-group-item-action" href="<?php echo base_url();?>formatos/segundo_semestre.xlsx" download="segundo_semestre.xlsx">Segundo semestre.xls</a>
       <a class="list-group-item list-group-item-action" href="<?php echo base_url();?>formatos/segundo_semestre_baja.xlsx" download="segundo_semestre_baja.xlsx">Segundo semestre baja.xls</a>

@@ -75,13 +75,13 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => '127.0.0.1',
+	'hostname' => '192.168.0.201',
 	//'username' => 'root',
 	//'password' => '',
 	//'hostname' => '127.0.0.1',
 	'username' => 'root',
-	'password' => '',
-	'database' => 'sise',
+	'password' => 'admin',
+	'database' => 'sise_matricula_grupo',
 	'dbdriver' => 'mysqli',
 	'dbport' => '3306',
 	'dbprefix' => '',

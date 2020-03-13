@@ -610,7 +610,7 @@ public function realizar_traslado_estudiante($no_control,
            if($tipo_ingreso!='DESERTOR' && $tipo_ingreso=='REINGRESO'){
 
             
-            $fecha_inscripcion_del_ciclo = $this->M_ciclo_escolar->fecha_inscripcion();
+           /* $fecha_inscripcion_del_ciclo = $this->M_ciclo_escolar->fecha_inscripcion();
                   $data = array(
                      'Estudiante_no_control' =>$no_control,
                      'motivo' => "SE CAMBIO A OTRO PLANTEL",
@@ -619,7 +619,7 @@ public function realizar_traslado_estudiante($no_control,
                      'grupo' => $grupo
                );
                
-               $this->db->insert('Desertor', $data);
+               $this->db->insert('Desertor', $data);*/
 
            }
            

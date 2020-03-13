@@ -13,7 +13,7 @@ class M_permisos_extemporaneo extends CI_Model {
 }
    
    public function permisos_cal_extemporaneo_plantel($plantel){
-    return $this->db->query("SELECT * from Permisos_extemporaneo where estatus=1 and curdate()>=fecha_inicio and curdate()<=fecha_fin and Plantel_cct_plantel='".$plantel."';")->result();
+    return $this->db->query("SELECT * from Permisos_extemporaneo where estatus=1 and curdate() between fecha_inicio and fecha_fin and Plantel_cct_plantel='".$plantel."'  limit 1;")->result();
 }
 
    function get_estudiantes_por_calificar_extemporaneo($id_grupo,$id_materia){

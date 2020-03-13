@@ -95,7 +95,7 @@ class M_permisos extends CI_Model {
 
 
    public function get_permiso_plantel($plantel){
-        return $this->db->query("select * from Permiso_calificacion where id_permiso=(select max(id_permiso) from Permiso_calificacion where Plantel_cct_plantel='".$plantel."') and curdate() between fecha_inicio and fecha_fin")->result();
+        return $this->db->query("select * from Permiso_calificacion where id_permiso=(select max(id_permiso) from Permiso_calificacion where Plantel_cct_plantel='".$plantel."' and estatus=0) and curdate() between fecha_inicio and fecha_fin")->result();
    }
 
 
@@ -112,6 +112,6 @@ class M_permisos extends CI_Model {
     }
 
     public function permisos_regularizacion_plantel($plantel){
-        return $this->db->query("select fecha_fin from Permiso_regularizacion where Plantel_cct_plantel='".$plantel."' and curdate() between fecha_inicio and fecha_fin limit 1")->result();
+        return $this->db->query("select fecha_fin from Permiso_regularizacion where Plantel_cct_plantel='".$plantel."' and estatus=1 and curdate() between fecha_inicio and fecha_fin limit 1")->result();
     }
 }

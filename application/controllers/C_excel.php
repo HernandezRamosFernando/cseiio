@@ -417,7 +417,20 @@ switch ($tipo_operacion_excel) {
 									);
 
 									
-									
+									$datos_calificacion_estudiante_update = array(
+										'primer_parcial' => $p1,
+										'segundo_parcial' => $p2,
+										'tercer_parcial' => $p3,
+										'examen_final' => $examen_final,
+										'calificacion_final' => $cal_final
+									);
+
+									$parametros_estudiante_update_cal = array(
+										'id_grupo' => strtoupper($id_grupo),
+										'no_control' => strtoupper($no_control),
+										'id_ciclo_escolar' =>$id_ciclo_escolar,
+										'id_materia' => strtoupper($clave)
+									);
 									  
 									
 									$existe_alumno_materia='';
@@ -440,6 +453,10 @@ switch ($tipo_operacion_excel) {
 											$this->M_friae->agregar_estudiante_friae_ciclos_anteriores((object)$datos_friae);
 										}
 										
+									}
+
+									else{
+										$this->M_grupo_estudiante->actualizar_calificaciones_ciclos_anteriores((object)$parametros_estudiante_update_cal,$datos_calificacion_estudiante_update);
 									}
 									
 									

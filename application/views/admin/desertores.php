@@ -112,9 +112,7 @@
             <div class="col-md-8">
               <div class="form-label-group">
                 <input class="form-control" required="required" placeholder="Fecha de deserción" type="date" name="fecha_desercion"
-                  id="fecha_inicio" style="color: #237087" min=<?php
-                echo date('Y-m-d');
-                ?>>
+                  id="fecha_inicio" style="color: #237087">
                 <label for="fecha_desercion" class="seltitulo">Fecha de deserción</label>
               </div>
             </div>

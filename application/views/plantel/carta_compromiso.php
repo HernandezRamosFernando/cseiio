@@ -286,7 +286,7 @@
       if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
         $('#div_carga').hide();
         //si se agregan las observaciones correctamente entonces se genera la carta compromiso
-        if (observaciones.responseText === "si") {
+        if (observaciones.responseText.trim() === "si") {
           var carta_compromiso = new XMLHttpRequest();
           carta_compromiso.open('GET', '<?php echo base_url();?>index.php/c_documentacion/generar_carta_compromiso?no_control=' + document.getElementById("no_control").value, true);
           carta_compromiso.responseType = "arraybuffer";

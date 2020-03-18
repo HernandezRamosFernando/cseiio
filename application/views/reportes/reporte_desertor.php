@@ -60,7 +60,7 @@ class MYPDF extends TCPDF {
         <br>
         <table border="1" cellpadding="3">
             <tr>
-            <td style="text-align: center;font-weight: bold">REPORTE DE BAJAS</td>
+            <td style="text-align: center;font-weight: bold">REPORTE DE DESERTORES</td>
             </tr>
         </table>
         

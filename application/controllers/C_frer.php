@@ -14,6 +14,41 @@ class C_frer extends CI_Controller {
         $this->load->model("M_configuracion");
     }
 
+    public function existe_frer(){
+        $plantel = $this->input->get('plantel');
+        $periodo = $this->input->get('periodo');
+
+        $mes_ano = explode('-',$periodo);
+
+        //echo $mes_ano[0];
+        //echo $mes_ano[1];
+        switch($mes_ano[0]){
+            case "01":
+            $datos['mes']="ENERO";
+            break;
+
+            case "05":
+            $datos['mes']="MAYO";
+            break;
+
+            case "07":
+            $datos['mes']="JULIO";
+            break;
+
+            case "10":
+            $datos['mes']="OCTUBRE";
+            break;
+        }
+
+        $folio_frer = $this->M_frer->verificar_folio_frer_periodo_plantel($plantel,$mes_ano[0],$mes_ano[1]);
+        if(isset($folio_frer[0]->id_frer)){
+            echo "si";
+        }
+        else{
+            echo "no";
+        }
+        
+    }
 
     function generar_frer_plantel_periodo(){
         $this->load->library('pdf');

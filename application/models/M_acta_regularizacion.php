@@ -28,9 +28,9 @@ class M_acta_regularizacion extends CI_Model {
 
    function estudiantes_sin_grupo_regularizacion_intermedia($mes,$ano,$plantel,$materia){
       return $this->db->query("select Estudiante_no_control as no_control,
-      e.nombre,e.primer_apellido,e.segundo_apellido,e.matricula,
+      e.nombre,e.primer_apellido,e.segundo_apellido,e.matricula,calificacion,
       (select concat(semestre,nombre_grupo) from Grupo_Estudiante as ge inner join Grupo as g on ge.Grupo_id_grupo=g.id_grupo where Estudiante_no_control=no_control and semestre=(select max(semestre) as semestre from Grupo_Estudiante as ge inner join Grupo as g on ge.Grupo_id_grupo=g.id_grupo where ge.Estudiante_no_control=no_control and calificacion_final is not null) and calificacion_final is not null limit 1) as ultimo_grupo
-       from (select Estudiante_no_control from Regularizacion where year(fecha_calificacion)=".$ano." and month(fecha_calificacion)=".$mes." and Plantel_cct_plantel='".$plantel."' and id_materia='".$materia."' and Estudiante_no_control not in 
+       from (select Estudiante_no_control,calificacion from Regularizacion where year(fecha_calificacion)=".$ano." and month(fecha_calificacion)=".$mes." and Plantel_cct_plantel='".$plantel."' and id_materia='".$materia."' and Estudiante_no_control not in 
       (select regularizaciones.Estudiante_no_control
        from (select Estudiante_no_control,fecha_calificacion from Regularizacion where year(fecha_calificacion)=".$ano." and month(fecha_calificacion)=".$mes." and Plantel_cct_plantel='".$plantel."' and id_materia='".$materia."') as regularizaciones inner join (select * from Grupo_Estudiante as ge inner join Ciclo_escolar as ce on ge.Ciclo_escolar_id_ciclo_escolar=ce.id_ciclo_escolar) as grupos on regularizaciones.Estudiante_no_control=grupos.Estudiante_no_control where regularizaciones.fecha_calificacion between grupos.fecha_inicio and date_add(grupos.fecha_terminacion,interval 20 day) group by regularizaciones.Estudiante_no_control)) as sin_grupo inner join Estudiante as e on e.no_control=sin_grupo.Estudiante_no_control order by ultimo_grupo,primer_apellido,segundo_apellido,nombre")->result();
    }

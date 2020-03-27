@@ -113,31 +113,57 @@
 
 function imprimir_frer(){
 
+  var xhr = new XMLHttpRequest();
   var plantel = document.getElementById("plantel").value;
 
-  let periodo_junto = document.getElementById("regularizaciones").value;
+let periodo_junto = document.getElementById("regularizaciones").value;
 
-  let periodo = periodo_junto.split("-");
+let periodo = periodo_junto.split("-");
 
-  switch(periodo[0]){
-    case "ENERO":
-    var mes = "1";
-    break;
+switch(periodo[0]){
+  case "ENERO":
+  var mes = "1";
+  break;
 
-    case "MAYO":
-    var mes = "5";
-    break;
+  case "MAYO":
+  var mes = "5";
+  break;
 
-    case "JULIO":
-    var mes = "7";
-    break;
+  case "JULIO":
+  var mes = "7";
+  break;
 
-    case "OCTUBRE":
-    var mes = "10";
-    break;
-  }
+  case "OCTUBRE":
+  var mes = "10";
+  break;
+}
 
-  let fecha = mes+"-"+periodo[1];
+let fecha = mes+"-"+periodo[1];
+
+      xhr.open('GET', '<?php echo base_url();?>index.php/c_frer/existe_frer?plantel='+plantel+'&periodo='+fecha, true);
+      xhr.onloadstart = function () {
+        $('#div_carga').show();
+      }
+      xhr.error = function () {
+        console.log("error de conexion");
+      }
+      xhr.onload = function () {
+        $('#div_carga').hide();
+        if (xhr.response.trim() === "si") {
+          window.open('<?php echo base_url();?>index.php/c_frer/generar_frer_plantel_periodo?plantel='+plantel+'&periodo='+fecha, '_blank');
+          
+        } 
+        else {
+          Swal.fire({
+            type: 'error',
+            text: 'Para visualizar formato FRER, primero cierre el periodo de regularización.'
+          });
+        }
+      };
+      xhr.send(null);
+
+
+ 
 
 
 
@@ -147,7 +173,7 @@ function imprimir_frer(){
 
 
 
-window.open('<?php echo base_url();?>index.php/c_frer/generar_frer_plantel_periodo?plantel='+plantel+'&periodo='+fecha, '_blank');
+
 
 }
 

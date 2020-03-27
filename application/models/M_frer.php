@@ -4,6 +4,9 @@ class M_frer extends CI_Model {
       parent::__construct();
    }
 
+   function verificar_folio_frer_periodo_plantel($plantel,$mes,$ano){
+      return $this->db->query("select max(id_frer) id_frer from Frer where month(fecha)=".$mes." and year(fecha)=".$ano." and Plantel_cct_plantel='".$plantel."'")->result();
+   }
 
 
    function folio_frer_periodo_plantel($plantel,$mes,$ano){

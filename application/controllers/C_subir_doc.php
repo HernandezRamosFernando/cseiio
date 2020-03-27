@@ -133,43 +133,23 @@ $no_control = $this->uri->segment(3);
         }
 
      $nombredocumento=$this->M_documentacion->get_nombre_archivo_documentacion($no_control,$iddocumento,$cct_plantel);
-	$file=$this->folder.$nombredocumento;
+    $file= base_url().'ims/'.$nombredocumento;
+    
+    
     //get the file extension
     $info = new SplFileInfo($nombredocumento);
     $contenType='';
-    //var_dump($info->getExtension());
+    $tipo=$info->getExtension();
 
-    switch ($info->getExtension()) {
-        case 'pdf':
-	        $contenType='Content-Type:application/pdf';
-	        $contentDisposition = 'inline';
-        break;
-        case 'png':
-	        $contenType='Content-Type: image/png';
-	        $contentDisposition = 'inline';
-        break;
-        case 'jpeg':
-        	$contenType='Content-Type: image/jpeg';
-	        $contentDisposition = 'inline';
-        break;
-        case 'jpg':
-        	$contenType='Content-Type: image/jpg';
-	        $contentDisposition = 'inline';
-            break;
-        default:
-            $contentDisposition = 'attachment';
-    }
-
-    if (file_exists($file)) {
-        header('Content-Description: File Transfer');
-        header($contenType);
-        // change inline to attachment if you want to download it instead
-        header('Content-Disposition: '.$contentDisposition.'; filename="'.basename($file).'"');
-        header('Expires: 0');
-        header('Cache-Control: must-revalidate');
-        header('Pragma: public');
-        header('Content-Length: ' . filesize($file));
-        readfile($file);
+    if (file_exists('./ims/'.$nombredocumento)) {
+    
+        if($tipo=='pdf'){
+            echo '<embed src="'.$file.'" type="application/pdf" width="100%" height="600px" />';
+        }
+        else{
+            echo '<img src="'.$file.'"/>';
+        }
+    
     }
     else echo "El archivo no existe, vuelva a cargar el archivo o consulte con el administrador del sistema";
 }

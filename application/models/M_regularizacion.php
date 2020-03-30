@@ -5,6 +5,38 @@ class M_regularizacion extends CI_Model {
       parent::__construct();
    }
 
+   public function para_frer_materias_debe_estudiante_periodo($mes,$ano,$no_control){
+      
+
+      return $this->db->query("select * from (select Estudiante_no_control, id_materia from Grupo_Estudiante as ge 
+      inner join 
+      Grupo as g on ge.Grupo_id_grupo=g.id_grupo
+      inner join Estudiante as e on ge.Estudiante_no_control=e.no_control
+      inner join Ciclo_escolar c on c.id_ciclo_escolar=ge.Ciclo_escolar_id_ciclo_escolar where  c.fecha_terminacion<='".$ano."-".$mes."-30' and calificacion_final<6 and calificacion_final is not null and no_control='".$no_control."' union
+      select Estudiante_no_control,Materia_id_materia as id_materia from Portabilidad_adeudos as pa
+      inner join 
+      Estudiante as e on pa.Estudiante_no_control=e.no_control
+      where calificacion<6 and no_control='".$no_control."') as a where concat(a.Estudiante_no_control,a.id_materia) 
+      not in (select concat(Estudiante_no_control,id_materia) 
+      from Regularizacion 
+      where Estudiante_no_control='".$no_control."' and fecha_calificacion<='".$ano."-".$mes."-30' and calificacion>=6 and estatus!=2)")->result();
+
+   }
+
+   public function para_frer_regularizaciones_plantel_periodo_sin_grupo($plantel,$mes,$ano){
+      
+
+      return $this->db->query("select nombre,no_control,semestre_en_curso,(select concat(semestre,nombre_grupo) from Grupo_Estudiante as ge inner join Grupo as g on ge.Grupo_id_grupo=g.id_grupo where Estudiante_no_control=e.no_control and semestre=(select max(semestre) as semestre from Grupo_Estudiante as ge inner join Grupo as g on ge.Grupo_id_grupo=g.id_grupo inner join Ciclo_escolar c on c.id_ciclo_escolar=ge.Ciclo_escolar_id_ciclo_escolar where  c.fecha_terminacion<='".$ano."-".$mes."-30' and ge.Estudiante_no_control=e.no_control and calificacion_final is not null)  and calificacion_final is not null limit 1) as ultimo_semestre_cursado from Estudiante as e where e.no_control not in (select distinct Estudiante_no_control from Grupo_Estudiante as ge inner join Grupo as g on ge.Grupo_id_grupo=g.id_grupo inner join Ciclo_escolar c on c.id_ciclo_escolar=ge.Ciclo_escolar_id_ciclo_escolar where g.plantel='".$plantel."' and '".$ano."-".$mes."-01' between fecha_inicio_inscripcion and fecha_terminacion) and e.no_control in (select Estudiante_no_control from Regularizacion r where calificacion is not null and month(fecha_calificacion)=".$mes." and year(fecha_calificacion)=".$ano." and Plantel_cct_plantel='".$plantel."') order by ultimo_semestre_cursado desc,e.primer_apellido,e.segundo_apellido,e.nombre")->result();
+
+   }
+
+   public function para_frer_regularizaciones_plantel_periodo_con_grupo($plantel,$mes,$ano){
+      
+
+      return $this->db->query("select nombre,no_control,semestre_en_curso,(select concat(semestre,nombre_grupo) from Grupo_Estudiante as ge inner join Grupo as g on ge.Grupo_id_grupo=g.id_grupo where Estudiante_no_control=e.no_control and semestre=(select max(semestre) as semestre from Grupo_Estudiante as ge inner join Grupo as g on ge.Grupo_id_grupo=g.id_grupo inner join Ciclo_escolar c on c.id_ciclo_escolar=ge.Ciclo_escolar_id_ciclo_escolar where  c.fecha_terminacion<='".$ano."-".$mes."-30' and ge.Estudiante_no_control=e.no_control and calificacion_final is not null)  and calificacion_final is not null limit 1) as ultimo_semestre_cursado from Estudiante as e where e.no_control in (select distinct Estudiante_no_control from Grupo_Estudiante as ge inner join Grupo as g on ge.Grupo_id_grupo=g.id_grupo inner join Ciclo_escolar c on c.id_ciclo_escolar=ge.Ciclo_escolar_id_ciclo_escolar where g.plantel='".$plantel."' and '".$ano."-".$mes."-01' between fecha_inicio_inscripcion and fecha_terminacion) and e.no_control in (select Estudiante_no_control from Regularizacion r where calificacion is not null and month(fecha_calificacion)=".$mes." and year(fecha_calificacion)=".$ano." and Plantel_cct_plantel='".$plantel."') order by ultimo_semestre_cursado desc,e.primer_apellido,e.segundo_apellido,e.nombre")->result();
+
+   }
+
    public function modificar_datos_regularizacion($parametros_regu,$parametros_actualizar){
       $this->db->trans_start();
 

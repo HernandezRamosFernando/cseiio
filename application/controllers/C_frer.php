@@ -94,9 +94,9 @@ class C_frer extends CI_Controller {
         $datos['encabezado'] = $this->M_frer->datos_plantel_frer($plantel);
 
         //solo numero de control y semestre regresa
-       $datos ['regularizaciones_sin_grupo'] = $this->M_regularizacion->regularizaciones_plantel_periodo_sin_grupo($plantel,$mes_ano[0],$mes_ano[1]);
+       $datos ['regularizaciones_sin_grupo'] = $this->M_regularizacion->para_frer_regularizaciones_plantel_periodo_sin_grupo($plantel,$mes_ano[0],$mes_ano[1]);
        //solo numero de control y semestre regresa
-       $datos ['regularizaciones_con_grupo'] = $this->M_regularizacion->regularizaciones_plantel_periodo_con_grupo($plantel,$mes_ano[0],$mes_ano[1]);
+       $datos ['regularizaciones_con_grupo'] = $this->M_regularizacion->para_frer_regularizaciones_plantel_periodo_con_grupo($plantel,$mes_ano[0],$mes_ano[1]);
        //$datos ['grupo_anterior_regularizaciones_con_grupo']= array();
        //$datos ['grupo_anterior_regularizaciones_sin_grupo']=array();
 
@@ -111,7 +111,9 @@ class C_frer extends CI_Controller {
             $datos ['datos_estudiantes_con_grupo'][$contador] = $this->M_frer->datos_estudiante($regularizacion->no_control);
             //regresa los datos del ferer
             $datos ['datos_frer_estudiante_con_grupo'][$contador] = $this->M_frer->datos_frer_estudiante($folio_frer,$regularizacion->no_control);
-            $datos ['materias_debe_estudiante_con_grupo'][$contador] = $this->M_regularizacion->materias_debe_estudiante_actualmente($regularizacion->no_control);
+            $datos ['materias_debe_estudiante_con_grupo'][$contador] = $this->M_regularizacion->para_frer_materias_debe_estudiante_periodo($mes_ano[0],$mes_ano[1],$regularizacion->no_control);
+            
+
             $contador+=1;
 
             
@@ -123,7 +125,8 @@ class C_frer extends CI_Controller {
             $datos ['materias_regularizadas_sin_grupo'][$contador] = $this->M_regularizacion->regularizacion_estudiante_periodo($regularizacion->no_control,$mes_ano[0],$mes_ano[1]);
             $datos ['datos_estudiantes_sin_grupo'][$contador] = $this->M_frer->datos_estudiante($regularizacion->no_control);
             $datos ['datos_frer_estudiante_sin_grupo'][$contador] = $this->M_frer->datos_frer_estudiante($folio_frer,$regularizacion->no_control);
-            $datos ['materias_debe_estudiante_sin_grupo'][$contador] = $this->M_regularizacion->materias_debe_estudiante_actualmente($regularizacion->no_control);
+            $datos ['materias_debe_estudiante_sin_grupo'][$contador] = $this->M_regularizacion->para_frer_materias_debe_estudiante_periodo($mes_ano[0],$mes_ano[1],$regularizacion->no_control);
+            
             $contador+=1;
         }
         

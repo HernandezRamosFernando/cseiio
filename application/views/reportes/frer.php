@@ -630,6 +630,8 @@ function nombre_grupo($valor){
             $adeudos+=1;
             }
         }
+        
+        $claves=trim ($claves,',');
 
         $ultimo_semestre="";
         $ultimo_grupo="";
@@ -648,7 +650,7 @@ function nombre_grupo($valor){
         <td style="width:38px;text-align:center" >'.(intval($datos_frer_estudiante_con_grupo[$contador-1]->numero_adeudos)+$aprobadas_sumar).'</td>
         '.$claves_califiaciones.'
         <td style="width:50px;text-align:center">'.($adeudos>0?'2':'1').'</td>
-        <td style="width:165px">'.$claves.'</td>
+        <td style="width:165px">'.$datos_frer_estudiante_con_grupo[$contador-1]->observaciones.'</td>
         </tr>';
         $contador+=1;
         $foliador+=1;
@@ -711,12 +713,19 @@ function nombre_grupo($valor){
             }
         }
         
-            
+        $claves=trim ($claves,',');
+
+        $ultimo_semestre="";
+        $ultimo_grupo="";
+
+        $cadena = explode("-",$datos_frer_estudiante_sin_grupo[$contador-1]->ultimo_semestre_cursado);
+        $ultimo_semestre=$cadena[0]; // porción semestre
+        $ultimo_grupo=$cadena[1]; // porción grupo
 
 
         $html2.='<tr>
         <td style="width:30px;text-align:center" height="15.5">'.$foliador.'</td>
-        <td style="width:85px">'.$datos_frer_estudiante_sin_grupo[$contador-1]->ultimo_semestre_cursado.'</td>
+        <td style="width:85px">'.nombre_grupo($ultimo_semestre).' "'.$ultimo_grupo.'"</td>
         <td style="width:50px">'.$datos_estudiantes_sin_grupo[$contador-1]->matricula.'</td>
         <td style="width:100px">'.$datos_estudiantes_sin_grupo[$contador-1]->primer_apellido.'</td>
         <td style="width:100px">'.$datos_estudiantes_sin_grupo[$contador-1]->segundo_apellido.'</td>
@@ -724,7 +733,7 @@ function nombre_grupo($valor){
         <td style="width:38px;text-align:center">'.(intval($datos_frer_estudiante_sin_grupo[$contador-1]->numero_adeudos)+$aprobadas_sumar).'</td>
         '.$claves_califiaciones.'
         <td style="width:50px;text-align:center">'.($adeudos>0?'2':'1').'</td>
-        <td style="width:165px">'.$claves.'</td>
+        <td style="width:165px">'.$datos_frer_estudiante_sin_grupo[$contador-1]->observaciones.'</td>
         </tr>';
         $contador+=1;
         $foliador+=1;

@@ -375,6 +375,10 @@ class M_friae extends CI_Model {
                     );
                     $this->actualizar((object)$parametros_friae);
             }
+            else{
+                
+                $this->db->query("update Friae_Estudiante set tipo_ingreso_fin_semestre='BAJA',adeudos_fin_semestre=0, id_materia_adeudos_fin_semestre='',adeudos_segunda_regularizacion=0,id_materia_adeudos_segunda_regularizacion='',tipo_ingreso_despues_regularizacion='BAJA' where Estudiante_no_control='".$e->Estudiante_no_control."' and Friae_folio=".$friae);
+            }
 
         }
 

@@ -1677,7 +1677,7 @@ function insertar_secundaria() {
       document.getElementById("aspirante_etnia").value=datos.estudiante[0].etnia;
       //fin datos lengua materna
       //secundaria
-      if (datos.estudiante[0].tipo_ingreso === "PORTABILIDAD") {
+      if (datos.estudiante[0].semestre_ingreso >1) {
         document.getElementById("bachillerato_oculto").style.display = "";
         cct_secundaria=datos.escuela_procedencia[0];
 

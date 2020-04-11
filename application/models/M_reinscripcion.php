@@ -7,6 +7,9 @@ class M_reinscripcion extends CI_Model {
       $this->load->model("M_regularizacion");
    }
 
+   public function estudiantes_a_reinscribir_sin_grupos_activos(){
+    return $this->db->query("select no_control,estatus,tipo_ingreso from Estudiante where no_control not in (select no_control from Estudiante as e inner join (select distinct Estudiante_no_control from Grupo_Estudiante as ge inner join Grupo as g on ge.Grupo_id_grupo=g.id_grupo  where g.estatus=1) as g on e.no_control=g.Estudiante_no_control) and semestre<12 and tipo_ingreso='REINGRESO';")->result();
+}
 
    public function estudiantes_en_grupos_activos(){
        return $this->db->query("select no_control,estatus,tipo_ingreso from Estudiante as e inner join (select distinct Estudiante_no_control from Grupo_Estudiante as ge inner join Grupo as g on ge.Grupo_id_grupo=g.id_grupo  where g.estatus=1) as g on e.no_control=g.Estudiante_no_control")->result();
@@ -69,7 +72,7 @@ class M_reinscripcion extends CI_Model {
                 }
                 //$promedio_final = round($promedio_final,0,PHP_ROUND_HALF_UP);
     
-                $this->db->query("update Grupo_Estudiante set calificacion_final=".$promedio_final." where id_materia='".$materia->id_materia."' and Estudiante_no_control='".$estudiante->Estudiante_no_control."'");//agrega las calificaciones finales a cada materia
+                $this->db->query("update Grupo_Estudiante inner join Grupo g on g.id_grupo=Grupo_Estudiante.Grupo_id_grupo set calificacion_final=".$promedio_final." where id_materia='".$materia->id_materia."' and Estudiante_no_control='".$estudiante->Estudiante_no_control."' and g.estatus=1");//agrega las calificaciones finales a cada materia
             }
 
             //estatus despues de haber calificado (calcular calificacion final)
@@ -109,7 +112,7 @@ class M_reinscripcion extends CI_Model {
             $materias = $this->get_materias_cursando_estudiante_actual($estudiante->Estudiante_no_control);//materias de cada estudiante
             foreach($materias as $materia){
     
-                $this->db->query("update Grupo_Estudiante set calificacion_final=0 where id_materia='".$materia->id_materia."' and Estudiante_no_control='".$estudiante->Estudiante_no_control."'");//agrega las calificaciones finales a cada materia
+                $this->db->query("update Grupo_Estudiante inner join Grupo g on g.id_grupo=Grupo_Estudiante.Grupo_id_grupo set calificacion_final=0 where id_materia='".$materia->id_materia."' and Estudiante_no_control='".$estudiante->Estudiante_no_control."' and g.estatus=1");//agrega las calificaciones finales a cada materia
             }
             $this->db->query("update Friae_Estudiante set tipo_ingreso_fin_semestre='BAJA' where Estudiante_no_control='".$estudiante->Estudiante_no_control."' and Friae_folio=".$folio);
         }
@@ -241,6 +244,19 @@ class M_reinscripcion extends CI_Model {
             
 
         }
+
+        }
+
+        $estudiantes_sin_grupos = $this->estudiantes_a_reinscribir_sin_grupos_activos();
+
+        foreach($estudiantes_sin_grupos as $estudiante){
+            $materias_debe = $this->M_regularizacion->materias_debe_estudiante_actualmente($estudiante->no_control);
+
+            if(sizeof($materias_debe)>=0 && sizeof($materias_debe)<=3){
+
+                $datos_semestre=$this->db->query("select max(semestre)+1 as semestre from Grupo_Estudiante ge inner join Grupo g on ge.Grupo_id_grupo=g.id_grupo where Estudiante_no_control='".$estudiante->no_control."' and calificacion_final is not null and calificacion_final>0;")->row();
+                $this->db->query("update Estudiante set semestre_en_curso=".$datos_semestre->semestre." where no_control='".$estudiante->no_control."'");
+            }
 
         }
 

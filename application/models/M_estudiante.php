@@ -536,8 +536,12 @@ $this->db->insert('Desertor', $data);
    $materias = $this->M_reinscripcion->get_materias_cursando_estudiante_actual($datos->no_control);//materias de cada estudiante
             foreach($materias as $materia){
     
-                $this->db->query("update Grupo_Estudiante set calificacion_final=0 where id_materia='".$materia->id_materia."' and Estudiante_no_control='".$datos->no_control."'");//agrega las calificaciones finales a cada materia
+                $this->db->query("update Grupo_Estudiante inner join Grupo g on g.id_grupo=Grupo_Estudiante.Grupo_id_grupo set calificacion_final=0 where id_materia='".$materia->id_materia."' and Estudiante_no_control='".$datos->no_control."' and g.estatus=1");//agrega las calificaciones finales a cada materia
             }
+
+            foreach($materias as $regu_materia){
+               $this->db->query("update Regularizacion set estatus=2 where id_materia='".$regu_materia->id_materia."' and Estudiante_no_control='".$datos->no_control."'");
+       }
 
    $this->db->trans_complete();
    

@@ -842,6 +842,7 @@ if($parametros->periodo=="AGOSTO-ENERO"){
          $materias_adeudo_fin_modulo.=$id->id_materia.",";
      }
 
+     $materias_adeudo_fin_modulo=trim($materias_adeudo_fin_modulo,',');
       
      $situacion_despues_regu='REINGRESO';
      $num_adeudos_despues_regu=0;
@@ -866,9 +867,11 @@ if($parametros->periodo=="AGOSTO-ENERO"){
          $materias_adeudo_despues_regu.=$id->id_materia.",";
      }
 
-
+     $materias_adeudo_despues_regu=trim($materias_adeudo_despues_regu,',');
      
-      
+     if($num_adeudos_fin_modulo==0){
+      $situacion_despues_regu="";
+    }
 
      $datos = array(
       'tipo_ingreso_fin_semestre' => $situacion_fin_modulo,
@@ -1023,6 +1026,8 @@ if($parametros->periodo=="FEBRERO-JULIO"){
       $materias_adeudo_inicio_modulo.=$id->id_materia.",";
   }
 
+  $materias_adeudo_inicio_modulo=trim($materias_adeudo_inicio_modulo,',');
+
   $adeudos_con_regu_mayo=$this->db->query("SELECT * FROM Grupo_Estudiante ge inner join Grupo g on g.id_grupo=ge.Grupo_id_grupo where g.semestre<=".$semestre_anterior." and Estudiante_no_control='".$parametros->no_control."' and calificacion_final>0 and calificacion_final<=5 and calificacion_final IS NOT NULL and id_materia not in (SELECT id_materia FROM Regularizacion where fecha_calificacion<'".$parametros->anio_inicio."-06-01' and Estudiante_no_control='".$parametros->no_control."' and calificacion>=6);")->result();
 
   $num_adeudos_regu_mayo=count($adeudos_con_regu_mayo);
@@ -1030,7 +1035,7 @@ if($parametros->periodo=="FEBRERO-JULIO"){
   foreach($adeudos_con_regu_mayo as $id){
    $materias_adeudo_regu_mayo.=$id->id_materia.",";
 }
-
+$materias_adeudo_regu_mayo=trim($materias_adeudo_regu_mayo,',');
 
 $estatus_final='REINGRESO';
    $situacion_fin_modulo='REINGRESO';
@@ -1048,6 +1053,7 @@ $estatus_final='REINGRESO';
    foreach($adeudos_sin_regu_julio as $id){
       $materias_adeudo_fin_modulo.=$id->id_materia.",";
   }
+  $materias_adeudo_fin_modulo=trim($materias_adeudo_fin_modulo,',');
 
   $adeudos_con_regu_julio=$this->db->query("SELECT * FROM Grupo_Estudiante ge inner join Grupo g on g.id_grupo=ge.Grupo_id_grupo where g.semestre<=".$parametros->semestre." and Estudiante_no_control='".$parametros->no_control."' and calificacion_final>0 and calificacion_final<=5 and calificacion_final IS NOT NULL and id_materia not in (SELECT id_materia FROM Regularizacion where fecha_calificacion<'".$parametros->anio_termino."-08-01' and Estudiante_no_control='".$parametros->no_control."' and calificacion>=6);")->result();
 
@@ -1056,6 +1062,9 @@ $estatus_final='REINGRESO';
   foreach($adeudos_con_regu_julio as $id){
    $materias_adeudo_regu_julio.=$id->id_materia.",";
 }
+
+$materias_adeudo_regu_julio=trim($materias_adeudo_regu_julio,',');
+
 
 if($num_adeudos_fin_modulo>0 && $num_adeudos_fin_modulo<=3){
    $situacion_fin_modulo='REINGRESO';// equivale a irregular
@@ -1082,7 +1091,9 @@ if($num_adeudos_fin_modulo>0 && $num_adeudos_fin_modulo<=3){
          $estatus_final='REPROBADO';// SIN DERECHO
       }
 
-
+      if($num_adeudos_fin_modulo==0){
+         $estatus_final="";
+       }
 
       $datos = array(
          'tipo_ingreso_inscripcion' => $tipo_ingreso_modulo,
@@ -1187,7 +1198,7 @@ if(count($datos_grupo)>0){
    foreach($datos_adeudos_estudiante as $id){
       $materias_adeudos_despues_de_regu.=$id->id_materia.",";
   }
-
+  $materias_adeudos_despues_de_regu=trim($materias_adeudos_despues_de_regu,',');
   if($num_adeudos_regu>0){
       $estatus_alumno='IRREGULAR';
   }

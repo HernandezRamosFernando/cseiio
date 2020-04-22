@@ -565,6 +565,67 @@ switch ($tipo_operacion_excel) {
 		}
         
         break;//Termina caso desertor
+		
+		case 'TRASLADO'://Empieza caso traslado
+			
+			$this->form_validation->set_rules('fileURL','Upload File', 'callback_checkValidateTraslado');
+				if($this->form_validation->run() != false){
+					$indiceHoja = 0;
+					
+                  /*  $calificaciones_friae = $spreadsheet->getSheet($indiceHoja);
+                   // echo "<h3>Vamos en la hoja con índice $indiceHoja</h3>";
+                    
+                    # Lo que hay en B2
+                    $celda = $calificaciones_friae->getCell('B2');
+                    # El valor, así como está en el documento
+                    $plantel_cct = trim($celda->getValue());
+
+                    $nombre_ciclo_escolar= trim($calificaciones_friae->getCell('B3')->getValue());
+
+                    $periodo= trim($calificaciones_friae->getCell('B4')->getValue());
+
+                    $modulo= trim($calificaciones_friae->getCell('B5')->getValue());
+
+					$grupo= trim($calificaciones_friae->getCell('B6')->getValue());
+
+					$no_control= trim($calificaciones_friae->getCell('A10')->getValue());
+
+					$matricula= trim($calificaciones_friae->getCell('B10')->getValue());
+
+					$tipo_operacion='';
+					$tipo_operacion= trim($calificaciones_friae->getCell('B1')->getValue());
+
+
+					$anio_baja= trim($calificaciones_friae->getCell('C10')->getFormattedValue());
+					$mes_baja= trim($calificaciones_friae->getCell('D10')->getFormattedValue());
+					$dia_baja= trim($calificaciones_friae->getCell('E10')->getFormattedValue());
+
+
+					$fecha_baja="";
+
+					if($anio_baja!='' && $mes_baja!='' && $dia_baja!=''){
+						$fecha_baja=$anio_baja."-".$this->num_mes($mes_baja)."-".$dia_baja;
+					}
+					
+
+
+
+					
+
+					
+
+					$motivo_baja= trim($calificaciones_friae->getCell('F10')->getValue());
+					$num_adeudos=0;
+			$num_adeudos=count($this->M_regularizacion->materias_debe_estudiante_actualmente($no_control));
+		
+		$this->M_regularizacion->actualizar_estatus_estudiante($no_control,$num_adeudos,$modulo,$plantel_cct,$matricula,$fecha_baja,$motivo_baja,$tipo_operacion_excel,$grupo);*/
+		
+		
+		$this->session->set_flashdata('msg_exito', 'Los datos del alumno <span style="font-weight:bold">TRASLADO</span> se han agregado al sistema correctamente, para corroborar verique en el reporte KARDEX.');
+		}
+        
+        break;//Termina caso traslado
+		
     case 'BAJA': //Empieza caso Baja
 			$this->form_validation->set_rules('fileURL','Upload File', 'callback_checkValidateBaja');
 		if($this->form_validation->run() != false){
@@ -1785,6 +1846,107 @@ $this->session->set_flashdata('msg_exito', 'Los datos del alumno se han agregado
 					if($resultado_error!=""){
 						$resultado_error="<span style='font-weight:bold'>ERRORES DE PLANTILLA DESERTOR</span><BR>".$resultado_error;
 						$this->form_validation->set_message('checkValidateDesertor',$resultado_error);
+						return false;
+
+					 }
+					 else{
+						return true;
+					 }
+
+	}
+	
+	public function checkValidateTraslado($spreadsheet) {
+		$indiceHoja = 0;
+                    $plantilla_traslado = $this->get_archivo()->getSheet($indiceHoja);
+                   // echo "<h3>Vamos en la hoja con índice $indiceHoja</h3>";
+                    
+                    # Lo que hay en B2
+                    $celda = $plantilla_traslado->getCell('B2');
+                    # El valor, así como está en el documento
+                    $plantel_cct_origen = trim($celda->getValue());
+					$nombre_ciclo_escolar= trim($plantilla_traslado->getCell('B3')->getValue());
+					$periodo= trim($plantilla_traslado->getCell('B4')->getValue());
+					$plantel_cct_destino = trim($plantilla_traslado->getCell('B5')->getValue());
+					$no_control= trim($plantilla_traslado->getCell('A9')->getValue());
+					$matricula= trim($plantilla_traslado->getCell('B9')->getValue());
+					$motivo_traslado= trim($plantilla_traslado->getCell('F9')->getValue());
+					
+					$anio_traslado= trim($plantilla_traslado->getCell('C9')->getValue());
+					$mes_traslado= trim($plantilla_traslado->getCell('D9')->getValue());
+					$dia_traslado= trim($plantilla_traslado->getCell('E9')->getValue());
+					$resultado_error='';
+					
+					if($matricula==''){
+						$resultado_error.="<li>No ha ingresado la matricula.</li>";
+					}
+					else{
+						if(strlen($matricula)!=7){
+							$resultado_error.="<li>La matricula no cumple con los criterios establecidos por el Depto. de Control Escolar.</li>";
+						}
+					}
+						
+						if(trim($anio_traslado)!='' && trim($mes_traslado)!='' && trim($dia_traslado)!=''){
+						 if(!$this->validar_fecha($anio_traslado,$mes_traslado,$dia_traslado)){
+								$resultado_error.="<li>El formato de fecha de traslado no es valida.</li>";
+						 }
+
+					}
+					else{
+						$resultado_error.="<li>El formato de fecha de traslado no es valida o se encuentra vacia</li>";
+					}
+					
+					
+					if($motivo_traslado==''){
+						$resultado_error.="<li>No ha seleccionado un motivo de traslado</li>";
+					}
+					
+					if($plantel_cct_origen==""){
+							$resultado_error.="<li>No ha seleccionado CCT de Plantel de origen.</li>";  
+					  }
+
+					  else{
+						  if(empty($this->M_plantel->get_plantel($plantel_cct_origen))){
+							$resultado_error.="<li>CCT de Plantel de origen incorrecto, vuelva a seleccionar.</li>";
+						  }
+					  }
+					  
+					 if($plantel_cct_destino==""){
+							$resultado_error.="<li>No ha seleccionado CCT de Plantel de destino.</li>";  
+					  }
+
+					  else{
+						  if(empty($this->M_plantel->get_plantel($plantel_cct_destino))){
+							$resultado_error.="<li>CCT de Plantel de destino incorrecto, vuelva a seleccionar.</li>";
+						  }
+					  }
+					  
+					if($periodo==""){
+						$resultado_error.="<li>No ha seleccionado un periodo.</li>";  
+						  }
+						  
+						  else{
+							  if(trim($periodo)!='FEBRERO-JULIO' && trim($periodo)!='AGOSTO-ENERO'){
+								$resultado_error.="<li>Seleccione un periodo valido.</li>";
+							  }
+						  }
+					
+					
+					if($nombre_ciclo_escolar==""){
+							$resultado_error.="<li>No ha seleccionado el ciclo escolar.</li>"; 
+
+					  }
+					  else{
+							if(empty($this->M_ciclo_escolar->existe_ciclo_escolar_x_periodo_x_nombre($periodo,$nombre_ciclo_escolar))){
+								$resultado_error.="<li>El ciclo escolar seleccionado no se encuentra dado de alta en el sistema, consulte al Depto. de Control Escolar</li>";
+								
+							}
+					  }
+
+					  
+					///////////////////////////////////////////////TERMINA VALIDACIÓN DE DATOS ////////////////////////////
+					if($resultado_error!=""){
+						$resultado_error="<span style='font-weight:bold'>ERRORES DE PLANTILLA TRASLADO</span><BR>".$resultado_error;
+						$this->form_validation->set_message('checkValidateTraslado',$resultado_error);
 						return false;
 
 					 }

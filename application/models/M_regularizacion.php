@@ -909,6 +909,8 @@ if($parametros->periodo=="AGOSTO-ENERO"){
          $materias_adeudo_inicio_modulo.=$id->id_materia.",";
      }
 
+     $materias_adeudo_inicio_modulo=trim($materias_adeudo_inicio_modulo,",");
+
      $adeudos_con_regu_octubre=$this->db->query("SELECT * FROM Grupo_Estudiante ge inner join Grupo g on g.id_grupo=ge.Grupo_id_grupo where g.semestre<=".$semestre_anterior." and Estudiante_no_control='".$parametros->no_control."' and calificacion_final>0 and calificacion_final<=5 and calificacion_final IS NOT NULL and id_materia not in (SELECT id_materia FROM Regularizacion where fecha_calificacion<'".$parametros->anio_inicio."-11-01' and Estudiante_no_control='".$parametros->no_control."' and calificacion>=6);")->result();
 
      $num_adeudos_regu_octubre=count($adeudos_con_regu_octubre);
@@ -917,7 +919,7 @@ if($parametros->periodo=="AGOSTO-ENERO"){
       $materias_adeudo_regu_octubre.=$id->id_materia.",";
   }
 
-
+      $materias_adeudo_regu_octubre=trim($materias_adeudo_regu_octubre,",");
   $estatus_final='REINGRESO';
       $situacion_fin_modulo='REINGRESO';
       $num_adeudos_fin_modulo=0;
@@ -934,7 +936,7 @@ if($parametros->periodo=="AGOSTO-ENERO"){
       foreach($adeudos_sin_regu_enero as $id){
          $materias_adeudo_fin_modulo.=$id->id_materia.",";
      }
-
+     $materias_adeudo_fin_modulo=trim($materias_adeudo_fin_modulo,",");
      $adeudos_con_regu_enero=$this->db->query("SELECT * FROM Grupo_Estudiante ge inner join Grupo g on g.id_grupo=ge.Grupo_id_grupo where g.semestre<=".$parametros->semestre." and Estudiante_no_control='".$parametros->no_control."' and calificacion_final>0 and calificacion_final<=5 and calificacion_final IS NOT NULL and id_materia not in (SELECT id_materia FROM Regularizacion where fecha_calificacion<'".$parametros->anio_termino."-02-01' and Estudiante_no_control='".$parametros->no_control."' and calificacion>=6);")->result();
 
      $num_adeudos_regu_enero=count($adeudos_con_regu_enero);
@@ -942,7 +944,7 @@ if($parametros->periodo=="AGOSTO-ENERO"){
      foreach($adeudos_con_regu_enero as $id){
       $materias_adeudo_regu_enero.=$id->id_materia.",";
   }
-
+  $materias_adeudo_regu_enero=trim($materias_adeudo_regu_enero,",");
    if($num_adeudos_fin_modulo>0 && $num_adeudos_fin_modulo<=3){
       $situacion_fin_modulo='REINGRESO';// equivale a irregular
       }
@@ -953,6 +955,7 @@ if($parametros->periodo=="AGOSTO-ENERO"){
 
       if($num_adeudos_fin_modulo>=6){
          $situacion_fin_modulo='REPROBADO';// SIN DERECHO
+         $materias_adeudo_fin_modulo='';
       }
 
 
@@ -966,8 +969,11 @@ if($parametros->periodo=="AGOSTO-ENERO"){
    
          if($num_adeudos_regu_enero>=6){
             $estatus_final='REPROBADO';// SIN DERECHO
+            $materias_adeudo_regu_enero="";
          }
-
+         if($num_adeudos_fin_modulo==0){
+            $estatus_final="";
+          }
 
 
         $datos = array(

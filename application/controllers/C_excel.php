@@ -571,57 +571,40 @@ switch ($tipo_operacion_excel) {
 			$this->form_validation->set_rules('fileURL','Upload File', 'callback_checkValidateTraslado');
 				if($this->form_validation->run() != false){
 					$indiceHoja = 0;
-					
-                  /*  $calificaciones_friae = $spreadsheet->getSheet($indiceHoja);
+                    $plantilla_traslado = $this->get_archivo()->getSheet($indiceHoja);
                    // echo "<h3>Vamos en la hoja con índice $indiceHoja</h3>";
                     
                     # Lo que hay en B2
-                    $celda = $calificaciones_friae->getCell('B2');
+                    $celda = $plantilla_traslado->getCell('B2');
                     # El valor, así como está en el documento
-                    $plantel_cct = trim($celda->getValue());
+					$plantel_cct_origen = trim($celda->getValue());
+					$tipo_operacion_excel= trim($plantilla_traslado->getCell('B1')->getValue());
+					$nombre_ciclo_escolar= trim($plantilla_traslado->getCell('B3')->getValue());
+					$periodo= trim($plantilla_traslado->getCell('B4')->getValue());
+					$plantel_cct_destino = trim($plantilla_traslado->getCell('B5')->getValue());
+					$no_control= trim($plantilla_traslado->getCell('A9')->getValue());
+					$matricula= trim($plantilla_traslado->getCell('B9')->getValue());
+					$motivo_traslado= trim($plantilla_traslado->getCell('F9')->getValue());
+					
+					$anio_traslado= trim($plantilla_traslado->getCell('C9')->getValue());
+					$mes_traslado= trim($plantilla_traslado->getCell('D9')->getValue());
+					$dia_traslado= trim($plantilla_traslado->getCell('E9')->getValue());
 
-                    $nombre_ciclo_escolar= trim($calificaciones_friae->getCell('B3')->getValue());
+					$fecha_traslado="";
 
-                    $periodo= trim($calificaciones_friae->getCell('B4')->getValue());
-
-                    $modulo= trim($calificaciones_friae->getCell('B5')->getValue());
-
-					$grupo= trim($calificaciones_friae->getCell('B6')->getValue());
-
-					$no_control= trim($calificaciones_friae->getCell('A10')->getValue());
-
-					$matricula= trim($calificaciones_friae->getCell('B10')->getValue());
-
-					$tipo_operacion='';
-					$tipo_operacion= trim($calificaciones_friae->getCell('B1')->getValue());
-
-
-					$anio_baja= trim($calificaciones_friae->getCell('C10')->getFormattedValue());
-					$mes_baja= trim($calificaciones_friae->getCell('D10')->getFormattedValue());
-					$dia_baja= trim($calificaciones_friae->getCell('E10')->getFormattedValue());
-
-
-					$fecha_baja="";
-
-					if($anio_baja!='' && $mes_baja!='' && $dia_baja!=''){
-						$fecha_baja=$anio_baja."-".$this->num_mes($mes_baja)."-".$dia_baja;
+					if($anio_traslado!='' && $mes_traslado!='' && $dia_traslado!=''){
+						$fecha_traslado=$anio_traslado."-".$this->num_mes($mes_traslado)."-".$dia_traslado;
 					}
+						
+					$this->M_regularizacion->actualizar_estatus_estudiante($no_control,$num_adeudos,$modulo,$plantel_cct,$matricula,$fecha_baja,$motivo_baja,$tipo_operacion_excel,$grupo);
 					
-
-
-
-					
-
-					
-
-					$motivo_baja= trim($calificaciones_friae->getCell('F10')->getValue());
-					$num_adeudos=0;
-			$num_adeudos=count($this->M_regularizacion->materias_debe_estudiante_actualmente($no_control));
+                  /*  $calificaciones_friae = $spreadsheet->getSheet($indiceHoja);
+                   
 		
 		$this->M_regularizacion->actualizar_estatus_estudiante($no_control,$num_adeudos,$modulo,$plantel_cct,$matricula,$fecha_baja,$motivo_baja,$tipo_operacion_excel,$grupo);*/
 		
 		
-		$this->session->set_flashdata('msg_exito', 'Los datos del alumno <span style="font-weight:bold">TRASLADO</span> se han agregado al sistema correctamente, para corroborar verique en el reporte KARDEX.');
+		/*$this->session->set_flashdata('msg_exito', 'Los datos del alumno <span style="font-weight:bold">TRASLADO</span> se han agregado al sistema correctamente, para corroborar verique en el reporte KARDEX.');*/
 		}
         
         break;//Termina caso traslado

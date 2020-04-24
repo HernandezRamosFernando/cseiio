@@ -295,6 +295,51 @@ class M_reinscripcion extends CI_Model {
         
     }
 
+    public function traslado_ciclos_anteriores($p){
+        $this->db->trans_start();
 
+        $existe_registro_traslado=$this->db->query("SELECT * FROM Traslado WHERE Estudiante_no_control='".$p->no_control."' AND cct_plantel_origen='".$p->cct_origen."' AND cct_plantel_traslado='".$p->cct_traslado."' AND fecha_tramite='".$p->fecha_tramite."';")->result();
+
+        if(count($existe_registro_traslado)==0){
+                $data = array(
+                'Estudiante_no_control' =>$p->no_control,
+                'cct_plantel_origen' => $p->cct_origen,
+                'cct_plantel_traslado' =>$p->cct_traslado,
+                'fecha_tramite' =>$p->fecha_tramite
+            );
+            $this->db->insert('Traslado', $data);
+        }
+        else{
+            $data = array(
+                'Estudiante_no_control' =>$p->no_control,
+                'cct_plantel_origen' => $p->cct_origen,
+                'cct_plantel_traslado' =>$p->cct_traslado,
+                'fecha_tramite' =>$p->fecha_tramite
+            );
+            $this->db->where('idtraslado',$existe_registro_traslado->idtraslado);
+            $this->db->update('Traslado', $data);
+
+        }
+
+
+        /*$this->db->where('Grupo_id_grupo',$parametros->id_grupo);
+        $this->db->where('Estudiante_no_control',$parametros->no_control);
+        $this->db->where('Ciclo_escolar_id_ciclo_escolar',$parametros->id_ciclo_escolar);
+        $this->db->where('id_materia',$parametros->id_materia);
+        $this->db->update('Grupo_Estudiante', $datos);*/
+
+        
+        $this->db->trans_complete();
+
+        if ($this->db->trans_status() === FALSE)
+        {
+            return "no";
+        }
+
+        else{
+            return "si";
+        }
+    
+    }
 
 }

@@ -41,6 +41,9 @@ class C_excel extends CI_Controller {
 		$this->load->model('M_plantel');
 		$this->load->model('M_materia');
 		$this->load->model('M_friae');
+		$this->load->model('M_reinscripcion');
+
+		
 		
 		
 	}
@@ -571,6 +574,7 @@ switch ($tipo_operacion_excel) {
 			$this->form_validation->set_rules('fileURL','Upload File', 'callback_checkValidateTraslado');
 				if($this->form_validation->run() != false){
 					$indiceHoja = 0;
+					$id_friae="";
                     $plantilla_traslado = $this->get_archivo()->getSheet($indiceHoja);
                    // echo "<h3>Vamos en la hoja con índice $indiceHoja</h3>";
                     
@@ -581,22 +585,59 @@ switch ($tipo_operacion_excel) {
 					$tipo_operacion_excel= trim($plantilla_traslado->getCell('B1')->getValue());
 					$nombre_ciclo_escolar= trim($plantilla_traslado->getCell('B3')->getValue());
 					$periodo= trim($plantilla_traslado->getCell('B4')->getValue());
-					$plantel_cct_destino = trim($plantilla_traslado->getCell('B5')->getValue());
-					$no_control= trim($plantilla_traslado->getCell('A9')->getValue());
-					$matricula= trim($plantilla_traslado->getCell('B9')->getValue());
-					$motivo_traslado= trim($plantilla_traslado->getCell('F9')->getValue());
+					$modulo= trim($plantilla_traslado->getCell('B5')->getValue());
+					$grupo_anterior_acreditado= trim($plantilla_traslado->getCell('B6')->getValue());
+					$plantel_cct_destino = trim($plantilla_traslado->getCell('B7')->getValue());
+					$no_control= trim($plantilla_traslado->getCell('A11')->getValue());
+					$matricula= trim($plantilla_traslado->getCell('B11')->getValue());
+					$motivo_traslado= trim($plantilla_traslado->getCell('F11')->getValue());
 					
-					$anio_traslado= trim($plantilla_traslado->getCell('C9')->getValue());
-					$mes_traslado= trim($plantilla_traslado->getCell('D9')->getValue());
-					$dia_traslado= trim($plantilla_traslado->getCell('E9')->getValue());
+					$anio_traslado= trim($plantilla_traslado->getCell('C11')->getValue());
+					$mes_traslado= trim($plantilla_traslado->getCell('D11')->getValue());
+					$dia_traslado= trim($plantilla_traslado->getCell('E11')->getValue());
 
 					$fecha_traslado="";
 
 					if($anio_traslado!='' && $mes_traslado!='' && $dia_traslado!=''){
 						$fecha_traslado=$anio_traslado."-".$this->num_mes($mes_traslado)."-".$dia_traslado;
 					}
+
+					$ciclo_escolar=""; //inicializamos variable
+					$id_grupo=""; //inicializamos variable id_grupo
+					$grupo="";
+					$ciclo_escolar=$this->M_ciclo_escolar->get_id_ciclo_escolar_x_periodo_x_nombre($periodo,$nombre_ciclo_escolar);
+
+					$id_ciclo_escolar=$ciclo_escolar->id_ciclo_escolar;
+
+					if(trim($periodo) == "AGOSTO-ENERO"){
+						$id_periodo="B";
+					  }else{
+						$id_periodo="A";
+					  }
+					  $datos_grupo_actual=$this->M_grupo_estudiante->grupo_semestre_estudiante_x_ciclo_escolar($no_control,$id_ciclo_escolar,$modulo);
+					  $grupo=$datos_grupo_actual->nombre_grupo;
+
+					  $id_grupo=$plantel_cct_destino.$modulo.$id_ciclo_escolar.$id_periodo.$grupo;// GENERANDO ID_GRUPO
+
+					 
+					$id_friae=$this->M_friae->id_friae($id_grupo)[0]->folio;
+					
+
+					  $datos_traslado = array(
+						'no_control' => $no_control,
+						'cct_origen' => $plantel_cct_origen,
+						'cct_traslado' => $plantel_cct_destino,
+						'fecha_tramite' => $fecha_traslado,
+						'fecha_inicio_ciclo_escolar'=>$ciclo_escolar->fecha_inicio,
+						'motivo'=>$motivo_traslado,
+						'semestre'=>$modulo,
+						'grupo_anterior_acreditado'=>$grupo_anterior_acreditado,
+						'id_friae'=>$id_friae
+					);
+
+
 						
-					$this->M_regularizacion->actualizar_estatus_estudiante($no_control,$num_adeudos,$modulo,$plantel_cct,$matricula,$fecha_baja,$motivo_baja,$tipo_operacion_excel,$grupo);
+					$this->M_reinscripcion->traslado_ciclos_anteriores((object)$datos_traslado);
 					
                   /*  $calificaciones_friae = $spreadsheet->getSheet($indiceHoja);
                    
@@ -604,7 +645,7 @@ switch ($tipo_operacion_excel) {
 		$this->M_regularizacion->actualizar_estatus_estudiante($no_control,$num_adeudos,$modulo,$plantel_cct,$matricula,$fecha_baja,$motivo_baja,$tipo_operacion_excel,$grupo);*/
 		
 		
-		/*$this->session->set_flashdata('msg_exito', 'Los datos del alumno <span style="font-weight:bold">TRASLADO</span> se han agregado al sistema correctamente, para corroborar verique en el reporte KARDEX.');*/
+		$this->session->set_flashdata('msg_exito', 'Los datos del alumno <span style="font-weight:bold">TRASLADO</span> se han agregado al sistema correctamente, para corroborar verique en el reporte KARDEX.');
 		}
         
         break;//Termina caso traslado
@@ -1849,16 +1890,30 @@ $this->session->set_flashdata('msg_exito', 'Los datos del alumno se han agregado
                     $plantel_cct_origen = trim($celda->getValue());
 					$nombre_ciclo_escolar= trim($plantilla_traslado->getCell('B3')->getValue());
 					$periodo= trim($plantilla_traslado->getCell('B4')->getValue());
-					$plantel_cct_destino = trim($plantilla_traslado->getCell('B5')->getValue());
-					$no_control= trim($plantilla_traslado->getCell('A9')->getValue());
-					$matricula= trim($plantilla_traslado->getCell('B9')->getValue());
-					$motivo_traslado= trim($plantilla_traslado->getCell('F9')->getValue());
+					$modulo= trim($plantilla_traslado->getCell('B5')->getValue());
+					$plantel_cct_destino = trim($plantilla_traslado->getCell('B7')->getValue());
+					$grupo_anterior_acreditado = trim($plantilla_traslado->getCell('B6')->getValue());
+					$no_control= trim($plantilla_traslado->getCell('A11')->getValue());
+					$matricula= trim($plantilla_traslado->getCell('B11')->getValue());
+					$motivo_traslado= trim($plantilla_traslado->getCell('F11')->getValue());
 					
-					$anio_traslado= trim($plantilla_traslado->getCell('C9')->getValue());
-					$mes_traslado= trim($plantilla_traslado->getCell('D9')->getValue());
-					$dia_traslado= trim($plantilla_traslado->getCell('E9')->getValue());
+					$anio_traslado= trim($plantilla_traslado->getCell('C11')->getValue());
+					$mes_traslado= trim($plantilla_traslado->getCell('D11')->getValue());
+					$dia_traslado= trim($plantilla_traslado->getCell('E11')->getValue());
 					$resultado_error='';
-					
+					$id_periodo="";
+					$datos_semestre_actual=0;
+
+					if(trim($periodo) == "AGOSTO-ENERO"){
+						$id_periodo="B";
+					  }else{
+						$id_periodo="A";
+					  }
+
+
+					if($grupo_anterior_acreditado==''){
+						$resultado_error.="<li>No ha seleccionado el grupo al que perteneció el alumno en el último semestre acreditado.</li>";
+					}
 					if($matricula==''){
 						$resultado_error.="<li>No ha ingresado la matricula.</li>";
 					}
@@ -1922,6 +1977,19 @@ $this->session->set_flashdata('msg_exito', 'Los datos del alumno se han agregado
 							if(empty($this->M_ciclo_escolar->existe_ciclo_escolar_x_periodo_x_nombre($periodo,$nombre_ciclo_escolar))){
 								$resultado_error.="<li>El ciclo escolar seleccionado no se encuentra dado de alta en el sistema, consulte al Depto. de Control Escolar</li>";
 								
+							}
+							else{
+								$id_ciclo_escolar=$this->M_ciclo_escolar->get_id_ciclo_escolar_x_periodo_x_nombre($periodo,$nombre_ciclo_escolar)->id_ciclo_escolar;
+
+								$datos_semestre_actual=$this->M_grupo_estudiante->grupo_semestre_estudiante_x_ciclo_escolar($no_control,$id_ciclo_escolar,$modulo);
+
+								if(count($datos_semestre_actual)==0){
+									$resultado_error.="<li>No se pueden cargar los datos de TRASLADO, porque aun no se han cargado los datos de calificaciones del módulo ".$modulo."</li>";
+
+								}
+								
+
+
 							}
 					  }
 

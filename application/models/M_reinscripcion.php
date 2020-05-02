@@ -298,7 +298,7 @@ class M_reinscripcion extends CI_Model {
     public function traslado_ciclos_anteriores($p){
         $this->db->trans_start();
 
-        $existe_registro_traslado=$this->db->query("SELECT * FROM Traslado WHERE Estudiante_no_control='".$p->no_control."' AND cct_plantel_origen='".$p->cct_origen."' AND cct_plantel_traslado='".$p->cct_traslado."' AND fecha_tramite='".$p->fecha_tramite."';")->result();
+        $existe_registro_traslado=$this->db->query("SELECT * FROM Traslado WHERE Estudiante_no_control='".$p->no_control."' AND cct_plantel_origen='".$p->cct_origen."' AND cct_plantel_traslado='".$p->cct_traslado."' AND fecha_tramite='".$p->fecha_tramite."';")->row();
 
         if(count($existe_registro_traslado)==0){
                 $data = array(
@@ -321,12 +321,29 @@ class M_reinscripcion extends CI_Model {
 
         }
 
+        $existe_registro_desertor=$this->db->query("select * from Desertor where Estudiante_no_control='".$p->no_control."' and motivo='".$p->motivo."' and fecha='".$p->fecha_inicio_ciclo_escolar."' and semestre=".$p->semestre.";")->result();
 
-        /*$this->db->where('Grupo_id_grupo',$parametros->id_grupo);
-        $this->db->where('Estudiante_no_control',$parametros->no_control);
-        $this->db->where('Ciclo_escolar_id_ciclo_escolar',$parametros->id_ciclo_escolar);
-        $this->db->where('id_materia',$parametros->id_materia);
-        $this->db->update('Grupo_Estudiante', $datos);*/
+        if(count($existe_registro_desertor)==0){
+            $data = array(
+                'Estudiante_no_control' =>$p->no_control,
+                'motivo' => $p->motivo,
+                'fecha' => $p->fecha_inicio_ciclo_escolar,
+                'semestre'=>$p->semestre,
+                'grupo'=>$p->grupo_anterior_acreditado
+    
+    
+            );
+            $this->db->insert('Desertor', $data);
+            
+        }
+
+        $data = array(
+            'tipo_ingreso_inscripcion' =>'TRASLADO'
+        );
+        $this->db->where('Friae_folio',$p->id_friae);
+        $this->db->where('Estudiante_no_control',$p->no_control);
+        $this->db->update('Friae_Estudiante', $data);
+
 
         
         $this->db->trans_complete();

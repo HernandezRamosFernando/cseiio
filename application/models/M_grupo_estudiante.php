@@ -193,5 +193,9 @@ public function actualizar_calificaciones_ciclos_anteriores($parametros,$datos){
         }
    }
 
+   public function grupo_semestre_estudiante_x_ciclo_escolar($no_control,$id_ciclo_escolar,$semestre){
+    return $this->db->query("select * from Grupo_Estudiante ge inner join Grupo g on g.id_grupo=ge.Grupo_id_grupo where ge.Estudiante_no_control='".$no_control."' and ge.Ciclo_escolar_id_ciclo_escolar=".$id_ciclo_escolar." and g.semestre=".$semestre.";")->row();
+    
+}
 
 }

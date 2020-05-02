@@ -109,11 +109,11 @@
 
 <!-- Inicia modal para agregar asesor-->
 
-<div class="modal" tabindex="-1" role="dialog" id="agregar">
+<div class="modal" tabindex="-1" role="dialog" id="modal_modificar_asesor">
   <div class="modal-dialog modal-dialog-centered" style="max-width: 80% !important;" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Agregar Asesor</h5>
+        <h5 class="modal-title">Modificar Asesor</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -169,28 +169,145 @@
       <form id="agregar_asesor">
       
        <div class="modal-body">
-           <table class="table table-hover" id="" style="width: 100%"  border="1">
+       
+       
+           <div class="form-group">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-label-group">
+                  <input type="text" pattern="[A-ZÑña-z]+[ ]*[A-ZÑña-z ]*" required title="Introduzca solo letras validas"
+                    class="form-control text-uppercase" id="asesor_nombre" name="asesor_nombre"
+                    onchange="valida(this)" placeholder="Nombre(s)" style="color: #237087">
+                  <label for="asesor_nombre">Nombre(s)</label>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="form-label-group">
+                  <input type="text" pattern="[A-ZÑña-z]+[ ]*[A-ZÑña-z ]*" required title="Introduzca solo letras"
+                    class="form-control text-uppercase" id="asesor_apellido_paterno" onchange="valida(this)"
+                    name="asesor_apellido_paterno" placeholder="Apellido Paterno" style="color: #237087" >
+                  <label for="asesor_apellido_paterno">Primer Apellido</label>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="form-label-group">
+                  <input type="text" pattern="[A-ZÑña-z]+[ ]*[A-ZÑña-z ]*" title="Introduzca solo letras"
+                    class="form-control text-uppercase" id="asesor_apellido_materno" onchange="valida(this)"
+                    name="asesor_apellido_materno" placeholder="Apellido Materno" style="color: #237087" >
+                  <label for="asesor_apellido_materno">Segundo Apellido</label>
+                </div>
+              </div>
+            </div>
+            </div>
+            
+            <div class="form-group">
+            <div class="row">
+            
+              <div class="col-md-4">
+                <div class="form-label-group">
+                  <input type="text" pattern="[A-Za-z0-9]{18}" title="Faltan datos" class="form-control text-uppercase"
+                    id="asesor_curp" name="asesor_curp" placeholder="CURP" style="color: #237087">
+                  <label for="asesor_curp">CURP</label>
+                </div>
+              </div>
+
+              
+              <div class="col-md-4">
+                <div class="form-label-group">
+                  <input type="text" pattern="[A-Za-z0-9]{13}" title="Faltan datos" class="form-control text-uppercase"
+                    id="asesor_rfc" name="asesor_rfc" placeholder="RFC" style="color: #237087">
+                  <label for="asesor_rfc">RFC</label>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="form-label-group">
+                  <input type="number" pattern="[0-9]{11}" title="Introduzca 11 digitos"
+                    class="form-control text-uppercase" id="asesor_nss" name="asesor_nss"
+                    placeholder="Numero de Seguro Social" style="color: #237087 ">
+                  <label for="asesor_nss">NSS (IMSS)</label>
+                </div>
+              </div>
+              
+            </div>
+          </div>
           
-                      <thead class="thead-light">
-                        <tr>
-
-                          <th scope="col" class="col-md-1">Materia</th>
-                          <th scope="col" class="col-md-1">Clave</th>
-                          <th scope="col" class="col-md-1">Parcial 1</th>
-                          <th scope="col" class="col-md-1">Parcial 2</th>
-                          <th scope="col" class="col-md-1">Parcial 3</th>
-                          <th scope="col" class="col-md-1">Examen Final</th>
-                        </tr>
-                      </thead>
-
-
-
-                        <tbody id="tabla_asesor">
-                                  
-                        </tbody>
-        </table>
-
-           
+          <div class="form-group">
+            <div class="row">
+            	<div class="col-md-6">
+                <label class="form-group has-float-label seltitulo">
+                  <select class="form-control form-control-lg selcolor" name="asesor_puesto"
+                    onChange=""
+                    id="asesor_puesto">
+                    <option></option>
+                  </select>
+                  <span>Puesto</span>
+                </label>
+              </div>
+              
+              <div class="col-md-6">
+                <label class="form-group has-float-label seltitulo">
+                  <select class="form-control form-control-lg selcolor" name="asesor_categoria"
+                    onChange=""
+                    id="asesor_categoria">
+                    <option></option>
+                  </select>
+                  <span>Categoría</span>
+                </label>
+              </div>
+          
+          </div>
+          </div>
+          
+          <div class="form-group">
+            <div class="row">
+            	<div class="col-md-3">
+                <label class="form-group has-float-label seltitulo">
+                  <select class="form-control form-control-lg selcolor" name="asesor_modalidad"
+                    onChange=""
+                    id="asesor_modalidad">
+                    <option></option>
+                  </select>
+                  <span>Modalidad</span>
+                </label>
+              </div>
+              
+              <div class="col-md-9">
+                <label class="form-group has-float-label seltitulo">
+                  <select class="form-control form-control-lg selcolor" name="asesor_plantel"
+                    onChange=""
+                    id="asesor_plantel">
+                    <option></option>
+                  </select>
+                  <span>Plantel CCT</span>
+                </label>
+              </div>
+          
+          </div>
+          </div>
+          
+          
+          
+          
+          
+          
+          
+          <div class="form-group">
+            <div class="row">
+            <div class="col-md-4">
+                <div class="form-label-group">
+                  <input type="date" title="Faltan datos" class="form-control text-uppercase"
+                    id="asesor_fecha_nacimiento" name="asesor_fecha_nacimiento" placeholder="Fecha " style="color: #237087">
+                  <label for="asesor_fecha_nacimiento">Fechade nacimiento</label>
+                </div>
+              </div>
+          
+          </div>
+          </div>
+          
+          
       </div>
       <div class="modal-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>
@@ -299,12 +416,12 @@ function buscar() {
           fila += '</td>';
 
           fila += '<td>';
-          fila += '<button class="btn btn-lg btn-block btn-success" type="button" value="" onclick="cargar_datos_materias(this)" class="btn btn-primary" data-toggle="modal" data-target="#modal_modificar_materia">Editar</button>';
+          fila += '<button class="btn btn-lg btn-block btn-success" type="button" value="" onclick="cargar_datos_materias(this)" class="btn btn-primary" data-toggle="modal" data-target="#modal_modificar_asesor">Editar</button>';
           fila += '</td>';
 
 
           fila += '<td>';
-          fila += '<button class="btn btn-lg btn-block btn-success" type="button" value="" onclick="cargar_datos_materias(this)" class="btn btn-primary" data-toggle="modal" data-target="#modal_modificar_materia">Editar</button>';
+          fila += '<button class="btn btn-lg btn-block btn-danger" type="button" value="" onclick="cargar_datos_materias(this)" class="btn btn-primary" data-toggle="modal" data-target="#modal_eliminar_asesor">Eliminar</button>';
           fila += '</td>';
 
 
@@ -319,11 +436,19 @@ function buscar() {
       }
 
       xhr.send(null);
+	  
+	  limpiarbusqueda();
       
     }
+	
+	
+	function limpiarbusqueda(){
+    document.getElementById("asesor_curp_busqueda").disabled = true;
+    document.getElementById("asesor_plantel_busqueda").disabled = true;
+    document.getElementById('btn_buscar').classList.remove('btn-success');
+    document.getElementById('btn_buscar').classList.add('btn-info');
+    document.getElementById('btn_buscar').setAttribute("onClick", "limpiar();");
+    document.getElementById('btn_buscar').innerHTML = 'Limpiar Búsqueda';
+  }
 
-
-
-
-buscar();
 </script>
